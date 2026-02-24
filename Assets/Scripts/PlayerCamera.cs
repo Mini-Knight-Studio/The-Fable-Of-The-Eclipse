@@ -13,9 +13,9 @@ class PlayerCamera : Component
     private Vector3 inputOffset = Vector3.Zero;
     private Vector3 resultCameraPosition = Vector3.Zero;
 
-    private const float ISO_ANGLE = (float)Math.PI / 4f;
-    private float cos = (float)Math.Cos(ISO_ANGLE);
-    private float sin = (float)Math.Sin(ISO_ANGLE);
+    private const float ISOMETRIC_ANGLE = (float)Math.PI / 4f;
+    private float cos = (float)Math.Cos(ISOMETRIC_ANGLE);
+    private float sin = (float)Math.Sin(ISOMETRIC_ANGLE);
 
     public void OnCreate()
     {
@@ -39,8 +39,14 @@ class PlayerCamera : Component
 
             if (Input.IsKeyPressed(KeyCode.UP)) { movementDirection.x += 1f; }
             if (Input.IsKeyPressed(KeyCode.DOWN)) { movementDirection.x -= 1f; }
-            if (Input.IsKeyPressed(KeyCode.LEFT)) { movementDirection.y += 1f; }
-            if (Input.IsKeyPressed(KeyCode.RIGHT)) { movementDirection.y -= 1f; }
+            if (Input.IsKeyPressed(KeyCode.LEFT)) { movementDirection.y -= 1f; }
+            if (Input.IsKeyPressed(KeyCode.RIGHT)) { movementDirection.y += 1f; }
+
+            if (Input.RightAxis.x != 0 || Input.RightAxis.y != 0)
+            {
+                movementDirection.x = -Input.RightAxis.y;
+                movementDirection.y = Input.RightAxis.x;
+            } 
 
             float lengthMovementDirection = (float)Math.Sqrt(movementDirection.x * movementDirection.x + movementDirection.y * movementDirection.y);
 
@@ -54,7 +60,7 @@ class PlayerCamera : Component
             inputOffset.z += movementDirection.y * speed * Time.deltaTime;
 
             // Return to Origin
-            if (!Input.IsKeyPressed(KeyCode.UP) && !Input.IsKeyPressed(KeyCode.DOWN) && !Input.IsKeyPressed(KeyCode.LEFT) && !Input.IsKeyPressed(KeyCode.RIGHT))
+            if (!Input.IsKeyPressed(KeyCode.UP) && !Input.IsKeyPressed(KeyCode.DOWN) && !Input.IsKeyPressed(KeyCode.LEFT) && !Input.IsKeyPressed(KeyCode.RIGHT) && Input.RightAxis == Vector2.Zero)
             {
                 float lengthInputOffset = (float)Math.Sqrt(inputOffset.x * inputOffset.x + inputOffset.z * inputOffset.z);
                 if (lengthInputOffset > 0f)
@@ -75,21 +81,14 @@ class PlayerCamera : Component
             }
 
             // Camera Limits
-            inputOffset.x = Clamp(inputOffset.x, -movementLimit, movementLimit);
-            inputOffset.z = Clamp(inputOffset.z, -movementLimit, movementLimit);
+            inputOffset.x = Mathf.Clamp(inputOffset.x, -movementLimit, movementLimit);
+            inputOffset.z = Mathf.Clamp(inputOffset.z, -movementLimit, movementLimit);
 
-            Vector3 rotatedOffset = new Vector3(inputOffset.x * cos - inputOffset.z * sin, 0f, inputOffset.x * sin + inputOffset.z * cos);
+            Vector3 rotatedOffset = new Vector3(inputOffset.x * cos + inputOffset.z * sin, 0f, inputOffset.x * sin - inputOffset.z * cos);
 
             resultCameraPosition = cameraOriginalPosition + rotatedOffset;
 
             entity.transform.position = resultCameraPosition;
         }
-    }
-
-    private float Clamp(float value, float min, float max)
-    {
-        if (value < min) return min;
-        if (value > max) return max;
-        return value;
     }
 }
