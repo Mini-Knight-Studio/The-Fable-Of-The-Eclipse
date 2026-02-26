@@ -3,7 +3,6 @@ using Loopie;
 
 class PlayerCamera : Component
 {
-    public bool freeCamera = false;
     public string playerName = "";
     public float distance = 15f;
     public float movementLimit = 5f;
@@ -18,9 +17,23 @@ class PlayerCamera : Component
     private float cos = (float)Math.Cos(ISOMETRIC_ANGLE);
     private float sin = (float)Math.Sin(ISOMETRIC_ANGLE);
 
+    private bool isFocusing = false;
+    private bool isFollowingPlayer = true;
+    private bool isFree = false;
+
+    // Focus
+    private Vector3 focusTarget;
+    private float focusZoom;
+    private float currentZoom;
+    public float focusStrength = 1f;
+
+    // Testing
+    private float toggleCooldown = 0f;
+
     public void OnCreate()
     {
         player = Entity.FindEntityByName(playerName);
+        currentZoom = distance;
     }
 
     public void OnUpdate()
@@ -31,7 +44,38 @@ class PlayerCamera : Component
             if (player == null) return;
         }
 
-        if (!freeCamera)
+        // Test trigger for focus
+        if (toggleCooldown > 0f)
+        {
+            toggleCooldown -= Time.deltaTime;
+        }
+        if (Input.IsKeyPressed(KeyCode.P) && toggleCooldown <= 0f)
+        {
+            toggleCooldown = 0.25f; 
+
+            if (isFollowingPlayer)
+            {
+                isFocusing = true;
+                isFollowingPlayer = false;
+
+                FocusOnPoint(new Vector3(0, 0, 0), 30f);
+            }
+            else if (isFocusing)
+            {
+                isFocusing = false;
+                isFollowingPlayer = true;
+
+                currentZoom = distance;
+            }
+        }
+
+        if (isFocusing)
+        {
+            UpdateFocus();
+            return;
+        }
+
+        if (isFollowingPlayer)
         {
             Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.25f, -distance);
 
@@ -91,5 +135,38 @@ class PlayerCamera : Component
 
             entity.transform.position += (resultCameraPosition - entity.transform.position) * followStrength * Time.deltaTime;
         }
+    }
+
+    public void FocusOnPoint(Vector3 destination, float zoomAmount)
+    {
+        focusTarget = destination;
+        focusZoom = zoomAmount;
+    }
+
+    private void UpdateFocus()
+    {
+        // ----- Smooth Zoom -----
+        float zoomDifference = focusZoom - currentZoom;
+        currentZoom = currentZoom + zoomDifference * followStrength * Time.deltaTime;
+
+        // ----- Build Target Camera Position -----
+        Vector3 targetCameraPosition = new Vector3(
+            focusTarget.x - currentZoom,
+            focusTarget.y + currentZoom * 1.25f,
+            focusTarget.z - currentZoom
+        );
+
+        // ----- Manual Smooth Movement -----
+        Vector3 currentPosition = entity.transform.position;
+
+        float dx = targetCameraPosition.x - currentPosition.x;
+        float dy = targetCameraPosition.y - currentPosition.y;
+        float dz = targetCameraPosition.z - currentPosition.z;
+
+        currentPosition.x = currentPosition.x + dx * followStrength * Time.deltaTime;
+        currentPosition.y = currentPosition.y + dy * followStrength * Time.deltaTime;
+        currentPosition.z = currentPosition.z + dz * followStrength * Time.deltaTime;
+
+        entity.transform.position = currentPosition;
     }
 }
