@@ -7,7 +7,8 @@ class PlayerCamera : Component
     public string playerName = "";
     public float distance = 15f;
     public float movementLimit = 5f;
-    public float speed = 10f;
+    public float speed = 20f;
+    public float followStrength = 8f;
 
     private Entity player;
     private Vector3 inputOffset = Vector3.Zero;
@@ -88,7 +89,7 @@ class PlayerCamera : Component
 
             resultCameraPosition = cameraOriginalPosition + rotatedOffset;
 
-            entity.transform.position = resultCameraPosition;
+            entity.transform.position += (resultCameraPosition - entity.transform.position) * followStrength * Time.deltaTime;
         }
     }
 }
