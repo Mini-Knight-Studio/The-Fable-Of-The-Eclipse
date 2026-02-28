@@ -1,50 +1,48 @@
 using System;
+using Loopie;
 
-namespace Loopie
+public class Enemy : Component
 {
-    public class Enemy : Component
+    public float speed = 4.0f;
+    public string targetEntityName = "BrightWishker";
+
+    private Entity playerEntity;
+
+    public Enemy() { }
+
+    public void OnCreate()
     {
-        public float speed = 4.0f;
-        public string targetEntityName = "BrightWishker";
+        playerEntity = Entity.FindEntityByName(targetEntityName);
+    }
 
-        private Entity playerEntity;
-
-        public Enemy() { }
-
-        public void OnCreate()
+    public void OnUpdate()
+    {
+        if (playerEntity == null)
         {
             playerEntity = Entity.FindEntityByName(targetEntityName);
+            if (playerEntity == null) return;
         }
 
-        public void OnUpdate()
+        Vector3 currentPos = entity.transform.position;
+        Vector3 targetPos = playerEntity.transform.position;
+
+        Vector3 direction = new Vector3(
+            targetPos.x - currentPos.x,
+            targetPos.y - currentPos.y,
+            targetPos.z - currentPos.z
+        );
+
+        float distance = (float)Math.Sqrt((direction.x * direction.x) + (direction.y * direction.y) + (direction.z * direction.z));
+
+        if (distance > 0.1f)
         {
-            if (playerEntity == null)
-            {
-                playerEntity = Entity.FindEntityByName(targetEntityName);
-                if (playerEntity == null) return;
-            }
+            direction.x /= distance;
+            direction.y /= distance;
+            direction.z /= distance;
 
-            Vector3 currentPos = entity.transform.position;
-            Vector3 targetPos = playerEntity.transform.position;
+            entity.transform.position += direction * speed * Time.deltaTime;
 
-            Vector3 direction = new Vector3(
-                targetPos.x - currentPos.x,
-                targetPos.y - currentPos.y,
-                targetPos.z - currentPos.z
-            );
-
-            float distance = (float)Math.Sqrt((direction.x * direction.x) + (direction.y * direction.y) + (direction.z * direction.z));
-
-            if (distance > 0.1f)
-            {
-                direction.x /= distance;
-                direction.y /= distance;
-                direction.z /= distance;
-
-                entity.transform.position += direction * speed * Time.deltaTime;
-
-                entity.transform.LookAt(targetPos, new Vector3(0, 1, 0));
-            }
+            entity.transform.LookAt(targetPos, new Vector3(0, 1, 0));
         }
     }
 }
