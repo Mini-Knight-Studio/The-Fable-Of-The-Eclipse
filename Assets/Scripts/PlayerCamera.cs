@@ -114,7 +114,7 @@ class PlayerCamera : Component
         {
             if (previousState == "Focusing")
             {
-                ReturnCameraToPlayer(focusSpeed);
+                ReturnCameraToPlayer(speed);
             }
             else if (previousState == "FollowingPlayer")
             {
