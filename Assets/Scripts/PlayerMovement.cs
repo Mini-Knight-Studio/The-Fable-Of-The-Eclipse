@@ -32,7 +32,6 @@ namespace Loopie
 
         private bool HandleDash()
         {
-            //TODO: gamepad input + input once
             if (dashTimer > 0)
             {
                 entity.transform.position += dashDirection * dashSpeed * Time.deltaTime;
@@ -56,39 +55,58 @@ namespace Loopie
 
         private void HandleNormalMovement()
         {
-            //TODO: joystick controllers
             Vector3 moveDirection = new Vector3(0, 0, 0);
             bool isMoving = false;
 
             if (Input.IsKeyPressed(KeyCode.W) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP))
             {
-                moveDirection += new Vector3(0, 0, 1);
+                moveDirection.z += 1;
                 isMoving = true;
             }
-
             if (Input.IsKeyPressed(KeyCode.S) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN))
             {
-                moveDirection += new Vector3(0, 0, -1);
+                moveDirection.z -= 1;
                 isMoving = true;
             }
-
             if (Input.IsKeyPressed(KeyCode.A) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT))
             {
-                moveDirection += new Vector3(-1, 0, 0);
+                moveDirection.x -= 1;
+                isMoving = true;
+            }
+            if (Input.IsKeyPressed(KeyCode.D) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
+            {
+                moveDirection.x += 1;
                 isMoving = true;
             }
 
-            if (Input.IsKeyPressed(KeyCode.D) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
+            if (Input.LeftAxis.x != 0 || Input.LeftAxis.y != 0)
             {
-                moveDirection += new Vector3(1, 0, 0);
+                moveDirection.x = Input.LeftAxis.x;
+                moveDirection.z = Input.LeftAxis.y;
                 isMoving = true;
             }
 
             if (isMoving)
             {
-                entity.transform.position += moveDirection * Time.deltaTime * speed;
+                float length = (float)Math.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
+                if (length > 1f)
+                {
+                    moveDirection.x /= length;
+                    moveDirection.z /= length;
+                }
 
-                Vector3 targetLookAt = entity.transform.position + moveDirection;
+                float cos = (float)Math.Cos(Math.PI / 4f);
+                float sin = (float)Math.Sin(Math.PI / 4f);
+
+                Vector3 rotatedDirection = new Vector3(
+                    moveDirection.x * cos + moveDirection.z * sin,
+                    0f,
+                    moveDirection.z * cos - moveDirection.x * sin
+                );
+
+                entity.transform.position += rotatedDirection * Time.deltaTime * speed;
+
+                Vector3 targetLookAt = entity.transform.position + rotatedDirection;
                 entity.transform.LookAt(targetLookAt, new Vector3(0, 1, 0));
             }
         }
