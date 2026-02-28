@@ -3,8 +3,10 @@ using Loopie;
 
 public class PlayerMovement : Component
 {
+    //Movement Settings
     public float speed = 10.0f;
     public float rotSpeed = 5.0f;
+    public bool isMoving = false;
 
     //Dash Settings
     public float dashSpeed = 40.0f;
@@ -13,6 +15,7 @@ public class PlayerMovement : Component
     private Vector3 dashDirection = new Vector3(0, 0, 0);
     private bool tempDashOnce = false;
     private bool wasSpacePressed = false;
+    public bool isDashing = false;
 
     //CamFollow
     public Vector3 camExtTransform;
@@ -25,7 +28,7 @@ public class PlayerMovement : Component
     public void OnUpdate()
     {
 
-        HandleDash();
+        isDashing = HandleDash();
         HandleNormalMovement();
     }
 
@@ -80,7 +83,7 @@ public class PlayerMovement : Component
         }
 
         float length = (float)Math.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
-        bool isMoving = length > 0.01f;
+        isMoving = length > 0.01f;
 
         if (isMoving)
         {
