@@ -55,39 +55,35 @@ public class PlayerMovement : Component
     private void HandleNormalMovement()
     {
         Vector3 moveDirection = new Vector3(0, 0, 0);
-        bool isMoving = false;
 
         if (Input.IsKeyPressed(KeyCode.W) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP))
         {
             moveDirection.z += 1;
-            isMoving = true;
         }
         if (Input.IsKeyPressed(KeyCode.S) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN))
         {
             moveDirection.z -= 1;
-            isMoving = true;
         }
         if (Input.IsKeyPressed(KeyCode.A) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT))
         {
             moveDirection.x -= 1;
-            isMoving = true;
         }
         if (Input.IsKeyPressed(KeyCode.D) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
         {
             moveDirection.x += 1;
-            isMoving = true;
         }
 
         if (Input.LeftAxis.x != 0 || Input.LeftAxis.y != 0)
         {
             moveDirection.x = Input.LeftAxis.x;
             moveDirection.z = Input.LeftAxis.y;
-            isMoving = true;
         }
+
+        float length = (float)Math.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
+        bool isMoving = length > 0.01f;
 
         if (isMoving)
         {
-            float length = (float)Math.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
             if (length > 1f)
             {
                 moveDirection.x /= length;
