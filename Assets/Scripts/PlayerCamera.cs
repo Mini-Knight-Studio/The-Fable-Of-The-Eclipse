@@ -94,7 +94,7 @@ class PlayerCamera : Component
 
         if (Input.RightAxis.x != 0 || Input.RightAxis.y != 0)
         {
-            movementDirection.x = -Input.RightAxis.y;
+            movementDirection.x = Input.RightAxis.y;
             movementDirection.y = Input.RightAxis.x;
         }
 
