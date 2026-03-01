@@ -15,10 +15,18 @@ class PlayerAnimation : Component
     public string walkClipName = "walk";
     public string dashClipName = "dash";
 
+    private Entity idleMesh;
+    private Entity walkMesh;
+    private Entity dashMesh;
+
     public void OnCreate()
     {
         playerMovement = entity.GetComponent<PlayerMovement>();
         animator = entity.GetComponent<Animator>();
+
+        idleMesh = Entity.FindEntityByName("brightwhiskers_idle");
+        walkMesh = Entity.FindEntityByName("brightwhiskers_walk");
+        dashMesh = Entity.FindEntityByName("brightwhiskers_dash");
     }
 
     public void OnUpdate()
@@ -51,6 +59,9 @@ class PlayerAnimation : Component
         Console.WriteLine("I'm idle");
         toIdle = false;
         toWalk = true;
+        idleMesh.SetActive(true);
+        walkMesh.SetActive(false);
+        dashMesh.SetActive(false);
     }
 
     private void Move()
@@ -59,6 +70,9 @@ class PlayerAnimation : Component
         Console.WriteLine("I'm moving");
         toWalk = false;
         toIdle = true;
+        idleMesh.SetActive(false);
+        walkMesh.SetActive(true);
+        dashMesh.SetActive(false);
     }
 
     private void Dash()
@@ -68,5 +82,8 @@ class PlayerAnimation : Component
         toDash = false;
         toWalk = true;
         toIdle = true;
+        idleMesh.SetActive(false);
+        walkMesh.SetActive(false);
+        dashMesh.SetActive(true);
     }
 };
