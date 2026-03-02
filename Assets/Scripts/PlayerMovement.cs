@@ -16,14 +16,13 @@ public class PlayerMovement : Component
     private bool tempDashOnce = false;
     private bool wasSpacePressed = false;
     public bool isDashing = false;
-
-    //CamFollow
-    public Vector3 camExtTransform;
-    public Entity camEntity;
+    public AudioSource dashSfxSource;
 
     public PlayerMovement() { }
 
-    public void OnCreate() { }
+    public void OnCreate() {
+        dashSfxSource = entity.GetComponent<AudioSource>();
+    }
 
     public void OnUpdate()
     {
@@ -48,6 +47,7 @@ public class PlayerMovement : Component
         {
             dashTimer = dashDuration;
             dashDirection = entity.transform.Forward;
+            dashSfxSource.Play();
         }
 
         wasSpacePressed = isSpacePressed;
