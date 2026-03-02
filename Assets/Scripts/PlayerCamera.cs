@@ -4,7 +4,7 @@ using Loopie;
 class PlayerCamera : Component
 {
     public string playerName = "";
-    public float distance = 15f;
+    public float distance = 100f;
     public float movementLimit = 5f;
     public float speed = 20f;
     public float followSpeed = 8f;
@@ -82,7 +82,7 @@ class PlayerCamera : Component
 
     private void UpdateFollowPlayer()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.25f, -distance);
+        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.45f, -distance);
 
         // Move Camera
         Vector2 movementDirection = new Vector2(0, 0);
@@ -138,7 +138,7 @@ class PlayerCamera : Component
         float zoomDifference = focusZoom - currentZoom;
         currentZoom = currentZoom + zoomDifference * focusSpeed * Time.deltaTime;
 
-        Vector3 targetCameraPosition = new Vector3(focusTarget.x - currentZoom, focusTarget.y + currentZoom * 1.25f, focusTarget.z - currentZoom);
+        Vector3 targetCameraPosition = new Vector3(focusTarget.x - currentZoom, focusTarget.y + currentZoom * 1.45f, focusTarget.z - currentZoom);
 
         Vector3 currentPosition = entity.transform.position;
         currentPosition.x = currentPosition.x + (targetCameraPosition.x - currentPosition.x) * focusSpeed * Time.deltaTime;
