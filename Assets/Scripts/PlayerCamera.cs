@@ -56,7 +56,7 @@ class PlayerCamera : Component
 
             if (currentState == "FollowingPlayer")
             {
-                FocusOnPoint(new Vector3(-35, 5, 325), 100f, 0.5f);
+                FocusOnPoint(new Vector3(-70, 0, 359), 100f, 0.5f);
 
                 currentState = "Focusing";
                 previousState = "FollowingPlayer";
