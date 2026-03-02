@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using Loopie;
 
 class PlayerAnimation : Component
@@ -56,7 +55,7 @@ class PlayerAnimation : Component
     private void Idle()
     {
         animator.Play(idleClipName);
-        Console.WriteLine("I'm idle");
+        Debug.Log("I'm idle");
         toIdle = false;
         toWalk = true;
         idleMesh.SetActive(true);
@@ -67,7 +66,7 @@ class PlayerAnimation : Component
     private void Move()
     {
         animator.Play(walkClipName);
-        Console.WriteLine("I'm moving");
+        Debug.Log("I'm moving");
         toWalk = false;
         toIdle = true;
         idleMesh.SetActive(false);
@@ -77,8 +76,9 @@ class PlayerAnimation : Component
 
     private void Dash()
     {
-        animator.Play(walkClipName);
-        Console.WriteLine("I'm dashing");
+        animator.Play(dashClipName);
+        animator.Looping = false;
+        Debug.Log("I'm dashing");
         toDash = false;
         toWalk = true;
         toIdle = true;
