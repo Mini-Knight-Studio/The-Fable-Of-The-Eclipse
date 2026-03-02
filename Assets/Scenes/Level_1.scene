@@ -55,8 +55,42 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "7df06aae-12f1-ba18-0d4a-868fa2b771ce",
+            "parent_uuid": "576eb813-577d-e49d-d9db-b95666958138",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ecb09375-e03b-17a8-8d93-b671f7d15d39"
+                }
+            ],
+            "name": "Environment",
+            "parent_uuid": "576eb813-577d-e49d-d9db-b95666958138",
+            "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
         {
             "active": true,
@@ -130,104 +164,8 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "7df06aae-12f1-ba18-0d4a-868fa2b771ce",
+            "parent_uuid": "576eb813-577d-e49d-d9db-b95666958138",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ecb09375-e03b-17a8-8d93-b671f7d15d39"
-                }
-            ],
-            "name": "Environment",
-            "parent_uuid": "7df06aae-12f1-ba18-0d4a-868fa2b771ce",
-            "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -12.326727867126465,
-                            "y": -0.0205856841057539,
-                            "z": -4.931573390960693
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "91820663-83ae-5d9b-0a6e-9148d67904b1"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "f2af045b-954f-d045-ae4e-1e8416e404db"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 3.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "25e5eb18-f050-548e-6e79-6e40e04234f9"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "3d8daa52-ae4c-9ca6-a635-92c58d33f75b"
-                }
-            ],
-            "name": "Slime",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "5585cb9c-dc52-ffb2-26f2-d3a577a83e44"
         },
         {
             "active": true,
@@ -324,6 +262,102 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": -12.326727867126465,
+                            "y": -0.0205856841057539,
+                            "z": -4.931573390960693
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "91820663-83ae-5d9b-0a6e-9148d67904b1"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
+                        "mesh_index": 0,
+                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
+                    },
+                    "uuid": "f2af045b-954f-d045-ae4e-1e8416e404db"
+                },
+                {
+                    "script": {
+                        "class_id": "Enemy",
+                        "fields": {
+                            "speed": 3.0,
+                            "targetEntityName": "Player"
+                        }
+                    },
+                    "uuid": "25e5eb18-f050-548e-6e79-6e40e04234f9"
+                },
+                {
+                    "script": {
+                        "class_id": "Loopie.WobblyEffect",
+                        "fields": {
+                            "wobbleAmount": 0.25,
+                            "wobbleSpeed": 5.0
+                        }
+                    },
+                    "uuid": "3d8daa52-ae4c-9ca6-a635-92c58d33f75b"
+                }
+            ],
+            "name": "Slime",
+            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
+            "uuid": "5585cb9c-dc52-ffb2-26f2-d3a577a83e44"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 85.45648956298828,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -70.64335632324219,
+                            "y": 0.0,
+                            "z": 50.29061508178711
+                        },
+                        "rotation": {
+                            "w": 0.7345802187919617,
+                            "x": 0.0,
+                            "y": 0.6785218715667725,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 4.723220348358154,
+                            "y": 4.72320032119751,
+                            "z": 4.723220348358154
+                        }
+                    },
+                    "uuid": "4e6ced9d-8fa4-cd25-e687-98a7911a9252"
+                }
+            ],
+            "name": "Trunk_2",
+            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
+            "uuid": "d1739815-052b-3980-ab08-11e9ed6887c8"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 0.0,
                             "y": 0.0,
                             "z": 0.0
@@ -344,7 +378,7 @@
                 }
             ],
             "name": "Enemies",
-            "parent_uuid": "7df06aae-12f1-ba18-0d4a-868fa2b771ce",
+            "parent_uuid": "576eb813-577d-e49d-d9db-b95666958138",
             "uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5"
         },
         {
@@ -504,6 +538,47 @@
             "name": "Mushroom",
             "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
             "uuid": "587165a9-07d8-c920-12e1-56cbf887b23a"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "db9444c2-876a-5de9-901f-6d11ba7f37ff"
+                },
+                {
+                    "meshrenderer": {
+                        "mesh_index": 0,
+                        "mesh_uuid": "5e5bbd87-4b3c-7808-5d28-2b2a6c528f3f"
+                    },
+                    "uuid": "f04c43bb-a0a1-7116-b7ea-d1e6d4b6a597"
+                }
+            ],
+            "name": "pCylinder1",
+            "parent_uuid": "3858950d-d205-38ad-9a0b-654db77f4369",
+            "uuid": "f42c5d7b-260d-e725-b4b1-4d34fc23c831"
         },
         {
             "active": true,
@@ -703,6 +778,48 @@
             "active": true,
             "components": [
                 {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d1876f8d-14b4-64dd-a1d4-b8fd18475b24"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f5db556c-4136-473a-ceed-0a3a6a481fe8"
+                    },
+                    "uuid": "86a180c2-7b5c-8fa8-33c9-d06634c4345e"
+                }
+            ],
+            "name": "pCylinder1",
+            "parent_uuid": "ac74d84c-5898-3af8-d4a5-a80c9971ee16",
+            "uuid": "bf32101f-9da6-6350-ed3e-f07a36599459"
+        },
+        {
+            "active": true,
+            "components": [
+                {
                     "canvas": {
                         "color": {
                             "a": 1.0,
@@ -743,54 +860,12 @@
                             "width": 50.0
                         }
                     },
-                    "uuid": "c80abd34-5b31-fe5a-2c74-f2ce961aab59"
+                    "uuid": "b2b79907-c727-969f-3482-88f9a47708b6"
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "7df06aae-12f1-ba18-0d4a-868fa2b771ce",
+            "parent_uuid": "576eb813-577d-e49d-d9db-b95666958138",
             "uuid": "45dea819-9b18-7a38-f84c-8f74d5d53ed4"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d1876f8d-14b4-64dd-a1d4-b8fd18475b24"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
-                        "mesh_index": 0,
-                        "mesh_uuid": "f5db556c-4136-473a-ceed-0a3a6a481fe8"
-                    },
-                    "uuid": "86a180c2-7b5c-8fa8-33c9-d06634c4345e"
-                }
-            ],
-            "name": "pCylinder1",
-            "parent_uuid": "ac74d84c-5898-3af8-d4a5-a80c9971ee16",
-            "uuid": "bf32101f-9da6-6350-ed3e-f07a36599459"
         },
         {
             "active": true,
@@ -857,7 +932,7 @@
                             "width": 15.0
                         }
                     },
-                    "uuid": "2fecf00c-e87e-22e2-9630-73ec86d07c17"
+                    "uuid": "1f32d1b5-0571-1840-6f78-fbe0c77d4852"
                 },
                 {
                     "image": {
@@ -919,12 +994,162 @@
                             "width": 10.0
                         }
                     },
-                    "uuid": "07d2c3d7-1d47-d3b9-dd67-b79e7b4ee300"
+                    "uuid": "264d6cbd-018f-2160-d46f-accc3d47e124"
                 }
             ],
             "name": "Attack Cooldown",
             "parent_uuid": "45dea819-9b18-7a38-f84c-8f74d5d53ed4",
             "uuid": "a4c895ac-1253-3123-a16f-0943ade964ab"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -85.4711685180664,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 2.0732388496398926,
+                            "y": 3.2193838706007227e-06,
+                            "z": 88.89270782470703
+                        },
+                        "rotation": {
+                            "w": 0.7344934344291687,
+                            "x": 0.0,
+                            "y": -0.6786158084869385,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 6.339892864227295,
+                            "y": 6.3398942947387695,
+                            "z": 6.339892864227295
+                        }
+                    },
+                    "uuid": "dd4a35c4-8861-44a4-a6ac-db9fba587fb0"
+                }
+            ],
+            "name": "Trunk",
+            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
+            "uuid": "3858950d-d205-38ad-9a0b-654db77f4369"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -15.998292922973633,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -36.39163589477539,
+                            "y": 0.0,
+                            "z": 67.02521514892578
+                        },
+                        "rotation": {
+                            "w": 0.9902701377868652,
+                            "x": 0.0,
+                            "y": -0.13915835320949554,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 6.043003559112549,
+                            "y": 6.043498992919922,
+                            "z": 6.043502330780029
+                        }
+                    },
+                    "uuid": "eb57a257-0f85-87f2-e346-0de28e6487cb"
+                }
+            ],
+            "name": "Trunk_1",
+            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
+            "uuid": "4a1e4f8c-7d56-2bac-8a93-aa5959212828"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f4f322be-62d6-da38-a761-92c423972c39"
+                },
+                {
+                    "meshrenderer": {
+                        "mesh_index": 0,
+                        "mesh_uuid": "5e5bbd87-4b3c-7808-5d28-2b2a6c528f3f"
+                    },
+                    "uuid": "a6c88e5c-322c-e147-33d3-e782e9a23696"
+                }
+            ],
+            "name": "pCylinder1",
+            "parent_uuid": "4a1e4f8c-7d56-2bac-8a93-aa5959212828",
+            "uuid": "1cf20e59-de45-7ae4-fd49-152acf3fefb0"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d51f3522-9801-04c5-9883-e2a4a1d776b1"
+                },
+                {
+                    "meshrenderer": {
+                        "mesh_index": 0,
+                        "mesh_uuid": "5e5bbd87-4b3c-7808-5d28-2b2a6c528f3f"
+                    },
+                    "uuid": "3e6d05c8-39c2-a2e6-018d-bedaa47d5dc8"
+                }
+            ],
+            "name": "pCylinder1",
+            "parent_uuid": "d1739815-052b-3980-ab08-11e9ed6887c8",
+            "uuid": "e93735dc-c7ad-6729-ee06-bc1c889c3da4"
         }
     ]
 }
