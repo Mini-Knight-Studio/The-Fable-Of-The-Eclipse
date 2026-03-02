@@ -55,6 +55,7 @@ class PlayerAnimation : Component
     private void Idle()
     {
         animator.Play(idleClipName);
+        animator.Looping = true;
         Debug.Log("I'm idle");
         toIdle = false;
         toWalk = true;
@@ -66,6 +67,7 @@ class PlayerAnimation : Component
     private void Move()
     {
         animator.Play(walkClipName);
+        animator.Looping = true;
         Debug.Log("I'm moving");
         toWalk = false;
         toIdle = true;
