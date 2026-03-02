@@ -1,11 +1,11 @@
 using System;
-using System.Numerics;
 using Loopie;
 
 class PlayerAnimation : Component
 {
     private PlayerMovement playerMovement;
-    private Animator animator;
+    private Animator idleAnimator;
+    private Animator walkAnimator;
 
     private bool toIdle = true;
     private bool toWalk = true;
@@ -15,10 +15,20 @@ class PlayerAnimation : Component
     public string walkClipName = "walk";
     public string dashClipName = "dash";
 
+    private Entity idleEntity;
+    private Entity walkEntity;
+    private Entity dashEntity;
+
     public void OnCreate()
     {
         playerMovement = entity.GetComponent<PlayerMovement>();
-        animator = entity.GetComponent<Animator>();
+
+        idleEntity = Entity.FindEntityByName("IdlePlayer");
+        walkEntity = Entity.FindEntityByName("WalkPlayer");
+        dashEntity = Entity.FindEntityByName("WalkPlayer");
+
+        idleAnimator = idleEntity.GetComponent<Animator>();
+        walkAnimator = walkEntity.GetComponent<Animator>();
     }
 
     public void OnUpdate()
@@ -47,26 +57,38 @@ class PlayerAnimation : Component
 
     private void Idle()
     {
-        animator.Play(idleClipName);
-        Console.WriteLine("I'm idle");
+        Debug.Log("I'm idle");
         toIdle = false;
         toWalk = true;
+        idleEntity.SetActive(true);
+        walkEntity.SetActive(false);
+        dashEntity.SetActive(false);
+        idleAnimator.Play(idleClipName);
+        idleAnimator.Looping = true;
     }
 
     private void Move()
     {
-        animator.Play(walkClipName);
-        Console.WriteLine("I'm moving");
+        Debug.Log("I'm moving");
         toWalk = false;
         toIdle = true;
+        idleEntity.SetActive(false);
+        walkEntity.SetActive(true);
+        dashEntity.SetActive(true);
+        walkAnimator.Play(walkClipName);
+        walkAnimator.Looping = true;
     }
 
     private void Dash()
     {
-        animator.Play(walkClipName);
-        Console.WriteLine("I'm dashing");
+        Debug.Log("I'm dashing");
         toDash = false;
         toWalk = true;
         toIdle = true;
+        idleEntity.SetActive(false);
+        walkEntity.SetActive(false);
+        dashEntity.SetActive(true);
+        walkAnimator.Play(dashClipName);
+        walkAnimator.Looping = false;
     }
 };
