@@ -3,7 +3,16 @@ using Loopie;
 
 class MovingPillar : Component
 {
-    private BoxCollider boxCollider;
+    private BoxCollider upCollider;
+    private BoxCollider downCollider;
+    private BoxCollider rightCollider;
+    private BoxCollider leftCollider;
+
+    public string upColliderName;
+    public string downColliderName;
+    public string rightColliderName;
+    public string leftColliderName;
+
     public float collisionCooldown = 2.0f;
     private float collisionTimer = 0.0f;
 
@@ -11,26 +20,66 @@ class MovingPillar : Component
 
     void OnCreate()
     {
-        boxCollider = entity.GetComponent<BoxCollider>();
+        upCollider = Entity.FindEntityByName(upColliderName).GetComponent<BoxCollider>();
+        downCollider = Entity.FindEntityByName(downColliderName).GetComponent<BoxCollider>();
+        rightCollider = Entity.FindEntityByName(rightColliderName).GetComponent<BoxCollider>();
+        leftCollider = Entity.FindEntityByName(leftColliderName).GetComponent<BoxCollider>();
     }
 
     void OnUpdate()
     {
-        HandleCollsion();
+        HandleCollision();
     }
 
-    void HandleCollsion()
+    void HandleCollision()
     {
-        if (boxCollider.HasCollided && collisionTimer >= collisionCooldown)
+        if (collisionTimer < collisionCooldown)
         {
-            //logic
+            collisionTimer++;
+            return;
+        }
 
-            //check if collided with player
-            //boxCollider.entity.transform
-
-            collisionTimer = 0;
+        if (upCollider.HasCollided)
+        {
+            HandleUpCollision();
+        }
+        else if (downCollider.HasCollided)
+        {
+            HandleDownCollision();
+        }
+        else if (rightCollider.HasCollided)
+        {
+            HandleRightCollision();
+        }
+        else if (leftCollider.HasCollided)
+        {
+            HandleLeftCollision();
         }
 
         collisionTimer++;
+    }
+
+    void HandleUpCollision()
+    {
+
+        collisionTimer = 0;
+    }
+
+    void HandleDownCollision()
+    {
+
+        collisionTimer = 0;
+    }
+
+    void HandleRightCollision()
+    {
+
+        collisionTimer = 0;
+    }
+
+    void HandleLeftCollision()
+    {
+
+        collisionTimer = 0;
     }
 };
