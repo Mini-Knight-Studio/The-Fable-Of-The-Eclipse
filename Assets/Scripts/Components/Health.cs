@@ -1,15 +1,57 @@
 using System;
+using System.Collections.Generic;
 using Loopie;
 
-class Health : Component
+public class Health : Component
 {
-    void OnCreate()
+    public int maxHealth;
+    private int actualHealth;
+    public List<Effect> effects;
+    private float timer;
+    public void UpdateHealth()
     {
-
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].UpdateEffect(this))
+            {
+                effects.Remove(effects[i]);
+                i--;
+            }
+        }
+    }
+    public int GetActualHealth()
+    {
+        return actualHealth;
+    }
+    public int GetMaxHealth()
+    {
+        return maxHealth;
     }
 
-    void OnUpdate()
+    public bool IsDead()
     {
+        return maxHealth <= 0;
+    }
 
+    public void Damage(int points)
+    {
+        actualHealth -= points;
+        actualHealth = actualHealth < 0? 0 : actualHealth;
+    }
+    public void AddEffect(Effect effect)
+    {
+        effect.InitEffect();
+        effects.Add(effect);
+    }
+
+    public void Heal(int points)
+    {
+        actualHealth += points;
+        actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
+    }
+
+    public void Reset()
+    {
+        actualHealth = maxHealth;
     }
 };
