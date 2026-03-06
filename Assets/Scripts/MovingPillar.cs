@@ -31,6 +31,7 @@ class MovingPillar : Component
     private Vector3 targetPosition;
 
     private bool onCorrectPlace = false;
+    public float onCorrectDistance = 1.0f;
 
     void OnCreate()
     {
@@ -44,7 +45,6 @@ class MovingPillar : Component
 
     void OnUpdate()
     {
-        if (onCorrectPlace) return;
 
         if (isMoving)
         {
@@ -52,6 +52,7 @@ class MovingPillar : Component
         }
         else
         {
+            if (onCorrectPlace) return;
             HandleCollision();
         }
     }
@@ -66,7 +67,9 @@ class MovingPillar : Component
 
         Vector3 pos = entity.transform.position;
 
-        if (zPlusCollider.HasCollided)
+        if (placeCheckerCollider.HasCollided)
+            CorrectlyPlaced();
+        else if (zPlusCollider.HasCollided)
             StartMovement(pos + new Vector3(0, 0, movementDistance));
         else if (zMinusCollider.HasCollided)
             StartMovement(pos + new Vector3(0, 0, -movementDistance));
@@ -75,7 +78,7 @@ class MovingPillar : Component
         else if (xMinusCollider.HasCollided)
             StartMovement(pos + new Vector3(-movementDistance, 0, 0));
 
-        collisionTimer += Time.deltaTime;
+            collisionTimer += Time.deltaTime;
     }
 
     void StartMovement(Vector3 newTarget)
@@ -107,5 +110,16 @@ class MovingPillar : Component
         }
 
         entity.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+    }
+
+    void CorrectlyPlaced()
+    {
+        onCorrectPlace = true;
+
+        Vector3 pos = entity.transform.position;
+
+        StartMovement(pos + new Vector3(0, -onCorrectDistance, 0));
+
+
     }
 };
