@@ -8,10 +8,14 @@ class MovingPillar : Component
     private BoxCollider xPlusCollider;
     private BoxCollider xMinusCollider;
 
+    private BoxCollider placeCheckerCollider;
+
     public string zPlusColliderName;
     public string zMinusColliderName;
     public string xPlusColliderName;
     public string xMinusColliderName;
+
+    public string placeCheckerColliderName;
 
     public float collisionCooldown = 2.0f;
     private float collisionTimer = 0.0f;
@@ -26,16 +30,22 @@ class MovingPillar : Component
     private bool isMoving = false;
     private Vector3 targetPosition;
 
+    private bool onCorrectPlace = false;
+
     void OnCreate()
     {
         zPlusCollider = Entity.FindEntityByName(zPlusColliderName).GetComponent<BoxCollider>();
         zMinusCollider = Entity.FindEntityByName(zMinusColliderName).GetComponent<BoxCollider>();
         xPlusCollider = Entity.FindEntityByName(xPlusColliderName).GetComponent<BoxCollider>();
         xMinusCollider = Entity.FindEntityByName(xMinusColliderName).GetComponent<BoxCollider>();
+
+        placeCheckerCollider = Entity.FindEntityByName(placeCheckerColliderName).GetComponent<BoxCollider>();
     }
 
     void OnUpdate()
     {
+        if (onCorrectPlace) return;
+
         if (isMoving)
         {
             MoveTowardsTarget();
