@@ -15,8 +15,6 @@ class MovingPillar : Component
     public string xPlusColliderName;
     public string xMinusColliderName;
 
-    public string placeCheckerColliderName;
-
     public float collisionCooldown = 2.0f;
     private float collisionTimer = 0.0f;
 
@@ -30,8 +28,13 @@ class MovingPillar : Component
     private bool isMoving = false;
     private Vector3 targetPosition;
 
-    private bool onCorrectPlace = false;
-    public float onCorrectDistance = 1.0f;
+    public string goalPositionName;
+    public float onGoalMovementDistance = 1.0f;
+    public bool onGoalPosition = false;
+    public bool onGoalCalled = false;
+    private Vector3 goalPosition;
+
+    public AudioSource slideSFX;
 
     void OnCreate()
     {
@@ -40,11 +43,18 @@ class MovingPillar : Component
         xPlusCollider = Entity.FindEntityByName(xPlusColliderName).GetComponent<BoxCollider>();
         xMinusCollider = Entity.FindEntityByName(xMinusColliderName).GetComponent<BoxCollider>();
 
-        placeCheckerCollider = Entity.FindEntityByName(placeCheckerColliderName).GetComponent<BoxCollider>();
+        goalPosition = Entity.FindEntityByName(goalPositionName).transform.position;
+
+        slideSFX = entity.GetComponent<AudioSource>();
     }
 
     void OnUpdate()
     {
+
+        if (entity.transform.position.x == goalPosition.x && entity.transform.position.z == goalPosition.z && !onGoalCalled)
+        {
+            StartGoalPosition();
+        }
 
         if (isMoving)
         {
@@ -52,7 +62,7 @@ class MovingPillar : Component
         }
         else
         {
-            if (onCorrectPlace) return;
+            if (onGoalPosition) return;
             HandleCollision();
         }
     }
@@ -67,9 +77,7 @@ class MovingPillar : Component
 
         Vector3 pos = entity.transform.position;
 
-        if (placeCheckerCollider.HasCollided)
-            CorrectlyPlaced();
-        else if (zPlusCollider.HasCollided)
+        if (zPlusCollider.HasCollided)
             StartMovement(pos + new Vector3(0, 0, movementDistance));
         else if (zMinusCollider.HasCollided)
             StartMovement(pos + new Vector3(0, 0, -movementDistance));
@@ -94,6 +102,8 @@ class MovingPillar : Component
 
         isMoving = true;
         collisionTimer = 0;
+
+        slideSFX.Play();
     }
 
     void MoveTowardsTarget()
@@ -112,14 +122,15 @@ class MovingPillar : Component
         entity.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
     }
 
-    void CorrectlyPlaced()
+    void StartGoalPosition()
     {
-        onCorrectPlace = true;
+        onGoalPosition = true;
+        onGoalCalled = true;
 
         Vector3 pos = entity.transform.position;
 
-        StartMovement(pos + new Vector3(0, -onCorrectDistance, 0));
+        StartMovement(pos + new Vector3(0, -onGoalMovementDistance, 0));
 
-
+        Debug.LogWarning("The pillar has reached its goal");
     }
 };
