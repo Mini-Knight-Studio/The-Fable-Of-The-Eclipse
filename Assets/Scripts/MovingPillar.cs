@@ -8,20 +8,10 @@ class MovingPillar : Component
     private BoxCollider xPlusCollider;
     private BoxCollider xMinusCollider;
 
-    private BoxCollider zPlusTargetCheck;
-    private BoxCollider zMinusTargetCheck;
-    private BoxCollider xPlusTargetCheck;
-    private BoxCollider xMinusTargetCheck;
-
     public string zPlusColliderName;
     public string zMinusColliderName;
     public string xPlusColliderName;
     public string xMinusColliderName;
-
-    public string zPlusTargetName;
-    public string zMinusTargetName;
-    public string xPlusTargetName;
-    public string xMinusTargetName;
 
     public float collisionCooldown = 2.0f;
     private float collisionTimer = 0.0f;
@@ -51,11 +41,6 @@ class MovingPillar : Component
         xPlusCollider = Entity.FindEntityByName(xPlusColliderName).GetComponent<BoxCollider>();
         xMinusCollider = Entity.FindEntityByName(xMinusColliderName).GetComponent<BoxCollider>();
 
-        zPlusTargetCheck = Entity.FindEntityByName(zPlusTargetName).GetComponent<BoxCollider>();
-        zMinusTargetCheck = Entity.FindEntityByName(zMinusTargetName).GetComponent<BoxCollider>();
-        xPlusTargetCheck = Entity.FindEntityByName(xPlusTargetName).GetComponent<BoxCollider>();
-        xMinusTargetCheck = Entity.FindEntityByName(xMinusTargetName).GetComponent<BoxCollider>();
-
         goalPosition = Entity.FindEntityByName(goalPositionName).transform.position;
 
         slideSFX = entity.GetComponent<AudioSource>();
@@ -81,40 +66,58 @@ class MovingPillar : Component
 
     void HandleCollision()
     {
-        //if (collisionTimer < collisionCooldown)
-        //{
-        //    collisionTimer += Time.deltaTime;
-        //    return;
-        //}
-
         Vector3 pos = entity.transform.position;
 
-        if (zPlusCollider.HasCollided && CanMove(zPlusTargetCheck))
+        if (zPlusCollider.HasCollided && CanMove(entity.transform.Forward))
         {
             StartMovement(pos + new Vector3(0, 0, movementDistance));
         }
-        else if (zMinusCollider.HasCollided && CanMove(zMinusTargetCheck))
+        else if (zMinusCollider.HasCollided && CanMove(entity.transform.Back))
         {
             StartMovement(pos + new Vector3(0, 0, -movementDistance));
         }
-        else if (xPlusCollider.HasCollided && CanMove(xPlusTargetCheck))
+        else if (xPlusCollider.HasCollided && CanMove(entity.transform.Right))
         {
             StartMovement(pos + new Vector3(movementDistance, 0, 0));
         }
-        else if (xMinusCollider.HasCollided && CanMove(xMinusTargetCheck))
+        else if (xMinusCollider.HasCollided && CanMove(entity.transform.Left))
         {
             StartMovement(pos + new Vector3(-movementDistance, 0, 0));
         }
-
-        //collisionTimer += Time.deltaTime;
     }
 
-    bool CanMove(BoxCollider targetCollider)
+    bool CanMove(Vector3 direction)
     {
-        targetCollider.entity.SetActive(true);
-        bool blocked = targetCollider.HasCollided;
-        targetCollider.entity.SetActive(false);
-        return !blocked;
+        BoxCollider collider = null;
+        if (direction.x > 0) collider = xMinusCollider;
+        else if (direction.x < 0) collider = xPlusCollider;
+        else if (direction.z > 0) collider = zMinusCollider;
+        else if (direction.z < 0) collider = zPlusCollider;
+
+        if (collider == null) return false;
+
+        Vector3 origin = entity.transform.position + collider.LocalCenter;
+        if (direction.x > 0) origin += new Vector3(collider.LocalExtents.x, 0, 0);
+        else if (direction.x < 0) origin -= new Vector3(collider.LocalExtents.x, 0, 0);
+        else if (direction.z > 0) origin += new Vector3(0, 0, collider.LocalExtents.z);
+        else if (direction.z < 0) origin -= new Vector3(0, 0, collider.LocalExtents.z);
+
+        const float epsilon = 0.01f;
+        origin += direction.normalized * epsilon;
+
+        float rayDistance = movementDistance;
+        if (direction.x != 0) rayDistance -= collider.LocalExtents.x;
+        else if (direction.z != 0) rayDistance -= collider.LocalExtents.z;
+
+        rayDistance += epsilon;
+
+        RaycastHit hit;
+        if (Collisions.Raycast(origin, direction.normalized, rayDistance, out hit))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     void StartMovement(Vector3 newTarget)
@@ -129,7 +132,6 @@ class MovingPillar : Component
         moveTimer = 0.0f;
 
         isMoving = true;
-        //collisionTimer = 0;
 
         slideSFX.Play();
     }
