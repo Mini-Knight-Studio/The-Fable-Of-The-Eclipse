@@ -6,48 +6,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 20.0,
-                            "y": 0.0,
-                            "z": -8.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "2b084706-dd4b-51c0-a210-cfb49e7ec5a2"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "2484b504-01eb-9b16-587e-ab77d294d3b5",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "ee3c21c5-15c3-3dbd-4e4b-251d6f34c9dc"
-                }
-            ],
-            "name": "AirTile",
-            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
-            "uuid": "84b5b998-d514-87ed-c859-4a2dbc923019"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 45.0,
                             "y": 45.000003814697266,
                             "z": 0.0
@@ -86,19 +44,61 @@
                     "script": {
                         "class_id": "PlayerCamera",
                         "fields": {
-                            "distance": 100.0,
-                            "followSpeed": 8.0,
-                            "movementLimit": 10.0,
-                            "playerName": "Player",
-                            "speed": 20.0
+                            "distance": 0.0,
+                            "followSpeed": 0.0,
+                            "movementLimit": 0.0,
+                            "playerName": "",
+                            "speed": 0.0
                         }
                     },
                     "uuid": "6f335f81-6d93-2c3d-e8fb-1dc35093b9b3"
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 20.0,
+                            "y": 0.0,
+                            "z": -8.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "2b084706-dd4b-51c0-a210-cfb49e7ec5a2"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "2484b504-01eb-9b16-587e-ab77d294d3b5",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "ee3c21c5-15c3-3dbd-4e4b-251d6f34c9dc"
+                }
+            ],
+            "name": "AirTile",
+            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
+            "uuid": "84b5b998-d514-87ed-c859-4a2dbc923019"
         },
         {
             "active": true,
@@ -185,6 +185,56 @@
             "uuid": "225ff386-5347-f47c-fcc5-f9ce66fd6e82"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "3ad72f61-7e48-112b-d290-94abb2fed53a"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "f844c34b-1353-161a-f12a-e38bb4b249f6"
+                }
+            ],
+            "name": "FireZ-_1",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "eb1ff3e9-5ff6-1ea5-c49b-4bb22e794c51"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -225,17 +275,21 @@
                     "script": {
                         "class_id": "MovingPillar",
                         "fields": {
-                            "collisionCooldown": 0.20000000298023224,
+                            "collisionCooldown": 2.0,
                             "goalPositionName": "AirTile",
                             "movementDistance": 4.0,
-                            "movementSpeed": 15.0,
+                            "movementSpeed": 4.0,
                             "onGoalCalled": false,
-                            "onGoalMovementDistance": 1.0,
+                            "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
                             "xMinusColliderName": "AirX-",
+                            "xMinusTargetName": "AirX-_1",
                             "xPlusColliderName": "AirX+",
+                            "xPlusTargetName": "AirX+_1",
                             "zMinusColliderName": "AirZ-",
-                            "zPlusColliderName": "AirZ+"
+                            "zMinusTargetName": "AirZ-_1",
+                            "zPlusColliderName": "AirZ+",
+                            "zPlusTargetName": "AirZ+_1"
                         }
                     },
                     "uuid": "5666f5ae-ed86-05cd-0d53-c34aee0c7248"
@@ -246,18 +300,22 @@
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
                         "currentClipIndex": 0,
-                        "isSpatial": true,
+                        "isSpatial": false,
                         "loop": false,
                         "loopStrategy": 0,
+                        "maxDistance": 0.0,
+                        "minDistance": 0.0,
                         "noLoopStrategy": 0,
-                        "playOnAwake": true,
-                        "usePlaylist": false
+                        "pan": 0.0,
+                        "pitch": 0.8799999952316284,
+                        "playOnAwake": false,
+                        "volume": 0.2770000100135803
                     },
                     "uuid": "a121fa39-4f60-ba88-18d2-0eb60098da9f"
                 }
             ],
             "name": "AirPillar",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
             "uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9"
         },
         {
@@ -364,48 +422,6 @@
             "active": true,
             "components": [
                 {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 20.0,
-                            "y": 0.0,
-                            "z": -12.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "0a261db5-b483-4557-3cf0-caf5194a3312"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "07c09ab3-c6cc-6ca6-69a0-9aaccf6788da"
-                }
-            ],
-            "name": "Plane_5_1_2_1",
-            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "6ea53f93-e471-bc51-1961-ef6f94ff0625"
-        },
-        {
-            "active": true,
-            "components": [
-                {
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -458,6 +474,48 @@
                 {
                     "transform": {
                         "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 20.0,
+                            "y": 0.0,
+                            "z": -12.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "0a261db5-b483-4557-3cf0-caf5194a3312"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "07c09ab3-c6cc-6ca6-69a0-9aaccf6788da"
+                }
+            ],
+            "name": "Plane_5_1_2_1",
+            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
+            "uuid": "6ea53f93-e471-bc51-1961-ef6f94ff0625"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
                             "x": -180.0,
                             "y": -0.0,
                             "z": -180.0
@@ -483,7 +541,7 @@
                 }
             ],
             "name": "Environment",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
         {
@@ -520,10 +578,10 @@
                         "class_id": "PlayerMovement",
                         "fields": {
                             "dashDuration": 0.20000000298023224,
-                            "dashSpeed": 30.0,
+                            "dashSpeed": 15.0,
                             "isDashing": false,
                             "isMoving": false,
-                            "rotSpeed": 5.0,
+                            "rotSpeed": 10.0,
                             "speed": 10.0
                         }
                     },
@@ -534,8 +592,8 @@
                         "class_id": "PlayerAnimation",
                         "fields": {
                             "dashClipName": "",
-                            "idleClipName": "Armature|Armature|Idle|BaseLayer",
-                            "walkClipName": "Armature|Armature|Walk|BaseLayer"
+                            "idleClipName": "",
+                            "walkClipName": ""
                         }
                     },
                     "uuid": "88657ea7-b29a-cee5-6e6a-22c18cbda7e1"
@@ -558,7 +616,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -602,6 +660,56 @@
             "name": "Ground",
             "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
             "uuid": "50f50d06-afe4-a9e0-4257-79d24217bf30"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "990cb9fa-38b6-d83e-c6d6-07772aa6c25e"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "c0d22c21-4aba-9879-c082-f841124d0177"
+                }
+            ],
+            "name": "WaterZ+_1",
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "e64e5d5a-1f0f-3ad1-ac19-eb331036d240"
         },
         {
             "active": true,
@@ -693,7 +801,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
             "uuid": "b79eaae7-22d1-1a5d-d46f-507f33aab1ab"
         },
         {
@@ -984,6 +1092,90 @@
                         },
                         "position": {
                             "x": 16.0,
+                            "y": 4.0,
+                            "z": -12.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 4.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "fa806610-ace3-d936-7b87-a6fb26643d46"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "7577ab4d-cfac-eb48-924f-4922a9b2942a",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "71ecc556-2b06-e41a-c89c-dae79e99b0dd"
+                },
+                {
+                    "script": {
+                        "class_id": "MovingPillar",
+                        "fields": {
+                            "collisionCooldown": 2.0,
+                            "goalPositionName": "WaterTile",
+                            "movementDistance": 4.0,
+                            "movementSpeed": 4.0,
+                            "onGoalCalled": false,
+                            "onGoalMovementDistance": 2.0,
+                            "onGoalPosition": false,
+                            "xMinusColliderName": "WaterX-",
+                            "xMinusTargetName": "WaterX-_1",
+                            "xPlusColliderName": "WaterX+",
+                            "xPlusTargetName": "WaterX+_1",
+                            "zMinusColliderName": "WaterZ-",
+                            "zMinusTargetName": "WaterZ-_1",
+                            "zPlusColliderName": "WaterZ+",
+                            "zPlusTargetName": "WaterZ+_1"
+                        }
+                    },
+                    "uuid": "2f06b471-3f74-742f-40e9-5fb39abfe4b2"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.8830000162124634,
+                        "playOnAwake": false,
+                        "volume": 0.2770000100135803
+                    },
+                    "uuid": "645bcffb-c1cb-8ef6-bcaa-6da080684c72"
+                }
+            ],
+            "name": "WaterPillar",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
+            "uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 16.0,
                             "y": 0.0,
                             "z": 4.0
                         },
@@ -1013,56 +1205,6 @@
             "name": "Plane_15_2",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "uuid": "3265bff4-8953-d2f6-5667-fb6c71a78476"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "3af37787-a0e1-838d-72e8-d170fda8da41"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": -1.100000023841858,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.30000001192092896,
-                            "y": 1.0,
-                            "z": 0.699999988079071
-                        }
-                    },
-                    "uuid": "c17f9cc0-3047-6e45-9d6f-a7653fee8acd"
-                }
-            ],
-            "name": "FireX+",
-            "parent_uuid": "31a11ae8-28a0-38ae-573c-2e33253fe5a9",
-            "uuid": "d153f37e-7756-52e8-3760-0a0d8c4282fb"
         },
         {
             "active": true,
@@ -2077,7 +2219,7 @@
                 }
             ],
             "name": "PuzzleBoard",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
         {
@@ -3301,82 +3443,6 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 16.0,
-                            "y": 4.000001907348633,
-                            "z": -12.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 4.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "8eb42b6f-5d22-26ac-a770-bc2180a60e7d"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "7577ab4d-cfac-eb48-924f-4922a9b2942a",
-                        "mesh_index": 0,
-                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
-                    },
-                    "uuid": "aa953456-c009-3ccb-72f3-315908076c41"
-                },
-                {
-                    "script": {
-                        "class_id": "MovingPillar",
-                        "fields": {
-                            "collisionCooldown": 0.20000000298023224,
-                            "goalPositionName": "WaterTile",
-                            "movementDistance": 4.0,
-                            "movementSpeed": 15.0,
-                            "onGoalCalled": false,
-                            "onGoalMovementDistance": 1.0,
-                            "onGoalPosition": false,
-                            "xMinusColliderName": "WaterX-",
-                            "xPlusColliderName": "WaterX+",
-                            "zMinusColliderName": "WaterZ-",
-                            "zPlusColliderName": "WaterZ+"
-                        }
-                    },
-                    "uuid": "7586ef58-cd0b-758d-c0bd-27c6ec6b9fb0"
-                },
-                {
-                    "audiosource": {
-                        "audioClips": {
-                            "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
-                        },
-                        "currentClipIndex": 0,
-                        "isSpatial": true,
-                        "loop": false,
-                        "loopStrategy": 0,
-                        "noLoopStrategy": 0,
-                        "playOnAwake": true,
-                        "usePlaylist": false
-                    },
-                    "uuid": "88e63352-5cb8-d8d4-264c-852033f53ec3"
-                }
-            ],
-            "name": "WaterPillar",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
-            "uuid": "5d084e88-b29c-0dfa-8c5d-13f0a7f445f9"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
                             "x": 0.0,
                             "y": 0.0,
                             "z": 0.0
@@ -3393,157 +3459,7 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "f21f0d63-d0d7-ce37-128e-2431005c306d"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 1.100000023841858,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.30000001192092896,
-                            "y": 1.0,
-                            "z": 0.699999988079071
-                        }
-                    },
-                    "uuid": "3c0080f4-d05f-ef3f-0a09-23854fcd37a9"
-                }
-            ],
-            "name": "WaterX-",
-            "parent_uuid": "5d084e88-b29c-0dfa-8c5d-13f0a7f445f9",
-            "uuid": "d91f5b69-586a-21b0-e7fc-a6de5520420b"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d0cbe25d-aef5-ea63-c213-80f8999bea33"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": -1.100000023841858,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.30000001192092896,
-                            "y": 1.0,
-                            "z": 0.699999988079071
-                        }
-                    },
-                    "uuid": "12240709-a13a-1e96-52a8-43ffdb6cbd5b"
-                }
-            ],
-            "name": "WaterX+",
-            "parent_uuid": "5d084e88-b29c-0dfa-8c5d-13f0a7f445f9",
-            "uuid": "6a90aeeb-2a75-04cd-b8a4-53df0fc26333"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "152cfcfa-b1b1-667c-47a0-307caa7f4bf3"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -1.100000023841858
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.699999988079071,
-                            "y": 1.0,
-                            "z": 0.30000001192092896
-                        }
-                    },
-                    "uuid": "6901c2d1-b1e9-1c47-32f0-6193865eb2fc"
-                }
-            ],
-            "name": "WaterZ+",
-            "parent_uuid": "5d084e88-b29c-0dfa-8c5d-13f0a7f445f9",
-            "uuid": "cd3c06c2-cef8-5b4c-02e0-690fbac56c8e"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "8a001de4-8be3-2010-7006-4e16a19dce27"
+                    "uuid": "6ab35a1b-da2b-697a-e430-2900443d4c8b"
                 },
                 {
                     "boxcollider": {
@@ -3559,514 +3475,12 @@
                             "z": 0.30000001192092896
                         }
                     },
-                    "uuid": "1eb566fb-737e-3bed-ea44-549344e3c113"
+                    "uuid": "3608dff2-7872-c53c-6e63-cf9fb03045f0"
                 }
             ],
             "name": "WaterZ-",
-            "parent_uuid": "5d084e88-b29c-0dfa-8c5d-13f0a7f445f9",
-            "uuid": "92af4745-06ec-bd1f-91cc-28ac933852d8"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 4.0,
-                            "y": 4.000001907348633,
-                            "z": -16.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 4.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "da9dafda-5acf-e26c-b2dc-91e7219ba86c"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "b5e91f05-d326-322e-14b7-af09a4a7474c",
-                        "mesh_index": 0,
-                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
-                    },
-                    "uuid": "88bf768e-42c6-0840-ca1f-90b2d5ccfd6c"
-                },
-                {
-                    "script": {
-                        "class_id": "MovingPillar",
-                        "fields": {
-                            "collisionCooldown": 0.20000000298023224,
-                            "goalPositionName": "FireTile",
-                            "movementDistance": 4.0,
-                            "movementSpeed": 15.0,
-                            "onGoalCalled": false,
-                            "onGoalMovementDistance": 1.0,
-                            "onGoalPosition": false,
-                            "xMinusColliderName": "FireX-",
-                            "xPlusColliderName": "FireX+",
-                            "zMinusColliderName": "FireZ-",
-                            "zPlusColliderName": "FireZ+"
-                        }
-                    },
-                    "uuid": "4851d48e-e2e2-b4b6-f4a3-410e6e1569e2"
-                },
-                {
-                    "audiosource": {
-                        "audioClips": {
-                            "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
-                        },
-                        "currentClipIndex": 0,
-                        "isSpatial": true,
-                        "loop": false,
-                        "loopStrategy": 0,
-                        "noLoopStrategy": 0,
-                        "playOnAwake": true,
-                        "usePlaylist": false
-                    },
-                    "uuid": "acb53ced-c64b-7502-ce82-065d490fd593"
-                }
-            ],
-            "name": "FirePillar",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
-            "uuid": "31a11ae8-28a0-38ae-573c-2e33253fe5a9"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "40b7064a-64cd-9413-6674-b5e6a1b43e1c"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 1.100000023841858,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.30000001192092896,
-                            "y": 1.0,
-                            "z": 0.699999988079071
-                        }
-                    },
-                    "uuid": "e527e191-a2e6-e578-f2b0-d12c5df3e959"
-                }
-            ],
-            "name": "FireX-",
-            "parent_uuid": "31a11ae8-28a0-38ae-573c-2e33253fe5a9",
-            "uuid": "571a0230-32e6-03d9-d58a-1835b598b57a"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "9c09c8e4-2d5f-4b3f-5d21-15d07720d874"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -1.100000023841858
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.699999988079071,
-                            "y": 1.0,
-                            "z": 0.30000001192092896
-                        }
-                    },
-                    "uuid": "628ac40e-16da-02de-f1c0-2ade060650be"
-                }
-            ],
-            "name": "FireZ+",
-            "parent_uuid": "31a11ae8-28a0-38ae-573c-2e33253fe5a9",
-            "uuid": "006593f0-5ffb-c2cd-85e6-e0dddb9dc5c4"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "00b2594e-243b-5423-7b3e-ee8928683122"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.100000023841858
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.699999988079071,
-                            "y": 1.0,
-                            "z": 0.30000001192092896
-                        }
-                    },
-                    "uuid": "7f81787c-640d-aea6-c738-f487569b9f4d"
-                }
-            ],
-            "name": "FireZ-",
-            "parent_uuid": "31a11ae8-28a0-38ae-573c-2e33253fe5a9",
-            "uuid": "f01d37e6-2ce4-ce77-63ed-1d643cb9eb69"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 20.0,
-                            "y": 4.000001907348633,
-                            "z": 4.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 4.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "6ef37e16-2628-3949-5147-1f48aa03eb17"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "9a147a43-094d-1023-befd-258a281f887d",
-                        "mesh_index": 0,
-                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
-                    },
-                    "uuid": "24b158a4-57ff-9345-b746-1d34a2a03c37"
-                },
-                {
-                    "script": {
-                        "class_id": "MovingPillar",
-                        "fields": {
-                            "collisionCooldown": 0.20000000298023224,
-                            "goalPositionName": "EarthTile",
-                            "movementDistance": 4.0,
-                            "movementSpeed": 15.0,
-                            "onGoalCalled": false,
-                            "onGoalMovementDistance": 1.0,
-                            "onGoalPosition": false,
-                            "xMinusColliderName": "EarthX-",
-                            "xPlusColliderName": "EarthX+",
-                            "zMinusColliderName": "EarthZ-",
-                            "zPlusColliderName": "EarthZ+"
-                        }
-                    },
-                    "uuid": "b7f2bb4b-4f11-1884-61a4-fd32c669d874"
-                },
-                {
-                    "audiosource": {
-                        "audioClips": {
-                            "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
-                        },
-                        "currentClipIndex": 0,
-                        "isSpatial": true,
-                        "loop": false,
-                        "loopStrategy": 0,
-                        "noLoopStrategy": 0,
-                        "playOnAwake": true,
-                        "usePlaylist": false
-                    },
-                    "uuid": "686c7c2a-9235-46f6-c396-badb04bbcf44"
-                }
-            ],
-            "name": "EarthPillar",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
-            "uuid": "b1320df2-8563-7523-5040-297edc37a4d0"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "a95eb982-f8ee-bf61-8060-80d830300cae"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 1.100000023841858,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.30000001192092896,
-                            "y": 1.0,
-                            "z": 0.699999988079071
-                        }
-                    },
-                    "uuid": "58622336-9257-2ae2-1e78-010daa164a6a"
-                }
-            ],
-            "name": "EarthX-",
-            "parent_uuid": "b1320df2-8563-7523-5040-297edc37a4d0",
-            "uuid": "7672519b-4f1d-70d8-307b-61f49f87e5c3"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "6319a6a3-7e34-a6a2-378f-d3fd64fe293c"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": -1.100000023841858,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.30000001192092896,
-                            "y": 1.0,
-                            "z": 0.699999988079071
-                        }
-                    },
-                    "uuid": "76bd848b-9dcf-928e-02b2-907799a1a981"
-                }
-            ],
-            "name": "EarthX+",
-            "parent_uuid": "b1320df2-8563-7523-5040-297edc37a4d0",
-            "uuid": "4259ab24-c845-8384-0dd9-0581228ddb77"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "84249c24-5d35-3d58-c0b1-51fe17eca970"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -1.100000023841858
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.699999988079071,
-                            "y": 1.0,
-                            "z": 0.30000001192092896
-                        }
-                    },
-                    "uuid": "4d0e7bda-3351-7170-6e0b-87640675db2c"
-                }
-            ],
-            "name": "EarthZ+",
-            "parent_uuid": "b1320df2-8563-7523-5040-297edc37a4d0",
-            "uuid": "b77b238e-84b3-9472-8698-bb289f9245ff"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "8ef9fdc7-9369-8ed6-4098-db26d8eb5fc1"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.100000023841858
-                        },
-                        "draw_gizmo": true,
-                        "extents": {
-                            "x": 0.699999988079071,
-                            "y": 1.0,
-                            "z": 0.30000001192092896
-                        }
-                    },
-                    "uuid": "7f6dcf8f-9c89-c88c-227e-7f9be123fcb1"
-                }
-            ],
-            "name": "EarthZ-",
-            "parent_uuid": "b1320df2-8563-7523-5040-297edc37a4d0",
-            "uuid": "ad9a0e87-f024-034c-a7e5-b158f7af50ef"
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "0abea196-bfbe-1347-1ff2-2c3512568659"
         },
         {
             "active": true,
@@ -4185,20 +3599,1454 @@
                     "script": {
                         "class_id": "PuzzleGoal",
                         "fields": {
-                            "Pillar1Name": "WaterPillar",
-                            "Pillar2Name": "FirePillar",
-                            "Pillar3Name": "EarthPillar",
-                            "Pillar4Name": "AirPillar",
-                            "movementDistance": 1.5,
-                            "movementSpeed": 3.0
+                            "Pillar1Name": "",
+                            "Pillar2Name": "",
+                            "Pillar3Name": "",
+                            "Pillar4Name": "",
+                            "movementDistance": 0.0,
+                            "movementSpeed": 0.0
                         }
                     },
                     "uuid": "ea83ea29-ebdd-ea49-bb1f-60e344fdc3f7"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 5.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 2.0,
+                            "y": 5.0,
+                            "z": 2.0
+                        }
+                    },
+                    "uuid": "1dc5b75a-a2eb-facc-9932-b04d60d613a7"
                 }
             ],
             "name": "Puzzle_Goal",
-            "parent_uuid": "1f4c5fa0-b342-0bd1-e25f-c2fa99bd91de",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "6dd40ddd-aae9-5b32-4a29-1782b6a5caf7"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "8669e517-2f65-a89b-35ff-4038288d5b65"
+                }
+            ],
+            "name": "AirX-_1",
+            "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
+            "uuid": "db611425-63f0-aa79-c205-6cbfe7830b4a"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "03efe7bf-46eb-c075-0c07-6c21a193943c"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": -4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "4dacf42b-9dea-e27c-2e6d-4f7be5b5b4c8"
+                }
+            ],
+            "name": "AirX+_1",
+            "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
+            "uuid": "8a7d5d22-1330-7bb8-47f7-c2c325ecbf28"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "4b3f4896-5aea-ec66-9ed0-84d93cac414a"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "38319235-37cf-4652-0e96-d75fa2529d3e"
+                }
+            ],
+            "name": "AirZ+_1",
+            "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
+            "uuid": "21b6b319-82cd-7dee-d9f3-64bf8bb0e340"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "7b8bcce3-8bb4-284d-a411-20858e7772f1"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "3606d68d-a255-8707-8ec4-26c990e9be6a"
+                }
+            ],
+            "name": "AirZ-_1",
+            "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
+            "uuid": "3f6b79fa-9194-97dc-75c2-60dbf91e69d6"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ce767fef-ec28-ded5-37f2-6671b9d9e0c8"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 1.100000023841858,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.699999988079071
+                        }
+                    },
+                    "uuid": "1c2fc9cc-bacc-4ddd-7826-28a313656731"
+                }
+            ],
+            "name": "WaterX-",
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "254977e6-7a3a-7cc8-0b19-fba9a843f464"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "744ced6f-2181-21a3-a551-5f11ac533bcb"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": -1.100000023841858,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.699999988079071
+                        }
+                    },
+                    "uuid": "19e85ca2-faca-f3e8-cc60-7c4d084300b5"
+                }
+            ],
+            "name": "WaterX+",
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "1c009398-137f-fb55-6d18-5d1603d78b4d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "fca4d217-09f8-584c-82eb-0795f36f2bd0"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -1.100000023841858
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.699999988079071,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "426b8155-09ce-301d-ba86-1a1b1b0497ab"
+                }
+            ],
+            "name": "WaterZ+",
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "2c7191c0-7edd-7beb-c00f-2fdad5af788a"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ee4616b9-76d3-88de-951c-03899ec2ff64"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "3145a41e-fea3-28bc-f431-26a6d387644c"
+                }
+            ],
+            "name": "WaterX-_1",
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "f8fdd16b-1a7b-fdff-7b61-155c22f74b80"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "caa542f2-192b-447c-018e-cd0ea1e7f6ab"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": -4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "45afb33d-c75c-adcc-3e72-430f90a016db"
+                }
+            ],
+            "name": "WaterX+_1",
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "3fcd280e-18a6-9b5d-3479-1d4821677b5e"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "8367f03a-e287-7ee6-9bf1-05c40ae5e7af"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "86261812-f850-2ead-a1a5-48960fe46989"
+                }
+            ],
+            "name": "WaterZ-_1",
+            "parent_uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf",
+            "uuid": "04f083bf-f3be-da83-c9d4-63f7899c6fcd"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "629acdc5-a6fc-c129-3ff2-12bee928dfb4"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": -4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "772055fd-493c-a57e-ba0a-1611496745ea"
+                }
+            ],
+            "name": "FireX+_1",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "b4bdd49f-b5f0-34f0-ea1b-b6a9c2e82a22"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 4.0,
+                            "y": 4.0,
+                            "z": -16.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 4.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "bcae45aa-c9c8-b9bc-81f4-262c55bf15c5"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "b5e91f05-d326-322e-14b7-af09a4a7474c",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "945b3536-ab46-886a-95f0-a3ada1b93d4d"
+                },
+                {
+                    "script": {
+                        "class_id": "MovingPillar",
+                        "fields": {
+                            "collisionCooldown": 2.0,
+                            "goalPositionName": "FireTile",
+                            "movementDistance": 4.0,
+                            "movementSpeed": 4.0,
+                            "onGoalCalled": false,
+                            "onGoalMovementDistance": 2.0,
+                            "onGoalPosition": false,
+                            "xMinusColliderName": "FireX-",
+                            "xMinusTargetName": "FireX-_1",
+                            "xPlusColliderName": "FireX+",
+                            "xPlusTargetName": "FireX+_1",
+                            "zMinusColliderName": "FireZ-",
+                            "zMinusTargetName": "FireZ-_1",
+                            "zPlusColliderName": "FireZ+",
+                            "zPlusTargetName": "FireZ+_1"
+                        }
+                    },
+                    "uuid": "fe0a6dd1-8c0d-7ec1-c36b-dbb51e4f25fb"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.8840000033378601,
+                        "playOnAwake": false,
+                        "volume": 0.2770000100135803
+                    },
+                    "uuid": "1ed908e8-951b-03eb-e9c9-1cbd4d4ab6c6"
+                }
+            ],
+            "name": "FirePillar",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
+            "uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "5af1f825-27ba-d270-f211-8705ec3875a6"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 1.100000023841858,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.699999988079071
+                        }
+                    },
+                    "uuid": "14d4f66c-79e9-015e-9ecf-ae42244547f4"
+                }
+            ],
+            "name": "FireX-",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "c4adf27d-b659-49a0-d994-b5f2976736c7"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "b67b92e7-2630-2ea7-9882-912fa0038d05"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": -1.100000023841858,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.699999988079071
+                        }
+                    },
+                    "uuid": "a9056a5b-8620-ebe1-9436-e6100e0706a4"
+                }
+            ],
+            "name": "FireX+",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "69c31203-fcf1-6ec2-5729-acd8e8d4acd6"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "2d90ac23-3c1d-1c12-cd62-2f29c6921ca8"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -1.100000023841858
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.699999988079071,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "1e1d371d-765e-550f-1e82-3bad25fcc866"
+                }
+            ],
+            "name": "FireZ+",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "673cfd62-ea66-9978-c39a-d667172cae0b"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "b4ef2043-8420-019f-85eb-3931d1978138"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 1.100000023841858
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.699999988079071,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "1f24286d-4aa5-df74-594a-284623896711"
+                }
+            ],
+            "name": "FireZ-",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "9901676a-a3ec-c653-7a98-127b3f5ca642"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "4b316dd8-9439-d5cb-c66e-c3c02d5ccf14"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "528e4814-db77-194c-18de-48506e1dc455"
+                }
+            ],
+            "name": "FireX-_1",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "599abf62-0b8e-2d5a-2ffc-b85ee18a2672"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "98951913-01c0-fec8-fb2d-0e5fcbd85965"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "566df6fd-a91d-3229-5823-8e1974342537"
+                }
+            ],
+            "name": "FireZ+_1",
+            "parent_uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c",
+            "uuid": "af31f28e-0089-3cb9-56a3-8b7b41fc586c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 20.0,
+                            "y": 4.0,
+                            "z": 4.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 4.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "14132758-7a53-7948-baa0-9ca380b84572"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "9a147a43-094d-1023-befd-258a281f887d",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "b88da529-5239-b5f7-cb69-ad00e0c32b61"
+                },
+                {
+                    "script": {
+                        "class_id": "MovingPillar",
+                        "fields": {
+                            "collisionCooldown": 2.0,
+                            "goalPositionName": "EarthTile",
+                            "movementDistance": 4.0,
+                            "movementSpeed": 4.0,
+                            "onGoalCalled": false,
+                            "onGoalMovementDistance": 2.0,
+                            "onGoalPosition": false,
+                            "xMinusColliderName": "EarthX-",
+                            "xMinusTargetName": "EarthX-_1",
+                            "xPlusColliderName": "EarthX+",
+                            "xPlusTargetName": "EarthX+_1",
+                            "zMinusColliderName": "EarthZ-",
+                            "zMinusTargetName": "EarthZ-_1",
+                            "zPlusColliderName": "EarthZ+",
+                            "zPlusTargetName": "EarthZ+_1"
+                        }
+                    },
+                    "uuid": "e96e893a-4265-976c-cc17-eb21086da250"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.8809999823570251,
+                        "playOnAwake": false,
+                        "volume": 0.2770000100135803
+                    },
+                    "uuid": "be424848-ba65-7a89-07ed-3e76b3fa08e9"
+                }
+            ],
+            "name": "EarthPillar",
+            "parent_uuid": "a486e63e-91e0-b0cf-651d-51cef638bfbf",
+            "uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "428d7dd2-bdb5-4cbf-34e5-0c50a190a658"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 1.100000023841858,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.699999988079071
+                        }
+                    },
+                    "uuid": "71060a85-5b0f-75a5-8b66-1a3e7617fe22"
+                }
+            ],
+            "name": "EarthX-",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "b8114fa2-1ebf-dcc2-7124-ecd0801eaa21"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "1fcdb125-78e4-8273-1a7e-6b6e289663e2"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": -1.100000023841858,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.699999988079071
+                        }
+                    },
+                    "uuid": "6a806630-71c2-f112-ef30-9315c48367e0"
+                }
+            ],
+            "name": "EarthX+",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "fc4ae9ce-d997-0b3a-1510-28e8239e974d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "6ed2312d-1fe5-7dc0-1297-c9f2f6fe4c47"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -1.100000023841858
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.699999988079071,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "5e024448-e8ed-3792-a54e-96b6e3b3e669"
+                }
+            ],
+            "name": "EarthZ+",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "2298085c-14ea-dfe4-895f-aedc10a9e457"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "45938a22-75ef-d730-ae85-d9f0f637bb2f"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 1.100000023841858
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.699999988079071,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "a4b15ce5-0560-38c0-cdfb-5047f8392f54"
+                }
+            ],
+            "name": "EarthZ-",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "7dc13ffb-cd6e-8118-0e73-a34ab69db0a8"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "c1711ef4-096c-bb27-2b71-24a961cd11b9"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "aef927a2-ee1e-ba49-1e31-16fffdbb1b45"
+                }
+            ],
+            "name": "EarthX-_1",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "795bbce3-55f5-c722-a31a-7477ea29d31f"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "10807803-4e35-0807-184c-755151a88f31"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": -4.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "36ebd1d4-6282-8382-0238-ca1f42ba6832"
+                }
+            ],
+            "name": "EarthX+_1",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "75aa10c0-4a50-3b7d-ccab-8bcbe21fca97"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "2891ede0-4bd4-0e4b-07ee-69f98705e719"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "49a50f55-4ca6-88e2-b16d-960a51e9d604"
+                }
+            ],
+            "name": "EarthZ+_1",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "2dbab147-f805-5045-a4ae-de5c0b7158d6"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "7c32b991-539a-9105-5f0a-deafdad84a85"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 4.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.30000001192092896,
+                            "y": 1.0,
+                            "z": 0.30000001192092896
+                        }
+                    },
+                    "uuid": "edd7670d-3c09-4dee-76e4-6395aac5f740"
+                }
+            ],
+            "name": "EarthZ-_1",
+            "parent_uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28",
+            "uuid": "6eb68126-fe0e-a56d-40ac-1fd60cc36e93"
         }
     ]
 }
