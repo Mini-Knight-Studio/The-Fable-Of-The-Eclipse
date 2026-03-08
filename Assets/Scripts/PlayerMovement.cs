@@ -3,29 +3,44 @@ using Loopie;
 
 public class PlayerMovement : Component
 {
-    //Movement Settings
     public float speed = 10.0f;
     public float rotSpeed = 5.0f;
     public bool isMoving = false;
 
-    //Dash Settings
     public float dashSpeed = 40.0f;
     public float dashDuration = 0.2f;
     private float dashTimer = 0.0f;
     private Vector3 dashDirection = new Vector3(0, 0, 0);
-    private bool tempDashOnce = false;
     private bool wasSpacePressed = false;
     public bool isDashing = false;
     public AudioSource dashSfxSource;
 
+    private BoxCollider boxCollider;
+    private Vector3 lastSafePosition;
+
     public PlayerMovement() { }
 
-    public void OnCreate() {
+    public void OnCreate()
+    {
         dashSfxSource = entity.GetComponent<AudioSource>();
+        boxCollider = entity.GetComponent<BoxCollider>();
+        if (entity.transform != null)
+        {
+            lastSafePosition = entity.transform.position;
+        }
     }
 
     public void OnUpdate()
     {
+        if (boxCollider != null && boxCollider.IsCollidingWithTag("Wall"))
+        {
+            Debug.Log("Wall hit detected! Reverting position.");
+            entity.transform.position = lastSafePosition;
+        }
+        else
+        {
+            lastSafePosition = entity.transform.position;
+        }
 
         isDashing = HandleDash();
         HandleNormalMovement();
@@ -37,7 +52,6 @@ public class PlayerMovement : Component
         {
             entity.transform.position += dashDirection * dashSpeed * Time.deltaTime;
             dashTimer -= Time.deltaTime;
-
             return true;
         }
 
@@ -47,11 +61,10 @@ public class PlayerMovement : Component
         {
             dashTimer = dashDuration;
             dashDirection = entity.transform.Forward;
-            dashSfxSource.Play();
+            if (dashSfxSource != null) dashSfxSource.Play();
         }
 
         wasSpacePressed = isSpacePressed;
-
         return false;
     }
 
@@ -82,7 +95,7 @@ public class PlayerMovement : Component
             moveDirection.z = Input.LeftAxis.y;
         }
 
-        float length = (float)Math.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
+        float length = moveDirection.Length();
         isMoving = length > 0.01f;
 
         if (isMoving)
@@ -93,8 +106,8 @@ public class PlayerMovement : Component
                 moveDirection.z /= length;
             }
 
-            float cos = (float)Math.Cos(Math.PI / 4f);
-            float sin = (float)Math.Sin(Math.PI / 4f);
+            float cos = Mathf.Cos(Mathf.PI / 4f);
+            float sin = Mathf.Sin(Mathf.PI / 4f);
 
             Vector3 rotatedDirection = new Vector3(
                 moveDirection.x * cos + moveDirection.z * sin,
