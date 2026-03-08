@@ -42,7 +42,7 @@ class PlayerCamera : Component
 
     public void OnUpdate()
     {
-        EnsurePlayerExists();
+        if (player == null) return;
 
         hasInput = CheckInput();
 
@@ -51,12 +51,6 @@ class PlayerCamera : Component
             case "Focusing": UpdateFocus(); break;
             case "FollowingPlayer": UpdateFollowPlayer(); break;
         }
-    }
-
-    private void EnsurePlayerExists()
-    {
-        if (player != null) return;
-        player = Entity.FindEntityByName(playerName);
     }
 
     private bool CheckInput()
@@ -129,7 +123,7 @@ class PlayerCamera : Component
 
     private void UpdateFocus()
     {
-        Vector3 targetPosition = new Vector3(focusTarget.x, entity.transform.position.y, focusTarget.z);
+        Vector3 targetPosition = new Vector3(focusTarget.x - distance, entity.transform.position.y, focusTarget.z - distance);
 
         entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, focusSpeed * Time.deltaTime);
 
