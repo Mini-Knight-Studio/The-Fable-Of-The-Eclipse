@@ -5,11 +5,8 @@ class PlayerCamera : Component
 {
     public string playerName = "";
     public float distance = 100f;
-    public float movementLimit = 5f;
-    public float speed = 20f;
+    public float speed = 25f;
     public float followSpeed = 8f;
-    public float returnFromInputSpeed = 20f;
-    public float returnFromFocusSpeed = 5f;
 
     private Entity player;
     private Camera camera;
@@ -17,14 +14,15 @@ class PlayerCamera : Component
     private string currentState = "FollowingPlayer";
     private string previousState = "FollowingPlayer";
 
-    private bool hasInput;
-    private Vector3 inputOffset = Vector3.Zero;
-    private Vector3 resultCameraPosition = Vector3.Zero;
-
     // Isometric
     private const float ISOMETRIC_ANGLE = (float)Math.PI / 4f;
     private float cos = (float)Math.Cos(ISOMETRIC_ANGLE);
     private float sin = (float)Math.Sin(ISOMETRIC_ANGLE);
+
+    // Input 
+    public float movementLimit = 5f;
+    private bool hasInput;
+    private Vector3 inputOffset = Vector3.Zero;
 
     // Focus
     private Vector3 focusTarget;
@@ -32,9 +30,6 @@ class PlayerCamera : Component
     private float focusZoom;
     private float currentZoom;
     private float focusSpeed;
-
-    // Testing
-    private float toggleCooldown = 0f;
 
     public void OnCreate()
     {
@@ -47,42 +42,10 @@ class PlayerCamera : Component
 
     public void OnUpdate()
     {
-        //------------------------------------------------------------
-        // Test focus on point
-        if (toggleCooldown > 0f)
-        {
-            toggleCooldown -= Time.deltaTime;
-        }
-        if (Input.IsKeyPressed(KeyCode.P) && toggleCooldown <= 0f)
-        {
-            toggleCooldown = 0.25f;
-
-            if (currentState == "FollowingPlayer")
-            {
-                FocusOnPoint(new Vector3(-70, 0, 359), 100f, 0.5f);
-            }
-            else if (currentState == "Focusing")
-            {
-                StopFocus();
-            }
-        }
-        //------------------------------------------------------------
-
         EnsurePlayerExists();
 
         hasInput = CheckInput();
 
-        // Camera Return Mode
-        if (!hasInput)
-        {
-            switch (currentState)
-            {
-                case "Focusing": ReturnCameraToPlayer(returnFromFocusSpeed); break;
-                case "FollowingPlayer": ReturnCameraToPlayer(returnFromInputSpeed); break;
-            }
-        }
-
-        // Camera Movement Mode
         switch (currentState)
         {
             case "Focusing": UpdateFocus(); break;
@@ -106,19 +69,37 @@ class PlayerCamera : Component
         Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.45f, -distance);
         Vector2 movementDirection = GetInputDirection();
 
+        float delta = Time.deltaTime;
+        float moveAmount = speed * delta;
+
         if (hasInput)
         {
-            inputOffset += new Vector3(movementDirection.x * speed * Time.deltaTime, 0, movementDirection.y * speed * Time.deltaTime);
+            inputOffset.x += movementDirection.x * moveAmount;
+            inputOffset.z += movementDirection.y * moveAmount;
+
+            inputOffset.x = Mathf.Clamp(inputOffset.x, -movementLimit, movementLimit);
+            inputOffset.z = Mathf.Clamp(inputOffset.z, -movementLimit, movementLimit);
+        }
+        else
+        {
+            float length = (float)Math.Sqrt(inputOffset.x * inputOffset.x + inputOffset.z * inputOffset.z);
+
+            if (length > 0f)
+            {
+                float newLength = Math.Max(0f, length - moveAmount);
+
+                inputOffset.x = inputOffset.x / length * newLength;
+                inputOffset.z = inputOffset.z / length * newLength;
+            }
+
+            currentZoom = Mathf.Lerp(currentZoom, originalZoom, focusSpeed * Time.deltaTime);
+            camera.SetOrthoSize(currentZoom);
         }
 
-        inputOffset.x = Mathf.Clamp(inputOffset.x, -movementLimit, movementLimit);
-        inputOffset.z = Mathf.Clamp(inputOffset.z, -movementLimit, movementLimit);
-
         Vector3 rotatedOffset = new Vector3(inputOffset.x * cos + inputOffset.z * sin, 0f, inputOffset.x * sin - inputOffset.z * cos);
+        Vector3 targetPosition = cameraOriginalPosition + rotatedOffset;
 
-        resultCameraPosition = cameraOriginalPosition + rotatedOffset;
-
-        entity.transform.position += (resultCameraPosition - entity.transform.position) * followSpeed * Time.deltaTime;
+        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, followSpeed * delta);
     }
 
     private Vector2 GetInputDirection()
@@ -170,13 +151,5 @@ class PlayerCamera : Component
         currentState = "FollowingPlayer";
         previousState = "Focusing";
         currentZoom = originalZoom;
-    }
-
-    private void ReturnCameraToPlayer(float returnSpeed)
-    {
-        inputOffset = Vector3.Lerp(inputOffset, Vector3.Zero, returnSpeed * Time.deltaTime);
-
-        currentZoom = Mathf.Lerp(currentZoom, originalZoom, focusSpeed * Time.deltaTime);
-        camera.SetOrthoSize(currentZoom);
     }
 }
