@@ -6,13 +6,19 @@ class PlayerCamera : Component
     public string playerName = "";
     public float distance = 100f;
     public float speed = 25f;
-    public float followSpeed = 8f;
 
     private Entity player;
     private Camera camera;
 
     private string currentState = "FollowingPlayer";
     private string previousState = "FollowingPlayer";
+
+    //private enum cameraState
+    //{
+    //    FOLLOWING_PLAYER,
+    //    FOCUSING,
+    //    STOP_FOCUSING
+    //}
 
     // Isometric
     private const float ISOMETRIC_ANGLE = (float)Math.PI / 4f;
@@ -29,15 +35,35 @@ class PlayerCamera : Component
     private float originalZoom;
     private float focusZoom;
     private float currentZoom;
-    private float focusSpeed;
+
+    // Timers
+    private float lerpTimer;
+    public float timeToFollowPlayer = 1f;
+    public float timeToFocus = 5;
+    public float timeToStopFocusing = 3;
 
     public void OnCreate()
     {
         player = Entity.FindEntityByName(playerName);
-        camera = entity.GetComponent<Camera>();
+        if (player != null)
+        {
+            // Get any player data.
+        }
+        else
+        {
+            Debug.Log("Error: There is no Player.");
+        }
 
-        originalZoom = camera.GetOrthoSize();
-        currentZoom = originalZoom;
+        camera = entity.GetComponent<Camera>();
+        if (camera != null)
+        {
+            originalZoom = camera.GetOrthoSize();
+            currentZoom = originalZoom;
+        }
+        else
+        {
+            Debug.Log("Error: The PlayerCamera lacks a Camera Component.");
+        }
     }
 
     public void OnUpdate()
@@ -49,8 +75,12 @@ class PlayerCamera : Component
         switch (currentState)
         {
             case "Focusing": UpdateFocus(); break;
+            case "StopFocusing": UpdateStopFocus(); break;
             case "FollowingPlayer": UpdateFollowPlayer(); break;
         }
+
+        lerpTimer += Time.deltaTime;
+        Debug.Log(lerpTimer);
     }
 
     private bool CheckInput()
@@ -86,14 +116,14 @@ class PlayerCamera : Component
                 inputOffset.z = inputOffset.z / length * newLength;
             }
 
-            currentZoom = Mathf.Lerp(currentZoom, originalZoom, focusSpeed * Time.deltaTime);
+            currentZoom = Mathf.Lerp(currentZoom, originalZoom, lerpTimer/timeToFollowPlayer);
             camera.SetOrthoSize(currentZoom);
         }
 
         Vector3 rotatedOffset = new Vector3(inputOffset.x * cos + inputOffset.z * sin, 0f, inputOffset.x * sin - inputOffset.z * cos);
         Vector3 targetPosition = cameraOriginalPosition + rotatedOffset;
 
-        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, followSpeed * delta);
+        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, lerpTimer/timeToFollowPlayer);
     }
 
     private Vector2 GetInputDirection()
@@ -125,25 +155,56 @@ class PlayerCamera : Component
     {
         Vector3 targetPosition = new Vector3(focusTarget.x - distance, entity.transform.position.y, focusTarget.z - distance);
 
-        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, focusSpeed * Time.deltaTime);
+        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, lerpTimer/timeToFocus);
 
-        currentZoom = Mathf.Lerp(currentZoom, focusZoom, focusSpeed * Time.deltaTime);
+        currentZoom = Mathf.Lerp(currentZoom, focusZoom, lerpTimer/timeToFocus);
         camera.SetOrthoSize(currentZoom);
     }
 
-    public void FocusOnPoint(Vector3 destination, float zoomSize, float speed)
+    public void FocusOnPoint(Vector3 destination, float zoomSize, float time)
     {
         currentState = "Focusing";
         previousState = "FollowingPlayer";
         focusTarget = destination;
         focusZoom = zoomSize;
-        focusSpeed = speed;
+        timeToFocus = time;
+
+        lerpTimer = 0;
+    }
+
+    private void UpdateStopFocus()
+    {
+        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.45f, -distance);
+
+        if (Mathf.Abs(currentZoom - originalZoom) < 0.1f)
+        {
+            currentZoom = originalZoom;
+
+            if (Vector3.Distance(entity.transform.position, cameraOriginalPosition) < 0.1f)
+            {
+                entity.transform.position = cameraOriginalPosition;
+                currentState = "FollowingPlayer";
+                lerpTimer = 0;
+            }
+            else
+            {
+                entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
+            }
+        }
+        else
+        {
+            currentZoom = Mathf.Lerp(currentZoom, originalZoom, lerpTimer/timeToStopFocusing);
+            camera.SetOrthoSize(currentZoom);
+
+            entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
+        }
     }
 
     public void StopFocus()
     {
-        currentState = "FollowingPlayer";
+        currentState = "StopFocusing";
         previousState = "Focusing";
-        currentZoom = originalZoom;
+
+        lerpTimer = 0;
     }
 }
