@@ -1,13 +1,12 @@
 using Loopie;
 using System;
-using System.Numerics;
 
-public class Effect
+public class Effect : Component
 {
     public int Probability;
     public int Damage;
     public int Ticks;
-    public int TickSpeed;
+    public float TickDuration;
     private float timer;
     public void InitEffect()
     {
@@ -16,7 +15,7 @@ public class Effect
     public bool UpdateEffect(Health health)
     {
         timer += Time.deltaTime;
-        if (timer > TickSpeed)
+        if (timer > TickDuration)
         {
             timer = 0;
             health.Damage(Damage);
@@ -25,3 +24,4 @@ public class Effect
         return Ticks == 0;
     }
 }
+

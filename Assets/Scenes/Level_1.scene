@@ -63,20 +63,22 @@
                             "0": "033f4d77-425c-e46f-b482-85c99020ffb8"
                         },
                         "currentClipIndex": 0,
+                        "isSpatial": false,
                         "loop": true,
+                        "loopStrategy": 0,
                         "maxDistance": 25.0,
                         "minDistance": 2.0,
+                        "noLoopStrategy": 0,
                         "pan": 0.0,
                         "pitch": 1.0,
                         "playOnAwake": true,
-                        "usePlaylist": false,
                         "volume": 1.0
                     },
                     "uuid": "91e97a6c-87b2-e545-2a6a-f1718f71bec2"
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "3dadd9ff-31ef-f95c-f8a9-a63bb4f39343",
+            "parent_uuid": "a12b34df-e476-fc0c-aa8b-49afc9221caf",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -110,7 +112,7 @@
                 }
             ],
             "name": "Environment",
-            "parent_uuid": "3dadd9ff-31ef-f95c-f8a9-a63bb4f39343",
+            "parent_uuid": "a12b34df-e476-fc0c-aa8b-49afc9221caf",
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
         {
@@ -119,41 +121,33 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
+                            "x": 180.0,
+                            "y": 5.120542049407959,
+                            "z": 180.0
                         },
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
+                            "x": 19.84962272644043,
+                            "y": -4.9314903662889265e-06,
+                            "z": 433.9334716796875
                         },
                         "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
+                            "w": 0.04467029124498367,
+                            "x": -4.1715153997756715e-08,
+                            "y": 0.9990018010139465,
+                            "z": -4.1715153997756715e-08
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
+                            "x": 3.5505125522613525,
+                            "y": 3.5503408908843994,
+                            "z": 3.5505125522613525
                         }
                     },
-                    "uuid": "a6e95317-68a1-f8ed-ef76-1071fe2d1faf"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
-                        "mesh_index": 0,
-                        "mesh_uuid": "f5db556c-4136-473a-ceed-0a3a6a481fe8"
-                    },
-                    "uuid": "9cc9f8ee-de63-896a-4cd3-152f59721d08"
+                    "uuid": "de7a1c5f-6bbb-c303-ea2e-b40e8facbc11"
                 }
             ],
-            "name": "pCylinder1",
-            "parent_uuid": "f093d678-6c40-89c2-1d7c-1d8a94a2ce45",
-            "uuid": "06badbbb-9a98-13b2-d6b3-667c593c9d2b"
+            "name": "Trunk_6",
+            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
+            "uuid": "fef83bae-58e0-194f-1b73-74b30194d1df"
         },
         {
             "active": true,
@@ -215,20 +209,47 @@
                             "0": "ee386b23-8797-506d-d982-4adb7ebc7788"
                         },
                         "currentClipIndex": 0,
+                        "isSpatial": false,
                         "loop": false,
+                        "loopStrategy": 0,
                         "maxDistance": 300.0,
                         "minDistance": 2.0,
+                        "noLoopStrategy": 0,
                         "pan": 0.0,
                         "pitch": 1.0,
                         "playOnAwake": false,
-                        "usePlaylist": false,
                         "volume": 1.0
                     },
                     "uuid": "3a19eb95-5da9-74c1-eba5-5bd2113f3efb"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 0.5,
+                            "y": 0.5,
+                            "z": 0.5
+                        }
+                    },
+                    "uuid": "4e4fd94d-b22f-02ac-48ca-0d5d238c8ebc"
+                },
+                {
+                    "script": {
+                        "class_id": "Health",
+                        "fields": {
+                            "maxHealth": 20
+                        }
+                    },
+                    "uuid": "1d75e802-0b7c-a37f-a665-cf6a341b9442"
                 }
             ],
             "name": "Player",
-            "parent_uuid": "3dadd9ff-31ef-f95c-f8a9-a63bb4f39343",
+            "parent_uuid": "a12b34df-e476-fc0c-aa8b-49afc9221caf",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -253,12 +274,12 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 1.2100000381469727,
-                            "y": 1.2100011110305786,
-                            "z": 1.2100000381469727
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
                         }
                     },
-                    "uuid": "fd0a478a-8f41-1479-0f0c-70fbb7dcfcca"
+                    "uuid": "a6e95317-68a1-f8ed-ef76-1071fe2d1faf"
                 },
                 {
                     "meshrenderer": {
@@ -266,12 +287,12 @@
                         "mesh_index": 0,
                         "mesh_uuid": "f5db556c-4136-473a-ceed-0a3a6a481fe8"
                     },
-                    "uuid": "c86b81c7-7426-8cab-96b5-04ddaf9f3ce8"
+                    "uuid": "9cc9f8ee-de63-896a-4cd3-152f59721d08"
                 }
             ],
             "name": "pCylinder1",
-            "parent_uuid": "5e5a380c-31fa-9179-fda2-13a9bfadb1b3",
-            "uuid": "a1105c81-deba-59af-ac45-40ea7c46d62b"
+            "parent_uuid": "f093d678-6c40-89c2-1d7c-1d8a94a2ce45",
+            "uuid": "06badbbb-9a98-13b2-d6b3-667c593c9d2b"
         },
         {
             "active": true,
@@ -326,9 +347,9 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": -25.76220703125,
+                            "x": 0.0,
                             "y": 0.0,
-                            "z": 299.056884765625
+                            "z": 0.0
                         },
                         "rotation": {
                             "w": 1.0,
@@ -337,45 +358,25 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 2.940000057220459,
-                            "y": 2.940000057220459,
-                            "z": 2.940000057220459
+                            "x": 1.2100000381469727,
+                            "y": 1.2100011110305786,
+                            "z": 1.2100000381469727
                         }
                     },
-                    "uuid": "86bef661-54a4-e99f-ead5-8344c9b7dfca"
+                    "uuid": "fd0a478a-8f41-1479-0f0c-70fbb7dcfcca"
                 },
                 {
                     "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
+                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
                         "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
+                        "mesh_uuid": "f5db556c-4136-473a-ceed-0a3a6a481fe8"
                     },
-                    "uuid": "3e3fd545-8d4f-fc03-6b6d-f39c2d14f3fb"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 1.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "ee737dcd-2ed8-187d-688b-bc6e2a13a975"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "58ec6d45-facf-dba2-cdb0-db0aed09f5cc"
+                    "uuid": "c86b81c7-7426-8cab-96b5-04ddaf9f3ce8"
                 }
             ],
-            "name": "Slime_7",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "efacdcac-8e6b-0850-ba4e-e845f6d1b498"
+            "name": "pCylinder1",
+            "parent_uuid": "5e5a380c-31fa-9179-fda2-13a9bfadb1b3",
+            "uuid": "a1105c81-deba-59af-ac45-40ea7c46d62b"
         },
         {
             "active": true,
@@ -384,13 +385,13 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
+                            "y": 0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": 52.04570388793945,
-                            "y": -0.020586758852005005,
-                            "z": 82.24490356445313
+                            "x": -38.823211669921875,
+                            "y": -0.607874870300293,
+                            "z": 347.5094299316406
                         },
                         "rotation": {
                             "w": 1.0,
@@ -399,9 +400,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
+                            "x": 4.5,
+                            "y": 4.5,
+                            "z": 4.5
                         }
                     },
                     "uuid": "91820663-83ae-5d9b-0a6e-9148d67904b1"
@@ -416,23 +417,51 @@
                 },
                 {
                     "script": {
-                        "class_id": "Enemy",
+                        "class_id": "Slime",
                         "fields": {
-                            "speed": 3.0,
+                            "AttackReachDistance": 0.0,
+                            "CooldownTime": 0.0,
+                            "Damage": 0,
+                            "SlimeSize": 1.5,
+                            "Speed": 2.5,
+                            "Stage": 3,
+                            "ViewFieldFar": 5.0,
+                            "ViewFieldWidth": 75.0,
                             "targetEntityName": "Player"
                         }
                     },
-                    "uuid": "25e5eb18-f050-548e-6e79-6e40e04234f9"
+                    "uuid": "46076f75-ad66-87ba-66d6-c9544f1d013f"
                 },
                 {
                     "script": {
-                        "class_id": "Loopie.WobblyEffect",
+                        "class_id": "WobblyEffect",
                         "fields": {
                             "wobbleAmount": 0.25,
                             "wobbleSpeed": 5.0
                         }
                     },
-                    "uuid": "3d8daa52-ae4c-9ca6-a635-92c58d33f75b"
+                    "uuid": "4e6188a4-ac54-568b-88e7-e2d2ac2a083c"
+                },
+                {
+                    "script": {
+                        "class_id": "Health",
+                        "fields": {
+                            "maxHealth": 3
+                        }
+                    },
+                    "uuid": "ef13672d-f6cb-b54d-5bc0-f73ba653b89a"
+                },
+                {
+                    "script": {
+                        "class_id": "Effect",
+                        "fields": {
+                            "Damage": 1,
+                            "Probability": 50,
+                            "TickDuration": 1.5,
+                            "Ticks": 2
+                        }
+                    },
+                    "uuid": "bbcf6feb-5592-0729-f764-41ad5441a302"
                 }
             ],
             "name": "Slime",
@@ -512,7 +541,7 @@
                 }
             ],
             "name": "Enemies",
-            "parent_uuid": "3dadd9ff-31ef-f95c-f8a9-a63bb4f39343",
+            "parent_uuid": "a12b34df-e476-fc0c-aa8b-49afc9221caf",
             "uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5"
         },
         {
@@ -590,192 +619,6 @@
             "name": "Trunk_2",
             "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
             "uuid": "d1739815-052b-3980-ab08-11e9ed6887c8"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -53.1148567199707,
-                            "y": -0.020585134625434875,
-                            "z": 305.3951110839844
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "54cb081e-bd59-d610-2c2f-4b34bb17e310"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "5f67e272-2d72-e02d-c8eb-acb9b59ba77d"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 3.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "cfe47d0d-6197-d274-4750-2180734f2b01"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "b53ac0c3-7dbc-703f-3fa9-92dbccdef4d1"
-                }
-            ],
-            "name": "Slime_8",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "6a66d9f9-884f-53e9-1736-bffa93718806"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 37.699127197265625,
-                            "y": 0.1255483627319336,
-                            "z": 90.50189971923828
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.5458401441574097,
-                            "y": 1.5458399057388306,
-                            "z": 1.5458401441574097
-                        }
-                    },
-                    "uuid": "bea82f71-01d7-ed84-91d1-f7c7d8572b89"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "d02c0e38-7c03-167f-b465-9ce8bd2f2bff"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 2.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "9c7d7ae9-836a-4c8e-b600-5912be2c0857"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "e1456821-7068-58c0-44e2-b3645ec21616"
-                }
-            ],
-            "name": "Slime_2",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "12fb647c-c069-0b2c-b63a-6adbccb3d4bc"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 50.253536224365234,
-                            "y": 0.30186927318573,
-                            "z": 93.17698669433594
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 2.5260298252105713,
-                            "y": 2.5260298252105713,
-                            "z": 2.5260298252105713
-                        }
-                    },
-                    "uuid": "b37b9e95-390f-5c09-e8b3-886d26a8215e"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "9b9dc2c9-b227-ed48-48b2-c55555af7607"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 1.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "42b5f210-fe9d-45b9-fb16-ba85e9d31d7d"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "046085e0-a1c6-be69-7150-31e4777d4e96"
-                }
-            ],
-            "name": "Slime_1",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "50595921-a76e-446a-504a-c9d0294ec9bc"
         },
         {
             "active": true,
@@ -978,68 +821,6 @@
             "name": "Spine_Barrier",
             "parent_uuid": "376f2a5f-2597-35bf-ff49-058b8d5151f1",
             "uuid": "7a338985-3837-3aa6-b725-9baa96804b78"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 105.70510864257813,
-                            "y": -0.02058078534901142,
-                            "z": 371.6990051269531
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "2806cf2b-0f3b-d295-009f-090c92c97a7d"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "32e7e993-4473-0b67-3427-90065e73d2c2"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 3.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "953ee018-4eed-5ea7-fe0c-6d2e20a2a44f"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "3302c2c8-7119-751d-42c2-f43715b4819d"
-                }
-            ],
-            "name": "Slime_15",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "cfb5cdc2-de23-aaf7-e4b0-ce3ac1028a97"
         },
         {
             "active": true,
@@ -1268,40 +1049,6 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -15.998270034790039,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -45.47991943359375,
-                            "y": 0.0,
-                            "z": 27.49481964111328
-                        },
-                        "rotation": {
-                            "w": 0.99027019739151,
-                            "x": 0.0,
-                            "y": -0.13915814459323883,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 6.043003559112549,
-                            "y": 6.043498992919922,
-                            "z": 6.043502330780029
-                        }
-                    },
-                    "uuid": "eb57a257-0f85-87f2-e346-0de28e6487cb"
-                }
-            ],
-            "name": "Trunk_1",
-            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
-            "uuid": "4a1e4f8c-7d56-2bac-8a93-aa5959212828"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
                             "y": -45.000003814697266,
                             "z": 0.0
                         },
@@ -1336,6 +1083,82 @@
             "name": "Void",
             "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
             "uuid": "1177ce56-13aa-aaa1-5ceb-ae9b5c54272c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -15.998270034790039,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -45.47991943359375,
+                            "y": 0.0,
+                            "z": 27.49481964111328
+                        },
+                        "rotation": {
+                            "w": 0.99027019739151,
+                            "x": 0.0,
+                            "y": -0.13915814459323883,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 6.043003559112549,
+                            "y": 6.043498992919922,
+                            "z": 6.043502330780029
+                        }
+                    },
+                    "uuid": "eb57a257-0f85-87f2-e346-0de28e6487cb"
+                }
+            ],
+            "name": "Trunk_1",
+            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
+            "uuid": "4a1e4f8c-7d56-2bac-8a93-aa5959212828"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f7bc7733-b638-fa84-3692-80d536aeb713"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f5db556c-4136-473a-ceed-0a3a6a481fe8"
+                    },
+                    "uuid": "dc2ff330-f09c-d307-43d2-1a82eb121a3b"
+                }
+            ],
+            "name": "pCylinder1",
+            "parent_uuid": "90a124bc-2cce-65eb-a231-584581710cd6",
+            "uuid": "059843b7-7506-1bed-3457-8590cb6c5384"
         },
         {
             "active": true,
@@ -1385,48 +1208,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 2.646637767611537e-05,
-                            "y": 16.241165161132813,
-                            "z": -4.711685505753849e-06
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 0.9899729490280151,
-                            "x": 2.344549301369625e-07,
-                            "y": 0.14125686883926392,
-                            "z": -7.332999985010247e-08
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d51f3522-9801-04c5-9883-e2a4a1d776b1"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "2ab99745-b4b9-c51c-8292-e5188d817c36",
-                        "mesh_index": 0,
-                        "mesh_uuid": "5e5bbd87-4b3c-7808-5d28-2b2a6c528f3f"
-                    },
-                    "uuid": "3e6d05c8-39c2-a2e6-018d-bedaa47d5dc8"
-                }
-            ],
-            "name": "pCylinder1",
-            "parent_uuid": "d1739815-052b-3980-ab08-11e9ed6887c8",
-            "uuid": "e93735dc-c7ad-6729-ee06-bc1c889c3da4"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 0.0,
                             "y": 30.175670623779297,
                             "z": 0.0
@@ -1462,6 +1243,48 @@
             "name": "Floor",
             "parent_uuid": "376f2a5f-2597-35bf-ff49-058b8d5151f1",
             "uuid": "5dcb5f1c-1fc6-2427-7966-1bd76e36a49c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 2.646637767611537e-05,
+                            "y": 16.241165161132813,
+                            "z": -4.711685505753849e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 0.9899729490280151,
+                            "x": 2.344549301369625e-07,
+                            "y": 0.14125686883926392,
+                            "z": -7.332999985010247e-08
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d51f3522-9801-04c5-9883-e2a4a1d776b1"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "2ab99745-b4b9-c51c-8292-e5188d817c36",
+                        "mesh_index": 0,
+                        "mesh_uuid": "5e5bbd87-4b3c-7808-5d28-2b2a6c528f3f"
+                    },
+                    "uuid": "3e6d05c8-39c2-a2e6-018d-bedaa47d5dc8"
+                }
+            ],
+            "name": "pCylinder1",
+            "parent_uuid": "d1739815-052b-3980-ab08-11e9ed6887c8",
+            "uuid": "e93735dc-c7ad-6729-ee06-bc1c889c3da4"
         },
         {
             "active": true,
@@ -1664,192 +1487,6 @@
             "name": "Collisions1",
             "parent_uuid": "376f2a5f-2597-35bf-ff49-058b8d5151f1",
             "uuid": "759623fc-02ad-fe10-b8c6-1bc4805fdb3a"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 46.021400451660156,
-                            "y": 3.601962816901505e-08,
-                            "z": 105.60094451904297
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "7041be24-72ab-07c5-467c-8d5b3ff9883f"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "6fa78f0b-d537-d4b2-0715-c3628a2b942c"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 3.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "ec107bce-b3ea-b133-5c0e-f08b75fe6cda"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "749af2ae-3396-2c6f-8e1f-8e71db33d775"
-                }
-            ],
-            "name": "Slime_4",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "52461950-fb68-2ecf-efb9-e5069ae66535"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 67.1617202758789,
-                            "y": 3.4495315551757813,
-                            "z": 444.67791748046875
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 2.75,
-                            "y": 2.75,
-                            "z": 2.75
-                        }
-                    },
-                    "uuid": "49cee5f8-34ff-7799-9d40-cbbb81a60aee"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "5b32c825-41a6-4b24-a685-4c220a054ea8"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 1.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "d0e1a59a-ad3d-392c-09e7-bcc8d9490204"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "6aa339d6-aa24-23d6-1e00-27130346a332"
-                }
-            ],
-            "name": "Slime_17",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "031ee333-d4a0-2bb2-d76f-ddca078aef0d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 85.58350372314453,
-                            "y": -3.0994415283203125e-06,
-                            "z": 339.076416015625
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.560010552406311,
-                            "y": 1.560010552406311,
-                            "z": 1.560010552406311
-                        }
-                    },
-                    "uuid": "0d041117-5238-d7bd-04f1-11bad2c7db99"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "34bc070c-2bcf-adc5-1c18-02c075f725d4"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 2.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "22d9a840-2849-ee95-27dc-0ed279fb7db3"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "9cbc879c-772d-edcc-ce20-ba2133e7ce49"
-                }
-            ],
-            "name": "Slime_12",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "0996438b-7f41-75b3-a411-f785ccbb9c5d"
         },
         {
             "active": true,
@@ -2068,6 +1705,48 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "1d0a6698-d808-aadb-e1fb-2dd2c8300989"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "a607ada3-07e5-c3d1-0acf-a8803951252a",
+                        "mesh_index": 1,
+                        "mesh_uuid": "6e93cd58-5200-8945-83d8-5f7cd0f63ee4"
+                    },
+                    "uuid": "bf2c498f-3ea9-a6cd-5c91-8bed583ed535"
+                }
+            ],
+            "name": "eyes",
+            "parent_uuid": "1f3386d2-1e83-b35a-8005-d58845d82ca3",
+            "uuid": "523f86b5-750b-b4ff-b44d-1b525814f00c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
                             "y": 51.69291687011719,
                             "z": 0.0
                         },
@@ -2114,9 +1793,9 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 43.55150604248047,
-                            "y": 7.450580596923828e-09,
-                            "z": 82.40105438232422
+                            "x": -25.722427368164063,
+                            "y": 4.469357490539551,
+                            "z": 25.847681045532227
                         },
                         "rotation": {
                             "w": 1.0,
@@ -2130,40 +1809,12 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "57c80319-8268-ae66-ce09-ce3433505a59"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "995a2d36-f6ef-a3d3-2625-cbd125b2fcef"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 0.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "f21b8afa-f0c2-6b8d-a1f7-a4b08af3a10c"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "7391885a-e887-e49d-4314-a1e2c3b552cf"
+                    "uuid": "a3e28d29-9a00-9740-5735-546b3f6a0ca0"
                 }
             ],
-            "name": "Slime_3",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "e823471a-5811-b4ff-3cb9-bcad309054e3"
+            "name": "Mushroom_6",
+            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
+            "uuid": "90a124bc-2cce-65eb-a231-584581710cd6"
         },
         {
             "active": true,
@@ -2252,316 +1903,6 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 44.07160186767578,
-                            "y": -4.172325134277344e-06,
-                            "z": 96.82926940917969
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.560010552406311,
-                            "y": 1.560010552406311,
-                            "z": 1.560010552406311
-                        }
-                    },
-                    "uuid": "0dc27e6f-3953-cfe2-b1d7-100530f1d76a"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "6a967f15-5a29-4bc4-0ba4-4824346b0ce2"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 2.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "caf0094b-751e-39a5-cf91-335ed005705f"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "3d5932db-a3d2-43a2-1406-d4b762a509b3"
-                }
-            ],
-            "name": "Slime_5",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "5ea81172-f705-ad03-932d-f573b203dd27"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -86.08137512207031,
-                            "y": 2.44852614402771,
-                            "z": 273.36212158203125
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.560010552406311,
-                            "y": 1.560010552406311,
-                            "z": 1.560010552406311
-                        }
-                    },
-                    "uuid": "ecfdd082-4f13-6d9c-0d40-f7032ef2ee9e"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "ba22662a-1e5a-f7d3-9f73-b6e640a5c822"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 2.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "effc8d80-1097-2c6a-9989-22f94f9f82fc"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "c027a3aa-facf-461a-b186-14e76618c9f0"
-                }
-            ],
-            "name": "Slime_20",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "f8593ff1-daff-9012-13bc-51507324419d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -10.41799545288086,
-                            "y": 0.0,
-                            "z": 320.5359802246094
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 2.75,
-                            "y": 2.75,
-                            "z": 2.75
-                        }
-                    },
-                    "uuid": "bff993bc-3022-0762-577f-39eb4799971e"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "e679b2ad-c5e3-8e38-ef92-8260f01567c5"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 1.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "8a9f584e-4494-5f31-bdfd-be0ae435b737"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "55215813-cfb8-ba1c-310e-9cc89d51e978"
-                }
-            ],
-            "name": "Slime_6",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "5e558cd0-172e-572b-a7ab-8dd95a10989d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -23.11748695373535,
-                            "y": 0.0,
-                            "z": 348.4237976074219
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 2.940000057220459,
-                            "y": 2.940000057220459,
-                            "z": 2.940000057220459
-                        }
-                    },
-                    "uuid": "d161161f-3ae5-132b-f4f4-142402b69797"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "36a6095e-4752-c56c-8f83-1e0e0e5374e5"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 1.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "4fd2324c-c97d-3652-9d55-525f48f9dc2b"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "0f01a608-4bfa-933f-0dcd-33ed355064ca"
-                }
-            ],
-            "name": "Slime_9",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "70eb64d0-996c-543e-87e2-fc882085ae80"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 73.7328872680664,
-                            "y": -3.2186508178710938e-06,
-                            "z": 315.0409240722656
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.560010552406311,
-                            "y": 1.560010552406311,
-                            "z": 1.560010552406311
-                        }
-                    },
-                    "uuid": "a821fdfd-ef29-d682-3cef-5f9b270cffa3"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "10e2f8a0-8840-6d33-14e1-4570d45340cc"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 2.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "b7db131d-5c06-1ea9-703b-b6d165778a0a"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "4d094dc5-7d5b-e058-9dcd-80144c4caad0"
-                }
-            ],
-            "name": "Slime_11",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "de2bca3c-8a1e-c1ec-273e-9cf5357bf75c"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
                             "x": -38.23335266113281,
                             "y": 9.74316692352295,
                             "z": 325.5264587402344
@@ -2584,378 +1925,6 @@
             "name": "Mushroom_3",
             "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
             "uuid": "6b60d30d-7b9b-31cd-7c04-e18a6601793c"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 72.04621124267578,
-                            "y": -0.22239960730075836,
-                            "z": 244.27386474609375
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 2.940000057220459,
-                            "y": 2.940000057220459,
-                            "z": 2.940000057220459
-                        }
-                    },
-                    "uuid": "dae785b0-083d-d47d-e765-b76823cfcac5"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "21e913c6-25f9-31e4-a53b-1b67b3b7c6df"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 1.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "7e8c31b4-1e98-8d1c-2218-ed4cc42e00e0"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "70d6618b-3dd6-b80d-e3b9-3c4f89842df9"
-                }
-            ],
-            "name": "Slime_10",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "870c0acb-1d78-8e34-7a34-89907fa57596"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 25.520641326904297,
-                            "y": -0.02058105170726776,
-                            "z": 379.5198059082031
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "c25c2cc9-cddb-cace-51f1-649d8b6443d1"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "a4936538-3aa2-dc06-bd59-fcc15baad5c6"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 3.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "e52ed622-215b-9dfb-aa21-66db8ed5c954"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "ffcddaa6-e5e7-3e68-93fc-8cd19b0248a6"
-                }
-            ],
-            "name": "Slime_13",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "b0f92510-bf1d-5f74-ae1f-7dd0903cb1ac"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 20.93080711364746,
-                            "y": -0.020581185817718506,
-                            "z": 391.40057373046875
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d8d638f3-84d0-b235-3299-5b2c036a1552"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "8f23713c-8569-aa70-70a0-914a6b1aafbd"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 3.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "15a6b7c5-38ad-41d3-9186-ef83884f2cf7"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "a9d7c990-cbe3-984d-c5c7-9b553685f6bd"
-                }
-            ],
-            "name": "Slime_14",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "1ac7654d-8abe-cca7-d940-47b48261f543"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 76.55084991455078,
-                            "y": 3.4495315551757813,
-                            "z": 432.48162841796875
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 2.75,
-                            "y": 2.75,
-                            "z": 2.75
-                        }
-                    },
-                    "uuid": "ae33bf4f-44e0-f426-e43e-1c57243ae13a"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "8f7fc988-4b71-8d17-0620-bdb118687e9a"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 1.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "40338bb3-d89c-81dd-bb64-43b60728c5ff"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "8f996e27-ecf0-2395-441e-5f6dd078b5f6"
-                }
-            ],
-            "name": "Slime_16",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "94cf108e-ac2e-d117-870e-d721db02be20"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -69.34329986572266,
-                            "y": 2.448525905609131,
-                            "z": 247.94407653808594
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.560010552406311,
-                            "y": 1.560010552406311,
-                            "z": 1.560010552406311
-                        }
-                    },
-                    "uuid": "618c31d2-0301-b4e8-7418-f8e51eed7ba2"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "2ee82658-48b4-b1dd-5a41-27433314262f"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 2.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "516b00e1-982f-835a-d876-a8c883111a0d"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "bbac8ad4-e762-8146-2452-6140771c55a9"
-                }
-            ],
-            "name": "Slime_18",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "9d4064b8-284e-422c-c0c6-4d4dc90d9b60"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -70.29891967773438,
-                            "y": 2.44852614402771,
-                            "z": 260.4239501953125
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.560010552406311,
-                            "y": 1.560010552406311,
-                            "z": 1.560010552406311
-                        }
-                    },
-                    "uuid": "80272e4f-9a5b-e5d7-ac3d-39145d7472ab"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
-                        "mesh_index": 0,
-                        "mesh_uuid": "df5ba6c1-25d8-5b49-47d5-b76524ba8795"
-                    },
-                    "uuid": "b0e08240-e016-7b67-41f1-ddae1c0a738c"
-                },
-                {
-                    "script": {
-                        "class_id": "Enemy",
-                        "fields": {
-                            "speed": 2.0,
-                            "targetEntityName": "Player"
-                        }
-                    },
-                    "uuid": "2dc698a6-9562-384f-6c26-3ccc094706b4"
-                },
-                {
-                    "script": {
-                        "class_id": "Loopie.WobblyEffect",
-                        "fields": {
-                            "wobbleAmount": 0.25,
-                            "wobbleSpeed": 5.0
-                        }
-                    },
-                    "uuid": "510ff6af-a89c-db4a-50c8-a511fa8eeb54"
-                }
-            ],
-            "name": "Slime_19",
-            "parent_uuid": "dde546d5-e43e-06ee-733a-ec2d8aadeed5",
-            "uuid": "7351cf1d-d604-609b-5f4b-40ef2607216d"
         },
         {
             "active": true,
@@ -3108,40 +2077,6 @@
             "name": "pCylinder1",
             "parent_uuid": "a689dbd7-a5ec-9e53-1c6a-6a4ff8b0ffbe",
             "uuid": "7b9eb869-a8ed-5bd8-0380-a3f87c337f8d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 180.0,
-                            "y": 5.120542049407959,
-                            "z": 180.0
-                        },
-                        "position": {
-                            "x": 19.84962272644043,
-                            "y": -4.9314903662889265e-06,
-                            "z": 433.9334716796875
-                        },
-                        "rotation": {
-                            "w": 0.04467029124498367,
-                            "x": -4.1715153997756715e-08,
-                            "y": 0.9990018010139465,
-                            "z": -4.1715153997756715e-08
-                        },
-                        "scale": {
-                            "x": 3.5505125522613525,
-                            "y": 3.5503408908843994,
-                            "z": 3.5505125522613525
-                        }
-                    },
-                    "uuid": "de7a1c5f-6bbb-c303-ea2e-b40e8facbc11"
-                }
-            ],
-            "name": "Trunk_6",
-            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
-            "uuid": "fef83bae-58e0-194f-1b73-74b30194d1df"
         },
         {
             "active": true,
@@ -3341,82 +2276,6 @@
             "active": true,
             "components": [
                 {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -25.722427368164063,
-                            "y": 4.469357490539551,
-                            "z": 25.847681045532227
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "a3e28d29-9a00-9740-5735-546b3f6a0ca0"
-                }
-            ],
-            "name": "Mushroom_6",
-            "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
-            "uuid": "90a124bc-2cce-65eb-a231-584581710cd6"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "f7bc7733-b638-fa84-3692-80d536aeb713"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
-                        "mesh_index": 0,
-                        "mesh_uuid": "f5db556c-4136-473a-ceed-0a3a6a481fe8"
-                    },
-                    "uuid": "dc2ff330-f09c-d307-43d2-1a82eb121a3b"
-                }
-            ],
-            "name": "pCylinder1",
-            "parent_uuid": "90a124bc-2cce-65eb-a231-584581710cd6",
-            "uuid": "059843b7-7506-1bed-3457-8590cb6c5384"
-        },
-        {
-            "active": true,
-            "components": [
-                {
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -3461,8 +2320,58 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "3dadd9ff-31ef-f95c-f8a9-a63bb4f39343",
+            "parent_uuid": "a12b34df-e476-fc0c-aa8b-49afc9221caf",
             "uuid": "b79eaae7-22d1-1a5d-d46f-507f33aab1ab"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "0c56c1a9-af62-8daf-645b-4d0493877e01"
+                },
+                {
+                    "animator": {
+                        "renderers": [
+                            {
+                                "ownerUUID": "c52fa238-9fc1-aed1-8bcf-bde92dc97470",
+                                "rendererUUID": "1c42b0ca-4434-a6de-567b-27053d1db674"
+                            },
+                            {
+                                "ownerUUID": "523f86b5-750b-b4ff-b44d-1b525814f00c",
+                                "rendererUUID": "bf2c498f-3ea9-a6cd-5c91-8bed583ed535"
+                            }
+                        ],
+                        "targetRendererUUID": "1c42b0ca-4434-a6de-567b-27053d1db674"
+                    },
+                    "uuid": "34c0ef6d-5e0e-5a75-b447-da482540ae44"
+                }
+            ],
+            "name": "IdlePlayer",
+            "parent_uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
+            "uuid": "1f3386d2-1e83-b35a-8005-d58845d82ca3"
         },
         {
             "active": true,
@@ -3513,6 +2422,56 @@
             "name": "Gems_Row",
             "parent_uuid": "b79eaae7-22d1-1a5d-d46f-507f33aab1ab",
             "uuid": "513e7d88-60fd-a10c-e572-b2b9b865233f"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "59ce97da-4291-1b15-6e5e-ed8980fd8e41"
+                },
+                {
+                    "animator": {
+                        "renderers": [
+                            {
+                                "ownerUUID": "23a71a73-4ee4-d584-1caf-77bf9962cd1c",
+                                "rendererUUID": "71c23407-5f52-5fd9-2b54-9b5c962865be"
+                            },
+                            {
+                                "ownerUUID": "6e7fd22e-c54d-33d2-34ab-8e51f967ad68",
+                                "rendererUUID": "dc6a6439-f518-f9c2-ad90-18e869812dff"
+                            }
+                        ],
+                        "targetRendererUUID": "dc6a6439-f518-f9c2-ad90-18e869812dff"
+                    },
+                    "uuid": "7c9de334-7fc9-0609-212b-51dda7d2315e"
+                }
+            ],
+            "name": "WalkPlayer",
+            "parent_uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
+            "uuid": "7a4ea88e-d0ab-7064-ed95-f3e2b23de82d"
         },
         {
             "active": true,
@@ -3691,56 +2650,6 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "0c56c1a9-af62-8daf-645b-4d0493877e01"
-                },
-                {
-                    "animator": {
-                        "renderers": [
-                            {
-                                "ownerUUID": "c52fa238-9fc1-aed1-8bcf-bde92dc97470",
-                                "rendererUUID": "1c42b0ca-4434-a6de-567b-27053d1db674"
-                            },
-                            {
-                                "ownerUUID": "523f86b5-750b-b4ff-b44d-1b525814f00c",
-                                "rendererUUID": "bf2c498f-3ea9-a6cd-5c91-8bed583ed535"
-                            }
-                        ],
-                        "targetRendererUUID": "1c42b0ca-4434-a6de-567b-27053d1db674"
-                    },
-                    "uuid": "34c0ef6d-5e0e-5a75-b447-da482540ae44"
-                }
-            ],
-            "name": "IdlePlayer",
-            "parent_uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
-            "uuid": "1f3386d2-1e83-b35a-8005-d58845d82ca3"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
                     "uuid": "8d690b1c-9ada-863e-7ede-0e6aae6d26dd"
                 },
                 {
@@ -3755,98 +2664,6 @@
             "name": "brightwhiskers",
             "parent_uuid": "1f3386d2-1e83-b35a-8005-d58845d82ca3",
             "uuid": "c52fa238-9fc1-aed1-8bcf-bde92dc97470"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "1d0a6698-d808-aadb-e1fb-2dd2c8300989"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "a607ada3-07e5-c3d1-0acf-a8803951252a",
-                        "mesh_index": 1,
-                        "mesh_uuid": "6e93cd58-5200-8945-83d8-5f7cd0f63ee4"
-                    },
-                    "uuid": "bf2c498f-3ea9-a6cd-5c91-8bed583ed535"
-                }
-            ],
-            "name": "eyes",
-            "parent_uuid": "1f3386d2-1e83-b35a-8005-d58845d82ca3",
-            "uuid": "523f86b5-750b-b4ff-b44d-1b525814f00c"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "59ce97da-4291-1b15-6e5e-ed8980fd8e41"
-                },
-                {
-                    "animator": {
-                        "renderers": [
-                            {
-                                "ownerUUID": "23a71a73-4ee4-d584-1caf-77bf9962cd1c",
-                                "rendererUUID": "71c23407-5f52-5fd9-2b54-9b5c962865be"
-                            },
-                            {
-                                "ownerUUID": "6e7fd22e-c54d-33d2-34ab-8e51f967ad68",
-                                "rendererUUID": "dc6a6439-f518-f9c2-ad90-18e869812dff"
-                            }
-                        ],
-                        "targetRendererUUID": "dc6a6439-f518-f9c2-ad90-18e869812dff"
-                    },
-                    "uuid": "7c9de334-7fc9-0609-212b-51dda7d2315e"
-                }
-            ],
-            "name": "WalkPlayer",
-            "parent_uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
-            "uuid": "7a4ea88e-d0ab-7064-ed95-f3e2b23de82d"
         },
         {
             "active": true,

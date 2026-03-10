@@ -37,11 +37,16 @@ public class Health : Component
     {
         actualHealth -= points;
         actualHealth = actualHealth < 0? 0 : actualHealth;
+        Debug.Log("Ouch!");
     }
     public void AddEffect(Effect effect)
     {
-        effect.InitEffect();
+        Random random = new Random();
+        int number = random.Next(0, 101);
+        if (number > effect.Probability)
+            return;
         effects.Add(effect);
+        effect.InitEffect();
     }
 
     public void Heal(int points)
