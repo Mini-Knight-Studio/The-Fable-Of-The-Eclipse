@@ -1,10 +1,11 @@
 using System;
 using Loopie;
 
-class VistaPoint : Component
+class BossEntry : Component
 {
-    public float zoom = 20;
-    public float time = 50f;
+    public float time = 3f;
+    public float transformAmount = 0.5f;
+    public float rotationAmount = 0.5f;
 
     private string cameraName = "PlayerCamera";
 
@@ -37,11 +38,7 @@ class VistaPoint : Component
 
         if (collider.HasCollided)
         {
-            camera.FocusOnPoint(entity.transform.position, zoom, time);
-        }
-        else if (collider.HasEndedCollision)
-        {
-            camera.StopFocus();
+            camera.SetIsShaking(true, time, transformAmount, rotationAmount);
         }
     }
 };

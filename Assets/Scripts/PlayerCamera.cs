@@ -36,11 +36,21 @@ class PlayerCamera : Component
     private float focusZoom;
     private float currentZoom;
 
+    // Shaking
+    private bool isShaking = false;
+    private float transformShakeAmount = 1;
+    private float rotationShakeAmount = 1.5f;
+    private Vector3 shakeOffset = Vector3.Zero;
+    private Vector3 shakeRotationOffset = Vector3.Zero;
+    private Random random = new Random();
+
     // Timers
     private float lerpTimer;
+    private float shakeTimer;
     public float timeToFollowPlayer = 1f;
     public float timeToFocus = 5;
-    public float timeToStopFocusing = 3;
+    public float timeToStopFocusing = 1;
+    public float timeToShake = 3;
 
     public void OnCreate()
     {
@@ -77,6 +87,11 @@ class PlayerCamera : Component
             case "Focusing": UpdateFocus(); break;
             case "StopFocusing": UpdateStopFocus(); break;
             case "FollowingPlayer": UpdateFollowPlayer(); break;
+        }
+
+        if (isShaking)
+        {
+            UpdateShake();
         }
 
         lerpTimer += Time.deltaTime;
@@ -206,5 +221,51 @@ class PlayerCamera : Component
         previousState = "Focusing";
 
         lerpTimer = 0;
+    }
+
+    private void UpdateShake()
+    {
+        shakeTimer += Time.deltaTime;
+
+        entity.transform.position -= shakeOffset;
+        entity.transform.rotation -= shakeRotationOffset;
+
+        float progress = shakeTimer / timeToShake;
+
+        if (progress >= 1f)
+        {
+            shakeOffset = Vector3.Zero;
+            shakeRotationOffset = Vector3.Zero;
+            isShaking = false;
+            return;
+        }
+
+        float strength = 1f - Mathf.SmoothStep(0f, 1f, progress);
+
+        float currentTransformShake = transformShakeAmount * strength;
+        float currentRotationShake = rotationShakeAmount * strength;
+
+        float offsetX = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
+        float offsetY = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
+        float offsetZ = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
+
+        shakeOffset = new Vector3(offsetX, offsetY, offsetZ);
+
+        float rotZ = ((float)random.NextDouble() * 2f - 1f) * currentRotationShake;
+
+        shakeRotationOffset = new Vector3(0f, 0f, rotZ);
+
+        entity.transform.position += shakeOffset;
+        entity.transform.rotation += shakeRotationOffset;
+    }
+
+    public void SetIsShaking(bool active, float time = 1f, float amount = 1f, float rotationAmount = 1f)
+    {
+        isShaking = active;
+        timeToShake = time;
+        transformShakeAmount = amount;
+        rotationShakeAmount = rotationAmount;
+
+        shakeTimer = 0f;
     }
 }
