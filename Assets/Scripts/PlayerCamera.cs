@@ -6,6 +6,7 @@ class PlayerCamera : Component
     public string playerName = "";
     public float distance = 100f;
     public float speed = 25f;
+    public float verticalScale = 1.22f;
 
     private Entity player;
     private Camera camera;
@@ -105,7 +106,7 @@ class PlayerCamera : Component
 
     private void UpdateFollowPlayer()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.22f, -distance);
+        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
         Vector2 movementDirection = GetInputDirection();
 
         float delta = Time.deltaTime;
@@ -189,7 +190,7 @@ class PlayerCamera : Component
 
     private void UpdateStopFocus()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.45f, -distance);
+        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
 
         if (Mathf.Abs(currentZoom - originalZoom) < 0.1f)
         {

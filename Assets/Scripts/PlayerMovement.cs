@@ -26,7 +26,6 @@ public class PlayerMovement : Component
 
     public void OnUpdate()
     {
-
         isDashing = HandleDash();
         HandleNormalMovement();
         transform.position -= transform.Up * 9.8f * Time.deltaTime;
