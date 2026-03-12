@@ -132,14 +132,14 @@ class PlayerCamera : Component
                 inputOffset.z = inputOffset.z / length * newLength;
             }
 
-            currentZoom = Mathf.Lerp(currentZoom, originalZoom, lerpTimer/timeToFollowPlayer);
+            currentZoom = Mathf.Lerp(currentZoom, originalZoom, Time.deltaTime / timeToFollowPlayer);
             camera.SetOrthoSize(currentZoom);
         }
 
         Vector3 rotatedOffset = new Vector3(inputOffset.x * cos + inputOffset.z * sin, 0f, inputOffset.x * sin - inputOffset.z * cos);
         Vector3 targetPosition = cameraOriginalPosition + rotatedOffset;
 
-        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, lerpTimer/timeToFollowPlayer);
+        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, Time.deltaTime / timeToFollowPlayer);
     }
 
     private Vector2 GetInputDirection()
