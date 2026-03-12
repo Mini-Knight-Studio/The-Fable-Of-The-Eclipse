@@ -29,6 +29,7 @@ public class PlayerMovement : Component
 
         isDashing = HandleDash();
         HandleNormalMovement();
+        transform.position -= transform.Up * 9.8f * Time.deltaTime;
     }
 
     private bool HandleDash()
@@ -109,3 +110,4 @@ public class PlayerMovement : Component
         }
     }
 }
+

@@ -105,7 +105,7 @@ class PlayerCamera : Component
 
     private void UpdateFollowPlayer()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.45f, -distance);
+        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.22f, -distance);
         Vector2 movementDirection = GetInputDirection();
 
         float delta = Time.deltaTime;
