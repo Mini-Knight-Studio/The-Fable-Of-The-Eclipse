@@ -3,8 +3,9 @@ using Loopie;
 
 class Slime : Enemy
 {
-    public int Stage = 3;
+    public int Stage;
     public float SlimeSize;
+    public int SplitAmmount;
 
     public float ViewFieldWidth;
     public float ViewFieldFar;
@@ -16,62 +17,57 @@ class Slime : Enemy
     public float AttackReachDistance;
 
     public float CooldownTime;
-    private float cooldownTimer;
     private Effect effect;
-    private Health targetHealth;
-    private Health health;
     
     void OnCreate()
     {
+        SetEnemy("Slime_Reference");
         SetTarget(targetEntityName);
         SetStage(Stage);
-        targetHealth = target.GetComponent<Health>();
-        targetHealth = entity.GetComponent<Health>();
         effect = entity.GetComponent<Effect>();
     }
 
     void OnUpdate()
     {
-        Vector3 front = transform.Forward;
-        Vector3 targetDirection = target.transform.position - transform.position;
-        if (Mathf.Abs(Vector3.Angle(front, targetDirection)) <= ViewFieldWidth)
+        UpdateEnemy();
+        if(Input.IsKeyDown(KeyCode.P))
         {
-            RaycastHit hit;
-
-            if (Collisions.Raycast(transform.position, targetDirection, ViewFieldFar*Stage, out hit))
-            {
-                if(hit.entity.ID == target.ID && cooldownTimer <= 0)
-                {
-                    transform.LookAt(target.transform.position, transform.Up);
-                    Move(transform.Forward);
-                }
-            }
+            health.Damage(1);
         }
-
-        if(cooldownTimer > 0)
-            cooldownTimer-= Time.deltaTime;
-        if(cooldownTimer < 0)
-            cooldownTimer = 0;
-        if(targetDirection.magnitude <= AttackReachDistance)
+        
+        #region Movement
+        if(DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar*Stage) && HasAttackCooldown())
+        {
+            transform.LookAt(target.transform.position, transform.Up);
+            Move(transform.Forward);
+        }
+        #endregion
+        #region Attack
+        if (GetDirectionToTarget().magnitude <= AttackReachDistance*Stage)
         {
             //Init attack animation
             RaycastHit hit;
             if (Collisions.Raycast(transform.position, transform.Forward, AttackReachDistance*Stage, out hit))
             {
-                if (hit.entity.ID == target.ID && cooldownTimer <= 0)
+                if (hit.entity.ID == target.ID && HasAttackCooldown())
                 {
                     Attack();
                 }
             }
-            StartCooldown();
+            StartAttackCooldown(CooldownTime);
             //End attack animation
         }
-
+        #endregion
+        #region Health
         health.UpdateHealth();
         if(health.IsDead())
         {
-            Debug.Log("I'm dead");
+            //Debug.Log("I'm dead");
+            if (Stage > 0)
+                Split();
+            entity.Destroy();
         }
+        #endregion
     }
 
     public void Move(Vector3 direction)
@@ -83,6 +79,8 @@ class Slime : Enemy
     {
         Stage = stage;
         transform.scale = Vector3.One*SlimeSize*stage;
+
+        Debug.Log($" SCALE ->{Stage} -> {transform.scale.x}");
     }
 
     public void Attack()
@@ -94,8 +92,15 @@ class Slime : Enemy
         }
     }
 
-    public void StartCooldown()
+    public void Split()
     {
-        cooldownTimer = CooldownTime;
+        for (int i = 0; i < SplitAmmount; i++)
+        {
+            Entity newslime = reference.Clone(true);
+            Slime slimecomp = newslime.GetComponent<Slime>();
+            newslime.SetActive(true);
+          
+            slimecomp.SetStage(Stage - 1);
+        }
     }
 };
