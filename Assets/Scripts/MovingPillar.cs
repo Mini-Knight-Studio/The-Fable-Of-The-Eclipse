@@ -3,19 +3,6 @@ using Loopie;
 
 class MovingPillar : Component
 {
-    private BoxCollider zPlusCollider;
-    private BoxCollider zMinusCollider;
-    private BoxCollider xPlusCollider;
-    private BoxCollider xMinusCollider;
-
-    public string zPlusColliderName;
-    public string zMinusColliderName;
-    public string xPlusColliderName;
-    public string xMinusColliderName;
-
-    public float collisionCooldown = 2.0f;
-    private float collisionTimer = 0.0f;
-
     public float movementSpeed = 2.0f;
     public float movementDistance = 3.0f;
 
@@ -26,98 +13,52 @@ class MovingPillar : Component
     private bool isMoving = false;
     private Vector3 targetPosition;
 
-    public string goalPositionName;
+    public string goalName;
     public float onGoalMovementDistance = 1.0f;
     public bool onGoalPosition = false;
     public bool onGoalCalled = false;
-    private Vector3 goalPosition;
+
+    private float rayDistance = 2.0f;
+
+    private BoxCollider myCollider;
+    private BoxCollider goalCollider;
 
     public AudioSource slideSFX;
 
     void OnCreate()
     {
-        zPlusCollider = Entity.FindEntityByName(zPlusColliderName).GetComponent<BoxCollider>();
-        zMinusCollider = Entity.FindEntityByName(zMinusColliderName).GetComponent<BoxCollider>();
-        xPlusCollider = Entity.FindEntityByName(xPlusColliderName).GetComponent<BoxCollider>();
-        xMinusCollider = Entity.FindEntityByName(xMinusColliderName).GetComponent<BoxCollider>();
-
-        goalPosition = Entity.FindEntityByName(goalPositionName).transform.position;
+        myCollider = entity.GetComponent<BoxCollider>();
+        goalCollider = Entity.FindEntityByName(goalName).GetComponent<BoxCollider>();
 
         slideSFX = entity.GetComponent<AudioSource>();
     }
 
     void OnUpdate()
     {
-        if (entity.transform.position.x == goalPosition.x && entity.transform.position.z == goalPosition.z && !onGoalCalled)
-        {
-            StartGoalPosition();
-        }
+        HandleGoal();
 
         if (isMoving)
         {
             MoveTowardsTarget();
         }
-        else
-        {
-            if (onGoalPosition) return;
-            HandleCollision();
-        }
     }
 
-    void HandleCollision()
+    void HandleGoal()
     {
-        Vector3 pos = entity.transform.position;
+        if (onGoalCalled) return;
 
-        if (zPlusCollider.HasCollided && CanMove(entity.transform.Forward))
-        {
-            StartMovement(pos + new Vector3(0, 0, movementDistance));
-        }
-        else if (zMinusCollider.HasCollided && CanMove(entity.transform.Back))
-        {
-            StartMovement(pos + new Vector3(0, 0, -movementDistance));
-        }
-        else if (xPlusCollider.HasCollided && CanMove(entity.transform.Right))
-        {
-            StartMovement(pos + new Vector3(movementDistance, 0, 0));
-        }
-        else if (xMinusCollider.HasCollided && CanMove(entity.transform.Left))
-        {
-            StartMovement(pos + new Vector3(-movementDistance, 0, 0));
-        }
-    }
-
-    bool CanMove(Vector3 direction)
-    {
-        BoxCollider collider = null;
-        if (direction.x > 0) collider = xMinusCollider;
-        else if (direction.x < 0) collider = xPlusCollider;
-        else if (direction.z > 0) collider = zMinusCollider;
-        else if (direction.z < 0) collider = zPlusCollider;
-
-        if (collider == null) return false;
-
-        Vector3 origin = entity.transform.position + collider.LocalCenter;
-        if (direction.x > 0) origin += new Vector3(collider.LocalExtents.x, 0, 0);
-        else if (direction.x < 0) origin -= new Vector3(collider.LocalExtents.x, 0, 0);
-        else if (direction.z > 0) origin += new Vector3(0, 0, collider.LocalExtents.z);
-        else if (direction.z < 0) origin -= new Vector3(0, 0, collider.LocalExtents.z);
-
-        const float epsilon = 0.01f;
-        origin += direction.normalized * epsilon;
-
-        float rayDistance = movementDistance;
-        if (direction.x != 0) rayDistance -= collider.LocalExtents.x;
-        else if (direction.z != 0) rayDistance -= collider.LocalExtents.z;
-
-        rayDistance += epsilon;
+        Vector3 origin = entity.transform.position + myCollider.LocalCenter;
+        origin.y -= ((myCollider.LocalExtents.y) * entity.transform.scale.y) + 0.01f;
 
         RaycastHit hit;
-        if (Collisions.Raycast(origin, direction.normalized, rayDistance, out hit))
-        {
-            return false;
-        }
 
-        return true;
+        if (Collisions.Raycast(origin, entity.transform.Down, rayDistance, out hit))
+        {
+            if(hit.collider.ID == goalCollider.ID)
+            {
+                StartGoalPosition();
+            }
+        }
     }
 
     void StartMovement(Vector3 newTarget)
@@ -157,10 +98,24 @@ class MovingPillar : Component
         onGoalPosition = true;
         onGoalCalled = true;
 
-        Vector3 pos = entity.transform.position;
+        Vector3 finalPos = goalCollider.transform.position;
+        finalPos.y = entity.transform.position.y -onGoalMovementDistance;
 
-        StartMovement(pos + new Vector3(0, -onGoalMovementDistance, 0));
+        StartMovement(finalPos);
+
+        myCollider.Static = true;
 
         Debug.LogWarning("The pillar has reached its goal");
+    }
+
+    void OnDrawGizmo()
+    {
+        Vector3 origin = entity.transform.position + myCollider.LocalCenter;
+        origin.y -= ((myCollider.LocalExtents.y) * entity.transform.scale.y) - 0.01f;
+
+        Vector3 lineEnd = origin;
+        lineEnd.y -= rayDistance;
+
+        Gizmo.DrawLine(origin, lineEnd, Color.Magenta);
     }
 };
