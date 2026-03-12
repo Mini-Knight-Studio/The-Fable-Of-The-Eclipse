@@ -3,10 +3,12 @@ using Loopie;
 
 public class Enemy : Component
 {
-    protected Health health;
-    protected Entity target;
-    protected Health targetHealth;
     protected Entity reference;
+    protected Entity target;
+    protected Health health;
+    protected Health targetHealth;
+    protected BoxCollider attackBox;
+    protected BoxCollider collider;
     private float attackCooldown;
 
     protected void SetReference(string EnemyReference)
@@ -18,6 +20,8 @@ public class Enemy : Component
     {
         SetReference(EnemyReference);
         health = entity.GetComponent<Health>();
+        collider = entity.GetComponent<BoxCollider>();
+        attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
         health.CanBeDamaged(true);
         health.Init();
     }
@@ -36,10 +40,12 @@ public class Enemy : Component
         if (Mathf.Abs(Vector3.Angle(front, targetDirection)) <= ViewFieldWidth)
         {
             RaycastHit hit;
+            int PlayerLayer = Collisions.GetLayerBit("Player");
+            int LayerMask = PlayerLayer;
 
-            if (Collisions.Raycast(transform.position, targetDirection, ViewFieldDepth, out hit))
+            if (Collisions.Raycast(transform.position, targetDirection, ViewFieldDepth, out hit,LayerMask))
             {
-                if (hit.entity.ID == target.ID)
+                if (hit.entity == target)
                 {
                     return true;
                 }

@@ -6,6 +6,9 @@ class Slime : Enemy
     public int Stage;
     public float SlimeSize;
     public int SplitAmmount;
+    public float SplitDistance;
+    protected Vector3 SplitDirection;
+    protected float parentY;
 
     public float ViewFieldWidth;
     public float ViewFieldFar;
@@ -17,6 +20,8 @@ class Slime : Enemy
     public float AttackReachDistance;
 
     public float CooldownTime;
+    protected float splitLerpTimer;
+    private bool isSpawning;
     private Effect effect;
     
     void OnCreate()
@@ -34,40 +39,52 @@ class Slime : Enemy
         {
             health.Damage(1);
         }
-        
-        #region Movement
-        if(DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar*Stage) && HasAttackCooldown())
+
+        if (!HasAttackCooldown())
+            attackBox.SetActive(true);
+
+        if (splitLerpTimer < 1)
         {
-            transform.LookAt(target.transform.position, transform.Up);
-            Move(transform.Forward);
+            splitLerpTimer += Time.deltaTime;
+            isSpawning = true;
         }
-        #endregion
-        #region Attack
-        if (GetDirectionToTarget().magnitude <= AttackReachDistance*Stage)
+        else
         {
-            //Init attack animation
-            RaycastHit hit;
-            if (Collisions.Raycast(transform.position, transform.Forward, AttackReachDistance*Stage, out hit))
+            splitLerpTimer = 1;
+            isSpawning = false;
+            transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
+        }
+
+        if (isSpawning)
+        {
+            SplitLerp();
+        }
+        else
+        {
+            #region Movement
+            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * Stage) && !HasAttackCooldown())
             {
-                if (hit.entity.ID == target.ID && HasAttackCooldown())
-                {
-                    Attack();
-                }
+                transform.LookAt(target.transform.position, transform.Up);
+                Move(transform.Forward);
             }
-            StartAttackCooldown(CooldownTime);
-            //End attack animation
+            #endregion
+            #region Attack
+            if (attackBox.IsColliding && !HasAttackCooldown())
+            {
+                Attack();
+            }
+            #endregion
+            #region Health
+            health.UpdateHealth();
+            if (health.IsDead())
+            {
+                //Debug.Log("I'm dead");
+                if (Stage > 0)
+                    Split();
+                entity.Destroy();
+            }
+            #endregion
         }
-        #endregion
-        #region Health
-        health.UpdateHealth();
-        if(health.IsDead())
-        {
-            //Debug.Log("I'm dead");
-            if (Stage > 0)
-                Split();
-            entity.Destroy();
-        }
-        #endregion
     }
 
     public void Move(Vector3 direction)
@@ -80,7 +97,12 @@ class Slime : Enemy
         Stage = stage;
         transform.scale = Vector3.One*SlimeSize*stage;
 
-        Debug.Log($" SCALE ->{Stage} -> {transform.scale.x}");
+        Debug.Log($" UUID ->{entity.ID} -> {transform.scale.x}");
+
+        //Destroy after vertical 2
+        WobblyEffect slimeEffect = entity.GetComponent<WobblyEffect>();
+        slimeEffect.SetBaseScale(SlimeSize * stage);
+        //
     }
 
     public void Attack()
@@ -90,17 +112,35 @@ class Slime : Enemy
         {
             targetHealth.AddEffect(effect);
         }
+        StartAttackCooldown(CooldownTime);
+        attackBox.SetActive(false);
+    }
+
+    public void SplitLerp()
+    {
+        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance/25.0f,splitLerpTimer);
+        if(splitLerpTimer < 0.75f)
+            collider.Enabled = false;
+        else
+            collider.Trigger = true;
+        transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
     }
 
     public void Split()
     {
+        Random rnd = new Random();
+        int random = rnd.Next(0, 360);
         for (int i = 0; i < SplitAmmount; i++)
         {
             Entity newslime = reference.Clone(true);
+            newslime.transform.rotation = transform.rotation;
+            newslime.transform.position = transform.position;
             Slime slimecomp = newslime.GetComponent<Slime>();
-            newslime.SetActive(true);
-          
+            slimecomp.splitLerpTimer = 0;
+            slimecomp.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
             slimecomp.SetStage(Stage - 1);
+            slimecomp.parentY = transform.position.y;
+            newslime.SetActive(true);
         }
     }
 };

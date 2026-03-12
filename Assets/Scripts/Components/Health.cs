@@ -48,7 +48,7 @@ public class Health : Component
     	if(!canBeDamaged)return;
         actualHealth -= points;
         actualHealth = actualHealth < 0? 0 : actualHealth;
-        //Debug.Log("Ouch!");
+        Debug.Log($"{entity.Name} Ouch!");
         //Debug.Log($"{actualHealth}");
     }
     

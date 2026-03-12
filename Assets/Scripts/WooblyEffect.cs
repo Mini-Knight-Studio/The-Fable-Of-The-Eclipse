@@ -1,74 +1,51 @@
 using System;
+using System.Threading;
 using Loopie;
 
 public class WobblyEffect : Component
 {
-    public float wobbleSpeed = 15.0f;
     public float wobbleAmount = 0.2f;
-    
-    private Vector3 lastPosition;
-    private float wobbleTimer = 0.0f;
+    public float wobbleTime = 1.0f;
+
+    private float timer = 0.0f;
     private Vector3 baseScale;
 
-    public WobblyEffect() { }
-
-    public void OnCreate()
+    void OnCreate()
     {
-
-        lastPosition = entity.transform.position;
-        baseScale = entity.transform.scale;
-        
-
+        Random rnd = new Random();
+        timer = (float)(rnd.Next(0,100)/100.0f);
     }
 
-    public void OnUpdate()
+    void OnUpdate()
     {
-        Vector3 currentPosition = entity.transform.position;
-        
+        timer += Time.deltaTime;
 
-        float deltaX = currentPosition.x - lastPosition.x;
-        float deltaY = currentPosition.y - lastPosition.y;
-        float deltaZ = currentPosition.z - lastPosition.z;
-        
+        float t = timer / wobbleTime;
 
-        float moveDistanceSq = (deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ);
-
-
-        if (moveDistanceSq > 0.0001f)
+        if (t > 1.0f)
         {
-
-            wobbleTimer += Time.deltaTime * wobbleSpeed;
-            
-
-            float yWobble = (float)Math.Sin(wobbleTimer) * wobbleAmount;
-            
-
-            float xzWobble = -yWobble * 0.5f;
-
-
-            entity.transform.scale = new Vector3(
-                baseScale.x + xzWobble,
-                baseScale.y + yWobble,
-                baseScale.z + xzWobble
-            );
-        }
-        else
-        {
-
-            Vector3 currentScale = entity.transform.scale;
-            float lerpSpeed = 10.0f * Time.deltaTime;
-            
-            currentScale.x += (baseScale.x - currentScale.x) * lerpSpeed;
-            currentScale.y += (baseScale.y - currentScale.y) * lerpSpeed;
-            currentScale.z += (baseScale.z - currentScale.z) * lerpSpeed;
-            
-            entity.transform.scale = currentScale;
-            
-
-            wobbleTimer = 0.0f;
+            t -= 1.0f;
+            timer -= wobbleTime;
         }
 
+        float yWobble = (float)Math.Sin(t * Math.PI * 2.0f) * wobbleAmount;
+        float xzWobble = -yWobble * 0.5f;
 
-        lastPosition = currentPosition;
+        Vector3 targetScale = new Vector3(
+            baseScale.x + xzWobble,
+            baseScale.y + yWobble,
+            baseScale.z + xzWobble
+        );
+
+        entity.transform.scale = Vector3.Lerp(
+            entity.transform.scale,
+            targetScale,
+            t
+        );
+    }
+
+    public void SetBaseScale(float newScale)
+    {
+        baseScale = Vector3.One * newScale;
     }
 }
