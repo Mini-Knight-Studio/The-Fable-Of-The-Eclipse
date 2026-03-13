@@ -7,7 +7,7 @@ public class PlayerMovement : Component
     public float speed = 10.0f;
     public float rotSpeed = 5.0f;
     public bool isMoving = false;
-
+  
     //Dash Settings
     public float dashSpeed = 40.0f;
     public float dashDuration = 0.2f;

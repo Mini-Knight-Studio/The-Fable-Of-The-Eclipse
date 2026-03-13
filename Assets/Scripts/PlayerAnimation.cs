@@ -26,7 +26,6 @@ class PlayerAnimation : Component
         idleEntity = Entity.FindEntityByName("IdlePlayer");
         walkEntity = Entity.FindEntityByName("WalkPlayer");
         dashEntity = Entity.FindEntityByName("WalkPlayer");
-
         idleAnimator = idleEntity.GetComponent<Animator>();
         walkAnimator = walkEntity.GetComponent<Animator>();
     }
@@ -54,6 +53,7 @@ class PlayerAnimation : Component
             }
         }
     }
+    
 
     private void Idle()
     {
