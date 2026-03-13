@@ -119,7 +119,7 @@ class Slime : Enemy
     public void SplitLerp()
     {
         transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 50.0f, splitLerpTimer);
-        if (splitLerpTimer < 0.8f)
+        if (splitLerpTimer < 0.95f)
             collider.Enabled = false;
         else
             collider.Enabled = true;
