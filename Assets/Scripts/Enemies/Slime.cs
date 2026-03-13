@@ -16,6 +16,8 @@ class Slime : Enemy
     public string targetEntityName = "Player";
 
     public float Speed;
+    public float KnockbackForce;
+    public float KnockbackTime;
     public int Damage;
     public float AttackReachDistance;
 
@@ -38,6 +40,7 @@ class Slime : Enemy
         if (Input.IsKeyDown(KeyCode.P))
         {
             health.Damage(1);
+            CoroutineSystem.StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget().normalized * -1, KnockbackTime));
         }
 
         if (!HasAttackCooldown())
@@ -118,7 +121,7 @@ class Slime : Enemy
 
     public void SplitLerp()
     {
-        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 50.0f, splitLerpTimer);
+        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, splitLerpTimer);
         if (splitLerpTimer < 0.95f)
             collider.Enabled = false;
         else

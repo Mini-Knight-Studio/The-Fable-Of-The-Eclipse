@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using Loopie;
 
 public class Enemy : Component
@@ -72,6 +74,23 @@ public class Enemy : Component
     {
         if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
         else attackCooldown = 0;
+
+
+        //CoroutineSystem.StartCoroutine(ApplyKnockback(0,new));
+    }
+
+    protected IEnumerator ApplyKnockback(float force, Vector3 direction, float duration)
+    {
+        float timer = 0;
+
+        while (timer<duration)
+        {
+            float factor = duration - timer;
+            factor = Mathf.Clamp01(factor/duration);
+            transform.position += direction * force * Time.deltaTime*factor;
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 }
 
