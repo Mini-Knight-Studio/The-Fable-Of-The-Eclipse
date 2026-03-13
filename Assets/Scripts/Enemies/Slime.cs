@@ -23,7 +23,7 @@ class Slime : Enemy
     protected float splitLerpTimer;
     private bool isSpawning;
     private Effect effect;
-    
+
     void OnCreate()
     {
         SetEnemy("Slime_Reference");
@@ -35,7 +35,7 @@ class Slime : Enemy
     void OnUpdate()
     {
         UpdateEnemy();
-        if(Input.IsKeyDown(KeyCode.P))
+        if (Input.IsKeyDown(KeyCode.P))
         {
             health.Damage(1);
         }
@@ -43,14 +43,14 @@ class Slime : Enemy
         if (!HasAttackCooldown())
             attackBox.SetActive(true);
 
-        if (splitLerpTimer < 1)
+        if (splitLerpTimer < 1.0f)
         {
             splitLerpTimer += Time.deltaTime;
             isSpawning = true;
         }
         else
         {
-            splitLerpTimer = 1;
+            splitLerpTimer = 1.0f;
             isSpawning = false;
             transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         }
@@ -79,7 +79,7 @@ class Slime : Enemy
             if (health.IsDead())
             {
                 //Debug.Log("I'm dead");
-                if (Stage > 0)
+                if (Stage > 1)
                     Split();
                 entity.Destroy();
             }
@@ -89,13 +89,13 @@ class Slime : Enemy
 
     public void Move(Vector3 direction)
     {
-        transform.position += direction * Time.deltaTime * Speed*Stage/2;
+        transform.position += direction * Time.deltaTime * Speed * Stage / 2;
     }
 
     public void SetStage(int stage)
     {
         Stage = stage;
-        transform.scale = Vector3.One*SlimeSize*stage;
+        transform.scale = Vector3.One * SlimeSize * stage;
 
         Debug.Log($" UUID ->{entity.ID} -> {transform.scale.x}");
 
@@ -108,7 +108,7 @@ class Slime : Enemy
     public void Attack()
     {
         targetHealth.Damage(Damage);
-        if(effect != null)
+        if (effect != null)
         {
             targetHealth.AddEffect(effect);
         }
@@ -118,11 +118,11 @@ class Slime : Enemy
 
     public void SplitLerp()
     {
-        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance/25.0f,splitLerpTimer);
-        if(splitLerpTimer < 0.75f)
+        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 50.0f, splitLerpTimer);
+        if (splitLerpTimer < 0.8f)
             collider.Enabled = false;
         else
-            collider.Trigger = true;
+            collider.Enabled = true;
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
     }
 

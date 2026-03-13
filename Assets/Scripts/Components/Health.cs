@@ -8,11 +8,13 @@ public class Health : Component
     private int actualHealth;
     public List<Effect> effects;
     private float timer;
-    private bool canBeDamaged;
-    private bool canBeHealed;
+    public bool canBeDamaged;
+    public bool canBeHealed;
     
     public void Init()
     {
+        canBeDamaged = true;
+        canBeHealed = true;
         Reset();
     }
 
@@ -68,19 +70,10 @@ public class Health : Component
         actualHealth += points;
         actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
     }
-    
-    public void CanBeDamaged(bool option)
-    {
-    	canBeDamaged = option;
-    }
-    
-    public void CanBeHealed(bool option)
-    {
-    	canBeHealed = option;
-    }
 
     public void Reset()
     {
         actualHealth = maxHealth;
+        effects = new List<Effect>();
     }
 };

@@ -22,7 +22,6 @@ public class Enemy : Component
         health = entity.GetComponent<Health>();
         collider = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
-        health.CanBeDamaged(true);
         health.Init();
     }
 
