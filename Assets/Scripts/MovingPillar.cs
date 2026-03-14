@@ -25,12 +25,20 @@ class MovingPillar : Component
 
     public AudioSource slideSFX;
 
+    private PlayerCamera camera;
+    private string cameraName = "PlayerCamera";
+    public float cameraShakeDuration = 0.5f;
+    public float cameraShakeAmount = 0.3f;
+    public float cameraShakeRotation = 0.3f;
+
     void OnCreate()
     {
         myCollider = entity.GetComponent<BoxCollider>();
         goalCollider = Entity.FindEntityByName(goalName).GetComponent<BoxCollider>();
 
         slideSFX = entity.GetComponent<AudioSource>();
+
+        camera = Entity.FindEntityByName(cameraName).GetComponent<PlayerCamera>();
     }
 
     void OnUpdate()
@@ -75,6 +83,7 @@ class MovingPillar : Component
         isMoving = true;
 
         slideSFX.Play();
+        camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
     }
 
     void MoveTowardsTarget()
