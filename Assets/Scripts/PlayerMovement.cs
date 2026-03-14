@@ -3,54 +3,66 @@ using Loopie;
 
 public class PlayerMovement : Component
 {
-    //Movement Settings
     public float speed = 10.0f;
     public float rotSpeed = 5.0f;
     public bool isMoving = false;
 
-    //Dash Settings
     public float dashSpeed = 40.0f;
     public float dashDuration = 0.2f;
+    public float dashCooldown = 1.0f;
+    public float dashBufferTime = 0.15f;
+
     private float dashTimer = 0.0f;
+    private float dashCooldownTimer = 0.0f;
+    private float dashBufferTimer = 0.0f;
+
     private Vector3 dashDirection = new Vector3(0, 0, 0);
-    private bool tempDashOnce = false;
-    private bool wasSpacePressed = false;
+    private bool wasDashKeyPressed = false;
     public bool isDashing = false;
     public AudioSource dashSfxSource;
 
-    public PlayerMovement() { }
+    //public PlayerMovement() { }
 
-    public void OnCreate() {
+    public void OnCreate()
+    {
         dashSfxSource = entity.GetComponent<AudioSource>();
     }
 
     public void OnUpdate()
     {
         isDashing = HandleDash();
-        HandleNormalMovement();
+        if (!isDashing) HandleNormalMovement();
         transform.position -= transform.Up * 9.8f * Time.deltaTime;
     }
 
     private bool HandleDash()
     {
+        if (dashCooldownTimer > 0) dashCooldownTimer -= Time.deltaTime;
+        if (dashBufferTimer > 0) dashBufferTimer -= Time.deltaTime;
+
+        bool dashKeyPressed = (Input.IsKeyPressed(KeyCode.SPACE) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_X));
+        if (dashKeyPressed && !wasDashKeyPressed)
+        {
+            dashBufferTimer = dashBufferTime;
+        }
+        wasDashKeyPressed = dashKeyPressed;
+
         if (dashTimer > 0)
         {
             entity.transform.position += dashDirection * dashSpeed * Time.deltaTime;
             dashTimer -= Time.deltaTime;
-
             return true;
         }
 
-        bool isSpacePressed = Input.IsKeyPressed(KeyCode.SPACE);
-
-        if (isSpacePressed && !wasSpacePressed)
+        if (dashBufferTimer > 0 && dashCooldownTimer <= 0)
         {
             dashTimer = dashDuration;
+            dashCooldownTimer = dashCooldown;
+            dashBufferTimer = 0;
+
             dashDirection = entity.transform.Forward;
             dashSfxSource.Play();
         }
-
-        wasSpacePressed = isSpacePressed;
 
         return false;
     }
@@ -82,7 +94,7 @@ public class PlayerMovement : Component
             moveDirection.z = Input.LeftAxis.y;
         }
 
-        float length = (float)Math.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
+        float length = (float)Mathf.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
         isMoving = length > 0.01f;
 
         if (isMoving)
@@ -93,8 +105,8 @@ public class PlayerMovement : Component
                 moveDirection.z /= length;
             }
 
-            float cos = (float)Math.Cos(Math.PI / 4f);
-            float sin = (float)Math.Sin(Math.PI / 4f);
+            float cos = (float)Mathf.Cos(Mathf.PI / 4f);
+            float sin = (float)Mathf.Sin(Mathf.PI / 4f);
 
             Vector3 rotatedDirection = new Vector3(
                 moveDirection.x * cos + moveDirection.z * sin,
@@ -109,4 +121,3 @@ public class PlayerMovement : Component
         }
     }
 }
-

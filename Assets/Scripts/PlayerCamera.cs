@@ -1,4 +1,3 @@
-using System;
 using Loopie;
 
 class PlayerCamera : Component
@@ -22,9 +21,9 @@ class PlayerCamera : Component
     //}
 
     // Isometric
-    private const float ISOMETRIC_ANGLE = (float)Math.PI / 4f;
-    private float cos = (float)Math.Cos(ISOMETRIC_ANGLE);
-    private float sin = (float)Math.Sin(ISOMETRIC_ANGLE);
+    private const float ISOMETRIC_ANGLE = (float)Mathf.PI / 4f;
+    private float cos = (float)Mathf.Cos(ISOMETRIC_ANGLE);
+    private float sin = (float)Mathf.Sin(ISOMETRIC_ANGLE);
 
     // Input 
     public float movementLimit = 5f;
@@ -43,8 +42,7 @@ class PlayerCamera : Component
     private float rotationShakeAmount = 1.5f;
     private Vector3 shakeOffset = Vector3.Zero;
     private Vector3 shakeRotationOffset = Vector3.Zero;
-    private Random random = new Random();
-
+    
     // Timers
     private float lerpTimer;
     private float shakeTimer;
@@ -122,11 +120,11 @@ class PlayerCamera : Component
         }
         else
         {
-            float length = (float)Math.Sqrt(inputOffset.x * inputOffset.x + inputOffset.z * inputOffset.z);
+            float length = (float)Mathf.Sqrt(inputOffset.x * inputOffset.x + inputOffset.z * inputOffset.z);
 
             if (length > 0f)
             {
-                float newLength = Math.Max(0f, length - moveAmount);
+                float newLength = Mathf.Max(0f, length - moveAmount);
 
                 inputOffset.x = inputOffset.x / length * newLength;
                 inputOffset.z = inputOffset.z / length * newLength;
@@ -157,7 +155,7 @@ class PlayerCamera : Component
             direction.y = Input.RightAxis.x;
         }
 
-        float directionLength = (float)Math.Sqrt(direction.x * direction.x + direction.y * direction.y);
+        float directionLength = (float)Mathf.Sqrt(direction.x * direction.x + direction.y * direction.y);
 
         if (directionLength > 1f)
         {
@@ -246,13 +244,13 @@ class PlayerCamera : Component
         float currentTransformShake = transformShakeAmount * strength;
         float currentRotationShake = rotationShakeAmount * strength;
 
-        float offsetX = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
-        float offsetY = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
-        float offsetZ = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
+        float offsetX = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
+        float offsetY = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
+        float offsetZ = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
 
         shakeOffset = new Vector3(offsetX, offsetY, offsetZ);
 
-        float rotZ = ((float)random.NextDouble() * 2f - 1f) * currentRotationShake;
+        float rotZ = Loopie.Random.Range(-currentRotationShake, currentRotationShake);
 
         shakeRotationOffset = new Vector3(0f, 0f, rotZ);
 
