@@ -32,7 +32,7 @@ public class PlayerMovement : Component
     {
         isDashing = HandleDash();
         if (!isDashing) HandleNormalMovement();
-        transform.position -= transform.Up * 9.8f * Time.deltaTime;
+        //transform.position -= transform.Up * 9.8f * Time.deltaTime;
     }
 
     private bool HandleDash()
