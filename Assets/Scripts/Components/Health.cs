@@ -51,12 +51,14 @@ public class Health : Component
         actualHealth -= points;
         actualHealth = actualHealth < 0? 0 : actualHealth;
         Debug.Log($"{entity.Name} Ouch!");
+        //Debug.Log($"{actualHealth}");
     }
     
     public void AddEffect(Effect effect)
     {
-        int probability = Loopie.Random.Range(0, 101);
-        if (probability > effect.Probability+1)
+        Random random = new Random();
+        int number = random.Next(0, 101);
+        if (number > effect.Probability)
             return;
         effects.Add(effect);
         effect.InitEffect();

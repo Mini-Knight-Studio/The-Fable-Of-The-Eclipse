@@ -100,6 +100,8 @@ class Slime : Enemy
         Stage = stage;
         transform.scale = Vector3.One * SlimeSize * stage;
 
+        Debug.Log($" UUID ->{entity.ID} -> {transform.scale.x}");
+
         //Destroy after vertical 2
         WobblyEffect slimeEffect = entity.GetComponent<WobblyEffect>();
         slimeEffect.SetBaseScale(SlimeSize * stage);
@@ -129,7 +131,8 @@ class Slime : Enemy
 
     public void Split()
     {
-        int random = Loopie.Random.Range(0,360);
+        Random rnd = new Random();
+        int random = rnd.Next(0, 360);
         for (int i = 0; i < SplitAmmount; i++)
         {
             Entity newslime = reference.Clone(true);

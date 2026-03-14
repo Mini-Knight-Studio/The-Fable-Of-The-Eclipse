@@ -12,7 +12,8 @@ public class WobblyEffect : Component
 
     void OnCreate()
     {
-        timer = Loopie.Random.Range(0,1);
+        Random rnd = new Random();
+        timer = (float)(rnd.Next(0,100)/100.0f);
     }
 
     void OnUpdate()
@@ -48,4 +49,3 @@ public class WobblyEffect : Component
         baseScale = Vector3.One * newScale;
     }
 }
-
