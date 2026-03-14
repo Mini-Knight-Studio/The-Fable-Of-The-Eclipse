@@ -57,7 +57,6 @@ class PlayerAnimation : Component
 
     private void Idle()
     {
-        Debug.Log("I'm idle");
         toIdle = false;
         toWalk = true;
         idleEntity.SetActive(true);
@@ -69,7 +68,6 @@ class PlayerAnimation : Component
 
     private void Move()
     {
-        Debug.Log("I'm moving");
         toWalk = false;
         toIdle = true;
         idleEntity.SetActive(false);
@@ -81,7 +79,6 @@ class PlayerAnimation : Component
 
     private void Dash()
     {
-        Debug.Log("I'm dashing");
         toDash = false;
         toWalk = true;
         toIdle = true;
