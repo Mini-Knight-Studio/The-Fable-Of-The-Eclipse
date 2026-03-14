@@ -131,8 +131,7 @@ class Slime : Enemy
 
     public void Split()
     {
-        Random rnd = new Random();
-        int random = rnd.Next(0, 360);
+        int random = Loopie.Random.Range(0, 360);
         for (int i = 0; i < SplitAmmount; i++)
         {
             Entity newslime = reference.Clone(true);

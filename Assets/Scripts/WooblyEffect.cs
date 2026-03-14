@@ -12,8 +12,7 @@ public class WobblyEffect : Component
 
     void OnCreate()
     {
-        Random rnd = new Random();
-        timer = (float)(rnd.Next(0,100)/100.0f);
+        timer = Loopie.Random.Range(0.0f,2.0f);
     }
 
     void OnUpdate()
