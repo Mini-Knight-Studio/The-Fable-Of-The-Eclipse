@@ -116,7 +116,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "a467d309-2cec-c350-fba3-ce23815c2d09",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -325,10 +325,21 @@
                         }
                     },
                     "uuid": "ef9d3642-541a-5b38-a0c4-a7bbe2144696"
+                },
+                {
+                    "script": {
+                        "class_id": "Health",
+                        "fields": {
+                            "canBeDamaged": true,
+                            "canBeHealed": true,
+                            "maxHealth": 10
+                        }
+                    },
+                    "uuid": "b4c8649d-7b69-a0f4-c05d-759bad29ca89"
                 }
             ],
             "name": "Player",
-            "parent_uuid": "a467d309-2cec-c350-fba3-ce23815c2d09",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -636,6 +647,59 @@
             "name": "Eye_R_jt",
             "parent_uuid": "0243f71e-90f9-fbc3-8379-b5605708e29f",
             "uuid": "171c206c-b56c-fc90-5c47-6d5b289f9631"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e235b322-6eb8-d84b-1657-69a172076fa0"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 1.5,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 1.5,
+                            "y": 1.5,
+                            "z": 1.5
+                        },
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 5
+                    },
+                    "uuid": "09fa359c-03cb-9b21-d861-8c50e75e0713"
+                }
+            ],
+            "name": "AttackBox",
+            "parent_uuid": "67769f28-d4c6-0747-b761-cff06adfbd5c",
+            "uuid": "01617c2f-9ca4-e46a-8871-05ca19659e00"
         },
         {
             "active": true,
@@ -1899,7 +1963,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "a467d309-2cec-c350-fba3-ce23815c2d09",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
             "uuid": "7aef2b10-a1ac-2829-ae8e-efbf291414d3"
         },
         {
@@ -2760,6 +2824,123 @@
             "name": "Wrist_L_jt",
             "parent_uuid": "12513902-aba9-f6f8-7b23-a604bc5a8db3",
             "uuid": "8dc37426-550a-5722-b73a-c9b2ebd6325f"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.5,
+                            "y": 1.5,
+                            "z": 1.5
+                        }
+                    },
+                    "uuid": "add4a3b1-36e5-8770-678d-0362b22db9a7"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
+                        "mesh_index": 0,
+                        "mesh_uuid": "647ec4a0-1449-7d69-4790-38f845fb38b9"
+                    },
+                    "uuid": "dfe5acfb-e63c-065e-c590-82d37930ff33"
+                },
+                {
+                    "script": {
+                        "class_id": "Slime",
+                        "fields": {
+                            "AttackReachDistance": 2.0,
+                            "CooldownTime": 3.0,
+                            "Damage": 1,
+                            "KnockbackForce": 12.5,
+                            "KnockbackTime": 0.30000001192092896,
+                            "SlimeSize": 0.5,
+                            "Speed": 2.5,
+                            "SplitAmmount": 2,
+                            "SplitDistance": 1.0,
+                            "Stage": 3,
+                            "ViewFieldFar": 15.0,
+                            "ViewFieldWidth": 75.0,
+                            "parentY": 0.0,
+                            "splitLerpTimer": 0.0,
+                            "targetEntityName": "Player"
+                        }
+                    },
+                    "uuid": "1fead2c0-19c3-3240-4752-f22aed6e1e2b"
+                },
+                {
+                    "script": {
+                        "class_id": "Health",
+                        "fields": {
+                            "canBeDamaged": true,
+                            "canBeHealed": false,
+                            "maxHealth": 3
+                        }
+                    },
+                    "uuid": "03587101-d261-5005-da35-ee2d246cb328"
+                },
+                {
+                    "script": {
+                        "class_id": "WobblyEffect",
+                        "fields": {
+                            "wobbleAmount": 0.25,
+                            "wobbleTime": 2.0
+                        }
+                    },
+                    "uuid": "c473d9c4-da00-c3dc-fcb5-7dc139d05b17"
+                },
+                {
+                    "script": {
+                        "class_id": "Effect",
+                        "fields": {
+                            "Damage": 1,
+                            "Probability": 50,
+                            "TickDuration": 1.5,
+                            "Ticks": 2
+                        }
+                    },
+                    "uuid": "e01c7f33-07e6-04f5-4a91-f8a9c0a12919"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 1.5,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 1.25,
+                            "y": 1.5,
+                            "z": 1.25
+                        },
+                        "is_static": false,
+                        "is_trigger": false,
+                        "layer_index": 4
+                    },
+                    "uuid": "fb3a946c-cc05-debd-21f5-9954f6414e95"
+                }
+            ],
+            "name": "Slime_Reference",
+            "parent_uuid": "3dc80e80-0f21-762e-882a-738760a7d261",
+            "uuid": "1a42d2b5-ad04-0060-3978-ad3b1730f965"
         },
         {
             "active": true,
@@ -5248,7 +5429,7 @@
                 }
             ],
             "name": "BossEntry",
-            "parent_uuid": "a467d309-2cec-c350-fba3-ce23815c2d09",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
             "uuid": "4f6c5bfb-b31f-8a4a-aa19-a6301a167b53"
         },
         {
@@ -6321,7 +6502,7 @@
                 }
             ],
             "name": "VistaPoint",
-            "parent_uuid": "a467d309-2cec-c350-fba3-ce23815c2d09",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
             "uuid": "1ea0c285-5786-af4f-adf5-3ed49a16552e"
         },
         {
@@ -6459,7 +6640,7 @@
                 }
             ],
             "name": "Level1ToPuzzle_Transition",
-            "parent_uuid": "a467d309-2cec-c350-fba3-ce23815c2d09",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
             "uuid": "b29e3175-13fc-3da3-c7db-112058aca500"
         },
         {
@@ -6569,7 +6750,7 @@
                 }
             ],
             "name": "Level1-final",
-            "parent_uuid": "a467d309-2cec-c350-fba3-ce23815c2d09",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
             "uuid": "58a4b002-277f-cd60-3026-e22bbe51eed8"
         },
         {
@@ -8036,6 +8217,210 @@
             "name": "WallColider_27",
             "parent_uuid": "58a4b002-277f-cd60-3026-e22bbe51eed8",
             "uuid": "db49150d-a1d0-2739-1dad-2f92117c0cfd"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "b1ba783e-f645-e095-f8e7-9e9996110f48"
+                }
+            ],
+            "name": "Enemies",
+            "parent_uuid": "e88f4845-5f6e-2735-73c6-6ab98c02520a",
+            "uuid": "3dc80e80-0f21-762e-882a-738760a7d261"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 13.923206329345703,
+                            "y": 1.4066696166992188e-05,
+                            "z": 35.55614471435547
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.5,
+                            "y": 1.5,
+                            "z": 1.5
+                        }
+                    },
+                    "uuid": "580ad221-68ff-0342-ca44-0d19b9dd842a"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "8def141a-4b87-a527-153c-f9652f4566f7",
+                        "mesh_index": 0,
+                        "mesh_uuid": "647ec4a0-1449-7d69-4790-38f845fb38b9"
+                    },
+                    "uuid": "f8a067ce-886c-8d6d-e74e-c8c8d8bab460"
+                },
+                {
+                    "script": {
+                        "class_id": "Slime",
+                        "fields": {
+                            "AttackReachDistance": 2.0,
+                            "CooldownTime": 3.0,
+                            "Damage": 1,
+                            "KnockbackForce": 12.5,
+                            "KnockbackTime": 0.30000001192092896,
+                            "SlimeSize": 0.5,
+                            "Speed": 2.5,
+                            "SplitAmmount": 2,
+                            "SplitDistance": 1.0,
+                            "Stage": 3,
+                            "ViewFieldFar": 15.0,
+                            "ViewFieldWidth": 75.0,
+                            "parentY": 0.0,
+                            "splitLerpTimer": 0.0,
+                            "targetEntityName": "Player"
+                        }
+                    },
+                    "uuid": "7aa2774b-f100-ca50-9442-317dde2c53c3"
+                },
+                {
+                    "script": {
+                        "class_id": "Health",
+                        "fields": {
+                            "canBeDamaged": true,
+                            "canBeHealed": false,
+                            "maxHealth": 3
+                        }
+                    },
+                    "uuid": "8e84f1e4-e03b-9a2e-3360-f2c498a28ba8"
+                },
+                {
+                    "script": {
+                        "class_id": "WobblyEffect",
+                        "fields": {
+                            "wobbleAmount": 0.25,
+                            "wobbleTime": 2.0
+                        }
+                    },
+                    "uuid": "13f412db-999e-cdae-853e-94edc69d4a1c"
+                },
+                {
+                    "script": {
+                        "class_id": "Effect",
+                        "fields": {
+                            "Damage": 1,
+                            "Probability": 50,
+                            "TickDuration": 1.5,
+                            "Ticks": 2
+                        }
+                    },
+                    "uuid": "8783fd8c-8c89-3a0b-b3b1-16518552a7b4"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 1.5,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 1.25,
+                            "y": 1.5,
+                            "z": 1.25
+                        },
+                        "is_static": false,
+                        "is_trigger": false,
+                        "layer_index": 4
+                    },
+                    "uuid": "6ae431aa-f244-4270-8fea-1cf96e0a2c19"
+                }
+            ],
+            "name": "Slime",
+            "parent_uuid": "3dc80e80-0f21-762e-882a-738760a7d261",
+            "uuid": "67769f28-d4c6-0747-b761-cff06adfbd5c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "0494cd6a-bb6d-ce30-8a22-c255591511a0"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 1.5,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "extents": {
+                            "x": 1.5,
+                            "y": 1.5,
+                            "z": 1.5
+                        },
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 5
+                    },
+                    "uuid": "28ffac5d-2b8d-db59-af88-90e8529221d2"
+                }
+            ],
+            "name": "AttackBox",
+            "parent_uuid": "1a42d2b5-ad04-0060-3978-ad3b1730f965",
+            "uuid": "df1df4fe-bed3-9825-e03c-a68422427d8d"
         }
     ]
 }

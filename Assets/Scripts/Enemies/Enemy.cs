@@ -42,6 +42,7 @@ public class Enemy : Component
         {
             RaycastHit hit;
             int PlayerLayer = Collisions.GetLayerBit("Player");
+            int WorldLimits = Collisions.GetLayerBit("WorldLimits");
             int LayerMask = PlayerLayer;
 
             if (Collisions.Raycast(transform.position, targetDirection, ViewFieldDepth, out hit,LayerMask))
