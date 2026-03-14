@@ -244,13 +244,13 @@ class PlayerCamera : Component
         float currentTransformShake = transformShakeAmount * strength;
         float currentRotationShake = rotationShakeAmount * strength;
 
-        float offsetX = ((float)/*Random.Range(Loopie.Random.Range()) **/ 2f - 1f) * currentTransformShake;
-        float offsetY = ((float)/*Random.Range(Loopie.Random.Range()) **/ 2f - 1f) * currentTransformShake;
-        float offsetZ = ((float)/*Random.Range(Loopie.Random.Range()) **/ 2f - 1f) * currentTransformShake;
+        float offsetX = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
+        float offsetY = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
+        float offsetZ = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
 
         shakeOffset = new Vector3(offsetX, offsetY, offsetZ);
 
-        float rotZ = ((float)/*Random.Range(Loopie.Random.Range()) **/ 2f - 1f) * currentRotationShake;
+        float rotZ = Loopie.Random.Range(-currentRotationShake, currentRotationShake);
 
         shakeRotationOffset = new Vector3(0f, 0f, rotZ);
 
