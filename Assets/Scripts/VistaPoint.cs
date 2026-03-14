@@ -43,5 +43,6 @@ class VistaPoint : Component
         {
             camera.StopFocus();
         }
+
     }
 };

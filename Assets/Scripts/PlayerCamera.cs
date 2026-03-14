@@ -6,7 +6,6 @@ class PlayerCamera : Component
     public string playerName = "";
     public float distance = 100f;
     public float speed = 25f;
-    public float verticalScale = 1.22f;
 
     private Entity player;
     private Camera camera;
@@ -37,21 +36,11 @@ class PlayerCamera : Component
     private float focusZoom;
     private float currentZoom;
 
-    // Shaking
-    private bool isShaking = false;
-    private float transformShakeAmount = 1;
-    private float rotationShakeAmount = 1.5f;
-    private Vector3 shakeOffset = Vector3.Zero;
-    private Vector3 shakeRotationOffset = Vector3.Zero;
-    private Random random = new Random();
-
     // Timers
     private float lerpTimer;
-    private float shakeTimer;
     public float timeToFollowPlayer = 1f;
     public float timeToFocus = 5;
-    public float timeToStopFocusing = 1;
-    public float timeToShake = 3;
+    public float timeToStopFocusing = 3;
 
     public void OnCreate()
     {
@@ -90,11 +79,6 @@ class PlayerCamera : Component
             case "FollowingPlayer": UpdateFollowPlayer(); break;
         }
 
-        if (isShaking)
-        {
-            UpdateShake();
-        }
-
         lerpTimer += Time.deltaTime;
         Debug.Log(lerpTimer);
     }
@@ -106,7 +90,7 @@ class PlayerCamera : Component
 
     private void UpdateFollowPlayer()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
+        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.45f, -distance);
         Vector2 movementDirection = GetInputDirection();
 
         float delta = Time.deltaTime;
@@ -132,14 +116,14 @@ class PlayerCamera : Component
                 inputOffset.z = inputOffset.z / length * newLength;
             }
 
-            currentZoom = Mathf.Lerp(currentZoom, originalZoom, Time.deltaTime / timeToFollowPlayer);
+            currentZoom = Mathf.Lerp(currentZoom, originalZoom, lerpTimer/timeToFollowPlayer);
             camera.SetOrthoSize(currentZoom);
         }
 
         Vector3 rotatedOffset = new Vector3(inputOffset.x * cos + inputOffset.z * sin, 0f, inputOffset.x * sin - inputOffset.z * cos);
         Vector3 targetPosition = cameraOriginalPosition + rotatedOffset;
 
-        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, Time.deltaTime / timeToFollowPlayer);
+        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, lerpTimer/timeToFollowPlayer);
     }
 
     private Vector2 GetInputDirection()
@@ -190,7 +174,7 @@ class PlayerCamera : Component
 
     private void UpdateStopFocus()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
+        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * 1.45f, -distance);
 
         if (Mathf.Abs(currentZoom - originalZoom) < 0.1f)
         {
@@ -222,51 +206,5 @@ class PlayerCamera : Component
         previousState = "Focusing";
 
         lerpTimer = 0;
-    }
-
-    private void UpdateShake()
-    {
-        shakeTimer += Time.deltaTime;
-
-        entity.transform.position -= shakeOffset;
-        entity.transform.rotation -= shakeRotationOffset;
-
-        float progress = shakeTimer / timeToShake;
-
-        if (progress >= 1f)
-        {
-            shakeOffset = Vector3.Zero;
-            shakeRotationOffset = Vector3.Zero;
-            isShaking = false;
-            return;
-        }
-
-        float strength = 1f - Mathf.SmoothStep(0f, 1f, progress);
-
-        float currentTransformShake = transformShakeAmount * strength;
-        float currentRotationShake = rotationShakeAmount * strength;
-
-        float offsetX = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
-        float offsetY = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
-        float offsetZ = ((float)random.NextDouble() * 2f - 1f) * currentTransformShake;
-
-        shakeOffset = new Vector3(offsetX, offsetY, offsetZ);
-
-        float rotZ = ((float)random.NextDouble() * 2f - 1f) * currentRotationShake;
-
-        shakeRotationOffset = new Vector3(0f, 0f, rotZ);
-
-        entity.transform.position += shakeOffset;
-        entity.transform.rotation += shakeRotationOffset;
-    }
-
-    public void SetIsShaking(bool active, float time = 1f, float amount = 1f, float rotationAmount = 1f)
-    {
-        isShaking = active;
-        timeToShake = time;
-        transformShakeAmount = amount;
-        rotationShakeAmount = rotationAmount;
-
-        shakeTimer = 0f;
     }
 }
