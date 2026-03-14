@@ -117,10 +117,33 @@
                         }
                     },
                     "uuid": "6f335f81-6d93-2c3d-e8fb-1dc35093b9b3"
+                },
+                {
+                    "audiolistener": {},
+                    "uuid": "068f9675-8e8a-456a-b394-216c6b97431f"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "033f4d77-425c-e46f-b482-85c99020ffb8"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": true,
+                        "volume": 1.0
+                    },
+                    "uuid": "cd206996-e949-33aa-4941-10de07a07d39"
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -248,6 +271,9 @@
                     "script": {
                         "class_id": "MovingPillar",
                         "fields": {
+                            "cameraShakeAmount": 0.20000000298023224,
+                            "cameraShakeDuration": 0.699999988079071,
+                            "cameraShakeRotation": 0.20000000298023224,
                             "goalName": "AirTile",
                             "movementDistance": 4.0,
                             "movementSpeed": 4.0,
@@ -292,13 +318,13 @@
                         },
                         "is_static": false,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 4
                     },
                     "uuid": "4d38d19d-9446-cffd-f387-939accabb7fb"
                 }
             ],
             "name": "AirPillar",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9"
         },
         {
@@ -466,7 +492,7 @@
                 }
             ],
             "name": "Environment",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
         {
@@ -546,7 +572,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -834,6 +860,9 @@
                     "script": {
                         "class_id": "MovingPillar",
                         "fields": {
+                            "cameraShakeAmount": 0.20000000298023224,
+                            "cameraShakeDuration": 0.699999988079071,
+                            "cameraShakeRotation": 0.20000000298023224,
                             "goalName": "WaterTile",
                             "movementDistance": 4.0,
                             "movementSpeed": 4.0,
@@ -878,13 +907,13 @@
                         },
                         "is_static": false,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 4
                     },
                     "uuid": "f97e8200-654e-6caf-9834-c8f1a67aeabb"
                 }
             ],
             "name": "WaterPillar",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "e5e627b0-8f4e-36d7-42a4-bc69692d0ebf"
         },
         {
@@ -1188,7 +1217,7 @@
                 }
             ],
             "name": "Puzzle_Borders",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "666815e3-731b-f199-1238-ff869804f25c"
         },
         {
@@ -1847,7 +1876,7 @@
                 }
             ],
             "name": "PuzzleBoard",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
         {
@@ -2897,24 +2926,24 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": 90.0,
+                            "y": 89.98021697998047,
                             "z": 0.0
                         },
                         "position": {
-                            "x": -4.0,
+                            "x": -2.5,
                             "y": 4.0,
                             "z": -8.0
                         },
                         "rotation": {
-                            "w": 0.7071067690849304,
+                            "w": 0.7072288393974304,
                             "x": 0.0,
-                            "y": 0.7071067690849304,
+                            "y": 0.7069846987724304,
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 1.0,
+                            "x": 0.9999983310699463,
                             "y": 1.0,
-                            "z": 1.0
+                            "z": 0.9999983310699463
                         }
                     },
                     "uuid": "5b4eeb5a-9d17-225b-9dbd-be8f7c3bd4b2"
@@ -2932,9 +2961,9 @@
                             "y": 4.0,
                             "z": 0.5
                         },
-                        "is_static": false,
+                        "is_static": true,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 5
                     },
                     "uuid": "278e0541-08ab-47ae-c021-183a73e40864"
                 }
@@ -3497,13 +3526,13 @@
                         },
                         "is_static": true,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 3
                     },
                     "uuid": "1dc5b75a-a2eb-facc-9932-b04d60d613a7"
                 }
             ],
             "name": "Puzzle_Goal",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
         {
@@ -3547,6 +3576,9 @@
                     "script": {
                         "class_id": "MovingPillar",
                         "fields": {
+                            "cameraShakeAmount": 0.20000000298023224,
+                            "cameraShakeDuration": 0.699999988079071,
+                            "cameraShakeRotation": 0.20000000298023224,
                             "goalName": "FireTile",
                             "movementDistance": 4.0,
                             "movementSpeed": 4.0,
@@ -3591,13 +3623,13 @@
                         },
                         "is_static": false,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 4
                     },
                     "uuid": "f98e09f1-4be9-eb3b-dfcb-c0c7d0f7a0f8"
                 }
             ],
             "name": "FirePillar",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "d915ebca-4f23-5924-387c-ccd0d5773d2c"
         },
         {
@@ -3641,6 +3673,9 @@
                     "script": {
                         "class_id": "MovingPillar",
                         "fields": {
+                            "cameraShakeAmount": 0.20000000298023224,
+                            "cameraShakeDuration": 0.699999988079071,
+                            "cameraShakeRotation": 0.20000000298023224,
                             "goalName": "EarthTile",
                             "movementDistance": 4.0,
                             "movementSpeed": 4.0,
@@ -3685,13 +3720,13 @@
                         },
                         "is_static": false,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 4
                     },
                     "uuid": "e076dab5-b81f-14f7-f84f-96106dfea316"
                 }
             ],
             "name": "EarthPillar",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "7ac3e0cb-1ef9-93c9-2915-93334c54bd28"
         },
         {
@@ -3707,7 +3742,7 @@
                         "position": {
                             "x": 12.0,
                             "y": 4.0,
-                            "z": -24.0
+                            "z": -22.5
                         },
                         "rotation": {
                             "w": 1.0,
@@ -3736,9 +3771,9 @@
                             "y": 4.0,
                             "z": 0.5
                         },
-                        "is_static": false,
+                        "is_static": true,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 5
                     },
                     "uuid": "83e7473f-bf69-03e9-86d9-08b887fd0f4e"
                 }
@@ -3754,13 +3789,13 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": 0.0,
+                            "y": -0.0,
                             "z": 0.0
                         },
                         "position": {
                             "x": 12.0,
                             "y": 4.0,
-                            "z": 6.128405570983887
+                            "z": 6.5
                         },
                         "rotation": {
                             "w": 1.0,
@@ -3789,9 +3824,9 @@
                             "y": 4.0,
                             "z": 0.5
                         },
-                        "is_static": false,
+                        "is_static": true,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 5
                     },
                     "uuid": "0dad666c-1249-611a-dbcc-ac01376678fe"
                 }
@@ -3807,24 +3842,24 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": 90.0,
+                            "y": 89.98021697998047,
                             "z": 0.0
                         },
                         "position": {
-                            "x": 28.0,
+                            "x": 26.5,
                             "y": 4.0,
                             "z": -8.0
                         },
                         "rotation": {
-                            "w": 0.7071067690849304,
+                            "w": 0.7072288393974304,
                             "x": 0.0,
-                            "y": 0.7071067690849304,
+                            "y": 0.7069846987724304,
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 1.0000008344650269,
+                            "x": 0.9999976754188538,
                             "y": 0.9999988675117493,
-                            "z": 1.0000008344650269
+                            "z": 0.9999976754188538
                         }
                     },
                     "uuid": "8506a212-4a99-6afc-9b3f-7f3817882be8"
@@ -3842,9 +3877,9 @@
                             "y": 4.0,
                             "z": 0.5
                         },
-                        "is_static": false,
+                        "is_static": true,
                         "is_trigger": false,
-                        "layer_index": 0
+                        "layer_index": 5
                     },
                     "uuid": "5956876d-3e4a-72c7-fa1c-20cd86bd9fb7"
                 }
@@ -3910,7 +3945,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "a9eafda9-d3c1-a986-8f6b-02b5eb2edfe9",
+            "parent_uuid": "b87fc075-90b6-fa88-7777-20150d7b602e",
             "uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3"
         },
         {
