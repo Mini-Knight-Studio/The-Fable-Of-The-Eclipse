@@ -8,7 +8,7 @@ public class Enemy : Component
 
     private Entity playerEntity;
 
-    public Enemy() { }
+    //public Enemy() { }
 
     public void OnCreate()
     {
@@ -32,7 +32,7 @@ public class Enemy : Component
             targetPos.z - currentPos.z
         );
 
-        float distance = (float)Math.Sqrt((direction.x * direction.x) + (direction.y * direction.y) + (direction.z * direction.z));
+        float distance = (float)Mathf.Sqrt((direction.x * direction.x) + (direction.y * direction.y) + (direction.z * direction.z));
 
         if (distance > 0.1f)
         {

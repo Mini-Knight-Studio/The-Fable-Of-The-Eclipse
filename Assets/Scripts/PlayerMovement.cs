@@ -18,7 +18,7 @@ public class PlayerMovement : Component
     public bool isDashing = false;
     public AudioSource dashSfxSource;
 
-    public PlayerMovement() { }
+    //public PlayerMovement() { }
 
     public void OnCreate() {
         dashSfxSource = entity.GetComponent<AudioSource>();
@@ -82,7 +82,7 @@ public class PlayerMovement : Component
             moveDirection.z = Input.LeftAxis.y;
         }
 
-        float length = (float)Math.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
+        float length = (float)Mathf.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
         isMoving = length > 0.01f;
 
         if (isMoving)
@@ -93,8 +93,8 @@ public class PlayerMovement : Component
                 moveDirection.z /= length;
             }
 
-            float cos = (float)Math.Cos(Math.PI / 4f);
-            float sin = (float)Math.Sin(Math.PI / 4f);
+            float cos = (float)Mathf.Cos(Mathf.PI / 4f);
+            float sin = (float)Mathf.Sin(Mathf.PI / 4f);
 
             Vector3 rotatedDirection = new Vector3(
                 moveDirection.x * cos + moveDirection.z * sin,
