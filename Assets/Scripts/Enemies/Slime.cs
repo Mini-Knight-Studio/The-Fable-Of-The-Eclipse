@@ -40,7 +40,7 @@ class Slime : Enemy
         if (Input.IsKeyDown(KeyCode.P))
         {
             health.Damage(1);
-            CoroutineSystem.StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget().normalized * -1, KnockbackTime));
+            //CoroutineSystem.StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget().normalized * -1, KnockbackTime));
         }
 
         if (!HasAttackCooldown())
