@@ -1,23 +1,19 @@
 using System;
 using Loopie;
 
-class SceneTransition : Component
+public class SceneTransition : Component
 {
-    public string SceneUUID;
+	public string UUID;
     public bool Blocked;
-    private BoxCollider transitionArea;
-
-    void OnCreate()
+    
+    public void StartTransition()
     {
-        transitionArea = entity.GetComponent<BoxCollider>();
-        transitionArea.Trigger = true;
-    }
-
-    void OnUpdate()
-    {
-        if(!Blocked && transitionArea.HasCollided)
+    	if(!Blocked)
         {
-            SceneManager.LoadSceneByID(SceneUUID);
+            SceneManager.LoadSceneByID(UUID);
         }
     }
 };
+
+
+
