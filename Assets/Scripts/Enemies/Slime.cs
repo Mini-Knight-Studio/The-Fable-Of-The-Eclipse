@@ -37,7 +37,7 @@ class Slime : Enemy
     void OnUpdate()
     {
         UpdateEnemy();
-        if (Input.IsKeyDown(KeyCode.P))
+        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_B))
         {
             health.Damage(1);
             StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
