@@ -40,7 +40,7 @@ class Slime : Enemy
         if (Input.IsKeyDown(KeyCode.P))
         {
             health.Damage(1);
-            //CoroutineSystem.StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget().normalized * -1, KnockbackTime));
+            StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
         }
 
         if (!HasAttackCooldown())
@@ -69,7 +69,10 @@ class Slime : Enemy
             {
                 transform.LookAt(target.transform.position, transform.Up);
                 Move(transform.Forward);
+                ResetWanderBehaviour();
             }
+            else
+                Wander(ViewFieldWidth,ViewFieldFar * Stage, Speed);
             #endregion
             #region Attack
             if (attackBox.IsColliding && !HasAttackCooldown())
@@ -100,7 +103,6 @@ class Slime : Enemy
         Stage = stage;
         transform.scale = Vector3.One * SlimeSize * stage;
 
-        Debug.Log($" UUID ->{entity.ID} -> {transform.scale.x}");
 
         //Destroy after vertical 2
         WobblyEffect slimeEffect = entity.GetComponent<WobblyEffect>();
@@ -142,7 +144,23 @@ class Slime : Enemy
             slimecomp.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
             slimecomp.SetStage(Stage - 1);
             slimecomp.parentY = transform.position.y;
+            slimecomp.ResetWanderBehaviour();
             newslime.SetActive(true);
         }
+    }
+
+    void OnDrawGizmo()
+    {
+        Vector3 leftZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -ViewFieldWidth);
+        Vector3 rightZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, ViewFieldWidth);
+        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * Stage, transform.position - leftZone * -1.0f * ViewFieldFar * Stage, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * Stage, transform.position - rightZone * -1.0f * ViewFieldFar * Stage, Color.White);
+        Gizmo.DrawLine(transform.position, transform.position + rightZone * ViewFieldFar * Stage, Color.White);
+        Gizmo.DrawLine(transform.position, transform.position + leftZone * ViewFieldFar * Stage, Color.White);
+    }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
     }
 };

@@ -94,7 +94,6 @@ class PlayerCamera : Component
         }
 
         lerpTimer += Time.deltaTime;
-        Debug.Log(lerpTimer);
     }
 
     private bool CheckInput()
