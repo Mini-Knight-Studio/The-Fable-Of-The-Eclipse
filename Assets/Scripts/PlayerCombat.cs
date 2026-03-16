@@ -10,11 +10,13 @@ class PlayerCombat : Component
     public float hitboxDuration = 0.2f;
 
     public Entity swordTrigger;
+    public AudioSource attackSfxSource;
 
     void OnCreate()
     {
         swordTrigger = Entity.FindEntityByName("PlayerSwordTrigger");
         if (swordTrigger != null) swordTrigger.SetActive(false);
+        attackSfxSource = swordTrigger.GetComponent<AudioSource>();
     }
 
     void OnUpdate()
@@ -35,12 +37,13 @@ class PlayerCombat : Component
             return;
         }
 
-        if (Input.IsKeyPressed(KeyCode.J) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_X))
+        if (Input.IsKeyPressed(KeyCode.J) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
         {
             if (swordTrigger != null) swordTrigger.SetActive(true);
 
             isAttacking = true;
             attackTimer = attackCooldown;
+            attackSfxSource.Play();
         }
     }
 };
