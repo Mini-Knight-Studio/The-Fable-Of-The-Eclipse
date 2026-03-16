@@ -20,7 +20,13 @@ public class PlayerMovement : Component
     private bool wasDashKeyPressed = false;
     public bool isDashing = false;
     public AudioSource dashSfxSource;
-    
+
+    // Walk SFX
+    public AudioSource walkSFXSource;
+    public Entity walkSFX;
+    private float walkSFXTimer = 0;
+    public float walkSFXInterval = 5;
+
     private BoxCollider playerCollider;
 
     public bool isGodMode = false;
@@ -35,6 +41,9 @@ public class PlayerMovement : Component
         dashSfxSource = entity.GetComponent<AudioSource>();
         playerCollider = entity.GetComponent<BoxCollider>();
         originalSpeed = speed;
+
+        walkSFX = Entity.FindEntityByName("Walking_SFX");
+        walkSFXSource = walkSFX.GetComponent<AudioSource>();
     }
 
     public void OnUpdate()
@@ -156,6 +165,14 @@ public class PlayerMovement : Component
 
             Vector3 targetLookAt = entity.transform.position + rotatedDirection;
             entity.transform.LookAt(targetLookAt, new Vector3(0, 1, 0));
+
+            walkSFXTimer += Time.deltaTime;
+
+            if (walkSFXTimer >= walkSFXInterval)
+            {
+                walkSFXSource.Play();
+                walkSFXTimer = 0f;
+            }
         }
     }
 }
