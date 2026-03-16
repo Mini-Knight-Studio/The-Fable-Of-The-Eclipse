@@ -116,7 +116,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -157,11 +157,13 @@
                             "dashDuration": 0.20000000298023224,
                             "dashSpeed": 30.0,
                             "godModeSpeedMultiplier": 5.0,
+                            "idleSFXInterval": 5.0,
                             "isDashing": false,
                             "isGodMode": false,
                             "isMoving": false,
                             "rotSpeed": 5.0,
-                            "speed": 10.0
+                            "speed": 10.0,
+                            "walkSFXInterval": 0.5
                         }
                     },
                     "uuid": "6d8144f5-c697-8b4e-38f3-146df18d4ad8"
@@ -253,7 +255,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -723,7 +725,7 @@
                 }
             ],
             "name": "Hub_To_Firepath_Collider",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "fb24e3a4-1075-b36a-639c-8dd7e843db0c"
         },
         {
@@ -2156,6 +2158,40 @@
                 {
                     "transform": {
                         "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "c5313c06-c6b5-22cb-df2a-220a1013ea24"
+                }
+            ],
+            "name": "Player_SFX",
+            "parent_uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
+            "uuid": "9f36989c-aa1b-8915-f907-b5160be9cf36"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
                             "x": 167.28604125976563,
                             "y": -2.2311802240437828e-05,
                             "z": 180.0
@@ -2589,6 +2625,25 @@
                         "layer_index": 5
                     },
                     "uuid": "e49f0e73-bf59-f922-fba8-49d422a4a558"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "770e5794-a392-a02f-04c2-dbc24654fbd0"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.5019999742507935
+                    },
+                    "uuid": "a3954821-10f3-8ff1-3e53-979cd1b268f9"
                 }
             ],
             "name": "PlayerSwordTrigger",
@@ -2864,7 +2919,7 @@
                 }
             ],
             "name": "Level2Hub",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "4b93d5d0-8687-35a0-32d3-5d97d80f28dc"
         },
         {
@@ -2960,7 +3015,7 @@
                 }
             ],
             "name": "Hub_To_Waterpath_Collider",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "2ed9a1f9-e0f7-59b0-d463-4dc4ea894020"
         },
         {
@@ -3123,7 +3178,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 192.3821563720703,
+                                "x": 179.73431396484375,
                                 "y": 108.0
                             }
                         },
@@ -3177,7 +3232,7 @@
                 }
             ],
             "name": "FinalScreen",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "ffc0f6bb-feed-d112-0120-f4bf856b7710"
         },
         {
@@ -5365,7 +5420,7 @@
                 }
             ],
             "name": "Hub_To_Airpath_Collider",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "9e0f0009-f858-8f25-5fca-4d8a453b7811"
         },
         {
@@ -6088,7 +6143,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 192.3821563720703,
+                                "x": 179.73431396484375,
                                 "y": 108.0
                             }
                         },
@@ -6135,7 +6190,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
         {
@@ -6169,7 +6224,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
         {
@@ -6447,7 +6502,7 @@
                 }
             ],
             "name": "Hub_To_Level1_Collider",
-            "parent_uuid": "9aaf77d8-41ae-add4-69fe-40fb788436a6",
+            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
             "uuid": "80d4bb1c-1dcc-baee-049a-ba181e829a96"
         },
         {
@@ -6951,6 +7006,112 @@
             "name": "pasted__pPlane2",
             "parent_uuid": "4b93d5d0-8687-35a0-32d3-5d97d80f28dc",
             "uuid": "4e520942-9d3e-2216-ac53-a378339256b0"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "968fe715-9357-9336-159e-28ae5f39488d"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "a6f257ee-f793-9327-2d68-0b6b82e5ad54"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.5019999742507935
+                    },
+                    "uuid": "92382edc-34ec-e3f5-c0a3-56b76d568473"
+                }
+            ],
+            "name": "Walking_SFX",
+            "parent_uuid": "9f36989c-aa1b-8915-f907-b5160be9cf36",
+            "uuid": "5681d239-d8dd-f543-7132-361aeb92f98e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "6f2e1ead-e7b5-c935-5025-b172b39cf114"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "8d72694a-7cf0-3003-fc95-8970c68abf8d"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.49799999594688416
+                    },
+                    "uuid": "51e0daeb-b592-ba05-6178-2527b7d25227"
+                }
+            ],
+            "name": "Idle_SFX",
+            "parent_uuid": "9f36989c-aa1b-8915-f907-b5160be9cf36",
+            "uuid": "152bb28c-654a-d4a9-93c9-9b624f7374b3"
         }
     ]
 }

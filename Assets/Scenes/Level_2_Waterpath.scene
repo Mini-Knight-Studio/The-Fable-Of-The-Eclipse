@@ -116,7 +116,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "5f35a0c4-b3f1-f6f9-28a8-5f1de989e821",
+            "parent_uuid": "e0f4b3f5-faf1-2228-11b0-2690d51d8a8a",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -157,11 +157,13 @@
                             "dashDuration": 0.20000000298023224,
                             "dashSpeed": 30.0,
                             "godModeSpeedMultiplier": 5.0,
+                            "idleSFXInterval": 5.0,
                             "isDashing": false,
                             "isGodMode": false,
                             "isMoving": false,
                             "rotSpeed": 5.0,
-                            "speed": 10.0
+                            "speed": 10.0,
+                            "walkSFXInterval": 0.5
                         }
                     },
                     "uuid": "6d8144f5-c697-8b4e-38f3-146df18d4ad8"
@@ -253,7 +255,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "5f35a0c4-b3f1-f6f9-28a8-5f1de989e821",
+            "parent_uuid": "e0f4b3f5-faf1-2228-11b0-2690d51d8a8a",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -2602,6 +2604,25 @@
                         "layer_index": 5
                     },
                     "uuid": "e49f0e73-bf59-f922-fba8-49d422a4a558"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "770e5794-a392-a02f-04c2-dbc24654fbd0"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 1.0
+                    },
+                    "uuid": "a668fd90-3717-d66b-3436-9755484b0ea3"
                 }
             ],
             "name": "PlayerSwordTrigger",
@@ -3040,7 +3061,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 192.3821563720703,
+                                "x": 179.73431396484375,
                                 "y": 108.0
                             }
                         },
@@ -3094,7 +3115,7 @@
                 }
             ],
             "name": "FinalScreen",
-            "parent_uuid": "5f35a0c4-b3f1-f6f9-28a8-5f1de989e821",
+            "parent_uuid": "e0f4b3f5-faf1-2228-11b0-2690d51d8a8a",
             "uuid": "ffc0f6bb-feed-d112-0120-f4bf856b7710"
         },
         {
@@ -4248,6 +4269,59 @@
             "name": "Neck_jt",
             "parent_uuid": "db7cc201-0a1e-4357-a40a-354796f37612",
             "uuid": "c8375c64-78e8-c03f-efbc-b085a740211d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "cd85eeec-ca5d-ded3-2eec-31d5237896d7"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "a6f257ee-f793-9327-2d68-0b6b82e5ad54"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.48100000619888306
+                    },
+                    "uuid": "fcbc4da1-6279-e802-6249-64c3a985703f"
+                }
+            ],
+            "name": "Walking_SFX",
+            "parent_uuid": "fbd0de26-f8e6-fb48-bef1-e84fa67838e1",
+            "uuid": "b649469c-f6ea-cc2e-bd07-2964d054c3af"
         },
         {
             "active": true,
@@ -6115,7 +6189,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 192.3821563720703,
+                                "x": 179.73431396484375,
                                 "y": 108.0
                             }
                         },
@@ -6162,7 +6236,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "5f35a0c4-b3f1-f6f9-28a8-5f1de989e821",
+            "parent_uuid": "e0f4b3f5-faf1-2228-11b0-2690d51d8a8a",
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
         {
@@ -6237,7 +6311,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "5f35a0c4-b3f1-f6f9-28a8-5f1de989e821",
+            "parent_uuid": "e0f4b3f5-faf1-2228-11b0-2690d51d8a8a",
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
         {
@@ -6473,7 +6547,7 @@
                 }
             ],
             "name": "Waterpath_To_Hub_Collider",
-            "parent_uuid": "5f35a0c4-b3f1-f6f9-28a8-5f1de989e821",
+            "parent_uuid": "e0f4b3f5-faf1-2228-11b0-2690d51d8a8a",
             "uuid": "94c1fd7b-8c3c-9e4c-b42f-d983e0cad154"
         },
         {
@@ -6507,7 +6581,7 @@
                 }
             ],
             "name": "Waterpath",
-            "parent_uuid": "5f35a0c4-b3f1-f6f9-28a8-5f1de989e821",
+            "parent_uuid": "e0f4b3f5-faf1-2228-11b0-2690d51d8a8a",
             "uuid": "28f19a5b-188c-faff-28f1-3d15aa60d09a"
         },
         {
@@ -7419,6 +7493,93 @@
             "name": "pCube24",
             "parent_uuid": "28f19a5b-188c-faff-28f1-3d15aa60d09a",
             "uuid": "4458a842-774f-ea0f-7e94-9eb912e8e740"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "88f9e8ed-3627-5be4-d797-099851c9c71d"
+                }
+            ],
+            "name": "Player_SFX",
+            "parent_uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
+            "uuid": "fbd0de26-f8e6-fb48-bef1-e84fa67838e1"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "5fbc95dc-9b83-9e55-8262-62df5ee15b22"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "8d72694a-7cf0-3003-fc95-8970c68abf8d"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.5059999823570251
+                    },
+                    "uuid": "d78a1c59-8502-1609-9f1a-cc2c03ba42bb"
+                }
+            ],
+            "name": "Idle_SFX",
+            "parent_uuid": "fbd0de26-f8e6-fb48-bef1-e84fa67838e1",
+            "uuid": "f971fc9f-10c3-c5c0-fed2-219b9cd3904c"
         }
     ]
 }
