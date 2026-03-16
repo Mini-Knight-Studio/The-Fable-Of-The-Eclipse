@@ -20,12 +20,18 @@ public class PlayerMovement : Component
     private bool wasDashKeyPressed = false;
     public bool isDashing = false;
     public AudioSource dashSfxSource;
+    
+    private BoxCollider playerCollider;
+
+    public bool isGodMode = false;
+    private bool wasGodModeKeyPressed = false;
 
     //public PlayerMovement() { }
 
     public void OnCreate()
     {
         dashSfxSource = entity.GetComponent<AudioSource>();
+        playerCollider = entity.GetComponent<BoxCollider>();
     }
 
     public void OnUpdate()
@@ -33,6 +39,26 @@ public class PlayerMovement : Component
         isDashing = HandleDash();
         if (!isDashing) HandleNormalMovement();
         //transform.position -= transform.Up * 9.8f * Time.deltaTime;
+
+        HandleGodMode();
+
+    }
+
+    private void HandleGodMode()
+    {
+        bool godModeKeyPressed = Input.IsKeyPressed(KeyCode.G); 
+
+        if (godModeKeyPressed && !wasGodModeKeyPressed)
+        {
+            if (playerCollider != null)
+            {
+                isGodMode = !isGodMode;
+                playerCollider.Trigger = isGodMode;
+
+            }
+        }
+
+        wasGodModeKeyPressed = godModeKeyPressed;
     }
 
     private bool HandleDash()
@@ -121,3 +147,4 @@ public class PlayerMovement : Component
         }
     }
 }
+
