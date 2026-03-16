@@ -25,6 +25,8 @@ public class PlayerMovement : Component
 
     public bool isGodMode = false;
     private bool wasGodModeKeyPressed = false;
+    public float godModeSpeedMultiplier = 2.5f; 
+    private float originalSpeed;
 
     //public PlayerMovement() { }
 
@@ -32,6 +34,7 @@ public class PlayerMovement : Component
     {
         dashSfxSource = entity.GetComponent<AudioSource>();
         playerCollider = entity.GetComponent<BoxCollider>();
+        originalSpeed = speed;
     }
 
     public void OnUpdate()
@@ -54,6 +57,15 @@ public class PlayerMovement : Component
             {
                 isGodMode = !isGodMode;
                 playerCollider.Trigger = isGodMode;
+
+                if (isGodMode)
+                {
+                    speed = originalSpeed * godModeSpeedMultiplier; 
+                }
+                else
+                {
+                    speed = originalSpeed; 
+                }
 
             }
         }
