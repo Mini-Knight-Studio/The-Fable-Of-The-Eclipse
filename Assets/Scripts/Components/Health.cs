@@ -10,7 +10,9 @@ public class Health : Component
     private float timer;
     public bool canBeDamaged;
     public bool canBeHealed;
-    
+
+    public AudioSource impactSfxSource;
+
     public void Init()
     {
         canBeDamaged = true;

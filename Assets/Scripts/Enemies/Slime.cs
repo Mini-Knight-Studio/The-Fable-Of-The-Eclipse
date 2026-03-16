@@ -26,21 +26,42 @@ class Slime : Enemy
     private bool isSpawning;
     private Effect effect;
 
+    // SFX
+    public Entity SlimeDeath_SFX;
+    public AudioSource deathSFXSource;
+
+    public Entity SlimeImpact_SFX;
+    public AudioSource impactSFXSource;
+
     void OnCreate()
     {
         SetEnemy("Slime_Reference");
         SetTarget(targetEntityName);
         SetStage(Stage);
         effect = entity.GetComponent<Effect>();
+
+        SlimeDeath_SFX = Entity.FindEntityByName("SlimeDeath_SFX");
+        deathSFXSource = SlimeDeath_SFX.GetComponent<AudioSource>();
+        SlimeImpact_SFX = Entity.FindEntityByName("SlimeImpact_SFX");
+        impactSFXSource = SlimeImpact_SFX.GetComponent<AudioSource>();
     }
 
     void OnUpdate()
     {
         UpdateEnemy();
-        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_B))
+        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
         {
             health.Damage(1);
             StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
+
+            if (health.GetActualHealth() == 0)
+            {
+                deathSFXSource.Play();
+            }
+            else 
+            {
+                impactSFXSource.Play();
+            }
         }
 
         if (!HasAttackCooldown())

@@ -27,6 +27,12 @@ public class PlayerMovement : Component
     private float walkSFXTimer = 0;
     public float walkSFXInterval = 5;
 
+    // Idle SFX
+    public AudioSource idleSFXSource;
+    public Entity idleSFX;
+    private float idleSFXTimer = 0;
+    public float idleSFXInterval = 5;
+
     private BoxCollider playerCollider;
 
     public bool isGodMode = false;
@@ -44,6 +50,9 @@ public class PlayerMovement : Component
 
         walkSFX = Entity.FindEntityByName("Walking_SFX");
         walkSFXSource = walkSFX.GetComponent<AudioSource>();
+
+        idleSFX = Entity.FindEntityByName("Idle_SFX");
+        idleSFXSource = idleSFX.GetComponent<AudioSource>();
     }
 
     public void OnUpdate()
@@ -52,8 +61,18 @@ public class PlayerMovement : Component
         if (!isDashing) HandleNormalMovement();
         //transform.position -= transform.Up * 9.8f * Time.deltaTime;
 
-        HandleGodMode();
+        if (!isMoving && !isDashing)
+        {
+            idleSFXTimer += Time.deltaTime;
 
+            if (idleSFXTimer >= idleSFXInterval)
+            {
+                idleSFXSource.Play();
+                idleSFXTimer = 0f;
+            }
+        }
+
+        HandleGodMode();
     }
 
     private void HandleGodMode()
