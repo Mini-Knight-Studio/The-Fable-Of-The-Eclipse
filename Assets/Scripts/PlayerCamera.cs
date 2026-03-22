@@ -2,12 +2,11 @@ using Loopie;
 
 class PlayerCamera : Component
 {
-    public string playerName = "";
     public float distance = 100f;
     public float speed = 25f;
     public float verticalScale = 1.22f;
 
-    private Entity player;
+    public Entity player;
     private Camera camera;
 
     private string currentState = "FollowingPlayer";
@@ -53,7 +52,6 @@ class PlayerCamera : Component
 
     public void OnCreate()
     {
-        player = Entity.FindEntityByName(playerName);
         if (player != null)
         {
             // Get any player data.
