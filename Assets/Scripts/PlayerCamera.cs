@@ -9,15 +9,15 @@ class PlayerCamera : Component
     public Entity player;
     private Camera camera;
 
-    private string currentState = "FollowingPlayer";
-    private string previousState = "FollowingPlayer";
+    private cameraState currentState = cameraState.FOLLOWING_PLAYER;
+    private cameraState previousState = cameraState.FOLLOWING_PLAYER;
 
-    //private enum cameraState
-    //{
-    //    FOLLOWING_PLAYER,
-    //    FOCUSING,
-    //    STOP_FOCUSING
-    //}
+    private enum cameraState
+    {
+        FOLLOWING_PLAYER,
+        FOCUSING,
+        STOP_FOCUSING
+    }
 
     // Isometric
     private const float ISOMETRIC_ANGLE = (float)Mathf.PI / 4f;
@@ -81,9 +81,9 @@ class PlayerCamera : Component
 
         switch (currentState)
         {
-            case "Focusing": UpdateFocus(); break;
-            case "StopFocusing": UpdateStopFocus(); break;
-            case "FollowingPlayer": UpdateFollowPlayer(); break;
+            case cameraState.FOCUSING: UpdateFocus(); break;
+            case cameraState.STOP_FOCUSING: UpdateStopFocus(); break;
+            case cameraState.FOLLOWING_PLAYER: UpdateFollowPlayer(); break;
         }
 
         if (isShaking)
@@ -174,8 +174,8 @@ class PlayerCamera : Component
 
     public void FocusOnPoint(Vector3 destination, float zoomSize, float time)
     {
-        currentState = "Focusing";
-        previousState = "FollowingPlayer";
+        currentState = cameraState.FOCUSING; 
+        previousState = cameraState.FOLLOWING_PLAYER;
         focusTarget = destination;
         focusZoom = zoomSize;
         timeToFocus = time;
@@ -194,7 +194,7 @@ class PlayerCamera : Component
             if (Vector3.Distance(entity.transform.position, cameraOriginalPosition) < 0.1f)
             {
                 entity.transform.position = cameraOriginalPosition;
-                currentState = "FollowingPlayer";
+                currentState = cameraState.FOLLOWING_PLAYER;
                 lerpTimer = 0;
             }
             else
@@ -213,8 +213,8 @@ class PlayerCamera : Component
 
     public void StopFocus()
     {
-        currentState = "StopFocusing";
-        previousState = "Focusing";
+        currentState = cameraState.STOP_FOCUSING;
+        previousState = cameraState.FOCUSING;
 
         lerpTimer = 0;
     }
