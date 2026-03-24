@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using Loopie;
+using Newtonsoft.Json;
 
 class MovingPillar : Component
 {
@@ -13,7 +15,7 @@ class MovingPillar : Component
     private bool isMoving = false;
     private Vector3 targetPosition;
 
-    public string goalName;
+    public Entity goalEntity;
     public float onGoalMovementDistance = 1.0f;
     public bool onGoalPosition = false;
     public bool onGoalCalled = false;
@@ -25,8 +27,7 @@ class MovingPillar : Component
 
     public AudioSource slideSFX;
 
-    private PlayerCamera camera;
-    private string cameraName = "PlayerCamera";
+    public Entity playerCamera;
     public float cameraShakeDuration = 0.5f;
     public float cameraShakeAmount = 0.3f;
     public float cameraShakeRotation = 0.3f;
@@ -34,11 +35,9 @@ class MovingPillar : Component
     void OnCreate()
     {
         myCollider = entity.GetComponent<BoxCollider>();
-        goalCollider = Entity.FindEntityByName(goalName).GetComponent<BoxCollider>();
+        goalCollider = goalEntity.GetComponent<BoxCollider>();
 
         slideSFX = entity.GetComponent<AudioSource>();
-
-        camera = Entity.FindEntityByName(cameraName).GetComponent<PlayerCamera>();
     }
 
     void OnUpdate()
@@ -83,7 +82,7 @@ class MovingPillar : Component
         isMoving = true;
 
         slideSFX.Play();
-        camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
+        playerCamera.GetComponent<PlayerCamera>().SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
     }
 
     void MoveTowardsTarget()
@@ -128,3 +127,12 @@ class MovingPillar : Component
         Gizmo.DrawLine(origin, lineEnd, Color.Magenta);
     }
 };
+
+//public class ExampleLocalDataBase : LocalDatabase
+//{
+//    public ExampleLocalDataBase(string name) : base(name) { }
+
+//    public int PlayerLevel;
+//    public string Loadout;
+//    public int Health;
+//}

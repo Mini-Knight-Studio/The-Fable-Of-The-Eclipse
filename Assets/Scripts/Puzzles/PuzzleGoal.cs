@@ -3,18 +3,13 @@ using Loopie;
 
 class PuzzleGoal : Component
 {
-    public string Pillar1Name;
-    public string Pillar2Name;
-    public string Pillar3Name;
-    public string Pillar4Name;
-
     private MovingPillar[] pillars;
     private bool[] pillarTriggered;
 
-    private Entity Pillar1;
-    private Entity Pillar2;
-    private Entity Pillar3;
-    private Entity Pillar4;
+    public Entity Pillar1;
+    public Entity Pillar2;
+    public Entity Pillar3;
+    public Entity Pillar4;
 
     public float movementSpeed = 2.0f;
     public float movementDistance = 1.0f;
@@ -33,10 +28,10 @@ class PuzzleGoal : Component
         pillars = new MovingPillar[4];
         pillarTriggered = new bool[4];
 
-        pillars[0] = Entity.FindEntityByName(Pillar1Name)?.GetComponent<MovingPillar>();
-        pillars[1] = Entity.FindEntityByName(Pillar2Name)?.GetComponent<MovingPillar>();
-        pillars[2] = Entity.FindEntityByName(Pillar3Name)?.GetComponent<MovingPillar>();
-        pillars[3] = Entity.FindEntityByName(Pillar4Name)?.GetComponent<MovingPillar>();
+        pillars[0] = Pillar1.GetComponent<MovingPillar>();
+        pillars[1] = Pillar2.GetComponent<MovingPillar>();
+        pillars[2] = Pillar3.GetComponent<MovingPillar>();
+        pillars[3] = Pillar4.GetComponent<MovingPillar>();
     }
 
     void OnUpdate()
