@@ -127,12 +127,3 @@ class MovingPillar : Component
         Gizmo.DrawLine(origin, lineEnd, Color.Magenta);
     }
 };
-
-//public class ExampleLocalDataBase : LocalDatabase
-//{
-//    public ExampleLocalDataBase(string name) : base(name) { }
-
-//    public int PlayerLevel;
-//    public string Loadout;
-//    public int Health;
-//}

@@ -23,6 +23,9 @@ class PuzzleGoal : Component
     private bool isMoving = false;
     private int pendingMoves = 0;
 
+    private PuzzlesDataBase dataBase;
+    private bool puzzle1Completed;
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -32,6 +35,11 @@ class PuzzleGoal : Component
         pillars[1] = Pillar2.GetComponent<MovingPillar>();
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
         pillars[3] = Pillar4.GetComponent<MovingPillar>();
+
+        //if (!dataBase.Exists())
+        //{
+        //    dataBase.Save();
+        //}
     }
 
     void OnUpdate()
@@ -47,10 +55,17 @@ class PuzzleGoal : Component
             pendingMoves--;
             StartMovement(entity.transform.position + new Vector3(0, -movementDistance, 0));
         }
+
+        //if (dataBase.Exists())
+        //{
+        //    Debug.Log("P1: " + dataBase.Puzzle1Completed);
+        //}
     }
 
     void CheckPillars()
     {
+        bool allOnGoal = true;
+
         for (int i = 0; i < pillars.Length; i++)
         {
             if (pillars[i] == null) continue;
@@ -60,6 +75,18 @@ class PuzzleGoal : Component
                 pillarTriggered[i] = true;
                 pendingMoves++;
             }
+
+            if (!pillars[i].onGoalPosition)
+            {
+                allOnGoal = false;
+            }
+        }
+
+        if (allOnGoal && !puzzle1Completed)
+        {
+            puzzle1Completed = true;
+            //dataBase.Save();
+            //dataBase.Puzzle1Completed = true;
         }
     }
 
