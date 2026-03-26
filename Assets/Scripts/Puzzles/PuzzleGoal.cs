@@ -23,7 +23,6 @@ class PuzzleGoal : Component
     private bool isMoving = false;
     private int pendingMoves = 0;
 
-    private PuzzlesDataBase dataBase;
     private bool puzzle1Completed;
 
     void OnCreate()
@@ -36,10 +35,10 @@ class PuzzleGoal : Component
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
         pillars[3] = Pillar4.GetComponent<MovingPillar>();
 
-        //if (!dataBase.Exists())
-        //{
-        //    dataBase.Save();
-        //}
+        if (GlobalDatabase.Data.Exists())
+        {
+            GlobalDatabase.Data.Load();
+        }
     }
 
     void OnUpdate()
@@ -55,11 +54,6 @@ class PuzzleGoal : Component
             pendingMoves--;
             StartMovement(entity.transform.position + new Vector3(0, -movementDistance, 0));
         }
-
-        //if (dataBase.Exists())
-        //{
-        //    Debug.Log("P1: " + dataBase.Puzzle1Completed);
-        //}
     }
 
     void CheckPillars()
@@ -82,11 +76,24 @@ class PuzzleGoal : Component
             }
         }
 
+        // Commented so that the puzzle is not completed automatically after completing it once (for other devs)
+        //
+        //if (GlobalDatabase.Data.Puzzles.Puzzle1Completed && !puzzle1Completed)
+        //{
+        //    puzzle1Completed = true;
+
+        //    if (GlobalDatabase.Data.Puzzles.Puzzle1Completed)
+        //    {
+        //        CompletePuzzleAuto();
+        //    }
+        //}
+
         if (allOnGoal && !puzzle1Completed)
         {
             puzzle1Completed = true;
-            //dataBase.Save();
-            //dataBase.Puzzle1Completed = true;
+
+            GlobalDatabase.Data.Puzzles.Puzzle1Completed = true;
+            GlobalDatabase.Data.Save();
         }
     }
 
@@ -118,5 +125,13 @@ class PuzzleGoal : Component
         }
 
         entity.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+    }
+
+    void CompletePuzzleAuto()
+    {
+        Pillar1.GetComponent<MovingPillar>().CompletePillarAuto();
+        Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
+        Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
+        Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
     }
 };

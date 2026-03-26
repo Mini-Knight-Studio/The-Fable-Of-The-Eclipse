@@ -1,4 +1,5 @@
 using System;
+using Loopie;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -16,6 +17,7 @@ public abstract class LocalDatabase
     public void Save()
     {
         string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+        Debug.Log(FilePath);
         File.WriteAllText(FilePath, json);
     }
 
@@ -43,6 +45,16 @@ public static class GlobalDatabase
         internal GlobalData() : base("globalDB") { }
 
         // Global variables (Add as much as needed)
+        public PuzzlesData Puzzles { get; } = new PuzzlesData();
 
     }
 }
+
+//public class ExampleLocalDataBase : LocalDatabase
+//{
+//    public ExampleLocalDataBase(string name) : base(name) { }
+
+//    public int PlayerLevel;
+//    public string Loadout;
+//    public int Health;
+//}

@@ -116,6 +116,14 @@ class MovingPillar : Component
         Debug.LogWarning("The pillar has reached its goal");
     }
 
+    public void CompletePillarAuto()
+    {
+        Vector3 finalPos = goalCollider.transform.position;
+        finalPos.y = entity.transform.position.y;
+
+        transform.position = finalPos;
+    }
+
     void OnDrawGizmo()
     {
         Vector3 origin = entity.transform.position + myCollider.LocalCenter;
