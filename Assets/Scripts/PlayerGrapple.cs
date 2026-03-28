@@ -6,56 +6,47 @@ public class PlayerGrapple : Component
     public float grappleDuration = 0.3f;
     public float stoppingDistance = 2.0f;
 
-    private Entity currentPillar = null;
     private bool isGrappling = false;
-    private float grappleTimer = 0.0f;
-    private Vector3 grappleStartPos;
-    private Vector3 grappleTargetPos;
+    private float timer = 0.0f;
+    private Vector3 startPos;
+    private Vector3 targetPos;
 
-    public void SetGrappleTarget(Entity pillar) { currentPillar = pillar; }
-    public void ClearGrappleTarget(Entity pillar) { if (currentPillar == pillar) currentPillar = null; }
+    private PillarTrigger activePillarScript;
+
+    public void RotateToTarget(Vector3 pillarPos)
+    {
+        Vector3 lookAtPos = new Vector3(pillarPos.x, transform.position.y, pillarPos.z);
+        transform.LookAt(lookAtPos, Vector3.Up);
+    }
+
+    public void ExecuteGrapple(PillarTrigger pillarScript)
+    {
+        isGrappling = true;
+        timer = 0.0f;
+        startPos = transform.position;
+        activePillarScript = pillarScript;
+
+        Vector3 pillarPos = pillarScript.entity.transform.position;
+        Vector3 dir = (pillarPos - transform.position).normalized;
+
+        targetPos = pillarPos - (dir * stoppingDistance);
+        targetPos.y = transform.position.y;
+    }
 
     public void OnUpdate()
     {
-        if (isGrappling)
-        {
-            PerformGrappleMovement();
-            return;
-        }
+        if (!isGrappling) return;
 
-        if (currentPillar != null && Input.IsKeyPressed(KeyCode.I))
-        {
-            StartGrapple();
-        }
-    }
-
-    private void StartGrapple()
-    {
-        isGrappling = true;
-        grappleTimer = 0.0f;
-        grappleStartPos = transform.position;
-
-        Vector3 dirToPillar = (currentPillar.transform.position - transform.position).normalized;
-
-        grappleTargetPos = currentPillar.transform.position - (dirToPillar * stoppingDistance);
-
-        grappleTargetPos.y = transform.position.y;
-
-        transform.LookAt(grappleTargetPos, Vector3.Up);
-
-        Debug.Log("Grappling");
-    }
-
-    private void PerformGrappleMovement()
-    {
-        grappleTimer += Time.deltaTime;
-        float t = grappleTimer / grappleDuration;
+        timer += Time.deltaTime;
+        float t = timer / grappleDuration;
 
         if (t >= 1.0f)
         {
             t = 1.0f;
             isGrappling = false;
+            if (activePillarScript != null) activePillarScript.ResetParticles();
         }
-        transform.position = Vector3.Lerp(grappleStartPos, grappleTargetPos, t);
+
+        transform.position = Vector3.Lerp(startPos, targetPos, t);
     }
 }

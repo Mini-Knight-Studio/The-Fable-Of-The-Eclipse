@@ -1,12 +1,17 @@
 using System;
 using Loopie;
 
-class PillarTrigger : Component
+public class PillarTrigger : Component
 {
     private BoxCollider triggerZone;
     private PlayerGrapple playerGrapple;
 
-    private Entity interactionPrompt;
+    public Entity interactionPrompt;
+    public Entity hookParticles;
+
+    public float hookTravelTime = 0.25f;
+    private bool isWaitingForHook = false;
+    private float hookTimer = 0.0f;
 
     void OnCreate()
     {
@@ -18,17 +23,8 @@ class PillarTrigger : Component
             playerGrapple = playerEntity.GetComponent<PlayerGrapple>();
         }
 
-        interactionPrompt = entity.GetChild(0);
-
-        if (interactionPrompt != null)
-        {
-            interactionPrompt.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("PillarTrigger: No child entity found for interaction prompt!");
-        }
-
+        if (interactionPrompt != null) interactionPrompt.SetActive(false);
+        if (hookParticles != null) hookParticles.SetActive(false);
     }
 
     void OnUpdate()
@@ -38,16 +34,34 @@ class PillarTrigger : Component
         if (triggerZone.HasCollided)
         {
             if (interactionPrompt != null) interactionPrompt.SetActive(true);
-            playerGrapple.SetGrappleTarget(entity);
-
-            Debug.Log("Interaction prompt visible.");
         }
         else if (triggerZone.HasEndedCollision)
         {
             if (interactionPrompt != null) interactionPrompt.SetActive(false);
-            playerGrapple.ClearGrappleTarget(entity);
-
-            Debug.Log("Interaction prompt hidden.");
+            isWaitingForHook = false;
         }
+
+        if (interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook)
+        {
+            isWaitingForHook = true;
+            hookTimer = 0.0f;
+            playerGrapple.RotateToTarget(entity.transform.position);
+        }
+
+        if (isWaitingForHook)
+        {
+            hookTimer += Time.deltaTime;
+            if (hookTimer >= hookTravelTime)
+            {
+                isWaitingForHook = false;
+                if (hookParticles != null) hookParticles.SetActive(true);
+                playerGrapple.ExecuteGrapple(this);
+            }
+        }
+    }
+
+    public void ResetParticles()
+    {
+        if (hookParticles != null) hookParticles.SetActive(false);
     }
 }
