@@ -34,11 +34,6 @@ class PuzzleGoal : Component
         pillars[1] = Pillar2.GetComponent<MovingPillar>();
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
         pillars[3] = Pillar4.GetComponent<MovingPillar>();
-
-        if (GlobalDatabase.Data.Exists())
-        {
-            GlobalDatabase.Data.Load();
-        }
     }
 
     void OnUpdate()
@@ -76,24 +71,18 @@ class PuzzleGoal : Component
             }
         }
 
-        // Commented so that the puzzle is not completed automatically after completing it once (for other devs)
-        //
-        //if (GlobalDatabase.Data.Puzzles.Puzzle1Completed && !puzzle1Completed)
-        //{
-        //    puzzle1Completed = true;
-
-        //    if (GlobalDatabase.Data.Puzzles.Puzzle1Completed)
-        //    {
-        //        CompletePuzzleAuto();
-        //    }
-        //}
+        if (PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed && !puzzle1Completed)
+        {
+            puzzle1Completed = true;
+            
+            CompletePuzzleAuto();
+        }
 
         if (allOnGoal && !puzzle1Completed)
         {
             puzzle1Completed = true;
 
-            GlobalDatabase.Data.Puzzles.Puzzle1Completed = true;
-            GlobalDatabase.Data.Save();
+            PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed = true;
         }
     }
 

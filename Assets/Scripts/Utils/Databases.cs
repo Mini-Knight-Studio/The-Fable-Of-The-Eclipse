@@ -17,7 +17,7 @@ public abstract class LocalDatabase
     public void Save()
     {
         string json = JsonConvert.SerializeObject(this, Formatting.Indented);
-        Debug.Log(FilePath);
+        Debug.Log("Saving file: " + FilePath);
         File.WriteAllText(FilePath, json);
     }
 
