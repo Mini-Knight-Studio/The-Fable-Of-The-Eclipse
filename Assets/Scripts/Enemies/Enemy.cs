@@ -136,6 +136,17 @@ public class Enemy : Component
         }
     }
     #endregion
+    #region Debug
+    protected void DebugViewField(float field_width, float field_depth)
+    {
+        Vector3 leftZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -field_width);
+        Vector3 rightZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, field_width);
+        Gizmo.DrawLine(transform.position + transform.Forward * field_depth, transform.position - leftZone * -1.0f * field_depth, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * field_depth, transform.position - rightZone * -1.0f * field_depth, Color.White);
+        Gizmo.DrawLine(transform.position, transform.position + rightZone * field_depth, Color.White);
+        Gizmo.DrawLine(transform.position, transform.position + leftZone * field_depth, Color.White);
+    }
+    #endregion
 }
 
 

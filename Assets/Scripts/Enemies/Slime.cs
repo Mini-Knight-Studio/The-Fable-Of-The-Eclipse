@@ -152,12 +152,7 @@ class Slime : Enemy
 
     void OnDrawGizmo()
     {
-        Vector3 leftZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -ViewFieldWidth);
-        Vector3 rightZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, ViewFieldWidth);
-        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * SlimeStage, transform.position - leftZone * -1.0f * ViewFieldFar * SlimeStage, Color.White);
-        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * SlimeStage, transform.position - rightZone * -1.0f * ViewFieldFar * SlimeStage, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + rightZone * ViewFieldFar * SlimeStage, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + leftZone * ViewFieldFar * SlimeStage, Color.White);
+        DebugViewField(ViewFieldWidth, ViewFieldFar*SlimeStage);
     }
 
     void OnDestroy()
