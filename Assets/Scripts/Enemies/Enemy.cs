@@ -12,6 +12,7 @@ public class Enemy : Component
     protected BoxCollider attackBox;
     protected BoxCollider collision;
 
+    private float attackReachDistance;
     private float attackCooldown;
     private float attackPreparationTime;
 
@@ -36,28 +37,35 @@ public class Enemy : Component
         targetHealth = target.GetComponent<Health>();
     }
     #endregion
-
-    protected bool DetectedTargetInViewField(float ViewFieldWidth, float ViewFieldDepth)
+    #region Detection
+    protected bool DetectedTargetInViewField(float field_width, float field_depth)
     {
         Vector3 front = transform.Forward;
         Vector3 targetDirection = GetDirectionToTarget();
-        if (Mathf.Abs(Vector3.Angle(front, targetDirection)) <= ViewFieldWidth)
+        if (Mathf.Abs(Vector3.Angle(front, targetDirection)) <= field_width)
         {
-            RaycastHit hit;
-            int PlayerLayer = Collisions.GetLayerBit("Player");
-            int WallLayer = Collisions.GetLayerBit("WorldLimits");
-            int LayerMask = PlayerLayer | WallLayer;
+            return DetectedTargetInDistance(field_depth);
+        }
+        return false;
+    }
 
-            if (Collisions.Raycast(transform.position + transform.Up, targetDirection, ViewFieldDepth, out hit,LayerMask))
+    protected bool DetectedTargetInDistance(float distance)
+    {
+        RaycastHit hit;
+        int PlayerLayer = Collisions.GetLayerBit("Player");
+        int WallLayer = Collisions.GetLayerBit("WorldLimits");
+        int LayerMask = PlayerLayer | WallLayer;
+
+        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, LayerMask))
+        {
+            if (hit.entity == target)
             {
-                if (hit.entity == target)
-                {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
     }
+    #endregion
 
     protected Vector3 GetDirectionToTarget()
     {

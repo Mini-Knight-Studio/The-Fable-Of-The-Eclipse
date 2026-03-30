@@ -44,42 +44,44 @@ class Slime : Enemy
         }
 
         if (!HasAttackCooldown())
+        { 
             attackBox.entity.SetActive(true);
 
-        if (splitLerpTimer < 1.0f)
-        {
-            splitLerpTimer += Time.deltaTime;
-            isSpawning = true;
-        }
-        else
-        {
-            splitLerpTimer = 1.0f;
-            isSpawning = false;
-            transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
-        }
-
-        if (isSpawning)
-        {
-            SplitLerp();
-        }
-        else
-        {
-            #region Movement
-            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * Stage) && !HasAttackCooldown())
+            if (splitLerpTimer < 1.0f)
             {
-                transform.LookAt(target.transform.position, transform.Up);
-                Move(transform.Forward);
-                ResetWander();
+                splitLerpTimer += Time.deltaTime;
+                isSpawning = true;
             }
             else
-                Wander(ViewFieldWidth,ViewFieldFar * Stage, Speed);
-            #endregion
-            #region Attack
-            if (attackBox.IsColliding && !HasAttackCooldown())
             {
-                Attack();
+                splitLerpTimer = 1.0f;
+                isSpawning = false;
+                transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
             }
-            #endregion
+
+            if (isSpawning)
+            {
+                SplitLerp();
+            }
+            else
+            {
+                #region Movement
+                if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * Stage) && !HasAttackCooldown())
+                {
+                    transform.LookAt(target.transform.position, transform.Up);
+                    Move(transform.Forward);
+                    ResetWander();
+                }
+                else
+                    Wander(ViewFieldWidth, ViewFieldFar * Stage, Speed);
+                #endregion
+                #region Attack
+                if (attackBox.IsColliding && !HasAttackCooldown())
+                {
+                    Attack();
+                }
+                #endregion
+            }
             #region Health
             health.UpdateHealth();
             if (health.IsDead())
