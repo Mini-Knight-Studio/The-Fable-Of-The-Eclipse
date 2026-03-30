@@ -42,7 +42,7 @@
                 }
             ],
             "name": "MainCamera",
-            "parent_uuid": "f1bb9171-f7b3-7da6-c150-f98623fd0a5f",
+            "parent_uuid": "e63c952e-d3be-a198-3c3b-5f6c458f9237",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -139,7 +139,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 166.78228759765625,
+                                "x": 191.9447021484375,
                                 "y": 108.0
                             }
                         },
@@ -186,7 +186,7 @@
                 }
             ],
             "name": "Canvas",
-            "parent_uuid": "f1bb9171-f7b3-7da6-c150-f98623fd0a5f",
+            "parent_uuid": "e63c952e-d3be-a198-3c3b-5f6c458f9237",
             "uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b"
         },
         {
@@ -328,10 +328,10 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "6ef401e6-8efb-369f-27d9-51ace9d2d81f": {
+                            "de581ca3-c817-a6bd-cd1e-7404044f7679": {
                                 "0": {
-                                    "component_uuid": "d36c70df-8b66-c0c3-6320-dc15079455ef",
-                                    "entity_uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
+                                    "component_uuid": "a60bd075-eb3e-84dd-fca9-32378fa0c13b",
+                                    "entity_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
                                     "function": "StartTransition"
                                 }
                             }
@@ -357,13 +357,6 @@
                         }
                     },
                     "uuid": "aa14dfa2-f97c-2999-e0d5-307f73b4f648"
-                },
-                {
-                    "script": {
-                        "class_id": "SceneTransition",
-                        "fields": {}
-                    },
-                    "uuid": "d36c70df-8b66-c0c3-6320-dc15079455ef"
                 }
             ],
             "name": "NewGame",
@@ -428,6 +421,16 @@
                         }
                     },
                     "uuid": "7104b83a-0c7b-bc68-e821-30925d800114"
+                },
+                {
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "8e5971c1-452c-562e-0de4-581e07cca376"
+                        }
+                    },
+                    "uuid": "a60bd075-eb3e-84dd-fca9-32378fa0c13b"
                 }
             ],
             "name": "MainMenu",
@@ -984,6 +987,21 @@
                         }
                     },
                     "uuid": "6cbdff45-2b67-30d3-5465-40c29393cfef"
+                },
+                {
+                    "script": {
+                        "class_id": "Intro_MiniKnightStudio",
+                        "fields": {
+                            "afterTextDelay": 3.0,
+                            "backgroundEntity": "c3c36fa1-1149-9a33-ac26-457453c15259",
+                            "onTextDelay": 2.0,
+                            "preTextDelay": 2.0,
+                            "textEntity": "034fbac6-6144-dd46-885a-d9d7b9998dca",
+                            "textFadeInDelay": 2.0,
+                            "textFadeOutDelay": 2.0
+                        }
+                    },
+                    "uuid": "90a642f0-89f4-0618-6374-65a00c5f3122"
                 }
             ],
             "name": "Intro_MiniKnightStudio",
@@ -991,7 +1009,7 @@
             "uuid": "c3c36fa1-1149-9a33-ac26-457453c15259"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "recttransform": {
@@ -1040,7 +1058,7 @@
                 {
                     "text": {
                         "color": {
-                            "a": 0.0,
+                            "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
