@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using Loopie;
 
-class Intro_MiniKnightStudio : Component
+class IntroMiniKnightStudio : Component
 {
     // Modyfiable values
     public Entity backgroundEntity;
@@ -20,7 +20,7 @@ class Intro_MiniKnightStudio : Component
     // Internal values
     private float timer = 0f;
     private float currentTextOpacity = 0f;
-    private float currentBackgroundOpacity = 255f;
+    private float currentBackgroundOpacity = 1f;
 
     private bool hasIntroEnded = false;
 
@@ -78,7 +78,7 @@ class Intro_MiniKnightStudio : Component
         {
             textEntity.SetActive(true);
             currentState = introState.FADE_IN_TEXT;
-            timer = 0f; 
+            timer = 0f;
         }
     }
 
@@ -89,7 +89,7 @@ class Intro_MiniKnightStudio : Component
             currentState = introState.DELAY_ON_TEXT;
             timer = 0f;
         }
-        else 
+        else
         {
             currentTextOpacity = Mathf.Lerp(0, 1, timer / textFadeInDelay);
             // Assign currentTextOpacity to text.
@@ -101,7 +101,7 @@ class Intro_MiniKnightStudio : Component
         if (timer >= onTextDelay)
         {
             currentState = introState.FADE_OUT_TEXT;
-            timer = 0f; 
+            timer = 0f;
         }
     }
 
@@ -111,7 +111,7 @@ class Intro_MiniKnightStudio : Component
         {
             textEntity.SetActive(false);
             currentState = introState.DELAY_AFTER_TEXT;
-            timer = 0f; 
+            timer = 0f;
         }
         else
         {
