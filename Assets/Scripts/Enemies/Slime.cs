@@ -30,7 +30,6 @@ class Slime : Enemy
 
     public float TargetForcedDetectionDistance;
 
-    private float splitLerpTimer;
     private int LayerOverride;
 
     void OnCreate()
@@ -44,14 +43,7 @@ class Slime : Enemy
         isSpawning = false;
     }
 
-    private void TestKeys()
-    {
-        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
-        {
-            health.Damage(1);
-            StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
-        }
-    }
+    
 
     void OnUpdate()
     {
@@ -116,13 +108,14 @@ class Slime : Enemy
 
     private IEnumerator SplitLerp()
     {
-        float timer = 0;
+        float timer = 0.0f;
         spawn = false;
         isSpawning = true;
-        while(timer < 1.0f)
+        collision.AddExcludeMask(LayerOverride);
+        while (timer < 1.0f)
         {
             timer += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * SlimeStage * SplitDistance / 20.0f, splitLerpTimer);
+            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * SlimeStage * SplitDistance / 20.0f, timer);
             yield return null;
         }
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
@@ -141,18 +134,25 @@ class Slime : Enemy
             Entity new_slime = reference.Clone(true);
             Slime slime_component = new_slime.GetComponent<Slime>();
             slime_component.collision.AddExcludeMask(LayerOverride);
-            slime_component.splitLerpTimer = 0;
             slime_component.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
             slime_component.SetStage(SlimeStage - 1);
+            new_slime.transform.position = transform.position;
+            new_slime.transform.rotation = transform.rotation;
+            new_slime.Name = entity.Name;
             slime_component.parentY = transform.position.y;
             slime_component.spawn = true;
             slime_component.isSpawning = true;
             slime_component.ResetWander();
-            slime_component.SetActive(true);
-            new_slime.Name = entity.Name;
-            new_slime.transform.position = transform.position;
-            new_slime.transform.rotation = transform.rotation;
             new_slime.SetActive(true);
+        }
+    }
+
+    private void TestKeys()
+    {
+        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
+        {
+            health.Damage(1);
+            StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
         }
     }
 
