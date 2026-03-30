@@ -10,33 +10,32 @@ public class Enemy : Component
     protected Health health;
     protected Health targetHealth;
     protected BoxCollider attackBox;
-    protected BoxCollider collider;
+    protected BoxCollider collision;
+
     private float attackCooldown;
-    private bool entireWanderingRange = false;
+    private float attackPreparationTime;
+
+    private bool wanderRange = false;
     private Vector3 lastWanderPosition;
 
-    protected void SetReference(string EnemyReference)
-    {
-        reference = Entity.FindEntityByName(EnemyReference);
-    }
-
+    #region Set Up
     protected void SetEnemy(string EnemyReference)
     {
-        SetReference(EnemyReference);
+        reference = Entity.FindEntityByName(EnemyReference);
         health = entity.GetComponent<Health>();
-        collider = entity.GetComponent<BoxCollider>();
+        collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
         health.Init();
-        entireWanderingRange = false;
-        ResetWanderBehaviour();
+        wanderRange = false;
+        ResetWander();
     }
 
     protected void SetTarget(string name)
     {
         target = Entity.FindEntityByName(name);
         targetHealth = target.GetComponent<Health>();
-        targetHealth.Init();
     }
+    #endregion
 
     protected bool DetectedTargetInViewField(float ViewFieldWidth, float ViewFieldDepth)
     {
@@ -95,7 +94,7 @@ public class Enemy : Component
         }
     }
 
-    protected void ResetWanderBehaviour()
+    protected void ResetWander()
     {
         lastWanderPosition = transform.position + Vector3.Forward;
     }
@@ -104,7 +103,6 @@ public class Enemy : Component
     {
         RaycastHit hit;
         
-        //int EnemiesLayer = Collisions.GetLayerBit("Enemy");
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
         int LayerMask = WallLayer;
 
@@ -115,13 +113,13 @@ public class Enemy : Component
                 return;
         }
         
-        entireWanderingRange = false;
+        wanderRange = true;
         for (int i = 0; i < 2; i++)
         {
             int tries = 0;
             while (tries < 10)
             {
-                float newDir = Loopie.Random.Range(entireWanderingRange? -180.0f : -areaWidth, entireWanderingRange? 180.0f : areaWidth);
+                float newDir = Loopie.Random.Range(!wanderRange? -180.0f : -areaWidth, !wanderRange? 180.0f : areaWidth);
                 
                 Vector3 newDirection = Vector3.RotateAroundAxis(transform.Forward,transform.Up, newDir);
                 if (!Collisions.Raycast(transform.position + transform.Up, newDirection, reachDistance, out hit, LayerMask))
@@ -132,7 +130,7 @@ public class Enemy : Component
                 }
                 tries++;
             }
-            entireWanderingRange = true;
+            wanderRange = false;
         }
     }
 }

@@ -26,24 +26,12 @@ class Slime : Enemy
     private bool isSpawning;
     private Effect effect;
 
-    // SFX
-    public Entity SlimeDeath_SFX;
-    public AudioSource deathSFXSource;
-
-    public Entity SlimeImpact_SFX;
-    public AudioSource impactSFXSource;
-
     void OnCreate()
     {
         SetEnemy("Slime_Reference");
         SetTarget(targetEntityName);
         SetStage(Stage);
         effect = entity.GetComponent<Effect>();
-
-        SlimeDeath_SFX = Entity.FindEntityByName("SlimeDeath_SFX");
-        deathSFXSource = SlimeDeath_SFX.GetComponent<AudioSource>();
-        SlimeImpact_SFX = Entity.FindEntityByName("SlimeImpact_SFX");
-        impactSFXSource = SlimeImpact_SFX.GetComponent<AudioSource>();
     }
 
     void OnUpdate()
@@ -53,19 +41,10 @@ class Slime : Enemy
         {
             health.Damage(1);
             StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
-
-            if (health.GetActualHealth() == 0)
-            {
-                deathSFXSource.Play();
-            }
-            else 
-            {
-                impactSFXSource.Play();
-            }
         }
 
         if (!HasAttackCooldown())
-            attackBox.SetActive(true);
+            attackBox.entity.SetActive(true);
 
         if (splitLerpTimer < 1.0f)
         {
@@ -90,7 +69,7 @@ class Slime : Enemy
             {
                 transform.LookAt(target.transform.position, transform.Up);
                 Move(transform.Forward);
-                ResetWanderBehaviour();
+                ResetWander();
             }
             else
                 Wander(ViewFieldWidth,ViewFieldFar * Stage, Speed);
@@ -123,12 +102,6 @@ class Slime : Enemy
     {
         Stage = stage;
         transform.scale = Vector3.One * SlimeSize * stage;
-
-
-        //Destroy after vertical 2
-        WobblyEffect slimeEffect = entity.GetComponent<WobblyEffect>();
-        slimeEffect.SetBaseScale(SlimeSize * stage);
-        //
     }
 
     public void Attack()
@@ -139,34 +112,34 @@ class Slime : Enemy
             targetHealth.AddEffect(effect);
         }
         StartAttackCooldown(CooldownTime);
-        attackBox.SetActive(false);
+        attackBox.entity.SetActive(false);
     }
 
     public void SplitLerp()
     {
         transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, splitLerpTimer);
         if (splitLerpTimer < 0.95f)
-            collider.Enabled = false;
+            collision.Enabled = false;
         else
-            collider.Enabled = true;
+            collision.Enabled = true;
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
     }
 
-    public void Split()
+    protected void Split()
     {
         int random = Loopie.Random.Range(0, 360);
         for (int i = 0; i < SplitAmmount; i++)
         {
-            Entity newslime = reference.Clone(true);
-            newslime.transform.rotation = transform.rotation;
-            newslime.transform.position = transform.position;
-            Slime slimecomp = newslime.GetComponent<Slime>();
-            slimecomp.splitLerpTimer = 0;
-            slimecomp.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
-            slimecomp.SetStage(Stage - 1);
-            slimecomp.parentY = transform.position.y;
-            slimecomp.ResetWanderBehaviour();
-            newslime.SetActive(true);
+            Entity new_slime = reference.Clone(true);
+            new_slime.transform.rotation = transform.rotation;
+            new_slime.transform.position = transform.position;
+            Slime slime_component = new_slime.GetComponent<Slime>();
+            slime_component.splitLerpTimer = 0;
+            slime_component.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
+            slime_component.SetStage(Stage - 1);
+            slime_component.parentY = transform.position.y;
+            slime_component.ResetWander();
+            new_slime.SetActive(true);
         }
     }
 
