@@ -20,9 +20,9 @@ public class Enemy : Component
     private Vector3 lastWanderPosition;
 
     #region Set Up
-    protected void SetEnemy(string EnemyReference)
+    protected void SetEnemy(string reference_name)
     {
-        reference = Entity.FindEntityByName(EnemyReference);
+        reference = Entity.FindEntityByName(reference_name);
         health = entity.GetComponent<Health>();
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
@@ -66,12 +66,13 @@ public class Enemy : Component
         return false;
     }
     #endregion
-
+    #region Target
     protected Vector3 GetDirectionToTarget()
     {
         return (target.transform.position - transform.position).normalized;
     }
-
+    #endregion
+    #region Attack Cooldown
     protected bool HasAttackCooldown()
     {
         return attackCooldown > 0;
@@ -81,6 +82,7 @@ public class Enemy : Component
     {
         attackCooldown = cooldown;
     }
+    #endregion
 
     protected void UpdateEnemy()
     {
