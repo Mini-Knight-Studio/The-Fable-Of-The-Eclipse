@@ -84,7 +84,7 @@ class IntroBookCover : Component
         else
         {
             currentBackgroundOpacity = Mathf.Lerp(1, 0, timer / inAnimationDelay);
-            Vector4 color = new Vector4(0, 0, 0, currentBackgroundOpacity);
+            Vector4 color = new Vector4(1, 1, 1, currentBackgroundOpacity);
             background.SetTint(color);
         }
     }

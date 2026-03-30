@@ -92,7 +92,8 @@ class IntroMiniKnightStudio : Component
         else
         {
             currentTextOpacity = Mathf.Lerp(0, 1, timer / textFadeInDelay);
-            // Assign currentTextOpacity to text.
+            Vector4 color = new Vector4(1, 1, 1, currentTextOpacity);
+            text.SetColor(color);
         }
     }
 
@@ -116,7 +117,8 @@ class IntroMiniKnightStudio : Component
         else
         {
             currentTextOpacity = Mathf.Lerp(1, 0, timer / textFadeOutDelay);
-            // Assign currentTextOpacity to text.
+            Vector4 color = new Vector4(1, 1, 1, currentTextOpacity);
+            text.SetColor(color);
         }
     }
 
