@@ -5,15 +5,18 @@ using Loopie;
 public class Movement : Component
 {
     public float Speed;
+    public bool CanMove;
 
     public void Move(Vector3 direction)
     {
-        transform.position += direction * Time.deltaTime * Speed;
+        if(CanMove)
+            transform.position += direction * Time.deltaTime * Speed;
     }
 
     public void Move(float multiplier, Vector3 direction)
     {
-        transform.position += direction * Time.deltaTime * Speed * multiplier;
+        if(CanMove)
+            transform.position += direction * Time.deltaTime * Speed * multiplier;
     }
 
     public IEnumerator Push(float force, float duration, Vector3 direction)

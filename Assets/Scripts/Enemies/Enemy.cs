@@ -37,7 +37,7 @@ public class Enemy : Component
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
         effect = entity.GetComponent<Effect>();
-
+        SetTarget();
         health.Init();
         wanderRange = false;
         ResetWander();
@@ -101,7 +101,7 @@ public class Enemy : Component
         lastWanderPosition = transform.position + Vector3.Forward;
     }
 
-    protected void Wander(float areaWidth, float reachDistance, float movementSpeed)
+    protected void Wander(float areaWidth, float reachDistance, float speedMultiplier)
     {
         RaycastHit hit;
         
@@ -110,7 +110,7 @@ public class Enemy : Component
 
         if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask))
         {
-            transform.position += transform.Forward * movementSpeed * Time.deltaTime;
+            movement.Move(speedMultiplier / 2, transform.Forward);
             if(Vector3.Distance(lastWanderPosition, transform.position) > reachDistance)
                 return;
         }

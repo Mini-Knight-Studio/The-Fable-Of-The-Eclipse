@@ -7,40 +7,51 @@ class Slime : Enemy
 
     public int SlimeStage;
     public float SlimeStageSize;
+
     public int SplitAmmount;
     public float SplitDistance;
-    protected Vector3 SplitDirection;
+    private Vector3 SplitDirection;
+
     protected float parentY;
 
     public float ViewFieldWidth;
     public float ViewFieldFar;
 
-    public float Speed;
     public float KnockbackForce;
     public float KnockbackTime;
+
     public int Damage;
     public float AttackReachDistance;
+    public float AttackCooldownTime;
+    public float AttackPreparationTime;
 
-    public float CooldownTime;
-    protected float splitLerpTimer;
+    public float TargetForcedDetectionDistance;
+
+    private float splitLerpTimer;
     private bool isSpawning;
 
     void OnCreate()
     {
         SetEnemy(Reference);
-        SetTarget();
         SetStage(SlimeStage);
-        
     }
 
-    void OnUpdate()
+    private void TestKeys()
     {
-        UpdateEnemy();
         if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
         {
             health.Damage(1);
             StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
         }
+    }
+
+    void OnUpdate()
+    {
+        UpdateEnemy();
+        
+        //Temporal
+        TestKeys();
+        //
 
         if (!HasAttackCooldown())
         { 
@@ -68,11 +79,11 @@ class Slime : Enemy
                 if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * SlimeStage) && !HasAttackCooldown())
                 {
                     transform.LookAt(target.transform.position, transform.Up);
-                    Move(transform.Forward);
+                    movement.Move(SlimeStage,transform.Forward);
                     ResetWander();
                 }
                 else
-                    Wander(ViewFieldWidth, ViewFieldFar * SlimeStage, Speed);
+                    Wander(ViewFieldWidth, ViewFieldFar * SlimeStage, SlimeStage);
                 #endregion
                 #region Attack
                 if (attackBox.IsColliding && !HasAttackCooldown())
@@ -94,11 +105,6 @@ class Slime : Enemy
         }
     }
 
-    public void Move(Vector3 direction)
-    {
-        transform.position += direction * Time.deltaTime * Speed * SlimeStage / 2;
-    }
-
     public void SetStage(int newStage)
     {
         SlimeStage = newStage;
@@ -112,7 +118,7 @@ class Slime : Enemy
         {
             targetHealth.AddEffect(effect);
         }
-        StartAttackCooldown(CooldownTime);
+        StartAttackCooldown(AttackCooldownTime);
         attackBox.entity.SetActive(false);
     }
 
