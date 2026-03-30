@@ -6,11 +6,13 @@ using Loopie;
 public class Enemy : Component
 {
     protected Entity reference;
-    protected Entity target;
     protected Health health;
-    protected Health targetHealth;
+    protected Movement movement;
     protected BoxCollider attackBox;
     protected BoxCollider collision;
+
+    protected Entity target;
+    protected Health targetHealth;
 
     private float attackReachDistance;
     private float attackCooldown;
@@ -23,17 +25,20 @@ public class Enemy : Component
     protected void SetEnemy(string reference_name)
     {
         reference = Entity.FindEntityByName(reference_name);
+
         health = entity.GetComponent<Health>();
+        movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
+
         health.Init();
         wanderRange = false;
         ResetWander();
     }
 
-    protected void SetTarget(string name)
+    protected void SetTarget()
     {
-        target = Entity.FindEntityByName(name);
+        target = Entity.FindEntityByName("Player");
         targetHealth = target.GetComponent<Health>();
     }
     #endregion
@@ -88,20 +93,6 @@ public class Enemy : Component
     {
         if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
         else attackCooldown = 0;
-    }
-
-    protected IEnumerator ApplyKnockback(float force, Vector3 direction, float duration)
-    {
-        float timer = 0;
-
-        while (timer<duration)
-        {
-            float factor = duration - timer;
-            factor = Mathf.Clamp01(factor/duration);
-            transform.position += direction * force * Time.deltaTime*factor;
-            timer += Time.deltaTime;
-            yield return null;
-        }
     }
 
     protected void ResetWander()

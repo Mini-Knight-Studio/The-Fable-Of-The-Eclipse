@@ -3,6 +3,8 @@ using Loopie;
 
 class Slime : Enemy
 {
+    public string Reference;
+
     public int Stage;
     public float SlimeSize;
     public int SplitAmmount;
@@ -13,7 +15,6 @@ class Slime : Enemy
     public float ViewFieldWidth;
     public float ViewFieldFar;
 
-    public string targetEntityName = "Player";
 
     public float Speed;
     public float KnockbackForce;
@@ -28,8 +29,8 @@ class Slime : Enemy
 
     void OnCreate()
     {
-        SetEnemy("Slime_Reference");
-        SetTarget(targetEntityName);
+        SetEnemy(Reference);
+        SetTarget();
         SetStage(Stage);
         effect = entity.GetComponent<Effect>();
     }
@@ -40,7 +41,7 @@ class Slime : Enemy
         if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
         {
             health.Damage(1);
-            StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
+            StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
         }
 
         if (!HasAttackCooldown())
