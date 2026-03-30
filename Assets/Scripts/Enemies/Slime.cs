@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Loopie;
 
 class Slime : Enemy
@@ -11,6 +12,8 @@ class Slime : Enemy
     public int SplitAmmount;
     public float SplitDistance;
     private Vector3 SplitDirection;
+    private bool spawn;
+    private bool isSpawning;
 
     protected float parentY;
 
@@ -28,12 +31,17 @@ class Slime : Enemy
     public float TargetForcedDetectionDistance;
 
     private float splitLerpTimer;
-    private bool isSpawning;
+    private int LayerOverride;
 
     void OnCreate()
     {
         SetEnemy(Reference);
         SetStage(SlimeStage);
+        int EnemyLayer = Collisions.GetLayerBit("Player");
+        int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
+        LayerOverride = EnemyLayer | PlayerHitLayer;
+        spawn = false;
+        isSpawning = false;
     }
 
     private void TestKeys()
@@ -52,51 +60,35 @@ class Slime : Enemy
         //Temporal
         TestKeys();
         //
+        if (spawn)
+        {
+            StartCoroutine(SplitLerp());
+        }
 
-        if (!HasAttackCooldown())
+        if (!isSpawning && !HasAttackCooldown())
         { 
             attackBox.entity.SetActive(true);
 
-            if (splitLerpTimer < 1.0f)
+            #region Movement
+            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * SlimeStage) || DetectedTargetInDistance(TargetForcedDetectionDistance*SlimeStage))
             {
-                splitLerpTimer += Time.deltaTime;
-                isSpawning = true;
+                transform.LookAt(target.transform.position, transform.Up);
+                movement.Move(SlimeStage,transform.Forward);
+                ResetWander();
             }
             else
+                Wander(ViewFieldWidth, ViewFieldFar * SlimeStage, SlimeStage);
+            #endregion
+            #region Attack
+            if (attackBox.IsColliding)
             {
-                splitLerpTimer = 1.0f;
-                isSpawning = false;
-                transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
+                Attack();
             }
-
-            if (isSpawning)
-            {
-                SplitLerp();
-            }
-            else
-            {
-                #region Movement
-                if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * SlimeStage) && !HasAttackCooldown())
-                {
-                    transform.LookAt(target.transform.position, transform.Up);
-                    movement.Move(SlimeStage,transform.Forward);
-                    ResetWander();
-                }
-                else
-                    Wander(ViewFieldWidth, ViewFieldFar * SlimeStage, SlimeStage);
-                #endregion
-                #region Attack
-                if (attackBox.IsColliding && !HasAttackCooldown())
-                {
-                    Attack();
-                }
-                #endregion
-            }
+            #endregion
             #region Health
             health.UpdateHealth();
             if (health.IsDead())
             {
-                //Debug.Log("I'm dead");
                 if (SlimeStage > 1)
                     Split();
                 entity.Destroy();
@@ -122,30 +114,44 @@ class Slime : Enemy
         attackBox.entity.SetActive(false);
     }
 
-    public void SplitLerp()
+    private IEnumerator SplitLerp()
     {
-        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * SlimeStage * SplitDistance / 20.0f, splitLerpTimer);
-        if (splitLerpTimer < 0.95f)
-            collision.Enabled = false;
-        else
-            collision.Enabled = true;
+        float timer = 0;
+        spawn = false;
+        isSpawning = true;
+        while(timer < 1.0f)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * SlimeStage * SplitDistance / 20.0f, splitLerpTimer);
+            yield return null;
+        }
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
+        collision.RemoveExcludeMask(LayerOverride);
+        isSpawning = false;
     }
+
+
 
     protected void Split()
     {
+        collision.AddExcludeMask(LayerOverride);
         int random = Loopie.Random.Range(0, 360);
         for (int i = 0; i < SplitAmmount; i++)
         {
             Entity new_slime = reference.Clone(true);
-            new_slime.transform.rotation = transform.rotation;
-            new_slime.transform.position = transform.position;
             Slime slime_component = new_slime.GetComponent<Slime>();
+            slime_component.collision.AddExcludeMask(LayerOverride);
             slime_component.splitLerpTimer = 0;
             slime_component.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
             slime_component.SetStage(SlimeStage - 1);
             slime_component.parentY = transform.position.y;
+            slime_component.spawn = true;
+            slime_component.isSpawning = true;
             slime_component.ResetWander();
+            slime_component.SetActive(true);
+            new_slime.Name = entity.Name;
+            new_slime.transform.position = transform.position;
+            new_slime.transform.rotation = transform.rotation;
             new_slime.SetActive(true);
         }
     }
