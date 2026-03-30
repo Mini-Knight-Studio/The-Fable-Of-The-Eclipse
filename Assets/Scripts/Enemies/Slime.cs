@@ -5,8 +5,8 @@ class Slime : Enemy
 {
     public string Reference;
 
-    public int Stage;
-    public float SlimeSize;
+    public int SlimeStage;
+    public float SlimeStageSize;
     public int SplitAmmount;
     public float SplitDistance;
     protected Vector3 SplitDirection;
@@ -14,7 +14,6 @@ class Slime : Enemy
 
     public float ViewFieldWidth;
     public float ViewFieldFar;
-
 
     public float Speed;
     public float KnockbackForce;
@@ -25,14 +24,13 @@ class Slime : Enemy
     public float CooldownTime;
     protected float splitLerpTimer;
     private bool isSpawning;
-    private Effect effect;
 
     void OnCreate()
     {
         SetEnemy(Reference);
         SetTarget();
-        SetStage(Stage);
-        effect = entity.GetComponent<Effect>();
+        SetStage(SlimeStage);
+        
     }
 
     void OnUpdate()
@@ -67,14 +65,14 @@ class Slime : Enemy
             else
             {
                 #region Movement
-                if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * Stage) && !HasAttackCooldown())
+                if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * SlimeStage) && !HasAttackCooldown())
                 {
                     transform.LookAt(target.transform.position, transform.Up);
                     Move(transform.Forward);
                     ResetWander();
                 }
                 else
-                    Wander(ViewFieldWidth, ViewFieldFar * Stage, Speed);
+                    Wander(ViewFieldWidth, ViewFieldFar * SlimeStage, Speed);
                 #endregion
                 #region Attack
                 if (attackBox.IsColliding && !HasAttackCooldown())
@@ -88,7 +86,7 @@ class Slime : Enemy
             if (health.IsDead())
             {
                 //Debug.Log("I'm dead");
-                if (Stage > 1)
+                if (SlimeStage > 1)
                     Split();
                 entity.Destroy();
             }
@@ -98,13 +96,13 @@ class Slime : Enemy
 
     public void Move(Vector3 direction)
     {
-        transform.position += direction * Time.deltaTime * Speed * Stage / 2;
+        transform.position += direction * Time.deltaTime * Speed * SlimeStage / 2;
     }
 
-    public void SetStage(int stage)
+    public void SetStage(int newStage)
     {
-        Stage = stage;
-        transform.scale = Vector3.One * SlimeSize * stage;
+        SlimeStage = newStage;
+        transform.scale = Vector3.One * SlimeStageSize * SlimeStage;
     }
 
     public void Attack()
@@ -120,7 +118,7 @@ class Slime : Enemy
 
     public void SplitLerp()
     {
-        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, splitLerpTimer);
+        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * SlimeStage * SplitDistance / 20.0f, splitLerpTimer);
         if (splitLerpTimer < 0.95f)
             collision.Enabled = false;
         else
@@ -139,7 +137,7 @@ class Slime : Enemy
             Slime slime_component = new_slime.GetComponent<Slime>();
             slime_component.splitLerpTimer = 0;
             slime_component.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
-            slime_component.SetStage(Stage - 1);
+            slime_component.SetStage(SlimeStage - 1);
             slime_component.parentY = transform.position.y;
             slime_component.ResetWander();
             new_slime.SetActive(true);
@@ -150,10 +148,10 @@ class Slime : Enemy
     {
         Vector3 leftZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -ViewFieldWidth);
         Vector3 rightZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, ViewFieldWidth);
-        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * Stage, transform.position - leftZone * -1.0f * ViewFieldFar * Stage, Color.White);
-        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * Stage, transform.position - rightZone * -1.0f * ViewFieldFar * Stage, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + rightZone * ViewFieldFar * Stage, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + leftZone * ViewFieldFar * Stage, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * SlimeStage, transform.position - leftZone * -1.0f * ViewFieldFar * SlimeStage, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * SlimeStage, transform.position - rightZone * -1.0f * ViewFieldFar * SlimeStage, Color.White);
+        Gizmo.DrawLine(transform.position, transform.position + rightZone * ViewFieldFar * SlimeStage, Color.White);
+        Gizmo.DrawLine(transform.position, transform.position + leftZone * ViewFieldFar * SlimeStage, Color.White);
     }
 
     void OnDestroy()

@@ -10,6 +10,7 @@ public class Enemy : Component
     protected Movement movement;
     protected BoxCollider attackBox;
     protected BoxCollider collision;
+    protected Effect effect;
 
     protected Entity target;
     protected Health targetHealth;
@@ -20,6 +21,11 @@ public class Enemy : Component
 
     private bool wanderRange = false;
     private Vector3 lastWanderPosition;
+    protected void UpdateEnemy()
+    {
+        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
+        else attackCooldown = 0;
+    }
 
     #region Set Up
     protected void SetEnemy(string reference_name)
@@ -30,6 +36,7 @@ public class Enemy : Component
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
+        effect = entity.GetComponent<Effect>();
 
         health.Init();
         wanderRange = false;
@@ -88,13 +95,7 @@ public class Enemy : Component
         attackCooldown = cooldown;
     }
     #endregion
-
-    protected void UpdateEnemy()
-    {
-        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
-        else attackCooldown = 0;
-    }
-
+    #region Wander
     protected void ResetWander()
     {
         lastWanderPosition = transform.position + Vector3.Forward;
@@ -134,6 +135,7 @@ public class Enemy : Component
             wanderRange = false;
         }
     }
+    #endregion
 }
 
 
