@@ -53,15 +53,17 @@ public class Health : Component
         actualHealth -= points;
         actualHealth = actualHealth < 0? 0 : actualHealth;
     }
-    
-    public void AddEffect(Effect effect)
+
+    public void AddEffect(List<Effect> effectList)
     {
-        
         int probability = Loopie.Random.Range(0, 101);
-        if (probability > effect.Probability+1)
-            return;
-        effects.Add(effect);
-        effect.InitEffect();
+        for (int i = 0; i < effectList.Count; i++)
+        {
+            if (probability > effectList[i].Probability + 1)
+                continue;
+            effects.Add(effectList[i]);
+            effectList[i].InitEffect();
+        }
     }
 
     public void Heal(int points)

@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
 using Loopie;
 
 public class Enemy : Component
@@ -10,7 +9,7 @@ public class Enemy : Component
     protected Movement movement;
     protected BoxCollider attackBox;
     protected BoxCollider collision;
-    protected Effect effect;
+    protected List<Effect> effectList;
 
     protected Entity target;
     protected Health targetHealth;
@@ -36,7 +35,8 @@ public class Enemy : Component
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
-        effect = entity.GetComponent<Effect>();
+        effectList = new List<Effect>();
+        //entity.Ge
         SetTarget();
         health.Init();
         wanderRange = false;

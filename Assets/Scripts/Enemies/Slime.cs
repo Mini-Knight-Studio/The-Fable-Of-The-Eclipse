@@ -43,8 +43,6 @@ class Slime : Enemy
         isSpawning = false;
     }
 
-    
-
     void OnUpdate()
     {
         UpdateEnemy();
@@ -111,6 +109,7 @@ class Slime : Enemy
         float timer = 0.0f;
         spawn = false;
         isSpawning = true;
+        transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         collision.AddExcludeMask(LayerOverride);
         while (timer < 1.0f)
         {
@@ -118,12 +117,9 @@ class Slime : Enemy
             transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * SlimeStage * SplitDistance / 20.0f, timer);
             yield return null;
         }
-        transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         collision.RemoveExcludeMask(LayerOverride);
         isSpawning = false;
     }
-
-
 
     protected void Split()
     {
