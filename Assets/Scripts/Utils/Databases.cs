@@ -46,6 +46,7 @@ public static class GlobalDatabase
 
         // Global variables (Add as much as needed)
         public PuzzlesData Puzzles { get; } = new PuzzlesData();
+        public SettingsData Settings { get; } = new SettingsData();
 
     }
 }
