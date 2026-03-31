@@ -5,7 +5,7 @@ public class SettingsData
 {
     // Graphics
     public bool Fullscreen = false;
-    public float FrameRate = 60f;
+    public float FrameRate = 60.0f;
     public bool VSync = false;
 
     // Audio
