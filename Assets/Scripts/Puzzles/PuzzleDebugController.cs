@@ -3,38 +3,34 @@ using Loopie;
 
 class PuzzleDebugController : Component
 {
-    void OnCreate()
-    {
-        PuzzleProgressionManager.Initialize();
-    }
 
     void OnUpdate()
     {
         if (Input.IsKeyDown(KeyCode.NUM_1))
         {
-            PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed = !PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed;
-            Debug.LogWarning("Completed Puzzle 1 = " + PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed);
+            GlobalDatabase.Data.Puzzles.Puzzle1Completed = !GlobalDatabase.Data.Puzzles.Puzzle1Completed;
+            Debug.LogWarning("Completed Puzzle 1 = " + GlobalDatabase.Data.Puzzles.Puzzle1Completed);
         }
         if (Input.IsKeyDown(KeyCode.NUM_2))
         {
-            PuzzleProgressionManager.runtimePuzzleData.Puzzle2Completed = !PuzzleProgressionManager.runtimePuzzleData.Puzzle2Completed;
-            Debug.LogWarning("Completed Puzzle 2 = " + PuzzleProgressionManager.runtimePuzzleData.Puzzle2Completed);
+            GlobalDatabase.Data.Puzzles.Puzzle2Completed = !GlobalDatabase.Data.Puzzles.Puzzle2Completed;
+            Debug.LogWarning("Completed Puzzle 2 = " + GlobalDatabase.Data.Puzzles.Puzzle2Completed);
         }
         if (Input.IsKeyDown(KeyCode.NUM_3))
         {
-            PuzzleProgressionManager.runtimePuzzleData.Puzzle3Completed = !PuzzleProgressionManager.runtimePuzzleData.Puzzle3Completed;
-            Debug.LogWarning("Completed Puzzle 3 = " + PuzzleProgressionManager.runtimePuzzleData.Puzzle3Completed);
+            GlobalDatabase.Data.Puzzles.Puzzle3Completed = !GlobalDatabase.Data.Puzzles.Puzzle3Completed;
+            Debug.LogWarning("Completed Puzzle 3 = " + GlobalDatabase.Data.Puzzles.Puzzle3Completed);
         }
         if (Input.IsKeyDown(KeyCode.NUM_4))
         {
-            PuzzleProgressionManager.runtimePuzzleData.AllPuzzlesCompleted = !PuzzleProgressionManager.runtimePuzzleData.AllPuzzlesCompleted;
-            Debug.LogWarning("Completed All Puzzles = " + PuzzleProgressionManager.runtimePuzzleData.AllPuzzlesCompleted);
+            GlobalDatabase.Data.Puzzles.AllPuzzlesCompleted = !GlobalDatabase.Data.Puzzles.AllPuzzlesCompleted;
+            Debug.LogWarning("Completed All Puzzles = " + GlobalDatabase.Data.Puzzles.AllPuzzlesCompleted);
         }
 
         if (Input.IsKeyDown(KeyCode.NUM_0))
         {
             Debug.Log("Saving to Manager");
-            PuzzleProgressionManager.SaveChanges();
+            GlobalDatabase.Data.Save();
         }
     }
 }

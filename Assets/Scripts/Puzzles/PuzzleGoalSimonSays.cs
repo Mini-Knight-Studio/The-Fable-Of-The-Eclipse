@@ -349,8 +349,7 @@ class PuzzleGoalSimonSays : Component
         puzzle2Completed = true;
 
         Debug.Log("Puzzle Fully Completed!");
-        if (PuzzleProgressionManager.runtimePuzzleData != null)
-            PuzzleProgressionManager.runtimePuzzleData.Puzzle2Completed = true;
+        GlobalDatabase.Data.Puzzles.Puzzle2Completed = true;
 
         currentState = State.Completed;
     }

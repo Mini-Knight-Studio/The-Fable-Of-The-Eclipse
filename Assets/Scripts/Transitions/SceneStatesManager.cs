@@ -11,6 +11,11 @@ public static class SceneStatesManager
         return previousSceneUUID;
     }
 
+    public static string GetCurrentSceneUUID()
+    {
+        return currentSceneUUID;
+    }
+
     public static void SetCurrentScene(string newSceneUUID)
     {
         if(currentSceneUUID == newSceneUUID) { return; }
