@@ -81,10 +81,8 @@ class PuzzleGoal : Component
             
             CompletePuzzleAuto();
 
-            // If (PlayerProgression.HasEarthGem = true)
-            // Gem.SetActive(false);
-            // else
-            Gem.GetComponent<BoxCollider>().SetActive(true);
+            Gem.SetActive(!GlobalDatabase.Data.Player.gemEarthCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!GlobalDatabase.Data.Player.gemEarthCollected);
         }
 
         if (allOnGoal && !puzzle1Completed)
@@ -99,9 +97,9 @@ class PuzzleGoal : Component
         if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
         {
             Gem.SetActive(false);
-            
-            // give the gem and grapple to player
-            // maybe we want to automate this
+
+            GlobalDatabase.Data.Player.gemEarthCollected = true;
+            GlobalDatabase.Data.Player.hasGrappling = true;
         }
     }
 

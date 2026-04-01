@@ -13,14 +13,14 @@ class InitialPlayerPositionManager : Component
     public Entity player;
     void OnCreate()
     {
-        SceneStatesManager.SetCurrentScene(level1SceneUUID);
+        GlobalDatabase.Data.Player.SetCurrentScene(level1SceneUUID);
 
-        if(SceneStatesManager.GetPreviousSceneUUID() == puzzle1SceneUUID)
+        if(GlobalDatabase.Data.Player.previousSceneUUID == puzzle1SceneUUID)
         {
             puzzleToLvl1PlayerPos.y = player.transform.position.y;
             player.transform.position = puzzleToLvl1PlayerPos;
         }
-        else if (SceneStatesManager.GetPreviousSceneUUID() == level2SceneUUID)
+        else if (GlobalDatabase.Data.Player.previousSceneUUID == level2SceneUUID)
         {
             Lvl2ToLvl1PlayerPos.y = player.transform.position.y;
             player.transform.position = Lvl2ToLvl1PlayerPos;
