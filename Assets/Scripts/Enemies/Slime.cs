@@ -14,6 +14,8 @@ class Slime : Enemy
     public float ViewFieldFar;
 
     public string targetEntityName = "Player";
+    private Player playerCentral;
+    private bool hasBeenHitThisAttack = false;
 
     public float Speed;
     public float KnockbackForce;
@@ -44,13 +46,39 @@ class Slime : Enemy
         deathSFXSource = SlimeDeath_SFX.GetComponent<AudioSource>();
         SlimeImpact_SFX = Entity.FindEntityByName("SlimeImpact_SFX");
         impactSFXSource = SlimeImpact_SFX.GetComponent<AudioSource>();
+
+        Entity playerEntity = Entity.FindEntityByName(targetEntityName);
+        if (playerEntity != null)
+        {
+            playerCentral = playerEntity.GetComponent<Player>();
+        }
     }
 
     void OnUpdate()
     {
         UpdateEnemy();
+
+        if (playerCentral != null && playerCentral.Combat != null)
+        {
+            BoxCollider swordCol = playerCentral.Combat.swordTrigger.GetComponent<BoxCollider>();
+
+            if (playerCentral.Combat.isAttacking && swordCol != null && swordCol.IsColliding)
+            {
+                if (!hasBeenHitThisAttack)
+                {
+                    ReceiveDamage();
+                    hasBeenHitThisAttack = true;
+                }
+            }
+
+            if (!playerCentral.Combat.isAttacking)
+            {
+                hasBeenHitThisAttack = false;
+            }
+        }
         if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
         {
+
             health.Damage(1);
             StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
 
@@ -113,7 +141,21 @@ class Slime : Enemy
             #endregion
         }
     }
+    private void ReceiveDamage()
+    {
+        health.Damage(1);
 
+        StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
+
+        if (health.GetActualHealth() <= 0)
+        {
+            if (deathSFXSource != null) deathSFXSource.Play();
+        }
+        else
+        {
+            if (impactSFXSource != null) impactSFXSource.Play();
+        }
+    }
     public void Move(Vector3 direction)
     {
         transform.position += direction * Time.deltaTime * Speed * Stage / 2;
@@ -133,15 +175,22 @@ class Slime : Enemy
 
     public void Attack()
     {
-        targetHealth.Damage(Damage);
-        if (effect != null)
+        if (playerCentral != null && playerCentral.PlayerHealth != null)
         {
-            targetHealth.AddEffect(effect);
+            playerCentral.PlayerHealth.Damage(Damage);
+
+            if (effect != null) { playerCentral.PlayerHealth.AddEffect(effect); }
+
+            Vector3 pushDir = (target.transform.position - transform.position).normalized;
+            pushDir.y = 0;
+
+            if (playerCentral.Movement != null) { playerCentral.Movement.ApplyKnockback(pushDir, KnockbackForce, KnockbackTime); }
+
         }
+
         StartAttackCooldown(CooldownTime);
         attackBox.SetActive(false);
     }
-
     public void SplitLerp()
     {
         transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, splitLerpTimer);

@@ -132,7 +132,21 @@ public class PlayerMovement : Component
 
         return false;
     }
+    public void ApplyKnockback(Vector3 direction, float force, float duration)
+    {
+        StartCoroutine(KnockbackRoutine(direction, force, duration));
+    }
 
+    private System.Collections.IEnumerator KnockbackRoutine(Vector3 direction, float force, float duration)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            entity.transform.position += direction * force * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
     private void HandleNormalMovement()
     {
         Vector3 moveDirection = new Vector3(0, 0, 0);

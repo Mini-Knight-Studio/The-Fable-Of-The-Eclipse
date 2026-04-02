@@ -5,7 +5,7 @@ using Loopie;
 public class Health : Component
 {
     public int maxHealth;
-    private int actualHealth;
+    public int actualHealth;
     public List<Effect> effects;
     private float timer;
     public bool canBeDamaged;
