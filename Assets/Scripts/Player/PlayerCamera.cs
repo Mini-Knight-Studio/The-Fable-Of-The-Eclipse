@@ -1,13 +1,14 @@
 using Loopie;
 
-class PlayerCamera : Component
+public class PlayerCamera : Component
 {
+    public Entity player;
+    private Player playerCentral;
+    private Camera camera;
+
     public float distance = 100f;
     public float speed = 25f;
     public float verticalScale = 1.22f;
-
-    public Entity player;
-    private Camera camera;
 
     private cameraState currentState = cameraState.FOLLOWING_PLAYER;
     private cameraState previousState = cameraState.FOLLOWING_PLAYER;
@@ -41,7 +42,7 @@ class PlayerCamera : Component
     private float rotationShakeAmount = 1.5f;
     private Vector3 shakeOffset = Vector3.Zero;
     private Vector3 shakeRotationOffset = Vector3.Zero;
-    
+
     // Timers
     private float lerpTimer;
     private float shakeTimer;
@@ -54,11 +55,11 @@ class PlayerCamera : Component
     {
         if (player != null)
         {
-            // Get any player data.
+            playerCentral = player.GetComponent<Player>();
         }
         else
         {
-            Debug.Log("Error: There is no Player.");
+            Debug.Log("Error: There is no Player Entity assigned.");
         }
 
         camera = entity.GetComponent<Camera>();
@@ -166,15 +167,15 @@ class PlayerCamera : Component
     {
         Vector3 targetPosition = new Vector3(focusTarget.x - distance, entity.transform.position.y, focusTarget.z - distance);
 
-        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, lerpTimer/timeToFocus);
+        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, lerpTimer / timeToFocus);
 
-        currentZoom = Mathf.Lerp(currentZoom, focusZoom, lerpTimer/timeToFocus);
+        currentZoom = Mathf.Lerp(currentZoom, focusZoom, lerpTimer / timeToFocus);
         camera.SetOrthoSize(currentZoom);
     }
 
     public void FocusOnPoint(Vector3 destination, float zoomSize, float time)
     {
-        currentState = cameraState.FOCUSING; 
+        currentState = cameraState.FOCUSING;
         previousState = cameraState.FOLLOWING_PLAYER;
         focusTarget = destination;
         focusZoom = zoomSize;
@@ -199,15 +200,15 @@ class PlayerCamera : Component
             }
             else
             {
-                entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
+                entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer / timeToStopFocusing);
             }
         }
         else
         {
-            currentZoom = Mathf.Lerp(currentZoom, originalZoom, lerpTimer/timeToStopFocusing);
+            currentZoom = Mathf.Lerp(currentZoom, originalZoom, lerpTimer / timeToStopFocusing);
             camera.SetOrthoSize(currentZoom);
 
-            entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
+            entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer / timeToStopFocusing);
         }
     }
 

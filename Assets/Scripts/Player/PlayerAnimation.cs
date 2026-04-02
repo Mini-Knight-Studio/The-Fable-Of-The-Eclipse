@@ -1,9 +1,10 @@
 using System;
 using Loopie;
 
-class PlayerAnimation : Component
+public class PlayerAnimation : Component
 {
-    private PlayerMovement playerMovement;
+    private Player player;
+
     private Animator idleAnimator;
     private Animator walkAnimator;
 
@@ -21,7 +22,7 @@ class PlayerAnimation : Component
 
     public void OnCreate()
     {
-        playerMovement = entity.GetComponent<PlayerMovement>();
+        player = entity.GetComponent<Player>();
 
         idleEntity = Entity.FindEntityByName("IdlePlayer");
         walkEntity = Entity.FindEntityByName("WalkPlayer");
@@ -33,22 +34,22 @@ class PlayerAnimation : Component
 
     public void OnUpdate()
     {
-        if (playerMovement == null) return;
+        if (player == null || player.Movement == null) return;
 
-        if (playerMovement.isDashing && toDash)
+        if (player.Movement.isDashing && toDash)
         {
             Dash();
             return;
         }
 
-        if (!playerMovement.isDashing)
+        if (!player.Movement.isDashing)
         {
             toDash = true;
-            if (playerMovement.isMoving && toWalk)
+            if (player.Movement.isMoving && toWalk)
             {
                 Move();
             }
-            else if (!playerMovement.isMoving && toIdle)
+            else if (!player.Movement.isMoving && toIdle)
             {
                 Idle();
             }

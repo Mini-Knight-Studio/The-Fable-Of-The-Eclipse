@@ -1,8 +1,10 @@
 using System;
 using Loopie;
 
-class PlayerCombat : Component
+public class PlayerCombat : Component
 {
+    private Player player;
+
     public bool isAttacking = false;
     private float attackTimer = 0f;
 
@@ -14,6 +16,8 @@ class PlayerCombat : Component
 
     void OnCreate()
     {
+        player = entity.GetComponent<Player>();
+
         swordTrigger = Entity.FindEntityByName("PlayerSwordTrigger");
         if (swordTrigger != null) swordTrigger.SetActive(false);
         attackSfxSource = swordTrigger.GetComponent<AudioSource>();
@@ -43,7 +47,7 @@ class PlayerCombat : Component
 
             isAttacking = true;
             attackTimer = attackCooldown;
-            attackSfxSource.Play();
+            if (attackSfxSource != null) attackSfxSource.Play();
         }
     }
 };
