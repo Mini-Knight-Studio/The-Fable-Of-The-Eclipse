@@ -48,3 +48,4 @@ public class WobblyEffect : Component
         baseScale = Vector3.One * newScale;
     }
 }
+
