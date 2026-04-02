@@ -14,11 +14,16 @@ class CheckpointCollider : Component
 
     void OnUpdate()
     {
-        if (!hasSaved)
+        if (!hasSaved && collider.IsColliding)
         {
-            GlobalDatabase.Data.Player.playerPosition = player.transform.position;
-            GlobalDatabase.Data.Save();
             hasSaved = true;
+            if (GlobalDatabase.Data.Exists())
+            {
+                GlobalDatabase.Data.Player.playerPositionX = player.transform.position.x;
+                GlobalDatabase.Data.Player.playerPositionY = player.transform.position.y;
+                GlobalDatabase.Data.Player.playerPositionZ = player.transform.position.z;
+                GlobalDatabase.Data.Save();
+            }
         }
     }
 };

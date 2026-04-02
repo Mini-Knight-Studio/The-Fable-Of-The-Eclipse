@@ -29,7 +29,7 @@ class PuzzleDebugController : Component
 
         if (Input.IsKeyDown(KeyCode.NUM_0))
         {
-            Debug.Log("Saving to Manager");
+            Debug.Log("Saving to Global Database");
             GlobalDatabase.Data.Save();
         }
     }

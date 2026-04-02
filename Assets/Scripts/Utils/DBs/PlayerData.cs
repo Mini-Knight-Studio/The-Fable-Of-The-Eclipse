@@ -16,10 +16,12 @@ public class PlayerData
     public string previousSceneUUID = "";
     public void SetCurrentScene(string newSceneUUID)
     {
-        if (currentSceneUUID == newSceneUUID)   return;
+        if (currentSceneUUID == newSceneUUID) return;
         previousSceneUUID = currentSceneUUID;
         currentSceneUUID = newSceneUUID;
     }
 
-    public Vector3 playerPosition = Vector3.Zero;
+    public float playerPositionX = 0.0f;
+    public float playerPositionY = 0.0f;
+    public float playerPositionZ = 0.0f;
 }
