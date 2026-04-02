@@ -6,16 +6,21 @@ class MovingPillarSimonSays : Component
     private bool enabled = false;
 
     public bool active = false;
-    private bool activated = false;
+    public bool wasPressed = false;
 
+    private bool activated = false;
     private bool locked = true;
 
     public Entity torch;
     private ParticleComponent torchParticles;
     private BoxCollider torchCollider;
 
+    private MovingPillar movingPillar;
+
     void OnCreate()
     {
+        movingPillar = entity.GetComponent<MovingPillar>();
+
         if (torch != null)
         {
             torchParticles = torch.GetComponent<ParticleComponent>();
@@ -25,13 +30,12 @@ class MovingPillarSimonSays : Component
 
     void OnUpdate()
     {
-        var movingPillar = entity.GetComponent<MovingPillar>();
+        wasPressed = false;
 
-        if (movingPillar == null || !movingPillar.onGoalPosition)
-        {
-            return;
-        }
-        else if (!enabled)
+        if (movingPillar == null) return;
+        if (!movingPillar.onGoalPosition) return;
+
+        if (!enabled)
         {
             if (torch != null) torch.SetActive(true);
             if (torchParticles != null) torchParticles.SetActive(false);
@@ -43,8 +47,9 @@ class MovingPillarSimonSays : Component
 
     void HandleActivation()
     {
-        if (torchCollider != null && torchCollider.IsColliding && !locked && Input.IsKeyPressed(KeyCode.E))
+        if (torchCollider != null && torchCollider.IsColliding && !locked && Input.IsKeyDown(KeyCode.E))
         {
+            wasPressed = true;
             active = true;
         }
 
@@ -53,19 +58,34 @@ class MovingPillarSimonSays : Component
             if (torchParticles != null) torchParticles.SetActive(true);
             activated = true;
         }
-        else
+        else if (!active && activated)
         {
-            if (!active && activated)
-            {
-                if (torchParticles != null) torchParticles.SetActive(false);
-                activated = false;
-            }
+            if (torchParticles != null) torchParticles.SetActive(false);
+            activated = false;
         }
     }
 
     public void ForceActive()
     {
         active = true;
+
+        if (!activated)
+        {
+            if (torchParticles != null) torchParticles.SetActive(true);
+            activated = true;
+        }
+    }
+
+    public void ResetState()
+    {
+        active = false;
+        wasPressed = false;
+
+        if (activated)
+        {
+            if (torchParticles != null) torchParticles.SetActive(false);
+            activated = false;
+        }
     }
 
     public void Unlock()
@@ -77,4 +97,4 @@ class MovingPillarSimonSays : Component
     {
         locked = true;
     }
-};
+}

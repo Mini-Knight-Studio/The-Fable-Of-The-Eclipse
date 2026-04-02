@@ -115,9 +115,6 @@ class PuzzleGoalSimonSays : Component
             case State.Fail:
                 HandleFail();
                 break;
-
-            case State.Completed:
-                break;
         }
     }
 
@@ -126,8 +123,14 @@ class PuzzleGoalSimonSays : Component
         startPosition = entity.transform.position;
         targetPosition = newTarget;
 
-        Vector3 difference = targetPosition - startPosition;
-        float distance = (float)difference.magnitude;
+        Vector3 diff = targetPosition - startPosition;
+        float distance = (float)diff.magnitude;
+
+        if (distance <= 0.0001f)
+        {
+            isMoving = false;
+            return;
+        }
 
         moveDuration = distance / movementSpeed;
         moveTimer = 0.0f;
@@ -137,6 +140,13 @@ class PuzzleGoalSimonSays : Component
 
     void MoveTowardsTarget()
     {
+        if (moveDuration <= 0.0001f)
+        {
+            entity.transform.position = targetPosition;
+            isMoving = false;
+            return;
+        }
+
         moveTimer += Time.deltaTime;
         float t = moveTimer / moveDuration;
 
@@ -163,28 +173,24 @@ class PuzzleGoalSimonSays : Component
                 allOnGoal = false;
                 pillarTriggered[i] = false;
             }
-            else 
+            else
             {
                 if (!pillarTriggered[i])
                 {
                     pillarTriggered[i] = true;
 
                     if (simonPillars[i] != null)
-                    {
                         simonPillars[i].Lock();
-                    }
                 }
 
                 if (simonPillars[i] != null)
-                {
                     simonPillars[i].ForceActive();
-                }
             }
         }
 
         if (allOnGoal && !simonStarted)
         {
-            if (goalCollider != null && goalCollider.IsColliding && Input.IsKeyPressed(KeyCode.E))
+            if (goalCollider != null && goalCollider.IsColliding && Input.IsKeyDown(KeyCode.E))
             {
                 simonStarted = true;
                 Debug.LogWarning("Starting Simon Says.");
@@ -199,12 +205,13 @@ class PuzzleGoalSimonSays : Component
         sequence.Clear();
 
         fullSequence = new List<int> { 0, 1, 2, 3 };
+
         for (int i = 0; i < fullSequence.Count; i++)
         {
             int temp = fullSequence[i];
-            int randomIndex = Loopie.Random.Range(i, fullSequence.Count);
-            fullSequence[i] = fullSequence[randomIndex];
-            fullSequence[randomIndex] = temp;
+            int r = Loopie.Random.Range(i, fullSequence.Count);
+            fullSequence[i] = fullSequence[r];
+            fullSequence[r] = temp;
         }
 
         round = 0;
@@ -214,6 +221,7 @@ class PuzzleGoalSimonSays : Component
     void NextRound()
     {
         round++;
+
         if (round > maxRounds)
         {
             CompletePuzzle();
@@ -247,9 +255,7 @@ class PuzzleGoalSimonSays : Component
                 Debug.Log($"Playback: Showing Pillar {index}");
 
                 if (simonPillars[index] != null)
-                {
                     simonPillars[index].ForceActive();
-                }
 
                 showIndex++;
             }
@@ -263,12 +269,10 @@ class PuzzleGoalSimonSays : Component
     void PreparePlayerPhase()
     {
         playerIndex = 0;
-        inputCooldown = 0.5f;
+        inputCooldown = 0.4f;
 
         for (int i = 0; i < pillarPressedThisRound.Length; i++)
-        {
             pillarPressedThisRound[i] = false;
-        }
 
         ResetAllPillars();
         UnlockAllPillars();
@@ -285,15 +289,18 @@ class PuzzleGoalSimonSays : Component
 
         for (int i = 0; i < simonPillars.Length; i++)
         {
-            if (simonPillars[i] != null && simonPillars[i].active && !pillarPressedThisRound[i])
+            var pillar = simonPillars[i];
+            if (pillar == null) continue;
+
+            if (pillar.wasPressed && !pillarPressedThisRound[i])
             {
                 Debug.Log($"Player input: {i}");
 
                 pillarPressedThisRound[i] = true;
-                simonPillars[i].ForceActive();
 
                 CheckPlayerInput(i);
-                inputCooldown = 0.4f;
+
+                inputCooldown = 0.3f;
                 break;
             }
         }
@@ -304,11 +311,13 @@ class PuzzleGoalSimonSays : Component
         if (sequence[playerIndex] == index)
         {
             playerIndex++;
+
             if (playerIndex >= sequence.Count)
             {
                 pendingMoves++;
                 successfulRounds++;
                 currentState = State.Success;
+                timer = 0.0f;
             }
         }
         else
@@ -336,8 +345,6 @@ class PuzzleGoalSimonSays : Component
         pendingUpMoves += successfulRounds;
         successfulRounds = 0;
 
-        // Spawn enemies here
-
         LockAllPillars();
         StartSimonPhase();
     }
@@ -349,6 +356,7 @@ class PuzzleGoalSimonSays : Component
         puzzle2Completed = true;
 
         Debug.Log("Puzzle Fully Completed!");
+
         GlobalDatabase.Data.Puzzles.Puzzle2Completed = true;
 
         currentState = State.Completed;
@@ -369,14 +377,6 @@ class PuzzleGoalSimonSays : Component
     void ResetAllPillars()
     {
         foreach (var pillar in simonPillars)
-            if (pillar != null) pillar.active = false;
-    }
-
-    void CompletePillarsAuto()
-    {
-        Pillar1.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
+            if (pillar != null) pillar.ResetState();
     }
 }
