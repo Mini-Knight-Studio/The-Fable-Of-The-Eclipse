@@ -9,6 +9,8 @@ public class Player : Component
     public PlayerItems Items;
     public Health PlayerHealth;
     public PlayerCamera Camera;
+    public Entity GrappleLine;
+    public Entity HookAnchor;
 
     void OnCreate()
     {
@@ -17,7 +19,9 @@ public class Player : Component
         Combat = entity.GetComponent<PlayerCombat>();
         Items = entity.GetComponent<PlayerItems>();
         PlayerHealth = entity.GetComponent<Health>();
-
+        GrappleLine = Entity.FindEntityByName("GrappleLine");
+        if (GrappleLine != null) GrappleLine.SetActive(false);
+        HookAnchor = Entity.FindEntityByName("HookAnchor");
         Entity cameraEntity = Entity.FindEntityByName("PlayerCamera");
         if (cameraEntity != null)
         {

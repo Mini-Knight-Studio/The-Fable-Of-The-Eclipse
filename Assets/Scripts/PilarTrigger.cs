@@ -9,7 +9,8 @@ public class PillarTrigger : Component
     public Entity interactionPrompt;
     public Entity hookParticles;
 
-    public float hookTravelTime = 0.25f;
+    public float hookTravelTime = 0.5f;
+
     private bool isWaitingForHook = false;
     private float hookTimer = 0.0f;
 
@@ -45,17 +46,22 @@ public class PillarTrigger : Component
         {
             isWaitingForHook = true;
             hookTimer = 0.0f;
+
             playerGrapple.RotateToTarget(entity.transform.position);
+
+            playerGrapple.ExecuteGrapple(this, hookTravelTime);
         }
 
         if (isWaitingForHook)
         {
             hookTimer += Time.deltaTime;
+
             if (hookTimer >= hookTravelTime)
             {
                 isWaitingForHook = false;
+
                 if (hookParticles != null) hookParticles.SetActive(true);
-                playerGrapple.ExecuteGrapple(this);
+
             }
         }
     }
