@@ -3,12 +3,12 @@ using Loopie;
 
 public class Player : Component
 {
-    private PlayerMovement Movement;
-    private PlayerAnimation Animation;
-    private PlayerCombat Combat;
-    private PlayerItems Items;
-    private Health PlayerHealth;
-    private PlayerCamera Camera;
+    public PlayerMovement Movement;
+    public PlayerAnimation Animation;
+    public PlayerCombat Combat;
+    public PlayerItems Items;
+    public Health PlayerHealth;
+    public PlayerCamera Camera;
 
     void OnCreate()
     {

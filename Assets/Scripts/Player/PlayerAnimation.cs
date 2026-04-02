@@ -1,7 +1,7 @@
 using System;
 using Loopie;
 
-class PlayerAnimation : Component
+public class PlayerAnimation : Component
 {
     private PlayerMovement playerMovement;
     private Animator idleAnimator;

@@ -1,7 +1,7 @@
 using System;
 using Loopie;
 
-class PlayerItems : Component
+public class PlayerItems : Component
 {
     public string item1Name;
     public string item2Name;
