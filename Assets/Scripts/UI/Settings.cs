@@ -44,7 +44,8 @@ class Settings : Component
     private float inputTimer = 0f;
     private float confirmTimer = 0f;
 
-    private bool canCallScripts = false;
+    private bool canCallScriptsRight = false;
+    private bool canCallScriptsLeft = false;
 
     // Audio
     public Entity loopMusicEntity;
@@ -74,72 +75,44 @@ class Settings : Component
             Debug.Log("Error: There is no Framerate Hovered Entity assigned.");
         }
 
-        if (continueEntity != null)
+        if (vSyncHoveredEntity != null)
         {
-            // button
-
-            if (continueHoveredEntity != null)
-            {
-                continueScript = continueHoveredEntity.GetComponent<Load>();
-                continueHoveredImage = continueHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no Continue Hovered Entity assigned.");
-            }
+            //vSyncScript = framerateHoveredEntity.GetComponent<Framerate>();
+            vSyncHoveredImage = vSyncHoveredEntity.GetComponent<Image>();
         }
         else
         {
-            Debug.Log("Error: There is no Continue Entity assigned.");
+            Debug.Log("Error: There is no V-Sync Hovered Entity assigned.");
         }
 
-        if (settingsEntity != null)
+        if (masterVolumeHoveredEntity != null)
         {
-            // button
-
-            if (settingsHoveredEntity != null)
-            {
-                settingsScript = settingsHoveredEntity.GetComponent<SceneTransition>();
-                settingsHoveredImage = settingsHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no Settings Hovered Entity assigned.");
-            }
+            //masterVolumeScript = masterVolumeHoveredEntity.GetComponent<MasterVolume>();
+            masterVolumeHoveredImage = masterVolumeHoveredEntity.GetComponent<Image>();
         }
         else
         {
-            Debug.Log("Error: There is no Settings Entity assigned.");
+            Debug.Log("Error: There is no Master Volume Hovered Entity assigned.");
         }
 
-        if (exitEntity != null)
+        if (musicVolumeHoveredEntity != null)
         {
-            // button
-
-            if (exitHoveredEntity != null)
-            {
-                exitScript = exitHoveredEntity.GetComponent<Exit>();
-                exitHoveredImage = exitHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no Exit Hovered Entity assigned.");
-            }
+            //musicVolumeScript = musicVolumeHoveredEntity.GetComponent<MusicVolume>();
+            musicVolumeHoveredImage = musicVolumeHoveredEntity.GetComponent<Image>();
         }
         else
         {
-            Debug.Log("Error: There is no Exit Entity assigned.");
+            Debug.Log("Error: There is no Music Volume Hovered Entity assigned.");
         }
 
-        // External
-        if (introBookCoverEntity != null)
+        if (sfxVolumeHoveredEntity != null)
         {
-            introBookCoverScript = introBookCoverEntity.GetComponent<IntroBookCover>();
-            preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
+            //sfxVolumeScript = sfxVolumeHoveredEntity.GetComponent<SfxVolume>();
+            sfxVolumeHoveredImage = sfxVolumeHoveredEntity.GetComponent<Image>();
         }
         else
         {
-            Debug.Log("Error: There is no IntroBookCover Entity assigned.");
+            Debug.Log("Error: There is no SFX Volume Hovered Entity assigned.");
         }
 
         if (loopMusicEntity != null)
@@ -155,17 +128,8 @@ class Settings : Component
     void OnUpdate()
     {
         HandleMusic();
-
-        // Nullify Input while in intro.
-        preMainMenuDelayTimer += Time.deltaTime;
-        preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
-
-        if (preMainMenuDelayTimer < preMainMenuDelay)
-            return;
-
-        // Main Menu logic.
         HandleNavigation();
-        HandleConfirm();
+        HandleChangeValue();
     }
 
     void HandleNavigation()
@@ -179,13 +143,6 @@ class Settings : Component
             return;
 
         bool moved = false;
-
-        FULLSCREEN,
-        FRAMERATE,
-        V_SYNC,
-        MASTER_VOLUME,
-        MUSIC_VOLUME,
-        SFX_VOLUME
 
         // Read Input
         if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0)
@@ -216,33 +173,57 @@ class Settings : Component
         }
 
         // Visual Feedback
-        //switch (currentButton)
-        //{
-        //    case Buttons.NEW_GAME:
-        //        newGameHoveredEntity.SetActive(true);
-        //        continueHoveredEntity.SetActive(false);
-        //        settingsHoveredEntity.SetActive(false);
-        //        exitHoveredEntity.SetActive(false);
-        //        break;
-        //    case Buttons.CONTINUE:
-        //        newGameHoveredEntity.SetActive(false);
-        //        continueHoveredEntity.SetActive(true);
-        //        settingsHoveredEntity.SetActive(false);
-        //        exitHoveredEntity.SetActive(false);
-        //        break;
-        //    case Buttons.SETTINGS:
-        //        newGameHoveredEntity.SetActive(false);
-        //        continueHoveredEntity.SetActive(false);
-        //        settingsHoveredEntity.SetActive(true);
-        //        exitHoveredEntity.SetActive(false);
-        //        break;
-        //    case Buttons.EXIT:
-        //        newGameHoveredEntity.SetActive(false);
-        //        continueHoveredEntity.SetActive(false);
-        //        settingsHoveredEntity.SetActive(false);
-        //        exitHoveredEntity.SetActive(true);
-        //        break;
-        //}
+        switch (currentButton)
+        {
+            case Buttons.FULLSCREEN:
+                fullscreenHoveredEntity.SetActive(true);
+                framerateHoveredEntity.SetActive(false);
+                vSyncHoveredEntity.SetActive(false);
+                masterVolumeHoveredEntity.SetActive(false);
+                musicVolumeHoveredEntity.SetActive(false);
+                sfxVolumeHoveredEntity.SetActive(false);
+                break;
+            case Buttons.FRAMERATE:
+                fullscreenHoveredEntity.SetActive(false);
+                framerateHoveredEntity.SetActive(true);
+                vSyncHoveredEntity.SetActive(false);
+                masterVolumeHoveredEntity.SetActive(false);
+                musicVolumeHoveredEntity.SetActive(false);
+                sfxVolumeHoveredEntity.SetActive(false);
+                break;
+            case Buttons.V_SYNC:
+                fullscreenHoveredEntity.SetActive(false);
+                framerateHoveredEntity.SetActive(false);
+                vSyncHoveredEntity.SetActive(true);
+                masterVolumeHoveredEntity.SetActive(false);
+                musicVolumeHoveredEntity.SetActive(false);
+                sfxVolumeHoveredEntity.SetActive(false);
+                break;
+            case Buttons.MASTER_VOLUME:
+                fullscreenHoveredEntity.SetActive(false);
+                framerateHoveredEntity.SetActive(false);
+                vSyncHoveredEntity.SetActive(false);
+                masterVolumeHoveredEntity.SetActive(true);
+                musicVolumeHoveredEntity.SetActive(false);
+                sfxVolumeHoveredEntity.SetActive(false);
+                break;
+            case Buttons.MUSIC_VOLUME:
+                fullscreenHoveredEntity.SetActive(false);
+                framerateHoveredEntity.SetActive(false);
+                vSyncHoveredEntity.SetActive(false);
+                masterVolumeHoveredEntity.SetActive(false);
+                musicVolumeHoveredEntity.SetActive(true);
+                sfxVolumeHoveredEntity.SetActive(false);
+                break;
+            case Buttons.SFX_VOLUME:
+                fullscreenHoveredEntity.SetActive(false);
+                framerateHoveredEntity.SetActive(false);
+                vSyncHoveredEntity.SetActive(false);
+                masterVolumeHoveredEntity.SetActive(false);
+                musicVolumeHoveredEntity.SetActive(false);
+                sfxVolumeHoveredEntity.SetActive(true);
+                break;
+        }
 
         if (moved)
         {
@@ -250,39 +231,51 @@ class Settings : Component
         }
     }
 
-    void HandleConfirm()
+    void HandleChangeValue()
     {
         confirmTimer += Time.deltaTime;
 
         // Read Input
-        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+        if (Input.IsKeyPressed(KeyCode.RIGHT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT) || Input.LeftAxis.x > 0)
         {
-            // Visual Feedback
-            Vector4 color = new Vector4(255, 0, 0, 1);
-            switch (currentButton)
-            {
-                case Buttons.NEW_GAME: newGameHoveredImage.SetTint(color); break;
-                case Buttons.CONTINUE: continueHoveredImage.SetTint(color); break;
-                case Buttons.SETTINGS: settingsHoveredImage.SetTint(color); break;
-                case Buttons.EXIT: exitHoveredImage.SetTint(color); break;
-            }
-
-            canCallScripts = true;
+            canCallScriptsRight = true;
+            confirmTimer = 0f;
+        }
+        else if (Input.IsKeyPressed(KeyCode.LEFT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT) || Input.LeftAxis.x < 0)
+        {
+            canCallScriptsLeft = true;
             confirmTimer = 0f;
         }
 
-        if (confirmTimer > inputCooldown && canCallScripts)
+        // Function Call
+        if (confirmTimer > inputCooldown && canCallScriptsRight)
         {
-            // Function Call
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: newGameScript.StartTransition(); break;
-                case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
-                case Buttons.SETTINGS: settingsScript.StartTransition(); break;
-                case Buttons.EXIT: exitScript.ExitGame(); break;
+                case Buttons.FULLSCREEN:
+                    //
+                    break;
+                case Buttons.FRAMERATE: currentButton = Buttons.V_SYNC; break;
+                case Buttons.V_SYNC: currentButton = Buttons.MASTER_VOLUME; break;
+                case Buttons.MASTER_VOLUME: currentButton = Buttons.MUSIC_VOLUME; break;
+                case Buttons.MUSIC_VOLUME: currentButton = Buttons.SFX_VOLUME; break;
+                case Buttons.SFX_VOLUME: currentButton = Buttons.FULLSCREEN; break;
             }
 
-            loopMusicAudioSource.Stop();
+            canCallScriptsRight = false;
+        }
+        else if (confirmTimer > inputCooldown && canCallScriptsLeft)
+        {
+            switch (currentButton)
+            {
+                case Buttons.FULLSCREEN: currentButton = Buttons.FRAMERATE; break;
+                case Buttons.FRAMERATE: currentButton = Buttons.V_SYNC; break;
+                case Buttons.V_SYNC: currentButton = Buttons.MASTER_VOLUME; break;
+                case Buttons.MASTER_VOLUME: currentButton = Buttons.MUSIC_VOLUME; break;
+                case Buttons.MUSIC_VOLUME: currentButton = Buttons.SFX_VOLUME; break;
+                case Buttons.SFX_VOLUME: currentButton = Buttons.FULLSCREEN; break;
+            }
+            canCallScriptsLeft = false;
         }
     }
 
