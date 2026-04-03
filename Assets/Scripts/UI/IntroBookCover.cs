@@ -10,15 +10,19 @@ class IntroBookCover : Component
     public Entity introMiniKnightStudioEntity;
     private IntroMiniKnightStudio introMiniKnightStudioScript;
 
+    public Entity openingMusicEntity;
+    private AudioSource openingMusicAudioSource;
+
     public float preAnimationDelay = 2f;
     public float inAnimationDelay = 2f;
 
     // Internal values
+    private float totalPreAnimationDelay = 0f;
     private float timer = 0f;
     private float currentBackgroundOpacity = 1f;
-    private float totalPreAnimationDelay = 0f;
 
     private bool hasIntroEnded = false;
+    private bool openingMusicHasPlayed = false;
 
     private enum introState
     {
@@ -48,6 +52,14 @@ class IntroBookCover : Component
             Debug.Log("Error: There is no IntroMiniKnightStudio Entity assigned.");
         }
 
+        if (openingMusicEntity != null)
+        {
+            openingMusicAudioSource = openingMusicEntity.GetComponent<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Opening Music Entity assigned.");
+        }
     }
 
     void OnUpdate()
@@ -83,9 +95,25 @@ class IntroBookCover : Component
         }
         else
         {
+            if (!openingMusicHasPlayed)
+            {
+                openingMusicAudioSource.Play();
+                openingMusicHasPlayed = true;
+            }
+
             currentBackgroundOpacity = Mathf.Lerp(1, 0, timer / inAnimationDelay);
             Vector4 color = new Vector4(1, 1, 1, currentBackgroundOpacity);
             background.SetTint(color);
         }
+    }
+
+    public float GetTotalPreAnimationDelay()
+    {
+        return totalPreAnimationDelay;
+    }
+
+    public bool HasOpeningMusicPlayed()
+    {
+        return openingMusicHasPlayed;
     }
 };

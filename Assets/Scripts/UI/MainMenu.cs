@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Loopie;
 
 class MainMenu : Component
@@ -37,11 +38,28 @@ class MainMenu : Component
     }
     private Buttons currentButton = Buttons.NEW_GAME;
 
-    // Internal
+    // Intro Book Cover
+    public Entity introBookCoverEntity;
+    private IntroBookCover introBookCoverScript;
+
+    private float preMainMenuDelay = 0f;
+    private float preMainMenuDelayTimer = 0f;
+
+    // Input
     public float inputCooldown = 0.2f;
+
     private float inputTimer = 0f;
     private float confirmTimer = 0f;
+    
     private bool canCallScripts = false;
+
+    // Audio
+    public Entity loopMusicEntity;
+    private AudioSource loopMusicAudioSource;
+
+    private bool loopMusicHasPlayed = false;
+    private float openingMusicDelay = 21f;
+    private float openingMusicTimer = 0f;
 
     void OnCreate()
     {
@@ -121,19 +139,48 @@ class MainMenu : Component
         {
             Debug.Log("Error: There is no Exit Entity assigned.");
         }
+
+        // External
+        if (introBookCoverEntity != null)
+        {
+            introBookCoverScript = introBookCoverEntity.GetComponent<IntroBookCover>();
+            preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
+        }
+        else
+        {
+            Debug.Log("Error: There is no IntroBookCover Entity assigned.");
+        }
+
+        if (loopMusicEntity != null)
+        {
+            loopMusicAudioSource = loopMusicEntity.GetComponent<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Loop Music Entity assigned.");
+        }
     }
 
     void OnUpdate()
     {
-        inputTimer += Time.deltaTime;
-        confirmTimer += Time.deltaTime;
+        HandleMusic();
 
+        // Nullify Input while in intro.
+        preMainMenuDelayTimer += Time.deltaTime;
+        preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
+
+        if (preMainMenuDelayTimer < preMainMenuDelay)
+            return;
+
+        // Main Menu logic.
         HandleNavigation();
         HandleConfirm();
     }
 
     void HandleNavigation()
     {
+        inputTimer += Time.deltaTime;
+
         // Cooldown
         if (inputTimer < inputCooldown)
             return;
@@ -203,6 +250,8 @@ class MainMenu : Component
 
     void HandleConfirm()
     {
+        confirmTimer += Time.deltaTime;
+
         // Read Input
         if (Input.IsKeyPressed(KeyCode.KP_ENTER) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
         {
@@ -230,6 +279,25 @@ class MainMenu : Component
                 case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                 case Buttons.EXIT: exitScript.ExitGame(); break;
             }
+
+            loopMusicAudioSource.Stop();
+        }
+    }
+
+    void HandleMusic()
+    {
+        if (loopMusicHasPlayed)
+            return;
+        
+        if (introBookCoverScript.HasOpeningMusicPlayed())
+        {
+            openingMusicTimer += Time.deltaTime;
+
+            if (openingMusicTimer < openingMusicDelay)
+                return;
+
+            loopMusicAudioSource.Play();
+            loopMusicHasPlayed = true;
         }
     }
 };
