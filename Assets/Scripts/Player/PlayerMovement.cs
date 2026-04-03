@@ -3,6 +3,8 @@ using Loopie;
 
 public class PlayerMovement : Component
 {
+    private Player player;
+
     public float speed = 10.0f;
     public float rotSpeed = 5.0f;
     public bool isMoving = false;
@@ -37,13 +39,13 @@ public class PlayerMovement : Component
 
     public bool isGodMode = false;
     private bool wasGodModeKeyPressed = false;
-    public float godModeSpeedMultiplier = 2.5f; 
+    public float godModeSpeedMultiplier = 2.5f;
     private float originalSpeed;
-
-    //public PlayerMovement() { }
 
     public void OnCreate()
     {
+        player = entity.GetComponent<Player>();
+
         dashSfxSource = entity.GetComponent<AudioSource>();
         playerCollider = entity.GetComponent<BoxCollider>();
         originalSpeed = speed;
@@ -59,7 +61,6 @@ public class PlayerMovement : Component
     {
         isDashing = HandleDash();
         if (!isDashing) HandleNormalMovement();
-        //transform.position -= transform.Up * 9.8f * Time.deltaTime;
 
         if (!isMoving && !isDashing)
         {
@@ -77,7 +78,7 @@ public class PlayerMovement : Component
 
     private void HandleGodMode()
     {
-        bool godModeKeyPressed = Input.IsKeyPressed(KeyCode.G); 
+        bool godModeKeyPressed = Input.IsKeyPressed(KeyCode.G);
 
         if (godModeKeyPressed && !wasGodModeKeyPressed)
         {
@@ -88,13 +89,12 @@ public class PlayerMovement : Component
 
                 if (isGodMode)
                 {
-                    speed = originalSpeed * godModeSpeedMultiplier; 
+                    speed = originalSpeed * godModeSpeedMultiplier;
                 }
                 else
                 {
-                    speed = originalSpeed; 
+                    speed = originalSpeed;
                 }
-
             }
         }
 
@@ -132,27 +132,29 @@ public class PlayerMovement : Component
 
         return false;
     }
+    public void ApplyKnockback(Vector3 direction, float force, float duration)
+    {
+        StartCoroutine(KnockbackRoutine(direction, force, duration));
+    }
 
+    private System.Collections.IEnumerator KnockbackRoutine(Vector3 direction, float force, float duration)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            entity.transform.position += direction * force * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
     private void HandleNormalMovement()
     {
         Vector3 moveDirection = new Vector3(0, 0, 0);
 
-        if (Input.IsKeyPressed(KeyCode.W) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP))
-        {
-            moveDirection.z += 1;
-        }
-        if (Input.IsKeyPressed(KeyCode.S) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN))
-        {
-            moveDirection.z -= 1;
-        }
-        if (Input.IsKeyPressed(KeyCode.A) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT))
-        {
-            moveDirection.x -= 1;
-        }
-        if (Input.IsKeyPressed(KeyCode.D) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
-        {
-            moveDirection.x += 1;
-        }
+        if (Input.IsKeyPressed(KeyCode.W) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP)) moveDirection.z += 1;
+        if (Input.IsKeyPressed(KeyCode.S) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN)) moveDirection.z -= 1;
+        if (Input.IsKeyPressed(KeyCode.A) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT)) moveDirection.x -= 1;
+        if (Input.IsKeyPressed(KeyCode.D) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT)) moveDirection.x += 1;
 
         if (Input.LeftAxis.x != 0 || Input.LeftAxis.y != 0)
         {
@@ -195,4 +197,3 @@ public class PlayerMovement : Component
         }
     }
 }
-

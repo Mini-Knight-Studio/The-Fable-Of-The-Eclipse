@@ -1,7 +1,7 @@
 using System;
 using Loopie;
 
-class PlayerCombat : Component
+public class PlayerCombat : Component
 {
     public bool isAttacking = false;
     private float attackTimer = 0f;

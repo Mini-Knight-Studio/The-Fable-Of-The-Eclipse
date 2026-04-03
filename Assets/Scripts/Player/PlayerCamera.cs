@@ -1,6 +1,6 @@
 using Loopie;
 
-class PlayerCamera : Component
+public class PlayerCamera : Component
 {
     public float distance = 100f;
     public float speed = 25f;

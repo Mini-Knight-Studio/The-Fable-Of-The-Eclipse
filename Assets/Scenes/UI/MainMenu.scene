@@ -39,10 +39,14 @@
                         "projection": 0
                     },
                     "uuid": "08a8bf2f-9b2d-2592-d32c-ebd9395cc90d"
+                },
+                {
+                    "audiolistener": {},
+                    "uuid": "95b60299-af11-7a84-2fe3-226d328ddc48"
                 }
             ],
             "name": "MainCamera",
-            "parent_uuid": "f53b3762-3e5b-632f-43d7-2443125669f8",
+            "parent_uuid": "8af4faa7-e1e5-cead-1f21-890cefbe03db",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -69,7 +73,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 191.49078369140625,
+                                "x": 192.14523315429688,
                                 "y": 108.0
                             }
                         },
@@ -116,7 +120,7 @@
                 }
             ],
             "name": "Canvas",
-            "parent_uuid": "f53b3762-3e5b-632f-43d7-2443125669f8",
+            "parent_uuid": "8af4faa7-e1e5-cead-1f21-890cefbe03db",
             "uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b"
         },
         {
@@ -143,14 +147,14 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 50.0,
-                                "y": 50.0
+                                "x": 176.0,
+                                "y": 48.0
                             }
                         },
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.8686952590942383
+                            "x": 135.5374298095703,
+                            "y": 25.4126033782959,
+                            "z": -0.1456599235534668
                         },
                         "rotation": {
                             "w": 1.0,
@@ -159,35 +163,69 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
+                            "x": 0.09956666082143784,
+                            "y": 0.09956666082143784,
+                            "z": 0.09956666082143784
                         }
                     },
-                    "uuid": "049e2eac-5b8f-0cdf-5b97-fcb6da378a6b"
+                    "uuid": "d7fd129c-2204-f906-e648-f75362419d51"
                 },
                 {
-                    "text": {
-                        "color": {
-                            "a": 1.0,
-                            "b": 0.34117648005485535,
-                            "g": 0.34117648005485535,
-                            "r": 0.6823529601097107
+                    "button": {
+                        "disabled": {
+                            "a": 0.5,
+                            "b": 0.5,
+                            "g": 0.5,
+                            "r": 0.5
                         },
-                        "font_size": 24.0,
-                        "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
-                        "horizontal_alignment": 0,
-                        "scale": 1.0,
-                        "size_mode": 0,
-                        "value": "New Game",
-                        "vertical_alignment": 0
+                        "hovered": {
+                            "a": 0.800000011920929,
+                            "b": 0.800000011920929,
+                            "g": 0.800000011920929,
+                            "r": 0.800000011920929
+                        },
+                        "interactable": true,
+                        "normal": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "on_click_bindings": {
+                            "05f1a104-37c0-55ae-d0e3-30a011fca062": {
+                                "0": {
+                                    "component_uuid": "23591416-8a23-9f54-0f66-e4344fa05975",
+                                    "entity_uuid": "05f1a104-37c0-55ae-d0e3-30a011fca062",
+                                    "function": "StartTransition"
+                                }
+                            }
+                        },
+                        "pressed": {
+                            "a": 0.6000000238418579,
+                            "b": 0.6000000238418579,
+                            "g": 0.6000000238418579,
+                            "r": 0.6000000238418579
+                        },
+                        "transition_mode": 0
                     },
-                    "uuid": "f8fe18fc-9ba1-3113-1403-afd1c000439b"
+                    "uuid": "35288562-93ed-b33b-41ff-8a4ddde25a31"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "104e193c-23d0-392c-4458-6f3b5885256f",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        }
+                    },
+                    "uuid": "96486f77-00a2-2dc8-907f-cbfe8fe6754f"
                 }
             ],
-            "name": "Text",
-            "parent_uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
-            "uuid": "56516160-1906-987c-0f44-50b93c9579d4"
+            "name": "Settings",
+            "parent_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
+            "uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a"
         },
         {
             "active": true,
@@ -213,8 +251,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 50.0,
-                                "y": 7.0
+                                "x": 244.0,
+                                "y": 37.0
                             }
                         },
                         "position": {
@@ -229,9 +267,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 0.49399998784065247,
-                            "y": 0.49399998784065247,
-                            "z": 0.49399998784065247
+                            "x": 0.10374000668525696,
+                            "y": 0.10374000668525696,
+                            "z": 0.10374000668525696
                         }
                     },
                     "uuid": "fdb01941-3823-2e54-30c3-508b36f6cded"
@@ -258,10 +296,10 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "de581ca3-c817-a6bd-cd1e-7404044f7679": {
+                            "56516160-1906-987c-0f44-50b93c9579d4": {
                                 "0": {
-                                    "component_uuid": "a60bd075-eb3e-84dd-fca9-32378fa0c13b",
-                                    "entity_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
+                                    "component_uuid": "f7d3f494-83b0-3ae5-e3d6-0f85f8a23a21",
+                                    "entity_uuid": "56516160-1906-987c-0f44-50b93c9579d4",
                                     "function": "StartTransition"
                                 }
                             }
@@ -278,7 +316,7 @@
                 },
                 {
                     "image": {
-                        "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
+                        "texture_uuid": "bce7793a-3d8e-beb5-d325-6df3b1ac1c75",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -292,76 +330,6 @@
             "name": "NewGame",
             "parent_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
             "uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 50.0,
-                                "y": 50.0
-                            }
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.8686952590942383
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "a0322fd7-ac74-90d9-19a3-37fa799d1389"
-                },
-                {
-                    "text": {
-                        "color": {
-                            "a": 1.0,
-                            "b": 0.34117648005485535,
-                            "g": 0.34117648005485535,
-                            "r": 0.6823529601097107
-                        },
-                        "font_size": 24.0,
-                        "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
-                        "horizontal_alignment": 0,
-                        "scale": 1.0,
-                        "size_mode": 0,
-                        "value": "Settings",
-                        "vertical_alignment": 0
-                    },
-                    "uuid": "1c938b1d-37d1-d204-6e5f-4b92c752fb7c"
-                }
-            ],
-            "name": "Text",
-            "parent_uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
-            "uuid": "05f1a104-37c0-55ae-d0e3-30a011fca062"
         },
         {
             "active": true,
@@ -411,8 +379,27 @@
                     "uuid": "72dea223-cd30-258f-0e41-20810e6e6afc"
                 },
                 {
+                    "script": {
+                        "class_id": "MainMenu",
+                        "fields": {
+                            "continueEntity": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
+                            "continueHoveredEntity": "7e6d4794-a47e-5ede-7897-fd0801ca318d",
+                            "exitEntity": "4765b331-c2d2-1734-58f1-27d7172168e1",
+                            "exitHoveredEntity": "97b3b74a-5788-495d-6424-505417bbbc37",
+                            "inputCooldown": 0.20000000298023224,
+                            "introBookCoverEntity": "111496da-1ad3-06a5-d1e4-9b968b6a7a54",
+                            "loopMusicEntity": "18e9fee6-02a5-f7a4-a5e7-cb58f75be45d",
+                            "newGameEntity": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
+                            "newGameHoveredEntity": "6f4fc9ec-b929-a8c0-9729-6866009d711e",
+                            "settingsEntity": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
+                            "settingsHoveredEntity": "b340ab3c-76a9-5f4e-6435-27bd74755279"
+                        }
+                    },
+                    "uuid": "c4df46c2-2258-13a6-ae47-a0a32e3ea122"
+                },
+                {
                     "image": {
-                        "texture_uuid": "4d45c024-1247-c035-12ee-c8dcaf4f6b59",
+                        "texture_uuid": "f586da8b-3f97-e0ff-94c4-04c9b81d15fa",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -420,17 +407,7 @@
                             "r": 1.0
                         }
                     },
-                    "uuid": "7104b83a-0c7b-bc68-e821-30925d800114"
-                },
-                {
-                    "script": {
-                        "class_id": "SceneTransition",
-                        "fields": {
-                            "Blocked": false,
-                            "UUID": "8e5971c1-452c-562e-0de4-581e07cca376"
-                        }
-                    },
-                    "uuid": "a60bd075-eb3e-84dd-fca9-32378fa0c13b"
+                    "uuid": "3af22b5d-f6d5-2779-db8e-589947aaf5f0"
                 }
             ],
             "name": "MainMenu",
@@ -461,8 +438,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 50.0,
-                                "y": 7.0
+                                "x": 250.0,
+                                "y": 38.0
                             }
                         },
                         "position": {
@@ -477,9 +454,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 0.49399998784065247,
-                            "y": 0.49399998784065247,
-                            "z": 0.49399998784065247
+                            "x": 0.10163407772779465,
+                            "y": 0.10163407772779465,
+                            "z": 0.10163407772779465
                         }
                     },
                     "uuid": "703041b5-0d1d-27f7-15b8-42a21f6bba8b"
@@ -505,7 +482,15 @@
                             "g": 1.0,
                             "r": 1.0
                         },
-                        "on_click_bindings": {},
+                        "on_click_bindings": {
+                            "0a6606da-a0bb-bc05-ed2e-d58d33fee9c6": {
+                                "0": {
+                                    "component_uuid": "f8829f8d-74b4-647c-53fb-d2f40d98f9c6",
+                                    "entity_uuid": "0a6606da-a0bb-bc05-ed2e-d58d33fee9c6",
+                                    "function": "LoadPreviousSave"
+                                }
+                            }
+                        },
                         "pressed": {
                             "a": 0.6000000238418579,
                             "b": 0.6000000238418579,
@@ -518,7 +503,7 @@
                 },
                 {
                     "image": {
-                        "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
+                        "texture_uuid": "3c0bad6d-eda1-ea2c-444b-dc4a99ea12e0",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -557,179 +542,13 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 50.0,
-                                "y": 50.0
+                                "x": 84.0,
+                                "y": 37.0
                             }
                         },
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.8686952590942383
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "edaadf73-d3a1-cabe-074b-61327d12920f"
-                },
-                {
-                    "text": {
-                        "color": {
-                            "a": 1.0,
-                            "b": 0.34117648005485535,
-                            "g": 0.34117648005485535,
-                            "r": 0.6823529601097107
-                        },
-                        "font_size": 24.0,
-                        "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
-                        "horizontal_alignment": 0,
-                        "scale": 1.0,
-                        "size_mode": 0,
-                        "value": "Continue",
-                        "vertical_alignment": 0
-                    },
-                    "uuid": "02ded1da-fb17-c749-26cd-348f3161c887"
-                }
-            ],
-            "name": "Text",
-            "parent_uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
-            "uuid": "0a6606da-a0bb-bc05-ed2e-d58d33fee9c6"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 50.0,
-                                "y": 7.0
-                            }
-                        },
-                        "position": {
-                            "x": 135.5374298095703,
-                            "y": 26.165019989013672,
-                            "z": -0.1456599235534668
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.49399998784065247,
-                            "y": 0.49399998784065247,
-                            "z": 0.49399998784065247
-                        }
-                    },
-                    "uuid": "d7fd129c-2204-f906-e648-f75362419d51"
-                },
-                {
-                    "button": {
-                        "disabled": {
-                            "a": 0.5,
-                            "b": 0.5,
-                            "g": 0.5,
-                            "r": 0.5
-                        },
-                        "hovered": {
-                            "a": 0.800000011920929,
-                            "b": 0.800000011920929,
-                            "g": 0.800000011920929,
-                            "r": 0.800000011920929
-                        },
-                        "interactable": true,
-                        "normal": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "on_click_bindings": {},
-                        "pressed": {
-                            "a": 0.6000000238418579,
-                            "b": 0.6000000238418579,
-                            "g": 0.6000000238418579,
-                            "r": 0.6000000238418579
-                        },
-                        "transition_mode": 0
-                    },
-                    "uuid": "35288562-93ed-b33b-41ff-8a4ddde25a31"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        }
-                    },
-                    "uuid": "96486f77-00a2-2dc8-907f-cbfe8fe6754f"
-                }
-            ],
-            "name": "Settings",
-            "parent_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
-            "uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 25.0,
-                                "y": 7.0
-                            }
-                        },
-                        "position": {
-                            "x": 135.5374298095703,
-                            "y": 19.03229522705078,
+                            "x": 135.53700256347656,
+                            "y": 19.660999298095703,
                             "z": -0.912773609161377
                         },
                         "rotation": {
@@ -739,9 +558,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 0.49399998784065247,
-                            "y": 0.49399998784065247,
-                            "z": 0.49399998784065247
+                            "x": 0.09911615401506424,
+                            "y": 0.09911615401506424,
+                            "z": 0.09911615401506424
                         }
                     },
                     "uuid": "ba97b792-9cdc-455d-88b2-6f132e784527"
@@ -767,7 +586,15 @@
                             "g": 1.0,
                             "r": 1.0
                         },
-                        "on_click_bindings": {},
+                        "on_click_bindings": {
+                            "bf55114d-6e32-d25e-bdd6-e7df4560e861": {
+                                "0": {
+                                    "component_uuid": "e772f2d9-9961-d341-da1b-33a0ae2a45e7",
+                                    "entity_uuid": "bf55114d-6e32-d25e-bdd6-e7df4560e861",
+                                    "function": "ExitGame"
+                                }
+                            }
+                        },
                         "pressed": {
                             "a": 0.6000000238418579,
                             "b": 0.6000000238418579,
@@ -780,7 +607,7 @@
                 },
                 {
                     "image": {
-                        "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
+                        "texture_uuid": "2264c2d5-b6e2-d16b-f951-90552551ec2f",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -794,76 +621,6 @@
             "name": "Exit",
             "parent_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
             "uuid": "4765b331-c2d2-1734-58f1-27d7172168e1"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 50.0,
-                                "y": 7.0
-                            }
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.8686952590942383
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "7d60e164-f4a7-962a-5897-b169c2500dec"
-                },
-                {
-                    "text": {
-                        "color": {
-                            "a": 1.0,
-                            "b": 0.34117648005485535,
-                            "g": 0.34117648005485535,
-                            "r": 0.6823529601097107
-                        },
-                        "font_size": 24.0,
-                        "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
-                        "horizontal_alignment": 0,
-                        "scale": 1.0,
-                        "size_mode": 0,
-                        "value": "Exit",
-                        "vertical_alignment": 0
-                    },
-                    "uuid": "e16781f6-f2f1-a89d-d58c-ae7e499c739a"
-                }
-            ],
-            "name": "Text",
-            "parent_uuid": "4765b331-c2d2-1734-58f1-27d7172168e1",
-            "uuid": "bf55114d-6e32-d25e-bdd6-e7df4560e861"
         },
         {
             "active": true,
@@ -929,9 +686,10 @@
                         "class_id": "IntroBookCover",
                         "fields": {
                             "backgroundEntity": "111496da-1ad3-06a5-d1e4-9b968b6a7a54",
-                            "inAnimationDelay": 3.0,
+                            "inAnimationDelay": 2.0,
                             "introMiniKnightStudioEntity": "c3c36fa1-1149-9a33-ac26-457453c15259",
-                            "preAnimationDelay": 3.0
+                            "openingMusicEntity": "2de56a2c-1eae-4c4f-1760-83d0327060d3",
+                            "preAnimationDelay": 2.0
                         }
                     },
                     "uuid": "b9c30373-8747-e8c5-fa48-9507c3265015"
@@ -1004,7 +762,7 @@
                     "script": {
                         "class_id": "IntroMiniKnightStudio",
                         "fields": {
-                            "afterTextDelay": 4.0,
+                            "afterTextDelay": 3.0,
                             "backgroundEntity": "c3c36fa1-1149-9a33-ac26-457453c15259",
                             "onTextDelay": 2.0,
                             "preTextDelay": 2.0,
@@ -1089,6 +847,438 @@
             "name": "Text",
             "parent_uuid": "c3c36fa1-1149-9a33-ac26-457453c15259",
             "uuid": "034fbac6-6144-dd46-885a-d9d7b9998dca"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 259.0,
+                                "y": 51.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.489013671875,
+                            "y": -6.982994079589844,
+                            "z": -0.8839952349662781
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "1478e22c-187b-5cbc-bc24-a6a5a658e039"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "ebd344dc-6fa4-b251-bfb6-39fceaeec18d",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        }
+                    },
+                    "uuid": "cf410aa0-6c6d-4b77-ea08-b596ad7f944a"
+                },
+                {
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "8e5971c1-452c-562e-0de4-581e07cca376"
+                        }
+                    },
+                    "uuid": "f35a65f7-51a3-58cc-2f73-958f0e07a0af"
+                }
+            ],
+            "name": "NewGame_Hovered",
+            "parent_uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
+            "uuid": "6f4fc9ec-b929-a8c0-9729-6866009d711e"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 262.0,
+                                "y": 50.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.000518798828125,
+                            "y": -5.900196075439453,
+                            "z": -1.0159633159637451
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.9999999403953552,
+                            "y": 0.9999999403953552,
+                            "z": 0.9999999403953552
+                        }
+                    },
+                    "uuid": "44c4be33-3496-50bc-a5d3-65194fa44630"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "41047741-f2b0-18ee-d070-d5c3d1bf174d",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        }
+                    },
+                    "uuid": "a393736d-2384-2a6c-3387-aac2059814b5"
+                },
+                {
+                    "script": {
+                        "class_id": "Load",
+                        "fields": {}
+                    },
+                    "uuid": "c527aca1-76c8-5b09-7054-426d56dd2763"
+                }
+            ],
+            "name": "Continue_Hovered",
+            "parent_uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
+            "uuid": "7e6d4794-a47e-5ede-7897-fd0801ca318d"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 188.0,
+                                "y": 60.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.0,
+                            "y": -6.0,
+                            "z": -3.547407627105713
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "7dacc96f-a4c2-3e5d-a0e6-9de5faced4ab"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "1f1fd865-fcf7-966f-6696-202e1fe8eff8",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        }
+                    },
+                    "uuid": "c0e8eca3-509d-168d-cba9-fd03b741d0c8"
+                },
+                {
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "b51ec635-d666-ffa8-336e-9e908e4cefaa"
+                        }
+                    },
+                    "uuid": "220b53ef-f268-c378-7da5-c87ef625007d"
+                }
+            ],
+            "name": "Settings_Hovered",
+            "parent_uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
+            "uuid": "b340ab3c-76a9-5f4e-6435-27bd74755279"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 96.0,
+                                "y": 49.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.0,
+                            "y": -6.0,
+                            "z": -4.412818908691406
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "0a5ed0d0-8872-869f-9bd8-fe9cd5417b7f"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "50057c8a-f679-fa87-9e31-673ea1bfca26",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        }
+                    },
+                    "uuid": "ea8a7a42-4656-6850-a58d-7b0b9ba82651"
+                },
+                {
+                    "script": {
+                        "class_id": "Exit",
+                        "fields": {
+                            "Blocked": false
+                        }
+                    },
+                    "uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3"
+                }
+            ],
+            "name": "Exit_Hovered",
+            "parent_uuid": "4765b331-c2d2-1734-58f1-27d7172168e1",
+            "uuid": "97b3b74a-5788-495d-6424-505417bbbc37"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "11c80b43-4fc9-aab8-e5b3-dc413406d9d5"
+                }
+            ],
+            "name": "MainMenu_Music",
+            "parent_uuid": "8af4faa7-e1e5-cead-1f21-890cefbe03db",
+            "uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "6a77409e-df7c-3d7c-189b-bb2c6263b735"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "651b9e92-4569-d85b-6a64-a2d536df9ff3"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 1.0
+                    },
+                    "uuid": "bbea8c95-eb81-b6c6-18c8-3097738c9138"
+                }
+            ],
+            "name": "OpeningMusic",
+            "parent_uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533",
+            "uuid": "2de56a2c-1eae-4c4f-1760-83d0327060d3"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "b9597012-44db-3613-6530-2bb145a68e2b"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "21afe9b1-def5-07f0-d88b-d31f10161a20"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.7210000157356262
+                    },
+                    "uuid": "d8ca8357-a567-25fb-a355-3298416bb931"
+                }
+            ],
+            "name": "LoopMusic",
+            "parent_uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533",
+            "uuid": "18e9fee6-02a5-f7a4-a5e7-cb58f75be45d"
         }
     ]
 }

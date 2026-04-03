@@ -5,7 +5,7 @@ using Loopie;
 public class Health : Component
 {
     public int maxHealth;
-    private int actualHealth;
+    public int actualHealth;
     public List<Effect> effects;
     private float timer;
     public bool canBeDamaged;
@@ -31,12 +31,12 @@ public class Health : Component
             }
         }
     }
-    
+
     public int GetActualHealth()
     {
         return actualHealth;
     }
-    
+
     public int GetMaxHealth()
     {
         return maxHealth;
@@ -49,16 +49,16 @@ public class Health : Component
 
     public void Damage(int points)
     {
-    	if(!canBeDamaged)return;
+        if (!canBeDamaged) return;
         actualHealth -= points;
-        actualHealth = actualHealth < 0? 0 : actualHealth;
+        actualHealth = actualHealth < 0 ? 0 : actualHealth;
     }
-    
+
     public void AddEffect(Effect effect)
     {
-        
+
         int probability = Loopie.Random.Range(0, 101);
-        if (probability > effect.Probability+1)
+        if (probability > effect.Probability + 1)
             return;
         effects.Add(effect);
         effect.InitEffect();
@@ -66,7 +66,7 @@ public class Health : Component
 
     public void Heal(int points)
     {
-    	if(!canBeHealed)return;
+        if (!canBeHealed) return;
         actualHealth += points;
         actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
     }
