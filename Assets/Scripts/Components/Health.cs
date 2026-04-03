@@ -6,15 +6,13 @@ public class Health : Component
 {
     public int maxHealth;
     private int actualHealth;
-    public List<Effect> effects;
-    private float timer;
     public bool canBeDamaged;
     public bool canBeHealed;
-
-    public AudioSource impactSfxSource;
+    private EffectApplier effectApplier;
 
     public void Init()
     {
+        effectApplier = entity.GetComponent<EffectApplier>();
         canBeDamaged = true;
         canBeHealed = true;
         Reset();
@@ -22,14 +20,7 @@ public class Health : Component
 
     public void UpdateHealth()
     {
-        for (int i = 0; i < effects.Count; i++)
-        {
-            if (effects[i].UpdateEffect(this))
-            {
-                effects.Remove(effects[i]);
-                i--;
-            }
-        }
+        
     }
     
     public int GetActualHealth()

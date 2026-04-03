@@ -34,7 +34,7 @@ class Slime : Enemy
 
     void OnCreate()
     {
-        SetEnemy(Reference);
+        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance*SlimeStage);
         SetStage(SlimeStage);
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
@@ -45,8 +45,6 @@ class Slime : Enemy
 
     void OnUpdate()
     {
-        UpdateEnemy();
-        
         //Temporal
         TestKeys();
         //
@@ -55,7 +53,7 @@ class Slime : Enemy
             StartCoroutine(SplitLerp());
         }
 
-        if (!isSpawning && !HasAttackCooldown())
+        if (!isSpawning && !isAttacking)
         { 
             attackBox.entity.SetActive(true);
 
@@ -65,16 +63,17 @@ class Slime : Enemy
                 transform.LookAt(target.transform.position, transform.Up);
                 movement.Move(SlimeStage,transform.Forward);
                 ResetWander();
+                #region Attack
+                if (Vector3.Distance(target.transform.position, transform.position) < AttackReachDistance * SlimeStage)
+                {
+                    StartCoroutine(DoAttack(Damage));
+                }
+                #endregion
             }
             else
                 Wander(ViewFieldWidth, ViewFieldFar * SlimeStage, SlimeStage);
             #endregion
-            #region Attack
-            if (attackBox.IsColliding)
-            {
-                Attack();
-            }
-            #endregion
+            
             #region Health
             health.UpdateHealth();
             if (health.IsDead())
@@ -91,17 +90,6 @@ class Slime : Enemy
     {
         SlimeStage = newStage;
         transform.scale = Vector3.One * SlimeStageSize * SlimeStage;
-    }
-
-    public void Attack()
-    {
-        targetHealth.Damage(Damage);
-        if (effect != null)
-        {
-            targetHealth.AddEffect(effect);
-        }
-        StartAttackCooldown(AttackCooldownTime);
-        attackBox.entity.SetActive(false);
     }
 
     private IEnumerator SplitLerp()
@@ -147,7 +135,7 @@ class Slime : Enemy
     {
         if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
         {
-            health.Damage(1);
+            Hit(1);
             StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
         }
     }

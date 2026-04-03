@@ -3,25 +3,16 @@ using System;
 
 public class Effect : Component
 {
-    public int Probability;
-    public int Damage;
-    public int Ticks;
-    public float TickDuration;
-    private float timer;
-    public void InitEffect()
-    {
-        timer = 0;
-    }
-    public bool UpdateEffect(Health health)
-    {
-        timer += Time.deltaTime;
-        if (timer > TickDuration)
-        {
-            timer = 0;
-            health.Damage(Damage);
-            Ticks--;
-        }
-        return Ticks == 0;
-    }
-}
+    private string inner_category;
+    protected bool effect_ended;
 
+    public Effect(string category)
+    { inner_category = category; }
+
+    public bool IsCategory(string category)
+    { return inner_category == category; }
+
+    public virtual void InitEffect() { effect_ended = false; }
+    public virtual void UpdateEffect() { }
+    public virtual void RemoveEffect() { }
+}

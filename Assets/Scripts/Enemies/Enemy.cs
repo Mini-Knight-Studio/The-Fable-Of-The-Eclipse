@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Loopie;
 
@@ -13,21 +14,19 @@ public class Enemy : Component
 
     protected Entity target;
     protected Health targetHealth;
+    protected Movement targetMovement;
 
-    private float attackReachDistance;
     private float attackCooldown;
     private float attackPreparationTime;
+    private float attackReachDistance;
 
     private bool wanderRange = false;
+    protected bool isAttacking;
     private Vector3 lastWanderPosition;
-    protected void UpdateEnemy()
-    {
-        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
-        else attackCooldown = 0;
-    }
-
+    private bool endedPreparingAttack;
+    private bool endedAttack;
     #region Set Up
-    protected void SetEnemy(string reference_name)
+    protected void SetEnemy(string reference_name, float attack_cooldown, float attack_preparation_time, float attack_reach_distance)
     {
         reference = Entity.FindEntityByName(reference_name);
 
@@ -36,17 +35,22 @@ public class Enemy : Component
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
         effectList = new List<Effect>();
-        //entity.Ge
+        
         SetTarget();
         health.Init();
         wanderRange = false;
         ResetWander();
+
+        attackCooldown = attack_cooldown;
+        attackPreparationTime = attack_preparation_time;
+        attackReachDistance = attack_reach_distance;
     }
 
     protected void SetTarget()
     {
         target = Entity.FindEntityByName("Player");
         targetHealth = target.GetComponent<Health>();
+        targetMovement = target.GetComponent<Movement>();
     }
     #endregion
     #region Detection
@@ -84,15 +88,57 @@ public class Enemy : Component
         return (target.transform.position - transform.position).normalized;
     }
     #endregion
-    #region Attack Cooldown
-    protected bool HasAttackCooldown()
+    #region Attack
+    protected IEnumerator DoAttack(int damage)
     {
-        return attackCooldown > 0;
+        float timer = 0.0f;
+        movement.CanMove = false;
+        isAttacking = true;
+        endedPreparingAttack = false;
+        endedAttack = false;
+        while (timer < attackPreparationTime)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        endedPreparingAttack = true;
+        //attackBox.entity.SetActive(true);
+        if (attackBox.IsColliding || Vector3.Distance(transform.position, target.transform.position) < attackReachDistance)
+            Attack(damage);
+        timer = 0.0f;
+        //attackBox.entity.SetActive(false);
+        endedAttack = true;
+        while (timer < attackCooldown)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        //attackBox.entity.SetActive(true);
+        movement.CanMove = true;
+        isAttacking = false;
+        endedPreparingAttack = false;
+        endedAttack = false;
     }
 
-    protected void StartAttackCooldown(float cooldown)
+    private void Attack(int points)
     {
-        attackCooldown = cooldown;
+        targetHealth.Damage(points);
+        StartCoroutine(targetMovement.Push((float)points*10.0f, 0.3f, GetDirectionToTarget()));
+    }
+
+    protected bool EndedPreparingAttack()
+    {
+        return endedPreparingAttack;
+    }
+
+    protected bool EndedAttack()
+    {
+        return endedPreparingAttack;
+    }
+
+    public virtual void Hit(int points)
+    {
+        health.Damage(points);
     }
     #endregion
     #region Wander
