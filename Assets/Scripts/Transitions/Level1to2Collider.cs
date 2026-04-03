@@ -17,7 +17,7 @@ class Level1to2Collider : SceneTransition
     {
         if (collision.HasCollided)
         {
-            if (PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed)
+            if (GlobalDatabase.Data.Puzzles.Puzzle1Completed)
             {
                 StartTransition();
             }
