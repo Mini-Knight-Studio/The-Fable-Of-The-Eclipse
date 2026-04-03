@@ -5,20 +5,28 @@ class MainMenu : Component
 {
     // Buttons
     public Entity newGameEntity;
+    public Entity newGameHoveredEntity;
     //private Button newGameButton;
     private SceneTransition newGameScript;
+    private Image newGameHoveredImage;
 
     public Entity continueEntity;
+    public Entity continueHoveredEntity;
     //private Button continueButton;
     private Load continueScript;
+    private Image continueHoveredImage;
 
     public Entity settingsEntity;
+    public Entity settingsHoveredEntity;
     //private Button settingsButton;
     private SceneTransition settingsScript;
-    
+    private Image settingsHoveredImage;
+
     public Entity exitEntity;
+    public Entity exitHoveredEntity;
     //private Button exitButton;
     private Exit exitScript;
+    private Image exitHoveredImage;
 
     private enum Buttons
     {
@@ -30,8 +38,10 @@ class MainMenu : Component
     private Buttons currentButton = Buttons.NEW_GAME;
 
     // Internal
-    float inputCooldown = 0.2f;
-    float inputTimer = 0f;
+    public float inputCooldown = 0.2f;
+    private float inputTimer = 0f;
+    private float confirmTimer = 0f;
+    private bool canCallScripts = false;
 
     void OnCreate()
     {
@@ -40,14 +50,14 @@ class MainMenu : Component
         {
             // button
 
-            Entity textNewGameEntity = Entity.FindEntityByName("Text_NewGame");
-            if (textNewGameEntity != null)
+            if (newGameHoveredEntity != null)
             {
-                newGameScript = textNewGameEntity.GetComponent<SceneTransition>();
+                newGameScript = newGameHoveredEntity.GetComponent<SceneTransition>();
+                newGameHoveredImage = newGameHoveredEntity.GetComponent<Image>();
             }
             else
             {
-                Debug.Log("Error: There is no Text_NewGame Entity.");
+                Debug.Log("Error: There is no NewGame Hovered Entity assigned.");
             }
         }
         else
@@ -59,14 +69,14 @@ class MainMenu : Component
         {
             // button
 
-            Entity textContinueEntity = Entity.FindEntityByName("Text_Continue");
-            if (textContinueEntity != null)
+            if (continueHoveredEntity != null)
             {
-                continueScript = textContinueEntity.GetComponent<Load>();
+                continueScript = continueHoveredEntity.GetComponent<Load>();
+                continueHoveredImage = continueHoveredEntity.GetComponent<Image>();
             }
             else
             {
-                Debug.Log("Error: There is no Text_Continue Entity.");
+                Debug.Log("Error: There is no Continue Hovered Entity assigned.");
             }
         }
         else
@@ -78,14 +88,14 @@ class MainMenu : Component
         {
             // button
 
-            Entity textSettingsEntity = Entity.FindEntityByName("Text_Settings");
-            if (textSettingsEntity != null)
+            if (settingsHoveredEntity != null)
             {
-                settingsScript = textSettingsEntity.GetComponent<SceneTransition>();
+                settingsScript = settingsHoveredEntity.GetComponent<SceneTransition>();
+                settingsHoveredImage = settingsHoveredEntity.GetComponent<Image>();
             }
             else
             {
-                Debug.Log("Error: There is no Text_Settings Entity.");
+                Debug.Log("Error: There is no Settings Hovered Entity assigned.");
             }
         }
         else
@@ -97,14 +107,14 @@ class MainMenu : Component
         {
             // button
 
-            Entity textExitEntity = Entity.FindEntityByName("Text_Exit");
-            if (textExitEntity != null)
+            if (exitHoveredEntity != null)
             {
-                exitScript = textExitEntity.GetComponent<Exit>();
+                exitScript = exitHoveredEntity.GetComponent<Exit>();
+                exitHoveredImage = exitHoveredEntity.GetComponent<Image>();
             }
             else
             {
-                Debug.Log("Error: There is no Text_Exit Entity.");
+                Debug.Log("Error: There is no Exit Hovered Entity assigned.");
             }
         }
         else
@@ -116,6 +126,7 @@ class MainMenu : Component
     void OnUpdate()
     {
         inputTimer += Time.deltaTime;
+        confirmTimer += Time.deltaTime;
 
         HandleNavigation();
         HandleConfirm();
@@ -126,7 +137,9 @@ class MainMenu : Component
         // Cooldown
         if (inputTimer < inputCooldown)
             return;
-
+        if (canCallScripts)
+            return;
+        
         bool moved = false;
 
         // Read Input
@@ -153,6 +166,35 @@ class MainMenu : Component
             moved = true;
         }
 
+        // Visual Feedback
+        switch (currentButton)
+        {
+            case Buttons.NEW_GAME:
+                newGameHoveredEntity.SetActive(true);
+                continueHoveredEntity.SetActive(false);
+                settingsHoveredEntity.SetActive(false);
+                exitHoveredEntity.SetActive(false);
+                break;
+            case Buttons.CONTINUE:
+                newGameHoveredEntity.SetActive(false);
+                continueHoveredEntity.SetActive(true);
+                settingsHoveredEntity.SetActive(false);
+                exitHoveredEntity.SetActive(false);
+                break;
+            case Buttons.SETTINGS:
+                newGameHoveredEntity.SetActive(false);
+                continueHoveredEntity.SetActive(false);
+                settingsHoveredEntity.SetActive(true);
+                exitHoveredEntity.SetActive(false);
+                break;
+            case Buttons.EXIT:
+                newGameHoveredEntity.SetActive(false);
+                continueHoveredEntity.SetActive(false);
+                settingsHoveredEntity.SetActive(false);
+                exitHoveredEntity.SetActive(true);
+                break;
+        }
+        
         if (moved)
         {
             inputTimer = 0f;
@@ -161,8 +203,26 @@ class MainMenu : Component
 
     void HandleConfirm()
     {
+        // Read Input
         if (Input.IsKeyPressed(KeyCode.KP_ENTER) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
         {
+            // Visual Feedback
+            Vector4 color = new Vector4(255, 0, 0, 1);
+            switch (currentButton)
+            {
+                case Buttons.NEW_GAME: newGameHoveredImage.SetTint(color); break;
+                case Buttons.CONTINUE: continueHoveredImage.SetTint(color); break;
+                case Buttons.SETTINGS: settingsHoveredImage.SetTint(color); break;
+                case Buttons.EXIT: exitHoveredImage.SetTint(color); break;
+            }
+
+            canCallScripts = true;
+            confirmTimer = 0f;
+        }
+
+        if (confirmTimer > inputCooldown && canCallScripts)
+        {
+            // Function Call
             switch (currentButton)
             {
                 case Buttons.NEW_GAME: newGameScript.StartTransition(); break;
