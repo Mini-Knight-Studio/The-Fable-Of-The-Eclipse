@@ -17,6 +17,7 @@ class ColliderSceneTransition : SceneTransition
     {
         if(collision.HasCollided)
         {
+            GlobalDatabase.Data.Player.SetCurrentScene(UUID);
             StartTransition();
         }
     }

@@ -10,8 +10,7 @@ class Load : Component
         isLoading = true;
         
         GlobalDatabase.Data.Load();
-        SceneStatesManager.SetCurrentScene(UUID);
-        SceneManager.LoadSceneByID(UUID);
+        SceneManager.LoadSceneByID(GlobalDatabase.Data.Player.currentSceneUUID);
 
         Debug.Log("Load Success");
     }

@@ -139,8 +139,8 @@ class Settings : Component
         // Cooldown
         if (inputTimer < inputCooldown)
             return;
-        if (canCallScripts)
-            return;
+        //if (canCallScripts)
+        //    return;
 
         bool moved = false;
 
