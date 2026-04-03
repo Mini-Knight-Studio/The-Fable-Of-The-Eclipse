@@ -22,7 +22,6 @@ public class Movement : Component
     public IEnumerator Push(float force, float duration, Vector3 direction)
     {
         float timer = 0;
-
         while (timer < duration)
         {
             float factor = duration - timer;

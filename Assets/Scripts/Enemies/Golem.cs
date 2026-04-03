@@ -59,31 +59,35 @@ class Golem : Enemy
             else
                 Wander(ViewFieldWidth, ViewFieldFar, isShielding ? 0.5f : 1.0f);
             #endregion
-            #region Health
-            health.UpdateHealth();
-            if (health.IsDead())
-            {
-                entity.Destroy();
-            }
-            #endregion
+            
         }
         else if (EndedPreparingAttack())
         {
             isShielding = false;
         }
+        #region Health
+        health.UpdateHealth();
+        if (health.IsDead())
+        {
+            entity.Destroy();
+        }
+        #endregion
     }
 
     public override void Hit(int points)
     {
-        if (isShielding)
+        if (isShielding && !OnHitCooldown())
+        {
             ShieldLife--;
+            StartHitCooldown(target.Combat.GetAttackDuration());
+        }
         else
-            health.Damage(points);
+            base.Hit(points);
     }
 
     private void TestKeys()
     {
-        if (Input.IsKeyDown(KeyCode.O) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
+        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
         {
             Hit(1);
             StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));

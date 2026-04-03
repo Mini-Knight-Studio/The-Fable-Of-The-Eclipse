@@ -12,9 +12,7 @@ public class Enemy : Component
     protected BoxCollider collision;
     protected List<Effect> effectList;
 
-    protected Entity target;
-    protected Health targetHealth;
-    protected Movement targetMovement;
+    protected Player target;
 
     private float attackCooldown;
     private float attackPreparationTime;
@@ -25,6 +23,22 @@ public class Enemy : Component
     private Vector3 lastWanderPosition;
     private bool endedPreparingAttack;
     private bool endedAttack;
+    private float internal_hit_cooldown;
+
+    protected void UpdateEnemy()
+    {
+        if(internal_hit_cooldown > 0.0f)
+            internal_hit_cooldown -= Time.deltaTime;
+        else
+            internal_hit_cooldown = 0.0f;
+        //Temporal
+        if(target.Combat.TemporalFunctionIsAttacking())
+        {
+            if (collision.IsColliding)
+                Hit(1);
+        }
+        //
+    }
     #region Set Up
     protected void SetEnemy(string reference_name, float attack_cooldown, float attack_preparation_time, float attack_reach_distance)
     {
@@ -35,8 +49,7 @@ public class Enemy : Component
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
         effectList = new List<Effect>();
-        
-        SetTarget();
+
         health.Init();
         wanderRange = false;
         ResetWander();
@@ -44,13 +57,8 @@ public class Enemy : Component
         attackCooldown = attack_cooldown;
         attackPreparationTime = attack_preparation_time;
         attackReachDistance = attack_reach_distance;
-    }
 
-    protected void SetTarget()
-    {
-        target = Entity.FindEntityByName("Player");
-        targetHealth = target.GetComponent<Health>();
-        targetMovement = target.GetComponent<Movement>();
+        target = Entity.FindEntityByName("Player").GetComponent<Player>();
     }
     #endregion
     #region Detection
@@ -74,7 +82,7 @@ public class Enemy : Component
 
         if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, LayerMask))
         {
-            if (hit.entity == target)
+            if (hit.entity == target.entity)
             {
                 return true;
             }
@@ -102,18 +110,18 @@ public class Enemy : Component
             yield return null;
         }
         endedPreparingAttack = true;
-        //attackBox.entity.SetActive(true);
+        attackBox.entity.SetActive(true);
         if (attackBox.IsColliding || Vector3.Distance(transform.position, target.transform.position) < attackReachDistance)
             Attack(damage);
         timer = 0.0f;
-        //attackBox.entity.SetActive(false);
+        attackBox.entity.SetActive(false);
         endedAttack = true;
         while (timer < attackCooldown)
         {
             timer += Time.deltaTime;
             yield return null;
         }
-        //attackBox.entity.SetActive(true);
+        attackBox.entity.SetActive(true);
         movement.CanMove = true;
         isAttacking = false;
         endedPreparingAttack = false;
@@ -122,8 +130,9 @@ public class Enemy : Component
 
     private void Attack(int points)
     {
-        targetHealth.Damage(points);
-        StartCoroutine(targetMovement.Push((float)points*10.0f, 0.3f, GetDirectionToTarget()));
+        target.PlayerHealth.Damage(points);
+        StartCoroutine(target.Movement2.Push((float)points * 10.0f, 0.3f, GetDirectionToTarget()));
+        Debug.Log("AAAAAAAA");
     }
 
     protected bool EndedPreparingAttack()
@@ -136,9 +145,22 @@ public class Enemy : Component
         return endedPreparingAttack;
     }
 
+    protected bool OnHitCooldown()
+    {
+        return internal_hit_cooldown > 0.0f;
+    }
+
+    protected void StartHitCooldown(float attack_duration)
+    {
+        internal_hit_cooldown = attack_duration;
+    }
+
     public virtual void Hit(int points)
     {
+        if (OnHitCooldown() || !health.canBeDamaged) return;
+        StartHitCooldown(target.Combat.GetAttackDuration());
         health.Damage(points);
+        movement.Push(points * 10 - health.maxHealth, 0.3f, GetDirectionToTarget() * -1);
     }
     #endregion
     #region Wander
@@ -150,30 +172,30 @@ public class Enemy : Component
     protected void Wander(float areaWidth, float reachDistance, float speedMultiplier)
     {
         RaycastHit hit;
-        
+
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
         int LayerMask = WallLayer;
 
         if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask))
         {
             movement.Move(speedMultiplier / 2, transform.Forward);
-            if(Vector3.Distance(lastWanderPosition, transform.position) > reachDistance)
+            if (Vector3.Distance(lastWanderPosition, transform.position) > reachDistance)
                 return;
         }
-        
+
         wanderRange = true;
         for (int i = 0; i < 2; i++)
         {
             int tries = 0;
             while (tries < 10)
             {
-                float newDir = Loopie.Random.Range(!wanderRange? -180.0f : -areaWidth, !wanderRange? 180.0f : areaWidth);
-                
-                Vector3 newDirection = Vector3.RotateAroundAxis(transform.Forward,transform.Up, newDir);
+                float newDir = Loopie.Random.Range(!wanderRange ? -180.0f : -areaWidth, !wanderRange ? 180.0f : areaWidth);
+
+                Vector3 newDirection = Vector3.RotateAroundAxis(transform.Forward, transform.Up, newDir);
                 if (!Collisions.Raycast(transform.position + transform.Up, newDirection, reachDistance, out hit, LayerMask))
                 {
                     transform.LookAt(transform.position + newDirection, transform.Up);
-                    lastWanderPosition = transform.position + transform.Forward * reachDistance*1.5f;
+                    lastWanderPosition = transform.position + transform.Forward * reachDistance * 1.5f;
                     return;
                 }
                 tries++;
@@ -194,5 +216,3 @@ public class Enemy : Component
     }
     #endregion
 }
-
-
