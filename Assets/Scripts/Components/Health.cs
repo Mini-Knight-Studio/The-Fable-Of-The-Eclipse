@@ -5,14 +5,16 @@ using Loopie;
 public class Health : Component
 {
     public int maxHealth;
-    private int actualHealth;
+    public int actualHealth;
+    public List<Effect> effects;
+    private float timer;
     public bool canBeDamaged;
     public bool canBeHealed;
-    private EffectApplier effectApplier;
+
+    public AudioSource impactSfxSource;
 
     public void Init()
     {
-        effectApplier = entity.GetComponent<EffectApplier>();
         canBeDamaged = true;
         canBeHealed = true;
         Reset();
@@ -20,14 +22,21 @@ public class Health : Component
 
     public void UpdateHealth()
     {
-        
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].UpdateEffect(this))
+            {
+                effects.Remove(effects[i]);
+                i--;
+            }
+        }
     }
-    
+
     public int GetActualHealth()
     {
         return actualHealth;
     }
-    
+
     public int GetMaxHealth()
     {
         return maxHealth;
@@ -40,26 +49,24 @@ public class Health : Component
 
     public void Damage(int points)
     {
-    	if(!canBeDamaged)return;
+        if (!canBeDamaged) return;
         actualHealth -= points;
-        actualHealth = actualHealth < 0? 0 : actualHealth;
+        actualHealth = actualHealth < 0 ? 0 : actualHealth;
     }
 
-    public void AddEffect(List<Effect> effectList)
+    public void AddEffect(Effect effect)
     {
+
         int probability = Loopie.Random.Range(0, 101);
-        for (int i = 0; i < effectList.Count; i++)
-        {
-            if (probability > effectList[i].Probability + 1)
-                continue;
-            effects.Add(effectList[i]);
-            effectList[i].InitEffect();
-        }
+        if (probability > effect.Probability + 1)
+            return;
+        effects.Add(effect);
+        effect.InitEffect();
     }
 
     public void Heal(int points)
     {
-    	if(!canBeHealed)return;
+        if (!canBeHealed) return;
         actualHealth += points;
         actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
     }
