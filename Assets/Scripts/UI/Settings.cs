@@ -1,56 +1,49 @@
 using System;
-using System.Runtime.InteropServices;
 using Loopie;
 
-class MainMenu : Component
+class Settings : Component
 {
-    // Buttons
-    public Entity newGameEntity;
-    public Entity newGameHoveredEntity;
-    //private Button newGameButton;
-    private SceneTransition newGameScript;
-    private Image newGameHoveredImage;
+    public Entity fullscreenHoveredEntity;
+    private Image fullscreenHoveredImage;
+    // Script
 
-    public Entity continueEntity;
-    public Entity continueHoveredEntity;
-    //private Button continueButton;
-    private Load continueScript;
-    private Image continueHoveredImage;
+    public Entity framerateHoveredEntity;
+    private Image framerateHoveredImage;
+    // Script
 
-    public Entity settingsEntity;
-    public Entity settingsHoveredEntity;
-    //private Button settingsButton;
-    private SceneTransition settingsScript;
-    private Image settingsHoveredImage;
+    public Entity vSyncHoveredEntity;
+    private Image vSyncHoveredImage;
+    // Script
 
-    public Entity exitEntity;
-    public Entity exitHoveredEntity;
-    //private Button exitButton;
-    private Exit exitScript;
-    private Image exitHoveredImage;
+    public Entity masterVolumeHoveredEntity;
+    private Image masterVolumeHoveredImage;
+    // Script
+
+    public Entity musicVolumeHoveredEntity;
+    private Image musicVolumeHoveredImage;
+    // Script
+
+    public Entity sfxVolumeHoveredEntity;
+    private Image sfxVolumeHoveredImage;
+    // Script
 
     private enum Buttons
     {
-        NEW_GAME,
-        CONTINUE,
-        SETTINGS,
-        EXIT
+        FULLSCREEN,
+        FRAMERATE,
+        V_SYNC,
+        MASTER_VOLUME,
+        MUSIC_VOLUME,
+        SFX_VOLUME
     }
-    private Buttons currentButton = Buttons.NEW_GAME;
-
-    // Intro Book Cover
-    public Entity introBookCoverEntity;
-    private IntroBookCover introBookCoverScript;
-
-    private float preMainMenuDelay = 0f;
-    private float preMainMenuDelayTimer = 0f;
+    private Buttons currentButton = Buttons.FULLSCREEN;
 
     // Input
     public float inputCooldown = 0.2f;
 
     private float inputTimer = 0f;
     private float confirmTimer = 0f;
-    
+
     private bool canCallScripts = false;
 
     // Audio
@@ -58,29 +51,27 @@ class MainMenu : Component
     private AudioSource loopMusicAudioSource;
 
     private bool loopMusicHasPlayed = false;
-    private float openingMusicDelay = 21f;
-    private float openingMusicTimer = 0f;
 
     void OnCreate()
     {
-        // Buttons
-        if (newGameEntity != null )
+        if (fullscreenHoveredEntity != null)
         {
-            // button
-
-            if (newGameHoveredEntity != null)
-            {
-                newGameScript = newGameHoveredEntity.GetComponent<SceneTransition>();
-                newGameHoveredImage = newGameHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no NewGame Hovered Entity assigned.");
-            }
+            //fullscreenScript = fullscreenHoveredEntity.GetComponent<Fullscreen>();
+            fullscreenHoveredImage = fullscreenHoveredEntity.GetComponent<Image>();
         }
         else
         {
-            Debug.Log("Error: There is no NewGame Entity assigned.");
+            Debug.Log("Error: There is no Fullscreen Hovered Entity assigned.");
+        }
+
+        if (framerateHoveredEntity != null)
+        {
+            //framerateScript = framerateHoveredEntity.GetComponent<Framerate>();
+            framerateHoveredImage = framerateHoveredEntity.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Framerate Hovered Entity assigned.");
         }
 
         if (continueEntity != null)
@@ -186,62 +177,73 @@ class MainMenu : Component
             return;
         if (canCallScripts)
             return;
-        
+
         bool moved = false;
 
+        FULLSCREEN,
+        FRAMERATE,
+        V_SYNC,
+        MASTER_VOLUME,
+        MUSIC_VOLUME,
+        SFX_VOLUME
+
         // Read Input
-        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0) 
+        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0)
         {
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: currentButton = Buttons.EXIT; break;
-                case Buttons.CONTINUE: currentButton = Buttons.NEW_GAME; break;
-                case Buttons.SETTINGS: currentButton = Buttons.CONTINUE; break;
-                case Buttons.EXIT: currentButton = Buttons.SETTINGS; break;
+                case Buttons.FULLSCREEN: currentButton = Buttons.SFX_VOLUME; break;
+                case Buttons.FRAMERATE: currentButton = Buttons.FULLSCREEN; break;
+                case Buttons.V_SYNC: currentButton = Buttons.FRAMERATE; break;
+                case Buttons.MASTER_VOLUME: currentButton = Buttons.V_SYNC; break;
+                case Buttons.MUSIC_VOLUME: currentButton = Buttons.MASTER_VOLUME; break;
+                case Buttons.SFX_VOLUME: currentButton = Buttons.MUSIC_VOLUME; break;
             }
             moved = true;
         }
-        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0) 
+        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0)
         {
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: currentButton = Buttons.CONTINUE; break;
-                case Buttons.CONTINUE: currentButton = Buttons.SETTINGS; break;
-                case Buttons.SETTINGS: currentButton = Buttons.EXIT; break;
-                case Buttons.EXIT: currentButton = Buttons.NEW_GAME; break;
+                case Buttons.FULLSCREEN: currentButton = Buttons.FRAMERATE; break;
+                case Buttons.FRAMERATE: currentButton = Buttons.V_SYNC; break;
+                case Buttons.V_SYNC: currentButton = Buttons.MASTER_VOLUME; break;
+                case Buttons.MASTER_VOLUME: currentButton = Buttons.MUSIC_VOLUME; break;
+                case Buttons.MUSIC_VOLUME: currentButton = Buttons.SFX_VOLUME; break;
+                case Buttons.SFX_VOLUME: currentButton = Buttons.FULLSCREEN; break;
             }
             moved = true;
         }
 
         // Visual Feedback
-        switch (currentButton)
-        {
-            case Buttons.NEW_GAME:
-                newGameHoveredEntity.SetActive(true);
-                continueHoveredEntity.SetActive(false);
-                settingsHoveredEntity.SetActive(false);
-                exitHoveredEntity.SetActive(false);
-                break;
-            case Buttons.CONTINUE:
-                newGameHoveredEntity.SetActive(false);
-                continueHoveredEntity.SetActive(true);
-                settingsHoveredEntity.SetActive(false);
-                exitHoveredEntity.SetActive(false);
-                break;
-            case Buttons.SETTINGS:
-                newGameHoveredEntity.SetActive(false);
-                continueHoveredEntity.SetActive(false);
-                settingsHoveredEntity.SetActive(true);
-                exitHoveredEntity.SetActive(false);
-                break;
-            case Buttons.EXIT:
-                newGameHoveredEntity.SetActive(false);
-                continueHoveredEntity.SetActive(false);
-                settingsHoveredEntity.SetActive(false);
-                exitHoveredEntity.SetActive(true);
-                break;
-        }
-        
+        //switch (currentButton)
+        //{
+        //    case Buttons.NEW_GAME:
+        //        newGameHoveredEntity.SetActive(true);
+        //        continueHoveredEntity.SetActive(false);
+        //        settingsHoveredEntity.SetActive(false);
+        //        exitHoveredEntity.SetActive(false);
+        //        break;
+        //    case Buttons.CONTINUE:
+        //        newGameHoveredEntity.SetActive(false);
+        //        continueHoveredEntity.SetActive(true);
+        //        settingsHoveredEntity.SetActive(false);
+        //        exitHoveredEntity.SetActive(false);
+        //        break;
+        //    case Buttons.SETTINGS:
+        //        newGameHoveredEntity.SetActive(false);
+        //        continueHoveredEntity.SetActive(false);
+        //        settingsHoveredEntity.SetActive(true);
+        //        exitHoveredEntity.SetActive(false);
+        //        break;
+        //    case Buttons.EXIT:
+        //        newGameHoveredEntity.SetActive(false);
+        //        continueHoveredEntity.SetActive(false);
+        //        settingsHoveredEntity.SetActive(false);
+        //        exitHoveredEntity.SetActive(true);
+        //        break;
+        //}
+
         if (moved)
         {
             inputTimer = 0f;
@@ -288,16 +290,8 @@ class MainMenu : Component
     {
         if (loopMusicHasPlayed)
             return;
-        
-        if (introBookCoverScript.HasOpeningMusicPlayed())
-        {
-            openingMusicTimer += Time.deltaTime;
 
-            if (openingMusicTimer < openingMusicDelay)
-                return;
-
-            loopMusicAudioSource.Play();
-            loopMusicHasPlayed = true;
-        }
+        loopMusicAudioSource.Play();
+        loopMusicHasPlayed = true;
     }
 };
