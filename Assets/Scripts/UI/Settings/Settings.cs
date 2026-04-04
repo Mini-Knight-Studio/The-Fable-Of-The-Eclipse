@@ -5,27 +5,29 @@ class Settings : Component
 {
     public Entity fullscreenHoveredEntity;
     private Image fullscreenHoveredImage;
-    // Script
+    private Fullscreen fullscreenScript;
+    private Text fullscreenDisplayText;
 
     public Entity framerateHoveredEntity;
     private Image framerateHoveredImage;
-    // Script
+    private Framerate framerateScript;
 
     public Entity vSyncHoveredEntity;
     private Image vSyncHoveredImage;
-    // Script
+    private VSync vSyncScript;
+    private Text vSyncDisplayText;
 
     public Entity masterVolumeHoveredEntity;
     private Image masterVolumeHoveredImage;
-    // Script
+    private MasterVolume masterVolumeScript;
 
     public Entity musicVolumeHoveredEntity;
     private Image musicVolumeHoveredImage;
-    // Script
+    private MusicVolume musicVolumeScript;
 
     public Entity sfxVolumeHoveredEntity;
     private Image sfxVolumeHoveredImage;
-    // Script
+    private SfxVolume sfxVolumeScript;
 
     private enum Buttons
     {
@@ -44,8 +46,7 @@ class Settings : Component
     private float inputTimer = 0f;
     private float confirmTimer = 0f;
 
-    private bool canCallScriptsRight = false;
-    private bool canCallScriptsLeft = false;
+    private bool isEditingValue = false;
 
     // Audio
     public Entity loopMusicEntity;
@@ -55,10 +56,21 @@ class Settings : Component
 
     void OnCreate()
     {
+        // Fullscreen
         if (fullscreenHoveredEntity != null)
         {
-            //fullscreenScript = fullscreenHoveredEntity.GetComponent<Fullscreen>();
+            fullscreenScript = fullscreenHoveredEntity.GetComponent<Fullscreen>();
             fullscreenHoveredImage = fullscreenHoveredEntity.GetComponent<Image>();
+
+            Entity displayFullscreenEntity = Entity.FindEntityByName("Fullscreen_Display");
+            if (displayFullscreenEntity != null)
+            {
+                fullscreenDisplayText = displayFullscreenEntity.GetComponent<Text>();
+            }
+            else
+            {
+                Debug.Log("Error: There is no Fullscreen Display Text.");
+            }
         }
         else
         {
@@ -67,7 +79,7 @@ class Settings : Component
 
         if (framerateHoveredEntity != null)
         {
-            //framerateScript = framerateHoveredEntity.GetComponent<Framerate>();
+            framerateScript = framerateHoveredEntity.GetComponent<Framerate>();
             framerateHoveredImage = framerateHoveredEntity.GetComponent<Image>();
         }
         else
@@ -75,10 +87,21 @@ class Settings : Component
             Debug.Log("Error: There is no Framerate Hovered Entity assigned.");
         }
 
+        // V-Sync
         if (vSyncHoveredEntity != null)
         {
-            //vSyncScript = framerateHoveredEntity.GetComponent<Framerate>();
+            vSyncScript = vSyncHoveredEntity.GetComponent<VSync>();
             vSyncHoveredImage = vSyncHoveredEntity.GetComponent<Image>();
+
+            Entity displayVSyncEntity = Entity.FindEntityByName("VSync_Display");
+            if (displayVSyncEntity != null)
+            {
+                vSyncDisplayText = displayVSyncEntity.GetComponent<Text>();
+            }
+            else
+            {
+                Debug.Log("Error: There is no Fullscreen Display Text.");
+            }
         }
         else
         {
@@ -87,7 +110,7 @@ class Settings : Component
 
         if (masterVolumeHoveredEntity != null)
         {
-            //masterVolumeScript = masterVolumeHoveredEntity.GetComponent<MasterVolume>();
+            masterVolumeScript = masterVolumeHoveredEntity.GetComponent<MasterVolume>();
             masterVolumeHoveredImage = masterVolumeHoveredEntity.GetComponent<Image>();
         }
         else
@@ -97,7 +120,7 @@ class Settings : Component
 
         if (musicVolumeHoveredEntity != null)
         {
-            //musicVolumeScript = musicVolumeHoveredEntity.GetComponent<MusicVolume>();
+            musicVolumeScript = musicVolumeHoveredEntity.GetComponent<MusicVolume>();
             musicVolumeHoveredImage = musicVolumeHoveredEntity.GetComponent<Image>();
         }
         else
@@ -107,7 +130,7 @@ class Settings : Component
 
         if (sfxVolumeHoveredEntity != null)
         {
-            //sfxVolumeScript = sfxVolumeHoveredEntity.GetComponent<SfxVolume>();
+            sfxVolumeScript = sfxVolumeHoveredEntity.GetComponent<SfxVolume>();
             sfxVolumeHoveredImage = sfxVolumeHoveredEntity.GetComponent<Image>();
         }
         else
@@ -139,8 +162,8 @@ class Settings : Component
         // Cooldown
         if (inputTimer < inputCooldown)
             return;
-        //if (canCallScripts)
-        //    return;
+        if (isEditingValue)
+            return;
 
         bool moved = false;
 
@@ -235,47 +258,88 @@ class Settings : Component
     {
         confirmTimer += Time.deltaTime;
 
-        // Read Input
-        if (Input.IsKeyPressed(KeyCode.RIGHT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT) || Input.LeftAxis.x > 0)
-        {
-            canCallScriptsRight = true;
-            confirmTimer = 0f;
-        }
-        else if (Input.IsKeyPressed(KeyCode.LEFT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT) || Input.LeftAxis.x < 0)
-        {
-            canCallScriptsLeft = true;
-            confirmTimer = 0f;
-        }
+        float deadzone = 0.3f;
+        float strongDeadzone = 0.7f;
 
-        // Function Call
-        if (confirmTimer > inputCooldown && canCallScriptsRight)
+        // Enter editing mode only on strong push
+        if (!isEditingValue)
         {
-            switch (currentButton)
+            if (Input.LeftAxis.x > strongDeadzone || Input.IsKeyPressed(KeyCode.RIGHT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
             {
-                case Buttons.FULLSCREEN:
-                    //
-                    break;
-                case Buttons.FRAMERATE: currentButton = Buttons.V_SYNC; break;
-                case Buttons.V_SYNC: currentButton = Buttons.MASTER_VOLUME; break;
-                case Buttons.MASTER_VOLUME: currentButton = Buttons.MUSIC_VOLUME; break;
-                case Buttons.MUSIC_VOLUME: currentButton = Buttons.SFX_VOLUME; break;
-                case Buttons.SFX_VOLUME: currentButton = Buttons.FULLSCREEN; break;
+                if (confirmTimer > inputCooldown)
+                {
+                    isEditingValue = true;
+                    ChangeValueRight();
+                    confirmTimer = 0f;
+                }
             }
-
-            canCallScriptsRight = false;
+            else if (Input.LeftAxis.x < -strongDeadzone || Input.IsKeyPressed(KeyCode.LEFT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT))
+            {
+                if (confirmTimer > inputCooldown)
+                {
+                    isEditingValue = true;
+                    ChangeValueLeft();
+                    confirmTimer = 0f;
+                }
+            }
         }
-        else if (confirmTimer > inputCooldown && canCallScriptsLeft)
+        else
         {
-            switch (currentButton)
+            // Exit editing mode when stick returns to neutral
+            if (Mathf.Abs(Input.LeftAxis.x) < deadzone)
             {
-                case Buttons.FULLSCREEN: currentButton = Buttons.FRAMERATE; break;
-                case Buttons.FRAMERATE: currentButton = Buttons.V_SYNC; break;
-                case Buttons.V_SYNC: currentButton = Buttons.MASTER_VOLUME; break;
-                case Buttons.MASTER_VOLUME: currentButton = Buttons.MUSIC_VOLUME; break;
-                case Buttons.MUSIC_VOLUME: currentButton = Buttons.SFX_VOLUME; break;
-                case Buttons.SFX_VOLUME: currentButton = Buttons.FULLSCREEN; break;
+                isEditingValue = false;
             }
-            canCallScriptsLeft = false;
+        }
+    }
+
+    void ChangeValueRight()
+    {
+        switch (currentButton)
+        {
+            case Buttons.FULLSCREEN:
+                fullscreenScript.ToggleFullscreen();
+                fullscreenScript.ApplyFullscreen();
+                if (fullscreenScript.IsFullscreen()) { fullscreenDisplayText.SetText("On"); }
+                else { fullscreenDisplayText.SetText("Off"); }
+                break;
+            case Buttons.FRAMERATE:
+                // increase FPS
+                break;
+            case Buttons.V_SYNC:
+                vSyncScript.ToggleVSync();
+                vSyncScript.ApplyVSync();
+                if (vSyncScript.IsVSync()) { vSyncDisplayText.SetText("On"); }
+                else { vSyncDisplayText.SetText("Off"); }
+                break;
+            case Buttons.MASTER_VOLUME:
+                // increase volume
+                break;
+        }
+    }
+
+    void ChangeValueLeft()
+    {
+        switch (currentButton)
+        {
+            case Buttons.FULLSCREEN:
+                fullscreenScript.ToggleFullscreen();
+                fullscreenScript.ApplyFullscreen();
+                if (fullscreenScript.IsFullscreen()) { fullscreenDisplayText.SetText("On"); }
+                else { fullscreenDisplayText.SetText("Off"); }
+                break;
+            case Buttons.FRAMERATE:
+                // decrease FPS
+                break;
+            case Buttons.V_SYNC:
+                vSyncScript.ToggleVSync();
+                vSyncScript.ApplyVSync();
+                if (vSyncScript.IsVSync()) { vSyncDisplayText.SetText("On"); }
+                else { vSyncDisplayText.SetText("Off"); }
+                break;
+            case Buttons.MASTER_VOLUME:
+                // decrease volume
+                break;
         }
     }
 
