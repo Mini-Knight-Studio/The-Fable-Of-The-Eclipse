@@ -4,6 +4,7 @@ using Loopie;
 public class Player : Component
 {
     public PlayerMovement Movement;
+    public Movement Movement2;
     public PlayerAnimation Animation;
     public PlayerCombat Combat;
     public PlayerItems Items;
@@ -24,10 +25,10 @@ public class Player : Component
             Camera = cameraEntity.GetComponent<PlayerCamera>();
         }
 
-        if (Movement == null) Debug.Log("Falta PlayerMovement");
-        if (Animation == null) Debug.Log("Falta PlayerAnimation");
-        if (Combat == null) Debug.Log("Falta PlayerCombat");
-        if (PlayerHealth == null) Debug.Log("Falta Health");
+        if (Movement == null) Debug.Log("Missing PlayerMovement");
+        if (Animation == null) Debug.Log("Missing PlayerAnimation");
+        if (Combat == null) Debug.Log("Missing PlayerCombat");
+        if (PlayerHealth == null) Debug.Log("Missing Health");
     }
 
     void OnUpdate()

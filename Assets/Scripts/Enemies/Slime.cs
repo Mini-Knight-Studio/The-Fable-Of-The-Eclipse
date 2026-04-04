@@ -1,232 +1,148 @@
 using System;
+using System.Collections;
 using Loopie;
 
 class Slime : Enemy
 {
-    public int Stage;
-    public float SlimeSize;
+    public string Reference;
+
+    public int SlimeStage;
+    public float SlimeStageSize;
+
     public int SplitAmmount;
     public float SplitDistance;
-    protected Vector3 SplitDirection;
+    private Vector3 SplitDirection;
+    private bool spawn;
+    private bool isSpawning;
+
     protected float parentY;
 
     public float ViewFieldWidth;
     public float ViewFieldFar;
 
-    public string targetEntityName = "Player";
-    private Player playerCentral;
-    private bool hasBeenHitThisAttack = false;
-
-    public float Speed;
     public float KnockbackForce;
     public float KnockbackTime;
+
     public int Damage;
     public float AttackReachDistance;
+    public float AttackCooldownTime;
+    public float AttackPreparationTime;
 
-    public float CooldownTime;
-    protected float splitLerpTimer;
-    private bool isSpawning;
-    private Effect effect;
+    public float TargetForcedDetectionDistance;
 
-    // SFX
-    public Entity SlimeDeath_SFX;
-    public AudioSource deathSFXSource;
-
-    public Entity SlimeImpact_SFX;
-    public AudioSource impactSFXSource;
+    private int LayerOverride;
 
     void OnCreate()
     {
-        SetEnemy("Slime_Reference");
-        SetTarget(targetEntityName);
-        SetStage(Stage);
-        effect = entity.GetComponent<Effect>();
-
-        SlimeDeath_SFX = Entity.FindEntityByName("SlimeDeath_SFX");
-        deathSFXSource = SlimeDeath_SFX.GetComponent<AudioSource>();
-        SlimeImpact_SFX = Entity.FindEntityByName("SlimeImpact_SFX");
-        impactSFXSource = SlimeImpact_SFX.GetComponent<AudioSource>();
-
-        Entity playerEntity = Entity.FindEntityByName(targetEntityName);
-        if (playerEntity != null)
-        {
-            playerCentral = playerEntity.GetComponent<Player>();
-        }
+        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance * SlimeStage);
+        SetStage(SlimeStage);
+        int EnemyLayer = Collisions.GetLayerBit("Player");
+        int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
+        LayerOverride = EnemyLayer | PlayerHitLayer;
+        spawn = false;
+        isSpawning = false;
     }
 
     void OnUpdate()
     {
+        //Temporal
+        TestKeys();
+        //
+        if (spawn)
+        {
+            StartCoroutine(SplitLerp());
+        }
+
         UpdateEnemy();
 
-        if (playerCentral != null && playerCentral.Combat != null)
+        if (!isSpawning && !isAttacking)
         {
-            BoxCollider swordCol = playerCentral.Combat.swordTrigger.GetComponent<BoxCollider>();
-
-            if (playerCentral.Combat.isAttacking && swordCol != null && swordCol.IsColliding)
-            {
-                if (!hasBeenHitThisAttack)
-                {
-                    ReceiveDamage();
-                    hasBeenHitThisAttack = true;
-                }
-            }
-
-            if (!playerCentral.Combat.isAttacking)
-            {
-                hasBeenHitThisAttack = false;
-            }
-        }
-        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
-        {
-
-            health.Damage(1);
-            StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
-
-            if (health.GetActualHealth() == 0)
-            {
-                deathSFXSource.Play();
-            }
-            else
-            {
-                impactSFXSource.Play();
-            }
-        }
-
-        if (!HasAttackCooldown())
-            attackBox.SetActive(true);
-
-        if (splitLerpTimer < 1.0f)
-        {
-            splitLerpTimer += Time.deltaTime;
-            isSpawning = true;
-        }
-        else
-        {
-            splitLerpTimer = 1.0f;
-            isSpawning = false;
-            transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
-        }
-
-        if (isSpawning)
-        {
-            SplitLerp();
-        }
-        else
-        {
+            attackBox.entity.SetActive(true);
             #region Movement
-            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * Stage) && !HasAttackCooldown())
+            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar * SlimeStage) || DetectedTargetInDistance(TargetForcedDetectionDistance * SlimeStage))
             {
                 transform.LookAt(target.transform.position, transform.Up);
-                Move(transform.Forward);
-                ResetWanderBehaviour();
+                movement.Move(SlimeStage, transform.Forward);
+                ResetWander();
+                #region Attack
+                if (Vector3.Distance(target.transform.position, transform.position) < AttackReachDistance * SlimeStage)
+                {
+                    StartCoroutine(DoAttack(Damage));
+                }
+                #endregion
             }
             else
-                Wander(ViewFieldWidth, ViewFieldFar * Stage, Speed);
+                Wander(ViewFieldWidth, ViewFieldFar * SlimeStage, SlimeStage);
             #endregion
-            #region Attack
-            if (attackBox.IsColliding && !HasAttackCooldown())
-            {
-                Attack();
-            }
-            #endregion
-            #region Health
-            health.UpdateHealth();
-            if (health.IsDead())
-            {
-                //Debug.Log("I'm dead");
-                if (Stage > 1)
-                    Split();
-                entity.Destroy();
-            }
-            #endregion
+
         }
-    }
-    private void ReceiveDamage()
-    {
-        health.Damage(1);
-
-        StartCoroutine(ApplyKnockback(KnockbackForce, GetDirectionToTarget() * -1, KnockbackTime));
-
-        if (health.GetActualHealth() <= 0)
+        #region Health
+        if (health.IsDead())
         {
-            if (deathSFXSource != null) deathSFXSource.Play();
+            if (SlimeStage > 1)
+                Split();
+            entity.Destroy();
         }
-        else
-        {
-            if (impactSFXSource != null) impactSFXSource.Play();
-        }
-    }
-    public void Move(Vector3 direction)
-    {
-        transform.position += direction * Time.deltaTime * Speed * Stage / 2;
+        #endregion
     }
 
-    public void SetStage(int stage)
+    public void SetStage(int newStage)
     {
-        Stage = stage;
-        transform.scale = Vector3.One * SlimeSize * stage;
-
-
-        //Destroy after vertical 2
-        WobblyEffect slimeEffect = entity.GetComponent<WobblyEffect>();
-        slimeEffect.SetBaseScale(SlimeSize * stage);
-        //
+        SlimeStage = newStage;
+        transform.scale = Vector3.One * SlimeStageSize * SlimeStage;
     }
 
-    public void Attack()
+    private IEnumerator SplitLerp()
     {
-        if (playerCentral != null && playerCentral.PlayerHealth != null)
-        {
-            playerCentral.PlayerHealth.Damage(Damage);
-
-            if (effect != null) { playerCentral.PlayerHealth.AddEffect(effect); }
-
-            Vector3 pushDir = (target.transform.position - transform.position).normalized;
-            pushDir.y = 0;
-
-            if (playerCentral.Movement != null) { playerCentral.Movement.ApplyKnockback(pushDir, KnockbackForce, KnockbackTime); }
-
-        }
-
-        StartAttackCooldown(CooldownTime);
-        attackBox.SetActive(false);
-    }
-    public void SplitLerp()
-    {
-        transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, splitLerpTimer);
-        if (splitLerpTimer < 0.95f)
-            collider.Enabled = false;
-        else
-            collider.Enabled = true;
+        float timer = 0.0f;
+        spawn = false;
+        isSpawning = true;
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
+        collision.AddExcludeMask(LayerOverride);
+        while (timer < 1.0f)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * SlimeStage * SplitDistance / 20.0f, timer);
+            yield return null;
+        }
+        collision.RemoveExcludeMask(LayerOverride);
+        isSpawning = false;
     }
 
-    public void Split()
+    protected void Split()
     {
+        collision.AddExcludeMask(LayerOverride);
         int random = Loopie.Random.Range(0, 360);
         for (int i = 0; i < SplitAmmount; i++)
         {
-            Entity newslime = reference.Clone(true);
-            newslime.transform.rotation = transform.rotation;
-            newslime.transform.position = transform.position;
-            Slime slimecomp = newslime.GetComponent<Slime>();
-            slimecomp.splitLerpTimer = 0;
-            slimecomp.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
-            slimecomp.SetStage(Stage - 1);
-            slimecomp.parentY = transform.position.y;
-            slimecomp.ResetWanderBehaviour();
-            newslime.SetActive(true);
+            Entity new_slime = reference.Clone(true);
+            Slime slime_component = new_slime.GetComponent<Slime>();
+            slime_component.collision.AddExcludeMask(LayerOverride);
+            slime_component.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
+            slime_component.SetStage(SlimeStage - 1);
+            new_slime.transform.position = transform.position;
+            new_slime.transform.rotation = transform.rotation;
+            new_slime.Name = entity.Name;
+            slime_component.parentY = transform.position.y;
+            slime_component.spawn = true;
+            slime_component.isSpawning = true;
+            slime_component.ResetWander();
+            new_slime.SetActive(true);
+        }
+    }
+
+    private void TestKeys()
+    {
+        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
+        {
+            Hit(1);
+            StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
         }
     }
 
     void OnDrawGizmo()
     {
-        Vector3 leftZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -ViewFieldWidth);
-        Vector3 rightZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, ViewFieldWidth);
-        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * Stage, transform.position - leftZone * -1.0f * ViewFieldFar * Stage, Color.White);
-        Gizmo.DrawLine(transform.position + transform.Forward * ViewFieldFar * Stage, transform.position - rightZone * -1.0f * ViewFieldFar * Stage, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + rightZone * ViewFieldFar * Stage, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + leftZone * ViewFieldFar * Stage, Color.White);
+        DebugViewField(ViewFieldWidth, ViewFieldFar * SlimeStage);
     }
 
     void OnDestroy()
