@@ -11,6 +11,8 @@ class PuzzleGoal : Component
     public Entity Pillar3;
     public Entity Pillar4;
 
+    public Entity Gem;
+
     public float movementSpeed = 2.0f;
     public float movementDistance = 1.0f;
 
@@ -34,6 +36,8 @@ class PuzzleGoal : Component
         pillars[1] = Pillar2.GetComponent<MovingPillar>();
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
         pillars[3] = Pillar4.GetComponent<MovingPillar>();
+
+        Gem.GetComponent<BoxCollider>().SetActive(false);
     }
 
     void OnUpdate()
@@ -71,18 +75,31 @@ class PuzzleGoal : Component
             }
         }
 
-        if (PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed && !puzzle1Completed)
+        if (GlobalDatabase.Data.Puzzles.Puzzle1Completed && !puzzle1Completed)
         {
             puzzle1Completed = true;
             
             CompletePuzzleAuto();
+
+            Gem.SetActive(!GlobalDatabase.Data.Player.gemEarthCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!GlobalDatabase.Data.Player.gemEarthCollected);
         }
 
         if (allOnGoal && !puzzle1Completed)
         {
             puzzle1Completed = true;
 
-            PuzzleProgressionManager.runtimePuzzleData.Puzzle1Completed = true;
+            GlobalDatabase.Data.Puzzles.Puzzle1Completed = true;
+
+            Gem.GetComponent<BoxCollider>().SetActive(true);
+        }
+
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        {
+            Gem.SetActive(false);
+
+            GlobalDatabase.Data.Player.gemEarthCollected = true;
+            GlobalDatabase.Data.Player.hasGrappling = true;
         }
     }
 

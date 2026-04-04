@@ -10,7 +10,7 @@ public class SceneTransition : Component
     {
     	if(!Blocked)
         {
-            SceneStatesManager.SetCurrentScene(UUID);
+            GlobalDatabase.Data.Player.SetCurrentScene(UUID);
             SceneManager.LoadSceneByID(UUID);
         }
     }

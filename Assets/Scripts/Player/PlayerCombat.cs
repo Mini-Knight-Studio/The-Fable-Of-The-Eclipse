@@ -3,47 +3,65 @@ using Loopie;
 
 public class PlayerCombat : Component
 {
-    public bool isAttacking = false;
+    private bool isAttacking = false;
     private float attackTimer = 0f;
 
-    public float attackCooldown = 0.5f;
-    public float hitboxDuration = 0.2f;
+    public float attackCooldown;
+    public float hitboxDuration;
 
-    public Entity swordTrigger;
+    public BoxCollider swordTrigger;
     public AudioSource attackSfxSource;
 
     void OnCreate()
     {
-        swordTrigger = Entity.FindEntityByName("PlayerSwordTrigger");
-        if (swordTrigger != null) swordTrigger.SetActive(false);
-        attackSfxSource = swordTrigger.GetComponent<AudioSource>();
+        swordTrigger = Entity.FindEntityByName("PlayerSwordTrigger").GetComponent<BoxCollider>();
+        if (swordTrigger != null) swordTrigger.entity.SetActive(false);
+        swordTrigger.Trigger = true;
+        attackSfxSource = swordTrigger.entity.GetComponent<AudioSource>();
+
+        attackTimer = 0.0f;
+        isAttacking = false;
     }
 
     void OnUpdate()
     {
-        if (attackTimer > 0)
+        if (swordTrigger == null)
+            return;
+        if (isAttacking)
         {
-            attackTimer -= Time.deltaTime;
-
-            if (attackTimer < (attackCooldown - hitboxDuration))
+            if (attackTimer <= attackCooldown && swordTrigger.entity.Active == true)
             {
-                if (swordTrigger != null) swordTrigger.SetActive(false);
+                swordTrigger.entity.SetActive(false);
             }
 
-            if (attackTimer <= 0)
+            if (attackTimer > 0.0f)
+                attackTimer -= Time.deltaTime;
+            else
             {
+                attackTimer = 0.0f;
                 isAttacking = false;
             }
-            return;
-        }
 
-        if (Input.IsKeyPressed(KeyCode.J) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+        }
+        else
         {
-            if (swordTrigger != null) swordTrigger.SetActive(true);
-
-            isAttacking = true;
-            attackTimer = attackCooldown;
-            attackSfxSource.Play();
+            if (Input.IsKeyPressed(KeyCode.J) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+            {
+                isAttacking = true;
+                attackTimer = attackCooldown + hitboxDuration;
+                attackSfxSource.Play();
+                swordTrigger.entity.SetActive(true);
+            }
         }
+    }
+
+    public bool TemporalFunctionIsAttacking()
+    {
+        return isAttacking;
+    }
+
+    public float GetAttackDuration()
+    {
+        return hitboxDuration + attackCooldown;
     }
 };

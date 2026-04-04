@@ -7,23 +7,29 @@ class InitialPlayerPositionManager : Component
     public string puzzle1SceneUUID;
     public string level2SceneUUID;
 
-    public Vector3 fromPuzzlePlayerPos;
-    public Vector3 fromLvl2PlayerPos;
+    public Vector3 puzzleToLvl1PlayerPos;
+    public Vector3 puzzleToLvl1PlayerRot;
+    public Vector3 Lvl2ToLvl1PlayerPos;
+    public Vector3 Lvl2ToLvl1PlayerRot;
 
     public Entity player;
     void OnCreate()
     {
-        SceneStatesManager.SetCurrentScene(level1SceneUUID);
+        GlobalDatabase.Data.Player.SetCurrentScene(level1SceneUUID);
 
-        if(SceneStatesManager.GetPreviousSceneUUID() == puzzle1SceneUUID)
+        if(GlobalDatabase.Data.Player.previousSceneUUID == puzzle1SceneUUID)
         {
-            fromPuzzlePlayerPos.y = player.transform.position.y;
-            player.transform.position = fromPuzzlePlayerPos;
+            puzzleToLvl1PlayerPos.y = player.transform.position.y;
+
+            player.transform.position = puzzleToLvl1PlayerPos;
+            //player.transform.local_rotation = puzzleToLvl1PlayerRot;
         }
-        else if (SceneStatesManager.GetPreviousSceneUUID() == level2SceneUUID)
+        else if (GlobalDatabase.Data.Player.previousSceneUUID == level2SceneUUID)
         {
-            fromLvl2PlayerPos.y = player.transform.position.y;
-            player.transform.position = fromLvl2PlayerPos;
+            Lvl2ToLvl1PlayerPos.y = player.transform.position.y;
+
+            player.transform.position = Lvl2ToLvl1PlayerPos;
+            //player.transform.local_rotation = Lvl2ToLvl1PlayerRot;
         }
     }
 };
