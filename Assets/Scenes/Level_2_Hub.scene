@@ -80,7 +80,7 @@
                         "fields": {
                             "distance": 100.0,
                             "movementLimit": 10.0,
-                            "playerName": "Player",
+                            "player": "",
                             "speed": 20.0,
                             "timeToFocus": 10.0,
                             "timeToFollowPlayer": 0.30000001192092896,
@@ -116,7 +116,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -157,12 +157,14 @@
                             "dashDuration": 0.20000000298023224,
                             "dashSpeed": 30.0,
                             "godModeSpeedMultiplier": 5.0,
+                            "idleSFX": "",
                             "idleSFXInterval": 5.0,
                             "isDashing": false,
                             "isGodMode": false,
                             "isMoving": false,
                             "rotSpeed": 5.0,
                             "speed": 10.0,
+                            "walkSFX": "",
                             "walkSFXInterval": 0.5
                         }
                     },
@@ -206,11 +208,13 @@
                             "z": 0.5
                         },
                         "draw_gizmo": true,
+                        "exclude_mask": 0,
                         "extents": {
                             "x": 1.0,
                             "y": 2.5,
                             "z": 1.0
                         },
+                        "include_mask": 0,
                         "is_static": false,
                         "is_trigger": false,
                         "layer_index": 1
@@ -223,7 +227,8 @@
                         "fields": {
                             "attackCooldown": 1.0,
                             "hitboxDuration": 0.5,
-                            "isAttacking": false
+                            "isAttacking": false,
+                            "swordTrigger": ""
                         }
                     },
                     "uuid": "ef9d3642-541a-5b38-a0c4-a7bbe2144696"
@@ -232,6 +237,7 @@
                     "script": {
                         "class_id": "Health",
                         "fields": {
+                            "actualHealth": 0,
                             "canBeDamaged": true,
                             "canBeHealed": true,
                             "maxHealth": 10
@@ -255,7 +261,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -703,11 +709,13 @@
                             "z": 0.0
                         },
                         "draw_gizmo": true,
+                        "exclude_mask": 0,
                         "extents": {
                             "x": 1.5800000429153442,
                             "y": 5.0,
                             "z": 7.5
                         },
+                        "include_mask": 0,
                         "is_static": true,
                         "is_trigger": true,
                         "layer_index": 2
@@ -725,7 +733,7 @@
                 }
             ],
             "name": "Hub_To_Firepath_Collider",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "fb24e3a4-1075-b36a-639c-8dd7e843db0c"
         },
         {
@@ -1369,6 +1377,12 @@
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
                         }
                     },
                     "uuid": "29b836fc-77ed-2bcc-bf53-b428fbcbbd09"
@@ -1443,6 +1457,12 @@
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
                         }
                     },
                     "uuid": "554d6aeb-1fa3-21f0-3b43-3483f65775ad"
@@ -1781,15 +1801,32 @@
                 },
                 {
                     "image": {
-                        "texture_uuid": "a7cb3a48-179f-1c53-7c9d-84468330ad5c",
+                        "texture_uuid": "1a1c6d15-5c8f-7654-9433-0d3db190f904",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
                         }
                     },
                     "uuid": "8d1914c3-6105-adaa-7253-a740a09b6672"
+                },
+                {
+                    "script": {
+                        "class_id": "HealthHUD",
+                        "fields": {
+                            "iconNamePrefix": "Life_",
+                            "maxHealthIcons": 5,
+                            "playerName": "Player"
+                        }
+                    },
+                    "uuid": "5a2f8ab8-9011-3fe8-b5d9-2b81d6d3308e"
                 }
             ],
             "name": "Life_Bar",
@@ -1947,6 +1984,76 @@
             "name": "RootNode",
             "parent_uuid": "f28a724b-6d08-cf37-bd33-dbc15b9b585f",
             "uuid": "e68a5936-2057-2e2d-7d0f-29c7b7527419"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 5.800000190734863,
+                                "y": 2.0
+                            }
+                        },
+                        "position": {
+                            "x": 16.405223846435547,
+                            "y": 98.07437133789063,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "15a460c6-a27f-abda-1030-a6ba7f01d4aa"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "9f161dfc-54b4-95e9-d91c-71eadd6ac7ea",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "896a4a96-fd01-1350-970e-3ce5e4520f52"
+                }
+            ],
+            "name": "Life_1",
+            "parent_uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5",
+            "uuid": "74f2c020-c055-26c9-8d4e-196251fb066a"
         },
         {
             "active": true,
@@ -2615,11 +2722,13 @@
                             "z": 0.0
                         },
                         "draw_gizmo": true,
+                        "exclude_mask": 0,
                         "extents": {
                             "x": 0.5,
                             "y": 0.5,
                             "z": 0.5
                         },
+                        "include_mask": 0,
                         "is_static": false,
                         "is_trigger": true,
                         "layer_index": 5
@@ -2919,7 +3028,7 @@
                 }
             ],
             "name": "Level2Hub",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "4b93d5d0-8687-35a0-32d3-5d97d80f28dc"
         },
         {
@@ -2993,11 +3102,13 @@
                             "z": 0.0
                         },
                         "draw_gizmo": true,
+                        "exclude_mask": 0,
                         "extents": {
                             "x": 1.3600000143051147,
                             "y": 5.0,
                             "z": 5.289999961853027
                         },
+                        "include_mask": 0,
                         "is_static": true,
                         "is_trigger": true,
                         "layer_index": 2
@@ -3015,7 +3126,7 @@
                 }
             ],
             "name": "Hub_To_Waterpath_Collider",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "2ed9a1f9-e0f7-59b0-d463-4dc4ea894020"
         },
         {
@@ -3178,7 +3289,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 179.73431396484375,
+                                "x": 94.23041534423828,
                                 "y": 108.0
                             }
                         },
@@ -3232,7 +3343,7 @@
                 }
             ],
             "name": "FinalScreen",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "ffc0f6bb-feed-d112-0120-f4bf856b7710"
         },
         {
@@ -5195,6 +5306,76 @@
             "active": true,
             "components": [
                 {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 5.800000190734863,
+                                "y": 2.0
+                            }
+                        },
+                        "position": {
+                            "x": 28.113353729248047,
+                            "y": 98.07437133789063,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f69872fc-aedc-cf85-6496-f59afc5570d2"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "62f6c387-566f-ef8b-abbd-3b1b18ce944a",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "a47ddb48-5188-b5e5-3e55-480556d5204a"
+                }
+            ],
+            "name": "Life_3",
+            "parent_uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5",
+            "uuid": "c61a0b10-9ca2-a5c5-1b8c-165ee2d58b29"
+        },
+        {
+            "active": true,
+            "components": [
+                {
                     "transform": {
                         "euler_angles": {
                             "x": 3.971285820007324,
@@ -5398,11 +5579,13 @@
                             "z": 0.0
                         },
                         "draw_gizmo": true,
+                        "exclude_mask": 0,
                         "extents": {
                             "x": 1.6100000143051147,
                             "y": 5.0,
                             "z": 8.779999732971191
                         },
+                        "include_mask": 0,
                         "is_static": true,
                         "is_trigger": true,
                         "layer_index": 2
@@ -5420,7 +5603,7 @@
                 }
             ],
             "name": "Hub_To_Airpath_Collider",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "9e0f0009-f858-8f25-5fca-4d8a453b7811"
         },
         {
@@ -5552,6 +5735,12 @@
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
                         }
                     },
                     "uuid": "e8a249df-252b-5cdf-7b1b-80c13927b40f"
@@ -6100,6 +6289,12 @@
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
                         }
                     },
                     "uuid": "515054f6-ad16-1368-53dc-cbb4c30e1c3a"
@@ -6143,7 +6338,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 179.73431396484375,
+                                "x": 94.23041534423828,
                                 "y": 108.0
                             }
                         },
@@ -6190,7 +6385,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
         {
@@ -6224,7 +6419,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
         {
@@ -6364,6 +6559,12 @@
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
                         }
                     },
                     "uuid": "434a51fc-8863-7de8-85ba-b5102be865eb"
@@ -6480,11 +6681,13 @@
                             "z": 0.0
                         },
                         "draw_gizmo": true,
+                        "exclude_mask": 0,
                         "extents": {
                             "x": 1.8300000429153442,
                             "y": 5.0,
                             "z": 7.579999923706055
                         },
+                        "include_mask": 0,
                         "is_static": true,
                         "is_trigger": true,
                         "layer_index": 2
@@ -6502,7 +6705,7 @@
                 }
             ],
             "name": "Hub_To_Level1_Collider",
-            "parent_uuid": "36399729-72af-e44c-802f-bd867a7dc17a",
+            "parent_uuid": "84d0befd-c0ca-f2ae-6561-a335cd2ef55e",
             "uuid": "80d4bb1c-1dcc-baee-049a-ba181e829a96"
         },
         {
@@ -7112,6 +7315,216 @@
             "name": "Idle_SFX",
             "parent_uuid": "9f36989c-aa1b-8915-f907-b5160be9cf36",
             "uuid": "152bb28c-654a-d4a9-93c9-9b624f7374b3"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 5.800000190734863,
+                                "y": 2.0
+                            }
+                        },
+                        "position": {
+                            "x": 22.25950813293457,
+                            "y": 98.07437133789063,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "c4121faa-c750-b57c-2ec3-54914f1119a2"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "62f6c387-566f-ef8b-abbd-3b1b18ce944a",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "68e0d0d9-c4b3-58f7-12f0-68daea13822f"
+                }
+            ],
+            "name": "Life_2",
+            "parent_uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5",
+            "uuid": "00ce1b71-e1f7-4d06-3805-62c106225f4d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 5.800000190734863,
+                                "y": 2.0
+                            }
+                        },
+                        "position": {
+                            "x": 33.97026824951172,
+                            "y": 98.07437133789063,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "aa17d42c-1b56-5f0e-629d-5b77d1f867c5"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "62f6c387-566f-ef8b-abbd-3b1b18ce944a",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "e6e9aa66-c056-80a8-4ab3-c5f4911c5c05"
+                }
+            ],
+            "name": "Life_4",
+            "parent_uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5",
+            "uuid": "84a3b571-2424-0e8f-0ff3-576573849450"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 5.800000190734863,
+                                "y": 2.0
+                            }
+                        },
+                        "position": {
+                            "x": 40.11039352416992,
+                            "y": 98.07437133789063,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ee027274-25d6-92e5-9acc-989a4168b743"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "c1601964-9cfa-330a-762a-15e1e3be4b33",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "935401d0-7021-93e9-5e17-1019bca90ec0"
+                }
+            ],
+            "name": "Life_5",
+            "parent_uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5",
+            "uuid": "45c04d75-d453-121e-d4bb-d1f9dfd3651b"
         }
     ]
 }
