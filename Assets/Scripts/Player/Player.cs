@@ -14,6 +14,7 @@ public class Player : Component
     void OnCreate()
     {
         Movement = entity.GetComponent<PlayerMovement>();
+        Movement2 = entity.GetComponent<Movement>();
         Animation = entity.GetComponent<PlayerAnimation>();
         Combat = entity.GetComponent<PlayerCombat>();
         Items = entity.GetComponent<PlayerItems>();

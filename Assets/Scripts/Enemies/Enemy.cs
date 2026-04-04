@@ -131,8 +131,9 @@ public class Enemy : Component
     private void Attack(int points)
     {
         target.PlayerHealth.Damage(points);
+        Debug.Log("1");
         StartCoroutine(target.Movement2.Push((float)points * 10.0f, 0.3f, GetDirectionToTarget()));
-        Debug.Log("AAAAAAAA");
+        Debug.Log("2");
     }
 
     protected bool EndedPreparingAttack()
