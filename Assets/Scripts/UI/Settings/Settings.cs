@@ -62,7 +62,7 @@ class Settings : Component
             fullscreenScript = fullscreenHoveredEntity.GetComponent<Fullscreen>();
             fullscreenHoveredImage = fullscreenHoveredEntity.GetComponent<Image>();
 
-            Entity displayFullscreenEntity = Entity.FindEntityByName("Fullscreen_Display");
+            Entity displayFullscreenEntity = Entity.FindEntityByName("DisplayMode_Display");
             if (displayFullscreenEntity != null)
             {
                 fullscreenDisplayText = displayFullscreenEntity.GetComponent<Text>();
