@@ -37,6 +37,9 @@ class Golem : Enemy
         //Temporal
         TestKeys();
         //
+
+        UpdateEnemy();
+
         if (!isAttacking)
         {
             if (ShieldLife > 0)
@@ -59,7 +62,7 @@ class Golem : Enemy
             else
                 Wander(ViewFieldWidth, ViewFieldFar, isShielding ? 0.5f : 1.0f);
             #endregion
-            
+
         }
         else if (EndedPreparingAttack())
         {
@@ -87,7 +90,7 @@ class Golem : Enemy
 
     private void TestKeys()
     {
-        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
+        if (Input.IsKeyDown(KeyCode.P))
         {
             Hit(1);
             StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
