@@ -19,7 +19,7 @@ class GODModeSpawner : Component
     void OnCreate()
     {
         EnemyDirections = new List<EnemyDirection>();
-        EnemyNameText = entity.GetChild(0).GetComponent<Text>();
+        EnemyNameText = Entity.FindEntityByName("EnemyName").GetComponent<Text>();
         Entity enemies = Entity.FindEntityByName("Enemies");
         foreach (Entity child in enemies.GetChildren())
         {
