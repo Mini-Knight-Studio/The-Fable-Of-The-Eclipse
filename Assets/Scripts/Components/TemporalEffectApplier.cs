@@ -16,7 +16,9 @@ public class TemporalEffectApplier : Component
         foreach (TemporalEffect effect in effects)
         {
             if (effect.updateMode_useFalse_timeTrue)
+            {
                 effect.UpdateEffect();
+            }
         }
 
         for (int i = effects.Count - 1; i >= 0; i--)
@@ -24,7 +26,9 @@ public class TemporalEffectApplier : Component
             TemporalEffect effect = effects[i];
 
             if (effect.EffectEnded())
+            {
                 effects.RemoveAt(i);
+            }
         }
     }
 
@@ -34,9 +38,9 @@ public class TemporalEffectApplier : Component
 
         effect.InitEffect();
         int random = Loopie.Random.Range(0, 100);
-        Debug.Log($"{random} / {effect.probability}");
         if (random >= effect.probability)
             return;
+        Debug.Log("Applied Effect");
         effects.Add(effect);
     }
 
@@ -69,7 +73,7 @@ public class TemporalEffectApplier : Component
         float multipliedValue = modifiedValue * multiplier;
         return (int)multipliedValue;
     }
-    public float GetEffectValueFloat(int baseValue, string category)
+    public float GetEffectValueFloat(float baseValue, string category)
     {
         float modifiedValue = baseValue;
         float multiplier = 1;

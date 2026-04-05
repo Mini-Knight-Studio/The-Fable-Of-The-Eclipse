@@ -18,11 +18,10 @@ public class TemporalEffect : Component
     public void InitEffect()
     {
         timer = duration;
-        Debug.Log("Effect Initialized");
     }
 
     public void UpdateEffect()
-    { timer += Time.deltaTime; }
+    { timer -= Time.deltaTime; }
 
     public void UseEffect()
     { timer -= 1.0f; }

@@ -39,6 +39,16 @@ class GODModeSpawner : Component
         LayerMask = Floor | Walls;
     }
 
+    void KillAllEnemies()
+    {
+        Entity enemies = Entity.FindEntityByName("Enemies");
+        foreach (Entity child in enemies.GetChildren())
+        {
+            if (child.Name.Contains("_Reference"))
+                continue;
+            child.Destroy();
+        }
+    }
 
     string FormatName(string input)
     {
@@ -90,6 +100,11 @@ class GODModeSpawner : Component
             new_enemy.transform.Rotate(new Vector3(0, angles, 0), Transform.Space.LocalSpace);
             new_enemy.Name = EnemyDirections[currentListIndex].EnemyName;
             new_enemy.SetActive(true);
+        }
+
+        if(Input.IsKeyDown(KeyCode.O))
+        {
+            KillAllEnemies();
         }
     }
 };

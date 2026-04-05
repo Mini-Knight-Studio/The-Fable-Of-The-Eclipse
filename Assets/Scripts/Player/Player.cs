@@ -10,6 +10,7 @@ public class Player : Component
     public PlayerItems Items;
     public Health PlayerHealth;
     public PlayerCamera Camera;
+    public TemporalEffectApplier Effects;
 
     void OnCreate()
     {
@@ -19,6 +20,7 @@ public class Player : Component
         Combat = entity.GetComponent<PlayerCombat>();
         Items = entity.GetComponent<PlayerItems>();
         PlayerHealth = entity.GetComponent<Health>();
+        Effects = entity.GetComponent<TemporalEffectApplier>();
 
         Entity cameraEntity = Entity.FindEntityByName("PlayerCamera");
         if (cameraEntity != null)
@@ -30,9 +32,9 @@ public class Player : Component
         if (Animation == null) Debug.Log("Missing PlayerAnimation");
         if (Combat == null) Debug.Log("Missing PlayerCombat");
         if (PlayerHealth == null) Debug.Log("Missing Health");
+        PlayerHealth.Init();
     }
 
     void OnUpdate()
-    {
-    }
+    {    }
 }

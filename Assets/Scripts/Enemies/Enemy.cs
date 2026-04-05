@@ -10,7 +10,7 @@ public class Enemy : Component
     protected Movement movement;
     protected BoxCollider attackBox;
     protected BoxCollider collision;
-    protected List<Effect> effectList;
+    protected TemporalEffect effect;
 
     protected Player target;
 
@@ -48,7 +48,7 @@ public class Enemy : Component
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
-        effectList = new List<Effect>();
+        effect = entity.GetComponent<TemporalEffect>();
 
         health.Init();
         wanderRange = false;
@@ -112,7 +112,10 @@ public class Enemy : Component
         endedPreparingAttack = true;
         attackBox.entity.SetActive(true);
         if (attackBox.IsColliding || Vector3.Distance(transform.position, target.transform.position) < attackReachDistance)
+        {
+            target.Effects.AddEffect(effect);
             Attack(damage);
+        }
         timer = 0.0f;
         attackBox.entity.SetActive(false);
         endedAttack = true;
@@ -130,10 +133,9 @@ public class Enemy : Component
 
     private void Attack(int points)
     {
-        target.PlayerHealth.Damage(points);
-        Debug.Log("1");
+        target.PlayerHealth.Damage(target.Effects.GetEffectValueInt(points, "ModifyDamage"));
         StartCoroutine(target.Movement2.Push((float)points * 10.0f, 0.3f, GetDirectionToTarget()));
-        Debug.Log("2");
+        Debug.Log(target.PlayerHealth.GetActualHealth());
     }
 
     protected bool EndedPreparingAttack()
