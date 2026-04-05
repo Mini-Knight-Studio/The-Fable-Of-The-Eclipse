@@ -19,17 +19,17 @@ class InitialPlayerPositionManager : Component
 
         if(GlobalDatabase.Data.Player.previousSceneUUID == puzzle1SceneUUID)
         {
-            puzzleToLvl1PlayerPos.y = player.transform.position.y;
+            puzzleToLvl1PlayerPos.y = player.transform.local_position.y;
 
-            player.transform.position = puzzleToLvl1PlayerPos;
-            player.transform.rotation = puzzleToLvl1PlayerRot;
+            player.transform.local_position = puzzleToLvl1PlayerPos;
+            player.transform.local_rotation = puzzleToLvl1PlayerRot;
         }
         else if (GlobalDatabase.Data.Player.previousSceneUUID == level2SceneUUID)
         {
-            Lvl2ToLvl1PlayerPos.y = player.transform.position.y;
+            Lvl2ToLvl1PlayerPos.y = player.transform.local_position.y;
 
-            player.transform.position = Lvl2ToLvl1PlayerPos;
-            player.transform.rotation = Lvl2ToLvl1PlayerRot;
+            player.transform.local_position = Lvl2ToLvl1PlayerPos;
+            player.transform.local_rotation = Lvl2ToLvl1PlayerRot;
         }
     }
 };
