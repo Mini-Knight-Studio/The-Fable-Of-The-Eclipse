@@ -8,7 +8,7 @@ class MainMenu : Component
     public Entity newGameEntity;
     public Entity newGameHoveredEntity;
     //private Button newGameButton;
-    private SceneTransition newGameScript;
+    private NewGame newGameScript;
     private Image newGameHoveredImage;
 
     public Entity continueEntity;
@@ -70,7 +70,7 @@ class MainMenu : Component
 
             if (newGameHoveredEntity != null)
             {
-                newGameScript = newGameHoveredEntity.GetComponent<SceneTransition>();
+                newGameScript = newGameHoveredEntity.GetComponent<NewGame>();
                 newGameHoveredImage = newGameHoveredEntity.GetComponent<Image>();
             }
             else
@@ -274,7 +274,7 @@ class MainMenu : Component
             // Function Call
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: newGameScript.StartTransition(); break;
+                case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
                 case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
                 case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                 case Buttons.EXIT: exitScript.ExitGame(); break;
