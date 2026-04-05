@@ -22,14 +22,14 @@ class InitialPlayerPositionManager : Component
             puzzleToLvl1PlayerPos.y = player.transform.position.y;
 
             player.transform.position = puzzleToLvl1PlayerPos;
-            //player.transform.local_rotation = puzzleToLvl1PlayerRot;
+            player.transform.rotation = puzzleToLvl1PlayerRot;
         }
         else if (GlobalDatabase.Data.Player.previousSceneUUID == level2SceneUUID)
         {
             Lvl2ToLvl1PlayerPos.y = player.transform.position.y;
 
             player.transform.position = Lvl2ToLvl1PlayerPos;
-            //player.transform.local_rotation = Lvl2ToLvl1PlayerRot;
+            player.transform.rotation = Lvl2ToLvl1PlayerRot;
         }
     }
 };
