@@ -253,7 +253,7 @@ class MainMenu : Component
         confirmTimer += Time.deltaTime;
 
         // Read Input
-        if (Input.IsKeyPressed(KeyCode.KP_ENTER) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
         {
             // Visual Feedback
             Vector4 color = new Vector4(255, 0, 0, 1);
