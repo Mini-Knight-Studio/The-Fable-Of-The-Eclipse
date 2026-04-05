@@ -69,8 +69,8 @@
                     "script": {
                         "class_id": "Settings",
                         "fields": {
+                            "displayModeHoveredEntity": "e8433c16-7369-05e3-0e65-ef4d0a534029",
                             "framerateHoveredEntity": "19e63d43-cd6f-a733-cff3-8b9920c30f0a",
-                            "fullscreenHoveredEntity": "e8433c16-7369-05e3-0e65-ef4d0a534029",
                             "inputCooldown": 0.20000000298023224,
                             "loopMusicEntity": "176982d2-30c6-c677-249a-d007fadd6b2c",
                             "masterVolumeHoveredEntity": "76c1dbe1-e1da-2fd9-16ec-ed8d9a9309e0",
@@ -110,8 +110,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 191.847412109375,
-                                "y": 108.0858154296875
+                                "x": 192.2392578125,
+                                "y": 107.86540985107422
                             }
                         },
                         "position": {
@@ -157,7 +157,7 @@
                 }
             ],
             "name": "Canvas",
-            "parent_uuid": "f8683455-1310-1c40-9ca4-6a68590e503d",
+            "parent_uuid": "99288ea0-05f2-c89e-db4a-e824f8dda5dc",
             "uuid": "e2025a4c-65b8-322f-f468-b75576038e00"
         },
         {
@@ -233,7 +233,7 @@
                     "uuid": "b581c572-e109-f48a-a55d-1af98431078e"
                 }
             ],
-            "name": "V-Sync_Hovered",
+            "name": "VSync_Hovered",
             "parent_uuid": "0817c709-23bc-8200-ca2d-46234bfd4967",
             "uuid": "c5d41174-41d3-8874-9c07-630827622829"
         },
@@ -283,8 +283,85 @@
                 }
             ],
             "name": "MainCamera",
-            "parent_uuid": "f8683455-1310-1c40-9ca4-6a68590e503d",
+            "parent_uuid": "99288ea0-05f2-c89e-db4a-e824f8dda5dc",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 178.0,
+                                "y": 46.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.0,
+                            "y": -6.0,
+                            "z": -2.5935983657836914
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "191d24e6-7142-464a-c19d-6053005b2658"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "e127370d-4f7f-d033-9804-85fa9a93fe85",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "842025e0-1ca7-6580-c566-9333dd3fb8f0"
+                },
+                {
+                    "script": {
+                        "class_id": "Framerate",
+                        "fields": {}
+                    },
+                    "uuid": "5ae694e0-d98d-5728-5904-a75b1be78659"
+                }
+            ],
+            "name": "Framerate_Hovered",
+            "parent_uuid": "de8ac63d-fed9-d381-3637-7981e952ccf3",
+            "uuid": "19e63d43-cd6f-a733-cff3-8b9920c30f0a"
         },
         {
             "active": true,
@@ -310,12 +387,12 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 30.0,
-                                "y": 8.0
+                                "x": 15.0,
+                                "y": 5.0
                             }
                         },
                         "position": {
-                            "x": 834.60498046875,
+                            "x": 863.8049926757813,
                             "y": -0.8602294921875,
                             "z": -0.8474102020263672
                         },
@@ -346,7 +423,7 @@
                         "horizontal_alignment": 0,
                         "scale": 1.0,
                         "size_mode": 0,
-                        "value": "120 Hz",
+                        "value": "120",
                         "vertical_alignment": 0
                     },
                     "uuid": "5d681363-7856-4156-5327-091df29d5dc6"
@@ -355,6 +432,76 @@
             "name": "Framerate_Display",
             "parent_uuid": "de8ac63d-fed9-d381-3637-7981e952ccf3",
             "uuid": "2c23352b-f4d0-e741-0d90-7d6497fb01b7"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 224.0,
+                                "y": 33.0
+                            }
+                        },
+                        "position": {
+                            "x": 34.150001525878906,
+                            "y": 18.77199935913086,
+                            "z": -2.9296774864196777
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.1292000114917755,
+                            "y": 0.1292000114917755,
+                            "z": 0.1292000114917755
+                        }
+                    },
+                    "uuid": "5f1c2f52-7c28-2633-ce3b-989396f2bd9f"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "cec05115-b393-d804-b392-dfd9652a772a",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "ecf8b334-4397-8d93-2ade-752199bd82c7"
+                }
+            ],
+            "name": "SfxVolume",
+            "parent_uuid": "b51aef64-1c68-e8a2-8a81-39788b0345a0",
+            "uuid": "9bed0e21-b630-02cb-5b85-8f568f068eaa"
         },
         {
             "active": true,
@@ -457,7 +604,7 @@
                 }
             ],
             "name": "Audio",
-            "parent_uuid": "f8683455-1310-1c40-9ca4-6a68590e503d",
+            "parent_uuid": "99288ea0-05f2-c89e-db4a-e824f8dda5dc",
             "uuid": "8b51f683-b3f8-33a1-905f-f8affff1de1e"
         },
         {
@@ -631,83 +778,6 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 178.0,
-                                "y": 46.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.0,
-                            "y": -6.0,
-                            "z": -2.5935983657836914
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "191d24e6-7142-464a-c19d-6053005b2658"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "e127370d-4f7f-d033-9804-85fa9a93fe85",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "842025e0-1ca7-6580-c566-9333dd3fb8f0"
-                },
-                {
-                    "script": {
-                        "class_id": "Framerate",
-                        "fields": {}
-                    },
-                    "uuid": "5ae694e0-d98d-5728-5904-a75b1be78659"
-                }
-            ],
-            "name": "Framerate_Hovered",
-            "parent_uuid": "de8ac63d-fed9-d381-3637-7981e952ccf3",
-            "uuid": "19e63d43-cd6f-a733-cff3-8b9920c30f0a"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
                                 "x": 250.0,
                                 "y": 46.0
                             }
@@ -760,6 +830,76 @@
             "name": "MusicVolume_Hovered",
             "parent_uuid": "b8e3176e-4cf7-2866-0116-3686b72f1f14",
             "uuid": "0441f034-95f3-0e53-fc84-f2a129786ece"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 18.0,
+                                "y": 23.0
+                            }
+                        },
+                        "position": {
+                            "x": 770.6719970703125,
+                            "y": 11.253000259399414,
+                            "z": 3.814697265625e-06
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ea408e75-98b6-fff4-ce4b-cb7304d1f04d"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "fa9be7eb-f9fa-c3cd-e94f-6e8c2575feec",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "da478a7d-a9a3-bc8d-69b2-95bb467b4e7c"
+                }
+            ],
+            "name": "VSync_LeftArrow",
+            "parent_uuid": "0817c709-23bc-8200-ca2d-46234bfd4967",
+            "uuid": "01e2259e-6494-f9ac-2318-5d9aac110060"
         },
         {
             "active": true,
@@ -908,6 +1048,76 @@
                                 "y": 0.0
                             },
                             "size_delta": {
+                                "x": 30.0,
+                                "y": 35.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.0,
+                            "y": -6.00018310546875,
+                            "z": -7.709728240966797
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e5f69d4d-aa05-f0b8-6831-bd641a163a04"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "4951d656-d17a-8ef3-60c9-884ea0ff44fa",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "574f119b-219b-70a5-c223-4cf7f03e2156"
+                }
+            ],
+            "name": "Framerate_RightArrow_Hovered",
+            "parent_uuid": "53be2f3d-6364-73f2-52bd-e072486a8c87",
+            "uuid": "c441094f-2573-9b37-a5c5-a73d32c0851d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
                                 "x": 130.0,
                                 "y": 45.0
                             }
@@ -950,7 +1160,7 @@
                     "uuid": "78015de2-8c7a-5ef0-a6c7-2205ee8dfb69"
                 }
             ],
-            "name": "V-Sync",
+            "name": "VSync",
             "parent_uuid": "b51aef64-1c68-e8a2-8a81-39788b0345a0",
             "uuid": "0817c709-23bc-8200-ca2d-46234bfd4967"
         },
@@ -978,8 +1188,78 @@
                                 "y": 0.0
                             },
                             "size_delta": {
+                                "x": 30.0,
+                                "y": 36.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.0,
+                            "y": -6.00018310546875,
+                            "z": -7.709728240966797
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "4171f4f1-93f5-4faf-418b-cf4f076557dc"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "615240f8-690e-cf7e-4fe0-ff28dda6bc21",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "827a5b70-b19a-0dd0-8007-5bdbfe88b0ca"
+                }
+            ],
+            "name": "MusicVolume_LeftArrow_Hovered",
+            "parent_uuid": "e0a01e15-ceb1-c3cd-38d7-3901e6ca056e",
+            "uuid": "6837bdcb-8585-0f9f-f6d5-2f6e27b1db24"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
                                 "x": 58.0,
-                                "y": 22.0
+                                "y": 13.0
                             }
                         },
                         "position": {
@@ -1014,7 +1294,7 @@
                         "horizontal_alignment": 0,
                         "scale": 1.0,
                         "size_mode": 0,
-                        "value": "Fullscreen",
+                        "value": "Windowed",
                         "vertical_alignment": 0
                     },
                     "uuid": "c469ec35-0226-7b8f-551e-117cd3e40fde"
@@ -1119,7 +1399,7 @@
                             },
                             "size_delta": {
                                 "x": 57.0,
-                                "y": 35.0
+                                "y": 19.0
                             }
                         },
                         "position": {
@@ -1235,7 +1515,77 @@
             "uuid": "430efa9d-6707-1830-14d0-dda523df748c"
         },
         {
-            "active": false,
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 18.0,
+                                "y": 23.0
+                            }
+                        },
+                        "position": {
+                            "x": 940.4349975585938,
+                            "y": -3.8469998836517334,
+                            "z": 0.0001087188720703125
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d155c772-28b4-8489-a6be-e2a8e805a87d"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "85f149a2-f202-44d3-1ed7-fab14fa22827",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "4c7f8cc0-6c63-994a-12b8-6778ba50a407"
+                }
+            ],
+            "name": "SfxVolume_RightArrow",
+            "parent_uuid": "9bed0e21-b630-02cb-5b85-8f568f068eaa",
+            "uuid": "ddcc8cf2-de4e-fee6-9bc6-255c927c4405"
+        },
+        {
+            "active": true,
             "components": [
                 {
                     "recttransform": {
@@ -1305,7 +1655,7 @@
             "uuid": "6fdec9eb-3b4a-18b3-a475-6f91ff670a4b"
         },
         {
-            "active": false,
+            "active": true,
             "components": [
                 {
                     "recttransform": {
@@ -1376,76 +1726,6 @@
         },
         {
             "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 18.0,
-                                "y": 23.0
-                            }
-                        },
-                        "position": {
-                            "x": 1143.635009765625,
-                            "y": 12.652999877929688,
-                            "z": 0.0001087188720703125
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "8dc41866-1922-0ced-9ced-3b8c00318edd"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "85f149a2-f202-44d3-1ed7-fab14fa22827",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "504652ea-320c-0aaa-1761-6280c49c6b0f"
-                }
-            ],
-            "name": "DisplayMode_RightArrow",
-            "parent_uuid": "460af235-91cb-6802-9770-3d0f1d94051b",
-            "uuid": "5355b097-8729-06fe-a1ce-998a0f9dd6ff"
-        },
-        {
-            "active": false,
             "components": [
                 {
                     "recttransform": {
@@ -1543,6 +1823,146 @@
                             }
                         },
                         "position": {
+                            "x": 1143.635009765625,
+                            "y": 12.652999877929688,
+                            "z": 0.0001087188720703125
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "8dc41866-1922-0ced-9ced-3b8c00318edd"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "85f149a2-f202-44d3-1ed7-fab14fa22827",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "504652ea-320c-0aaa-1761-6280c49c6b0f"
+                }
+            ],
+            "name": "DisplayMode_RightArrow",
+            "parent_uuid": "460af235-91cb-6802-9770-3d0f1d94051b",
+            "uuid": "5355b097-8729-06fe-a1ce-998a0f9dd6ff"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 18.0,
+                                "y": 23.0
+                            }
+                        },
+                        "position": {
+                            "x": 730.1719970703125,
+                            "y": -0.1469999998807907,
+                            "z": 3.814697265625e-06
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d03f427b-196a-e778-897e-f4d2b3b0bfd7"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "fa9be7eb-f9fa-c3cd-e94f-6e8c2575feec",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "e4250c53-7af9-f110-37ea-2af9ed945a46"
+                }
+            ],
+            "name": "MasterVolume_LeftArrow",
+            "parent_uuid": "f41915ac-0177-5fea-3213-88456b4f2035",
+            "uuid": "fa755ef1-fe2a-6e0a-801f-1e7bfd1029a8"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 18.0,
+                                "y": 23.0
+                            }
+                        },
+                        "position": {
                             "x": 770.9719848632813,
                             "y": -1.246999979019165,
                             "z": 3.814697265625e-06
@@ -1585,7 +2005,77 @@
             "uuid": "bfdc8b6c-eaf2-ad75-5354-635e5899ba60"
         },
         {
-            "active": false,
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 30.0,
+                                "y": 35.0
+                            }
+                        },
+                        "position": {
+                            "x": -6.0,
+                            "y": -6.00018310546875,
+                            "z": -7.709728240966797
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "9aa889a0-b16e-a8d7-1424-2e64872b77fd"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "4951d656-d17a-8ef3-60c9-884ea0ff44fa",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "55673fd3-5294-e4d9-a134-f1f9ea947eb2"
+                }
+            ],
+            "name": "MasterVolume_RightArrow_Hovered",
+            "parent_uuid": "fdf35be8-38f3-758f-448b-0683cc992a5f",
+            "uuid": "92f26664-a369-4f09-b6d5-c7407d812935"
+        },
+        {
+            "active": true,
             "components": [
                 {
                     "recttransform": {
@@ -1683,6 +2173,76 @@
                             }
                         },
                         "position": {
+                            "x": 726.4719848632813,
+                            "y": -0.1469999998807907,
+                            "z": 3.814697265625e-06
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "b49c8fc0-1c39-6c36-ac44-227cdfa74917"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "fa9be7eb-f9fa-c3cd-e94f-6e8c2575feec",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "1884aa5f-21a0-0886-6b8e-b780ce4ab495"
+                }
+            ],
+            "name": "SfxVolume_LeftArrow",
+            "parent_uuid": "9bed0e21-b630-02cb-5b85-8f568f068eaa",
+            "uuid": "648cb8e1-34dc-133e-c147-58017d41f163"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 18.0,
+                                "y": 23.0
+                            }
+                        },
+                        "position": {
                             "x": 1003.0349731445313,
                             "y": -2.246999979019165,
                             "z": 0.0001087188720703125
@@ -1723,146 +2283,6 @@
             "name": "Framerate_RightArrow",
             "parent_uuid": "de8ac63d-fed9-d381-3637-7981e952ccf3",
             "uuid": "53be2f3d-6364-73f2-52bd-e072486a8c87"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 30.0,
-                                "y": 35.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.0,
-                            "y": -6.00018310546875,
-                            "z": -7.709728240966797
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "e5f69d4d-aa05-f0b8-6831-bd641a163a04"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "4951d656-d17a-8ef3-60c9-884ea0ff44fa",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "574f119b-219b-70a5-c223-4cf7f03e2156"
-                }
-            ],
-            "name": "Framerate_RightArrow_Hovered",
-            "parent_uuid": "53be2f3d-6364-73f2-52bd-e072486a8c87",
-            "uuid": "c441094f-2573-9b37-a5c5-a73d32c0851d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 18.0,
-                                "y": 23.0
-                            }
-                        },
-                        "position": {
-                            "x": 770.6719970703125,
-                            "y": 11.253000259399414,
-                            "z": 3.814697265625e-06
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ea408e75-98b6-fff4-ce4b-cb7304d1f04d"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "fa9be7eb-f9fa-c3cd-e94f-6e8c2575feec",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "da478a7d-a9a3-bc8d-69b2-95bb467b4e7c"
-                }
-            ],
-            "name": "VSync_LeftArrow",
-            "parent_uuid": "0817c709-23bc-8200-ca2d-46234bfd4967",
-            "uuid": "01e2259e-6494-f9ac-2318-5d9aac110060"
         },
         {
             "active": true,
@@ -1935,7 +2355,7 @@
             "uuid": "778f8e6b-b058-5690-98eb-7ccf8a4965b2"
         },
         {
-            "active": false,
+            "active": true,
             "components": [
                 {
                     "recttransform": {
@@ -2075,76 +2495,6 @@
             "uuid": "e0a01e15-ceb1-c3cd-38d7-3901e6ca056e"
         },
         {
-            "active": false,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 30.0,
-                                "y": 36.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.0,
-                            "y": -6.00018310546875,
-                            "z": -7.709728240966797
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "4171f4f1-93f5-4faf-418b-cf4f076557dc"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "615240f8-690e-cf7e-4fe0-ff28dda6bc21",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "827a5b70-b19a-0dd0-8007-5bdbfe88b0ca"
-                }
-            ],
-            "name": "MusicVolume_LeftArrow_Hovered",
-            "parent_uuid": "e0a01e15-ceb1-c3cd-38d7-3901e6ca056e",
-            "uuid": "6837bdcb-8585-0f9f-f6d5-2f6e27b1db24"
-        },
-        {
             "active": true,
             "components": [
                 {
@@ -2215,7 +2565,7 @@
             "uuid": "b25728b9-271c-69c4-22a2-53a9145172e3"
         },
         {
-            "active": false,
+            "active": true,
             "components": [
                 {
                     "recttransform": {
@@ -2456,7 +2806,7 @@
                             },
                             "size_delta": {
                                 "x": 57.0,
-                                "y": 35.0
+                                "y": 20.0
                             }
                         },
                         "position": {
@@ -2503,76 +2853,6 @@
         },
         {
             "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 18.0,
-                                "y": 23.0
-                            }
-                        },
-                        "position": {
-                            "x": 730.1719970703125,
-                            "y": -0.1469999998807907,
-                            "z": 3.814697265625e-06
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d03f427b-196a-e778-897e-f4d2b3b0bfd7"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "fa9be7eb-f9fa-c3cd-e94f-6e8c2575feec",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "e4250c53-7af9-f110-37ea-2af9ed945a46"
-                }
-            ],
-            "name": "MasterVolume_LeftArrow",
-            "parent_uuid": "f41915ac-0177-5fea-3213-88456b4f2035",
-            "uuid": "fa755ef1-fe2a-6e0a-801f-1e7bfd1029a8"
-        },
-        {
-            "active": false,
             "components": [
                 {
                     "recttransform": {
@@ -2735,146 +3015,6 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 30.0,
-                                "y": 35.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.0,
-                            "y": -6.00018310546875,
-                            "z": -7.709728240966797
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "9aa889a0-b16e-a8d7-1424-2e64872b77fd"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "4951d656-d17a-8ef3-60c9-884ea0ff44fa",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "55673fd3-5294-e4d9-a134-f1f9ea947eb2"
-                }
-            ],
-            "name": "MasterVolume_RightArrow_Hovered",
-            "parent_uuid": "fdf35be8-38f3-758f-448b-0683cc992a5f",
-            "uuid": "92f26664-a369-4f09-b6d5-c7407d812935"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 224.0,
-                                "y": 34.0
-                            }
-                        },
-                        "position": {
-                            "x": 34.25,
-                            "y": 18.485000610351563,
-                            "z": -2.9296774864196777
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.1292000114917755,
-                            "y": 0.1292000114917755,
-                            "z": 0.1292000114917755
-                        }
-                    },
-                    "uuid": "5f1c2f52-7c28-2633-ce3b-989396f2bd9f"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "cec05115-b393-d804-b392-dfd9652a772a",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "ecf8b334-4397-8d93-2ade-752199bd82c7"
-                }
-            ],
-            "name": "SfxVolume",
-            "parent_uuid": "b51aef64-1c68-e8a2-8a81-39788b0345a0",
-            "uuid": "9bed0e21-b630-02cb-5b85-8f568f068eaa"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
                                 "x": 236.0,
                                 "y": 46.0
                             }
@@ -2953,7 +3093,7 @@
                             },
                             "size_delta": {
                                 "x": 57.0,
-                                "y": 35.0
+                                "y": 19.0
                             }
                         },
                         "position": {
@@ -3000,76 +3140,6 @@
         },
         {
             "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 18.0,
-                                "y": 23.0
-                            }
-                        },
-                        "position": {
-                            "x": 726.4719848632813,
-                            "y": -0.1469999998807907,
-                            "z": 3.814697265625e-06
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "b49c8fc0-1c39-6c36-ac44-227cdfa74917"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "fa9be7eb-f9fa-c3cd-e94f-6e8c2575feec",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "1884aa5f-21a0-0886-6b8e-b780ce4ab495"
-                }
-            ],
-            "name": "SfxVolume_LeftArrow",
-            "parent_uuid": "9bed0e21-b630-02cb-5b85-8f568f068eaa",
-            "uuid": "648cb8e1-34dc-133e-c147-58017d41f163"
-        },
-        {
-            "active": false,
             "components": [
                 {
                     "recttransform": {
@@ -3140,76 +3210,6 @@
         },
         {
             "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 18.0,
-                                "y": 23.0
-                            }
-                        },
-                        "position": {
-                            "x": 940.4349975585938,
-                            "y": -3.8469998836517334,
-                            "z": 0.0001087188720703125
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d155c772-28b4-8489-a6be-e2a8e805a87d"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "85f149a2-f202-44d3-1ed7-fab14fa22827",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "4c7f8cc0-6c63-994a-12b8-6778ba50a407"
-                }
-            ],
-            "name": "SfxVolume_RightArrow",
-            "parent_uuid": "9bed0e21-b630-02cb-5b85-8f568f068eaa",
-            "uuid": "ddcc8cf2-de4e-fee6-9bc6-255c927c4405"
-        },
-        {
-            "active": false,
             "components": [
                 {
                     "recttransform": {
