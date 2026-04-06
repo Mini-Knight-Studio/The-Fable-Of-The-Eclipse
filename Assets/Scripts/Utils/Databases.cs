@@ -48,6 +48,7 @@ public static class GlobalDatabase
         public PuzzlesData Puzzles { get; } = new PuzzlesData();
         public SettingsData Settings { get; } = new SettingsData();
         public PlayerData Player { get; } = new PlayerData();
+        public MainMenuData MainMenu { get; } = new MainMenuData();
 
     }
 }

@@ -169,8 +169,15 @@ class MainMenu : Component
         preMainMenuDelayTimer += Time.deltaTime;
         preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
 
-        if (preMainMenuDelayTimer < preMainMenuDelay)
-            return;
+        if (!GlobalDatabase.Data.MainMenu.hasPlayedIntro)
+        {
+            if (preMainMenuDelayTimer < preMainMenuDelay)
+                return;
+        }
+
+        introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
+        introBookCoverEntity.SetActive(false);
+        GlobalDatabase.Data.MainMenu.hasPlayedIntro = true;
 
         // Main Menu logic.
         HandleNavigation();
@@ -281,6 +288,7 @@ class MainMenu : Component
             }
 
             loopMusicAudioSource.Stop();
+            canCallScripts = false;
         }
     }
 
@@ -296,6 +304,11 @@ class MainMenu : Component
             if (openingMusicTimer < openingMusicDelay)
                 return;
 
+            loopMusicAudioSource.Play();
+            loopMusicHasPlayed = true;
+        }
+        else if (GlobalDatabase.Data.MainMenu.hasPlayedIntro)
+        {
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
