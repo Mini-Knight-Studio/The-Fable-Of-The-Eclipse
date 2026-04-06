@@ -37,7 +37,7 @@ class Slime : Enemy
         SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance * SlimeStage);
         SetStage(SlimeStage);
         int EnemyLayer = Collisions.GetLayerBit("Player");
-        int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
+        int PlayerHitLayer = Collisions.GetLayerBit("PlayerTrigger");
         LayerOverride = EnemyLayer | PlayerHitLayer;
         spawn = false;
         isSpawning = false;

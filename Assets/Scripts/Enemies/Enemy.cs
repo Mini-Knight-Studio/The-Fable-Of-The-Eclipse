@@ -10,6 +10,7 @@ public class Enemy : Component
     protected Movement movement;
     protected BoxCollider attackBox;
     protected BoxCollider collision;
+    protected BoxCollider hitbox;
     protected TemporalEffect effect;
 
     protected Player target;
@@ -34,7 +35,7 @@ public class Enemy : Component
         //Temporal
         if(target.Combat.TemporalFunctionIsAttacking())
         {
-            if (collision.IsColliding)
+            if (hitbox.IsColliding)
                 Hit(1);
         }
         //
@@ -49,6 +50,12 @@ public class Enemy : Component
         collision = entity.GetComponent<BoxCollider>();
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
         effect = entity.GetComponent<TemporalEffect>();
+
+        foreach(Entity child in entity.GetChildren())
+        {
+            if(child.Name == "AttackBox") attackBox = child.GetComponent<BoxCollider>();
+            if(child.Name == "Hitbox") hitbox = child.GetComponent<BoxCollider>();
+        }
 
         health.Init();
         wanderRange = false;
@@ -177,7 +184,8 @@ public class Enemy : Component
         RaycastHit hit;
 
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
-        int LayerMask = WallLayer;
+        int Wall2Layer = Collisions.GetLayerBit("EnemyLimit");
+        int LayerMask = WallLayer | Wall2Layer;
 
         if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask))
         {
