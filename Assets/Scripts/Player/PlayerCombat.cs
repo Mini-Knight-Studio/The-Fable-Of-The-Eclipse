@@ -51,6 +51,7 @@ public class PlayerCombat : Component
                 attackTimer = attackCooldown + hitboxDuration;
                 attackSfxSource.Play();
                 swordTrigger.entity.SetActive(true);
+
             }
         }
     }
