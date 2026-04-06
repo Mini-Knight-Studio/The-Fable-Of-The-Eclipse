@@ -36,7 +36,9 @@ public class Enemy : Component
         if(target.Combat.TemporalFunctionIsAttacking())
         {
             if (hitbox.IsColliding)
+            {
                 Hit(1);
+            }
         }
         //
     }
@@ -64,7 +66,7 @@ public class Enemy : Component
         attackCooldown = attack_cooldown;
         attackPreparationTime = attack_preparation_time;
         attackReachDistance = attack_reach_distance;
-
+        internal_hit_cooldown = 0.0f;
         target = Entity.FindEntityByName("Player").GetComponent<Player>();
     }
     #endregion
@@ -170,6 +172,7 @@ public class Enemy : Component
         if (OnHitCooldown() || !health.canBeDamaged) return;
         StartHitCooldown(target.Combat.GetAttackDuration());
         health.Damage(points);
+        Debug.Log(health.GetActualHealth());
         movement.Push(points * 10 - health.maxHealth, 0.3f, GetDirectionToTarget() * -1);
     }
     #endregion

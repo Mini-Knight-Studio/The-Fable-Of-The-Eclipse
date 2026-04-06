@@ -3,7 +3,7 @@ using Loopie;
 
 public class PlayerCombat : Component
 {
-    private bool isAttacking = false;
+    public bool isAttacking;
     private float attackTimer = 0f;
 
     public float attackCooldown;
@@ -45,7 +45,7 @@ public class PlayerCombat : Component
         }
         else
         {
-            if (Input.IsKeyPressed(KeyCode.J) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+            if (Input.IsKeyDown(KeyCode.J) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
             {
                 isAttacking = true;
                 attackTimer = attackCooldown + hitboxDuration;

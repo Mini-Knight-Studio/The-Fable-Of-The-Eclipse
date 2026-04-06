@@ -127,6 +127,7 @@ class Slime : Enemy
             slime_component.spawn = true;
             slime_component.isSpawning = true;
             slime_component.ResetWander();
+            slime_component.StartHitCooldown(target.Combat.GetAttackDuration());
             new_slime.SetActive(true);
         }
     }

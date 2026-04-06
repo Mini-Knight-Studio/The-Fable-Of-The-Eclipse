@@ -158,7 +158,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -336,7 +336,8 @@
                         "class_id": "PlayerCombat",
                         "fields": {
                             "attackCooldown": 1.0,
-                            "hitboxDuration": 0.5
+                            "hitboxDuration": 0.5,
+                            "isAttacking": false
                         }
                     },
                     "uuid": "ef9d3642-541a-5b38-a0c4-a7bbe2144696"
@@ -402,7 +403,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -584,7 +585,7 @@
             "uuid": "3ebe3472-6305-c082-d8ca-c9377ac27973"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "transform": {
@@ -4113,14 +4114,14 @@
                         "center": {
                             "x": 0.0,
                             "y": 0.0,
-                            "z": 0.5
+                            "z": 2.5
                         },
                         "draw_gizmo": true,
                         "exclude_mask": 0,
                         "extents": {
-                            "x": 0.5,
+                            "x": 1.0,
                             "y": 2.0,
-                            "z": 2.0
+                            "z": 4.0
                         },
                         "include_mask": 0,
                         "is_static": false,
@@ -5723,7 +5724,7 @@
                 }
             ],
             "name": "Manager",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "49f2109a-bbd2-b2fb-548a-0bfb63d447a6"
         },
         {
@@ -7563,7 +7564,7 @@
                     "transform": {
                         "euler_angles": {
                             "x": 180.0,
-                            "y": 45.02001190185547,
+                            "y": 30.0,
                             "z": 180.0
                         },
                         "position": {
@@ -7572,10 +7573,10 @@
                             "z": 59.236602783203125
                         },
                         "rotation": {
-                            "w": 0.3828447461128235,
-                            "x": -2.364645901309359e-08,
-                            "y": 0.9238126873970032,
-                            "z": -2.364645901309359e-08
+                            "w": 0.258819043636322,
+                            "x": -3.0908619663705394e-08,
+                            "y": 0.9659258127212524,
+                            "z": -3.0908619663705394e-08
                         },
                         "scale": {
                             "x": 0.9999886751174927,
@@ -10410,7 +10411,7 @@
                 }
             ],
             "name": "Level1-final",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "58a4b002-277f-cd60-3026-e22bbe51eed8"
         },
         {
@@ -12454,7 +12455,7 @@
                 }
             ],
             "name": "Enemies",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "3dc80e80-0f21-762e-882a-738760a7d261"
         },
         {
@@ -12589,7 +12590,7 @@
             "uuid": "f2c3da86-64eb-6fb2-f001-d20942a85f19"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "transform": {
@@ -14265,7 +14266,7 @@
                 }
             ],
             "name": "Level_1",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "3031880b-52d9-a236-2995-9163474bee3f"
         },
         {
@@ -15953,7 +15954,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 160.09756469726563,
+                                "x": 199.20001220703125,
                                 "y": 108.0
                             }
                         },
@@ -16011,7 +16012,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
         {
@@ -16045,7 +16046,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
         {
@@ -16079,7 +16080,7 @@
                 }
             ],
             "name": "Interactables",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816"
         },
         {
@@ -16189,7 +16190,7 @@
                 }
             ],
             "name": "VFX",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "79cc4080-68df-1a14-04c2-e79213e2e4ed"
         },
         {
@@ -19430,7 +19431,7 @@
             "uuid": "8098fac6-e06b-db16-cf05-d8e99912bbc4"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "transform": {
@@ -20492,7 +20493,7 @@
                 }
             ],
             "name": "terrain_vs2",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "84a262da-620b-9cbb-8c6f-e28cef924ac3"
         },
         {
@@ -21861,7 +21862,7 @@
                 }
             ],
             "name": "terrain_vs3",
-            "parent_uuid": "ce9f165c-d3f3-58b6-3814-9d559f626add",
+            "parent_uuid": "900d1426-83df-fac9-a0f2-f58f5e7b26a0",
             "uuid": "9a6472e2-6989-d05d-6f9e-1b5c03e7de74"
         },
         {
@@ -22293,69 +22294,6 @@
                         }
                     },
                     "uuid": "939f166e-87d3-86a6-f47d-8bb3a70ae3f8"
-                },
-                {
-                    "particlecomponent": {
-                        "0": {
-                            "active": true,
-                            "emmitertimer": 0.0,
-                            "maxparticles": 50,
-                            "name": "EnemyParticle",
-                            "particlefollowemitter": false,
-                            "particleprops": {
-                                "colorbegin": {
-                                    "a": 1.0,
-                                    "b": 1.0,
-                                    "g": 0.0,
-                                    "r": 0.0
-                                },
-                                "colorend": {
-                                    "a": 1.0,
-                                    "b": 1.0,
-                                    "g": 1.0,
-                                    "r": 0.0
-                                },
-                                "lifetime": 10.0,
-                                "position": {
-                                    "x": 0.0,
-                                    "y": 0.0,
-                                    "z": 0.0
-                                },
-                                "positionvariation": {
-                                    "x": 2.5,
-                                    "y": 0.0,
-                                    "z": 2.5
-                                },
-                                "sizebegin": 2.5,
-                                "sizeend": 2.5,
-                                "sizevariation": 2.5,
-                                "velocity": {
-                                    "x": 0.0,
-                                    "y": 0.0,
-                                    "z": 0.0
-                                },
-                                "velocityvariation": {
-                                    "x": 1.0,
-                                    "y": 1.0,
-                                    "z": 0.0
-                                }
-                            },
-                            "poolindex": 49,
-                            "position": {
-                                "x": 0.0,
-                                "y": 2.1438818293972872e-05,
-                                "z": 0.0
-                            },
-                            "positionoffset": {
-                                "x": 0.0,
-                                "y": 0.0,
-                                "z": 0.0
-                            },
-                            "spawnrate": 10
-                        },
-                        "emitterscount": 1
-                    },
-                    "uuid": "bcefad99-035f-be18-db2b-d89790d7d809"
                 }
             ],
             "name": "WaterSlime_Reference",
@@ -23715,9 +23653,64 @@
                     "uuid": "aada1a21-4b67-cb5f-e19b-bbc850958740"
                 }
             ],
-            "name": "EnemyBarrier_1",
+            "name": "EnemyBarrier",
             "parent_uuid": "58a4b002-277f-cd60-3026-e22bbe51eed8",
             "uuid": "188ca77f-6755-1391-b443-3bbcc555f065"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 1.9134301781909002e-11,
+                            "y": 4.2688682810876344e-07,
+                            "z": 3.7505262784343074e-11
+                        },
+                        "position": {
+                            "x": -1.533092975616455,
+                            "y": 0.0,
+                            "z": 6.494543075561523
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 1.6697828829261713e-13,
+                            "y": 3.725290298461914e-09,
+                            "z": 3.272951571223204e-13
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999912977218628,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "539590cc-bb08-96fb-15ab-78a813fe46c9"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 1.0,
+                            "y": 6.0,
+                            "z": -5.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 10.0,
+                            "y": 0.5,
+                            "z": 12.5
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": false,
+                        "layer_index": 10
+                    },
+                    "uuid": "222bba44-f5f5-1154-664e-ccaab2e1d4c0"
+                }
+            ],
+            "name": "Floor",
+            "parent_uuid": "58a4b002-277f-cd60-3026-e22bbe51eed8",
+            "uuid": "2c3927ce-a013-5546-4eb2-3e2618509ccf"
         }
     ]
 }
