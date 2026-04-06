@@ -133,7 +133,7 @@ class Slime : Enemy
 
     private void TestKeys()
     {
-        if (Input.IsKeyDown(KeyCode.P) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
+        if (Input.IsKeyDown(KeyCode.P))
         {
             Hit(1);
             StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
