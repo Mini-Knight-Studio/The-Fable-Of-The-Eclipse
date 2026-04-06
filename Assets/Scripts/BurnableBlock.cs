@@ -27,7 +27,7 @@ public class BurnableBlock : Component
 			isPlayerTriggerTouching = false;
 		}
 
-		if (isPlayerTriggerTouching && Input.IsKeyPressed(KeyCode.O))
+		if (isPlayerTriggerTouching && Input.IsKeyPressed(KeyCode.O) && GlobalDatabase.Data.Player.hasBurner)
 		{
 			StartCoroutine(BurnSequence());
 		}

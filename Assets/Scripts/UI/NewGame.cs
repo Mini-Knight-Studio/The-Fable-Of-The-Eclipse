@@ -10,6 +10,7 @@ class NewGame : Component
     {
         if (!Blocked)
         {
+            GlobalDatabase.Data.Player.ResetScenes();
             SceneManager.LoadSceneByID(UUID);
         }
     }

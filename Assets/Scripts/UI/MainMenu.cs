@@ -281,6 +281,7 @@ class MainMenu : Component
             }
 
             loopMusicAudioSource.Stop();
+            canCallScripts = false;
         }
     }
 
