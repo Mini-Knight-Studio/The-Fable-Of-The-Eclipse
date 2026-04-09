@@ -127,7 +127,7 @@ class PuzzleGoalSimonSays : Component
 
         if (GlobalDatabase.Data.Puzzles.Puzzle2Completed && !puzzle2Completed)
         {
-            CompletePuzzle();
+            CompletePuzzleAuto();
         }
     }
 
@@ -377,6 +377,17 @@ class PuzzleGoalSimonSays : Component
     }
 
     void CompletePuzzle()
+    {
+        if (puzzle2Completed) return;
+
+        puzzle2Completed = true;
+
+        Debug.Log("Puzzle Fully Completed!");
+
+        currentState = State.Completed;
+    }
+
+    void CompletePuzzleAuto()
     {
         if (puzzle2Completed) return;
 
