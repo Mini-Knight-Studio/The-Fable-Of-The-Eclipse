@@ -45,8 +45,8 @@ public static class GlobalDatabase
     {
         internal GlobalData() : base("globalDB") { }
 
-        public static MainMenuDatabase mainMenuDB;
-        public static SettingsDatabase settingsDB;
+        public static MainMenuDatabase mainMenuDB = new MainMenuDatabase();
+        public static SettingsDatabase settingsDB = new SettingsDatabase();
 
         public static void SaveGlobalDatabase()
         {
@@ -79,8 +79,8 @@ public static class GlobalDatabase
 // Registry
 public static class DatabaseRegistry
 {
-    public static PuzzlesDatabase puzzlesDB;
-    public static PlayerDatabase playerDB;
+    public static PuzzlesDatabase puzzlesDB = new PuzzlesDatabase();
+    public static PlayerDatabase playerDB = new PlayerDatabase();
 
     public static void SaveAll()
     {

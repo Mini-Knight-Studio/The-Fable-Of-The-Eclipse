@@ -65,6 +65,7 @@ class MainMenu : Component
     private LoadSettings loadSettingsScript;
 
     private bool settingsLoaded = false;
+    private bool globalDatabaseLoaded = false;
 
     void OnCreate()
     {
@@ -174,17 +175,24 @@ class MainMenu : Component
         {
             Debug.Log("Error: There is no LoadSettings Entity assigned.");
         }
+
+        
     }
     void OnUpdate()
     {
-        // Load Settings
-        GlobalDatabase.GlobalData.LoadGlobalDatabase();
-        if (GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault == false)
+        if (!globalDatabaseLoaded)
         {
-            if (!settingsLoaded)
+            globalDatabaseLoaded = true;
+            GlobalDatabase.GlobalData.LoadGlobalDatabase();
+
+            // Load Settings
+            if (GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault == false)
             {
-                loadSettingsScript.ImportSettings();
-                settingsLoaded = true;
+                if (!settingsLoaded)
+                {
+                    loadSettingsScript.ImportSettings();
+                    settingsLoaded = true;
+                }
             }
         }
 
@@ -194,14 +202,14 @@ class MainMenu : Component
         preMainMenuDelayTimer += Time.deltaTime;
         preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
 
-        if (GlobalDatabase.GlobalData.mainMenuDB.Settings.hasPlayedIntro == false)
+        if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro == false)
         {
             if (preMainMenuDelayTimer < preMainMenuDelay)
                 return;
 
             introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
             introBookCoverEntity.SetActive(false);
-            GlobalDatabase.GlobalData.mainMenuDB.Settings.hasPlayedIntro = true;
+            GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro = true;
             GlobalDatabase.GlobalData.SaveGlobalDatabase();
         }
 
@@ -333,7 +341,7 @@ class MainMenu : Component
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
-        else if (GlobalDatabase.Data.MainMenu.hasPlayedIntro)
+        else if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro)
         {
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
