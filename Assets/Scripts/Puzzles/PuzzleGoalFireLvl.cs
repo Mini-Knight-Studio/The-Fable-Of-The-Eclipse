@@ -1,7 +1,7 @@
 using System;
 using Loopie;
 
-class PuzzleGoal : Component
+class PuzzleGoalFireLvl : Component
 {
     private MovingPillar[] pillars;
     private bool[] pillarTriggered;
@@ -9,7 +9,6 @@ class PuzzleGoal : Component
     public Entity Pillar1;
     public Entity Pillar2;
     public Entity Pillar3;
-    public Entity Pillar4;
 
     public Entity Gem;
 
@@ -25,17 +24,16 @@ class PuzzleGoal : Component
     private bool isMoving = false;
     private int pendingMoves = 0;
 
-    private bool puzzle1Completed;
+    private bool puzzle3Completed;
 
     void OnCreate()
     {
-        pillars = new MovingPillar[4];
-        pillarTriggered = new bool[4];
+        pillars = new MovingPillar[3];
+        pillarTriggered = new bool[3];
 
         pillars[0] = Pillar1.GetComponent<MovingPillar>();
         pillars[1] = Pillar2.GetComponent<MovingPillar>();
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
-        pillars[3] = Pillar4.GetComponent<MovingPillar>();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
     }
@@ -75,21 +73,21 @@ class PuzzleGoal : Component
             }
         }
 
-        if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed && !puzzle1Completed)
+        if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed && !puzzle3Completed)
         {
-            puzzle1Completed = true;
+            puzzle3Completed = true;
             
             CompletePuzzleAuto();
 
-            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
-            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
+            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
         }
 
-        if (allOnGoal && !puzzle1Completed)
+        if (allOnGoal && !puzzle3Completed)
         {
-            puzzle1Completed = true;
+            puzzle3Completed = true;
 
-            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed = true;
 
             Gem.GetComponent<BoxCollider>().SetActive(true);
         }
@@ -98,8 +96,7 @@ class PuzzleGoal : Component
         {
             Gem.SetActive(false);
 
-            DatabaseRegistry.playerDB.Player.gemEarthCollected = true;
-            DatabaseRegistry.playerDB.Player.hasBurner = true;
+            DatabaseRegistry.playerDB.Player.gemFireCollected = true;
         }
     }
 
@@ -138,6 +135,5 @@ class PuzzleGoal : Component
         Pillar1.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
     }
 };

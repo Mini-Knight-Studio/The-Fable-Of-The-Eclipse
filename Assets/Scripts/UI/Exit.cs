@@ -9,8 +9,8 @@ class Exit : Component
     {
         if (!Blocked)
         {
-            // Exit Function
             Debug.Log("Exit Success");
+            Application.Quit();
         }
     }
 };

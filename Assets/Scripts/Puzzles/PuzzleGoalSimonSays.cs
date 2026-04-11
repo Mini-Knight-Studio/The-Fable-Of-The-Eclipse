@@ -125,9 +125,9 @@ class PuzzleGoalSimonSays : Component
                 break;
         }
 
-        if (GlobalDatabase.Data.Puzzles.Puzzle2Completed && !puzzle2Completed)
+        if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed && !puzzle2Completed)
         {
-            CompletePuzzle();
+            CompletePuzzleAuto();
         }
     }
 
@@ -371,8 +371,8 @@ class PuzzleGoalSimonSays : Component
         {
             Gem.SetActive(false);
 
-            GlobalDatabase.Data.Player.gemWaterCollected = true;
-            GlobalDatabase.Data.Player.hasGrappling = true;
+            DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
+            DatabaseRegistry.playerDB.Player.hasGrappling = true;
         }
     }
 
@@ -384,10 +384,21 @@ class PuzzleGoalSimonSays : Component
 
         Debug.Log("Puzzle Fully Completed!");
 
-        GlobalDatabase.Data.Puzzles.Puzzle2Completed = true;
+        currentState = State.Completed;
+    }
 
-        Gem.SetActive(!GlobalDatabase.Data.Player.gemWaterCollected);
-        Gem.GetComponent<BoxCollider>().SetActive(!GlobalDatabase.Data.Player.gemWaterCollected);
+    void CompletePuzzleAuto()
+    {
+        if (puzzle2Completed) return;
+
+        puzzle2Completed = true;
+
+        Debug.Log("Puzzle Fully Completed!");
+
+        DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = true;
+
+        Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+        Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
 
         ResetAllPillars();
 

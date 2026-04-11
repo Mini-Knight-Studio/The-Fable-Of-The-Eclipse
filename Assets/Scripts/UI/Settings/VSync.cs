@@ -7,14 +7,14 @@ class VSync : Component
 
     void OnCreate()
     {
-        isVSync = GlobalDatabase.Data.Settings.VSync;
-        Window.VSync = GlobalDatabase.Data.Settings.VSync;
+        isVSync = GlobalDatabase.GlobalData.settingsDB.Settings.VSync;
+        Window.VSync = GlobalDatabase.GlobalData.settingsDB.Settings.VSync;
     }
 
     public void ApplyVSync()
     {
-        GlobalDatabase.Data.Settings.VSync = isVSync;
-        Window.VSync = GlobalDatabase.Data.Settings.VSync;
+        GlobalDatabase.GlobalData.settingsDB.Settings.VSync = isVSync;
+        Window.VSync = GlobalDatabase.GlobalData.settingsDB.Settings.VSync;
     }
 
     public void ToggleVSync()

@@ -7,14 +7,14 @@ public class Fullscreen : Component
 
     void OnCreate()
     {
-        isFullscreen = GlobalDatabase.Data.Settings.Fullscreen;
-        Window.Fullscreen = GlobalDatabase.Data.Settings.Fullscreen;
+        isFullscreen = GlobalDatabase.GlobalData.settingsDB.Settings.Fullscreen;
+        Window.Fullscreen = GlobalDatabase.GlobalData.settingsDB.Settings.Fullscreen;
     }
 
     public void ApplyFullscreen()
     {
-        GlobalDatabase.Data.Settings.Fullscreen = isFullscreen;
-        Window.Fullscreen = GlobalDatabase.Data.Settings.Fullscreen;
+        GlobalDatabase.GlobalData.settingsDB.Settings.Fullscreen = isFullscreen;
+        Window.Fullscreen = GlobalDatabase.GlobalData.settingsDB.Settings.Fullscreen;
     }
 
     public void ToggleFullscreen()
