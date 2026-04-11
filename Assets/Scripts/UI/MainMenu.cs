@@ -49,7 +49,7 @@ class MainMenu : Component
 
     private float inputTimer = 0f;
     private float confirmTimer = 0f;
-    
+
     private bool canCallScripts = false;
 
     // Audio
@@ -65,6 +65,7 @@ class MainMenu : Component
     private LoadSettings loadSettingsScript;
 
     private bool settingsLoaded = false;
+    private bool globalDatabaseLoaded = false;
 
     void OnCreate()
     {
@@ -174,14 +175,25 @@ class MainMenu : Component
         {
             Debug.Log("Error: There is no LoadSettings Entity assigned.");
         }
+
+        
     }
     void OnUpdate()
     {
-        GlobalDatabase.Data.Load();
-        if (GlobalDatabase.Data.Settings.AreSettingsDefault == false)
+        if (!globalDatabaseLoaded)
         {
-            loadSettingsScript.ImportSettings();
-            settingsLoaded = true;
+            globalDatabaseLoaded = true;
+            GlobalDatabase.GlobalData.LoadGlobalDatabase();
+
+            // Load Settings
+            if (GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault == false)
+            {
+                if (!settingsLoaded)
+                {
+                    loadSettingsScript.ImportSettings();
+                    settingsLoaded = true;
+                }
+            }
         }
 
         HandleMusic();
@@ -190,15 +202,16 @@ class MainMenu : Component
         preMainMenuDelayTimer += Time.deltaTime;
         preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
 
-        if (!GlobalDatabase.Data.MainMenu.hasPlayedIntro)
+        if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro == false)
         {
             if (preMainMenuDelayTimer < preMainMenuDelay)
                 return;
-        }
 
-        introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
-        introBookCoverEntity.SetActive(false);
-        GlobalDatabase.Data.MainMenu.hasPlayedIntro = true;
+            introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
+            introBookCoverEntity.SetActive(false);
+            GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro = true;
+            GlobalDatabase.GlobalData.SaveGlobalDatabase();
+        }
 
         // Main Menu logic.
         HandleNavigation();
@@ -214,11 +227,11 @@ class MainMenu : Component
             return;
         if (canCallScripts)
             return;
-        
+
         bool moved = false;
 
         // Read Input
-        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0) 
+        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0)
         {
             switch (currentButton)
             {
@@ -229,7 +242,7 @@ class MainMenu : Component
             }
             moved = true;
         }
-        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0) 
+        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0)
         {
             switch (currentButton)
             {
@@ -269,7 +282,7 @@ class MainMenu : Component
                 exitHoveredEntity.SetActive(true);
                 break;
         }
-        
+
         if (moved)
         {
             inputTimer = 0f;
@@ -317,7 +330,7 @@ class MainMenu : Component
     {
         if (loopMusicHasPlayed)
             return;
-        
+
         if (introBookCoverScript.HasOpeningMusicPlayed())
         {
             openingMusicTimer += Time.deltaTime;
@@ -328,7 +341,7 @@ class MainMenu : Component
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
-        else if (GlobalDatabase.Data.MainMenu.hasPlayedIntro)
+        else if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro)
         {
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;

@@ -15,16 +15,16 @@ class InitialPlayerPositionManager : Component
     public Entity player;
     void OnCreate()
     {
-        GlobalDatabase.Data.Player.SetCurrentScene(level1SceneUUID);
+        DatabaseRegistry.playerDB.Player.SetCurrentScene(level1SceneUUID);
 
-        if(GlobalDatabase.Data.Player.previousSceneUUID == puzzle1SceneUUID)
+        if(DatabaseRegistry.playerDB.Player.previousSceneUUID == puzzle1SceneUUID)
         {
             puzzleToLvl1PlayerPos.y = player.transform.local_position.y;
 
             player.transform.local_position = puzzleToLvl1PlayerPos;
             player.transform.local_rotation = puzzleToLvl1PlayerRot;
         }
-        else if (GlobalDatabase.Data.Player.previousSceneUUID == level2SceneUUID)
+        else if (DatabaseRegistry.playerDB.Player.previousSceneUUID == level2SceneUUID)
         {
             Lvl2ToLvl1PlayerPos.y = player.transform.local_position.y;
 

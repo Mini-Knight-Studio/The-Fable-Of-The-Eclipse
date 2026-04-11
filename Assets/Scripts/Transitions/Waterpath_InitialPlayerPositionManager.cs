@@ -15,16 +15,16 @@ class Waterpath_InitialPlayerPositionManager : Component
     public Entity player;
     void OnCreate()
     {
-        GlobalDatabase.Data.Player.SetCurrentScene(waterpathUUID);
+        DatabaseRegistry.playerDB.Player.SetCurrentScene(waterpathUUID);
 
-        if(GlobalDatabase.Data.Player.previousSceneUUID == puzzleSceneUUID)
+        if(DatabaseRegistry.playerDB.Player.previousSceneUUID == puzzleSceneUUID)
         {
             FromPuzzlePlayerPos.y = player.transform.local_position.y;
 
             player.transform.local_position = FromPuzzlePlayerPos;
             player.transform.local_rotation = FromPuzzlePlayerRot;
         }
-        else if (GlobalDatabase.Data.Player.previousSceneUUID == level2SceneUUID)
+        else if (DatabaseRegistry.playerDB.Player.previousSceneUUID == level2SceneUUID)
         {
             FromLvl2PlayerPos.y = player.transform.local_position.y;
 

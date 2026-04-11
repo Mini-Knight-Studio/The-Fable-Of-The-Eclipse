@@ -7,14 +7,14 @@ class Framerate : Component
 
     void OnCreate()
     {
-        framerate = GlobalDatabase.Data.Settings.Framerate;
-        Window.TargetFramerate = GlobalDatabase.Data.Settings.Framerate;
+        framerate = GlobalDatabase.GlobalData.settingsDB.Settings.Framerate;
+        Window.TargetFramerate = GlobalDatabase.GlobalData.settingsDB.Settings.Framerate;
     }
 
     public void ApplyFramerate()
     {
-        GlobalDatabase.Data.Settings.Framerate = framerate;
-        Window.TargetFramerate = GlobalDatabase.Data.Settings.Framerate;
+        GlobalDatabase.GlobalData.settingsDB.Settings.Framerate = framerate;
+        Window.TargetFramerate = GlobalDatabase.GlobalData.settingsDB.Settings.Framerate;
     }
 
     public void IncreaseFramerate()
