@@ -10,6 +10,7 @@ public class Enemy : Component
     protected Movement movement;
     protected BoxCollider attackBox;
     protected BoxCollider collision;
+    protected BoxCollider hitbox;
     protected TemporalEffect effect;
 
     protected Player target;
@@ -34,8 +35,10 @@ public class Enemy : Component
         //Temporal
         if(target.Combat.TemporalFunctionIsAttacking())
         {
-            if (collision.IsColliding)
+            if (hitbox.IsColliding)
+            {
                 Hit(1);
+            }
         }
         //
     }
@@ -50,6 +53,12 @@ public class Enemy : Component
         attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
         effect = entity.GetComponent<TemporalEffect>();
 
+        foreach(Entity child in entity.GetChildren())
+        {
+            if(child.Name == "AttackBox") attackBox = child.GetComponent<BoxCollider>();
+            if(child.Name == "Hitbox") hitbox = child.GetComponent<BoxCollider>();
+        }
+
         health.Init();
         wanderRange = false;
         ResetWander();
@@ -57,7 +66,7 @@ public class Enemy : Component
         attackCooldown = attack_cooldown;
         attackPreparationTime = attack_preparation_time;
         attackReachDistance = attack_reach_distance;
-
+        internal_hit_cooldown = 0.0f;
         target = Entity.FindEntityByName("Player").GetComponent<Player>();
     }
     #endregion
@@ -163,6 +172,7 @@ public class Enemy : Component
         if (OnHitCooldown() || !health.canBeDamaged) return;
         StartHitCooldown(target.Combat.GetAttackDuration());
         health.Damage(points);
+        Debug.Log(health.GetActualHealth());
         movement.Push(points * 10 - health.maxHealth, 0.3f, GetDirectionToTarget() * -1);
     }
     #endregion
@@ -177,7 +187,8 @@ public class Enemy : Component
         RaycastHit hit;
 
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
-        int LayerMask = WallLayer;
+        int Wall2Layer = Collisions.GetLayerBit("EnemyLimit");
+        int LayerMask = WallLayer | Wall2Layer;
 
         if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask))
         {

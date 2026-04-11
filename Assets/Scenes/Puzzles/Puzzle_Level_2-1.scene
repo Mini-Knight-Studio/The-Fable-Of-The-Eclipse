@@ -4,6 +4,76 @@
             "active": true,
             "components": [
                 {
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 25.0,
+                                "y": 7.0
+                            }
+                        },
+                        "position": {
+                            "x": 1.1690611839294434,
+                            "y": 92.08866882324219,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 2.0,
+                            "y": 2.0,
+                            "z": 2.0
+                        }
+                    },
+                    "uuid": "2e8cc70f-fcb6-0856-0b2c-5b503ae92ccf"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "a7cb3a48-179f-1c53-7c9d-84468330ad5c",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "uuid": "8d1914c3-6105-adaa-7253-a740a09b6672"
+                }
+            ],
+            "name": "Life_Bar",
+            "parent_uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3",
+            "uuid": "61822d7e-b4b2-8b04-58a0-f8a06bf826e7"
+        },
+        {
+            "active": true,
+            "components": [
+                {
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -12,8 +82,8 @@
                         },
                         "position": {
                             "x": 20.0,
-                            "y": -1.4901161193847656e-08,
-                            "z": -8.0
+                            "y": 0.0,
+                            "z": -12.0
                         },
                         "rotation": {
                             "w": 1.0,
@@ -27,155 +97,7 @@
                             "z": 0.20000000298023224
                         }
                     },
-                    "uuid": "2b084706-dd4b-51c0-a210-cfb49e7ec5a2"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "2484b504-01eb-9b16-587e-ab77d294d3b5",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "ee3c21c5-15c3-3dbd-4e4b-251d6f34c9dc"
-                },
-                {
-                    "boxcollider": {
-                        "center": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "draw_gizmo": true,
-                        "exclude_mask": 0,
-                        "extents": {
-                            "x": 6.0,
-                            "y": 1.0,
-                            "z": 6.0
-                        },
-                        "include_mask": 0,
-                        "is_static": true,
-                        "is_trigger": true,
-                        "layer_index": 0
-                    },
-                    "uuid": "c10474ce-b7f1-18d8-606f-bee4bef08c42"
-                }
-            ],
-            "name": "AirTile",
-            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
-            "uuid": "84b5b998-d514-87ed-c859-4a2dbc923019"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 40.000003814697266,
-                            "y": 45.000003814697266,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -22.816999435424805,
-                            "y": 45.0989990234375,
-                            "z": -57.632999420166016
-                        },
-                        "rotation": {
-                            "w": 0.8681627511978149,
-                            "x": 0.31598541140556335,
-                            "y": 0.3596048057079315,
-                            "z": -0.13088545203208923
-                        },
-                        "scale": {
-                            "x": 0.9999999403953552,
-                            "y": 0.9999998211860657,
-                            "z": 0.9999998807907104
-                        }
-                    },
-                    "uuid": "81e5a103-5af2-5af7-d007-c920a1424d01"
-                },
-                {
-                    "camera": {
-                        "far_plane": 300.0,
-                        "fov": 60.0,
-                        "is_main_camera": true,
-                        "near_plane": 0.30000001192092896,
-                        "ortho_size": 14.0,
-                        "projection": 1
-                    },
-                    "uuid": "08a8bf2f-9b2d-2592-d32c-ebd9395cc90d"
-                },
-                {
-                    "script": {
-                        "class_id": "PlayerCamera",
-                        "fields": {
-                            "distance": 100.0,
-                            "movementLimit": 10.0,
-                            "player": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
-                            "speed": 20.0,
-                            "timeToFocus": 50.0,
-                            "timeToFollowPlayer": 0.30000001192092896,
-                            "timeToShake": 3.0,
-                            "timeToStopFocusing": 5.0,
-                            "verticalScale": 1.2200000286102295
-                        }
-                    },
-                    "uuid": "6f335f81-6d93-2c3d-e8fb-1dc35093b9b3"
-                },
-                {
-                    "audiolistener": {},
-                    "uuid": "068f9675-8e8a-456a-b394-216c6b97431f"
-                },
-                {
-                    "audiosource": {
-                        "audioClips": {
-                            "0": "033f4d77-425c-e46f-b482-85c99020ffb8"
-                        },
-                        "currentClipIndex": 0,
-                        "isSpatial": false,
-                        "loop": true,
-                        "loopStrategy": 0,
-                        "maxDistance": 100.0,
-                        "minDistance": 2.0,
-                        "noLoopStrategy": 0,
-                        "pan": 0.0,
-                        "pitch": 1.0,
-                        "playOnAwake": true,
-                        "volume": 0.5
-                    },
-                    "uuid": "cd206996-e949-33aa-4941-10de07a07d39"
-                }
-            ],
-            "name": "PlayerCamera",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
-            "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 16.0,
-                            "y": 0.0,
-                            "z": -8.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "3e11980c-bcd9-408f-424b-fe156272c266"
+                    "uuid": "0a261db5-b483-4557-3cf0-caf5194a3312"
                 },
                 {
                     "meshrenderer": {
@@ -183,12 +105,12 @@
                         "mesh_index": 0,
                         "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
                     },
-                    "uuid": "8019de18-ebf9-a7bc-0be1-b1ccdab27eec"
+                    "uuid": "07c09ab3-c6cc-6ca6-69a0-9aaccf6788da"
                 }
             ],
-            "name": "Plane_5_1_1",
-            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
-            "uuid": "225ff386-5347-f47c-fcc5-f9ce66fd6e82"
+            "name": "Plane_5_1_2_1",
+            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
+            "uuid": "6ea53f93-e471-bc51-1961-ef6f94ff0625"
         },
         {
             "active": true,
@@ -231,6 +153,48 @@
             "name": "Plane",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "uuid": "2c965225-fbcd-f4c1-5156-5058bd156721"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 16.0,
+                            "y": 0.0,
+                            "z": -8.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "3e11980c-bcd9-408f-424b-fe156272c266"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "8019de18-ebf9-a7bc-0be1-b1ccdab27eec"
+                }
+            ],
+            "name": "Plane_5_1_1",
+            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
+            "uuid": "225ff386-5347-f47c-fcc5-f9ce66fd6e82"
         },
         {
             "active": true,
@@ -394,71 +358,86 @@
             "active": true,
             "components": [
                 {
-                    "recttransform": {
+                    "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
+                            "x": 40.000003814697266,
+                            "y": 45.000003814697266,
                             "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 25.0,
-                                "y": 7.0
-                            }
                         },
                         "position": {
-                            "x": 1.1690611839294434,
-                            "y": 92.08866882324219,
-                            "z": 0.0
+                            "x": -22.816999435424805,
+                            "y": 45.0989990234375,
+                            "z": -57.632999420166016
                         },
                         "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
+                            "w": 0.8681627511978149,
+                            "x": 0.31598541140556335,
+                            "y": 0.3596048057079315,
+                            "z": -0.13088545203208923
                         },
                         "scale": {
-                            "x": 2.0,
-                            "y": 2.0,
-                            "z": 2.0
+                            "x": 0.9999999403953552,
+                            "y": 0.9999998211860657,
+                            "z": 0.9999998807907104
                         }
                     },
-                    "uuid": "2e8cc70f-fcb6-0856-0b2c-5b503ae92ccf"
+                    "uuid": "81e5a103-5af2-5af7-d007-c920a1424d01"
                 },
                 {
-                    "image": {
-                        "texture_uuid": "a7cb3a48-179f-1c53-7c9d-84468330ad5c",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
+                    "camera": {
+                        "far_plane": 300.0,
+                        "fov": 60.0,
+                        "is_main_camera": true,
+                        "near_plane": 0.30000001192092896,
+                        "ortho_size": 14.0,
+                        "projection": 1
+                    },
+                    "uuid": "08a8bf2f-9b2d-2592-d32c-ebd9395cc90d"
+                },
+                {
+                    "script": {
+                        "class_id": "PlayerCamera",
+                        "fields": {
+                            "distance": 100.0,
+                            "movementLimit": 10.0,
+                            "player": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
+                            "speed": 20.0,
+                            "timeToFocus": 50.0,
+                            "timeToFollowPlayer": 0.30000001192092896,
+                            "timeToShake": 3.0,
+                            "timeToStopFocusing": 5.0,
+                            "verticalScale": 1.2200000286102295
                         }
                     },
-                    "uuid": "8d1914c3-6105-adaa-7253-a740a09b6672"
+                    "uuid": "6f335f81-6d93-2c3d-e8fb-1dc35093b9b3"
+                },
+                {
+                    "audiolistener": {},
+                    "uuid": "068f9675-8e8a-456a-b394-216c6b97431f"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "033f4d77-425c-e46f-b482-85c99020ffb8"
+                        },
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": true,
+                        "volume": 0.5
+                    },
+                    "uuid": "cd206996-e949-33aa-4941-10de07a07d39"
                 }
             ],
-            "name": "Life_Bar",
-            "parent_uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3",
-            "uuid": "61822d7e-b4b2-8b04-58a0-f8a06bf826e7"
+            "name": "PlayerCamera",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
+            "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
             "active": true,
@@ -472,8 +451,8 @@
                         },
                         "position": {
                             "x": 20.0,
-                            "y": 0.0,
-                            "z": -12.0
+                            "y": -1.4901161193847656e-08,
+                            "z": -8.0
                         },
                         "rotation": {
                             "w": 1.0,
@@ -487,20 +466,41 @@
                             "z": 0.20000000298023224
                         }
                     },
-                    "uuid": "0a261db5-b483-4557-3cf0-caf5194a3312"
+                    "uuid": "2b084706-dd4b-51c0-a210-cfb49e7ec5a2"
                 },
                 {
                     "meshrenderer": {
-                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
+                        "material_uuid": "2484b504-01eb-9b16-587e-ab77d294d3b5",
                         "mesh_index": 0,
                         "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
                     },
-                    "uuid": "07c09ab3-c6cc-6ca6-69a0-9aaccf6788da"
+                    "uuid": "ee3c21c5-15c3-3dbd-4e4b-251d6f34c9dc"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 6.0,
+                            "y": 1.0,
+                            "z": 6.0
+                        },
+                        "include_mask": 0,
+                        "is_static": true,
+                        "is_trigger": true,
+                        "layer_index": 0
+                    },
+                    "uuid": "c10474ce-b7f1-18d8-606f-bee4bef08c42"
                 }
             ],
-            "name": "Plane_5_1_2_1",
-            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "6ea53f93-e471-bc51-1961-ef6f94ff0625"
+            "name": "AirTile",
+            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
+            "uuid": "84b5b998-d514-87ed-c859-4a2dbc923019"
         },
         {
             "active": true,
@@ -533,7 +533,7 @@
                 }
             ],
             "name": "Environment",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
         {
@@ -695,7 +695,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -1015,6 +1015,48 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": 1.1920928955078125e-07,
+                            "y": 0.0,
+                            "z": -8.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "a65c9e9c-f55d-9f69-1f34-420e5cf55387"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "7ef3e1b9-307e-10d0-e609-4f57bc1a64af"
+                }
+            ],
+            "name": "Plane_5",
+            "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
+            "uuid": "5dbf5ee0-915a-f339-0b4a-6e5b1013ac9e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 16.0,
                             "y": 0.0,
                             "z": 4.0
@@ -1108,48 +1150,6 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 1.1920928955078125e-07,
-                            "y": 0.0,
-                            "z": -8.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "a65c9e9c-f55d-9f69-1f34-420e5cf55387"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "7ef3e1b9-307e-10d0-e609-4f57bc1a64af"
-                }
-            ],
-            "name": "Plane_5",
-            "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
-            "uuid": "5dbf5ee0-915a-f339-0b4a-6e5b1013ac9e"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
                             "y": 0.0,
                             "z": -12.960383415222168
                         },
@@ -1218,74 +1218,6 @@
             "name": "Plane_5_1_2",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "uuid": "a10591ec-8719-cef4-3140-bbb36db60f09"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -8.518467903137207
-                        },
-                        "position": {
-                            "x": 2.9802318834981634e-08,
-                            "y": 0.39441514015197754,
-                            "z": -1.4210854715202004e-14
-                        },
-                        "rotation": {
-                            "w": 0.9972382187843323,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.07426920533180237
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "49640f72-b635-2db3-668a-36ba6bc78fe7"
-                }
-            ],
-            "name": "Tail4_jt",
-            "parent_uuid": "d204ca97-80bd-5621-4be5-f64dc8a49f72",
-            "uuid": "b41f0615-1676-d375-25fb-dd6cd53a6b45"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -8.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ee8a530f-00eb-0013-65a1-10fb2e019673"
-                }
-            ],
-            "name": "CleanRow_1",
-            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d"
         },
         {
             "active": true,
@@ -1452,13 +1384,47 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
+                            "y": 0.0,
+                            "z": -8.518467903137207
+                        },
+                        "position": {
+                            "x": 2.9802318834981634e-08,
+                            "y": 0.39441514015197754,
+                            "z": -1.4210854715202004e-14
+                        },
+                        "rotation": {
+                            "w": 0.9972382187843323,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -0.07426920533180237
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "49640f72-b635-2db3-668a-36ba6bc78fe7"
+                }
+            ],
+            "name": "Tail4_jt",
+            "parent_uuid": "d204ca97-80bd-5621-4be5-f64dc8a49f72",
+            "uuid": "b41f0615-1676-d375-25fb-dd6cd53a6b45"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
                         },
                         "position": {
                             "x": 0.0,
                             "y": 0.0,
-                            "z": 0.0
+                            "z": -8.0
                         },
                         "rotation": {
                             "w": 1.0,
@@ -1472,54 +1438,12 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "65f425e8-f735-efff-ae63-72fb3f15caba"
+                    "uuid": "ee8a530f-00eb-0013-65a1-10fb2e019673"
                 }
             ],
-            "name": "Puzzle_Borders",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
-            "uuid": "666815e3-731b-f199-1238-ff869804f25c"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 20.0,
-                            "y": 0.0,
-                            "z": 4.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "242d0e4c-cfde-b250-b1cb-60e1590320c9"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "bc329d17-3a3f-28b0-6f0b-e8251fed1e6c"
-                }
-            ],
-            "name": "Plane_3_1",
+            "name": "CleanRow_1",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "95193ace-4c4e-2808-07bf-bc2fb51b1e56"
+            "uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d"
         },
         {
             "active": true,
@@ -1595,9 +1519,43 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 24.0,
+                            "x": 0.0,
                             "y": 0.0,
-                            "z": -12.0
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "65f425e8-f735-efff-ae63-72fb3f15caba"
+                }
+            ],
+            "name": "Puzzle_Borders",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
+            "uuid": "666815e3-731b-f199-1238-ff869804f25c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 20.0,
+                            "y": 0.0,
+                            "z": 4.0
                         },
                         "rotation": {
                             "w": 1.0,
@@ -1611,20 +1569,20 @@
                             "z": 0.20000000298023224
                         }
                     },
-                    "uuid": "a7186a83-f3ab-b684-728a-4813973de3cc"
+                    "uuid": "242d0e4c-cfde-b250-b1cb-60e1590320c9"
                 },
                 {
                     "meshrenderer": {
-                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
+                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
                         "mesh_index": 0,
                         "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
                     },
-                    "uuid": "e55e7336-ca77-90cf-01e0-eea19bac3086"
+                    "uuid": "bc329d17-3a3f-28b0-6f0b-e8251fed1e6c"
                 }
             ],
-            "name": "Plane_6_1_1_1",
+            "name": "Plane_3_1",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "605c7d2f-8512-69f1-48a0-5355b67dbcd2"
+            "uuid": "95193ace-4c4e-2808-07bf-bc2fb51b1e56"
         },
         {
             "active": true,
@@ -1679,6 +1637,48 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": 24.0,
+                            "y": 0.0,
+                            "z": -12.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "a7186a83-f3ab-b684-728a-4813973de3cc"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "e55e7336-ca77-90cf-01e0-eea19bac3086"
+                }
+            ],
+            "name": "Plane_6_1_1_1",
+            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
+            "uuid": "605c7d2f-8512-69f1-48a0-5355b67dbcd2"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 4.0,
                             "y": 0.0,
                             "z": 1.1920928955078125e-07
@@ -1709,6 +1709,90 @@
             "name": "Plane_2",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "uuid": "1fbaef38-b78d-54bf-09aa-4fa0c1886286"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -1.7881393432617188e-07,
+                            "y": 0.0,
+                            "z": -4.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "cf38c8d2-2ed4-e4b3-9828-e5090a48faf4"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "33e3f29a-1389-e743-f44d-8dfcf26528db"
+                }
+            ],
+            "name": "Plane_4",
+            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
+            "uuid": "3fe54f47-b515-f937-e95d-a4c710367811"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 8.0,
+                            "y": 0.0,
+                            "z": -4.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "2ecfe27c-78a9-ea9c-9fc8-1be6bba54a74"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "f6ae1972-403a-6a27-b3bd-a792b38d8b50"
+                }
+            ],
+            "name": "Plane_4_1",
+            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
+            "uuid": "01234f75-bc34-fe3c-5c5b-3c992d5aab64"
         },
         {
             "active": true,
@@ -1789,90 +1873,6 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 8.0,
-                            "y": 0.0,
-                            "z": -4.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "2ecfe27c-78a9-ea9c-9fc8-1be6bba54a74"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "f6ae1972-403a-6a27-b3bd-a792b38d8b50"
-                }
-            ],
-            "name": "Plane_4_1",
-            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "01234f75-bc34-fe3c-5c5b-3c992d5aab64"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -1.7881393432617188e-07,
-                            "y": 0.0,
-                            "z": -4.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "cf38c8d2-2ed4-e4b3-9828-e5090a48faf4"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "33e3f29a-1389-e743-f44d-8dfcf26528db"
-                }
-            ],
-            "name": "Plane_4",
-            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "3fe54f47-b515-f937-e95d-a4c710367811"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
                             "x": 12.0,
                             "y": 0.0,
                             "z": -8.0
@@ -1903,132 +1903,6 @@
             "name": "Plane_11_1",
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "uuid": "5e027124-5694-d945-d694-6cf8c4fbc97b"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 12.0,
-                            "y": 0.0,
-                            "z": -8.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "f58afd93-a75a-c53d-b798-57577f20e7c0"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "cc8b6687-a0d5-7c29-eb39-6daf82f051cf"
-                }
-            ],
-            "name": "Plane_11_1",
-            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
-            "uuid": "3d41989d-e7a3-5594-b91b-fa151dbedc9d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "22e90751-e447-6566-17d6-431c04a66610"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
-                        "mesh_index": 5,
-                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
-                    },
-                    "uuid": "948fb300-ac2e-c7d5-e925-cc4a06b93b33"
-                }
-            ],
-            "name": "pCube2",
-            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
-            "uuid": "4a64fa86-7ff6-7435-f14c-4876a2008c67"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 24.0,
-                            "y": 0.0,
-                            "z": 1.1920928955078125e-07
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "869845f9-2417-3e1e-f5e3-b0b9d30e11ec"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "321a6f6a-bb32-caa8-a36b-d307b86c9bd3"
-                }
-            ],
-            "name": "Plane_16_1_1",
-            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "52207d68-d354-3bff-ba16-2bb32fc33166"
         },
         {
             "active": true,
@@ -2159,6 +2033,132 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": 24.0,
+                            "y": 0.0,
+                            "z": 1.1920928955078125e-07
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "869845f9-2417-3e1e-f5e3-b0b9d30e11ec"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "321a6f6a-bb32-caa8-a36b-d307b86c9bd3"
+                }
+            ],
+            "name": "Plane_16_1_1",
+            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
+            "uuid": "52207d68-d354-3bff-ba16-2bb32fc33166"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 12.0,
+                            "y": 0.0,
+                            "z": -8.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "f58afd93-a75a-c53d-b798-57577f20e7c0"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "cc8b6687-a0d5-7c29-eb39-6daf82f051cf"
+                }
+            ],
+            "name": "Plane_11_1",
+            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
+            "uuid": "3d41989d-e7a3-5594-b91b-fa151dbedc9d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "22e90751-e447-6566-17d6-431c04a66610"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
+                        "mesh_index": 5,
+                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
+                    },
+                    "uuid": "948fb300-ac2e-c7d5-e925-cc4a06b93b33"
+                }
+            ],
+            "name": "pCube2",
+            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
+            "uuid": "4a64fa86-7ff6-7435-f14c-4876a2008c67"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 0.0,
                             "y": 0.0,
                             "z": 0.0
@@ -2179,7 +2179,7 @@
                 }
             ],
             "name": "PuzzleBoard",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
         {
@@ -2411,6 +2411,82 @@
                 {
                     "transform": {
                         "euler_angles": {
+                            "x": 7.460484027862549,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 3.552713678800501e-14,
+                            "y": 0.40440866351127625,
+                            "z": 2.2351748896198842e-08
+                        },
+                        "rotation": {
+                            "w": 0.9978814125061035,
+                            "x": 0.06505902111530304,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "2417a962-9b70-cd59-b25d-775504d8b98e"
+                }
+            ],
+            "name": "Chest_jt",
+            "parent_uuid": "daefac15-1bc4-c70b-5354-90c48778069b",
+            "uuid": "afeadeec-8bbf-14be-c83b-9779df046089"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 24.0,
+                            "y": 0.0,
+                            "z": 4.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "48b15368-9768-701f-53ca-b7b48e3f5927"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "918f178f-2ef9-aeea-e7ca-654c6142fe12"
+                }
+            ],
+            "name": "Plane_15_3",
+            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
+            "uuid": "89c8a3ab-5db5-8f25-ae55-f1ea47d26e22"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
                             "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
@@ -2501,82 +2577,6 @@
             "name": "Plane_16_1",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "uuid": "2f379191-f1cb-9044-25e7-50026f561022"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 7.460484027862549,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 3.552713678800501e-14,
-                            "y": 0.40440866351127625,
-                            "z": 2.2351748896198842e-08
-                        },
-                        "rotation": {
-                            "w": 0.9978814125061035,
-                            "x": 0.06505902111530304,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "2417a962-9b70-cd59-b25d-775504d8b98e"
-                }
-            ],
-            "name": "Chest_jt",
-            "parent_uuid": "daefac15-1bc4-c70b-5354-90c48778069b",
-            "uuid": "afeadeec-8bbf-14be-c83b-9779df046089"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 24.0,
-                            "y": 0.0,
-                            "z": 4.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "48b15368-9768-701f-53ca-b7b48e3f5927"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "95eb25d7-6882-b9af-34f2-496f37e4fd0d",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "918f178f-2ef9-aeea-e7ca-654c6142fe12"
-                }
-            ],
-            "name": "Plane_15_3",
-            "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
-            "uuid": "89c8a3ab-5db5-8f25-ae55-f1ea47d26e22"
         },
         {
             "active": true,
@@ -3059,6 +3059,40 @@
                 {
                     "transform": {
                         "euler_angles": {
+                            "x": 6.645066738128662,
+                            "y": 1.024207592010498,
+                            "z": -17.5052547454834
+                        },
+                        "position": {
+                            "x": 2.384185791015625e-07,
+                            "y": 0.4545093774795532,
+                            "z": 1.7881393432617188e-07
+                        },
+                        "rotation": {
+                            "w": 0.9865750074386597,
+                            "x": 0.05863719806075096,
+                            "y": 8.381903171539307e-09,
+                            "z": -0.1524188369512558
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "038dadd2-3733-785e-ab4d-61d28f6f43ec"
+                }
+            ],
+            "name": "Tail10_jt",
+            "parent_uuid": "da7cdaa0-a1d8-5218-1003-941bddbc6683",
+            "uuid": "8cb030d4-5eb9-3b7d-549f-4edf8da3c99e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
                             "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
@@ -3094,40 +3128,6 @@
             "name": "Plane_6_1",
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "uuid": "2cf053d8-2924-c2ea-b43d-d4bb22d272f1"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 6.645066738128662,
-                            "y": 1.024207592010498,
-                            "z": -17.5052547454834
-                        },
-                        "position": {
-                            "x": 2.384185791015625e-07,
-                            "y": 0.4545093774795532,
-                            "z": 1.7881393432617188e-07
-                        },
-                        "rotation": {
-                            "w": 0.9865750074386597,
-                            "x": 0.05863719806075096,
-                            "y": 8.381903171539307e-09,
-                            "z": -0.1524188369512558
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "038dadd2-3733-785e-ab4d-61d28f6f43ec"
-                }
-            ],
-            "name": "Tail10_jt",
-            "parent_uuid": "da7cdaa0-a1d8-5218-1003-941bddbc6683",
-            "uuid": "8cb030d4-5eb9-3b7d-549f-4edf8da3c99e"
         },
         {
             "active": true,
@@ -3178,32 +3178,40 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": 0.0,
-                            "z": -25.72115707397461
+                            "y": -0.0,
+                            "z": 0.0
                         },
                         "position": {
-                            "x": -2.384185791015625e-07,
-                            "y": 0.4499826431274414,
-                            "z": -7.105427357601002e-14
+                            "x": 1.1920928955078125e-07,
+                            "y": 0.0,
+                            "z": -8.0
                         },
                         "rotation": {
-                            "w": 0.97491455078125,
+                            "w": 1.0,
                             "x": 0.0,
                             "y": 0.0,
-                            "z": -0.22257938981056213
+                            "z": 0.0
                         },
                         "scale": {
-                            "x": 1.0,
+                            "x": 0.20000000298023224,
                             "y": 1.0,
-                            "z": 1.0
+                            "z": 0.20000000298023224
                         }
                     },
-                    "uuid": "7e9fdf83-1b8e-9120-bd31-57c487b53581"
+                    "uuid": "1a2df089-5773-8c54-4f55-3dd22e462190"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "069f4e50-6407-c1f0-9e72-d2fbda66ce92"
                 }
             ],
-            "name": "Tail13_jt",
-            "parent_uuid": "0bf01074-f609-2b93-3861-a8a7daf3d86f",
-            "uuid": "21a0ab0a-133a-2870-8f3f-7a3df5757538"
+            "name": "Plane_5",
+            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
+            "uuid": "74292485-8a72-50a9-dd03-dda2936b5fa3"
         },
         {
             "active": true,
@@ -3246,11 +3254,45 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
+                            "y": 0.0,
+                            "z": -25.72115707397461
+                        },
+                        "position": {
+                            "x": -2.384185791015625e-07,
+                            "y": 0.4499826431274414,
+                            "z": -7.105427357601002e-14
+                        },
+                        "rotation": {
+                            "w": 0.97491455078125,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -0.22257938981056213
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "7e9fdf83-1b8e-9120-bd31-57c487b53581"
+                }
+            ],
+            "name": "Tail13_jt",
+            "parent_uuid": "0bf01074-f609-2b93-3861-a8a7daf3d86f",
+            "uuid": "21a0ab0a-133a-2870-8f3f-7a3df5757538"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": 1.1920928955078125e-07,
+                            "x": 8.0,
                             "y": 0.0,
                             "z": -8.0
                         },
@@ -3266,7 +3308,7 @@
                             "z": 0.20000000298023224
                         }
                     },
-                    "uuid": "1a2df089-5773-8c54-4f55-3dd22e462190"
+                    "uuid": "7c36a202-53ed-e1f4-92ce-18f3ca08bc80"
                 },
                 {
                     "meshrenderer": {
@@ -3274,12 +3316,12 @@
                         "mesh_index": 0,
                         "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
                     },
-                    "uuid": "069f4e50-6407-c1f0-9e72-d2fbda66ce92"
+                    "uuid": "7830c4f8-db10-39f3-075a-221ea47824e9"
                 }
             ],
-            "name": "Plane_5",
+            "name": "Plane_5_1",
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
-            "uuid": "74292485-8a72-50a9-dd03-dda2936b5fa3"
+            "uuid": "7593e5ad-905d-5b06-b062-b9e4a2df1ac1"
         },
         {
             "active": true,
@@ -3335,48 +3377,6 @@
             "name": "Puzzle_Border_3",
             "parent_uuid": "666815e3-731b-f199-1238-ff869804f25c",
             "uuid": "761808d5-d68b-c70d-c5b2-e1bf22d1bf45"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 8.0,
-                            "y": 0.0,
-                            "z": -8.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "7c36a202-53ed-e1f4-92ce-18f3ca08bc80"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "7830c4f8-db10-39f3-075a-221ea47824e9"
-                }
-            ],
-            "name": "Plane_5_1",
-            "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
-            "uuid": "7593e5ad-905d-5b06-b062-b9e4a2df1ac1"
         },
         {
             "active": true,
@@ -3665,6 +3665,48 @@
             "uuid": "3c35e56a-545d-2e65-f322-bccae3a903ed"
         },
         {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 20.0,
+                            "y": 0.0,
+                            "z": -8.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 1.0,
+                            "z": 0.20000000298023224
+                        }
+                    },
+                    "uuid": "c5c1cc0f-3c9b-bcc2-6d41-c7efb5d4f306"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "49d4e203-9a00-beac-7995-dc89967dcf78"
+                }
+            ],
+            "name": "Plane_11_1_1",
+            "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
+            "uuid": "fb138774-67b1-03ae-44ce-1ca4bd9fdefe"
+        },
+        {
             "active": false,
             "components": [
                 {
@@ -3781,48 +3823,6 @@
             "name": "Torch_Water",
             "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
             "uuid": "4ab6267b-c4a3-76f0-1548-7949f92b6b9d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 20.0,
-                            "y": 0.0,
-                            "z": -8.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.20000000298023224,
-                            "y": 1.0,
-                            "z": 0.20000000298023224
-                        }
-                    },
-                    "uuid": "c5c1cc0f-3c9b-bcc2-6d41-c7efb5d4f306"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "e01dad29-b487-73df-7d8b-dbe0f48f9d20",
-                        "mesh_index": 0,
-                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
-                    },
-                    "uuid": "49d4e203-9a00-beac-7995-dc89967dcf78"
-                }
-            ],
-            "name": "Plane_11_1_1",
-            "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
-            "uuid": "fb138774-67b1-03ae-44ce-1ca4bd9fdefe"
         },
         {
             "active": true,
@@ -3993,6 +3993,7 @@
                     "script": {
                         "class_id": "PuzzleGoalSimonSays",
                         "fields": {
+                            "Gem": "753d2b54-8d8c-fa7e-980f-bdcce89af298",
                             "Pillar1": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
                             "Pillar2": "0dd35820-8247-5742-a616-9ea8abb14a25",
                             "Pillar3": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
@@ -4007,7 +4008,7 @@
                 }
             ],
             "name": "Puzzle_Goal",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
         {
@@ -4246,7 +4247,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3"
         },
         {
@@ -4344,6 +4345,40 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": 3.235562306570556e-32,
+                            "y": 1.5708811283111572,
+                            "z": -0.020650794729590416
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "596525ac-0ceb-5901-d314-2e8ba67d5d52"
+                }
+            ],
+            "name": "Root_jt",
+            "parent_uuid": "77f20272-60d0-59f8-efdf-b36a27527dc6",
+            "uuid": "7ba6b0c8-c00c-692a-e683-58a6991fdbff"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 0.0,
                             "y": 0.0,
                             "z": 0.0
@@ -4374,74 +4409,6 @@
             "name": "eyes",
             "parent_uuid": "83b9268c-0c1d-e038-0305-2d8247f1e7a1",
             "uuid": "6ae2cb9d-c311-54d7-e99a-892153652e8b"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 3.235562306570556e-32,
-                            "y": 1.5708811283111572,
-                            "z": -0.020650794729590416
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "596525ac-0ceb-5901-d314-2e8ba67d5d52"
-                }
-            ],
-            "name": "Root_jt",
-            "parent_uuid": "77f20272-60d0-59f8-efdf-b36a27527dc6",
-            "uuid": "7ba6b0c8-c00c-692a-e683-58a6991fdbff"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 166.4705047607422,
-                            "y": 2.231179860245902e-05,
-                            "z": 180.0
-                        },
-                        "position": {
-                            "x": -2.2889022233130163e-08,
-                            "y": 0.11166238784790039,
-                            "z": 0.2196735143661499
-                        },
-                        "rotation": {
-                            "w": 1.8820276181941153e-07,
-                            "x": -6.634221705326127e-08,
-                            "y": 0.9930381774902344,
-                            "z": 0.11779298633337021
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "f46044b0-7444-c92a-09fb-8fd412b2a5aa"
-                }
-            ],
-            "name": "Crotch_jt",
-            "parent_uuid": "7ba6b0c8-c00c-692a-e683-58a6991fdbff",
-            "uuid": "c6f28e2f-5375-5a07-39bf-0c53fbdb26dd"
         },
         {
             "active": true,
@@ -4497,6 +4464,40 @@
             "name": "pushR_Earth",
             "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
             "uuid": "6c1cda81-b840-a934-f3e0-6e5a85abdb7b"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 166.4705047607422,
+                            "y": 2.231179860245902e-05,
+                            "z": 180.0
+                        },
+                        "position": {
+                            "x": -2.2889022233130163e-08,
+                            "y": 0.11166238784790039,
+                            "z": 0.2196735143661499
+                        },
+                        "rotation": {
+                            "w": 1.8820276181941153e-07,
+                            "x": -6.634221705326127e-08,
+                            "y": 0.9930381774902344,
+                            "z": 0.11779298633337021
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f46044b0-7444-c92a-09fb-8fd412b2a5aa"
+                }
+            ],
+            "name": "Crotch_jt",
+            "parent_uuid": "7ba6b0c8-c00c-692a-e683-58a6991fdbff",
+            "uuid": "c6f28e2f-5375-5a07-39bf-0c53fbdb26dd"
         },
         {
             "active": true,
@@ -4572,18 +4573,18 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
+                            "x": 3.9735188484191895,
                             "y": -0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
+                            "x": -1.2434497875801753e-14,
+                            "y": 0.4044085741043091,
+                            "z": 6.439293542825908e-15
                         },
                         "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
+                            "w": 0.9993988871574402,
+                            "x": 0.03466854616999626,
                             "y": 0.0,
                             "z": 0.0
                         },
@@ -4593,20 +4594,12 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "a40c22c9-56b5-c916-7912-806e3a7d24e2"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
-                        "mesh_index": 2,
-                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
-                    },
-                    "uuid": "087f9562-6be8-4fd4-630b-c6baa3c48c1e"
+                    "uuid": "0f26d1eb-3788-711b-8ae6-4a22996e65e9"
                 }
             ],
-            "name": "pCube3",
-            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
-            "uuid": "a43d95b0-4078-0ff1-8fed-f46924bff383"
+            "name": "Chest_jt",
+            "parent_uuid": "dd001632-e102-a0ad-b422-ca172b5da7a0",
+            "uuid": "7eb8da60-69f2-d61c-2dd7-858a1795a86d"
         },
         {
             "active": true,
@@ -4648,18 +4641,18 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 3.9735188484191895,
+                            "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": -1.2434497875801753e-14,
-                            "y": 0.4044085741043091,
-                            "z": 6.439293542825908e-15
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                         },
                         "rotation": {
-                            "w": 0.9993988871574402,
-                            "x": 0.03466854616999626,
+                            "w": 1.0,
+                            "x": 0.0,
                             "y": 0.0,
                             "z": 0.0
                         },
@@ -4669,12 +4662,20 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "0f26d1eb-3788-711b-8ae6-4a22996e65e9"
+                    "uuid": "a40c22c9-56b5-c916-7912-806e3a7d24e2"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
+                        "mesh_index": 2,
+                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
+                    },
+                    "uuid": "087f9562-6be8-4fd4-630b-c6baa3c48c1e"
                 }
             ],
-            "name": "Chest_jt",
-            "parent_uuid": "dd001632-e102-a0ad-b422-ca172b5da7a0",
-            "uuid": "7eb8da60-69f2-d61c-2dd7-858a1795a86d"
+            "name": "pCube3",
+            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
+            "uuid": "a43d95b0-4078-0ff1-8fed-f46924bff383"
         },
         {
             "active": true,
@@ -4750,40 +4751,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": -33.52030563354492,
-                            "y": 5.15217924118042,
-                            "z": 4.134030818939209
-                        },
-                        "position": {
-                            "x": -0.029146550223231316,
-                            "y": 0.3874119520187378,
-                            "z": -0.012668710201978683
-                        },
-                        "rotation": {
-                            "w": 0.9554626941680908,
-                            "x": -0.28943932056427,
-                            "y": 0.032618410885334015,
-                            "z": 0.04745380952954292
-                        },
-                        "scale": {
-                            "x": 0.9999999403953552,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "746d7bca-f2f6-e8e4-2f6d-e1ec58b6b30f"
-                }
-            ],
-            "name": "Heel_R_jt",
-            "parent_uuid": "5591a650-04b0-0e45-fae2-b0211b9c80ea",
-            "uuid": "e9a14ed9-a642-2904-ddad-187daddff103"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": -6.6859965324401855,
                             "y": 0.0,
                             "z": 0.0
@@ -4811,6 +4778,40 @@
             "name": "Jaw_jt",
             "parent_uuid": "a0b288aa-049b-763f-8a4f-579d74e3a16a",
             "uuid": "e6f6e683-75fe-a416-4248-afd85b8de773"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": -33.52030563354492,
+                            "y": 5.15217924118042,
+                            "z": 4.134030818939209
+                        },
+                        "position": {
+                            "x": -0.029146550223231316,
+                            "y": 0.3874119520187378,
+                            "z": -0.012668710201978683
+                        },
+                        "rotation": {
+                            "w": 0.9554626941680908,
+                            "x": -0.28943932056427,
+                            "y": 0.032618410885334015,
+                            "z": 0.04745380952954292
+                        },
+                        "scale": {
+                            "x": 0.9999999403953552,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "746d7bca-f2f6-e8e4-2f6d-e1ec58b6b30f"
+                }
+            ],
+            "name": "Heel_R_jt",
+            "parent_uuid": "5591a650-04b0-0e45-fae2-b0211b9c80ea",
+            "uuid": "e9a14ed9-a642-2904-ddad-187daddff103"
         },
         {
             "active": true,
@@ -5095,6 +5096,40 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": 0.37642616033554077,
+                            "y": -0.01871805638074875,
+                            "z": -0.4165947437286377
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "3675ef77-c191-711f-7b23-9402b5e8f963"
+                }
+            ],
+            "name": "Eye_R_jt",
+            "parent_uuid": "6c07ea0a-ba2c-6add-4af6-33fa1e396cf0",
+            "uuid": "083e56c6-90c4-8d29-5f07-740d43a7dffa"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 0.0,
                             "y": 0.0,
                             "z": 0.0
@@ -5125,40 +5160,6 @@
             "name": "pCube4",
             "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
             "uuid": "b45aa3de-b0ce-98e3-5c70-66420fc81090"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.37642616033554077,
-                            "y": -0.01871805638074875,
-                            "z": -0.4165947437286377
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "3675ef77-c191-711f-7b23-9402b5e8f963"
-                }
-            ],
-            "name": "Eye_R_jt",
-            "parent_uuid": "6c07ea0a-ba2c-6add-4af6-33fa1e396cf0",
-            "uuid": "083e56c6-90c4-8d29-5f07-740d43a7dffa"
         },
         {
             "active": true,
@@ -5268,40 +5269,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": -14.298468589782715,
-                            "y": -11.798142433166504,
-                            "z": -44.793724060058594
-                        },
-                        "position": {
-                            "x": -1.9371509552001953e-07,
-                            "y": 0.3208857476711273,
-                            "z": 2.9802322387695313e-08
-                        },
-                        "rotation": {
-                            "w": 0.9076471328735352,
-                            "x": -0.15331223607063293,
-                            "y": -0.04711652547121048,
-                            "z": -0.3878815472126007
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 0.9999999403953552,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "0ca8616a-1bfb-eec5-2aa5-e2481899c564"
-                }
-            ],
-            "name": "Elbow_R_jt",
-            "parent_uuid": "fb33a284-02f5-d570-4e90-abe7bef7aae0",
-            "uuid": "dffb3793-fb84-7150-136d-1fa8e0921f6d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": -3.3268320560455322,
                             "y": -42.23992919921875,
                             "z": -3.5826938152313232
@@ -5336,67 +5303,33 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -10.793702125549316
+                            "x": -14.298468589782715,
+                            "y": -11.798142433166504,
+                            "z": -44.793724060058594
                         },
                         "position": {
-                            "x": 1.7881392011531716e-07,
-                            "y": 0.49834752082824707,
-                            "z": -2.842170943040401e-14
+                            "x": -1.9371509552001953e-07,
+                            "y": 0.3208857476711273,
+                            "z": 2.9802322387695313e-08
                         },
                         "rotation": {
-                            "w": 0.9955671429634094,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.09405359625816345
+                            "w": 0.9076471328735352,
+                            "x": -0.15331223607063293,
+                            "y": -0.04711652547121048,
+                            "z": -0.3878815472126007
                         },
                         "scale": {
                             "x": 1.0,
-                            "y": 1.0,
+                            "y": 0.9999999403953552,
                             "z": 1.0
                         }
                     },
-                    "uuid": "279f82cf-c54e-1493-0bcf-d65f4146a197"
+                    "uuid": "0ca8616a-1bfb-eec5-2aa5-e2481899c564"
                 }
             ],
-            "name": "Tail15_jt",
-            "parent_uuid": "15f59941-8ffe-4df2-3d10-1bd87cd1aa17",
-            "uuid": "3edcb29a-a9be-8211-588a-6866ec855276"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 23.901742935180664,
-                            "y": -9.510062217712402,
-                            "z": -29.063987731933594
-                        },
-                        "position": {
-                            "x": -0.008880645036697388,
-                            "y": 0.36308524012565613,
-                            "z": -0.007667034864425659
-                        },
-                        "rotation": {
-                            "w": 0.9480743408203125,
-                            "x": 0.17940884828567505,
-                            "y": -0.13028447329998016,
-                            "z": -0.2280208319425583
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 0.9999998807907104,
-                            "z": 0.9999999403953552
-                        }
-                    },
-                    "uuid": "abaf7504-482f-65e1-c6f9-bd2d0e77a623"
-                }
-            ],
-            "name": "Wrist_R_jt",
-            "parent_uuid": "cdacd7b1-9c5f-90c6-1d6d-9b9647a358e7",
-            "uuid": "c72e7ca4-456b-ac33-cee0-450c7a857c3a"
+            "name": "Elbow_R_jt",
+            "parent_uuid": "fb33a284-02f5-d570-4e90-abe7bef7aae0",
+            "uuid": "dffb3793-fb84-7150-136d-1fa8e0921f6d"
         },
         {
             "active": true,
@@ -5438,6 +5371,74 @@
                 {
                     "transform": {
                         "euler_angles": {
+                            "x": 23.901742935180664,
+                            "y": -9.510062217712402,
+                            "z": -29.063987731933594
+                        },
+                        "position": {
+                            "x": -0.008880645036697388,
+                            "y": 0.36308524012565613,
+                            "z": -0.007667034864425659
+                        },
+                        "rotation": {
+                            "w": 0.9480743408203125,
+                            "x": 0.17940884828567505,
+                            "y": -0.13028447329998016,
+                            "z": -0.2280208319425583
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999998807907104,
+                            "z": 0.9999999403953552
+                        }
+                    },
+                    "uuid": "abaf7504-482f-65e1-c6f9-bd2d0e77a623"
+                }
+            ],
+            "name": "Wrist_R_jt",
+            "parent_uuid": "cdacd7b1-9c5f-90c6-1d6d-9b9647a358e7",
+            "uuid": "c72e7ca4-456b-ac33-cee0-450c7a857c3a"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -10.793702125549316
+                        },
+                        "position": {
+                            "x": 1.7881392011531716e-07,
+                            "y": 0.49834752082824707,
+                            "z": -2.842170943040401e-14
+                        },
+                        "rotation": {
+                            "w": 0.9955671429634094,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -0.09405359625816345
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "279f82cf-c54e-1493-0bcf-d65f4146a197"
+                }
+            ],
+            "name": "Tail15_jt",
+            "parent_uuid": "15f59941-8ffe-4df2-3d10-1bd87cd1aa17",
+            "uuid": "3edcb29a-a9be-8211-588a-6866ec855276"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
                             "x": 17.06648826599121,
                             "y": 10.137292861938477,
                             "z": -1.084141558749252e-07
@@ -5465,6 +5466,108 @@
             "name": "FingersBase_R_jt",
             "parent_uuid": "c72e7ca4-456b-ac33-cee0-450c7a857c3a",
             "uuid": "1842f812-3288-6e3f-c93b-0f5ff990eeef"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.0142593383789,
+                            "y": -34.577213287353516,
+                            "z": 89.99703216552734
+                        },
+                        "position": {
+                            "x": 7.625798303934062e-08,
+                            "y": -0.1835813969373703,
+                            "z": 0.8185616731643677
+                        },
+                        "rotation": {
+                            "w": 0.32875579595565796,
+                            "x": 0.6260519027709961,
+                            "y": 0.32887911796569824,
+                            "z": 0.6259530782699585
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999999403953552,
+                            "z": 0.9999999403953552
+                        }
+                    },
+                    "uuid": "a1e287c4-c846-3302-1db2-551e1e738439"
+                }
+            ],
+            "name": "TailBase_jt",
+            "parent_uuid": "dd001632-e102-a0ad-b422-ca172b5da7a0",
+            "uuid": "3bbd7634-de5b-ae17-6926-d8887deed1ce"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": -98.80252838134766,
+                            "y": -5.505853652954102,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -3.725290298461914e-08,
+                            "y": 0.7306448221206665,
+                            "z": -9.313225746154785e-08
+                        },
+                        "rotation": {
+                            "w": 0.6500064730644226,
+                            "x": -0.7584093809127808,
+                            "y": -0.0312553308904171,
+                            "z": -0.036467842757701874
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e1376115-7252-80f9-9131-53e476667f43"
+                }
+            ],
+            "name": "Knee_L_jt",
+            "parent_uuid": "ed0db54b-334e-15fa-0dd0-bb6a070c2d4b",
+            "uuid": "56e2f3fd-f314-b71a-c958-7f1ab18d657e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 17.659189224243164,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -1.043081283569336e-07,
+                            "y": 0.10009832680225372,
+                            "z": 0.0002357959747314453
+                        },
+                        "rotation": {
+                            "w": 0.9881492257118225,
+                            "x": 0.15349626541137695,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "c1047fcb-ce8d-9416-90fb-996226c8c267"
+                }
+            ],
+            "name": "FingersMid_R_jt",
+            "parent_uuid": "1842f812-3288-6e3f-c93b-0f5ff990eeef",
+            "uuid": "acef9a73-5ec0-2a83-c64a-bf1e33ee456e"
         },
         {
             "active": true,
@@ -5514,108 +5617,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 17.659189224243164,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -1.043081283569336e-07,
-                            "y": 0.10009832680225372,
-                            "z": 0.0002357959747314453
-                        },
-                        "rotation": {
-                            "w": 0.9881492257118225,
-                            "x": 0.15349626541137695,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "c1047fcb-ce8d-9416-90fb-996226c8c267"
-                }
-            ],
-            "name": "FingersMid_R_jt",
-            "parent_uuid": "1842f812-3288-6e3f-c93b-0f5ff990eeef",
-            "uuid": "acef9a73-5ec0-2a83-c64a-bf1e33ee456e"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": -98.80252838134766,
-                            "y": -5.505853652954102,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -3.725290298461914e-08,
-                            "y": 0.7306448221206665,
-                            "z": -9.313225746154785e-08
-                        },
-                        "rotation": {
-                            "w": 0.6500064730644226,
-                            "x": -0.7584093809127808,
-                            "y": -0.0312553308904171,
-                            "z": -0.036467842757701874
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "e1376115-7252-80f9-9131-53e476667f43"
-                }
-            ],
-            "name": "Knee_L_jt",
-            "parent_uuid": "ed0db54b-334e-15fa-0dd0-bb6a070c2d4b",
-            "uuid": "56e2f3fd-f314-b71a-c958-7f1ab18d657e"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 90.0142593383789,
-                            "y": -34.577213287353516,
-                            "z": 89.99703216552734
-                        },
-                        "position": {
-                            "x": 7.625798303934062e-08,
-                            "y": -0.1835813969373703,
-                            "z": 0.8185616731643677
-                        },
-                        "rotation": {
-                            "w": 0.32875579595565796,
-                            "x": 0.6260519027709961,
-                            "y": 0.32887911796569824,
-                            "z": 0.6259530782699585
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 0.9999999403953552,
-                            "z": 0.9999999403953552
-                        }
-                    },
-                    "uuid": "a1e287c4-c846-3302-1db2-551e1e738439"
-                }
-            ],
-            "name": "TailBase_jt",
-            "parent_uuid": "dd001632-e102-a0ad-b422-ca172b5da7a0",
-            "uuid": "3bbd7634-de5b-ae17-6926-d8887deed1ce"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 12.673396110534668,
                             "y": -0.0,
                             "z": 0.0
@@ -5650,40 +5651,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 151.09906005859375,
-                            "y": 2.2311802240437828e-05,
-                            "z": 180.0
-                        },
-                        "position": {
-                            "x": 2.812062987523657e-15,
-                            "y": 0.1389838457107544,
-                            "z": 0.06814762204885483
-                        },
-                        "rotation": {
-                            "w": 1.7763952087079815e-07,
-                            "x": -9.091634467495169e-08,
-                            "y": 0.9683637022972107,
-                            "z": 0.24954301118850708
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "54a41514-0b84-5c80-c683-20c58fea2e59"
-                }
-            ],
-            "name": "Crotch_jt",
-            "parent_uuid": "d9b3f2e5-f9b0-c9a9-ddd6-a9ad31c7c9c0",
-            "uuid": "283cd72f-1ec1-c3ab-7502-2f7c70bee856"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 8.929368019104004,
                             "y": 0.8730125427246094,
                             "z": -27.591556549072266
@@ -5711,6 +5678,40 @@
             "name": "ThumbBase_R_jt",
             "parent_uuid": "c72e7ca4-456b-ac33-cee0-450c7a857c3a",
             "uuid": "46735772-08df-e10d-9a32-ab3c69916051"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 151.09906005859375,
+                            "y": 2.2311802240437828e-05,
+                            "z": 180.0
+                        },
+                        "position": {
+                            "x": 2.812062987523657e-15,
+                            "y": 0.1389838457107544,
+                            "z": 0.06814762204885483
+                        },
+                        "rotation": {
+                            "w": 1.7763952087079815e-07,
+                            "x": -9.091634467495169e-08,
+                            "y": 0.9683637022972107,
+                            "z": 0.24954301118850708
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "54a41514-0b84-5c80-c683-20c58fea2e59"
+                }
+            ],
+            "name": "Crotch_jt",
+            "parent_uuid": "d9b3f2e5-f9b0-c9a9-ddd6-a9ad31c7c9c0",
+            "uuid": "283cd72f-1ec1-c3ab-7502-2f7c70bee856"
         },
         {
             "active": true,
@@ -6058,40 +6059,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 38.92804718017578,
-                            "y": 2.512331962585449,
-                            "z": -167.40924072265625
-                        },
-                        "position": {
-                            "x": 0.42570042610168457,
-                            "y": -0.006801862269639969,
-                            "z": 0.0482994019985199
-                        },
-                        "rotation": {
-                            "w": 0.09610187262296677,
-                            "x": 0.05707462131977081,
-                            "y": -0.3288594186306,
-                            "z": -0.9377411007881165
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 0.9999999403953552,
-                            "z": 0.9999999403953552
-                        }
-                    },
-                    "uuid": "ca6535f5-ba2a-a30d-2b92-d65d6cb41c45"
-                }
-            ],
-            "name": "HipBone_R_jt",
-            "parent_uuid": "283cd72f-1ec1-c3ab-7502-2f7c70bee856",
-            "uuid": "3e3481e1-983d-f266-c8a7-916444b97bd7"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 3.9712841510772705,
                             "y": 9.098847389221191,
                             "z": -11.532796859741211
@@ -6119,6 +6086,40 @@
             "name": "ThumbMid_L_jt",
             "parent_uuid": "881cebdd-eeb1-6b12-1c52-f0cbd1d6f209",
             "uuid": "c795752d-b174-cfe0-e748-600d5eb296da"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 38.92804718017578,
+                            "y": 2.512331962585449,
+                            "z": -167.40924072265625
+                        },
+                        "position": {
+                            "x": 0.42570042610168457,
+                            "y": -0.006801862269639969,
+                            "z": 0.0482994019985199
+                        },
+                        "rotation": {
+                            "w": 0.09610187262296677,
+                            "x": 0.05707462131977081,
+                            "y": -0.3288594186306,
+                            "z": -0.9377411007881165
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999999403953552,
+                            "z": 0.9999999403953552
+                        }
+                    },
+                    "uuid": "ca6535f5-ba2a-a30d-2b92-d65d6cb41c45"
+                }
+            ],
+            "name": "HipBone_R_jt",
+            "parent_uuid": "283cd72f-1ec1-c3ab-7502-2f7c70bee856",
+            "uuid": "3e3481e1-983d-f266-c8a7-916444b97bd7"
         },
         {
             "active": true,
@@ -6262,40 +6263,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": -26.578350067138672,
-                            "y": 3.742600917816162,
-                            "z": -10.944640159606934
-                        },
-                        "position": {
-                            "x": 1.0011717677116394e-07,
-                            "y": 1.3364295959472656,
-                            "z": 3.5390257835388184e-08
-                        },
-                        "rotation": {
-                            "w": 0.9689859747886658,
-                            "x": -0.22566550970077515,
-                            "y": 0.05354472994804382,
-                            "z": -0.08528976142406464
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d60ae5b0-a536-5a2f-665b-1256ab645b97"
-                }
-            ],
-            "name": "Ankle_R_jt",
-            "parent_uuid": "201183b6-d5fe-b700-29ac-cef18211f788",
-            "uuid": "5591a650-04b0-0e45-fae2-b0211b9c80ea"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 1.3531993627548218,
                             "y": 0.09751442819833755,
                             "z": -8.243083000183105
@@ -6323,6 +6290,40 @@
             "name": "Tail4_jt",
             "parent_uuid": "2ac4235f-222e-f3d3-e86d-b8de4e81c870",
             "uuid": "724a4f4e-2e6d-4b9e-206f-179720c1c999"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": -26.578350067138672,
+                            "y": 3.742600917816162,
+                            "z": -10.944640159606934
+                        },
+                        "position": {
+                            "x": 1.0011717677116394e-07,
+                            "y": 1.3364295959472656,
+                            "z": 3.5390257835388184e-08
+                        },
+                        "rotation": {
+                            "w": 0.9689859747886658,
+                            "x": -0.22566550970077515,
+                            "y": 0.05354472994804382,
+                            "z": -0.08528976142406464
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d60ae5b0-a536-5a2f-665b-1256ab645b97"
+                }
+            ],
+            "name": "Ankle_R_jt",
+            "parent_uuid": "201183b6-d5fe-b700-29ac-cef18211f788",
+            "uuid": "5591a650-04b0-0e45-fae2-b0211b9c80ea"
         },
         {
             "active": true,
@@ -6704,6 +6705,40 @@
                 {
                     "transform": {
                         "euler_angles": {
+                            "x": -101.10140228271484,
+                            "y": -8.205939593608491e-06,
+                            "z": -4.071110039794573e-13
+                        },
+                        "position": {
+                            "x": 1.4901161193847656e-08,
+                            "y": 0.730646014213562,
+                            "z": -1.4156103134155273e-07
+                        },
+                        "rotation": {
+                            "w": 0.6353951692581177,
+                            "x": -0.7721871733665466,
+                            "y": -4.550085463961295e-08,
+                            "z": -5.529658153591299e-08
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "3bcaffa9-26bb-8855-0bcd-c833583028c6"
+                }
+            ],
+            "name": "Knee_R_jt",
+            "parent_uuid": "f9d4d895-3704-a239-79e2-2775f8ef797d",
+            "uuid": "f2f694c7-aad9-ed43-3c2a-dbe36c9fbf79"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
                             "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
@@ -6739,40 +6774,6 @@
             "name": "pCube14",
             "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
             "uuid": "d131e820-ef1f-ffdd-c159-e081997600bf"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": -101.10140228271484,
-                            "y": -8.205939593608491e-06,
-                            "z": -4.071110039794573e-13
-                        },
-                        "position": {
-                            "x": 1.4901161193847656e-08,
-                            "y": 0.730646014213562,
-                            "z": -1.4156103134155273e-07
-                        },
-                        "rotation": {
-                            "w": 0.6353951692581177,
-                            "x": -0.7721871733665466,
-                            "y": -4.550085463961295e-08,
-                            "z": -5.529658153591299e-08
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "3bcaffa9-26bb-8855-0bcd-c833583028c6"
-                }
-            ],
-            "name": "Knee_R_jt",
-            "parent_uuid": "f9d4d895-3704-a239-79e2-2775f8ef797d",
-            "uuid": "f2f694c7-aad9-ed43-3c2a-dbe36c9fbf79"
         },
         {
             "active": true,
@@ -7073,20 +7074,20 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "ace4202a-838a-11a2-22f3-546bbd374468"
+                    "uuid": "28ee0006-a7ac-233d-3a52-6b6f69023346"
                 },
                 {
                     "meshrenderer": {
-                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
-                        "mesh_index": 16,
-                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
+                        "material_uuid": "bb0eff7f-6323-1ec5-a5db-765195a772e9",
+                        "mesh_index": 1,
+                        "mesh_uuid": "6e93cd58-5200-8945-83d8-5f7cd0f63ee4"
                     },
-                    "uuid": "8311796e-5ac6-c56f-f994-c77cf54e7b8b"
+                    "uuid": "cb335ef1-c919-d87d-7e37-131db0a59669"
                 }
             ],
-            "name": "pCube16",
-            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
-            "uuid": "4dc6061b-9448-697c-8346-e765366029eb"
+            "name": "eyes",
+            "parent_uuid": "8817bf98-5611-acb6-6cca-a62e767c971c",
+            "uuid": "b4a4a7ae-50cd-87e0-f5ff-3140030fc876"
         },
         {
             "active": true,
@@ -7115,20 +7116,20 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "28ee0006-a7ac-233d-3a52-6b6f69023346"
+                    "uuid": "ace4202a-838a-11a2-22f3-546bbd374468"
                 },
                 {
                     "meshrenderer": {
-                        "material_uuid": "bb0eff7f-6323-1ec5-a5db-765195a772e9",
-                        "mesh_index": 1,
-                        "mesh_uuid": "6e93cd58-5200-8945-83d8-5f7cd0f63ee4"
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
+                        "mesh_index": 16,
+                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
                     },
-                    "uuid": "cb335ef1-c919-d87d-7e37-131db0a59669"
+                    "uuid": "8311796e-5ac6-c56f-f994-c77cf54e7b8b"
                 }
             ],
-            "name": "eyes",
-            "parent_uuid": "8817bf98-5611-acb6-6cca-a62e767c971c",
-            "uuid": "b4a4a7ae-50cd-87e0-f5ff-3140030fc876"
+            "name": "pCube16",
+            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
+            "uuid": "4dc6061b-9448-697c-8346-e765366029eb"
         },
         {
             "active": false,
@@ -7356,40 +7357,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 3.3202593326568604,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 7.105427357601002e-15,
-                            "y": 0.4183732569217682,
-                            "z": 1.4901171851988693e-08
-                        },
-                        "rotation": {
-                            "w": 0.9995802640914917,
-                            "x": 0.02897067554295063,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "160619e5-107c-ebb9-a539-a88eee4c5c82"
-                }
-            ],
-            "name": "Cleavage_jt",
-            "parent_uuid": "afeadeec-8bbf-14be-c83b-9779df046089",
-            "uuid": "eacfe3b9-56b4-887e-8d4b-ea6e4b3031bb"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
@@ -7445,18 +7412,18 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": -8.417254447937012,
-                            "y": 0.0,
+                            "x": 3.3202593326568604,
+                            "y": -0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": -3.552713678800501e-15,
-                            "y": 0.19464373588562012,
-                            "z": -2.9802311729554276e-08
+                            "x": 7.105427357601002e-15,
+                            "y": 0.4183732569217682,
+                            "z": 1.4901171851988693e-08
                         },
                         "rotation": {
-                            "w": 0.9973034262657166,
-                            "x": -0.07338836789131165,
+                            "w": 0.9995802640914917,
+                            "x": 0.02897067554295063,
                             "y": 0.0,
                             "z": 0.0
                         },
@@ -7466,12 +7433,12 @@
                             "z": 1.0
                         }
                     },
-                    "uuid": "e35f2a6f-7a4f-7152-7123-9d0aed5ec10a"
+                    "uuid": "160619e5-107c-ebb9-a539-a88eee4c5c82"
                 }
             ],
-            "name": "Neck_jt",
-            "parent_uuid": "eacfe3b9-56b4-887e-8d4b-ea6e4b3031bb",
-            "uuid": "d910b47f-9848-de9f-eb16-bc12c6e967ef"
+            "name": "Cleavage_jt",
+            "parent_uuid": "afeadeec-8bbf-14be-c83b-9779df046089",
+            "uuid": "eacfe3b9-56b4-887e-8d4b-ea6e4b3031bb"
         },
         {
             "active": true,
@@ -7527,6 +7494,40 @@
             "name": "pushB_Fire",
             "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
             "uuid": "affea250-c1a7-9f50-d6b3-c7c4f9613608"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": -8.417254447937012,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -3.552713678800501e-15,
+                            "y": 0.19464373588562012,
+                            "z": -2.9802311729554276e-08
+                        },
+                        "rotation": {
+                            "w": 0.9973034262657166,
+                            "x": -0.07338836789131165,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e35f2a6f-7a4f-7152-7123-9d0aed5ec10a"
+                }
+            ],
+            "name": "Neck_jt",
+            "parent_uuid": "eacfe3b9-56b4-887e-8d4b-ea6e4b3031bb",
+            "uuid": "d910b47f-9848-de9f-eb16-bc12c6e967ef"
         },
         {
             "active": true,
@@ -8146,40 +8147,6 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 151.4776153564453,
-                            "y": -81.55242919921875,
-                            "z": -25.87489891052246
-                        },
-                        "position": {
-                            "x": -0.32691699266433716,
-                            "y": 0.096280537545681,
-                            "z": 0.051295556128025055
-                        },
-                        "rotation": {
-                            "w": 0.323527455329895,
-                            "x": 0.6792778968811035,
-                            "y": -0.3211211860179901,
-                            "z": 0.5751457810401917
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "5d3d005b-a35b-b10c-c3ee-e1ca00a8d4be"
-                }
-            ],
-            "name": "Scapula_L_jt",
-            "parent_uuid": "eacfe3b9-56b4-887e-8d4b-ea6e4b3031bb",
-            "uuid": "d6ae2c28-f0ea-15ba-6f98-659bdbfefb89"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
                             "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
@@ -8228,6 +8195,40 @@
             "name": "pushB_Water",
             "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
             "uuid": "80cf3233-9c08-195b-23e3-39fb7c730a20"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 151.4776153564453,
+                            "y": -81.55242919921875,
+                            "z": -25.87489891052246
+                        },
+                        "position": {
+                            "x": -0.32691699266433716,
+                            "y": 0.096280537545681,
+                            "z": 0.051295556128025055
+                        },
+                        "rotation": {
+                            "w": 0.323527455329895,
+                            "x": 0.6792778968811035,
+                            "y": -0.3211211860179901,
+                            "z": 0.5751457810401917
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "5d3d005b-a35b-b10c-c3ee-e1ca00a8d4be"
+                }
+            ],
+            "name": "Scapula_L_jt",
+            "parent_uuid": "eacfe3b9-56b4-887e-8d4b-ea6e4b3031bb",
+            "uuid": "d6ae2c28-f0ea-15ba-6f98-659bdbfefb89"
         },
         {
             "active": true,
@@ -8303,6 +8304,40 @@
                 {
                     "transform": {
                         "euler_angles": {
+                            "x": 34.5742073059082,
+                            "y": 28.950193405151367,
+                            "z": 33.43577575683594
+                        },
+                        "position": {
+                            "x": 0.00887712836265564,
+                            "y": 0.36309000849723816,
+                            "z": -0.007663100957870483
+                        },
+                        "rotation": {
+                            "w": 0.9068078398704529,
+                            "x": 0.20691046118736267,
+                            "y": 0.3113475441932678,
+                            "z": 0.19480808079242706
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999999403953552,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "870d6320-aa69-c8e9-2dcb-6be84521f222"
+                }
+            ],
+            "name": "Wrist_L_jt",
+            "parent_uuid": "0ead16ad-6c08-943d-2786-2234ca86ae87",
+            "uuid": "20f0ca81-8ebf-d167-146c-25a175f38c34"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
                             "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
@@ -8354,40 +8389,6 @@
             "name": "Directional Light",
             "parent_uuid": "07a093b1-5552-f8af-16ed-156f6110db5a",
             "uuid": "42f65713-a2e2-d234-6343-d798b1443267"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 34.5742073059082,
-                            "y": 28.950193405151367,
-                            "z": 33.43577575683594
-                        },
-                        "position": {
-                            "x": 0.00887712836265564,
-                            "y": 0.36309000849723816,
-                            "z": -0.007663100957870483
-                        },
-                        "rotation": {
-                            "w": 0.9068078398704529,
-                            "x": 0.20691046118736267,
-                            "y": 0.3113475441932678,
-                            "z": 0.19480808079242706
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 0.9999999403953552,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "870d6320-aa69-c8e9-2dcb-6be84521f222"
-                }
-            ],
-            "name": "Wrist_L_jt",
-            "parent_uuid": "0ead16ad-6c08-943d-2786-2234ca86ae87",
-            "uuid": "20f0ca81-8ebf-d167-146c-25a175f38c34"
         },
         {
             "active": true,
@@ -8634,6 +8635,40 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
+                            "y": 0.0,
+                            "z": -3.165785074234009
+                        },
+                        "position": {
+                            "x": -8.940696716308594e-08,
+                            "y": 0.42155882716178894,
+                            "z": 3.552713678800501e-14
+                        },
+                        "rotation": {
+                            "w": 0.999618411064148,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -0.027623170986771584
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f6c5dca7-58d2-79a3-e7d4-5dc66bc27f52"
+                }
+            ],
+            "name": "Tail2_jt",
+            "parent_uuid": "1a1e9a7b-311b-1fcc-2525-6b919bd039b5",
+            "uuid": "07a7f8eb-b8df-c93b-5553-646419310ac4"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
                         },
@@ -8668,40 +8703,6 @@
             "name": "pCube10",
             "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
             "uuid": "2f40d2ce-b8d8-6f0e-5045-4b586171aa44"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -3.165785074234009
-                        },
-                        "position": {
-                            "x": -8.940696716308594e-08,
-                            "y": 0.42155882716178894,
-                            "z": 3.552713678800501e-14
-                        },
-                        "rotation": {
-                            "w": 0.999618411064148,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.027623170986771584
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "f6c5dca7-58d2-79a3-e7d4-5dc66bc27f52"
-                }
-            ],
-            "name": "Tail2_jt",
-            "parent_uuid": "1a1e9a7b-311b-1fcc-2525-6b919bd039b5",
-            "uuid": "07a7f8eb-b8df-c93b-5553-646419310ac4"
         },
         {
             "active": true,
@@ -8914,6 +8915,40 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
+                            "y": 0.0,
+                            "z": -29.32866096496582
+                        },
+                        "position": {
+                            "x": 2.384185791015625e-07,
+                            "y": 0.4708995819091797,
+                            "z": 6.927791673660977e-14
+                        },
+                        "rotation": {
+                            "w": 0.967425525188446,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -0.25315573811531067
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "dbc69cc4-3bac-6a33-6232-e9f347ee0953"
+                }
+            ],
+            "name": "Tail12_jt",
+            "parent_uuid": "4b83be03-590f-4c5c-6ca9-b02d4cf76835",
+            "uuid": "0bf01074-f609-2b93-3861-a8a7daf3d86f"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
                         },
@@ -8970,40 +9005,6 @@
                         "euler_angles": {
                             "x": 0.0,
                             "y": 0.0,
-                            "z": -29.32866096496582
-                        },
-                        "position": {
-                            "x": 2.384185791015625e-07,
-                            "y": 0.4708995819091797,
-                            "z": 6.927791673660977e-14
-                        },
-                        "rotation": {
-                            "w": 0.967425525188446,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.25315573811531067
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "dbc69cc4-3bac-6a33-6232-e9f347ee0953"
-                }
-            ],
-            "name": "Tail12_jt",
-            "parent_uuid": "4b83be03-590f-4c5c-6ca9-b02d4cf76835",
-            "uuid": "0bf01074-f609-2b93-3861-a8a7daf3d86f"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": 0.0,
                             "z": -27.45663070678711
                         },
                         "position": {
@@ -9029,6 +9030,40 @@
             "name": "Tail14_jt",
             "parent_uuid": "21a0ab0a-133a-2870-8f3f-7a3df5757538",
             "uuid": "15f59941-8ffe-4df2-3d10-1bd87cd1aa17"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -3.576278970740532e-07,
+                            "y": 0.5386548042297363,
+                            "z": -7.105427357601002e-14
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "a38629d2-93aa-0d90-f1d1-fde295df5ba3"
+                }
+            ],
+            "name": "Tail16_jt",
+            "parent_uuid": "3edcb29a-a9be-8211-588a-6866ec855276",
+            "uuid": "24fae5f0-ea3c-697e-2926-6e4199683fdf"
         },
         {
             "active": true,
@@ -9071,40 +9106,6 @@
             "name": "pCube12",
             "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
             "uuid": "e1718a6c-e1a0-4a61-f4fa-5331b592241c"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": -3.576278970740532e-07,
-                            "y": 0.5386548042297363,
-                            "z": -7.105427357601002e-14
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "a38629d2-93aa-0d90-f1d1-fde295df5ba3"
-                }
-            ],
-            "name": "Tail16_jt",
-            "parent_uuid": "3edcb29a-a9be-8211-588a-6866ec855276",
-            "uuid": "24fae5f0-ea3c-697e-2926-6e4199683fdf"
         },
         {
             "active": true,
@@ -9167,7 +9168,7 @@
                 }
             ],
             "name": "TransitionCollider",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "3eb1f158-b046-73ec-f150-3caf405d6aba"
         },
         {
@@ -9413,7 +9414,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "07a093b1-5552-f8af-16ed-156f6110db5a"
         },
         {
@@ -9615,7 +9616,7 @@
                 }
             ],
             "name": "Pillars",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "fb076017-00ea-c384-dd59-90aafe82e22d"
         },
         {
@@ -9796,7 +9797,7 @@
                 }
             ],
             "name": "puzzleDebugger",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "39b5386b-aea9-18a2-fd63-d9a0ae1855bd"
         },
         {
@@ -9908,48 +9909,6 @@
             "name": "pushB_Earth",
             "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
             "uuid": "b5dce982-3ece-b082-e8e4-ad109902681e"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "917845b9-b8c1-a6df-08f6-fffb3b042691"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
-                        "mesh_index": 11,
-                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
-                    },
-                    "uuid": "30762a81-33d0-7621-5f9a-c6c42aa73aa8"
-                }
-            ],
-            "name": "pCube11",
-            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
-            "uuid": "7f335ed0-1b6d-b66c-7f18-9c9248469f1f"
         },
         {
             "active": true,
@@ -10094,6 +10053,48 @@
                             "z": 1.0
                         }
                     },
+                    "uuid": "917845b9-b8c1-a6df-08f6-fffb3b042691"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
+                        "mesh_index": 11,
+                        "mesh_uuid": "b7f3a33f-6707-09cc-c088-a30d8f1e80a2"
+                    },
+                    "uuid": "30762a81-33d0-7621-5f9a-c6c42aa73aa8"
+                }
+            ],
+            "name": "pCube11",
+            "parent_uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c",
+            "uuid": "7f335ed0-1b6d-b66c-7f18-9c9248469f1f"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
                     "uuid": "d3b3fd48-ef22-b877-7ce2-f294f40823b8"
                 },
                 {
@@ -10176,48 +10177,6 @@
             "name": "pushL_Fire",
             "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
             "uuid": "b4a98a1c-e163-ab67-866b-c991b579a9a4"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 1.6385393142700195,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "48711552-027b-4665-7011-163c8aefe88f"
-                },
-                {
-                    "meshrenderer": {
-                        "material_uuid": "22fe5255-d3db-6af0-097c-eee6741a4ef0",
-                        "mesh_index": 0,
-                        "mesh_uuid": "736e22e9-a782-419a-b8ce-12af62ed7b33"
-                    },
-                    "uuid": "d644b197-9828-4d7c-5f07-9f80c710d31f"
-                }
-            ],
-            "name": "pCylinder1",
-            "parent_uuid": "753d2b54-8d8c-fa7e-980f-bdcce89af298",
-            "uuid": "52f61925-4ead-4eee-65a0-4e886c14b231"
         },
         {
             "active": true,
@@ -10334,6 +10293,48 @@
             "name": "WaterPillar",
             "parent_uuid": "fb076017-00ea-c384-dd59-90aafe82e22d",
             "uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "transform": {
+                        "euler_angles": {
+                            "x": 180.0,
+                            "y": -45.0,
+                            "z": 180.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 1.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": -0.3826834559440613,
+                            "x": -5.711168071798056e-08,
+                            "y": 0.9238795042037964,
+                            "z": -5.711168071798056e-08
+                        },
+                        "scale": {
+                            "x": 0.75,
+                            "y": 0.75,
+                            "z": 0.75
+                        }
+                    },
+                    "uuid": "48711552-027b-4665-7011-163c8aefe88f"
+                },
+                {
+                    "meshrenderer": {
+                        "material_uuid": "22fe5255-d3db-6af0-097c-eee6741a4ef0",
+                        "mesh_index": 0,
+                        "mesh_uuid": "736e22e9-a782-419a-b8ce-12af62ed7b33"
+                    },
+                    "uuid": "d644b197-9828-4d7c-5f07-9f80c710d31f"
+                }
+            ],
+            "name": "pCylinder1",
+            "parent_uuid": "753d2b54-8d8c-fa7e-980f-bdcce89af298",
+            "uuid": "52f61925-4ead-4eee-65a0-4e886c14b231"
         },
         {
             "active": true,
@@ -10885,7 +10886,7 @@
                 }
             ],
             "name": "Water_Puzzle",
-            "parent_uuid": "c7b18ba7-11d5-a289-c049-c1b64469e3ec",
+            "parent_uuid": "5f48f154-d85c-5099-1c85-6c62c6339081",
             "uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c"
         },
         {
@@ -11188,9 +11189,9 @@
                 {
                     "transform": {
                         "euler_angles": {
-                            "x": 180.0,
-                            "y": -45.0,
-                            "z": 180.0
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                         },
                         "position": {
                             "x": 0.0,
@@ -11198,15 +11199,15 @@
                             "z": 0.0
                         },
                         "rotation": {
-                            "w": -0.3826834559440613,
-                            "x": -5.711168071798056e-08,
-                            "y": 0.9238795042037964,
-                            "z": -5.711168071798056e-08
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                         },
                         "scale": {
-                            "x": 0.75,
-                            "y": 0.75,
-                            "z": 0.75
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
                         }
                     },
                     "uuid": "1aeff057-40b0-acbd-1dd4-3cd2d67c9906"
@@ -11220,6 +11221,27 @@
                         }
                     },
                     "uuid": "e556956c-7ea9-160f-7335-c2e61921d7a8"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 2.0,
+                            "y": 2.0,
+                            "z": 2.0
+                        },
+                        "include_mask": 0,
+                        "is_static": true,
+                        "is_trigger": true,
+                        "layer_index": 2
+                    },
+                    "uuid": "87bf216b-8aee-713f-84fb-64728d99a1b0"
                 }
             ],
             "name": "water_gem",

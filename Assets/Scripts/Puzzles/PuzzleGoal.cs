@@ -99,7 +99,7 @@ class PuzzleGoal : Component
             Gem.SetActive(false);
 
             GlobalDatabase.Data.Player.gemEarthCollected = true;
-            GlobalDatabase.Data.Player.hasGrappling = true;
+            GlobalDatabase.Data.Player.hasBurner = true;
         }
     }
 
