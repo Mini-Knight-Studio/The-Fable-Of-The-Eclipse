@@ -73,21 +73,21 @@ class PuzzleGoalFireLvl : Component
             }
         }
 
-        if (GlobalDatabase.Data.Puzzles.Puzzle3Completed && !puzzle3Completed)
+        if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed && !puzzle3Completed)
         {
             puzzle3Completed = true;
             
             CompletePuzzleAuto();
 
-            Gem.SetActive(!GlobalDatabase.Data.Player.gemFireCollected);
-            Gem.GetComponent<BoxCollider>().SetActive(!GlobalDatabase.Data.Player.gemFireCollected);
+            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
         }
 
         if (allOnGoal && !puzzle3Completed)
         {
             puzzle3Completed = true;
 
-            GlobalDatabase.Data.Puzzles.Puzzle3Completed = true;
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed = true;
 
             Gem.GetComponent<BoxCollider>().SetActive(true);
         }
@@ -96,7 +96,7 @@ class PuzzleGoalFireLvl : Component
         {
             Gem.SetActive(false);
 
-            GlobalDatabase.Data.Player.gemFireCollected = true;
+            DatabaseRegistry.playerDB.Player.gemFireCollected = true;
         }
     }
 

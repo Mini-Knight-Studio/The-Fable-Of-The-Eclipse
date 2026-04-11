@@ -29,7 +29,7 @@ class RollingBridge : Component
     {
         if (animationFinished) return;
 
-        if(GlobalDatabase.Data.Puzzles.BridgePushedDown == true)
+        if(DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown == true)
         {
             bridgeBase.transform.local_position = finalPos;
             bridgeBase.transform.local_rotation = finalRotation;
@@ -58,7 +58,7 @@ class RollingBridge : Component
             t = 1f;
             animationFinished = true;
             blockingCollider.GetComponent<BoxCollider>().SetActive(false);
-            GlobalDatabase.Data.Puzzles.BridgePushedDown = true;
+            DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown = true;
         }
 
         Loopie.Vector3 pos = Loopie.Vector3.Lerp(standingPos, finalPos, t);
