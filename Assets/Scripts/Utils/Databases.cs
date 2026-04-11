@@ -36,6 +36,7 @@ public abstract class LocalDatabase
     }
 }
 
+// Global Database
 public static class GlobalDatabase
 {
     public static GlobalData Data { get; } = new GlobalData();
@@ -44,14 +45,74 @@ public static class GlobalDatabase
     {
         internal GlobalData() : base("globalDB") { }
 
-        // Global variables (Add as much as needed)
-        public PuzzlesData Puzzles { get; } = new PuzzlesData();
-        public SettingsData Settings { get; } = new SettingsData();
-        public PlayerData Player { get; } = new PlayerData();
-        public MainMenuData MainMenu { get; } = new MainMenuData();
+        public static MainMenuDatabase mainMenuDB;
+        public static SettingsDatabase settingsDB;
 
+        public static void SaveAll()
+        {
+            mainMenuDB.Save();
+            settingsDB.Save();
+        }
+
+        public static void LoadAll()
+        {
+            mainMenuDB.Load();
+            settingsDB.Load();
+        }
     }
 }
+
+// Registry
+public static class DatabaseRegistry
+{
+    public static PuzzlesDatabase puzzlesDB;
+    public static PlayerDatabase playerDB;
+
+    public static void SaveAll()
+    {
+        puzzlesDB.Save();
+        playerDB.Save();
+        GlobalDatabase.Data.SaveAll();
+    }
+
+    public static void LoadAll()
+    {
+        puzzlesDB.Load();
+        playerDB.Load();
+        GlobalDatabase.Data.LoadAll();
+    }
+}
+
+// Local Databases - Menus
+public class MainMenuDatabase : LocalDatabase
+{
+    public MainMenuDatabase() : base("mainMenuDB") { }
+
+    public MainMenuData MainMenu { get; } = new MainMenuData();
+}
+
+public class SettingsDatabase : LocalDatabase
+{
+    public SettingsDatabase() : base("settingsDB") { }
+
+    public SettingsData Settings { get; } = new SettingsData();
+}
+
+// Local Databases - InGame
+public class PuzzlesDatabase : LocalDatabase
+{
+    public PuzzlesDatabase() : base("puzzlesDB") { }
+
+    public PuzzlesData Puzzles { get; } = new PuzzlesData();
+}
+
+public class PlayerDatabase : LocalDatabase
+{
+    public PlayerDatabase() : base("playerDB") { }
+
+    public PlayerData Player { get; } = new PlayerData();
+}
+
 
 //public class ExampleLocalDataBase : LocalDatabase
 //{
