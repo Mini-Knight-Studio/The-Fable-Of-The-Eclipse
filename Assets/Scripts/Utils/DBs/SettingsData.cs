@@ -3,6 +3,8 @@ using Loopie;
 
 public class SettingsData
 {
+    public bool AreSettingsDefault = true;
+
     // Graphics
     public bool Fullscreen = false;
     public int Framerate = 60;
