@@ -7,13 +7,13 @@ class SfxVolume : Component
 
     void OnCreate()
     {
-        volume = GlobalDatabase.Data.Settings.SfxVolume;
+        volume = GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume;
         // Set in engine the volume.
     }
 
     public void ApplySfxVolume()
     {
-        GlobalDatabase.Data.Settings.SfxVolume = volume;
+        GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume = volume;
         // Set in engine the volume.
     }
 

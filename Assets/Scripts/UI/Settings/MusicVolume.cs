@@ -7,13 +7,13 @@ class MusicVolume : Component
 
     void OnCreate()
     {
-        volume = GlobalDatabase.Data.Settings.MusicVolume;
+        volume = GlobalDatabase.GlobalData.settingsDB.Settings.MusicVolume;
         // Set in engine the volume.
     }
 
     public void ApplyMusicVolume()
     {
-        GlobalDatabase.Data.Settings.MusicVolume = volume;
+        GlobalDatabase.GlobalData.settingsDB.Settings.MusicVolume = volume;
         // Set in engine the volume.
     }
 

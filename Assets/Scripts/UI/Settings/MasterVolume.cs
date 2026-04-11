@@ -7,13 +7,13 @@ class MasterVolume : Component
 
     void OnCreate()
     {
-        volume = GlobalDatabase.Data.Settings.MasterVolume;
+        volume = GlobalDatabase.GlobalData.settingsDB.Settings.MasterVolume;
         // Set in engine the volume.
     }
 
     public void ApplyMasterVolume()
     {
-        GlobalDatabase.Data.Settings.MasterVolume = volume;
+        GlobalDatabase.GlobalData.settingsDB.Settings.MasterVolume = volume;
         // Set in engine the volume.
     }
 
