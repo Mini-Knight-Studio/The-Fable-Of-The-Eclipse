@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 using Loopie;
 
 class MainMenu : Component
@@ -61,10 +60,16 @@ class MainMenu : Component
     private float openingMusicDelay = 21f;
     private float openingMusicTimer = 0f;
 
+    // Load
+    public Entity LoadSettingsEntity;
+    private LoadSettings loadSettingsScript;
+
+    private bool settingsLoaded = false;
+
     void OnCreate()
     {
         // Buttons
-        if (newGameEntity != null )
+        if (newGameEntity != null)
         {
             // button
 
@@ -159,10 +164,26 @@ class MainMenu : Component
         {
             Debug.Log("Error: There is no Loop Music Entity assigned.");
         }
-    }
 
+        // Load Settings
+        if (LoadSettingsEntity != null)
+        {
+            loadSettingsScript = LoadSettingsEntity.GetComponent<LoadSettings>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no LoadSettings Entity assigned.");
+        }
+    }
     void OnUpdate()
     {
+        GlobalDatabase.Data.Load();
+        if (GlobalDatabase.Data.Settings.AreSettingsDefault == false)
+        {
+            loadSettingsScript.ImportSettings();
+            settingsLoaded = true;
+        }
+
         HandleMusic();
 
         // Nullify Input while in intro.
@@ -313,4 +334,5 @@ class MainMenu : Component
             loopMusicHasPlayed = true;
         }
     }
+
 };

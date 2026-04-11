@@ -729,6 +729,9 @@ class Settings : Component
             // Apply Music Volume
             // Apply Sfx
 
+            GlobalDatabase.Data.Settings.AreSettingsDefault = false;
+            GlobalDatabase.Data.Save();
+
             applyTimer = 0f;
         }
     }

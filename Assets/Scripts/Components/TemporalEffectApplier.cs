@@ -13,14 +13,14 @@ public class TemporalEffectApplier : Component
 
     void OnUpdate()
     {
-        foreach (TemporalEffect effect in effects)
+        for (int i = 0; i < effects.Count; i++)
         {
+            TemporalEffect effect = effects[i];
             if (effect.updateMode_useFalse_timeTrue)
             {
                 effect.UpdateEffect();
             }
         }
-
         for (int i = effects.Count - 1; i >= 0; i--)
         {
             TemporalEffect effect = effects[i];
@@ -121,10 +121,12 @@ public class TemporalEffectApplier : Component
 
             if (effect.application_addFalse_multiplyTrue)
             {
-                if (effect.type == "Vector")
+                if (effect.type == "Vector3")
+                {
                     multiplier.x *= effect.pointsVector.x;
                     multiplier.y *= effect.pointsVector.y;
                     multiplier.z *= effect.pointsVector.z;
+                }
             }
 
             if (!effect.updateMode_useFalse_timeTrue)
