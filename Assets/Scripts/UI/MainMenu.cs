@@ -56,6 +56,9 @@ class MainMenu : Component
     public Entity loopMusicEntity;
     private AudioSource loopMusicAudioSource;
 
+    public Entity selectSfxEntity;
+    private AudioSource selectSfxAudioSource;
+
     private bool loopMusicHasPlayed = false;
     private float openingMusicDelay = 21f;
     private float openingMusicTimer = 0f;
@@ -166,6 +169,15 @@ class MainMenu : Component
             Debug.Log("Error: There is no Loop Music Entity assigned.");
         }
 
+        if (selectSfxEntity != null)
+        {
+            selectSfxAudioSource = selectSfxEntity.GetComponent<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Loop Music Entity assigned.");
+        }
+
         // Load Settings
         if (LoadSettingsEntity != null)
         {
@@ -173,7 +185,7 @@ class MainMenu : Component
         }
         else
         {
-            Debug.Log("Error: There is no LoadSettings Entity assigned.");
+            Debug.Log("Error: There is no SelectSfxEntity Entity assigned.");
         }
 
         
@@ -207,11 +219,16 @@ class MainMenu : Component
             if (preMainMenuDelayTimer < preMainMenuDelay)
                 return;
 
-            introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
-            introBookCoverEntity.SetActive(false);
             GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro = true;
             GlobalDatabase.GlobalData.SaveGlobalDatabase();
         }
+        else if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro == true)
+        {
+            introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
+            introBookCoverEntity.SetActive(false);
+        }
+
+        
 
         // Main Menu logic.
         HandleNavigation();
@@ -285,6 +302,7 @@ class MainMenu : Component
 
         if (moved)
         {
+            selectSfxAudioSource.Play();
             inputTimer = 0f;
         }
     }
@@ -341,7 +359,8 @@ class MainMenu : Component
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
-        else if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro)
+
+        if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro)
         {
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
