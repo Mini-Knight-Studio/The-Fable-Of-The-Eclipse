@@ -1,7 +1,8 @@
-using System;
 using Loopie;
-using System.IO;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 public abstract class LocalDatabase
 {
@@ -74,6 +75,74 @@ public static class GlobalDatabase
             DatabaseRegistry.LoadAll();
         }
     }
+}
+
+public static class PlayerPrefs
+{
+    public static PlayerPrefsData Data { get; } = new PlayerPrefsData();
+
+    public class PlayerPrefsData : LocalDatabase
+    {
+        internal PlayerPrefsData() : base("playerPrefsDB") { Load(); }
+        public Dictionary<string, string> Data = new Dictionary<string, string>();
+
+        public void SetString(string key, string value)
+        {
+            Data[key] = value;
+        }
+
+        public void SetInt(string key, int value)
+        {
+            SetString(key, value.ToString());
+        }
+
+        public void SetFloat(string key, float value)
+        {
+            SetString(key, value.ToString());
+        }
+
+        public void SetBool(string key, bool value)
+        {
+            SetString(key, value.ToString());
+        }
+
+        public string GetString(string key, string defaultValue = "")
+        {
+            return Data.TryGetValue(key, out var value) ? value : defaultValue;
+        }
+
+        public int GetInt(string key, int defaultValue = 0)
+        {
+            return int.TryParse(GetString(key), out var result) ? result : defaultValue;
+        }
+
+        public float GetFloat(string key, float defaultValue = 0f)
+        {
+            return float.TryParse(GetString(key), out var result) ? result : defaultValue;
+        }
+
+        public bool GetBool(string key, bool defaultValue = false)
+        {
+            return bool.TryParse(GetString(key), out var result) ? result : defaultValue;
+        }
+
+        public bool HasKey(string key)
+        {
+            return Data.ContainsKey(key);
+        }
+
+        public void DeleteKey(string key)
+        {
+            Data.Remove(key);
+        }
+
+        public void DeleteAll()
+        {
+            Data.Clear();
+        }
+    }
+
+
 }
 
 // Registry

@@ -3,6 +3,8 @@ using Loopie;
 
 class MainMenu : Component
 {
+    public static bool hasPlayedIntro = false;
+
     // Buttons
     public Entity newGameEntity;
     public Entity newGameHoveredEntity;
