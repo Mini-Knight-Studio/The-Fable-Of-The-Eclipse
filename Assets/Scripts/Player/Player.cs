@@ -1,6 +1,7 @@
 using System;
 using Loopie;
 
+
 public class Player : Component
 {
     public PlayerMovement Movement;
@@ -11,6 +12,8 @@ public class Player : Component
     public Health PlayerHealth;
     public PlayerCamera Camera;
     public TemporalEffectApplier Effects;
+    public Entity GrappleLine;
+    public Entity HookAnchor;
 
     void OnCreate()
     {
@@ -21,6 +24,10 @@ public class Player : Component
         Items = entity.GetComponent<PlayerItems>();
         PlayerHealth = entity.GetComponent<Health>();
         Effects = entity.GetComponent<TemporalEffectApplier>();
+        GrappleLine = Entity.FindEntityByName("GrappleLine");
+        if (GrappleLine != null) GrappleLine.SetActive(false);
+        HookAnchor = Entity.FindEntityByName("HookAnchor");
+
 
         Entity cameraEntity = Entity.FindEntityByName("PlayerCamera");
         if (cameraEntity != null)
@@ -36,5 +43,5 @@ public class Player : Component
     }
 
     void OnUpdate()
-    {    }
+    { }
 }

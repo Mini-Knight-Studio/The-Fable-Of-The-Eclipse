@@ -9,7 +9,8 @@ public class PillarTrigger : Component
     public Entity interactionPrompt;
     public Entity hookParticles;
 
-    public float hookTravelTime = 0.25f;
+    public float hookTravelTime = 0.5f;
+
     private bool isWaitingForHook = false;
     private float hookTimer = 0.0f;
 
@@ -31,31 +32,34 @@ public class PillarTrigger : Component
     {
         if (triggerZone == null || playerGrapple == null) return;
 
-        if (triggerZone.HasCollided)
+        // Cambiamos HasCollided por IsColliding para que sea una comprobación constante y real
+        if (triggerZone.IsColliding)
         {
             if (interactionPrompt != null) interactionPrompt.SetActive(true);
         }
-        else if (triggerZone.HasEndedCollision)
+        else
         {
             if (interactionPrompt != null) interactionPrompt.SetActive(false);
             isWaitingForHook = false;
         }
 
-        if (interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook && DatabaseRegistry.playerDB.Player.hasGrappling)
+        if (interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook)
         {
             isWaitingForHook = true;
             hookTimer = 0.0f;
+
             playerGrapple.RotateToTarget(entity.transform.position);
+            playerGrapple.ExecuteGrapple(this, hookTravelTime);
         }
 
         if (isWaitingForHook)
         {
             hookTimer += Time.deltaTime;
+
             if (hookTimer >= hookTravelTime)
             {
                 isWaitingForHook = false;
                 if (hookParticles != null) hookParticles.SetActive(true);
-                playerGrapple.ExecuteGrapple(this);
             }
         }
     }
