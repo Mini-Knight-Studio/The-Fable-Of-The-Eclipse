@@ -13,6 +13,7 @@ public class PillarTrigger : Component
 
     private bool isWaitingForHook = false;
     private float hookTimer = 0.0f;
+    private bool isTargeted = false;
 
     void OnCreate()
     {
@@ -32,18 +33,24 @@ public class PillarTrigger : Component
     {
         if (triggerZone == null || playerGrapple == null) return;
 
-        // Cambiamos HasCollided por IsColliding para que sea una comprobación constante y real
-        if (triggerZone.IsColliding)
+        if (triggerZone.HasCollided)
         {
-            if (interactionPrompt != null) interactionPrompt.SetActive(true);
+            Entity sensor = Entity.FindEntityByName("PlayerGrappleBox");
+
+            if (sensor != null && triggerZone.IsColliding)
+            {
+                isTargeted = true;
+                if (interactionPrompt != null) interactionPrompt.SetActive(true);
+            }
         }
-        else
+        else if (triggerZone.HasEndedCollision)
         {
+            isTargeted = false;
             if (interactionPrompt != null) interactionPrompt.SetActive(false);
             isWaitingForHook = false;
         }
 
-        if (interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook)
+        if (isTargeted && interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook)
         {
             isWaitingForHook = true;
             hookTimer = 0.0f;

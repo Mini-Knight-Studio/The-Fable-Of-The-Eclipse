@@ -54,7 +54,6 @@ public class PlayerGrapple : Component
         isGrappling = false;
         timer = 0.0f;
 
-        // SOBREESCRIBIR SIEMPRE LAS REFERENCIAS
         activePillar = pillarScript;
         pillarPos = activePillar.entity.transform.position;
         startPos = transform.position;
@@ -108,7 +107,6 @@ public class PlayerGrapple : Component
         if (player == null || player.HookAnchor == null || ropeSegments.Count == 0) return;
 
         Vector3 start = player.HookAnchor.transform.position;
-        // Usamos pillarPos que se acaba de actualizar en ExecuteGrapple
         Vector3 end = isLaunchingPhase ? Vector3.Lerp(start, pillarPos, progress) : pillarPos;
 
         Vector3 midPoint = (start + end) * 0.5f;
@@ -156,7 +154,6 @@ public class PlayerGrapple : Component
 
         if (activePillar != null) activePillar.ResetParticles();
 
-        // LIMPIEZA DE REFERENCIAS PARA EL SIGUIENTE USO
         activePillar = null;
         pillarPos = new Vector3(0.0f, 0.0f, 0.0f);
     }
