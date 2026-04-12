@@ -8,14 +8,13 @@ class MasterVolume : Component
     void OnCreate()
     {
         volume = GlobalDatabase.GlobalData.settingsDB.Settings.MasterVolume;
-        AudioMixer.SetVolume("Master",volume);
-        // Set in engine the volume.
+        AudioMixer.SetVolume("Master", AudioMixer.LinearToEngineVolume(volume));
     }
 
     public void ApplyMasterVolume()
     {
         GlobalDatabase.GlobalData.settingsDB.Settings.MasterVolume = volume;
-        // Set in engine the volume.
+        AudioMixer.SetVolume("Master", AudioMixer.LinearToEngineVolume(volume));
     }
 
     public void IncreaseVolume()

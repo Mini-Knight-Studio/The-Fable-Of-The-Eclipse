@@ -196,7 +196,6 @@ class MainMenu : Component
     {
         if (!globalDatabaseLoaded)
         {
-            globalDatabaseLoaded = true;
             GlobalDatabase.GlobalData.LoadGlobalDatabase();
 
             // Load Settings
@@ -208,6 +207,8 @@ class MainMenu : Component
                     settingsLoaded = true;
                 }
             }
+
+            globalDatabaseLoaded = true;
         }
 
         HandleMusic();
@@ -216,21 +217,18 @@ class MainMenu : Component
         preMainMenuDelayTimer += Time.deltaTime;
         preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
 
-        if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro == false)
+        if (!hasPlayedIntro)
         {
             if (preMainMenuDelayTimer < preMainMenuDelay)
                 return;
 
-            GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro = true;
-            GlobalDatabase.GlobalData.SaveGlobalDatabase();
+            hasPlayedIntro = true;
         }
-        else if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro == true)
+        else if (hasPlayedIntro)
         {
             introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
             introBookCoverEntity.SetActive(false);
         }
-
-        
 
         // Main Menu logic.
         HandleNavigation();
@@ -362,11 +360,10 @@ class MainMenu : Component
             loopMusicHasPlayed = true;
         }
 
-        if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro)
+        if (hasPlayedIntro)
         {
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
     }
-
 };

@@ -35,6 +35,47 @@ class Settings : Component
     private MasterVolume masterVolumeScript;
     private Text masterVolumeDisplayText;
 
+    // Master Volume Containers
+    private Entity masterVolumeContainer1Filled;
+    private Entity masterVolumeContainer1FilledHovered;
+    private Entity masterVolumeContainer1EmptyHovered;
+
+    private Entity masterVolumeContainer2Filled;
+    private Entity masterVolumeContainer2FilledHovered;
+    private Entity masterVolumeContainer2EmptyHovered;
+
+    private Entity masterVolumeContainer3Filled;
+    private Entity masterVolumeContainer3FilledHovered;
+    private Entity masterVolumeContainer3EmptyHovered;
+
+    private Entity masterVolumeContainer4Filled;
+    private Entity masterVolumeContainer4FilledHovered;
+    private Entity masterVolumeContainer4EmptyHovered;
+
+    private Entity masterVolumeContainer5Filled;
+    private Entity masterVolumeContainer5FilledHovered;
+    private Entity masterVolumeContainer5EmptyHovered;
+
+    private Entity masterVolumeContainer6Filled;
+    private Entity masterVolumeContainer6FilledHovered;
+    private Entity masterVolumeContainer6EmptyHovered;
+
+    private Entity masterVolumeContainer7Filled;
+    private Entity masterVolumeContainer7FilledHovered;
+    private Entity masterVolumeContainer7EmptyHovered;
+
+    private Entity masterVolumeContainer8Filled;
+    private Entity masterVolumeContainer8FilledHovered;
+    private Entity masterVolumeContainer8EmptyHovered;
+
+    private Entity masterVolumeContainer9Filled;
+    private Entity masterVolumeContainer9FilledHovered;
+    private Entity masterVolumeContainer9EmptyHovered;
+
+    private Entity masterVolumeContainer10Filled;
+    private Entity masterVolumeContainer10FilledHovered;
+    private Entity masterVolumeContainer10EmptyHovered;
+
     // Music Volume
     public Entity musicVolumeHoveredEntity;
     private Image musicVolumeHoveredImage;
@@ -43,12 +84,95 @@ class Settings : Component
     private MusicVolume musicVolumeScript;
     private Text musicVolumeDisplayText;
 
+    // Music Volume Containers
+    private Entity musicVolumeContainer1Filled;
+    private Entity musicVolumeContainer1FilledHovered;
+    private Entity musicVolumeContainer1EmptyHovered;
+
+    private Entity musicVolumeContainer2Filled;
+    private Entity musicVolumeContainer2FilledHovered;
+    private Entity musicVolumeContainer2EmptyHovered;
+
+    private Entity musicVolumeContainer3Filled;
+    private Entity musicVolumeContainer3FilledHovered;
+    private Entity musicVolumeContainer3EmptyHovered;
+
+    private Entity musicVolumeContainer4Filled;
+    private Entity musicVolumeContainer4FilledHovered;
+    private Entity musicVolumeContainer4EmptyHovered;
+
+    private Entity musicVolumeContainer5Filled;
+    private Entity musicVolumeContainer5FilledHovered;
+    private Entity musicVolumeContainer5EmptyHovered;
+
+    private Entity musicVolumeContainer6Filled;
+    private Entity musicVolumeContainer6FilledHovered;
+    private Entity musicVolumeContainer6EmptyHovered;
+
+    private Entity musicVolumeContainer7Filled;
+    private Entity musicVolumeContainer7FilledHovered;
+    private Entity musicVolumeContainer7EmptyHovered;
+
+    private Entity musicVolumeContainer8Filled;
+    private Entity musicVolumeContainer8FilledHovered;
+    private Entity musicVolumeContainer8EmptyHovered;
+
+    private Entity musicVolumeContainer9Filled;
+    private Entity musicVolumeContainer9FilledHovered;
+    private Entity musicVolumeContainer9EmptyHovered;
+
+    private Entity musicVolumeContainer10Filled;
+    private Entity musicVolumeContainer10FilledHovered;
+    private Entity musicVolumeContainer10EmptyHovered;
+
+    // Sfx Volume
     public Entity sfxVolumeHoveredEntity;
     private Image sfxVolumeHoveredImage;
     private Image sfxVolumeLeftArrowHoveredImage;
     private Image sfxVolumeRightArrowHoveredImage;
     private SfxVolume sfxVolumeScript;
     private Text sfxVolumeDisplayText;
+
+    // Sfx Volume Containers
+    private Entity sfxVolumeContainer1Filled;
+    private Entity sfxVolumeContainer1FilledHovered;
+    private Entity sfxVolumeContainer1EmptyHovered;
+
+    private Entity sfxVolumeContainer2Filled;
+    private Entity sfxVolumeContainer2FilledHovered;
+    private Entity sfxVolumeContainer2EmptyHovered;
+
+    private Entity sfxVolumeContainer3Filled;
+    private Entity sfxVolumeContainer3FilledHovered;
+    private Entity sfxVolumeContainer3EmptyHovered;
+
+    private Entity sfxVolumeContainer4Filled;
+    private Entity sfxVolumeContainer4FilledHovered;
+    private Entity sfxVolumeContainer4EmptyHovered;
+
+    private Entity sfxVolumeContainer5Filled;
+    private Entity sfxVolumeContainer5FilledHovered;
+    private Entity sfxVolumeContainer5EmptyHovered;
+
+    private Entity sfxVolumeContainer6Filled;
+    private Entity sfxVolumeContainer6FilledHovered;
+    private Entity sfxVolumeContainer6EmptyHovered;
+
+    private Entity sfxVolumeContainer7Filled;
+    private Entity sfxVolumeContainer7FilledHovered;
+    private Entity sfxVolumeContainer7EmptyHovered;
+
+    private Entity sfxVolumeContainer8Filled;
+    private Entity sfxVolumeContainer8FilledHovered;
+    private Entity sfxVolumeContainer8EmptyHovered;
+
+    private Entity sfxVolumeContainer9Filled;
+    private Entity sfxVolumeContainer9FilledHovered;
+    private Entity sfxVolumeContainer9EmptyHovered;
+
+    private Entity sfxVolumeContainer10Filled;
+    private Entity sfxVolumeContainer10FilledHovered;
+    private Entity sfxVolumeContainer10EmptyHovered;
 
     private enum Buttons
     {
@@ -204,6 +328,7 @@ class Settings : Component
             Debug.Log("Error: There is no VSync Hovered Entity assigned.");
         }
 
+        // Master Volume
         if (masterVolumeHoveredEntity != null)
         {
             masterVolumeScript = masterVolumeHoveredEntity.GetComponent<MasterVolume>();
@@ -239,12 +364,54 @@ class Settings : Component
             {
                 Debug.Log("Error: There is no MasterVolume Display Text.");
             }
+
+            // Containers
+            masterVolumeContainer1Filled = Entity.FindEntityByName("");
+            masterVolumeContainer1FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer1EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer2Filled = Entity.FindEntityByName("");
+            masterVolumeContainer2FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer2EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer3Filled = Entity.FindEntityByName("");
+            masterVolumeContainer3FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer3EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer4Filled = Entity.FindEntityByName("");
+            masterVolumeContainer4FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer4EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer5Filled = Entity.FindEntityByName("");
+            masterVolumeContainer5FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer5EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer6Filled = Entity.FindEntityByName("");
+            masterVolumeContainer6FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer6EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer7Filled = Entity.FindEntityByName("");
+            masterVolumeContainer7FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer7EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer8Filled = Entity.FindEntityByName("");
+            masterVolumeContainer8FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer8EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer9Filled = Entity.FindEntityByName("");
+            masterVolumeContainer9FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer9EmptyHovered = Entity.FindEntityByName("");
+
+            masterVolumeContainer10Filled = Entity.FindEntityByName("");
+            masterVolumeContainer10FilledHovered = Entity.FindEntityByName("");
+            masterVolumeContainer10EmptyHovered = Entity.FindEntityByName("");
         }
         else
         {
             Debug.Log("Error: There is no Master Volume Hovered Entity assigned.");
         }
 
+        // Music Volume
         if (musicVolumeHoveredEntity != null)
         {
             musicVolumeScript = musicVolumeHoveredEntity.GetComponent<MusicVolume>();
@@ -286,6 +453,7 @@ class Settings : Component
             Debug.Log("Error: There is no Music Volume Hovered Entity assigned.");
         }
 
+        // Sfx Volume
         if (sfxVolumeHoveredEntity != null)
         {
             sfxVolumeScript = sfxVolumeHoveredEntity.GetComponent<SfxVolume>();
@@ -327,6 +495,7 @@ class Settings : Component
             Debug.Log("Error: There is no SfxVolume_Hovered Entity assigned.");
         }
 
+        // Loop Music
         if (loopMusicEntity != null)
         {
             loopMusicAudioSource = loopMusicEntity.GetComponent<AudioSource>();
@@ -725,9 +894,9 @@ class Settings : Component
             displayModeScript.ApplyFullscreen();
             framerateScript.ApplyFramerate();
             vSyncScript.ApplyVSync();
-            // Apply Master Volume
-            // Apply Music Volume
-            // Apply Sfx
+            masterVolumeScript.ApplyMasterVolume();
+            musicVolumeScript.ApplyMusicVolume();
+            sfxVolumeScript.ApplySfxVolume();
 
             GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault = false;
             GlobalDatabase.GlobalData.SaveGlobalDatabase();

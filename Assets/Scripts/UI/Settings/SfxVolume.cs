@@ -8,13 +8,13 @@ class SfxVolume : Component
     void OnCreate()
     {
         volume = GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume;
-        // Set in engine the volume.
+        AudioMixer.SetVolume("Master/Sfx", AudioMixer.LinearToEngineVolume(volume));
     }
 
     public void ApplySfxVolume()
     {
         GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume = volume;
-        // Set in engine the volume.
+        AudioMixer.SetVolume("Master/Sfx", AudioMixer.LinearToEngineVolume(volume));
     }
 
     public void IncreaseVolume()
