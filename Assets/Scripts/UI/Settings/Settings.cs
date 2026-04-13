@@ -366,45 +366,45 @@ class Settings : Component
             }
 
             // Containers
-            masterVolumeContainer1Filled = Entity.FindEntityByName("");
-            masterVolumeContainer1FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer1EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer1Filled = Entity.FindEntityByName("MasterVolume_Container1_Filled");
+            masterVolumeContainer1FilledHovered = Entity.FindEntityByName("MasterVolume_Container1_Filled_Hovered");
+            masterVolumeContainer1EmptyHovered = Entity.FindEntityByName("MasterVolume_Container1_Empty_Hovered");
 
-            masterVolumeContainer2Filled = Entity.FindEntityByName("");
-            masterVolumeContainer2FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer2EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer2Filled = Entity.FindEntityByName("MasterVolume_Container2_Filled");
+            masterVolumeContainer2FilledHovered = Entity.FindEntityByName("MasterVolume_Container2_Filled_Hovered");
+            masterVolumeContainer2EmptyHovered = Entity.FindEntityByName("MasterVolume_Container2_Empty_Hovered");
 
-            masterVolumeContainer3Filled = Entity.FindEntityByName("");
-            masterVolumeContainer3FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer3EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer3Filled = Entity.FindEntityByName("MasterVolume_Container3_Filled");
+            masterVolumeContainer3FilledHovered = Entity.FindEntityByName("MasterVolume_Container3_Filled_Hovered");
+            masterVolumeContainer3EmptyHovered = Entity.FindEntityByName("MasterVolume_Container3_Empty_Hovered");
 
-            masterVolumeContainer4Filled = Entity.FindEntityByName("");
-            masterVolumeContainer4FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer4EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer4Filled = Entity.FindEntityByName("MasterVolume_Container4_Filled");
+            masterVolumeContainer4FilledHovered = Entity.FindEntityByName("MasterVolume_Container4_Filled_Hovered");
+            masterVolumeContainer4EmptyHovered = Entity.FindEntityByName("MasterVolume_Container4_Empty_Hovered");
 
-            masterVolumeContainer5Filled = Entity.FindEntityByName("");
-            masterVolumeContainer5FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer5EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer5Filled = Entity.FindEntityByName("MasterVolume_Container5_Filled");
+            masterVolumeContainer5FilledHovered = Entity.FindEntityByName("MasterVolume_Container5_Filled_Hovered");
+            masterVolumeContainer5EmptyHovered = Entity.FindEntityByName("MasterVolume_Container5_Empty_Hovered");
 
-            masterVolumeContainer6Filled = Entity.FindEntityByName("");
-            masterVolumeContainer6FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer6EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer6Filled = Entity.FindEntityByName("MasterVolume_Container6_Filled");
+            masterVolumeContainer6FilledHovered = Entity.FindEntityByName("MasterVolume_Container6_Filled_Hovered");
+            masterVolumeContainer6EmptyHovered = Entity.FindEntityByName("MasterVolume_Container6_Empty_Hovered");
 
-            masterVolumeContainer7Filled = Entity.FindEntityByName("");
-            masterVolumeContainer7FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer7EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer7Filled = Entity.FindEntityByName("MasterVolume_Container7_Filled");
+            masterVolumeContainer7FilledHovered = Entity.FindEntityByName("MasterVolume_Container7_Filled_Hovered");
+            masterVolumeContainer7EmptyHovered = Entity.FindEntityByName("MasterVolume_Container7_Empty_Hovered");
 
-            masterVolumeContainer8Filled = Entity.FindEntityByName("");
-            masterVolumeContainer8FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer8EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer8Filled = Entity.FindEntityByName("MasterVolume_Container8_Filled");
+            masterVolumeContainer8FilledHovered = Entity.FindEntityByName("MasterVolume_Container8_Filled_Hovered");
+            masterVolumeContainer8EmptyHovered = Entity.FindEntityByName("MasterVolume_Container8_Empty_Hovered");
 
-            masterVolumeContainer9Filled = Entity.FindEntityByName("");
-            masterVolumeContainer9FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer9EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer9Filled = Entity.FindEntityByName("MasterVolume_Container9_Filled");
+            masterVolumeContainer9FilledHovered = Entity.FindEntityByName("MasterVolume_Container9_Filled_Hovered");
+            masterVolumeContainer9EmptyHovered = Entity.FindEntityByName("MasterVolume_Container9_Empty_Hovered");
 
-            masterVolumeContainer10Filled = Entity.FindEntityByName("");
-            masterVolumeContainer10FilledHovered = Entity.FindEntityByName("");
-            masterVolumeContainer10EmptyHovered = Entity.FindEntityByName("");
+            masterVolumeContainer10Filled = Entity.FindEntityByName("MasterVolume_Container10_Filled");
+            masterVolumeContainer10FilledHovered = Entity.FindEntityByName("MasterVolume_Container10_Filled_Hovered");
+            masterVolumeContainer10EmptyHovered = Entity.FindEntityByName("MasterVolume_Container10_Empty_Hovered");
         }
         else
         {
@@ -447,6 +447,47 @@ class Settings : Component
             {
                 Debug.Log("Error: There is no MusicVolume Display Text.");
             }
+
+            // Containers
+            musicVolumeContainer1Filled = Entity.FindEntityByName("MusicVolume_Container1_Filled");
+            musicVolumeContainer1FilledHovered = Entity.FindEntityByName("MusicVolume_Container1_Filled_Hovered");
+            musicVolumeContainer1EmptyHovered = Entity.FindEntityByName("MusicVolume_Container1_Empty_Hovered");
+             
+            musicVolumeContainer2Filled = Entity.FindEntityByName("MusicVolume_Container2_Filled");
+            musicVolumeContainer2FilledHovered = Entity.FindEntityByName("MusicVolume_Container2_Filled_Hovered");
+            musicVolumeContainer2EmptyHovered = Entity.FindEntityByName("MusicVolume_Container2_Empty_Hovered");
+             
+            musicVolumeContainer3Filled = Entity.FindEntityByName("MusicVolume_Container3_Filled");
+            musicVolumeContainer3FilledHovered = Entity.FindEntityByName("MusicVolume_Container3_Filled_Hovered");
+            musicVolumeContainer3EmptyHovered = Entity.FindEntityByName("MusicVolume_Container3_Empty_Hovered");
+             
+            musicVolumeContainer4Filled = Entity.FindEntityByName("MusicVolume_Container4_Filled");
+            musicVolumeContainer4FilledHovered = Entity.FindEntityByName("MusicVolume_Container4_Filled_Hovered");
+            musicVolumeContainer4EmptyHovered = Entity.FindEntityByName("MusicVolume_Container4_Empty_Hovered");
+             
+            musicVolumeContainer5Filled = Entity.FindEntityByName("MusicVolume_Container5_Filled");
+            musicVolumeContainer5FilledHovered = Entity.FindEntityByName("MusicVolume_Container5_Filled_Hovered");
+            musicVolumeContainer5EmptyHovered = Entity.FindEntityByName("MusicVolume_Container5_Empty_Hovered");
+             
+            musicVolumeContainer6Filled = Entity.FindEntityByName("MusicVolume_Container6_Filled");
+            musicVolumeContainer6FilledHovered = Entity.FindEntityByName("MusicVolume_Container6_Filled_Hovered");
+            musicVolumeContainer6EmptyHovered = Entity.FindEntityByName("MusicVolume_Container6_Empty_Hovered");
+             
+            musicVolumeContainer7Filled = Entity.FindEntityByName("MusicVolume_Container7_Filled");
+            musicVolumeContainer7FilledHovered = Entity.FindEntityByName("MusicVolume_Container7_Filled_Hovered");
+            musicVolumeContainer7EmptyHovered = Entity.FindEntityByName("MusicVolume_Container7_Empty_Hovered");
+             
+            musicVolumeContainer8Filled = Entity.FindEntityByName("MusicVolume_Container8_Filled");
+            musicVolumeContainer8FilledHovered = Entity.FindEntityByName("MusicVolume_Container8_Filled_Hovered");
+            musicVolumeContainer8EmptyHovered = Entity.FindEntityByName("MusicVolume_Container8_Empty_Hovered");
+             
+            musicVolumeContainer9Filled = Entity.FindEntityByName("MusicVolume_Container9_Filled");
+            musicVolumeContainer9FilledHovered = Entity.FindEntityByName("MusicVolume_Container9_Filled_Hovered");
+            musicVolumeContainer9EmptyHovered = Entity.FindEntityByName("MusicVolume_Container9_Empty_Hovered");
+             
+            musicVolumeContainer10Filled = Entity.FindEntityByName("MusicVolume_Container10_Filled");
+            musicVolumeContainer10FilledHovered = Entity.FindEntityByName("MusicVolume_Container10_Filled_Hovered");
+            musicVolumeContainer10EmptyHovered = Entity.FindEntityByName("MusicVolume_Container10_Empty_Hovered");
         }
         else
         {
@@ -489,6 +530,47 @@ class Settings : Component
             {
                 Debug.Log("Error: There is no SfxVolume Display Text.");
             }
+
+            // Containers
+            sfxVolumeContainer1Filled = Entity.FindEntityByName("SfxVolume_Container1_Filled");
+            sfxVolumeContainer1FilledHovered = Entity.FindEntityByName("SfxVolume_Container1_Filled_Hovered");
+            sfxVolumeContainer1EmptyHovered = Entity.FindEntityByName("SfxVolume_Container1_Empty_Hovered");
+            
+            sfxVolumeContainer2Filled = Entity.FindEntityByName("SfxVolume_Container2_Filled");
+            sfxVolumeContainer2FilledHovered = Entity.FindEntityByName("SfxVolume_Container2_Filled_Hovered");
+            sfxVolumeContainer2EmptyHovered = Entity.FindEntityByName("SfxVolume_Container2_Empty_Hovered");
+            
+            sfxVolumeContainer3Filled = Entity.FindEntityByName("SfxVolume_Container3_Filled");
+            sfxVolumeContainer3FilledHovered = Entity.FindEntityByName("SfxVolume_Container3_Filled_Hovered");
+            sfxVolumeContainer3EmptyHovered = Entity.FindEntityByName("SfxVolume_Container3_Empty_Hovered");
+            
+            sfxVolumeContainer4Filled = Entity.FindEntityByName("SfxVolume_Container4_Filled");
+            sfxVolumeContainer4FilledHovered = Entity.FindEntityByName("SfxVolume_Container4_Filled_Hovered");
+            sfxVolumeContainer4EmptyHovered = Entity.FindEntityByName("SfxVolume_Container4_Empty_Hovered");
+            
+            sfxVolumeContainer5Filled = Entity.FindEntityByName("SfxVolume_Container5_Filled");
+            sfxVolumeContainer5FilledHovered = Entity.FindEntityByName("SfxVolume_Container5_Filled_Hovered");
+            sfxVolumeContainer5EmptyHovered = Entity.FindEntityByName("SfxVolume_Container5_Empty_Hovered");
+            
+            sfxVolumeContainer6Filled = Entity.FindEntityByName("SfxVolume_Container6_Filled");
+            sfxVolumeContainer6FilledHovered = Entity.FindEntityByName("SfxVolume_Container6_Filled_Hovered");
+            sfxVolumeContainer6EmptyHovered = Entity.FindEntityByName("SfxVolume_Container6_Empty_Hovered");
+            
+            sfxVolumeContainer7Filled = Entity.FindEntityByName("SfxVolume_Container7_Filled");
+            sfxVolumeContainer7FilledHovered = Entity.FindEntityByName("SfxVolume_Container7_Filled_Hovered");
+            sfxVolumeContainer7EmptyHovered = Entity.FindEntityByName("SfxVolume_Container7_Empty_Hovered");
+            
+            sfxVolumeContainer8Filled = Entity.FindEntityByName("SfxVolume_Container8_Filled");
+            sfxVolumeContainer8FilledHovered = Entity.FindEntityByName("SfxVolume_Container8_Filled_Hovered");
+            sfxVolumeContainer8EmptyHovered = Entity.FindEntityByName("SfxVolume_Container8_Empty_Hovered");
+            
+            sfxVolumeContainer9Filled = Entity.FindEntityByName("SfxVolume_Container9_Filled");
+            sfxVolumeContainer9FilledHovered = Entity.FindEntityByName("SfxVolume_Container9_Filled_Hovered");
+            sfxVolumeContainer9EmptyHovered = Entity.FindEntityByName("SfxVolume_Container9_Empty_Hovered");
+            
+            sfxVolumeContainer10Filled = Entity.FindEntityByName("SfxVolume_Container10_Filled");
+            sfxVolumeContainer10FilledHovered = Entity.FindEntityByName("SfxVolume_Container10_Filled_Hovered");
+            sfxVolumeContainer10EmptyHovered = Entity.FindEntityByName("SfxVolume_Container10_Empty_Hovered");
         }
         else
         {
@@ -555,6 +637,173 @@ class Settings : Component
             moved = true;
         }
 
+        HandleVisualFeedback();
+
+        if (moved)
+        {
+            inputTimer = 0f;
+        }
+    }
+
+    void HandleChangeValue()
+    {
+        confirmTimer += Time.deltaTime;
+
+        float deadzone = 0.3f;
+        float strongDeadzone = 0.7f;
+
+        // Enter editing mode only on strong push
+        if (!isEditingValue)
+        {
+            if (Input.LeftAxis.x > strongDeadzone || Input.IsKeyPressed(KeyCode.RIGHT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
+            {
+                if (confirmTimer > inputCooldown)
+                {
+                    isEditingValue = true;
+                    ChangeValueRight();
+                    confirmTimer = 0f;
+                }
+            }
+            else if (Input.LeftAxis.x < -strongDeadzone || Input.IsKeyPressed(KeyCode.LEFT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT))
+            {
+                if (confirmTimer > inputCooldown)
+                {
+                    isEditingValue = true;
+                    ChangeValueLeft();
+                    confirmTimer = 0f;
+                }
+            }
+        }
+        else
+        {
+            // Exit editing mode when stick returns to neutral
+            if (Mathf.Abs(Input.LeftAxis.x) < deadzone)
+            {
+                isEditingValue = false;
+            }
+        }
+    }
+
+    void ChangeValueRight()
+    {
+        switch (currentButton)
+        {
+            case Buttons.DISPLAY_MODE:
+                displayModeScript.ToggleFullscreen();
+                if (displayModeScript.IsFullscreen()) { displayModeDisplayText.SetText("Fullscreen"); }
+                else { displayModeDisplayText.SetText("Windowed"); }
+                break;
+            case Buttons.FRAMERATE:
+                framerateScript.IncreaseFramerate();
+                framerateDisplayText.SetText(framerateScript.GetFramerate().ToString());
+                break;
+            case Buttons.V_SYNC:
+                vSyncScript.ToggleVSync();
+                if (vSyncScript.IsVSync()) { vSyncDisplayText.SetText("On"); }
+                else { vSyncDisplayText.SetText("Off"); }
+                break;
+            case Buttons.MASTER_VOLUME:
+                masterVolumeScript.IncreaseVolume();
+                float masterVolume = Mathf.Abs(masterVolumeScript.GetVolume() * 100);
+                masterVolumeDisplayText.SetText(Mathf.Round(masterVolume).ToString());
+                masterVolumeScript.ApplyMasterVolume();
+                break;
+            case Buttons.MUSIC_VOLUME:
+                musicVolumeScript.IncreaseVolume();
+                float musicVolume = Mathf.Abs(musicVolumeScript.GetVolume() * 100);
+                musicVolumeDisplayText.SetText(Mathf.Round(musicVolume).ToString());
+                musicVolumeScript.ApplyMusicVolume();
+                break;
+            case Buttons.SFX_VOLUME:
+                sfxVolumeScript.IncreaseVolume();
+                float sfxVolume = Mathf.Abs(sfxVolumeScript.GetVolume() * 100);
+                sfxVolumeDisplayText.SetText(Mathf.Round(sfxVolume).ToString());
+                sfxVolumeScript.ApplySfxVolume();
+                break;
+        }
+    }
+
+    void ChangeValueLeft()
+    {
+        switch (currentButton)
+        {
+            case Buttons.DISPLAY_MODE:
+                displayModeScript.ToggleFullscreen();
+                if (displayModeScript.IsFullscreen()) { displayModeDisplayText.SetText("Fullscreen"); }
+                else { displayModeDisplayText.SetText("Windowed"); }
+                break;
+            case Buttons.FRAMERATE:
+                framerateScript.DecreaseFramerate();
+                framerateDisplayText.SetText(framerateScript.GetFramerate().ToString());
+                break;
+            case Buttons.V_SYNC:
+                vSyncScript.ToggleVSync();
+                if (vSyncScript.IsVSync()) { vSyncDisplayText.SetText("On"); }
+                else { vSyncDisplayText.SetText("Off"); }
+                break;
+            case Buttons.MASTER_VOLUME:
+                masterVolumeScript.DecreaseVolume();
+                float masterVolume = masterVolumeScript.GetVolume() * 100;
+                masterVolumeDisplayText.SetText(Mathf.Round(masterVolume).ToString());
+                masterVolumeScript.ApplyMasterVolume();
+                break;
+            case Buttons.MUSIC_VOLUME:
+                musicVolumeScript.DecreaseVolume();
+                float musicVolume = Mathf.Abs(musicVolumeScript.GetVolume() * 100);
+                musicVolumeDisplayText.SetText(Mathf.Round(musicVolume).ToString());
+                musicVolumeScript.ApplyMusicVolume();
+                break;
+            case Buttons.SFX_VOLUME:
+                sfxVolumeScript.DecreaseVolume();
+                float sfxVolume = Mathf.Abs(sfxVolumeScript.GetVolume() * 100);
+                sfxVolumeDisplayText.SetText(Mathf.Round(sfxVolume).ToString());
+                sfxVolumeScript.ApplySfxVolume();
+                break;
+        }
+    }
+
+    void HandleMusic()
+    {
+        if (loopMusicHasPlayed)
+            return;
+
+        loopMusicAudioSource.Play();
+        loopMusicHasPlayed = true;
+    }
+
+    void HandleApplyChanges()
+    {
+        applyTimer += Time.deltaTime;
+
+        // Cooldown
+        if (applyTimer < inputCooldown)
+            return;
+
+        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+        {
+            displayModeScript.ApplyFullscreen();
+            framerateScript.ApplyFramerate();
+            vSyncScript.ApplyVSync();
+            masterVolumeScript.ApplyMasterVolume();
+            musicVolumeScript.ApplyMusicVolume();
+            sfxVolumeScript.ApplySfxVolume();
+
+            GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault = false;
+            GlobalDatabase.GlobalData.SaveGlobalDatabase();
+
+            applyTimer = 0f;
+        }
+    }
+    void HandleBack()
+    {
+        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_B))
+        {
+            SceneManager.LoadSceneByID("db1dd4f7-fb12-b501-b8a7-ac788f03b8ae");
+        }
+    }
+
+    void HandleVisualFeedback()
+    {
         // Visual Feedback
         Vector4 inactiveColor = new Vector4(0.196f, 0.196f, 0.510f, 1.0f);
         Vector4 activeColor = new Vector4(0.706f, 0.000f, 0.216f, 1.0f);
@@ -754,161 +1003,1772 @@ class Settings : Component
                 sfxVolumeDisplayText.SetColor(activeColor);
                 break;
         }
-
-        if (moved)
-        {
-            inputTimer = 0f;
-        }
+        HandleSfxContainers();
+        HandleMusicContainers();
+        HandleMasterContainers();
     }
 
-    void HandleChangeValue()
+    void HandleSfxContainers()
     {
-        confirmTimer += Time.deltaTime;
-
-        float deadzone = 0.3f;
-        float strongDeadzone = 0.7f;
-
-        // Enter editing mode only on strong push
-        if (!isEditingValue)
+        if (currentButton == Buttons.SFX_VOLUME)
         {
-            if (Input.LeftAxis.x > strongDeadzone || Input.IsKeyPressed(KeyCode.RIGHT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
-            {
-                if (confirmTimer > inputCooldown)
-                {
-                    isEditingValue = true;
-                    ChangeValueRight();
-                    confirmTimer = 0f;
-                }
-            }
-            else if (Input.LeftAxis.x < -strongDeadzone || Input.IsKeyPressed(KeyCode.LEFT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT))
-            {
-                if (confirmTimer > inputCooldown)
-                {
-                    isEditingValue = true;
-                    ChangeValueLeft();
-                    confirmTimer = 0f;
-                }
-            }
+            sfxVolumeContainer1EmptyHovered.SetActive(true);
+            sfxVolumeContainer2EmptyHovered.SetActive(true);
+            sfxVolumeContainer3EmptyHovered.SetActive(true);
+            sfxVolumeContainer4EmptyHovered.SetActive(true);
+            sfxVolumeContainer5EmptyHovered.SetActive(true);
+            sfxVolumeContainer6EmptyHovered.SetActive(true);
+            sfxVolumeContainer7EmptyHovered.SetActive(true);
+            sfxVolumeContainer8EmptyHovered.SetActive(true);
+            sfxVolumeContainer9EmptyHovered.SetActive(true);
+            sfxVolumeContainer10EmptyHovered.SetActive(true);
         }
         else
         {
-            // Exit editing mode when stick returns to neutral
-            if (Mathf.Abs(Input.LeftAxis.x) < deadzone)
-            {
-                isEditingValue = false;
-            }
+            sfxVolumeContainer1EmptyHovered.SetActive(false);
+            sfxVolumeContainer2EmptyHovered.SetActive(false);
+            sfxVolumeContainer3EmptyHovered.SetActive(false);
+            sfxVolumeContainer4EmptyHovered.SetActive(false);
+            sfxVolumeContainer5EmptyHovered.SetActive(false);
+            sfxVolumeContainer6EmptyHovered.SetActive(false);
+            sfxVolumeContainer7EmptyHovered.SetActive(false);
+            sfxVolumeContainer8EmptyHovered.SetActive(false);
+            sfxVolumeContainer9EmptyHovered.SetActive(false);
+            sfxVolumeContainer10EmptyHovered.SetActive(false);
+        }
+
+        int sfxVolume = (int)(sfxVolumeScript.GetVolume() * 100);
+
+        switch (sfxVolume)
+        {
+            case 0:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(false);
+                    sfxVolumeContainer2Filled.SetActive(false);
+                    sfxVolumeContainer3Filled.SetActive(false);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(false);
+                    sfxVolumeContainer2Filled.SetActive(false);
+                    sfxVolumeContainer3Filled.SetActive(false);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 10:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(false);
+                    sfxVolumeContainer3Filled.SetActive(false);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(false);
+                    sfxVolumeContainer3Filled.SetActive(false);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 20:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(false);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(false);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 30:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(false);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 40:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(true);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(false);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 50:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(true);
+                    sfxVolumeContainer5FilledHovered.SetActive(true);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(false);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 60:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(true);
+                    sfxVolumeContainer5FilledHovered.SetActive(true);
+                    sfxVolumeContainer6FilledHovered.SetActive(true);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(false);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 70:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(true);
+                    sfxVolumeContainer5FilledHovered.SetActive(true);
+                    sfxVolumeContainer6FilledHovered.SetActive(true);
+                    sfxVolumeContainer7FilledHovered.SetActive(true);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(false);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 80:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(true);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(true);
+                    sfxVolumeContainer5FilledHovered.SetActive(true);
+                    sfxVolumeContainer6FilledHovered.SetActive(true);
+                    sfxVolumeContainer7FilledHovered.SetActive(true);
+                    sfxVolumeContainer8FilledHovered.SetActive(true);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(true);
+                    sfxVolumeContainer9Filled.SetActive(false);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 90:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(true);
+                    sfxVolumeContainer9Filled.SetActive(true);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(true);
+                    sfxVolumeContainer5FilledHovered.SetActive(true);
+                    sfxVolumeContainer6FilledHovered.SetActive(true);
+                    sfxVolumeContainer7FilledHovered.SetActive(true);
+                    sfxVolumeContainer8FilledHovered.SetActive(true);
+                    sfxVolumeContainer9FilledHovered.SetActive(true);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(true);
+                    sfxVolumeContainer9Filled.SetActive(true);
+                    sfxVolumeContainer10Filled.SetActive(false);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 100:
+                if (currentButton == Buttons.SFX_VOLUME)
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(true);
+                    sfxVolumeContainer9Filled.SetActive(true);
+                    sfxVolumeContainer10Filled.SetActive(true);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(true);
+                    sfxVolumeContainer2FilledHovered.SetActive(true);
+                    sfxVolumeContainer3FilledHovered.SetActive(true);
+                    sfxVolumeContainer4FilledHovered.SetActive(true);
+                    sfxVolumeContainer5FilledHovered.SetActive(true);
+                    sfxVolumeContainer6FilledHovered.SetActive(true);
+                    sfxVolumeContainer7FilledHovered.SetActive(true);
+                    sfxVolumeContainer8FilledHovered.SetActive(true);
+                    sfxVolumeContainer9FilledHovered.SetActive(true);
+                    sfxVolumeContainer10FilledHovered.SetActive(true);
+                }
+                else
+                {
+                    sfxVolumeContainer1Filled.SetActive(true);
+                    sfxVolumeContainer2Filled.SetActive(true);
+                    sfxVolumeContainer3Filled.SetActive(true);
+                    sfxVolumeContainer4Filled.SetActive(true);
+                    sfxVolumeContainer5Filled.SetActive(true);
+                    sfxVolumeContainer6Filled.SetActive(true);
+                    sfxVolumeContainer7Filled.SetActive(true);
+                    sfxVolumeContainer8Filled.SetActive(true);
+                    sfxVolumeContainer9Filled.SetActive(true);
+                    sfxVolumeContainer10Filled.SetActive(true);
+
+                    sfxVolumeContainer1FilledHovered.SetActive(false);
+                    sfxVolumeContainer2FilledHovered.SetActive(false);
+                    sfxVolumeContainer3FilledHovered.SetActive(false);
+                    sfxVolumeContainer4FilledHovered.SetActive(false);
+                    sfxVolumeContainer5FilledHovered.SetActive(false);
+                    sfxVolumeContainer6FilledHovered.SetActive(false);
+                    sfxVolumeContainer7FilledHovered.SetActive(false);
+                    sfxVolumeContainer8FilledHovered.SetActive(false);
+                    sfxVolumeContainer9FilledHovered.SetActive(false);
+                    sfxVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            default:
+                break;
         }
     }
 
-    void ChangeValueRight()
+    void HandleMusicContainers()
     {
-        switch (currentButton)
+        if (currentButton == Buttons.MUSIC_VOLUME)
         {
-            case Buttons.DISPLAY_MODE:
-                displayModeScript.ToggleFullscreen();
-                if (displayModeScript.IsFullscreen()) { displayModeDisplayText.SetText("Fullscreen"); }
-                else { displayModeDisplayText.SetText("Windowed"); }
+            musicVolumeContainer1EmptyHovered.SetActive(true);
+            musicVolumeContainer2EmptyHovered.SetActive(true);
+            musicVolumeContainer3EmptyHovered.SetActive(true);
+            musicVolumeContainer4EmptyHovered.SetActive(true);
+            musicVolumeContainer5EmptyHovered.SetActive(true);
+            musicVolumeContainer6EmptyHovered.SetActive(true);
+            musicVolumeContainer7EmptyHovered.SetActive(true);
+            musicVolumeContainer8EmptyHovered.SetActive(true);
+            musicVolumeContainer9EmptyHovered.SetActive(true);
+            musicVolumeContainer10EmptyHovered.SetActive(true);
+        }
+        else
+        {
+            musicVolumeContainer1EmptyHovered.SetActive(false);
+            musicVolumeContainer2EmptyHovered.SetActive(false);
+            musicVolumeContainer3EmptyHovered.SetActive(false);
+            musicVolumeContainer4EmptyHovered.SetActive(false);
+            musicVolumeContainer5EmptyHovered.SetActive(false);
+            musicVolumeContainer6EmptyHovered.SetActive(false);
+            musicVolumeContainer7EmptyHovered.SetActive(false);
+            musicVolumeContainer8EmptyHovered.SetActive(false);
+            musicVolumeContainer9EmptyHovered.SetActive(false);
+            musicVolumeContainer10EmptyHovered.SetActive(false);
+        }
+
+        int musicVolume = (int)(musicVolumeScript.GetVolume() * 100);
+
+        switch (musicVolume)
+        {
+            case 0:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(false);
+                    musicVolumeContainer2Filled.SetActive(false);
+                    musicVolumeContainer3Filled.SetActive(false);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(false);
+                    musicVolumeContainer2Filled.SetActive(false);
+                    musicVolumeContainer3Filled.SetActive(false);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
                 break;
-            case Buttons.FRAMERATE:
-                framerateScript.IncreaseFramerate();
-                framerateDisplayText.SetText(framerateScript.GetFramerate().ToString());
+            case 10:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(false);
+                    musicVolumeContainer3Filled.SetActive(false);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(false);
+                    musicVolumeContainer3Filled.SetActive(false);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
                 break;
-            case Buttons.V_SYNC:
-                vSyncScript.ToggleVSync();
-                if (vSyncScript.IsVSync()) { vSyncDisplayText.SetText("On"); }
-                else { vSyncDisplayText.SetText("Off"); }
+            case 20:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(false);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(false);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
                 break;
-            case Buttons.MASTER_VOLUME:
-                masterVolumeScript.IncreaseVolume();
-                float masterVolume = Mathf.Abs(masterVolumeScript.GetVolume() * 100);
-                masterVolumeDisplayText.SetText(Mathf.Round(masterVolume).ToString());
+            case 30:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(false);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
                 break;
-            case Buttons.MUSIC_VOLUME:
-                musicVolumeScript.IncreaseVolume();
-                float musicVolume = Mathf.Abs(musicVolumeScript.GetVolume() * 100);
-                musicVolumeDisplayText.SetText(Mathf.Round(musicVolume).ToString());
+            case 40:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(true);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(false);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
                 break;
-            case Buttons.SFX_VOLUME:
-                sfxVolumeScript.IncreaseVolume();
-                float sfxVolume = Mathf.Abs(sfxVolumeScript.GetVolume() * 100);
-                sfxVolumeDisplayText.SetText(Mathf.Round(sfxVolume).ToString());
+            case 50:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(true);
+                    musicVolumeContainer5FilledHovered.SetActive(true);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(false);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 60:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(true);
+                    musicVolumeContainer5FilledHovered.SetActive(true);
+                    musicVolumeContainer6FilledHovered.SetActive(true);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(false);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 70:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(true);
+                    musicVolumeContainer5FilledHovered.SetActive(true);
+                    musicVolumeContainer6FilledHovered.SetActive(true);
+                    musicVolumeContainer7FilledHovered.SetActive(true);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(false);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 80:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(true);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(true);
+                    musicVolumeContainer5FilledHovered.SetActive(true);
+                    musicVolumeContainer6FilledHovered.SetActive(true);
+                    musicVolumeContainer7FilledHovered.SetActive(true);
+                    musicVolumeContainer8FilledHovered.SetActive(true);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(true);
+                    musicVolumeContainer9Filled.SetActive(false);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 90:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(true);
+                    musicVolumeContainer9Filled.SetActive(true);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(true);
+                    musicVolumeContainer5FilledHovered.SetActive(true);
+                    musicVolumeContainer6FilledHovered.SetActive(true);
+                    musicVolumeContainer7FilledHovered.SetActive(true);
+                    musicVolumeContainer8FilledHovered.SetActive(true);
+                    musicVolumeContainer9FilledHovered.SetActive(true);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(true);
+                    musicVolumeContainer9Filled.SetActive(true);
+                    musicVolumeContainer10Filled.SetActive(false);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 100:
+                if (currentButton == Buttons.MUSIC_VOLUME)
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(true);
+                    musicVolumeContainer9Filled.SetActive(true);
+                    musicVolumeContainer10Filled.SetActive(true);
+
+                    musicVolumeContainer1FilledHovered.SetActive(true);
+                    musicVolumeContainer2FilledHovered.SetActive(true);
+                    musicVolumeContainer3FilledHovered.SetActive(true);
+                    musicVolumeContainer4FilledHovered.SetActive(true);
+                    musicVolumeContainer5FilledHovered.SetActive(true);
+                    musicVolumeContainer6FilledHovered.SetActive(true);
+                    musicVolumeContainer7FilledHovered.SetActive(true);
+                    musicVolumeContainer8FilledHovered.SetActive(true);
+                    musicVolumeContainer9FilledHovered.SetActive(true);
+                    musicVolumeContainer10FilledHovered.SetActive(true);
+                }
+                else
+                {
+                    musicVolumeContainer1Filled.SetActive(true);
+                    musicVolumeContainer2Filled.SetActive(true);
+                    musicVolumeContainer3Filled.SetActive(true);
+                    musicVolumeContainer4Filled.SetActive(true);
+                    musicVolumeContainer5Filled.SetActive(true);
+                    musicVolumeContainer6Filled.SetActive(true);
+                    musicVolumeContainer7Filled.SetActive(true);
+                    musicVolumeContainer8Filled.SetActive(true);
+                    musicVolumeContainer9Filled.SetActive(true);
+                    musicVolumeContainer10Filled.SetActive(true);
+
+                    musicVolumeContainer1FilledHovered.SetActive(false);
+                    musicVolumeContainer2FilledHovered.SetActive(false);
+                    musicVolumeContainer3FilledHovered.SetActive(false);
+                    musicVolumeContainer4FilledHovered.SetActive(false);
+                    musicVolumeContainer5FilledHovered.SetActive(false);
+                    musicVolumeContainer6FilledHovered.SetActive(false);
+                    musicVolumeContainer7FilledHovered.SetActive(false);
+                    musicVolumeContainer8FilledHovered.SetActive(false);
+                    musicVolumeContainer9FilledHovered.SetActive(false);
+                    musicVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            default:
                 break;
         }
     }
 
-    void ChangeValueLeft()
+    void HandleMasterContainers()
     {
-        switch (currentButton)
+        if (currentButton == Buttons.MASTER_VOLUME)
         {
-            case Buttons.DISPLAY_MODE:
-                displayModeScript.ToggleFullscreen();
-                if (displayModeScript.IsFullscreen()) { displayModeDisplayText.SetText("Fullscreen"); }
-                else { displayModeDisplayText.SetText("Windowed"); }
-                break;
-            case Buttons.FRAMERATE:
-                framerateScript.DecreaseFramerate();
-                framerateDisplayText.SetText(framerateScript.GetFramerate().ToString());
-                break;
-            case Buttons.V_SYNC:
-                vSyncScript.ToggleVSync();
-                if (vSyncScript.IsVSync()) { vSyncDisplayText.SetText("On"); }
-                else { vSyncDisplayText.SetText("Off"); }
-                break;
-            case Buttons.MASTER_VOLUME:
-                masterVolumeScript.DecreaseVolume();
-                float masterVolume = masterVolumeScript.GetVolume() * 100;
-                masterVolumeDisplayText.SetText(Mathf.Round(masterVolume).ToString());
-                break;
-            case Buttons.MUSIC_VOLUME:
-                musicVolumeScript.DecreaseVolume();
-                float musicVolume = Mathf.Abs(musicVolumeScript.GetVolume() * 100);
-                musicVolumeDisplayText.SetText(Mathf.Round(musicVolume).ToString());
-                break;
-            case Buttons.SFX_VOLUME:
-                sfxVolumeScript.DecreaseVolume();
-                float sfxVolume = Mathf.Abs(sfxVolumeScript.GetVolume() * 100);
-                sfxVolumeDisplayText.SetText(Mathf.Round(sfxVolume).ToString());
-                break;
+            masterVolumeContainer1EmptyHovered.SetActive(true);
+            masterVolumeContainer2EmptyHovered.SetActive(true);
+            masterVolumeContainer3EmptyHovered.SetActive(true);
+            masterVolumeContainer4EmptyHovered.SetActive(true);
+            masterVolumeContainer5EmptyHovered.SetActive(true);
+            masterVolumeContainer6EmptyHovered.SetActive(true);
+            masterVolumeContainer7EmptyHovered.SetActive(true);
+            masterVolumeContainer8EmptyHovered.SetActive(true);
+            masterVolumeContainer9EmptyHovered.SetActive(true);
+            masterVolumeContainer10EmptyHovered.SetActive(true);
         }
-    }
-
-    void HandleMusic()
-    {
-        if (loopMusicHasPlayed)
-            return;
-
-        loopMusicAudioSource.Play();
-        loopMusicHasPlayed = true;
-    }
-
-    void HandleApplyChanges()
-    {
-        applyTimer += Time.deltaTime;
-
-        // Cooldown
-        if (applyTimer < inputCooldown)
-            return;
-
-        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+        else
         {
-            displayModeScript.ApplyFullscreen();
-            framerateScript.ApplyFramerate();
-            vSyncScript.ApplyVSync();
-            masterVolumeScript.ApplyMasterVolume();
-            musicVolumeScript.ApplyMusicVolume();
-            sfxVolumeScript.ApplySfxVolume();
-
-            GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault = false;
-            GlobalDatabase.GlobalData.SaveGlobalDatabase();
-
-            applyTimer = 0f;
+            masterVolumeContainer1EmptyHovered.SetActive(false);
+            masterVolumeContainer2EmptyHovered.SetActive(false);
+            masterVolumeContainer3EmptyHovered.SetActive(false);
+            masterVolumeContainer4EmptyHovered.SetActive(false);
+            masterVolumeContainer5EmptyHovered.SetActive(false);
+            masterVolumeContainer6EmptyHovered.SetActive(false);
+            masterVolumeContainer7EmptyHovered.SetActive(false);
+            masterVolumeContainer8EmptyHovered.SetActive(false);
+            masterVolumeContainer9EmptyHovered.SetActive(false);
+            masterVolumeContainer10EmptyHovered.SetActive(false);
         }
-    }
-    void HandleBack()
-    {
-        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_B))
+
+        int masterVolume = (int)(masterVolumeScript.GetVolume() * 100);
+
+        switch (masterVolume)
         {
-            SceneManager.LoadSceneByID("db1dd4f7-fb12-b501-b8a7-ac788f03b8ae");
+            case 0:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(false);
+                    masterVolumeContainer2Filled.SetActive(false);
+                    masterVolumeContainer3Filled.SetActive(false);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(false);
+                    masterVolumeContainer2Filled.SetActive(false);
+                    masterVolumeContainer3Filled.SetActive(false);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 10:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(false);
+                    masterVolumeContainer3Filled.SetActive(false);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(false);
+                    masterVolumeContainer3Filled.SetActive(false);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 20:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(false);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(false);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 30:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(false);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 40:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(true);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(false);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 50:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(true);
+                    masterVolumeContainer5FilledHovered.SetActive(true);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(false);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 60:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(true);
+                    masterVolumeContainer5FilledHovered.SetActive(true);
+                    masterVolumeContainer6FilledHovered.SetActive(true);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(false);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 70:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(true);
+                    masterVolumeContainer5FilledHovered.SetActive(true);
+                    masterVolumeContainer6FilledHovered.SetActive(true);
+                    masterVolumeContainer7FilledHovered.SetActive(true);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(false);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 80:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(true);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(true);
+                    masterVolumeContainer5FilledHovered.SetActive(true);
+                    masterVolumeContainer6FilledHovered.SetActive(true);
+                    masterVolumeContainer7FilledHovered.SetActive(true);
+                    masterVolumeContainer8FilledHovered.SetActive(true);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(true);
+                    masterVolumeContainer9Filled.SetActive(false);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 90:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(true);
+                    masterVolumeContainer9Filled.SetActive(true);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(true);
+                    masterVolumeContainer5FilledHovered.SetActive(true);
+                    masterVolumeContainer6FilledHovered.SetActive(true);
+                    masterVolumeContainer7FilledHovered.SetActive(true);
+                    masterVolumeContainer8FilledHovered.SetActive(true);
+                    masterVolumeContainer9FilledHovered.SetActive(true);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(true);
+                    masterVolumeContainer9Filled.SetActive(true);
+                    masterVolumeContainer10Filled.SetActive(false);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            case 100:
+                if (currentButton == Buttons.MASTER_VOLUME)
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(true);
+                    masterVolumeContainer9Filled.SetActive(true);
+                    masterVolumeContainer10Filled.SetActive(true);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(true);
+                    masterVolumeContainer2FilledHovered.SetActive(true);
+                    masterVolumeContainer3FilledHovered.SetActive(true);
+                    masterVolumeContainer4FilledHovered.SetActive(true);
+                    masterVolumeContainer5FilledHovered.SetActive(true);
+                    masterVolumeContainer6FilledHovered.SetActive(true);
+                    masterVolumeContainer7FilledHovered.SetActive(true);
+                    masterVolumeContainer8FilledHovered.SetActive(true);
+                    masterVolumeContainer9FilledHovered.SetActive(true);
+                    masterVolumeContainer10FilledHovered.SetActive(true);
+                }
+                else
+                {
+                    masterVolumeContainer1Filled.SetActive(true);
+                    masterVolumeContainer2Filled.SetActive(true);
+                    masterVolumeContainer3Filled.SetActive(true);
+                    masterVolumeContainer4Filled.SetActive(true);
+                    masterVolumeContainer5Filled.SetActive(true);
+                    masterVolumeContainer6Filled.SetActive(true);
+                    masterVolumeContainer7Filled.SetActive(true);
+                    masterVolumeContainer8Filled.SetActive(true);
+                    masterVolumeContainer9Filled.SetActive(true);
+                    masterVolumeContainer10Filled.SetActive(true);
+                     
+                    masterVolumeContainer1FilledHovered.SetActive(false);
+                    masterVolumeContainer2FilledHovered.SetActive(false);
+                    masterVolumeContainer3FilledHovered.SetActive(false);
+                    masterVolumeContainer4FilledHovered.SetActive(false);
+                    masterVolumeContainer5FilledHovered.SetActive(false);
+                    masterVolumeContainer6FilledHovered.SetActive(false);
+                    masterVolumeContainer7FilledHovered.SetActive(false);
+                    masterVolumeContainer8FilledHovered.SetActive(false);
+                    masterVolumeContainer9FilledHovered.SetActive(false);
+                    masterVolumeContainer10FilledHovered.SetActive(false);
+                }
+                break;
+            default:
+                break;
         }
     }
 };
