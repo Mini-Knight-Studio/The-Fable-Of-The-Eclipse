@@ -11,7 +11,6 @@ public class Player : Component
     public Health PlayerHealth;
     public PlayerCamera Camera;
     public TemporalEffectApplier Effects;
-    private SceneTransition LoseTransition;
 
     void OnCreate()
     {
@@ -22,7 +21,6 @@ public class Player : Component
         Items = entity.GetComponent<PlayerItems>();
         PlayerHealth = entity.GetComponent<Health>();
         Effects = entity.GetComponent<TemporalEffectApplier>();
-        LoseTransition = entity.GetComponent<SceneTransition>();
 
         Entity cameraEntity = Entity.FindEntityByName("PlayerCamera");
         if (cameraEntity != null)
@@ -38,8 +36,5 @@ public class Player : Component
     }
 
     void OnUpdate()
-    {
-        if(PlayerHealth.IsDead())
-            LoseTransition.StartTransition();
-    }
+    {    }
 }

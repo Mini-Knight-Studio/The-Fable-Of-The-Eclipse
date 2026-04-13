@@ -69,6 +69,7 @@ class Golem : Enemy
             isShielding = false;
         }
         #region Health
+        health.UpdateHealth();
         if (health.IsDead())
         {
             entity.Destroy();
