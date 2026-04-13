@@ -8,6 +8,10 @@ class Load : Component
     public void LoadPreviousSave()
     {
         isLoading = true;
+
+        DatabaseRegistry.LoadAll();
+        SceneManager.LoadSceneByID(DatabaseRegistry.playerDB.Player.currentSceneUUID);
+
         Debug.Log("Load Success");
     }
 };

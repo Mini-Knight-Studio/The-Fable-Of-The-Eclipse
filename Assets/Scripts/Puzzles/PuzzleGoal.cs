@@ -75,21 +75,21 @@ class PuzzleGoal : Component
             }
         }
 
-        if (GlobalDatabase.Data.Puzzles.Puzzle1Completed && !puzzle1Completed)
+        if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed && !puzzle1Completed)
         {
             puzzle1Completed = true;
             
             CompletePuzzleAuto();
 
-            Gem.SetActive(!GlobalDatabase.Data.Player.gemEarthCollected);
-            Gem.GetComponent<BoxCollider>().SetActive(!GlobalDatabase.Data.Player.gemEarthCollected);
+            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
         }
 
         if (allOnGoal && !puzzle1Completed)
         {
             puzzle1Completed = true;
 
-            GlobalDatabase.Data.Puzzles.Puzzle1Completed = true;
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
 
             Gem.GetComponent<BoxCollider>().SetActive(true);
         }
@@ -98,8 +98,8 @@ class PuzzleGoal : Component
         {
             Gem.SetActive(false);
 
-            GlobalDatabase.Data.Player.gemEarthCollected = true;
-            GlobalDatabase.Data.Player.hasGrappling = true;
+            DatabaseRegistry.playerDB.Player.gemEarthCollected = true;
+            DatabaseRegistry.playerDB.Player.hasBurner = true;
         }
     }
 

@@ -1,14 +1,15 @@
 using System;
-using System.Runtime.InteropServices;
 using Loopie;
 
 class MainMenu : Component
 {
+    public static bool hasPlayedIntro = false;
+
     // Buttons
     public Entity newGameEntity;
     public Entity newGameHoveredEntity;
     //private Button newGameButton;
-    private SceneTransition newGameScript;
+    private NewGame newGameScript;
     private Image newGameHoveredImage;
 
     public Entity continueEntity;
@@ -50,27 +51,37 @@ class MainMenu : Component
 
     private float inputTimer = 0f;
     private float confirmTimer = 0f;
-    
+
     private bool canCallScripts = false;
 
     // Audio
     public Entity loopMusicEntity;
     private AudioSource loopMusicAudioSource;
 
+    public Entity selectSfxEntity;
+    private AudioSource selectSfxAudioSource;
+
     private bool loopMusicHasPlayed = false;
     private float openingMusicDelay = 21f;
     private float openingMusicTimer = 0f;
 
+    // Load
+    public Entity LoadSettingsEntity;
+    private LoadSettings loadSettingsScript;
+
+    private bool settingsLoaded = false;
+    private bool globalDatabaseLoaded = false;
+
     void OnCreate()
     {
         // Buttons
-        if (newGameEntity != null )
+        if (newGameEntity != null)
         {
             // button
 
             if (newGameHoveredEntity != null)
             {
-                newGameScript = newGameHoveredEntity.GetComponent<SceneTransition>();
+                newGameScript = newGameHoveredEntity.GetComponent<NewGame>();
                 newGameHoveredImage = newGameHoveredEntity.GetComponent<Image>();
             }
             else
@@ -159,18 +170,65 @@ class MainMenu : Component
         {
             Debug.Log("Error: There is no Loop Music Entity assigned.");
         }
-    }
 
+        if (selectSfxEntity != null)
+        {
+            selectSfxAudioSource = selectSfxEntity.GetComponent<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Loop Music Entity assigned.");
+        }
+
+        // Load Settings
+        if (LoadSettingsEntity != null)
+        {
+            loadSettingsScript = LoadSettingsEntity.GetComponent<LoadSettings>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no SelectSfxEntity Entity assigned.");
+        }
+
+        
+    }
     void OnUpdate()
     {
+        if (!globalDatabaseLoaded)
+        {
+            GlobalDatabase.GlobalData.LoadGlobalDatabase();
+
+            // Load Settings
+            if (GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault == false)
+            {
+                if (!settingsLoaded)
+                {
+                    loadSettingsScript.ImportSettings();
+                    settingsLoaded = true;
+                }
+            }
+
+            globalDatabaseLoaded = true;
+        }
+
         HandleMusic();
 
         // Nullify Input while in intro.
         preMainMenuDelayTimer += Time.deltaTime;
         preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
 
-        if (preMainMenuDelayTimer < preMainMenuDelay)
-            return;
+        if (!hasPlayedIntro)
+        {
+            if (preMainMenuDelayTimer < preMainMenuDelay)
+                return;
+
+            hasPlayedIntro = true;
+        }
+        else if (hasPlayedIntro)
+        {
+            introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
+            introBookCoverEntity.SetActive(false);
+        }
 
         // Main Menu logic.
         HandleNavigation();
@@ -186,11 +244,11 @@ class MainMenu : Component
             return;
         if (canCallScripts)
             return;
-        
+
         bool moved = false;
 
         // Read Input
-        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0) 
+        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0)
         {
             switch (currentButton)
             {
@@ -201,7 +259,7 @@ class MainMenu : Component
             }
             moved = true;
         }
-        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0) 
+        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0)
         {
             switch (currentButton)
             {
@@ -241,9 +299,10 @@ class MainMenu : Component
                 exitHoveredEntity.SetActive(true);
                 break;
         }
-        
+
         if (moved)
         {
+            selectSfxAudioSource.Play();
             inputTimer = 0f;
         }
     }
@@ -253,7 +312,7 @@ class MainMenu : Component
         confirmTimer += Time.deltaTime;
 
         // Read Input
-        if (Input.IsKeyPressed(KeyCode.KP_ENTER) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
         {
             // Visual Feedback
             Vector4 color = new Vector4(255, 0, 0, 1);
@@ -274,13 +333,14 @@ class MainMenu : Component
             // Function Call
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: newGameScript.StartTransition(); break;
+                case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
                 case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
                 case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                 case Buttons.EXIT: exitScript.ExitGame(); break;
             }
 
             loopMusicAudioSource.Stop();
+            canCallScripts = false;
         }
     }
 
@@ -288,7 +348,7 @@ class MainMenu : Component
     {
         if (loopMusicHasPlayed)
             return;
-        
+
         if (introBookCoverScript.HasOpeningMusicPlayed())
         {
             openingMusicTimer += Time.deltaTime;
@@ -296,6 +356,12 @@ class MainMenu : Component
             if (openingMusicTimer < openingMusicDelay)
                 return;
 
+            loopMusicAudioSource.Play();
+            loopMusicHasPlayed = true;
+        }
+
+        if (hasPlayedIntro)
+        {
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }

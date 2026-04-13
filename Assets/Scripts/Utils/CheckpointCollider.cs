@@ -17,12 +17,12 @@ class CheckpointCollider : Component
         if (!hasSaved && collider.IsColliding)
         {
             hasSaved = true;
-            if (GlobalDatabase.Data.Exists())
+            if (DatabaseRegistry.playerDB.Exists())
             {
-                GlobalDatabase.Data.Player.playerPositionX = player.transform.position.x;
-                GlobalDatabase.Data.Player.playerPositionY = player.transform.position.y;
-                GlobalDatabase.Data.Player.playerPositionZ = player.transform.position.z;
-                GlobalDatabase.Data.Save();
+                DatabaseRegistry.playerDB.Player.playerPositionX = player.transform.position.x;
+                DatabaseRegistry.playerDB.Player.playerPositionY = player.transform.position.y;
+                DatabaseRegistry.playerDB.Player.playerPositionZ = player.transform.position.z;
+                DatabaseRegistry.playerDB.Save();
             }
         }
     }

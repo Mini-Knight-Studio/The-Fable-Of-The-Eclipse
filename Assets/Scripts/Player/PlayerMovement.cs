@@ -115,7 +115,7 @@ public class PlayerMovement : Component
 
         if (dashTimer > 0)
         {
-            entity.transform.position += dashDirection * dashSpeed * Time.deltaTime;
+            entity.transform.position += dashDirection * player.Effects.GetEffectValueFloat(dashSpeed, "ModifySpeed") * Time.deltaTime;
             dashTimer -= Time.deltaTime;
             return true;
         }
@@ -182,7 +182,7 @@ public class PlayerMovement : Component
                 moveDirection.z * cos - moveDirection.x * sin
             );
 
-            entity.transform.position += rotatedDirection * Time.deltaTime * speed;
+            entity.transform.position += rotatedDirection * Time.deltaTime * player.Effects.GetEffectValueFloat(speed, "ModifySpeed");
 
             Vector3 targetLookAt = entity.transform.position + rotatedDirection;
             entity.transform.LookAt(targetLookAt, new Vector3(0, 1, 0));

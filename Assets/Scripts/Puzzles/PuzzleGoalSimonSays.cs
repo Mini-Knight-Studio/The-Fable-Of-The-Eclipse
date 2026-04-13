@@ -42,6 +42,8 @@ class PuzzleGoalSimonSays : Component
     private bool simonStarted = false;
     private float inputCooldown = 0.0f;
 
+    public Entity Gem;
+
     private enum State
     {
         WaitingForPillars,
@@ -75,6 +77,8 @@ class PuzzleGoalSimonSays : Component
         }
 
         LockAllPillars();
+
+        Gem.GetComponent<BoxCollider>().SetActive(false);
     }
 
     void OnUpdate()
@@ -115,6 +119,15 @@ class PuzzleGoalSimonSays : Component
             case State.Fail:
                 HandleFail();
                 break;
+
+            case State.Completed:
+                HandleCompleted();
+                break;
+        }
+
+        if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed && !puzzle2Completed)
+        {
+            CompletePuzzleAuto();
         }
     }
 
@@ -345,8 +358,22 @@ class PuzzleGoalSimonSays : Component
         pendingUpMoves += successfulRounds;
         successfulRounds = 0;
 
+        Debug.Log("Enemies theoretically spawned");
+
         LockAllPillars();
-        StartSimonPhase();
+        currentState = State.WaitingForPillars;
+        simonStarted = false;
+    }
+
+    void HandleCompleted()
+    {
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        {
+            Gem.SetActive(false);
+
+            DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
+            DatabaseRegistry.playerDB.Player.hasGrappling = true;
+        }
     }
 
     void CompletePuzzle()
@@ -357,7 +384,41 @@ class PuzzleGoalSimonSays : Component
 
         Debug.Log("Puzzle Fully Completed!");
 
-        GlobalDatabase.Data.Puzzles.Puzzle2Completed = true;
+        currentState = State.Completed;
+    }
+
+    void CompletePuzzleAuto()
+    {
+        if (puzzle2Completed) return;
+
+        puzzle2Completed = true;
+
+        Debug.Log("Puzzle Fully Completed!");
+
+        DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = true;
+
+        Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+        Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+
+        ResetAllPillars();
+
+        Pillar1.GetComponent<MovingPillar>().CompletePillarAuto();
+        Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
+        Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
+        Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
+
+        Pillar1.GetComponent<MovingPillarSimonSays>().Lock();
+        Pillar2.GetComponent<MovingPillarSimonSays>().Lock();
+        Pillar3.GetComponent<MovingPillarSimonSays>().Lock();
+        Pillar4.GetComponent<MovingPillarSimonSays>().Lock();
+
+        Pillar1.GetComponent<MovingPillarSimonSays>().ForceActive();
+        Pillar2.GetComponent<MovingPillarSimonSays>().ForceActive();
+        Pillar3.GetComponent<MovingPillarSimonSays>().ForceActive();
+        Pillar4.GetComponent<MovingPillarSimonSays>().ForceActive();
+
+        successfulRounds = maxRounds;
+        pendingMoves = maxRounds;
 
         currentState = State.Completed;
     }

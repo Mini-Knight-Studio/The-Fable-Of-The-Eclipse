@@ -17,8 +17,9 @@ class Level1to2Collider : SceneTransition
     {
         if (collision.HasCollided)
         {
-            if (GlobalDatabase.Data.Puzzles.Puzzle1Completed)
+            if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed)
             {
+                DatabaseRegistry.playerDB.Player.SetCurrentScene(UUID);
                 StartTransition();
             }
         }

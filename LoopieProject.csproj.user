@@ -1,4 +1,189 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Assets\Scripts\BossEntry.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\BurnableBlock.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\Effect.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\EffectApplier.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\FloatEffect.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\Health.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\IntEffect.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\Movement.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\TemporalEffect.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\TemporalEffectApplier.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Components\Vector3Effect.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Enemies\Enemy.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Enemies\GODModeSpawner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Enemies\Golem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Enemies\Slime.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\ItemHeal.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\NarrativeTrigger.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\OrbItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\PilarTrigger.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\OrbInventory.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\Player.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\PlayerAnimation.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\PlayerCamera.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\PlayerCombat.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\PlayerGrapple.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\PlayerItems.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\PlayerMovement.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Player\PlayerStatsSync.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Puzzles\Gem_Idle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Puzzles\MovingPillar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Puzzles\MovingPillarSimonSays.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Puzzles\PuzzleDebugController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Puzzles\PuzzleGoal.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Puzzles\PuzzleGoalSimonSays.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Puzzles\RollingBridge.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Transitions\ColliderSceneTransition.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Transitions\Firepath_InitialPlayerPositionManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Transitions\Hub_InitialPlayerPositionManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Transitions\InitialPlayerPositionManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Transitions\Level1to2Collider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Transitions\SceneTransition.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Transitions\Waterpath_InitialPlayerPositionManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Exit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\HealthHUD.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\IntroBookCover.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\IntroMiniKnightStudio.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Load.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\MenuShower.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\NewGame.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\OrbHUD.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\Framerate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\Fullscreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\LoadSettings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\MasterVolume.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\MusicVolume.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\Settings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\SfxVolume.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\Settings\VSync.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\UI\WinLoseSwap.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\Utils\CheckpointCollider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\VistaPoint.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

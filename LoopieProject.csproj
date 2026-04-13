@@ -1,17 +1,22 @@
 
 			<Project Sdk="Microsoft.NET.Sdk">
-				<PropertyGroup>
-					<TargetFramework>net472</TargetFramework>
-					<LangVersion>7.3</LangVersion>
-					<Nullable>disable</Nullable>
-					<ImplicitUsings>disable</ImplicitUsings>
-					<NuGetAudit>false</NuGetAudit>
-				</PropertyGroup>
+			  <PropertyGroup>
+				<TargetFramework>net472</TargetFramework>
+				<LangVersion>7.3</LangVersion>
+				<Nullable>disable</Nullable>
+				<ImplicitUsings>disable</ImplicitUsings>
+				<NuGetAudit>false</NuGetAudit>
 
-				 <ItemGroup>
-					<Reference Include="C:\Users\mpapi\Documents\GitHub\LoopieEngine\build\Debug\Loopie\*.dll" />
-				 </ItemGroup>
+				<EnableDefaultItems>false</EnableDefaultItems>
+			  </PropertyGroup>
+
+			  <ItemGroup>
+				<Compile Include="**\*.cs" />
+			  </ItemGroup>
+
+			  <ItemGroup>
+				<Reference Include="C:\Users\User\Documents\GitHub\LoopieEngine\build\Release\Loopie\*.dll" />
+			  </ItemGroup>
 
 			</Project>
-
 			

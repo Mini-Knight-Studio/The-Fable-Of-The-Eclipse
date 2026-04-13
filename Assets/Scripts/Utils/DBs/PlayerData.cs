@@ -21,6 +21,12 @@ public class PlayerData
         currentSceneUUID = newSceneUUID;
     }
 
+    public void ResetScenes()
+    {
+        currentSceneUUID = "";
+        previousSceneUUID = "";
+    }
+
     public float playerPositionX = 0.0f;
     public float playerPositionY = 0.0f;
     public float playerPositionZ = 0.0f;

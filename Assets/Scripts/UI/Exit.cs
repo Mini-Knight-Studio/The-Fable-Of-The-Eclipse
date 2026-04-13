@@ -9,8 +9,10 @@ class Exit : Component
     {
         if (!Blocked)
         {
-            // Exit Function
+            GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro = false;
+            GlobalDatabase.GlobalData.SaveAll();
             Debug.Log("Exit Success");
+            Application.Quit();
         }
     }
 };

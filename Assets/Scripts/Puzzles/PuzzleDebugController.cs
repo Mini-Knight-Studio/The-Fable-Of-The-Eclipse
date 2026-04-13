@@ -8,29 +8,57 @@ class PuzzleDebugController : Component
     {
         if (Input.IsKeyDown(KeyCode.NUM_1))
         {
-            GlobalDatabase.Data.Puzzles.Puzzle1Completed = !GlobalDatabase.Data.Puzzles.Puzzle1Completed;
-            Debug.LogWarning("Completed Puzzle 1 = " + GlobalDatabase.Data.Puzzles.Puzzle1Completed);
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = !DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed;
+            Debug.LogWarning("Completed Puzzle 1 = " + DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed);
         }
         if (Input.IsKeyDown(KeyCode.NUM_2))
         {
-            GlobalDatabase.Data.Puzzles.Puzzle2Completed = !GlobalDatabase.Data.Puzzles.Puzzle2Completed;
-            Debug.LogWarning("Completed Puzzle 2 = " + GlobalDatabase.Data.Puzzles.Puzzle2Completed);
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = !DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed;
+            Debug.LogWarning("Completed Puzzle 2 = " + DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed);
         }
         if (Input.IsKeyDown(KeyCode.NUM_3))
         {
-            GlobalDatabase.Data.Puzzles.Puzzle3Completed = !GlobalDatabase.Data.Puzzles.Puzzle3Completed;
-            Debug.LogWarning("Completed Puzzle 3 = " + GlobalDatabase.Data.Puzzles.Puzzle3Completed);
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed = !DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed;
+            Debug.LogWarning("Completed Puzzle 3 = " + DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed);
         }
         if (Input.IsKeyDown(KeyCode.NUM_4))
         {
-            GlobalDatabase.Data.Puzzles.AllPuzzlesCompleted = !GlobalDatabase.Data.Puzzles.AllPuzzlesCompleted;
-            Debug.LogWarning("Completed All Puzzles = " + GlobalDatabase.Data.Puzzles.AllPuzzlesCompleted);
+            DatabaseRegistry.puzzlesDB.Puzzles.AllPuzzlesCompleted = !DatabaseRegistry.puzzlesDB.Puzzles.AllPuzzlesCompleted;
+            Debug.LogWarning("Completed All Puzzles = " + DatabaseRegistry.puzzlesDB.Puzzles.AllPuzzlesCompleted);
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = !DatabaseRegistry.puzzlesDB.Puzzles.AllPuzzlesCompleted;
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = !DatabaseRegistry.puzzlesDB.Puzzles.AllPuzzlesCompleted;
+            DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed = !DatabaseRegistry.puzzlesDB.Puzzles.AllPuzzlesCompleted;
+        }
+        if (Input.IsKeyDown(KeyCode.NUM_5))
+        {
+            DatabaseRegistry.playerDB.Player.hasBurner = !DatabaseRegistry.playerDB.Player.hasBurner;
+            Debug.LogWarning("Player has Burner = " + DatabaseRegistry.playerDB.Player.hasBurner);
+        }
+        if (Input.IsKeyDown(KeyCode.NUM_6))
+        {
+            DatabaseRegistry.playerDB.Player.hasGrappling = !DatabaseRegistry.playerDB.Player.hasGrappling;
+            Debug.LogWarning("Player has Grappling = " + DatabaseRegistry.playerDB.Player.hasGrappling);
+        }
+        if (Input.IsKeyDown(KeyCode.NUM_7))
+        {
+            DatabaseRegistry.playerDB.Player.gemEarthCollected = !DatabaseRegistry.playerDB.Player.gemEarthCollected;
+            Debug.LogWarning("Player has Earth Gem = " + DatabaseRegistry.playerDB.Player.gemEarthCollected);
+        }
+        if (Input.IsKeyDown(KeyCode.NUM_8))
+        {
+            DatabaseRegistry.playerDB.Player.gemWaterCollected = !DatabaseRegistry.playerDB.Player.gemWaterCollected;
+            Debug.LogWarning("Player has Water Gem = " + DatabaseRegistry.playerDB.Player.gemWaterCollected);
+        }
+        if (Input.IsKeyDown(KeyCode.NUM_9))
+        {
+            DatabaseRegistry.playerDB.Player.gemFireCollected = !DatabaseRegistry.playerDB.Player.gemFireCollected;
+            Debug.LogWarning("Player has Fire Gem = " + DatabaseRegistry.playerDB.Player.gemFireCollected);
         }
 
         if (Input.IsKeyDown(KeyCode.NUM_0))
         {
             Debug.Log("Saving to Global Database");
-            GlobalDatabase.Data.Save();
+            DatabaseRegistry.playerDB.Save();
         }
     }
 }
