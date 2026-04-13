@@ -15,7 +15,7 @@ public class PlayerMovement : Component
     public float dashBufferTime = 0.15f;
 
     private float dashTimer = 0.0f;
-    private float dashCooldownTimer = 0.0f;
+    public float dashCooldownTimer = 0.0f;
     private float dashBufferTimer = 0.0f;
 
     private Vector3 dashDirection = new Vector3(0, 0, 0);
