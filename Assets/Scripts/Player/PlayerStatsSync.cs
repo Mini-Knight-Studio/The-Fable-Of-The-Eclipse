@@ -3,20 +3,20 @@ using Loopie;
 
 public class PlayerStatsSync : Component
 {
-    public Health playerHealth;
+    public Player player;
     public OrbInventory orbInventory;
 
     void OnCreate()
     {
-        playerHealth = entity.GetComponent<Health>();
+        player = entity.GetComponent<Player>();
         orbInventory = entity.GetComponent<OrbInventory>();
 
         
         if (!PlayerStats.isInitialized)
         {
-            if (playerHealth != null)
+            if (player != null)
             {
-                PlayerStats.savedHealth = playerHealth.GetMaxHealth();
+                PlayerStats.savedHealth = player.PlayerHealth.GetMaxHealth();
             }
             PlayerStats.savedOrbs = 0;
             PlayerStats.isInitialized = true;
@@ -24,9 +24,9 @@ public class PlayerStatsSync : Component
         else
         {
            
-            if (playerHealth != null)
+            if (player != null)
             {
-                playerHealth.actualHealth = PlayerStats.savedHealth;
+                player.PlayerHealth.ModifyActualHealth(PlayerStats.savedHealth);
             }
 
             if (orbInventory != null)
@@ -39,9 +39,9 @@ public class PlayerStatsSync : Component
     void OnUpdate()
     {
      
-        if (playerHealth != null)
+        if (player.PlayerHealth != null)
         {
-            PlayerStats.savedHealth = playerHealth.GetActualHealth();
+            PlayerStats.savedHealth = player.PlayerHealth.GetActualHealth();
         }
 
         if (orbInventory != null)
