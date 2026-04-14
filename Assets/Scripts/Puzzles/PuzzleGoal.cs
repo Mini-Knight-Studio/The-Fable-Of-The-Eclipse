@@ -27,6 +27,10 @@ class PuzzleGoal : Component
 
     private bool puzzle1Completed;
 
+    // Particles
+    private ParticleComponent goalParticles;
+    private bool particlesSwitched = true;
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -38,6 +42,9 @@ class PuzzleGoal : Component
         pillars[3] = Pillar4.GetComponent<MovingPillar>();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
+
+        goalParticles = entity.GetComponent<ParticleComponent>();
+        goalParticles.SetActive(false);
     }
 
     void OnUpdate()
@@ -52,6 +59,12 @@ class PuzzleGoal : Component
         {
             pendingMoves--;
             StartMovement(entity.transform.position + new Vector3(0, -movementDistance, 0));
+        }
+
+        if (!isMoving && !particlesSwitched)
+        {
+            goalParticles.SetActive(false);
+            particlesSwitched = true;
         }
     }
 
@@ -115,6 +128,9 @@ class PuzzleGoal : Component
         moveTimer = 0.0f;
 
         isMoving = true;
+
+        goalParticles.SetActive(true);
+        particlesSwitched = false;
     }
 
     void MoveTowardsTarget()
