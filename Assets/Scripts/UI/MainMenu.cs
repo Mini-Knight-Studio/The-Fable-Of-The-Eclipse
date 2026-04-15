@@ -8,25 +8,25 @@ class MainMenu : Component
     // Buttons
     public Entity newGameEntity;
     public Entity newGameHoveredEntity;
-    //private Button newGameButton;
+    private Button newGameButton;
     private NewGame newGameScript;
     private Image newGameHoveredImage;
 
     public Entity continueEntity;
     public Entity continueHoveredEntity;
-    //private Button continueButton;
+    private Button continueButton;
     private Load continueScript;
     private Image continueHoveredImage;
 
     public Entity settingsEntity;
     public Entity settingsHoveredEntity;
-    //private Button settingsButton;
+    private Button settingsButton;
     private SceneTransition settingsScript;
     private Image settingsHoveredImage;
 
     public Entity exitEntity;
     public Entity exitHoveredEntity;
-    //private Button exitButton;
+    private Button exitButton;
     private Exit exitScript;
     private Image exitHoveredImage;
 
@@ -38,6 +38,17 @@ class MainMenu : Component
         EXIT
     }
     private Buttons currentButton = Buttons.NEW_GAME;
+    private Buttons? mouseResult;
+    private Buttons keyboardResult = Buttons.NEW_GAME;
+
+    private enum InputMode
+    {
+        MOUSE,
+        KEYBOARD
+    }
+    private InputMode currentInputMode = InputMode.KEYBOARD;
+
+    private Vector2 lastMousePosition;
 
     // Intro Book Cover
     public Entity introBookCoverEntity;
@@ -51,6 +62,7 @@ class MainMenu : Component
 
     private float inputTimer = 0f;
     private float confirmTimer = 0f;
+    private float mouseTimer = 0f;
 
     private bool canCallScripts = false;
 
@@ -77,7 +89,7 @@ class MainMenu : Component
         // Buttons
         if (newGameEntity != null)
         {
-            // button
+            newGameButton = newGameEntity.GetComponent<Button>();
 
             if (newGameHoveredEntity != null)
             {
@@ -96,7 +108,7 @@ class MainMenu : Component
 
         if (continueEntity != null)
         {
-            // button
+            continueButton = continueEntity.GetComponent<Button>();
 
             if (continueHoveredEntity != null)
             {
@@ -115,7 +127,7 @@ class MainMenu : Component
 
         if (settingsEntity != null)
         {
-            // button
+            settingsButton = settingsEntity.GetComponent<Button>();
 
             if (settingsHoveredEntity != null)
             {
@@ -134,7 +146,7 @@ class MainMenu : Component
 
         if (exitEntity != null)
         {
-            // button
+            exitButton = exitEntity.GetComponent<Button>();
 
             if (exitHoveredEntity != null)
             {
@@ -231,73 +243,80 @@ class MainMenu : Component
         }
 
         // Main Menu logic.
+        Buttons previous = currentButton;
+
+        HandleMouseNavigation();
         HandleNavigation();
+
+        if (currentInputMode == InputMode.MOUSE)
+        {
+            if (mouseResult.HasValue)
+                currentButton = mouseResult.Value;
+        }
+        else
+        {
+            currentButton = keyboardResult;
+        }
+
+        HandleVisualFeedback();
         HandleConfirm();
+    }
+
+    void HandleMouseNavigation()
+    {
+        Vector2 currentMouse = Input.MousePosition;
+        Vector2 delta = currentMouse - lastMousePosition;
+
+        float sqrDistance = delta.x * delta.x + delta.y * delta.y;
+
+        lastMousePosition = currentMouse;
+
+        Buttons? hovered = null;
+
+        if (newGameButton.Hovered)
+            hovered = Buttons.NEW_GAME;
+        else if (continueButton.Hovered)
+            hovered = Buttons.CONTINUE;
+        else if (settingsButton.Hovered)
+            hovered = Buttons.SETTINGS;
+        else if (exitButton.Hovered)
+            hovered = Buttons.EXIT;
+
+        if (sqrDistance > 1.0f)
+            currentInputMode = InputMode.MOUSE;
+
+        if (currentInputMode != InputMode.MOUSE)
+            return;
+
+        mouseResult = hovered;
     }
 
     void HandleNavigation()
     {
+        bool input = Input.IsKeyPressed(KeyCode.UP) || Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y != 0;
+
+        if (input)
+            currentInputMode = InputMode.KEYBOARD;
+
+        if (currentInputMode != InputMode.KEYBOARD)
+            return;
+
         inputTimer += Time.deltaTime;
 
-        // Cooldown
-        if (inputTimer < inputCooldown)
-            return;
-        if (canCallScripts)
+        if (inputTimer < inputCooldown || canCallScripts)
             return;
 
         bool moved = false;
 
-        // Read Input
-        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0)
+        if (Input.IsKeyPressed(KeyCode.UP) || Input.LeftAxis.y > 0)
         {
-            switch (currentButton)
-            {
-                case Buttons.NEW_GAME: currentButton = Buttons.EXIT; break;
-                case Buttons.CONTINUE: currentButton = Buttons.NEW_GAME; break;
-                case Buttons.SETTINGS: currentButton = Buttons.CONTINUE; break;
-                case Buttons.EXIT: currentButton = Buttons.SETTINGS; break;
-            }
+            keyboardResult = (Buttons)(((int)keyboardResult + 3) % 4);
             moved = true;
         }
-        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0)
+        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.LeftAxis.y < 0)
         {
-            switch (currentButton)
-            {
-                case Buttons.NEW_GAME: currentButton = Buttons.CONTINUE; break;
-                case Buttons.CONTINUE: currentButton = Buttons.SETTINGS; break;
-                case Buttons.SETTINGS: currentButton = Buttons.EXIT; break;
-                case Buttons.EXIT: currentButton = Buttons.NEW_GAME; break;
-            }
+            keyboardResult = (Buttons)(((int)keyboardResult + 1) % 4);
             moved = true;
-        }
-
-        // Visual Feedback
-        switch (currentButton)
-        {
-            case Buttons.NEW_GAME:
-                newGameHoveredEntity.SetActive(true);
-                continueHoveredEntity.SetActive(false);
-                settingsHoveredEntity.SetActive(false);
-                exitHoveredEntity.SetActive(false);
-                break;
-            case Buttons.CONTINUE:
-                newGameHoveredEntity.SetActive(false);
-                continueHoveredEntity.SetActive(true);
-                settingsHoveredEntity.SetActive(false);
-                exitHoveredEntity.SetActive(false);
-                break;
-            case Buttons.SETTINGS:
-                newGameHoveredEntity.SetActive(false);
-                continueHoveredEntity.SetActive(false);
-                settingsHoveredEntity.SetActive(true);
-                exitHoveredEntity.SetActive(false);
-                break;
-            case Buttons.EXIT:
-                newGameHoveredEntity.SetActive(false);
-                continueHoveredEntity.SetActive(false);
-                settingsHoveredEntity.SetActive(false);
-                exitHoveredEntity.SetActive(true);
-                break;
         }
 
         if (moved)
@@ -342,6 +361,14 @@ class MainMenu : Component
             loopMusicAudioSource.Stop();
             canCallScripts = false;
         }
+    }
+
+    void HandleVisualFeedback()
+    {
+        newGameHoveredEntity.SetActive(currentButton == Buttons.NEW_GAME);
+        continueHoveredEntity.SetActive(currentButton == Buttons.CONTINUE);
+        settingsHoveredEntity.SetActive(currentButton == Buttons.SETTINGS);
+        exitHoveredEntity.SetActive(currentButton == Buttons.EXIT);
     }
 
     void HandleMusic()
