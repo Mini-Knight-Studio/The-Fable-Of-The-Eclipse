@@ -33,6 +33,7 @@ class IntroBookCover : Component
     private introState currentState = introState.DELAY_PRE_ANIMATION;
 
     private SpriteAnimator animator;
+    private bool quickStartAnimation = true;
 
     void OnCreate()
     {
@@ -69,6 +70,13 @@ class IntroBookCover : Component
 
     void OnUpdate()
     {
+        if (quickStartAnimation)
+        {
+            animator.Play();
+            animator.Stop();
+            quickStartAnimation = false;
+        }
+
         if (!hasIntroEnded)
         {
             timer += Time.deltaTime;
