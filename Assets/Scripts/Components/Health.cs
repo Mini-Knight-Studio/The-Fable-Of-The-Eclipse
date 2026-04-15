@@ -10,17 +10,16 @@ public class Health : Component
     public bool canBeHealed;
     private EffectApplier effectApplier;
 
+    public event Action OnDeath;
+    public event Action OnHit;
+    public event Action OnHeal;
+
     public void Init()
     {
         effectApplier = entity.GetComponent<EffectApplier>();
         canBeDamaged = true;
         canBeHealed = true;
         Reset();
-    }
-
-    public void UpdateHealth()
-    {
-
     }
 
     public int GetActualHealth()
@@ -33,6 +32,20 @@ public class Health : Component
         return maxHealth;
     }
 
+    public void ModifyActualHealth(int new_actual_health)
+    {
+        new_actual_health = new_actual_health < 0 ? 0 : new_actual_health;
+        new_actual_health = new_actual_health > maxHealth ? maxHealth : new_actual_health;
+        actualHealth = new_actual_health;
+    }
+
+    public void ModifyMaxHealth(int new_max_health)
+    {
+        maxHealth = new_max_health;
+        actualHealth = actualHealth < 0 ? 0 : actualHealth;
+        actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
+    }
+
     public bool IsDead()
     {
         return actualHealth <= 0;
@@ -43,30 +56,23 @@ public class Health : Component
         if (!canBeDamaged) return;
         actualHealth -= points;
         actualHealth = actualHealth < 0 ? 0 : actualHealth;
+        if(actualHealth == 0)
+            OnDeath?.Invoke();
+        else
+            OnHit?.Invoke();
     }
-
-    //public void AddEffect(List<Effect> effectList)
-    //{
-    //    int probability = Loopie.Random.Range(0, 101);
-    //    for (int i = 0; i < effectList.Count; i++)
-    //    {
-    //        if (probability > effectList[i].Probability + 1)
-    //            continue;
-    //        effects.Add(effectList[i]);
-    //        effectList[i].InitEffect();
-    //    }
-    //}
 
     public void Heal(int points)
     {
         if (!canBeHealed) return;
         actualHealth += points;
         actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
+        if(points > 0)
+            OnHeal?.Invoke();
     }
 
     public void Reset()
     {
         actualHealth = maxHealth;
-        //effects = new List<Effect>();
     }
 };

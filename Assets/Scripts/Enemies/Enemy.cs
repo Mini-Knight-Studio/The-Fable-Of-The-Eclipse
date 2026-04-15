@@ -8,10 +8,15 @@ public class Enemy : Component
     protected Entity reference;
     protected Health health;
     protected Movement movement;
+    protected Animator animator;
     protected BoxCollider attackBox;
     protected BoxCollider collision;
     protected BoxCollider hitbox;
     protected TemporalEffect effect;
+
+    protected ParticleComponent enemyParticles;
+    protected ParticleComponent attackParticles;
+    protected ParticleComponent hitParticles;
 
     protected Player target;
 
@@ -43,22 +48,32 @@ public class Enemy : Component
         //
     }
     #region Set Up
-    protected void SetEnemy(string reference_name, float attack_cooldown, float attack_preparation_time, float attack_reach_distance)
+    protected void SetEnemy(Entity reference_enemy, float attack_cooldown, float attack_preparation_time, float attack_reach_distance)
     {
-        reference = Entity.FindEntityByName(reference_name);
+        reference = reference_enemy;
 
         health = entity.GetComponent<Health>();
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
-        attackBox = entity.GetChild(0).GetComponent<BoxCollider>();
+        animator = entity.GetComponent<Animator>();
         effect = entity.GetComponent<TemporalEffect>();
+
+        attackParticles = entity.GetComponent<ParticleComponent>();
+        hitParticles = entity.GetComponent<ParticleComponent>();
 
         foreach(Entity child in entity.GetChildren())
         {
-            if(child.Name == "AttackBox") attackBox = child.GetComponent<BoxCollider>();
-            if(child.Name == "Hitbox") hitbox = child.GetComponent<BoxCollider>();
+            if (child.Name == "AttackBox")
+            {
+                attackBox = child.GetComponent<BoxCollider>();
+                attackParticles = child.GetComponent<ParticleComponent>();
+            }
+            if (child.Name == "Hitbox")
+            {
+                hitbox = child.GetComponent<BoxCollider>();
+                hitParticles = child.GetComponent<ParticleComponent>();
+            }
         }
-
         health.Init();
         wanderRange = false;
         ResetWander();
@@ -67,7 +82,10 @@ public class Enemy : Component
         attackPreparationTime = attack_preparation_time;
         attackReachDistance = attack_reach_distance;
         internal_hit_cooldown = 0.0f;
-        target = Entity.FindEntityByName("Player").GetComponent<Player>();
+        target = Player.Instance;
+
+        attackParticles.Enabled = false;
+        hitParticles.Enabled = false;
     }
     #endregion
     #region Detection
@@ -113,11 +131,14 @@ public class Enemy : Component
         isAttacking = true;
         endedPreparingAttack = false;
         endedAttack = false;
+        PlayAnimation("Armature|ChargeAttack", 0.0f);
         while (timer < attackPreparationTime)
         {
             timer += Time.deltaTime;
             yield return null;
         }
+        PlayAnimation("Armature|Attack", 0.0f);
+        animator.Looping = false;
         endedPreparingAttack = true;
         attackBox.entity.SetActive(true);
         if (attackBox.IsColliding || Vector3.Distance(transform.position, target.transform.position) < attackReachDistance)
@@ -125,6 +146,18 @@ public class Enemy : Component
             target.Effects.AddEffect(effect);
             Attack(damage);
         }
+        attackParticles.Enabled = true;
+        yield return new WaitForSeconds(Time.deltaTime);
+        attackParticles.Enabled = false;
+        timer = 0.0f;
+        float animation_duration = animator.GetCurrentClipDuration();
+        while (timer < animation_duration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        PlayAnimation("Armature|IdleWalk", 0.0f);
+        animator.Looping = true;
         timer = 0.0f;
         attackBox.entity.SetActive(false);
         endedAttack = true;
@@ -143,8 +176,7 @@ public class Enemy : Component
     private void Attack(int points)
     {
         target.PlayerHealth.Damage(target.Effects.GetEffectValueInt(points, "ModifyDamage"));
-        StartCoroutine(target.Movement2.Push((float)points * 10.0f, 0.3f, GetDirectionToTarget()));
-        Debug.Log(target.PlayerHealth.GetActualHealth());
+        target.Movement.ApplyKnockback((float)points * 10.0f, 0.3f, GetDirectionToTarget());
     }
 
     protected bool EndedPreparingAttack()
@@ -171,9 +203,9 @@ public class Enemy : Component
     {
         if (OnHitCooldown() || !health.canBeDamaged) return;
         StartHitCooldown(target.Combat.GetAttackDuration());
+        StartCoroutine(ParticleTick(hitParticles, Vector3.Up, Time.deltaTime));
         health.Damage(points);
-        Debug.Log(health.GetActualHealth());
-        movement.Push(points * 10 - health.maxHealth, 0.3f, GetDirectionToTarget() * -1);
+        StartCoroutine(movement.Push(points * 25 - health.maxHealth, 0.3f, GetDirectionToTarget() * -1));
     }
     #endregion
     #region Wander
@@ -185,19 +217,19 @@ public class Enemy : Component
     protected void Wander(float areaWidth, float reachDistance, float speedMultiplier)
     {
         RaycastHit hit;
-
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
         int Wall2Layer = Collisions.GetLayerBit("EnemyLimit");
-        int LayerMask = WallLayer | Wall2Layer;
+        int EnemyLayer = Collisions.GetLayerBit("Enemy");
+        int LayerMask = WallLayer | Wall2Layer /*| EnemyLayer*/;
 
-        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask))
+        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask, collision))
         {
             movement.Move(speedMultiplier / 2, transform.Forward);
             if (Vector3.Distance(lastWanderPosition, transform.position) > reachDistance)
                 return;
         }
 
-        wanderRange = true;
+            wanderRange = true;
         for (int i = 0; i < 2; i++)
         {
             int tries = 0;
@@ -223,10 +255,45 @@ public class Enemy : Component
     {
         Vector3 leftZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -field_width);
         Vector3 rightZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, field_width);
-        Gizmo.DrawLine(transform.position + transform.Forward * field_depth, transform.position - leftZone * -1.0f * field_depth, Color.White);
-        Gizmo.DrawLine(transform.position + transform.Forward * field_depth, transform.position - rightZone * -1.0f * field_depth, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + rightZone * field_depth, Color.White);
-        Gizmo.DrawLine(transform.position, transform.position + leftZone * field_depth, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position - leftZone * -1.0f * field_depth + transform.Up, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position - rightZone * -1.0f * field_depth + transform.Up, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Up, transform.position + rightZone * field_depth + transform.Up, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Up, transform.position + leftZone * field_depth + transform.Up, Color.White);
+    }
+    #endregion
+    #region Visual
+    public void PlayAnimation(string clipName, float transitionTime)
+    {
+        if (!animator.InTransition)
+        {
+            if (animator.GetCurrentClipName() == clipName)
+                return;
+        }
+        else
+        {
+            if (animator.GetNextClipName() == clipName)
+                return;
+        }
+        Debug.Log(clipName);
+        animator.Play(clipName, transitionTime);
+    }
+
+    public IEnumerator ParticleTick(ParticleComponent particles, Vector3 sequence, float tick_duration/*, string emitter, bool force_system_active, bool only_active*/) //Sequence options: -2 no modify | -1 opposite | 0 false | 1 true 
+    {
+        particles.SetActive(TranslateBool(particles, sequence.x));
+        yield return new WaitForSeconds(tick_duration);
+        particles.SetActive(TranslateBool(particles, sequence.y));
+        yield return new WaitForSeconds(tick_duration);
+        particles.SetActive(TranslateBool(particles, sequence.z));
+    }
+
+    private bool TranslateBool(ParticleComponent particles, float number)
+    {
+        if( particles == null ) return false;
+        if (number == -1) return !particles.Enabled;
+        if (number == 0) return false;
+        if (number == 1) return true;
+        return particles.Enabled;
     }
     #endregion
 }

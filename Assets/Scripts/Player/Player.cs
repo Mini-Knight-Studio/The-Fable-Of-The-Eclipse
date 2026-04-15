@@ -3,38 +3,73 @@ using Loopie;
 
 public class Player : Component
 {
+    public Health PlayerHealth;
+
+    protected Entity CameraEntity;
+    public PlayerCamera Camera;
+
+
+    public PlayerInput Input;
     public PlayerMovement Movement;
-    public Movement Movement2;
     public PlayerAnimation Animation;
     public PlayerCombat Combat;
-    public PlayerItems Items;
-    public Health PlayerHealth;
-    public PlayerCamera Camera;
+
     public TemporalEffectApplier Effects;
+    private SceneTransition LoseTransition;
+
+    public static Player Instance { get; private set; }
 
     void OnCreate()
     {
-        Movement = entity.GetComponent<PlayerMovement>();
-        Movement2 = entity.GetComponent<Movement>();
-        Animation = entity.GetComponent<PlayerAnimation>();
-        Combat = entity.GetComponent<PlayerCombat>();
-        Items = entity.GetComponent<PlayerItems>();
-        PlayerHealth = entity.GetComponent<Health>();
-        Effects = entity.GetComponent<TemporalEffectApplier>();
+        Instance = this;
 
-        Entity cameraEntity = Entity.FindEntityByName("PlayerCamera");
-        if (cameraEntity != null)
-        {
-            Camera = cameraEntity.GetComponent<PlayerCamera>();
-        }
+        PlayerHealth = entity.GetComponent<Health>();
+        Camera = CameraEntity.GetComponent<PlayerCamera>();
+
+
+
+        Input = entity.GetComponent<PlayerInput>();
+        Input.SetOwner(this);
+        Movement = entity.GetComponent<PlayerMovement>();
+        Movement.SetOwner(this);
+        Animation = entity.GetComponent<PlayerAnimation>();
+        Animation.SetOwner(this);
+        Combat = entity.GetComponent<PlayerCombat>();
+        Combat.SetOwner(this);
+
+
+        Effects = entity.GetComponent<TemporalEffectApplier>();
+        LoseTransition = entity.GetComponent<SceneTransition>();
+
+
 
         if (Movement == null) Debug.Log("Missing PlayerMovement");
         if (Animation == null) Debug.Log("Missing PlayerAnimation");
         if (Combat == null) Debug.Log("Missing PlayerCombat");
         if (PlayerHealth == null) Debug.Log("Missing Health");
+        if(Input == null) Debug.Log("Missing PlayerInput");
+        if(Camera == null) Debug.Log("Missing PlayerCamera");
+
+
+
         PlayerHealth.Init();
     }
 
+    private void PlayerHealth_OnDeath()
+    {
+        throw new NotImplementedException();
+    }
+
     void OnUpdate()
-    {    }
+    {
+ 
+        Input.ProcessInputs();
+        Movement.ProcessMovement();
+        Combat.ProcessCombat();
+
+
+        Animation.ProcessAnimations();
+    }
 }
+
+

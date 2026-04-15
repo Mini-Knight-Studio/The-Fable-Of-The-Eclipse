@@ -4,7 +4,6 @@ using Loopie;
 class RollingBridge : Component
 {
     private BoxCollider collider;
-    public Entity player;
     public Entity bridgeBase;
     public Entity blockingCollider;
 
@@ -37,7 +36,7 @@ class RollingBridge : Component
             animationFinished = true;
         }
 
-        if (!animationFinished && collider.IsColliding && player.GetComponent<PlayerMovement>().isDashing)
+        if (!animationFinished && collider.IsColliding && Player.Instance.Movement.IsDashing())
         {
             animationStarted = true;
         }
