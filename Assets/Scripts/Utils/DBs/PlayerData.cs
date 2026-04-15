@@ -4,7 +4,7 @@ using Loopie;
 public class PlayerData
 {
     // Items, Abilities and Gems
-    public bool gemEarthCollected = false;
+    public bool gemAirCollected = false;
     public bool gemFireCollected = false;
     public bool gemWaterCollected = false;
 

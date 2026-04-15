@@ -41,8 +41,8 @@ class PuzzleDebugController : Component
         }
         if (Input.IsKeyDown(KeyCode.NUM_7))
         {
-            DatabaseRegistry.playerDB.Player.gemEarthCollected = !DatabaseRegistry.playerDB.Player.gemEarthCollected;
-            Debug.LogWarning("Player has Earth Gem = " + DatabaseRegistry.playerDB.Player.gemEarthCollected);
+            DatabaseRegistry.playerDB.Player.gemAirCollected = !DatabaseRegistry.playerDB.Player.gemAirCollected;
+            Debug.LogWarning("Player has Earth Gem = " + DatabaseRegistry.playerDB.Player.gemAirCollected);
         }
         if (Input.IsKeyDown(KeyCode.NUM_8))
         {

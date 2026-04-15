@@ -4,7 +4,7 @@ using static Loopie.Transform;
 
 class Golem : Enemy
 {
-    public string Reference;
+    public Entity Reference;
 
     public int ShieldLife;
     public bool isShielding;
