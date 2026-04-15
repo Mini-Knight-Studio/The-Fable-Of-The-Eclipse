@@ -55,7 +55,7 @@ public class Enemy : Component
         health = entity.GetComponent<Health>();
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
-        animator = entity.GetComponent<Animator>();
+        animator = entity.GetChildByName("Visuals").GetComponent<Animator>();
         effect = entity.GetComponent<TemporalEffect>();
 
         attackParticles = entity.GetComponent<ParticleComponent>();
@@ -253,15 +253,15 @@ public class Enemy : Component
     #region Debug
     protected void DebugViewField(float field_width, float field_depth)
     {
-        Vector3 leftZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -field_width);
-        Vector3 rightZone = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, field_width);
-        Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position - leftZone * -1.0f * field_depth + transform.Up, Color.White);
-        Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position - rightZone * -1.0f * field_depth + transform.Up, Color.White);
-        Gizmo.DrawLine(transform.position + transform.Up, transform.position + rightZone * field_depth + transform.Up, Color.White);
-        Gizmo.DrawLine(transform.position + transform.Up, transform.position + leftZone * field_depth + transform.Up, Color.White);
+        Vector3 left = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, -field_width);
+        Vector3 right = Vector3.RotateAroundAxis(transform.Forward, Vector3.Up, field_width);
+        Gizmo.DrawLine(transform.position + transform.Up, transform.position + right * field_depth + transform.Up, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Up, transform.position + left * field_depth + transform.Up, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position + right * field_depth + transform.Up, Color.White);
+        Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position + left * field_depth + transform.Up, Color.White);
     }
     #endregion
-    #region Visual
+    #region Visualw
     public void PlayAnimation(string clipName, float transitionTime)
     {
         if (!animator.InTransition)

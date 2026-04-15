@@ -18,11 +18,8 @@ class Spawner : Component
         if(!alreadySpawned && Vector3.Distance(transform.position, player.transform.position) <= distance)
         {
             alreadySpawned = true;
-            Debug.Log("1");
-            Entity newClone = entityToClone.Clone(true);//Hello ^^
-            Debug.Log("2");
-            newClone.Name.Replace("Reference", "");
-            Debug.Log("3");
+            Entity newClone = entityToClone.Clone(true);
+            newClone.Name = newClone.Name.Replace("_Reference_", "");
             newClone.transform.position = transform.position;
             newClone.SetActive(true);
         }

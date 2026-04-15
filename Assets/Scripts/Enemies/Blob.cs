@@ -146,7 +146,7 @@ class Blob : Enemy
 
     void OnDrawGizmo()
     {
-        DebugViewField(ViewFieldWidth, ViewFieldFar * BlobStage);
+        DebugViewField(ViewFieldWidth, ViewFieldFar);
     }
 
     void OnDestroy()
