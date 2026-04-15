@@ -349,7 +349,7 @@ class MainMenu : Component
         if (loopMusicHasPlayed)
             return;
 
-        if (introBookCoverScript.HasOpeningMusicPlayed())
+        if (introBookCoverScript.HasOpeningStarted())
         {
             openingMusicTimer += Time.deltaTime;
 

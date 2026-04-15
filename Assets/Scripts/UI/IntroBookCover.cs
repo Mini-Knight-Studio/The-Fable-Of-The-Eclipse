@@ -23,6 +23,7 @@ class IntroBookCover : Component
 
     private bool hasIntroEnded = false;
     private bool openingMusicHasPlayed = false;
+    private bool openingHasStarted = false;
 
     private enum introState
     {
@@ -31,15 +32,19 @@ class IntroBookCover : Component
     }
     private introState currentState = introState.DELAY_PRE_ANIMATION;
 
+    private SpriteAnimator animator;
+
     void OnCreate()
     {
+        
         if (backgroundEntity != null)
         {
             background = backgroundEntity.GetComponent<Image>();
+            animator = entity.GetComponent<SpriteAnimator>();
         }
         else
         {
-            Debug.Log("Error: There is no background Image Entity assigned.");
+            Debug.Log("Error: There is no background Image+Sprite Animator Entity assigned.");
         }
 
         if (introMiniKnightStudioEntity != null)
@@ -87,23 +92,16 @@ class IntroBookCover : Component
 
     void UpdateInAnimation()
     {
-        if (timer >= inAnimationDelay)
+        if (!openingHasStarted)
+        {
+            animator.Play();
+            openingMusicAudioSource.Play();
+            openingHasStarted = true;
+        }
+        else if (animator.CurrentFrame == animator.FrameCount)
         {
             backgroundEntity.SetActive(false);
             hasIntroEnded = true;
-            timer = 0f;
-        }
-        else
-        {
-            if (!openingMusicHasPlayed)
-            {
-                openingMusicAudioSource.Play();
-                openingMusicHasPlayed = true;
-            }
-
-            currentBackgroundOpacity = Mathf.Lerp(1, 0, timer / inAnimationDelay);
-            Vector4 color = new Vector4(1, 1, 1, currentBackgroundOpacity);
-            background.SetTint(color);
         }
     }
 
@@ -112,8 +110,8 @@ class IntroBookCover : Component
         return totalPreAnimationDelay;
     }
 
-    public bool HasOpeningMusicPlayed()
+    public bool HasOpeningStarted()
     {
-        return openingMusicHasPlayed;
+        return openingHasStarted;
     }
 };

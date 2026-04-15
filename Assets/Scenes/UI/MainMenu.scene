@@ -13,7 +13,7 @@
                         "position": {
                             "x": 0.0,
                             "y": 1.0,
-                            "z": -10.0
+                            "z": -17.144527435302734
                         },
                         "rotation": {
                             "w": 1.0,
@@ -36,7 +36,7 @@
                         "is_main_camera": true,
                         "near_plane": 0.30000001192092896,
                         "ortho_size": 0.0,
-                        "projection": 0
+                        "projection": 1
                     },
                     "uuid": "08a8bf2f-9b2d-2592-d32c-ebd9395cc90d"
                 },
@@ -46,7 +46,7 @@
                 }
             ],
             "name": "MainCamera",
-            "parent_uuid": "9fcf5114-0c69-3a6b-1009-5931275eb2a2",
+            "parent_uuid": "e5e3750c-1cb9-3277-484c-a4d1ef72e6bb",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -117,7 +117,15 @@
                             "g": 1.0,
                             "r": 1.0
                         },
-                        "on_click_bindings": {},
+                        "on_click_bindings": {
+                            "b340ab3c-76a9-5f4e-6435-27bd74755279": {
+                                "0": {
+                                    "component_uuid": "220b53ef-f268-c378-7da5-c87ef625007d",
+                                    "entity_uuid": "b340ab3c-76a9-5f4e-6435-27bd74755279",
+                                    "function": "StartTransition"
+                                }
+                            }
+                        },
                         "pressed": {
                             "a": 0.6000000238418579,
                             "b": 0.6000000238418579,
@@ -175,7 +183,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 192.88560485839844,
+                                "x": 193.88192749023438,
                                 "y": 108.0
                             }
                         },
@@ -222,7 +230,7 @@
                 }
             ],
             "name": "Canvas",
-            "parent_uuid": "9fcf5114-0c69-3a6b-1009-5931275eb2a2",
+            "parent_uuid": "e5e3750c-1cb9-3277-484c-a4d1ef72e6bb",
             "uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b"
         },
         {
@@ -283,7 +291,7 @@
                             "exitHoveredEntity": "97b3b74a-5788-495d-6424-505417bbbc37",
                             "hasPlayedIntro": false,
                             "inputCooldown": 0.20000000298023224,
-                            "introBookCoverEntity": "111496da-1ad3-06a5-d1e4-9b968b6a7a54",
+                            "introBookCoverEntity": "30c6483a-ecef-ec61-ee34-c32e0e1e1565",
                             "loopMusicEntity": "18e9fee6-02a5-f7a4-a5e7-cb58f75be45d",
                             "newGameEntity": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
                             "newGameHoveredEntity": "6f4fc9ec-b929-a8c0-9729-6866009d711e",
@@ -385,7 +393,15 @@
                             "g": 1.0,
                             "r": 1.0
                         },
-                        "on_click_bindings": {},
+                        "on_click_bindings": {
+                            "6f4fc9ec-b929-a8c0-9729-6866009d711e": {
+                                "0": {
+                                    "component_uuid": "c80bdc8a-453a-b16b-d6c3-e716f22ec481",
+                                    "entity_uuid": "6f4fc9ec-b929-a8c0-9729-6866009d711e",
+                                    "function": "StartNewGame"
+                                }
+                            }
+                        },
                         "pressed": {
                             "a": 0.6000000238418579,
                             "b": 0.6000000238418579,
@@ -487,7 +503,15 @@
                             "g": 1.0,
                             "r": 1.0
                         },
-                        "on_click_bindings": {},
+                        "on_click_bindings": {
+                            "7e6d4794-a47e-5ede-7897-fd0801ca318d": {
+                                "0": {
+                                    "component_uuid": "c527aca1-76c8-5b09-7054-426d56dd2763",
+                                    "entity_uuid": "7e6d4794-a47e-5ede-7897-fd0801ca318d",
+                                    "function": "LoadPreviousSave"
+                                }
+                            }
+                        },
                         "pressed": {
                             "a": 0.6000000238418579,
                             "b": 0.6000000238418579,
@@ -520,89 +544,6 @@
             "name": "Continue",
             "parent_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
             "uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 192.0,
-                                "y": 108.0
-                            }
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -8.730830192565918
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "9556c546-7150-ba59-9250-2a3e0799948b"
-                },
-                {
-                    "image": {
-                        "texture_uuid": "337ed77e-c988-f989-1a9f-55b574174be5",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "uuid": "0a526722-7a5e-7b17-acaa-25c937b8730c"
-                },
-                {
-                    "script": {
-                        "class_id": "IntroBookCover",
-                        "fields": {
-                            "backgroundEntity": "111496da-1ad3-06a5-d1e4-9b968b6a7a54",
-                            "inAnimationDelay": 2.0,
-                            "introMiniKnightStudioEntity": "c3c36fa1-1149-9a33-ac26-457453c15259",
-                            "openingMusicEntity": "2de56a2c-1eae-4c4f-1760-83d0327060d3",
-                            "preAnimationDelay": 2.0
-                        }
-                    },
-                    "uuid": "b9c30373-8747-e8c5-fa48-9507c3265015"
-                }
-            ],
-            "name": "IntroBookCover",
-            "parent_uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b",
-            "uuid": "111496da-1ad3-06a5-d1e4-9b968b6a7a54"
         },
         {
             "active": true,
@@ -672,7 +613,15 @@
                             "g": 1.0,
                             "r": 1.0
                         },
-                        "on_click_bindings": {},
+                        "on_click_bindings": {
+                            "97b3b74a-5788-495d-6424-505417bbbc37": {
+                                "0": {
+                                    "component_uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3",
+                                    "entity_uuid": "97b3b74a-5788-495d-6424-505417bbbc37",
+                                    "function": "ExitGame"
+                                }
+                            }
+                        },
                         "pressed": {
                             "a": 0.6000000238418579,
                             "b": 0.6000000238418579,
@@ -1262,7 +1211,7 @@
                 }
             ],
             "name": "MainMenu_Music",
-            "parent_uuid": "9fcf5114-0c69-3a6b-1009-5931275eb2a2",
+            "parent_uuid": "e5e3750c-1cb9-3277-484c-a4d1ef72e6bb",
             "uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533"
         },
         {
@@ -1411,11 +1360,11 @@
                 }
             ],
             "name": "LoadSettings",
-            "parent_uuid": "9fcf5114-0c69-3a6b-1009-5931275eb2a2",
+            "parent_uuid": "e5e3750c-1cb9-3277-484c-a4d1ef72e6bb",
             "uuid": "4b4fb05c-e9aa-761a-360d-6b32271237c1"
         },
         {
-            "active": false,
+            "active": true,
             "components": [
                 {
                     "recttransform": {
@@ -1438,14 +1387,14 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 192.0,
-                                "y": 108.0
+                                "x": 660.0,
+                                "y": 213.0
                             }
                         },
                         "position": {
                             "x": 0.0,
                             "y": 0.0,
-                            "z": -13.975834846496582
+                            "z": -6.480451583862305
                         },
                         "rotation": {
                             "w": 1.0,
@@ -1454,16 +1403,16 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
+                            "x": 0.28999999165534973,
+                            "y": 0.5073593854904175,
+                            "z": 0.28999999165534973
                         }
                     },
                     "uuid": "83e457a9-8559-7da3-fb68-e2b5679ae709"
                 },
                 {
                     "image": {
-                        "texture_uuid": "337ed77e-c988-f989-1a9f-55b574174be5",
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -1482,16 +1431,16 @@
                 {
                     "sprite_animator": {
                         "fps": 12.0,
-                        "frame_count": 2,
+                        "frame_count": 15,
                         "grid": {
-                            "columns": 2,
-                            "rows": 1
+                            "columns": 8,
+                            "rows": 2
                         },
-                        "loop": true,
-                        "play_on_start": true,
-                        "playing": true,
+                        "loop": false,
+                        "play_on_start": false,
+                        "playing": false,
                         "start_frame": 0,
-                        "texture_uuid": "337ed77e-c988-f989-1a9f-55b574174be5"
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b"
                     },
                     "uuid": "90c6c378-5ed8-de3d-c067-ae04b55350b0"
                 },
@@ -1509,7 +1458,7 @@
                     "uuid": "b1f98229-04b1-8494-32ff-f79693d0901b"
                 }
             ],
-            "name": "IntroBookCoverFinal",
+            "name": "IntroBookCover",
             "parent_uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b",
             "uuid": "30c6483a-ecef-ec61-ee34-c32e0e1e1565"
         }
