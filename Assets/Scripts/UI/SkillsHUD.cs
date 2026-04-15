@@ -53,7 +53,7 @@ public class SkillsHUD : Component
         if (playerMovement != null && dashActiveEntity != null && dashInactiveEntity != null)
         {
             // El dash está listo si el temporizador llega a 0
-            bool isDashReady = playerMovement.dashCooldownTimer <= 0;
+            bool isDashReady = Player.Instance.Movement.CanDash();
 
             // Si el estado ha cambiado respecto al último frame, intercambiamos imágenes
             if (isDashReady != wasDashReady)

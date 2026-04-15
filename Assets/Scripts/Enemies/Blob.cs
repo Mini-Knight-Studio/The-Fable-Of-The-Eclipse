@@ -4,7 +4,7 @@ using Loopie;
 
 class Blob : Enemy
 {
-    public string Reference;
+    public Entity Reference;
 
     public int BlobStage;
     public float BlobStageSize;

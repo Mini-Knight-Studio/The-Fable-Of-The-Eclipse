@@ -10,6 +10,10 @@ public class Health : Component
     public bool canBeHealed;
     private EffectApplier effectApplier;
 
+    public event Action OnDeath;
+    public event Action OnHit;
+    public event Action OnHeal;
+
     public void Init()
     {
         effectApplier = entity.GetComponent<EffectApplier>();
@@ -52,6 +56,10 @@ public class Health : Component
         if (!canBeDamaged) return;
         actualHealth -= points;
         actualHealth = actualHealth < 0 ? 0 : actualHealth;
+        if(actualHealth == 0)
+            OnDeath?.Invoke();
+        else
+            OnHit?.Invoke();
     }
 
     public void Heal(int points)
@@ -59,6 +67,8 @@ public class Health : Component
         if (!canBeHealed) return;
         actualHealth += points;
         actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
+        if(points > 0)
+            OnHeal?.Invoke();
     }
 
     public void Reset()

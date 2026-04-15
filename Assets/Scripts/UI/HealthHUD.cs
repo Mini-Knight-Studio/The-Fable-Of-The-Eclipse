@@ -3,8 +3,6 @@ using Loopie;
 
 public class HealthHUD : Component
 {
-    public string playerName = "Player";
-
     public string iconNamePrefix = "Life_";
 
     public int maxHealthIcons = 5;
@@ -15,12 +13,7 @@ public class HealthHUD : Component
 
     void OnCreate()
     {
-        Entity playerEntity = Entity.FindEntityByName(playerName);
-        if (playerEntity != null)
-        {
-            playerHealth = playerEntity.GetComponent<Health>();
-        }
-
+        playerHealth = Player.Instance.PlayerHealth;
         healthIcons = new Entity[maxHealthIcons];
 
         for (int i = 0; i < maxHealthIcons; i++)
