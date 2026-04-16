@@ -51,6 +51,10 @@ class MovingPillar : Component
     // Particles
     private ParticleComponent goalParticles;
 
+    // For reseting
+    private Vector3 initialPosition;
+
+
     void OnCreate()
     {
         myCollider = entity.GetComponent<BoxCollider>();
@@ -63,6 +67,8 @@ class MovingPillar : Component
         pushBack = pushBackEntity.GetComponent<BoxCollider>();
         pushLeft = pushLeftEntity.GetComponent<BoxCollider>();
         pushRight = pushRightEntity.GetComponent<BoxCollider>();
+
+        initialPosition = entity.transform.position;
     }
 
     void OnUpdate()
@@ -252,4 +258,12 @@ class MovingPillar : Component
             (float)Math.Round(pos.z / tileSize) * tileSize
         );
     }
+
+    public void ResetPillar()
+    {
+        StartMovement(initialPosition);
+        onGoalPosition = false;
+        onGoalCalled = false;
+        stopedOnGoal = false;
+}
 }

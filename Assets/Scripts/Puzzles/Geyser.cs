@@ -3,6 +3,11 @@ using Loopie;
 
 class Geyser : Component
 {
+    public int damage = 1;
+    public float damageCD = 2.0f;
+    private float damageTimer = 0.0f;
+    private BoxCollider collider;
+
     public float movementSpeed = 2.0f;
 
     public float frequency = 3.0f;
@@ -35,6 +40,7 @@ class Geyser : Component
     void OnUpdate()
     {
         frequencyTimer += Time.deltaTime;
+        damageTimer += Time.deltaTime;
 
         if (frequencyTimer >= frequency && !isMoving)
         {
@@ -55,6 +61,12 @@ class Geyser : Component
         if (isMoving)
         {
             MoveTowardsTarget();
+        }
+
+        if (collider.IsColliding && damageTimer >= damageCD)
+        {
+            damageTimer = 0.0f;
+            Player.Instance.PlayerHealth.Damage(damage);
         }
     }
 
