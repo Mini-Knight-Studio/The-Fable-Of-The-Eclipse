@@ -308,12 +308,12 @@ class MainMenu : Component
 
         bool moved = false;
 
-        if (Input.IsKeyPressed(KeyCode.UP) || Input.LeftAxis.y > 0)
+        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0)
         {
             keyboardResult = (Buttons)(((int)keyboardResult + 3) % 4);
             moved = true;
         }
-        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.LeftAxis.y < 0)
+        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0)
         {
             keyboardResult = (Buttons)(((int)keyboardResult + 1) % 4);
             moved = true;
