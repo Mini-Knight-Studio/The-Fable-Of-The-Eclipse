@@ -24,9 +24,12 @@ class CheckpointCollider : Component
                 DatabaseRegistry.playerDB.Player.playerPositionZ = player.transform.position.z;
                 DatabaseRegistry.playerDB.Save();
             }
-            if (DatabaseRegistry.playerDB.Exists())
+            if (DatabaseRegistry.enemiesDB.Exists())    
             {
+                for (int i = 0; i < ; i++)
+                {
 
+                }
             }
     }
 };
