@@ -194,11 +194,11 @@ public class PlayerDatabase : LocalDatabase
     public PlayerData Player { get; } = new PlayerData();
 }
 
-public class EnemyDataBase : LocalDatabase
+public class EnemiesDataBase : LocalDatabase
 {
-    public EnemyDataBase() : base("enemyDB") { }
+    public EnemiesDataBase() : base("enemiesDB") { }
 
-    public EnemyDataBase Enemy { get; } = new EnemyData();  
+    public EnemiesDataBase Enemies { get; } = new EnemiesData();  
 }
 
 //public class ExampleLocalDataBase : LocalDatabase

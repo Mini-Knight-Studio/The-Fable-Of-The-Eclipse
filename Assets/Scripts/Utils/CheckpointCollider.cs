@@ -24,6 +24,9 @@ class CheckpointCollider : Component
                 DatabaseRegistry.playerDB.Player.playerPositionZ = player.transform.position.z;
                 DatabaseRegistry.playerDB.Save();
             }
-        }
+            if (DatabaseRegistry.playerDB.Exists())
+            {
+
+            }
     }
 };
