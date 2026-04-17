@@ -7,10 +7,10 @@ public class Movement : Component
     public float Speed;
     public bool CanMove;
 
-    public void Move(Vector3 direction)
+    public void Move(Vector3 direction, float multiplier = 1)
     {
         if(CanMove)
-            transform.position += direction * Time.deltaTime * Speed;
+            transform.position += direction * (Time.deltaTime * Speed * multiplier);
     }
 
     public void Move(float multiplier, Vector3 direction)

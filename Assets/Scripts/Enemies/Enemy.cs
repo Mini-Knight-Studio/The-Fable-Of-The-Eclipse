@@ -48,9 +48,9 @@ public class Enemy : Component
         //
     }
     #region Set Up
-    protected void SetEnemy(string reference_name, float attack_cooldown, float attack_preparation_time, float attack_reach_distance)
+    protected void SetEnemy(Entity reference_enemy, float attack_cooldown, float attack_preparation_time, float attack_reach_distance)
     {
-        reference = Entity.FindEntityByName(reference_name);
+        reference = reference_enemy;
 
         health = entity.GetComponent<Health>();
         movement = entity.GetComponent<Movement>();
@@ -82,7 +82,7 @@ public class Enemy : Component
         attackPreparationTime = attack_preparation_time;
         attackReachDistance = attack_reach_distance;
         internal_hit_cooldown = 0.0f;
-        target = Entity.FindEntityByName("Player").GetComponent<Player>();
+        target = Player.Instance;
 
         attackParticles.Enabled = false;
         hitParticles.Enabled = false;
@@ -176,7 +176,7 @@ public class Enemy : Component
     private void Attack(int points)
     {
         target.PlayerHealth.Damage(target.Effects.GetEffectValueInt(points, "ModifyDamage"));
-        StartCoroutine(target.Movement2.Push((float)points * 10.0f, 0.3f, GetDirectionToTarget()));
+        target.Movement.ApplyKnockback((float)points * 10.0f, 0.3f, GetDirectionToTarget());
     }
 
     protected bool EndedPreparingAttack()

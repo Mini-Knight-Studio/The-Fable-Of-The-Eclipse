@@ -3,6 +3,8 @@ using Loopie;
 
 class MainMenu : Component
 {
+    public static bool hasPlayedIntro = false;
+
     // Buttons
     public Entity newGameEntity;
     public Entity newGameHoveredEntity;
@@ -55,6 +57,9 @@ class MainMenu : Component
     // Audio
     public Entity loopMusicEntity;
     private AudioSource loopMusicAudioSource;
+
+    public Entity selectSfxEntity;
+    private AudioSource selectSfxAudioSource;
 
     private bool loopMusicHasPlayed = false;
     private float openingMusicDelay = 21f;
@@ -166,6 +171,15 @@ class MainMenu : Component
             Debug.Log("Error: There is no Loop Music Entity assigned.");
         }
 
+        if (selectSfxEntity != null)
+        {
+            selectSfxAudioSource = selectSfxEntity.GetComponent<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Loop Music Entity assigned.");
+        }
+
         // Load Settings
         if (LoadSettingsEntity != null)
         {
@@ -173,7 +187,7 @@ class MainMenu : Component
         }
         else
         {
-            Debug.Log("Error: There is no LoadSettings Entity assigned.");
+            Debug.Log("Error: There is no SelectSfxEntity Entity assigned.");
         }
 
         
@@ -182,7 +196,6 @@ class MainMenu : Component
     {
         if (!globalDatabaseLoaded)
         {
-            globalDatabaseLoaded = true;
             GlobalDatabase.GlobalData.LoadGlobalDatabase();
 
             // Load Settings
@@ -194,6 +207,8 @@ class MainMenu : Component
                     settingsLoaded = true;
                 }
             }
+
+            globalDatabaseLoaded = true;
         }
 
         HandleMusic();
@@ -202,15 +217,17 @@ class MainMenu : Component
         preMainMenuDelayTimer += Time.deltaTime;
         preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
 
-        if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro == false)
+        if (!hasPlayedIntro)
         {
             if (preMainMenuDelayTimer < preMainMenuDelay)
                 return;
 
+            hasPlayedIntro = true;
+        }
+        else if (hasPlayedIntro)
+        {
             introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
             introBookCoverEntity.SetActive(false);
-            GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro = true;
-            GlobalDatabase.GlobalData.SaveGlobalDatabase();
         }
 
         // Main Menu logic.
@@ -285,6 +302,7 @@ class MainMenu : Component
 
         if (moved)
         {
+            selectSfxAudioSource.Play();
             inputTimer = 0f;
         }
     }
@@ -341,11 +359,11 @@ class MainMenu : Component
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
-        else if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.hasPlayedIntro)
+
+        if (hasPlayedIntro)
         {
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
     }
-
 };

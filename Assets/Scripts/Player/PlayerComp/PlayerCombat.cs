@@ -1,7 +1,7 @@
 using System;
 using Loopie;
 
-public class PlayerCombat : Component
+public class PlayerCombat : PlayerComponent
 {
     public bool isAttacking;
     private float attackTimer = 0f;
@@ -9,29 +9,32 @@ public class PlayerCombat : Component
     public float attackCooldown;
     public float hitboxDuration;
 
-    public BoxCollider swordTrigger;
-    public AudioSource attackSfxSource;
+    public Entity swordTriggerEntity;
+    private BoxCollider swordTriggerCollider;
+
+    public Entity attackSFXEntity;
+    private AudioSource attackSfxSource;
 
     void OnCreate()
     {
-        swordTrigger = Entity.FindEntityByName("PlayerSwordTrigger").GetComponent<BoxCollider>();
-        if (swordTrigger != null) swordTrigger.entity.SetActive(false);
-        swordTrigger.Trigger = true;
-        attackSfxSource = swordTrigger.entity.GetComponent<AudioSource>();
+        swordTriggerCollider = swordTriggerEntity.GetComponent<BoxCollider>();
+        if (swordTriggerCollider != null) swordTriggerCollider.entity.SetActive(false);
+        swordTriggerCollider.Trigger = true;
+        attackSfxSource = attackSFXEntity.GetComponent<AudioSource>();
 
         attackTimer = 0.0f;
         isAttacking = false;
     }
 
-    void OnUpdate()
+    public void ProcessCombat()
     {
-        if (swordTrigger == null)
+        if (swordTriggerCollider == null)
             return;
         if (isAttacking)
         {
-            if (attackTimer <= attackCooldown && swordTrigger.entity.Active == true)
+            if (attackTimer <= attackCooldown && swordTriggerCollider.entity.Active == true)
             {
-                swordTrigger.entity.SetActive(false);
+                swordTriggerCollider.entity.SetActive(false);
             }
 
             if (attackTimer > 0.0f)
@@ -50,7 +53,7 @@ public class PlayerCombat : Component
                 isAttacking = true;
                 attackTimer = attackCooldown + hitboxDuration;
                 attackSfxSource.Play();
-                swordTrigger.entity.SetActive(true);
+                swordTriggerCollider.entity.SetActive(true);
 
             }
         }

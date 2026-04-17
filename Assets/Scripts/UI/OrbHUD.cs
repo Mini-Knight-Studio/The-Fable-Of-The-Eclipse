@@ -7,18 +7,11 @@ public class OrbHUD : Component
     public string orbPrefix = "HUD_Orb_";
     public int maxOrbs = 3;
 
-    private OrbInventory playerInventory;
     private Entity[] orbIcons;
     private int lastKnownOrbs = -1;
 
     void OnCreate()
     {
-        Entity playerEntity = Entity.FindEntityByName(playerName);
-        if (playerEntity != null)
-        {
-            playerInventory = playerEntity.GetComponent<OrbInventory>();
-        }
-
         orbIcons = new Entity[maxOrbs];
 
         for (int i = 0; i < maxOrbs; i++)
@@ -31,35 +24,37 @@ public class OrbHUD : Component
                 orbIcons[i].SetActive(false);
             }
         }
+
+
     }
 
     void OnUpdate()
     {
-        if (playerInventory == null) return;
-
-        int currentOrbs = playerInventory.orbsCollected;
-
-        if (currentOrbs != lastKnownOrbs)
-        {
-            UpdateIcons(currentOrbs);
-            lastKnownOrbs = currentOrbs;
-        }
+        UpdateIcons();
     }
 
-    private void UpdateIcons(int currentOrbs)
+    private void UpdateIcons()
     {
         for (int i = 0; i < maxOrbs; i++)
         {
             if (orbIcons[i] == null) continue;
 
-            if (i < currentOrbs)
+            switch (i)
             {
-                orbIcons[i].SetActive(true);
-            }
-            else
-            {
-                orbIcons[i].SetActive(false);
+                case 0:
+                    orbIcons[i].SetActive(DatabaseRegistry.playerDB.Player.gemAirCollected);
+                    break;
+                case 1:
+                    orbIcons[i].SetActive(DatabaseRegistry.playerDB.Player.gemWaterCollected);
+                    break;
+                case 2:
+                    orbIcons[i].SetActive(DatabaseRegistry.playerDB.Player.gemFireCollected);
+                    break;
+                default:
+                    break;
             }
         }
+
+        
     }
 }; 

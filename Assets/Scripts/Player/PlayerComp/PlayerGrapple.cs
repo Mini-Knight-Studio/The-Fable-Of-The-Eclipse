@@ -5,9 +5,12 @@ public class PlayerGrapple : Component
 {
     public float grappleDuration = 0.3f;
     public float stoppingDistance = 2.0f;
+    public float grappleCooldown = 2.0f; // NUEVO: Tiempo de recarga
 
     private bool isGrappling = false;
     private float timer = 0.0f;
+    public float grappleCooldownTimer = 0.0f; // NUEVO: El temporizador que leerá el HUD
+
     private Vector3 startPos;
     private Vector3 targetPos;
 
@@ -21,8 +24,13 @@ public class PlayerGrapple : Component
 
     public void ExecuteGrapple(PillarTrigger pillarScript)
     {
+        // Si la habilidad está en enfriamiento, no hacemos nada
+        if (grappleCooldownTimer > 0) return;
+
         isGrappling = true;
         timer = 0.0f;
+        grappleCooldownTimer = grappleCooldown; // Reiniciamos el temporizador de CD
+
         startPos = transform.position;
         activePillarScript = pillarScript;
 
@@ -35,6 +43,12 @@ public class PlayerGrapple : Component
 
     public void OnUpdate()
     {
+        // Reducimos el tiempo de cooldown en cada frame
+        if (grappleCooldownTimer > 0)
+        {
+            grappleCooldownTimer -= Time.deltaTime;
+        }
+
         if (!isGrappling) return;
 
         timer += Time.deltaTime;
@@ -49,4 +63,4 @@ public class PlayerGrapple : Component
 
         transform.position = Vector3.Lerp(startPos, targetPos, t);
     }
-}
+}; // <-- Punto y coma

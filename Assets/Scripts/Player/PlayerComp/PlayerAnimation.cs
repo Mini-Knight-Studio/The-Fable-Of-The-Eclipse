@@ -1,10 +1,8 @@
 using System;
 using Loopie;
 
-public class PlayerAnimation : Component
+public class PlayerAnimation : PlayerComponent
 {
-    private PlayerMovement playerMovement;
-    private PlayerCombat playerCombat;
     private Animator idleAnimator;
     private Animator walkAnimator;
     private Animator dashAnimator;
@@ -31,27 +29,24 @@ public class PlayerAnimation : Component
 
     public void OnCreate()
     {
-        playerMovement = entity.GetComponent<PlayerMovement>();
-        playerCombat = entity.GetComponent<PlayerCombat>();
-
         idleAnimator = idleEntity.GetComponent<Animator>();
         walkAnimator = walkEntity.GetComponent<Animator>();
         dashAnimator = dashEntity.GetComponent<Animator>();
         attackAnimator = attackEntity.GetComponent<Animator>();
     }
 
-    public void OnUpdate()
+    public void ProcessAnimations()
     {
-        if (playerMovement == null || playerCombat == null) return;
+        if (player.Movement == null || player.Combat == null) return;
 
-        if (playerCombat.TemporalFunctionIsAttacking() && toAttack)
+        if (player.Combat.TemporalFunctionIsAttacking() && toAttack)
         {
             toAttack = false;
             Attack();
             return;
         }
 
-        if (!playerCombat.TemporalFunctionIsAttacking())
+        if (!player.Combat.TemporalFunctionIsAttacking())
         {
             toAttack = true;
         }
@@ -70,11 +65,11 @@ public class PlayerAnimation : Component
                 toWalk = true;
                 toDash = true;
 
-                if (playerMovement.isDashing)
+                if (player.Movement.IsDashing())
                 {
                     Dash();
                 }
-                else if (playerMovement.isMoving)
+                else if (player.Movement.IsMoving())
                 {
                     Move();
                 }
@@ -87,21 +82,23 @@ public class PlayerAnimation : Component
             return;
         }
 
-        if (playerMovement.isDashing && toDash)
+        bool isDashing = player.Movement.IsDashing();
+        if (isDashing && toDash)
         {
             Dash();
             return;
         }
 
-        if (!playerMovement.isDashing)
+        if (!isDashing)
         {
             toDash = true;
 
-            if (playerMovement.isMoving && toWalk)
+            bool isMoving = player.Movement.IsMoving();
+            if (isMoving && toWalk)
             {
                 Move();
             }
-            else if (!playerMovement.isMoving && toIdle)
+            else if (!isMoving && toIdle)
             {
                 Idle();
             }

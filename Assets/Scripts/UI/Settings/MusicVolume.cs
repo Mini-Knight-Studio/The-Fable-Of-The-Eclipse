@@ -7,34 +7,40 @@ class MusicVolume : Component
 
     void OnCreate()
     {
-        volume = GlobalDatabase.GlobalData.settingsDB.Settings.MusicVolume;
-        // Set in engine the volume.
+        volume = ClampAndRound(GlobalDatabase.GlobalData.settingsDB.Settings.MusicVolume);
+        ApplyToMixer();
     }
 
     public void ApplyMusicVolume()
     {
+        volume = ClampAndRound(volume);
         GlobalDatabase.GlobalData.settingsDB.Settings.MusicVolume = volume;
-        // Set in engine the volume.
+        ApplyToMixer();
     }
 
     public void IncreaseVolume()
     {
-        if (volume < 1.0f)
-        {
-            volume += 0.1f;
-        }
+        volume = ClampAndRound(volume + 0.1f);
     }
 
     public void DecreaseVolume()
     {
-        if (volume > 0.0f)
-        {
-            volume -= 0.1f;
-        }
+        volume = ClampAndRound(volume - 0.1f);
     }
 
     public float GetVolume()
     {
         return volume;
     }
-};
+
+    private void ApplyToMixer()
+    {
+        AudioMixer.SetVolume("Master/Music", AudioMixer.LinearToEngineVolume(volume));
+    }
+
+    private float ClampAndRound(float value)
+    {
+        value = Mathf.Clamp(value, 0f, 1f);
+        return Mathf.Round(value * 10f) / 10f;
+    }
+}

@@ -7,34 +7,40 @@ class SfxVolume : Component
 
     void OnCreate()
     {
-        volume = GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume;
-        // Set in engine the volume.
+        volume = ClampAndRound(GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume);
+        ApplyToMixer();
     }
 
     public void ApplySfxVolume()
     {
+        volume = ClampAndRound(volume);
         GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume = volume;
-        // Set in engine the volume.
+        ApplyToMixer();
     }
 
     public void IncreaseVolume()
     {
-        if (volume < 1.0f)
-        {
-            volume += 0.1f;
-        }
+        volume = ClampAndRound(volume + 0.1f);
     }
 
     public void DecreaseVolume()
     {
-        if (volume > 0.0f)
-        {
-            volume -= 0.1f;
-        }
+        volume = ClampAndRound(volume - 0.1f);
     }
 
     public float GetVolume()
     {
         return volume;
+    }
+
+    private void ApplyToMixer()
+    {
+        AudioMixer.SetVolume("Master/Sfx", AudioMixer.LinearToEngineVolume(volume));
+    }
+
+    private float ClampAndRound(float value)
+    {
+        value = Mathf.Clamp(value, 0f, 1f);
+        return Mathf.Round(value * 10f) / 10f;
     }
 };

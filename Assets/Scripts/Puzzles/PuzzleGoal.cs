@@ -81,8 +81,8 @@ class PuzzleGoal : Component
             
             CompletePuzzleAuto();
 
-            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
-            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
+            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
         }
 
         if (allOnGoal && !puzzle1Completed)
@@ -98,7 +98,7 @@ class PuzzleGoal : Component
         {
             Gem.SetActive(false);
 
-            DatabaseRegistry.playerDB.Player.gemEarthCollected = true;
+            DatabaseRegistry.playerDB.Player.gemAirCollected = true;
             DatabaseRegistry.playerDB.Player.hasBurner = true;
         }
     }
