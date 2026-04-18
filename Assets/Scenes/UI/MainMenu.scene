@@ -49,7 +49,7 @@
                 }
             ],
             "name": "MainCamera",
-            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
+            "parent_uuid": "19993420-6b3d-3dac-691d-fa71bd49b9c8",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -193,7 +193,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 191.88929748535156,
+                                "x": 192.08856201171875,
                                 "y": 108.0
                             }
                         },
@@ -242,7 +242,7 @@
                 }
             ],
             "name": "Canvas",
-            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
+            "parent_uuid": "19993420-6b3d-3dac-691d-fa71bd49b9c8",
             "uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b"
         },
         {
@@ -307,6 +307,8 @@
                             "hasPlayedIntro": false,
                             "inputCooldown": 0.20000000298023224,
                             "introBookCoverEntity": "30c6483a-ecef-ec61-ee34-c32e0e1e1565",
+                            "invertedPassPageEntity": "2e75798d-7f9a-1292-7abf-818eea08ef87",
+                            "invertedPassPagePlayed": false,
                             "loopMusicEntity": "18e9fee6-02a5-f7a4-a5e7-cb58f75be45d",
                             "newGameEntity": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
                             "newGameHoveredEntity": "6f4fc9ec-b929-a8c0-9729-6866009d711e",
@@ -1098,7 +1100,7 @@
                 }
             ],
             "name": "MainMenu_Music",
-            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
+            "parent_uuid": "19993420-6b3d-3dac-691d-fa71bd49b9c8",
             "uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533"
         },
         {
@@ -1253,7 +1255,7 @@
                 }
             ],
             "name": "LoadSettings",
-            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
+            "parent_uuid": "19993420-6b3d-3dac-691d-fa71bd49b9c8",
             "uuid": "4b4fb05c-e9aa-761a-360d-6b32271237c1"
         },
         {
@@ -1696,6 +1698,95 @@
             "name": "PassPage",
             "parent_uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b",
             "uuid": "fae46f3a-2eae-911c-874b-d96ea45aa47c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 192.0,
+                                "y": 108.0
+                            }
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -7.821737766265869
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "c5d8476d-64e7-6133-d5c1-5a420f69ff3f"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "is_active": true,
+                    "uuid": "29b16c58-86de-c4d1-b5b2-c87bdaa2b3c0"
+                },
+                {
+                    "is_active": true,
+                    "sprite_animator": {
+                        "fps": 12.0,
+                        "frame_count": 15,
+                        "grid": {
+                            "columns": 8,
+                            "rows": 2
+                        },
+                        "loop": false,
+                        "play_on_start": true,
+                        "playing": false,
+                        "start_frame": 1,
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b"
+                    },
+                    "uuid": "a86163cc-8079-4956-67f7-691fdf9628d4"
+                }
+            ],
+            "name": "InvertedPassPage",
+            "parent_uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b",
+            "uuid": "2e75798d-7f9a-1292-7abf-818eea08ef87"
         }
     ]
 }

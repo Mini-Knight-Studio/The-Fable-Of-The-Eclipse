@@ -87,9 +87,12 @@ class MainMenu : Component
     private SpriteAnimator closeBookAnimator;
     public Entity passPageEntity;
     private SpriteAnimator passPageAnimator;
+    public Entity invertedPassPageEntity;
+    private SpriteAnimator invertedPassPageAnimator;
 
     public static bool quickStartAnimations = true;
     public static bool hasPlayedIntro = false;
+    public static bool invertedPassPagePlayed = true;
 
     void OnCreate()
     {
@@ -227,6 +230,15 @@ class MainMenu : Component
         {
             Debug.Log("Error: There is no passPageEntity Entity assigned.");
         }
+
+        if (invertedPassPageEntity != null)
+        {
+            invertedPassPageAnimator = invertedPassPageEntity.GetComponent<SpriteAnimator>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no passPageEntity Entity assigned.");
+        }
     }
     void OnUpdate()
     {
@@ -253,6 +265,9 @@ class MainMenu : Component
             passPageAnimator.Play();
             passPageAnimator.Stop();
             passPageEntity.SetActive(false);
+            invertedPassPageAnimator.Play();
+            invertedPassPageAnimator.Stop();
+            invertedPassPageEntity.SetActive(false);
             closeBookAnimator.Play();
             closeBookAnimator.Stop();
             closeBookEntity.SetActive(false);
@@ -276,6 +291,20 @@ class MainMenu : Component
         {
             introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
             introBookCoverEntity.SetActive(false);
+            
+            if (!invertedPassPagePlayed)
+            {
+                invertedPassPageEntity.SetActive(true);
+                invertedPassPageAnimator.Play();
+                invertedPassPagePlayed = true;
+            }
+            else
+            {
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount)
+                {
+                    invertedPassPageEntity.SetActive(false);
+                }
+            }
         }
 
         // Main Menu logic.
@@ -403,13 +432,17 @@ class MainMenu : Component
         {
             if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount)
             {
-                exitScript.ExitGame();
                 loopMusicAudioSource.Stop();
                 canCallScripts = false;
+                exitScript.ExitGame();
             }
 
             if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount)
             {
+                loopMusicAudioSource.Stop();
+                quickStartAnimations = false;
+                invertedPassPagePlayed = false;
+                canCallScripts = false;
                 switch (currentButton)
                 {
                     case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
@@ -417,8 +450,6 @@ class MainMenu : Component
                     case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                     case Buttons.EXIT: break;
                 }
-                loopMusicAudioSource.Stop();
-                canCallScripts = false;
             }
         }
     }
