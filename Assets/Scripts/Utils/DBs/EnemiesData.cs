@@ -22,17 +22,21 @@ public class EnemiesData
         previousSceneUUID = "";
     }
 
-    List<EnemyData> enemies;
+    public List<EnemyData> enemies = new List<EnemyData>();
 
-    struct EnemyData 
+    public struct EnemyData 
     {
-        public float enemyPositionX = 0.0f;
-        public float enemyPositionY = 0.0f;
-        public float enemyPositionZ = 0.0f;
+        public string enemyType;
 
-        public int hp = 0;
 
-        public int shieldHP = 0;
+        public float enemyPositionX;
+        public float enemyPositionY;
+        public float enemyPositionZ;
+
+        public int hp;
+
+        public int shieldHP;
+        public int blobStage;
     }
 
 }

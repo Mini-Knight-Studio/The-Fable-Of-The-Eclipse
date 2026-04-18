@@ -150,17 +150,20 @@ public static class DatabaseRegistry
 {
     public static PuzzlesDatabase puzzlesDB = new PuzzlesDatabase();
     public static PlayerDatabase playerDB = new PlayerDatabase();
+    public static EnemiesDatabase enemiesDB = new EnemiesDatabase();
 
     public static void SaveAll()
     {
         puzzlesDB.Save();
         playerDB.Save();
+        enemiesDB.Save();
     }
 
     public static void LoadAll()
     {
         puzzlesDB.Load();
         playerDB.Load();
+        enemiesDB.Load();
     }
 }
 
@@ -194,11 +197,11 @@ public class PlayerDatabase : LocalDatabase
     public PlayerData Player { get; } = new PlayerData();
 }
 
-public class EnemiesDataBase : LocalDatabase
+public class EnemiesDatabase : LocalDatabase
 {
-    public EnemiesDataBase() : base("enemiesDB") { }
+    public EnemiesDatabase() : base("enemiesDB") { }
 
-    public EnemiesDataBase Enemies { get; } = new EnemiesData();  
+    public EnemiesData Enemies { get; } = new EnemiesData();  
 }
 
 //public class ExampleLocalDataBase : LocalDatabase
