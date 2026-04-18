@@ -69,6 +69,10 @@ class CheckpointCollider : Component
                 DatabaseRegistry.enemiesDB.Save();
                 Debug.Log("Enemy Data Saved");
             }
+            if (DatabaseRegistry.puzzlesDB.Exists())
+            {
+                DatabaseRegistry.puzzlesDB.Save();
+            }
         }
     }
 };
