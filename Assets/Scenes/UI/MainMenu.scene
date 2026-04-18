@@ -4,6 +4,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -38,21 +39,24 @@
                         "ortho_size": 0.0,
                         "projection": 1
                     },
+                    "is_active": true,
                     "uuid": "08a8bf2f-9b2d-2592-d32c-ebd9395cc90d"
                 },
                 {
                     "audiolistener": {},
+                    "is_active": true,
                     "uuid": "95b60299-af11-7a84-2fe3-226d328ddc48"
                 }
             ],
             "name": "MainCamera",
-            "parent_uuid": "aa15d85b-f1a8-9861-7d4e-fd975c747312",
+            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -120,11 +124,11 @@
                         },
                         "normal_texture": "104e193c-23d0-392c-4458-6f3b5885256f",
                         "on_click_bindings": {
-                            "b340ab3c-76a9-5f4e-6435-27bd74755279": {
+                            "de581ca3-c817-a6bd-cd1e-7404044f7679": {
                                 "0": {
-                                    "component_uuid": "220b53ef-f268-c378-7da5-c87ef625007d",
-                                    "entity_uuid": "b340ab3c-76a9-5f4e-6435-27bd74755279",
-                                    "function": "StartTransition"
+                                    "component_uuid": "c4df46c2-2258-13a6-ae47-a0a32e3ea122",
+                                    "entity_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
+                                    "function": "HandleClickConfirm"
                                 }
                             }
                         },
@@ -137,6 +141,7 @@
                         "pressed_texture": "1f1fd865-fcf7-966f-6696-202e1fe8eff8",
                         "transition_mode": 0
                     },
+                    "is_active": true,
                     "uuid": "27d66ad3-5daa-baf4-f24f-c3df380ea0db"
                 },
                 {
@@ -155,6 +160,7 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "707e048a-f2c2-2117-fb8b-0871045efd81"
                 }
             ],
@@ -166,6 +172,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -186,7 +193,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 193.4833984375,
+                                "x": 191.88929748535156,
                                 "y": 108.0
                             }
                         },
@@ -220,6 +227,7 @@
                         "draw_gizmo": true,
                         "render_mode": 1
                     },
+                    "is_active": true,
                     "uuid": "8e4145ff-33fe-be06-e61d-4f439bf4e0e4"
                 },
                 {
@@ -229,17 +237,19 @@
                         "ref_w": 192.0,
                         "scale_mode": 1
                     },
+                    "is_active": true,
                     "uuid": "cc1f54da-88c2-aa48-d249-31a467020aed"
                 }
             ],
             "name": "Canvas",
-            "parent_uuid": "aa15d85b-f1a8-9861-7d4e-fd975c747312",
+            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
             "uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b"
         },
         {
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -284,10 +294,12 @@
                     "uuid": "72dea223-cd30-258f-0e41-20810e6e6afc"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "MainMenu",
                         "fields": {
                             "LoadSettingsEntity": "4b4fb05c-e9aa-761a-360d-6b32271237c1",
+                            "closeBookEntity": "c172c90a-704b-0a64-8bb5-20d39445711e",
                             "continueEntity": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
                             "continueHoveredEntity": "7e6d4794-a47e-5ede-7897-fd0801ca318d",
                             "exitEntity": "4765b331-c2d2-1734-58f1-27d7172168e1",
@@ -298,6 +310,8 @@
                             "loopMusicEntity": "18e9fee6-02a5-f7a4-a5e7-cb58f75be45d",
                             "newGameEntity": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
                             "newGameHoveredEntity": "6f4fc9ec-b929-a8c0-9729-6866009d711e",
+                            "passPageEntity": "fae46f3a-2eae-911c-874b-d96ea45aa47c",
+                            "quickStartAnimations": false,
                             "selectSfxEntity": "927647c2-3acd-e2f2-24fb-edc033f3597d",
                             "settingsEntity": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
                             "settingsHoveredEntity": "b340ab3c-76a9-5f4e-6435-27bd74755279"
@@ -321,6 +335,7 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "3af22b5d-f6d5-2779-db8e-589947aaf5f0"
                 }
             ],
@@ -332,6 +347,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -397,11 +413,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "6f4fc9ec-b929-a8c0-9729-6866009d711e": {
+                            "de581ca3-c817-a6bd-cd1e-7404044f7679": {
                                 "0": {
-                                    "component_uuid": "c80bdc8a-453a-b16b-d6c3-e716f22ec481",
-                                    "entity_uuid": "6f4fc9ec-b929-a8c0-9729-6866009d711e",
-                                    "function": "StartNewGame"
+                                    "component_uuid": "c4df46c2-2258-13a6-ae47-a0a32e3ea122",
+                                    "entity_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
+                                    "function": "HandleClickConfirm"
                                 }
                             }
                         },
@@ -413,6 +429,7 @@
                         },
                         "transition_mode": 0
                     },
+                    "is_active": true,
                     "uuid": "3c3e2585-2251-9539-529d-a5c3e56382ae"
                 },
                 {
@@ -431,6 +448,7 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "0e28d2ed-7d57-2d25-a611-c791bcf4f597"
                 }
             ],
@@ -442,6 +460,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -507,11 +526,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "7e6d4794-a47e-5ede-7897-fd0801ca318d": {
+                            "de581ca3-c817-a6bd-cd1e-7404044f7679": {
                                 "0": {
-                                    "component_uuid": "c527aca1-76c8-5b09-7054-426d56dd2763",
-                                    "entity_uuid": "7e6d4794-a47e-5ede-7897-fd0801ca318d",
-                                    "function": "LoadPreviousSave"
+                                    "component_uuid": "c4df46c2-2258-13a6-ae47-a0a32e3ea122",
+                                    "entity_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
+                                    "function": "HandleClickConfirm"
                                 }
                             }
                         },
@@ -523,6 +542,7 @@
                         },
                         "transition_mode": 0
                     },
+                    "is_active": true,
                     "uuid": "70c3896b-00cb-bf4c-1546-158a7f45bb3a"
                 },
                 {
@@ -541,6 +561,7 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "ec219308-9812-dd64-476a-12c1fdb2887f"
                 }
             ],
@@ -552,6 +573,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -617,31 +639,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "97b3b74a-5788-495d-6424-505417bbbc37": {
+                            "de581ca3-c817-a6bd-cd1e-7404044f7679": {
                                 "0": {
-                                    "component_uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3",
-                                    "entity_uuid": "97b3b74a-5788-495d-6424-505417bbbc37",
-                                    "function": "ExitGame"
-                                },
-                                "1": {
-                                    "component_uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3",
-                                    "entity_uuid": "97b3b74a-5788-495d-6424-505417bbbc37",
-                                    "function": "ExitGame"
-                                },
-                                "2": {
-                                    "component_uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3",
-                                    "entity_uuid": "97b3b74a-5788-495d-6424-505417bbbc37",
-                                    "function": "ExitGame"
-                                },
-                                "3": {
-                                    "component_uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3",
-                                    "entity_uuid": "97b3b74a-5788-495d-6424-505417bbbc37",
-                                    "function": "ExitGame"
-                                },
-                                "4": {
-                                    "component_uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3",
-                                    "entity_uuid": "97b3b74a-5788-495d-6424-505417bbbc37",
-                                    "function": "ExitGame"
+                                    "component_uuid": "c4df46c2-2258-13a6-ae47-a0a32e3ea122",
+                                    "entity_uuid": "de581ca3-c817-a6bd-cd1e-7404044f7679",
+                                    "function": "HandleClickConfirm"
                                 }
                             }
                         },
@@ -653,6 +655,7 @@
                         },
                         "transition_mode": 0
                     },
+                    "is_active": true,
                     "uuid": "848540e0-bfc4-5239-ece3-23e95547da5b"
                 },
                 {
@@ -671,6 +674,7 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "cbcecc30-22b8-6bc9-3113-c2b596d8e5bb"
                 }
             ],
@@ -682,6 +686,7 @@
             "active": false,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -741,9 +746,11 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "cf410aa0-6c6d-4b77-ea08-b596ad7f944a"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "NewGame",
                         "fields": {
@@ -762,6 +769,7 @@
             "active": false,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -821,9 +829,11 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "a393736d-2384-2a6c-3387-aac2059814b5"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "Load",
                         "fields": {}
@@ -839,6 +849,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -882,6 +893,7 @@
                         "playOnAwake": false,
                         "volume": 1.0
                     },
+                    "is_active": true,
                     "uuid": "b1d3a585-0dd8-482d-2a0f-a798acfdab07"
                 }
             ],
@@ -893,6 +905,7 @@
             "active": false,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -952,9 +965,11 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "c0e8eca3-509d-168d-cba9-fd03b741d0c8"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "SceneTransition",
                         "fields": {
@@ -973,6 +988,7 @@
             "active": false,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1032,9 +1048,11 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "ea8a7a42-4656-6850-a58d-7b0b9ba82651"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "Exit",
                         "fields": {
@@ -1052,6 +1070,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1079,13 +1098,14 @@
                 }
             ],
             "name": "MainMenu_Music",
-            "parent_uuid": "aa15d85b-f1a8-9861-7d4e-fd975c747312",
+            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
             "uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533"
         },
         {
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1129,6 +1149,7 @@
                         "playOnAwake": false,
                         "volume": 1.0
                     },
+                    "is_active": true,
                     "uuid": "bbea8c95-eb81-b6c6-18c8-3097738c9138"
                 }
             ],
@@ -1140,6 +1161,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1183,6 +1205,7 @@
                         "playOnAwake": false,
                         "volume": 0.7210000157356262
                     },
+                    "is_active": true,
                     "uuid": "d8ca8357-a567-25fb-a355-3298416bb931"
                 }
             ],
@@ -1194,6 +1217,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1220,6 +1244,7 @@
                     "uuid": "c5c5066f-1bbb-a83b-64e5-86d002d09d4e"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "LoadSettings",
                         "fields": {}
@@ -1228,13 +1253,14 @@
                 }
             ],
             "name": "LoadSettings",
-            "parent_uuid": "aa15d85b-f1a8-9861-7d4e-fd975c747312",
+            "parent_uuid": "507b873e-bfd1-3e8e-6096-4312de375d8c",
             "uuid": "4b4fb05c-e9aa-761a-360d-6b32271237c1"
         },
         {
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1294,9 +1320,11 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "985b04c4-40fb-4705-be53-0f6d4faea056"
                 },
                 {
+                    "is_active": true,
                     "sprite_animator": {
                         "fps": 12.0,
                         "frame_count": 15,
@@ -1313,6 +1341,7 @@
                     "uuid": "90c6c378-5ed8-de3d-c067-ae04b55350b0"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "IntroBookCover",
                         "fields": {
@@ -1334,6 +1363,7 @@
             "active": true,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1393,9 +1423,11 @@
                             "min_v": 0.0
                         }
                     },
+                    "is_active": true,
                     "uuid": "cbfcaa72-8087-3895-fd7a-f67a807b2951"
                 },
                 {
+                    "is_active": true,
                     "script": {
                         "class_id": "IntroMiniKnightStudio",
                         "fields": {
@@ -1419,6 +1451,7 @@
             "active": false,
             "components": [
                 {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -1463,6 +1496,7 @@
                     "uuid": "1a24eee0-1d6c-ff3f-388f-0d5d84bca9bc"
                 },
                 {
+                    "is_active": true,
                     "text": {
                         "color": {
                             "a": 0.0,
@@ -1484,6 +1518,184 @@
             "name": "Text",
             "parent_uuid": "a8ba690e-f5db-6347-5aec-55bffb7a30c9",
             "uuid": "a73b6e32-1675-d3ea-97eb-75cbd7f5aee0"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 192.0,
+                                "y": 108.0
+                            }
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -6.480451583862305
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "cbc9326b-8390-ff23-901a-b57cf62a544e"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "is_active": true,
+                    "uuid": "d1771ac8-c7ca-e59a-c5e0-d90f006ba9ed"
+                },
+                {
+                    "is_active": true,
+                    "sprite_animator": {
+                        "fps": 12.0,
+                        "frame_count": 15,
+                        "grid": {
+                            "columns": 8,
+                            "rows": 2
+                        },
+                        "loop": false,
+                        "play_on_start": true,
+                        "playing": false,
+                        "start_frame": 1,
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b"
+                    },
+                    "uuid": "a53ee774-48ed-82fb-37ae-c0198f3fa86f"
+                }
+            ],
+            "name": "CloseBook",
+            "parent_uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b",
+            "uuid": "c172c90a-704b-0a64-8bb5-20d39445711e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size_delta": {
+                                "x": 192.0,
+                                "y": 108.0
+                            }
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -6.480451583862305
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "8352e230-67b1-7b89-477a-b5173a920642"
+                },
+                {
+                    "image": {
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "is_active": true,
+                    "uuid": "6012520e-d8ca-4037-4e15-2ce6f5ce7a3a"
+                },
+                {
+                    "is_active": true,
+                    "sprite_animator": {
+                        "fps": 12.0,
+                        "frame_count": 15,
+                        "grid": {
+                            "columns": 8,
+                            "rows": 2
+                        },
+                        "loop": false,
+                        "play_on_start": true,
+                        "playing": false,
+                        "start_frame": 1,
+                        "texture_uuid": "a483d23b-dcc4-1040-13ac-bd625dd52c4b"
+                    },
+                    "uuid": "1298db13-4090-d7b0-7da4-f0ca810533e3"
+                }
+            ],
+            "name": "PassPage",
+            "parent_uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b",
+            "uuid": "fae46f3a-2eae-911c-874b-d96ea45aa47c"
         }
     ]
 }

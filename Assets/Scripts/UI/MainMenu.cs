@@ -3,8 +3,6 @@ using Loopie;
 
 class MainMenu : Component
 {
-    public static bool hasPlayedIntro = false;
-
     // Buttons
     public Entity newGameEntity;
     public Entity newGameHoveredEntity;
@@ -83,6 +81,15 @@ class MainMenu : Component
 
     private bool settingsLoaded = false;
     private bool globalDatabaseLoaded = false;
+
+    // On Start
+    public Entity closeBookEntity;
+    private SpriteAnimator closeBookAnimator;
+    public Entity passPageEntity;
+    private SpriteAnimator passPageAnimator;
+
+    public static bool quickStartAnimations = true;
+    public static bool hasPlayedIntro = false;
 
     void OnCreate()
     {
@@ -199,13 +206,31 @@ class MainMenu : Component
         }
         else
         {
-            Debug.Log("Error: There is no SelectSfxEntity Entity assigned.");
+            Debug.Log("Error: There is no LoadSettingsEntity Entity assigned.");
         }
 
-        
+        // On Start
+        if (closeBookEntity != null)
+        {
+            closeBookAnimator = closeBookEntity.GetComponent<SpriteAnimator>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no closeBookEntity Entity assigned.");
+        }
+
+        if (passPageEntity != null)
+        {
+            passPageAnimator = passPageEntity.GetComponent<SpriteAnimator>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no passPageEntity Entity assigned.");
+        }
     }
     void OnUpdate()
     {
+        // On Start
         if (!globalDatabaseLoaded)
         {
             GlobalDatabase.GlobalData.LoadGlobalDatabase();
@@ -221,6 +246,17 @@ class MainMenu : Component
             }
 
             globalDatabaseLoaded = true;
+        }
+
+        if (quickStartAnimations)
+        {
+            passPageAnimator.Play();
+            passPageAnimator.Stop();
+            passPageEntity.SetActive(false);
+            closeBookAnimator.Play();
+            closeBookAnimator.Stop();
+            closeBookEntity.SetActive(false);
+            quickStartAnimations = false;
         }
 
         HandleMusic();
@@ -331,35 +367,59 @@ class MainMenu : Component
         confirmTimer += Time.deltaTime;
 
         // Read Input
-        if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+        if ((Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A)) && !canCallScripts)
         {
-            // Visual Feedback
             Vector4 color = new Vector4(255, 0, 0, 1);
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: newGameHoveredImage.SetTint(color); break;
-                case Buttons.CONTINUE: continueHoveredImage.SetTint(color); break;
-                case Buttons.SETTINGS: settingsHoveredImage.SetTint(color); break;
-                case Buttons.EXIT: exitHoveredImage.SetTint(color); break;
+                case Buttons.NEW_GAME: 
+                    newGameHoveredImage.SetTint(color);
+                    passPageEntity.SetActive(true);
+                    passPageAnimator.Play();
+                    break;
+                case Buttons.CONTINUE: 
+                    continueHoveredImage.SetTint(color);
+                    passPageEntity.SetActive(true);
+                    passPageAnimator.Play();
+                    break;
+                case Buttons.SETTINGS: 
+                    settingsHoveredImage.SetTint(color);
+                    passPageEntity.SetActive(true);
+                    passPageAnimator.Play();
+                    break;
+                case Buttons.EXIT: 
+                    exitHoveredImage.SetTint(color);
+                    closeBookEntity.SetActive(true);
+                    closeBookAnimator.Play();
+                    break;
             }
 
             canCallScripts = true;
             confirmTimer = 0f;
         }
 
+        // Function Call
         if (confirmTimer > inputCooldown && canCallScripts)
         {
-            // Function Call
-            switch (currentButton)
+            if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount)
             {
-                case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
-                case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
-                case Buttons.SETTINGS: settingsScript.StartTransition(); break;
-                case Buttons.EXIT: exitScript.ExitGame(); break;
+                exitScript.ExitGame();
+                loopMusicAudioSource.Stop();
+                canCallScripts = false;
             }
 
-            loopMusicAudioSource.Stop();
-            canCallScripts = false;
+            if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount)
+            {
+                switch (currentButton)
+                {
+                    case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
+                    case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
+                    case Buttons.SETTINGS: settingsScript.StartTransition(); break;
+                    case Buttons.EXIT: break;
+                }
+                loopMusicAudioSource.Stop();
+                canCallScripts = false;
+            }
         }
     }
 
@@ -392,5 +452,36 @@ class MainMenu : Component
             loopMusicAudioSource.Play();
             loopMusicHasPlayed = true;
         }
+    }
+
+    public void HandleClickConfirm()
+    {
+        Vector4 color = new Vector4(255, 0, 0, 1);
+        switch (currentButton)
+        {
+            case Buttons.NEW_GAME:
+                newGameHoveredImage.SetTint(color);
+                passPageEntity.SetActive(true);
+                passPageAnimator.Play();
+                break;
+            case Buttons.CONTINUE:
+                continueHoveredImage.SetTint(color);
+                passPageEntity.SetActive(true);
+                passPageAnimator.Play();
+                break;
+            case Buttons.SETTINGS:
+                settingsHoveredImage.SetTint(color);
+                passPageEntity.SetActive(true);
+                passPageAnimator.Play();
+                break;
+            case Buttons.EXIT:
+                exitHoveredImage.SetTint(color);
+                closeBookEntity.SetActive(true);
+                closeBookAnimator.Play();
+                break;
+        }
+
+        canCallScripts = true;
+        confirmTimer = 0f;
     }
 };
