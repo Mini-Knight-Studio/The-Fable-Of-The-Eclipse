@@ -13,7 +13,8 @@ public class Player : Component
     public PlayerMovement Movement;
     public PlayerAnimation Animation;
     public PlayerCombat Combat;
-
+    public Entity GrappleLine;
+    public Entity HookAnchor;
     public TemporalEffectApplier Effects;
     private SceneTransition LoseTransition;
 
@@ -36,6 +37,10 @@ public class Player : Component
         Animation.SetOwner(this);
         Combat = entity.GetComponent<PlayerCombat>();
         Combat.SetOwner(this);
+
+        GrappleLine = Entity.FindEntityByName("GrappleLine");
+        if (GrappleLine != null) GrappleLine.SetActive(false);
+        HookAnchor = Entity.FindEntityByName("HookAnchor");
 
 
         Effects = entity.GetComponent<TemporalEffectApplier>();
