@@ -42,49 +42,6 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ead3f33e-262e-82e2-d041-8594cc33c845"
-                },
-                {
-                    "is_active": true,
-                    "script": {
-                        "class_id": "PuzzleDebugController",
-                        "fields": {}
-                    },
-                    "uuid": "8682253e-1f91-4366-dcbc-6d89d6ec40e8"
-                }
-            ],
-            "name": "Manager",
-            "parent_uuid": "92b80699-9a06-0054-af16-913986640fbe",
-            "uuid": "49f2109a-bbd2-b2fb-548a-0bfb63d447a6"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
                             "x": 8.66655158996582,
                             "y": -0.0,
                             "z": 0.0
@@ -195,8 +152,8 @@
                     "script": {
                         "class_id": "PlayerCamera",
                         "fields": {
-                            "cameraEntity": "",
-                            "cameraUser": "",
+                            "cameraEntity": "7be8bed2-1395-f0d2-b4ad-90234ff2a278",
+                            "cameraUser": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c",
                             "distance": 100.0,
                             "movementLimit": 10.0,
                             "speed": 20.0,
@@ -237,7 +194,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "92b80699-9a06-0054-af16-913986640fbe",
+            "parent_uuid": "1b876890-1946-5282-ee27-9cec8a8d6e72",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -322,9 +279,9 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 0.0,
-                            "y": 2.3741507902741432e-05,
-                            "z": 0.0
+                            "x": 41.567283630371094,
+                            "y": 2.347121153434273e-05,
+                            "z": -19.24393653869629
                         },
                         "rotation": {
                             "w": 0.8433914184570313,
@@ -347,15 +304,15 @@
                         "fields": {
                             "dashCooldown": 1.0,
                             "dashDuration": 0.20000000298023224,
-                            "dashSFXEntity": "",
+                            "dashSFXEntity": "5681d239-d8dd-f543-7132-361aeb92f98e",
                             "dashSpeed": 30.0,
                             "godModeSpeedMultiplier": 5.0,
-                            "idleSFXEntity": "",
+                            "idleSFXEntity": "152bb28c-654a-d4a9-93c9-9b624f7374b3",
                             "idleSFXInterval": 5.0,
                             "isGodMode": false,
-                            "moveSpeed": 0.0,
-                            "rotationSpeed": 0.0,
-                            "walkSFXEntity": "",
+                            "moveSpeed": 5.0,
+                            "rotationSpeed": 1.0,
+                            "walkSFXEntity": "5681d239-d8dd-f543-7132-361aeb92f98e",
                             "walkSFXInterval": 0.5
                         }
                     },
@@ -367,13 +324,13 @@
                         "class_id": "PlayerAnimation",
                         "fields": {
                             "attackClipName": "",
-                            "attackEntity": "",
+                            "attackEntity": "f28a724b-6d08-cf37-bd33-dbc15b9b585f",
                             "dashClipName": "",
-                            "dashEntity": "",
+                            "dashEntity": "fc02b67b-684a-383c-2d59-3b0d48eed5c6",
                             "idleClipName": "Armature|Armature|Idle|BaseLayer",
-                            "idleEntity": "",
+                            "idleEntity": "f28a724b-6d08-cf37-bd33-dbc15b9b585f",
                             "walkClipName": "Armature|Armature|Walk|BaseLayer",
-                            "walkEntity": ""
+                            "walkEntity": "fc02b67b-684a-383c-2d59-3b0d48eed5c6"
                         }
                     },
                     "uuid": "88657ea7-b29a-cee5-6e6a-22c18cbda7e1"
@@ -427,10 +384,10 @@
                         "class_id": "PlayerCombat",
                         "fields": {
                             "attackCooldown": 1.0,
-                            "attackSFXEntity": "",
+                            "attackSFXEntity": "c9ec5d31-56fd-e29c-3b28-75fd81e81ee7",
                             "hitboxDuration": 0.5,
                             "isAttacking": false,
-                            "swordTriggerEntity": ""
+                            "swordTriggerEntity": "c9ec5d31-56fd-e29c-3b28-75fd81e81ee7"
                         }
                     },
                     "uuid": "ef9d3642-541a-5b38-a0c4-a7bbe2144696"
@@ -440,21 +397,12 @@
                     "script": {
                         "class_id": "Health",
                         "fields": {
-                            "actualHealth": 0,
                             "canBeDamaged": true,
                             "canBeHealed": true,
                             "maxHealth": 10
                         }
                     },
                     "uuid": "b4c8649d-7b69-a0f4-c05d-759bad29ca89"
-                },
-                {
-                    "is_active": true,
-                    "script": {
-                        "class_id": "PlayerItems",
-                        "fields": {}
-                    },
-                    "uuid": "1494bf7e-40b4-d952-74ac-c2eedd10fd90"
                 },
                 {
                     "is_active": true,
@@ -474,7 +422,7 @@
                     "script": {
                         "class_id": "Player",
                         "fields": {
-                            "CameraEntity": ""
+                            "CameraEntity": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
                         }
                     },
                     "uuid": "eb81f907-0346-ab44-cefb-efb3e49e8b0f"
@@ -500,7 +448,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "92b80699-9a06-0054-af16-913986640fbe",
+            "parent_uuid": "1b876890-1946-5282-ee27-9cec8a8d6e72",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -1005,49 +953,6 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "4b5ade78-d4d9-b695-7601-48c3ffee61a8"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "8f8beb37-98f9-9ad6-23e9-5efb1d1f7e03"
-                    },
-                    "uuid": "3952a101-663a-7d92-84c3-8423daae21cc"
-                }
-            ],
-            "name": "pPlane1",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "08a32379-98a7-888e-3dc5-bf928ffb837a"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
                             "x": 4.263256414560601e-14,
                             "y": 0.9501428008079529,
                             "z": 4.47035120032524e-08
@@ -1070,49 +975,6 @@
             "name": "TopHead_jt",
             "parent_uuid": "0243f71e-90f9-fbc3-8379-b5605708e29f",
             "uuid": "1aa7d6c2-b203-502d-c28f-de78c5a48cf8"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "7457d815-3d59-cfe6-5453-dc6becf44070"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "01faf9d3-a5bc-45f5-9ec9-333bd50e39b4"
-                    },
-                    "uuid": "0f672659-cb2d-e798-6a90-be21d27d1392"
-                }
-            ],
-            "name": "pCylinder3",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "a4a36476-c81f-aaee-d539-35e3974012c4"
         },
         {
             "active": true,
@@ -1588,7 +1450,7 @@
                             "z": 15.258519172668457
                         },
                         "rotation": {
-                            "w": 0.8530876636505127,
+                            "w": 0.8530876040458679,
                             "x": 0.0,
                             "y": -0.5217676758766174,
                             "z": 0.0
@@ -2704,6 +2566,51 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -15.00019645690918,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.000000238418579,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "379ce4af-2011-253c-44b2-3d8b7c1ac174"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fdeea088-9ce7-09ab-3234-9e689db5eefc",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "f1f32fdb-2532-568b-f925-5f142e35552d"
+                }
+            ],
+            "name": "RightHandShadow",
+            "parent_uuid": "5187434c-d229-66d1-894e-88b1e448d0be",
+            "uuid": "d30e0578-cf45-e0a0-30b1-aeee1f7028d9"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
                             "x": -0.0003620000497903675,
                             "y": -9.242077067028731e-05,
                             "z": 6.702152313664556e-05
@@ -2771,7 +2678,7 @@
             "active": false,
             "components": [
                 {
-                    "is_active": false,
+                    "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -2816,7 +2723,7 @@
                         "is_trigger": true,
                         "layer_index": 5
                     },
-                    "is_active": false,
+                    "is_active": true,
                     "uuid": "e49f0e73-bf59-f922-fba8-49d422a4a558"
                 },
                 {
@@ -2837,7 +2744,7 @@
                         "playOnAwake": false,
                         "volume": 0.5019999742507935
                     },
-                    "is_active": false,
+                    "is_active": true,
                     "uuid": "a3954821-10f3-8ff1-3e53-979cd1b268f9"
                 }
             ],
@@ -3019,41 +2926,6 @@
             "name": "ThumbBase_L_jt",
             "parent_uuid": "8dc37426-550a-5722-b73a-c9b2ebd6325f",
             "uuid": "30d1f544-ceda-fa15-e648-024f5b5c8378"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 180.0,
-                            "y": -5.008961579733295e-06,
-                            "z": 180.0
-                        },
-                        "position": {
-                            "x": 30.134794235229492,
-                            "y": 1.3376142305787653e-05,
-                            "z": 14.260187149047852
-                        },
-                        "rotation": {
-                            "w": -4.3711430919302074e-08,
-                            "x": -4.371139183945161e-08,
-                            "y": 1.0,
-                            "z": -4.371139183945161e-08
-                        },
-                        "scale": {
-                            "x": -3.172553539276123,
-                            "y": 3.172553539276123,
-                            "z": 3.172553539276123
-                        }
-                    },
-                    "uuid": "68bcfef5-a9f7-ebd8-ce36-b4c44cd2501e"
-                }
-            ],
-            "name": "LevelBoss",
-            "parent_uuid": "92b80699-9a06-0054-af16-913986640fbe",
-            "uuid": "4b93d5d0-8687-35a0-32d3-5d97d80f28dc"
         },
         {
             "active": true,
@@ -3787,49 +3659,6 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "7deb5c85-2576-6ac0-b28a-a54eb4ce75eb"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "3751806c-de87-fae8-608a-147143347528"
-                }
-            ],
-            "name": "pCube1",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "7257fbab-3ac6-b62c-3af9-99896f5eac8d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
                             "x": -33.520301818847656,
                             "y": 5.152161598205566,
                             "z": 4.134042263031006
@@ -3997,49 +3826,6 @@
             "name": "Toe_L_jt",
             "parent_uuid": "a87cc22f-18c3-1107-9f2a-74fdbe733b92",
             "uuid": "0fcbd478-2a8f-6f6e-631f-a640ec9a5a67"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "69e318db-63ef-fdb7-5277-60cac2552a58"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "01faf9d3-a5bc-45f5-9ec9-333bd50e39b4"
-                    },
-                    "uuid": "1a918a48-4770-653d-73b7-3c5ad409b07b"
-                }
-            ],
-            "name": "pCylinder2",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "068ca986-3a6d-546b-3d6f-704e96973cfb"
         },
         {
             "active": true,
@@ -4400,41 +4186,6 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
-                            "x": 3.3202593326568604,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 7.105427357601002e-15,
-                            "y": 0.4183732569217682,
-                            "z": 1.4901171851988693e-08
-                        },
-                        "rotation": {
-                            "w": 0.9995802640914917,
-                            "x": 0.02897067554295063,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d64da7b7-167a-c70e-9209-a3780d19dbd8"
-                }
-            ],
-            "name": "Cleavage_jt",
-            "parent_uuid": "16c4ee66-d278-2d08-bba1-3e170d67c926",
-            "uuid": "db7cc201-0a1e-4357-a40a-354796f37612"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
                             "x": 33.52027893066406,
                             "y": -5.15192985534668,
                             "z": 4.1341753005981445
@@ -4462,6 +4213,41 @@
             "name": "Heel_L_jt",
             "parent_uuid": "fed73c02-07db-2616-05be-3793eddfe932",
             "uuid": "72657c45-d21d-3aec-5c71-e35fb8680617"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 3.3202593326568604,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 7.105427357601002e-15,
+                            "y": 0.4183732569217682,
+                            "z": 1.4901171851988693e-08
+                        },
+                        "rotation": {
+                            "w": 0.9995802640914917,
+                            "x": 0.02897067554295063,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d64da7b7-167a-c70e-9209-a3780d19dbd8"
+                }
+            ],
+            "name": "Cleavage_jt",
+            "parent_uuid": "16c4ee66-d278-2d08-bba1-3e170d67c926",
+            "uuid": "db7cc201-0a1e-4357-a40a-354796f37612"
         },
         {
             "active": true,
@@ -5800,41 +5586,6 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
-                            "x": -33.52030563354492,
-                            "y": 5.15217924118042,
-                            "z": 4.134030818939209
-                        },
-                        "position": {
-                            "x": -0.029146550223231316,
-                            "y": 0.3874119520187378,
-                            "z": -0.012668710201978683
-                        },
-                        "rotation": {
-                            "w": 0.9554626941680908,
-                            "x": -0.28943932056427,
-                            "y": 0.032618410885334015,
-                            "z": 0.04745380952954292
-                        },
-                        "scale": {
-                            "x": 0.9999999403953552,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "edec3941-b0fa-1d81-8a5d-44fcab22222d"
-                }
-            ],
-            "name": "Heel_R_jt",
-            "parent_uuid": "f89dd3c9-140d-a40b-0551-ec50d205bf66",
-            "uuid": "9d04a2df-0295-9128-750c-7a4a8f53f421"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
                             "x": 0.0,
                             "y": -0.0,
                             "z": 0.0
@@ -5862,6 +5613,41 @@
             "name": "Toe_L_jt",
             "parent_uuid": "72657c45-d21d-3aec-5c71-e35fb8680617",
             "uuid": "6b1afbd9-7ea8-570e-277e-ddfc312aed4f"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -33.52030563354492,
+                            "y": 5.15217924118042,
+                            "z": 4.134030818939209
+                        },
+                        "position": {
+                            "x": -0.029146550223231316,
+                            "y": 0.3874119520187378,
+                            "z": -0.012668710201978683
+                        },
+                        "rotation": {
+                            "w": 0.9554626941680908,
+                            "x": -0.28943932056427,
+                            "y": 0.032618410885334015,
+                            "z": 0.04745380952954292
+                        },
+                        "scale": {
+                            "x": 0.9999999403953552,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "edec3941-b0fa-1d81-8a5d-44fcab22222d"
+                }
+            ],
+            "name": "Heel_R_jt",
+            "parent_uuid": "f89dd3c9-140d-a40b-0551-ec50d205bf66",
+            "uuid": "9d04a2df-0295-9128-750c-7a4a8f53f421"
         },
         {
             "active": true,
@@ -6038,7 +5824,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 179.73431396484375,
+                                "x": 199.84487915039063,
                                 "y": 108.0
                             }
                         },
@@ -6087,7 +5873,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "92b80699-9a06-0054-af16-913986640fbe",
+            "parent_uuid": "1b876890-1946-5282-ee27-9cec8a8d6e72",
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
         {
@@ -6122,7 +5908,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "92b80699-9a06-0054-af16-913986640fbe",
+            "parent_uuid": "1b876890-1946-5282-ee27-9cec8a8d6e72",
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
         {
@@ -6245,7 +6031,7 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
+                            "y": 0.0,
                             "z": 0.0
                         },
                         "position": {
@@ -6260,951 +6046,16 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": -1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ed73a219-9151-6f9d-4ef5-e71a89fa11cf"
-                }
-            ],
-            "name": "Boss_Level",
-            "parent_uuid": "4b93d5d0-8687-35a0-32d3-5d97d80f28dc",
-            "uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "63994fce-7ec8-d58c-718d-2e86a32a97fb"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "6ca7a768-2400-cd51-594b-bbe5a41c4e3e"
-                }
-            ],
-            "name": "pCube2",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "c4e7490e-c628-96d7-ef96-a37130883c02"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "003b82bc-29e0-c660-0168-8a33a238b971"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "2281ab28-534b-04d7-f89b-e72c365b1357"
-                }
-            ],
-            "name": "pCube3",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "5c448baf-b62f-56e7-067d-910dfe544a3f"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "4421371d-258a-b3fc-520b-7f5ffe5da8a6"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "ee959c0a-aebe-bc93-219e-ca20e97f3c6a"
-                }
-            ],
-            "name": "pCube4",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "41fd3724-d56d-f4af-3cda-85a3573aa551"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ab68a238-78ed-6b29-777d-2c1bad7e2aac"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "2404a4b6-de3d-8054-9d81-1af755f30303"
-                }
-            ],
-            "name": "pCube5",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "7da1bc9e-451d-c245-1b82-d10195b70777"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "d876e79a-8f11-a465-83b0-571492c65fe3"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "3475c223-6c15-1c78-76a6-14bb38010d4a"
-                }
-            ],
-            "name": "pCube6",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "3f379986-4325-3148-2dc0-03e6a413e34e"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "2a45dd4e-e763-d45e-6142-dbdebeafea29"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "51ce862c-84da-ba7d-72bc-d425be9d8347"
-                }
-            ],
-            "name": "pCube7",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "ce42a259-891c-d098-384e-13a661d4ce19"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "051d94db-cf55-a5ec-947a-4e242eb94a76"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697"
-                    },
-                    "uuid": "0346dad0-9a8a-7d73-b020-b6c1439d4385"
-                }
-            ],
-            "name": "pCube8",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "db8b1e6d-352a-51c9-03c2-8ef0e025a8d3"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "81736eed-0634-4db6-b1f2-3e478d3e85b5"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de"
-                    },
-                    "uuid": "552ab094-50f2-53a6-c210-1c159f454301"
-                }
-            ],
-            "name": "pSphere1",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "b59b46f5-9de2-d4dc-d634-e23289c8b89c"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "1652447a-d184-f155-b085-2d1ceac7ba9e"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "01faf9d3-a5bc-45f5-9ec9-333bd50e39b4"
-                    },
-                    "uuid": "6c683c3c-c0be-10d9-44d5-eb0696fb2daf"
-                }
-            ],
-            "name": "pCylinder1",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "f166dca8-77bd-0003-986c-cfab8e636491"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "8270fce2-5630-634a-f688-3388e3b7f3af"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "01faf9d3-a5bc-45f5-9ec9-333bd50e39b4"
-                    },
-                    "uuid": "8255a578-f156-5b16-d96c-9df50ab97ec2"
-                }
-            ],
-            "name": "pCylinder4",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "7e783ba9-0960-4a2a-9eaf-01d1cb3ac689"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ef5b4209-2b0b-0d9b-32f2-e0d9f574b898"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "01faf9d3-a5bc-45f5-9ec9-333bd50e39b4"
-                    },
-                    "uuid": "e1663ee9-885d-8283-f77d-d1f5d96bdc50"
-                }
-            ],
-            "name": "pCylinder5",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "0bef2b9e-0f8e-bace-1cac-08d7ef0d4f12"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "fe5854a1-2a2a-d137-6efa-f3d02638b70b"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "01faf9d3-a5bc-45f5-9ec9-333bd50e39b4"
-                    },
-                    "uuid": "27b217ae-3fdb-72b0-5020-a470c7e0030c"
-                }
-            ],
-            "name": "pCylinder6",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "8dc5d21b-3667-0040-08ae-31a2614efc8c"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "ae69827b-f7f9-728d-1025-90043370db0b"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de"
-                    },
-                    "uuid": "08b52b73-afea-1d46-8536-91a617b3712d"
-                }
-            ],
-            "name": "pCube9",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "f8c1f0e8-8010-d540-275c-3023fa0ea0c5"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "b840ea00-7768-a57c-a5b2-edd2e3ad3eb9"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {},
-                    "uuid": "9ff245c4-234e-f22c-ed7d-eee294a97429"
-                }
-            ],
-            "name": "pCube10",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "22f33d10-7fc9-d519-9863-6336f9fb416f"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "79440e40-3416-d3a4-d76b-f174561d86fb"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de"
-                    },
-                    "uuid": "e7d818ad-95ab-8f89-aa64-d3938783fbcf"
-                }
-            ],
-            "name": "pCube11",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "b3e06f9b-2cee-50ad-d8c1-39c33df8566e"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "9f10bc38-650a-c62f-d20a-2da9dffd941c"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "f1df0e36-d2ec-98ec-b1ef-13410c88faa6"
-                    },
-                    "uuid": "e79aa7b4-7a2c-333f-4f62-98a5dce84487"
-                }
-            ],
-            "name": "pTorus1",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "12fae411-9945-2420-f648-2f1aa48426ac"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "0148d595-f7ac-16b1-c7a6-e573112d8fbb"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "f1df0e36-d2ec-98ec-b1ef-13410c88faa6"
-                    },
-                    "uuid": "fcd1c0b0-4ed8-b62f-be79-52ecec8cc2fe"
-                }
-            ],
-            "name": "pTorus2",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "e079a1b8-ff8d-94f7-5c7a-e11b8db30e12"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "c2af839c-ee52-e6ca-1e96-2705b1822cd8"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "f1df0e36-d2ec-98ec-b1ef-13410c88faa6"
-                    },
-                    "uuid": "950c25a8-44ad-f5b5-2c3b-37a5c61f9798"
-                }
-            ],
-            "name": "pTorus3",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "5017464d-58ba-16c3-929d-5a0fb3a20a8d"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "987f0963-87a1-ecb5-d4d8-36ea83bbf2f0"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "f1df0e36-d2ec-98ec-b1ef-13410c88faa6"
-                    },
-                    "uuid": "51789a06-384a-f410-d337-56530bd979c0"
-                }
-            ],
-            "name": "pTorus4",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "3cddb789-3be2-060e-5808-ff06b16d9951"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "fe7c032e-6f2f-69c1-adba-af9ef68f69d2"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "f1df0e36-d2ec-98ec-b1ef-13410c88faa6"
-                    },
-                    "uuid": "ff62143b-912c-9338-3d63-c1b9ee6261ba"
-                }
-            ],
-            "name": "pTorus5",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "c98d6513-870f-ce21-34a8-bc5a67e0c294"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "7915cc3a-3db2-73f5-22d4-e5037a2d2505"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "f1df0e36-d2ec-98ec-b1ef-13410c88faa6"
-                    },
-                    "uuid": "5c606de2-ca9d-23a2-450e-48f7753029cc"
-                }
-            ],
-            "name": "pTorus6",
-            "parent_uuid": "98ee7021-c51c-eae0-86e0-811f64e25fe7",
-            "uuid": "6c2a9059-a169-5b04-e967-29b9d554ba7f"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 180.0,
-                            "y": 62.88489532470703,
-                            "z": 180.0
-                        },
-                        "position": {
-                            "x": 40.46895980834961,
-                            "y": 0.0,
-                            "z": 38.11763381958008
-                        },
-                        "rotation": {
-                            "w": 0.5216418504714966,
-                            "x": 0.0,
-                            "y": 0.853164553642273,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 3.9176034927368164,
-                            "y": 3.917600154876709,
-                            "z": 3.9176034927368164
+                            "x": 4.0,
+                            "y": 4.0,
+                            "z": 4.0
                         }
                     },
                     "uuid": "9c86cbed-8ca6-1aeb-6067-fd7fe1dc2d54"
                 }
             ],
             "name": "Boss_Level",
-            "parent_uuid": "92b80699-9a06-0054-af16-913986640fbe",
+            "parent_uuid": "1b876890-1946-5282-ee27-9cec8a8d6e72",
             "uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68"
         },
         {
@@ -7220,7 +6071,7 @@
                         },
                         "position": {
                             "x": 0.0,
-                            "y": -1.9432895183563232,
+                            "y": -2.0,
                             "z": 0.0
                         },
                         "rotation": {
@@ -7230,9 +6081,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 19.06035041809082,
-                            "y": 19.06035041809082,
-                            "z": 19.06035041809082
+                            "x": 19.0,
+                            "y": 19.0,
+                            "z": 19.0
                         }
                     },
                     "uuid": "231f1b91-baa6-9fb6-8673-180b23985176"
@@ -7260,24 +6111,24 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": 0.0,
-                            "z": -25.391550064086914
+                            "y": -0.0,
+                            "z": 0.0
                         },
                         "position": {
-                            "x": -7.640152454376221,
-                            "y": 6.028944492340088,
-                            "z": -1.345887541770935
+                            "x": -3.5,
+                            "y": 6.0,
+                            "z": 0.0
                         },
                         "rotation": {
-                            "w": 0.9755507707595825,
+                            "w": 1.0,
                             "x": 0.0,
                             "y": 0.0,
-                            "z": -0.2197742611169815
+                            "z": 0.0
                         },
                         "scale": {
-                            "x": 2.854050636291504,
-                            "y": 4.086353302001953,
-                            "z": 2.854050636291504
+                            "x": 2.0,
+                            "y": 4.0,
+                            "z": 3.0
                         }
                     },
                     "uuid": "835e243e-d951-fb22-ac90-418a8eb21642"
@@ -7294,7 +6145,7 @@
                 }
             ],
             "name": "head",
-            "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
+            "parent_uuid": "ee35d717-fae7-db6b-33a8-77eae5f31ecc",
             "uuid": "1769be11-faa8-1cc8-3cb8-cb173eeb585c"
         },
         {
@@ -7310,7 +6161,7 @@
                         },
                         "position": {
                             "x": 1.8731324672698975,
-                            "y": 0.8433142900466919,
+                            "y": 1.0,
                             "z": 3.5876832008361816
                         },
                         "rotation": {
@@ -7330,6 +6181,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 2,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7339,49 +6192,6 @@
             "name": "column_6",
             "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
             "uuid": "12ea2f9a-6efa-45d9-df47-e90a0308c0ac"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.4249894320964813,
-                            "z": 5.805126667022705
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.49122488498687744,
-                            "y": 0.8777777552604675,
-                            "z": 0.5187222957611084
-                        }
-                    },
-                    "uuid": "83cda1c6-0fdc-af0a-ce88-03caefa1f623"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "mesh_index": 3,
-                        "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
-                    },
-                    "uuid": "c672983a-b602-b958-64df-d4001bf35aae"
-                }
-            ],
-            "name": "brightwhiskers",
-            "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
-            "uuid": "476e1721-36c2-cbf1-0ca6-1238e5edcf1a"
         },
         {
             "active": true,
@@ -7416,6 +6226,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 4,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7459,6 +6271,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 5,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7502,6 +6316,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 6,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7545,6 +6361,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 7,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7588,6 +6406,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 8,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7606,24 +6426,24 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
+                            "y": 0.0,
+                            "z": -1.0316708154000515e-13
                         },
                         "position": {
-                            "x": -2.0087227821350098,
+                            "x": -2.0087223052978516,
                             "y": 0.8964558839797974,
-                            "z": 5.915334224700928
+                            "z": 5.9153337478637695
                         },
                         "rotation": {
                             "w": 1.0,
                             "x": 0.0,
                             "y": 0.0,
-                            "z": 0.0
+                            "z": -9.003026375488865e-16
                         },
                         "scale": {
-                            "x": 0.06165832281112671,
+                            "x": 0.06165832653641701,
                             "y": 0.06165832281112671,
-                            "z": 0.06165832281112671
+                            "z": 0.06165832653641701
                         }
                     },
                     "uuid": "e3d72b3c-f731-3cc7-f574-d514c79ad5ad"
@@ -7631,6 +6451,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 9,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7648,20 +6470,20 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
+                            "x": 1.3577309307226393e-13,
+                            "y": 6.958558704248564e-28,
+                            "z": -5.872975716858519e-13
                         },
                         "position": {
-                            "x": -2.346829652786255,
-                            "y": 0.8433142900466919,
-                            "z": 6.132656574249268
+                            "x": -2.3468284606933594,
+                            "y": 1.0,
+                            "z": 6.132656097412109
                         },
                         "rotation": {
                             "w": 1.0,
-                            "x": 0.0,
+                            "x": 1.1848437685420634e-15,
                             "y": 0.0,
-                            "z": 0.0
+                            "z": -5.125138018786859e-15
                         },
                         "scale": {
                             "x": 0.4241251051425934,
@@ -7674,6 +6496,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 10,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7697,7 +6521,7 @@
                         },
                         "position": {
                             "x": 7.074714660644531,
-                            "y": 0.8433142900466919,
+                            "y": 1.0,
                             "z": 6.477799892425537
                         },
                         "rotation": {
@@ -7717,6 +6541,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 11,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7734,20 +6560,20 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
+                            "x": 9.788293087306318e-14,
+                            "y": 3.3444235707471004e-28,
+                            "z": -3.9153172349225274e-13
                         },
                         "position": {
-                            "x": 7.074714660644531,
-                            "y": 0.8433142900466919,
-                            "z": -3.346369981765747
+                            "x": 7.074715614318848,
+                            "y": 1.0,
+                            "z": -3.346369743347168
                         },
                         "rotation": {
                             "w": 1.0,
-                            "x": 0.0,
+                            "x": 8.541896874443295e-16,
                             "y": 0.0,
-                            "z": 0.0
+                            "z": -3.416758749777318e-15
                         },
                         "scale": {
                             "x": 0.4241251051425934,
@@ -7760,6 +6586,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 12,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7783,7 +6611,7 @@
                         },
                         "position": {
                             "x": 1.8271098136901855,
-                            "y": 0.8433142900466919,
+                            "y": 1.0,
                             "z": -6.59037446975708
                         },
                         "rotation": {
@@ -7803,6 +6631,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 13,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7820,20 +6650,20 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
+                            "x": 1.3577309307226393e-13,
+                            "y": 6.958558704248564e-28,
+                            "z": -5.872975716858519e-13
                         },
                         "position": {
-                            "x": -2.090059280395508,
-                            "y": 0.8433142900466919,
-                            "z": -3.408127784729004
+                            "x": -2.0900564193725586,
+                            "y": 1.0,
+                            "z": -3.408125400543213
                         },
                         "rotation": {
                             "w": 1.0,
-                            "x": 0.0,
+                            "x": 1.1848437685420634e-15,
                             "y": 0.0,
-                            "z": 0.0
+                            "z": -5.125138018786859e-15
                         },
                         "scale": {
                             "x": 0.4241251051425934,
@@ -7846,6 +6676,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "c4cc9af8-5253-cf95-d2c9-e60cf01e22de",
                         "mesh_index": 14,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7889,6 +6721,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "8f8beb37-98f9-9ad6-23e9-5efb1d1f7e03",
                         "mesh_index": 15,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7900,31 +6734,31 @@
             "uuid": "89df536b-ffa2-ae9d-4648-1187027e121e"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": 84.48505401611328,
+                            "y": 89.98021697998047,
                             "z": 0.0
                         },
                         "position": {
-                            "x": 10.634654998779297,
-                            "y": 4.39559268951416,
-                            "z": 7.069788932800293
+                            "x": 40.0,
+                            "y": 15.0,
+                            "z": 15.0
                         },
                         "rotation": {
-                            "w": 0.7403059005737305,
+                            "w": 0.7072288393974304,
                             "x": 0.0,
-                            "y": 0.6722701787948608,
+                            "y": 0.7069846987724304,
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 0.44656866788864136,
-                            "y": 0.44656863808631897,
-                            "z": 0.44656866788864136
+                            "x": 1.9999923706054688,
+                            "y": 2.0,
+                            "z": 1.9999923706054688
                         }
                     },
                     "uuid": "7fb8ef93-fadb-4c3a-cc54-c781d5e3385e"
@@ -7932,6 +6766,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fd7ee96c-cd41-ff0a-1797-933384f360c7",
                         "mesh_index": 16,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7939,35 +6775,35 @@
                 }
             ],
             "name": "hand_2",
-            "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
+            "parent_uuid": "ee35d717-fae7-db6b-33a8-77eae5f31ecc",
             "uuid": "e37e0f8e-7209-9adc-d2c0-3abbfc87f4bd"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": 84.48505401611328,
+                            "y": 90.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": 10.032295227050781,
-                            "y": 6.171624183654785,
-                            "z": -3.656134843826294
+                            "x": 40.0,
+                            "y": 15.0,
+                            "z": -15.0
                         },
                         "rotation": {
-                            "w": 0.7403059005737305,
+                            "w": 0.7071067690849304,
                             "x": 0.0,
-                            "y": 0.6722701787948608,
+                            "y": 0.7071067690849304,
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 0.44656866788864136,
-                            "y": 0.44656863808631897,
-                            "z": 0.44656866788864136
+                            "x": -0.5,
+                            "y": 0.5,
+                            "z": 0.5
                         }
                     },
                     "uuid": "fdabbd1e-4cc7-a1db-9901-3666efb03fb7"
@@ -7975,6 +6811,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fd7ee96c-cd41-ff0a-1797-933384f360c7",
                         "mesh_index": 17,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -7982,7 +6820,7 @@
                 }
             ],
             "name": "hand_1",
-            "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
+            "parent_uuid": "ee35d717-fae7-db6b-33a8-77eae5f31ecc",
             "uuid": "0169af34-a399-41c0-f4d1-e14ddbe71426"
         },
         {
@@ -7993,13 +6831,13 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
+                            "y": 0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": -5.179785251617432,
-                            "y": 5.993235111236572,
-                            "z": -0.3484032154083252
+                            "x": 0.75,
+                            "y": 0.0,
+                            "z": 0.4000000059604645
                         },
                         "rotation": {
                             "w": 1.0,
@@ -8008,9 +6846,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 0.7051657438278198,
-                            "y": 0.7051657438278198,
-                            "z": 0.7051657438278198
+                            "x": 0.25,
+                            "y": 0.15000000596046448,
+                            "z": 0.25
                         }
                     },
                     "uuid": "80146f75-fdae-022d-146c-7eab0abb5e46"
@@ -8018,6 +6856,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fdeea088-9ce7-09ab-3234-9e689db5eefc",
                         "mesh_index": 18,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -8025,7 +6865,7 @@
                 }
             ],
             "name": "eye_2",
-            "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
+            "parent_uuid": "1769be11-faa8-1cc8-3cb8-cb173eeb585c",
             "uuid": "07bb6162-6b04-a796-8eb7-9c517912cc36"
         },
         {
@@ -8036,13 +6876,13 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
+                            "y": 0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": -5.290170192718506,
-                            "y": 5.972456932067871,
-                            "z": -2.4960598945617676
+                            "x": 0.75,
+                            "y": 0.0,
+                            "z": -0.4000000059604645
                         },
                         "rotation": {
                             "w": 1.0,
@@ -8051,9 +6891,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 0.7051657438278198,
-                            "y": 0.7051657438278198,
-                            "z": 0.7051657438278198
+                            "x": 0.2500000298023224,
+                            "y": 0.15000000596046448,
+                            "z": 0.2500000298023224
                         }
                     },
                     "uuid": "6e9b7a08-539c-a4de-4b0c-11bc6c6daad7"
@@ -8061,6 +6901,8 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fdeea088-9ce7-09ab-3234-9e689db5eefc",
                         "mesh_index": 19,
                         "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
                     },
@@ -8068,7 +6910,7 @@
                 }
             ],
             "name": "eye_1",
-            "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
+            "parent_uuid": "1769be11-faa8-1cc8-3cb8-cb173eeb585c",
             "uuid": "fa9ff50b-cd34-a4ca-4a48-bf4ab12693c2"
         },
         {
@@ -8105,6 +6947,540 @@
             "name": "Collision",
             "parent_uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68",
             "uuid": "918a9b22-37fc-f948-a133-a6907eb58a1f"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "3ad85e41-f44d-2b76-8c00-ecff426afdfa"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "Boss",
+                        "fields": {
+                            "actionCooldown": {
+                                "x": 2.0,
+                                "y": 1.0
+                            },
+                            "stageRegeneration": 5.0,
+                            "target": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
+                        }
+                    },
+                    "uuid": "521c3d4d-813b-5d1d-4da0-55ad2529e794"
+                }
+            ],
+            "name": "Boss",
+            "parent_uuid": "1b876890-1946-5282-ee27-9cec8a8d6e72",
+            "uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 4.0,
+                            "y": 4.0,
+                            "z": 4.0
+                        }
+                    },
+                    "uuid": "bc2aff0b-856e-8db0-8296-63b7948ccfbc"
+                }
+            ],
+            "name": "Visuals",
+            "parent_uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d",
+            "uuid": "ee35d717-fae7-db6b-33a8-77eae5f31ecc"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 15.0,
+                            "z": -20.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 5.0,
+                            "y": 1.0,
+                            "z": 3.0
+                        }
+                    },
+                    "uuid": "001e83a1-6625-3b28-d1de-44da20d8e255"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "6961d822-e2f5-dfb9-50e2-93d659aff9d5"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "Hand",
+                        "fields": {
+                            "HandShadow": "beb6135f-c9bb-80f6-6c02-0b08de976e44",
+                            "fistGroundCooldown": {
+                                "x": 1.5,
+                                "y": 1.0
+                            },
+                            "fistTrackTime": {
+                                "x": 2.5,
+                                "y": 1.5
+                            },
+                            "fistVelocity": {
+                                "x": 25.0,
+                                "y": 25.0
+                            },
+                            "rightHand": false,
+                            "shakeTime": {
+                                "x": 0.800000011920929,
+                                "y": 0.5
+                            },
+                            "spikeActive": {
+                                "x": 3.0,
+                                "y": 2.0
+                            },
+                            "spikeWarn": {
+                                "x": 1.0,
+                                "y": 0.800000011920929
+                            }
+                        }
+                    },
+                    "uuid": "0da0278d-3ddb-dca4-7b70-4533c03ea90a"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 2
+                    },
+                    "is_active": true,
+                    "uuid": "1efcbf63-f318-4522-148b-d08e3211f858"
+                }
+            ],
+            "name": "LeftHand",
+            "parent_uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d",
+            "uuid": "d596475b-5a58-233b-70de-b60750604dcc"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 15.0,
+                            "z": 20.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 5.0,
+                            "y": 1.0,
+                            "z": 3.0
+                        }
+                    },
+                    "uuid": "cc7f752c-6287-92e8-b928-2c2f13870c37"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "4b3a2f1f-ecd2-6b67-d7ba-3b9665f39697",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "ab39aecf-a7a5-bee7-6de9-0c47c0f7f8fc"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "Hand",
+                        "fields": {
+                            "HandShadow": "d30e0578-cf45-e0a0-30b1-aeee1f7028d9",
+                            "fistGroundCooldown": {
+                                "x": 1.5,
+                                "y": 1.0
+                            },
+                            "fistTrackTime": {
+                                "x": 2.5,
+                                "y": 1.5
+                            },
+                            "fistVelocity": {
+                                "x": 25.0,
+                                "y": 25.0
+                            },
+                            "rightHand": true,
+                            "shakeTime": {
+                                "x": 0.800000011920929,
+                                "y": 0.5
+                            },
+                            "spikeActive": {
+                                "x": 3.0,
+                                "y": 2.0
+                            },
+                            "spikeWarn": {
+                                "x": 1.0,
+                                "y": 0.800000011920929
+                            }
+                        }
+                    },
+                    "uuid": "f2cd0741-c24a-06af-796f-f96d76d35321"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 2
+                    },
+                    "is_active": true,
+                    "uuid": "0a873e52-cca8-66d3-b12b-418be10948de"
+                }
+            ],
+            "name": "RightHand",
+            "parent_uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d",
+            "uuid": "5187434c-d229-66d1-894e-88b1e448d0be"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -15.00019645690918,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.000000238418579,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "a26376b3-cd02-d5e5-9351-0744b03411e0"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fdeea088-9ce7-09ab-3234-9e689db5eefc",
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "ba4cdc96-bb7e-aa32-1012-f07a1c8f3adf"
+                }
+            ],
+            "name": "LeftHandShadow",
+            "parent_uuid": "d596475b-5a58-233b-70de-b60750604dcc",
+            "uuid": "beb6135f-c9bb-80f6-6c02-0b08de976e44"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 15.0,
+                            "y": 0.0,
+                            "z": -21.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 36.29999923706055,
+                            "y": 5.0,
+                            "z": 12.0
+                        }
+                    },
+                    "uuid": "2e3e32c4-a6dc-c539-9cd5-5ae01e832b42"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 2
+                    },
+                    "is_active": true,
+                    "uuid": "b5dc2a01-499d-6d0e-4797-cdac57968821"
+                }
+            ],
+            "name": "LeftCollider",
+            "parent_uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d",
+            "uuid": "f008c95f-21a4-d46b-cbd5-e341a71644b5"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 15.0,
+                            "y": 0.0,
+                            "z": 21.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 36.29999923706055,
+                            "y": 5.0,
+                            "z": 12.0
+                        }
+                    },
+                    "uuid": "fa78b0ef-af5e-f69d-a8ec-4f96db674cfe"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 2
+                    },
+                    "is_active": true,
+                    "uuid": "3a862add-76bb-5809-d77c-1fa352a4f1c9"
+                }
+            ],
+            "name": "RightCollider",
+            "parent_uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d",
+            "uuid": "a5014273-9f44-1cd6-37fe-14187ce7e8ee"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -10.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "38c517b8-539d-9483-28e9-d6a6f03628bf"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "b4a26b35-53c0-c77a-0dfb-0af39f5d797c"
+                }
+            ],
+            "name": "Cube",
+            "parent_uuid": "f008c95f-21a4-d46b-cbd5-e341a71644b5",
+            "uuid": "8897e992-7974-f76b-f4c5-aa039002066a"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -10.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "563e8547-9207-59f7-31aa-0c17a7d27bc9"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "mesh_index": 0,
+                        "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
+                    },
+                    "uuid": "58967cbb-d7f2-0388-ac70-73e45cd68fed"
+                }
+            ],
+            "name": "Cube",
+            "parent_uuid": "a5014273-9f44-1cd6-37fe-14187ce7e8ee",
+            "uuid": "ffbfa52f-098f-6f0c-433d-17b9c6e6f9df"
         }
     ]
 }
