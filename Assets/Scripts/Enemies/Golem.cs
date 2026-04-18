@@ -4,7 +4,7 @@ using static Loopie.Transform;
 
 class Golem : Enemy
 {
-    public string Reference;
+    public Entity Reference;
 
     public int ShieldLife;
     public bool isShielding;
@@ -69,7 +69,6 @@ class Golem : Enemy
             isShielding = false;
         }
         #region Health
-        health.UpdateHealth();
         if (health.IsDead())
         {
             entity.Destroy();
