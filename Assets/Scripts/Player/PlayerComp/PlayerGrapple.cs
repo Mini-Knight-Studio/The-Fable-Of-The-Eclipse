@@ -116,16 +116,22 @@ public class PlayerGrapple : PlayerComponent
         Vector3 end = isLaunchingPhase ? Vector3.Lerp(start, pillarPos, progress) : pillarPos;
 
         Vector3 midPoint = (start + end) * 0.5f;
-        // Manual Down vector fixed
         Vector3 manualDown = new Vector3(0.0f, -1.0f, 0.0f);
         Vector3 controlPoint = midPoint + (manualDown * (ropeSagAmount * (1.0f - progress)));
 
-        // Position Hook Tip (No stretching)
+        // --- 1. Position Hook Tip (FIXED) ---
         hookInstance.transform.position = end;
-        Vector3 tipDirection = (end - GetBezierPoint(start, controlPoint, end, 0.95f)).normalized;
-        hookInstance.transform.LookAt(end + tipDirection, Vector3.Up);
 
-        // Position Chain
+        // Calculate the direction the tip should face
+        Vector3 tipDirection = (end - GetBezierPoint(start, controlPoint, end, 0.95f)).normalized;
+
+        // THE TRICK: Use the same Maya Y-Up compensation we used for the segments
+        // We point the Z-axis at a 'fake' point above, forcing the Maya Y-axis 
+        // (the length of the hook) to align with tipDirection.
+        Vector3 hookFakeTarget = end + new Vector3(0, 1, 0);
+        hookInstance.transform.LookAt(hookFakeTarget, tipDirection);
+
+        // --- 2. Position Chain (Already fixed) ---
         for (int i = 0; i < ropeSegments.Count; i++)
         {
             float t1 = (float)i / (float)ropeSegments.Count;
@@ -138,7 +144,8 @@ public class PlayerGrapple : PlayerComponent
             seg.transform.position = posA;
 
             Vector3 direction = (posB - posA).normalized;
-            seg.transform.LookAt(posA + Vector3.Up, direction);
+            Vector3 segFakeTarget = posA + new Vector3(0, 1, 0);
+            seg.transform.LookAt(segFakeTarget, direction);
 
             float dist = (float)Vector3.Distance(posA, posB);
             seg.transform.scale = new Vector3(2, dist, 2);
