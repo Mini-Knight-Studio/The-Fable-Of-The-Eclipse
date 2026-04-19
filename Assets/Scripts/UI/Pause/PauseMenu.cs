@@ -1,21 +1,21 @@
 using System;
 using Loopie;
 
-class MainMenu : Component
+class PauseMenu : Component
 {
     // Buttons
     [Header("Buttons")]
-    public Entity newGameEntity;
-    public Entity newGameHoveredEntity;
-    private Button newGameButton;
-    private NewGame newGameScript;
-    private Image newGameHoveredImage;
-
     public Entity continueEntity;
     public Entity continueHoveredEntity;
     private Button continueButton;
     private Load continueScript;
     private Image continueHoveredImage;
+
+    public Entity newGameEntity;
+    public Entity newGameHoveredEntity;
+    private Button newGameButton;
+    private NewGame newGameScript;
+    private Image newGameHoveredImage;
 
     public Entity settingsEntity;
     public Entity settingsHoveredEntity;
@@ -60,7 +60,7 @@ class MainMenu : Component
     private bool loopMusicHasPlayed = false;
     private float openingMusicDelay = 2f;
     private float openingMusicTimer = 0f;
-    
+
     [Header("Others")]
     // Input
     public float inputCooldown = 0.2f;
@@ -305,7 +305,7 @@ class MainMenu : Component
         {
             introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
             introBookCoverEntity.SetActive(false);
-            
+
             if (!invertedPassPagePlayed)
             {
                 invertedPassPageEntity.SetActive(true);
@@ -419,22 +419,22 @@ class MainMenu : Component
             Vector4 color = new Vector4(255, 0, 0, 1);
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: 
+                case Buttons.NEW_GAME:
                     newGameHoveredImage.SetTint(color);
                     passPageEntity.SetActive(true);
                     passPageAnimator.Play();
                     break;
-                case Buttons.CONTINUE: 
+                case Buttons.CONTINUE:
                     continueHoveredImage.SetTint(color);
                     passPageEntity.SetActive(true);
                     passPageAnimator.Play();
                     break;
-                case Buttons.SETTINGS: 
+                case Buttons.SETTINGS:
                     settingsHoveredImage.SetTint(color);
                     passPageEntity.SetActive(true);
                     passPageAnimator.Play();
                     break;
-                case Buttons.EXIT: 
+                case Buttons.EXIT:
                     exitHoveredImage.SetTint(color);
                     closeBookEntity.SetActive(true);
                     closeBookAnimator.Play();

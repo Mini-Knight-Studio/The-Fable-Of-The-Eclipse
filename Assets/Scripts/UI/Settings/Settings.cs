@@ -3,6 +3,19 @@ using Loopie;
 
 class Settings : Component
 {
+    [HideInInspector]
+    public float enterCooldown = 0.1f;
+    private float enterTimer = 0f;
+
+    public Entity passPageEntity;
+    private SpriteAnimator passPageAnimator;
+    public Entity invertedPassPageEntity;
+    private SpriteAnimator invertedPassPageAnimator;
+    [HideInInspector]
+    public static bool quickStartAnimations = true;
+    [HideInInspector]
+    public static bool invertedPassPagePlayed = false;
+
     // Display Mode
     public Entity displayModeHoveredEntity;
     private Image displayModeHoveredImage;
@@ -202,6 +215,24 @@ class Settings : Component
 
     void OnCreate()
     {
+        if (passPageEntity != null)
+        {
+            passPageAnimator = passPageEntity.GetComponent<SpriteAnimator>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no passPageEntity Entity assigned.");
+        }
+
+        if (invertedPassPageEntity != null)
+        {
+            invertedPassPageAnimator = invertedPassPageEntity.GetComponent<SpriteAnimator>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no passPageEntity Entity assigned.");
+        }
+
         // Display Mode
         if (displayModeHoveredEntity != null)
         {
@@ -590,6 +621,40 @@ class Settings : Component
 
     void OnUpdate()
     {
+        enterTimer += Time.deltaTime;
+        if (quickStartAnimations)
+        {
+            passPageAnimator.Play();
+            passPageAnimator.Stop();
+            passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
+            passPageEntity.SetActive(false);
+            invertedPassPageAnimator.Play();
+            invertedPassPageAnimator.Stop();
+            invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
+            invertedPassPageEntity.SetActive(false);
+
+            enterTimer = 0f;
+            quickStartAnimations = false;
+        }
+
+        if (!invertedPassPagePlayed)
+        {
+            invertedPassPageEntity.SetActive(true);
+            
+            if (enterTimer > enterCooldown)
+            {
+                invertedPassPageAnimator.Play();
+                invertedPassPagePlayed = true;
+            }
+        }
+        else
+        {
+            if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
+            {
+                invertedPassPageEntity.SetActive(false);
+            }
+        }
+        
         HandleMusic();
         HandleNavigation();
         HandleChangeValue();
