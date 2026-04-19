@@ -3,161 +3,139 @@ using Loopie;
 
 public class PlayerAnimation : PlayerComponent
 {
-    private Animator idleAnimator;
-    private Animator walkAnimator;
-    private Animator dashAnimator;
-    private Animator attackAnimator;
-
-    private bool toIdle = true;
-    private bool toWalk = true;
-    private bool toDash = true;
-    private bool toAttack = true;
+    private Animator modelAnimator;
 
     public string idleClipName = "idle";
     public string walkClipName = "walk";
-    public string dashClipName = "dash";
-    public string attackClipName = "attack";
+    public string dashIdleClipName = "DashFromIdle";
+    public string dashWalkClipName = "DashFromWalk";
+    public string attack1Clip = "Attack1";
+    public string attack2Clip = "Attack2";
+    public string attack3Clip = "Attack3";
+    public string grappleShootClip = "GrapleShoot";
+    public string grapplePoseClip = "GraplePose";
+    public string grappleLandingClip = "GrapleLanding";
 
-    public Entity idleEntity;
-    public Entity walkEntity;
-    public Entity dashEntity;
-    public Entity attackEntity;
+    private enum AnimationState { 
+        IDLE,
+        WALK, 
+        DASH, 
+        ATTACK, 
+        GRAPPLE_SHOOT, 
+        GRAPPLE_FLIGHT, 
+        GRAPPLE_LAND, 
+        NULL 
+    };
+    private AnimationState state;
+    private int lastPlayedComboIndex = 0;
 
-    private bool isAttacking = false;
-    private float attackTimer = 0f;
-    private float attackDuration = 0.2f;
+    public Entity modelEntity;
 
     public void OnCreate()
     {
-        idleAnimator = idleEntity.GetComponent<Animator>();
-        walkAnimator = walkEntity.GetComponent<Animator>();
-        dashAnimator = dashEntity.GetComponent<Animator>();
-        attackAnimator = attackEntity.GetComponent<Animator>();
+        state = AnimationState.NULL;
+        modelAnimator = modelEntity.GetComponent<Animator>();
+        Idle();
     }
 
     public void ProcessAnimations()
     {
-        if (player.Movement == null || player.Combat == null) return;
+        if (player.Movement == null || player.Combat == null || player.Grapple == null) return;
 
-        if (player.Combat.TemporalFunctionIsAttacking() && toAttack)
+        if (player.Grapple.IsLaunching)
         {
-            toAttack = false;
+            // Debugging Launch
+            if (state != AnimationState.GRAPPLE_SHOOT) Debug.Log("ANIM: Trying to play SHOOT: " + grappleShootClip);
+            PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
+        }
+        else if (player.Grapple.IsGrappling)
+        {
+            // Debugging Flight
+            if (state != AnimationState.GRAPPLE_FLIGHT) Debug.Log("ANIM: Trying to play POSE: " + grapplePoseClip);
+            PlayGrappleAnim(grapplePoseClip, AnimationState.GRAPPLE_FLIGHT, true);
+        }
+        else if (player.Grapple.IsLanding)
+        {
+            // Debugging Landing
+            if (state != AnimationState.GRAPPLE_LAND) Debug.Log("ANIM: Trying to play LANDING: " + grappleLandingClip);
+            PlayGrappleAnim(grappleLandingClip, AnimationState.GRAPPLE_LAND, false);
+        }
+        else if (player.Combat.isAttacking)
+        {
             Attack();
-            return;
         }
-
-        if (!player.Combat.TemporalFunctionIsAttacking())
-        {
-            toAttack = true;
-        }
-
-        if (isAttacking)
-        {
-            attackTimer -= Time.deltaTime;
-
-            if (attackTimer <= 0f)
-            {
-                isAttacking = false;
-
-                attackEntity.SetActive(false);
-
-                toIdle = true;
-                toWalk = true;
-                toDash = true;
-
-                if (player.Movement.IsDashing())
-                {
-                    Dash();
-                }
-                else if (player.Movement.IsMoving())
-                {
-                    Move();
-                }
-                else
-                {
-                    Idle();
-                }
-            }
-
-            return;
-        }
-
-        bool isDashing = player.Movement.IsDashing();
-        if (isDashing && toDash)
+        else if (player.Movement.IsDashing())
         {
             Dash();
-            return;
         }
-
-        if (!isDashing)
+        else if (player.Movement.IsMoving())
         {
-            toDash = true;
-
-            bool isMoving = player.Movement.IsMoving();
-            if (isMoving && toWalk)
-            {
-                Move();
-            }
-            else if (!isMoving && toIdle)
-            {
-                Idle();
-            }
+            Move();
+        }
+        else
+        {
+            Idle();
         }
     }
 
+    private void PlayGrappleAnim(string clip, AnimationState newState, bool loop)
+    {
+        if (state == newState) return;
+        state = newState;
+
+        Debug.Log("ANIM FIRE: " + clip); 
+
+        modelAnimator.Play(clip, 0.1f);
+        modelAnimator.Looping = loop;
+    }
     private void Idle()
     {
-        toIdle = false;
-        toWalk = true;
-        idleEntity.SetActive(true);
-        walkEntity.SetActive(false);
-        dashEntity.SetActive(false);
-        attackEntity.SetActive(false);
-        idleAnimator.Play(idleClipName);
-        idleAnimator.Looping = true;
+        if (state == AnimationState.IDLE) return;
+
+        state = AnimationState.IDLE;
+        lastPlayedComboIndex = 0;
+        modelAnimator.Play(idleClipName, 0.2f);
+        modelAnimator.Looping = true;
     }
 
     private void Move()
     {
-        toWalk = false;
-        toIdle = true;
-        idleEntity.SetActive(false);
-        walkEntity.SetActive(true);
-        dashEntity.SetActive(false);
-        attackEntity.SetActive(false);
-        walkAnimator.Play(walkClipName);
-        walkAnimator.Looping = true;
+        if (state == AnimationState.WALK) return;
+
+        state = AnimationState.WALK;
+        lastPlayedComboIndex = 0;
+        modelAnimator.Play(walkClipName, 0.2f);
+        modelAnimator.Looping = true;
     }
 
     private void Dash()
     {
-        toDash = false;
-        toWalk = true;
-        toIdle = true;
-        idleEntity.SetActive(false);
-        walkEntity.SetActive(false);
-        dashEntity.SetActive(true);
-        attackEntity.SetActive(false);
-        dashAnimator.Play(dashClipName);
-        dashAnimator.Looping = false;
+        if (state == AnimationState.DASH) return;
+
+        string clip = (state == AnimationState.WALK) ? dashWalkClipName : dashIdleClipName;
+        state = AnimationState.DASH;
+        lastPlayedComboIndex = 0;
+
+        modelAnimator.Play(clip, 0.1f);
+        modelAnimator.Looping = false;
     }
 
     private void Attack()
     {
-        isAttacking = true;
+        int currentCombo = player.Combat.GetCurrentComboIndex();
 
-        toDash = true;
-        toWalk = true;
-        toIdle = true;
+        if (state != AnimationState.ATTACK || lastPlayedComboIndex != currentCombo)
+        {
+            state = AnimationState.ATTACK;
+            lastPlayedComboIndex = currentCombo;
 
-        idleEntity.SetActive(false);
-        walkEntity.SetActive(false);
-        dashEntity.SetActive(false);
-        attackEntity.SetActive(true);
+            string clipToPlay = attack1Clip;
+            if (currentCombo == 2) clipToPlay = attack2Clip;
+            else if (currentCombo == 3) clipToPlay = attack3Clip;
 
-        attackAnimator.Play(attackClipName);
-        attackAnimator.Looping = false;
-
-        attackTimer = attackDuration;
+            modelAnimator.Play(clipToPlay, 0.05f);
+            modelAnimator.Looping = true;
+        }
     }
-};
+ 
+}
