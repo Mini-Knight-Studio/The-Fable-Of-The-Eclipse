@@ -11,6 +11,7 @@ class Geyser : Component
     public float movementSpeed = 2.0f;
 
     public float frequency = 3.0f;
+    public float delay = 0.0f;
     private float frequencyTimer = 0.0f;
 
     public float height = 5.0f;
@@ -32,9 +33,12 @@ class Geyser : Component
     void OnCreate()
     {
         riseSFX = entity.GetComponent<AudioSource>();
+        collider = entity.GetComponent<BoxCollider>();
 
         startPosition = entity.transform.position;
         upPosition = startPosition + new Vector3(0, height, 0);
+
+        frequencyTimer -= delay;
     }
 
     void OnUpdate()

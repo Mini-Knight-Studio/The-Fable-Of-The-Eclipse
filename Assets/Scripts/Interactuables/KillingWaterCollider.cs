@@ -48,8 +48,6 @@ class KillingWaterCollider : Component
         {
             killTimer = 0.0f;
         }
-
-        Gizmo.DrawLine(origin, origin + direction * rayDistance, Color.Magenta);
     }
 
 };
