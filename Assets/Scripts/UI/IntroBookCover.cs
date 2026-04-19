@@ -106,7 +106,7 @@ class IntroBookCover : Component
             openingMusicAudioSource.Play();
             openingHasStarted = true;
         }
-        else if (animator.CurrentFrame == animator.FrameCount)
+        else if (animator.CurrentFrame == animator.FrameCount - 1)
         {
             backgroundEntity.SetActive(false);
             hasIntroEnded = true;

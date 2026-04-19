@@ -264,12 +264,15 @@ class MainMenu : Component
         {
             passPageAnimator.Play();
             passPageAnimator.Stop();
+            //passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
             passPageEntity.SetActive(false);
             invertedPassPageAnimator.Play();
             invertedPassPageAnimator.Stop();
+            //invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
             invertedPassPageEntity.SetActive(false);
             closeBookAnimator.Play();
             closeBookAnimator.Stop();
+            //closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
             closeBookEntity.SetActive(false);
             quickStartAnimations = false;
         }
@@ -300,7 +303,7 @@ class MainMenu : Component
             }
             else
             {
-                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount)
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
                 {
                     invertedPassPageEntity.SetActive(false);
                 }
@@ -430,14 +433,14 @@ class MainMenu : Component
         // Function Call
         if (confirmTimer > inputCooldown && canCallScripts)
         {
-            if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount)
+            if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount - 1)
             {
                 loopMusicAudioSource.Stop();
                 canCallScripts = false;
                 exitScript.ExitGame();
             }
 
-            if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount)
+            if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
             {
                 loopMusicAudioSource.Stop();
                 quickStartAnimations = false;
