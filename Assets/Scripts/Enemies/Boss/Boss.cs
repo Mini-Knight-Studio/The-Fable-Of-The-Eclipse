@@ -2,66 +2,135 @@ using System;
 using System.Threading;
 using Loopie;
 
-class Boss : Component
+public class Boss : Component
 {
-    public Vector2 actionCooldown;
-    public float stageRegeneration;
-    public float startingCooldown;
-    public int damage;
-    private int stage;
-    private float timer;
-    private bool updating;
+    [Header("Boss Parts")]
     public Entity leftHandEntity;
     public Entity rightHandEntity;
+
     private Hand leftHand;
     private Hand rightHand;
+    [Space(10)]
+    [Header("Boss Variables")]
+    public Vector2 StartEndWaitTime;
+    public float InBetweenStagesCooldown;
+    public Vector2 InBetweenAttacksCooldown;
+    [Space(10)]
+    [Header("Hand Variables")]
+    public Vector2 punchTrackTime;
+    public Vector2 shakeTime;
+    public Vector2 handVelocity;
+    public Vector2 punchGroundCooldown;
+    public Vector2 spikeWarn;
+    public Vector2 spikeActive;
 
+    public int Damage;
+    [HideInInspector]
+    public int stage;
+    private bool on_sequence;
+    private bool defeated;
+    private float stage_timer;
+    [HideInInspector]
+    public Vector2 target_side_comparition;
+
+    private SceneTransition winScene;
+
+    #region Internal
     void OnCreate()
     {
         stage = 0;
-        updating = false;
-        timer = 0;
+        on_sequence = false;
+        stage_timer = 0;
+        target_side_comparition = new Vector2(-1, -1);
+
         leftHand = leftHandEntity.GetComponent<Hand>();
+        leftHand.SetUp(this);
+        
         rightHand = rightHandEntity.GetComponent<Hand>();
-        Debug.Log(leftHand.ID);
-        Debug.Log(rightHand.ID);
+        rightHand.SetUp(this);
+
+        winScene = entity.GetComponent<SceneTransition>();
     }
 
     void OnUpdate()
     {
-        if (!updating && timer < startingCooldown)
+        #region Timer Between Attacks
+        if(on_sequence)
         {
-            timer += Time.deltaTime;
-            if (timer >= startingCooldown)
+            if (stage_timer > 0.0f)
+                stage_timer -= Time.deltaTime;
+            else
+                StartNextAttack();
+        }
+        #endregion
+
+        #region Start Timer | In Stage Timer | End Timer
+        if(!on_sequence)
+        {
+            if (StartEndWaitTime.x > 0.0f)
+                StartEndWaitTime.x -= Time.deltaTime;
+            else
+                StartBattle();
+
+            if (defeated && stage < 2)
             {
-                timer = 0;
-                StartSequence();
+                if(InBetweenStagesCooldown > 0.0f)
+                    InBetweenStagesCooldown -= Time.deltaTime;
+                else
+                    Evolve();
+            }
+            else if (defeated && stage >= 2)
+            {
+                if (StartEndWaitTime.y > 0.0f)
+                    StartEndWaitTime.y -= Time.deltaTime;
+                else
+                    winScene.StartTransition();
             }
         }
-
-        if (updating)
-        {
-            if (leftHand.IsOnSide())
-            {
-                Debug.Log("On Left");
-                rightHand.CancelSequence();
-                leftHand.StartSequence();
-            }
-
-            if (rightHand.IsOnSide())
-            {
-                Debug.Log("On Right");
-                leftHand.CancelSequence();
-                rightHand.StartSequence();
-            }
-        }
+        #endregion
     }
 
-    public void StartSequence()
+    #endregion
+
+    #region Combat Control
+    public void StartBattle()
     {
-        timer = 0;
-        leftHand.SetUpHand(stage, damage);
-        rightHand.SetUpHand(stage, damage);
-        updating = true;
+        on_sequence = true;
+        stage_timer = 0;
     }
+
+    private void StartNextAttack()
+    {
+        if (leftHand.IsOnSide())
+            leftHand.Attack();
+
+        if (rightHand.IsOnSide())
+            rightHand.Attack();
+    }
+
+    public void Evolve()
+    {
+        stage = 1;
+        StartBattle();
+    }
+
+    private void GetTargetSide()
+    {
+        target_side_comparition.x = -1;
+        if (leftHand.IsOnSide())
+            target_side_comparition.x = 0;
+        if(rightHand.IsOnSide())
+            target_side_comparition.x = 1;
+    }
+
+    public bool NeedsToCancel()
+    {
+        GetTargetSide();
+        if(target_side_comparition.x == -1 || target_side_comparition.y == -1)
+            return true;
+        if (target_side_comparition.x != target_side_comparition.y)
+            return true;
+        return false;
+    }
+    #endregion
 };
