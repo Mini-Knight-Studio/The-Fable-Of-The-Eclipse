@@ -17,7 +17,6 @@ public class PlayerMovement : PlayerComponent
     private float dashTimer = 0.0f;
     private float dashCooldownTimer = 0.0f;
     private float dashBufferTimer = 0.0f;
-    private Animator animator;
     private Vector3 dashDirection = new Vector3(0, 0, 0);
     private bool isDashing = false;
 
@@ -50,44 +49,33 @@ public class PlayerMovement : PlayerComponent
 
         playerCollider = entity.GetComponent<BoxCollider>();
 
-        animator = entity.GetComponent<Animator>();
         dashSfxSource = dashSFXEntity.GetComponent<AudioSource>();
         walkSFXSource = walkSFXEntity.GetComponent<AudioSource>();
         idleSFXSource = idleSFXEntity.GetComponent<AudioSource>();
 
-    }
+    }                          
 
     public void ProcessMovement()
     {
         isDashing = HandleDash();
 
-        if (isDashing)
-        {
-            animator.Play("Armature|Armature|DashFromWalk|BaseLayer", 0.1f);
-        }
-        else
-        {
+        if (!isDashing) 
             HandleNormalMovement();
 
-            if (isMoving)
-            {
-                animator.Play("Armature|Armature|Walk|BaseLayer", 0.2f);
-            }
-            else
-            {
-                animator.Play("Armature|Armature|IdleBasic|BaseLayer", 0.25f);
+        if (!isMoving && !isDashing)
+        {
+            idleSFXTimer += Time.deltaTime;
 
-                idleSFXTimer += Time.deltaTime;
-                if (idleSFXTimer >= idleSFXInterval)
-                {
-                    idleSFXSource.Play();
-                    idleSFXTimer = 0f;
-                }
+            if (idleSFXTimer >= idleSFXInterval)
+            {
+                idleSFXSource.Play();
+                idleSFXTimer = 0f;
             }
         }
 
         HandleGodMode();
     }
+
     private void HandleGodMode()
     {
         if (player.Input.godModeKeyPressed)
