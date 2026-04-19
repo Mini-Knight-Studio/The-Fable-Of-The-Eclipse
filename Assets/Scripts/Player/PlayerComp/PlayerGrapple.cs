@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using Loopie;
 
-public class PlayerGrapple : Component
+public class PlayerGrapple : PlayerComponent
 {
-    private Player player;
-
     public Entity segmentPrefab;
     public int segmentCount = 10;
     public float ropeSagAmount = 2.0f;
@@ -15,20 +13,25 @@ public class PlayerGrapple : Component
     public float grappleDuration = 0.3f;
     public float stoppingDistance = 2.0f;
     public float grappleCooldown = 2.0f;
-
     private bool isLaunching = false;
     private bool isGrappling = false;
     public float grappleCooldownTimer = 0.0f;
+    private float stateTimer = 0.0f;
 
     private Vector3 startPos = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 targetPos = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 pillarPos = new Vector3(0.0f, 0.0f, 0.0f);
     private PillarTrigger activePillar;
 
+    private bool isLanding = false;
+    private float landingTimer = 0f;
+    public float landingDuration = 0.5f;
+    public bool IsLaunching => isLaunching;
+    public bool IsGrappling => isGrappling;
+    public bool IsLanding => isLanding;
+
     public void OnCreate()
     {
-        player = entity.GetComponent<Player>();
-
         if (segmentPrefab != null)
         {
             for (int i = 0; i < segmentCount; i++)
@@ -38,6 +41,9 @@ public class PlayerGrapple : Component
                 ropeSegments.Add(seg);
             }
         }
+        else
+        {
+        }
     }
 
     public void RotateToTarget(Vector3 pPos)
@@ -46,14 +52,72 @@ public class PlayerGrapple : Component
         transform.LookAt(lookAtPos, Vector3.Up);
     }
 
+    public void OnUpdate()
+    {
+        if (grappleCooldownTimer > 0)
+        {
+            grappleCooldownTimer -= Time.deltaTime;
+        }
+        if (isLanding)
+        {
+            landingTimer -= Time.deltaTime;
+            if (landingTimer <= 0) isLanding = false;
+        }
+        if (!isLaunching && !isGrappling) return;
+
+        stateTimer += Time.deltaTime;
+
+        if (isLaunching)
+        {
+            float t = stateTimer / currentWaitTime;
+            if (t > 1.0f) t = 1.0f;
+
+            UpdateRopeVisuals(t, true);
+
+            if (stateTimer >= currentWaitTime)
+            {
+                isLaunching = false;
+                isGrappling = true;
+                stateTimer = 0.0f;
+                startPos = transform.position;
+            }
+        }
+        else if (isGrappling)
+        {
+            float t = stateTimer / grappleDuration;
+            if (t > 1.0f) t = 1.0f;
+
+            UpdateRopeVisuals(1.0f, false);
+
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+
+            if (stateTimer >= grappleDuration)
+            {
+                FinalizeGrapple();
+                isLanding = true;
+                landingTimer = landingDuration;
+            }
+        }
+    }
+
     public void ExecuteGrapple(PillarTrigger pillarScript, float waitTime)
     {
-        if (pillarScript == null) return;
+        if (pillarScript == null)
+        {
+            return;
+        }
+
+        if (grappleCooldownTimer > 0)
+        {
+            return;
+        }
+
 
         currentWaitTime = waitTime > 0.01f ? waitTime : 0.5f;
+        isLanding = false;
         isLaunching = true;
         isGrappling = false;
-        grappleCooldownTimer = 0.0f;
+        stateTimer = 0.0f;
 
         activePillar = pillarScript;
         pillarPos = activePillar.entity.transform.position;
@@ -69,43 +133,8 @@ public class PlayerGrapple : Component
         }
     }
 
-    public void OnUpdate()
-    {
-        if (!isLaunching && !isGrappling) return;
-
-        grappleCooldownTimer += Time.deltaTime;
-
-        if (isLaunching)
-        {
-            float t = grappleCooldownTimer / currentWaitTime;
-            if (t > 1.0f) t = 1.0f;
-
-            UpdateRopeVisuals(t, true);
-
-            if (grappleCooldownTimer >= currentWaitTime)
-            {
-                isLaunching = false;
-                isGrappling = true;
-                grappleCooldownTimer = 0.0f;
-                startPos = transform.position;
-            }
-        }
-        else if (isGrappling)
-        {
-            float t = grappleCooldownTimer / grappleDuration;
-            if (t > 1.0f) t = 1.0f;
-
-            UpdateRopeVisuals(1.0f, false);
-
-            transform.position = Vector3.Lerp(startPos, targetPos, t);
-
-            if (grappleCooldownTimer >= grappleDuration) FinalizeGrapple();
-        }
-    }
-
     private void UpdateRopeVisuals(float progress, bool isLaunchingPhase)
     {
-        if (player == null || player.HookAnchor == null || ropeSegments.Count == 0) return;
 
         Vector3 start = player.HookAnchor.transform.position;
         Vector3 end = isLaunchingPhase ? Vector3.Lerp(start, pillarPos, progress) : pillarPos;
@@ -147,6 +176,8 @@ public class PlayerGrapple : Component
     {
         isGrappling = false;
         isLaunching = false;
+        stateTimer = 0.0f;
+        grappleCooldownTimer = grappleCooldown;
 
         for (int i = 0; i < ropeSegments.Count; i++)
         {
@@ -156,6 +187,5 @@ public class PlayerGrapple : Component
         if (activePillar != null) activePillar.ResetParticles();
 
         activePillar = null;
-        pillarPos = new Vector3(0.0f, 0.0f, 0.0f);
     }
 };

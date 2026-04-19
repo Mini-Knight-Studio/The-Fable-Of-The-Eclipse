@@ -12,8 +12,20 @@ public class PlayerAnimation : PlayerComponent
     public string attack1Clip = "Attack1";
     public string attack2Clip = "Attack2";
     public string attack3Clip = "Attack3";
+    public string grappleShootClip = "GrapleShoot";
+    public string grapplePoseClip = "GraplePose";
+    public string grappleLandingClip = "GrapleLanding";
 
-    private enum AnimationState { IDLE, WALK, DASH, ATTACK, NULL };
+    private enum AnimationState { 
+        IDLE,
+        WALK, 
+        DASH, 
+        ATTACK, 
+        GRAPPLE_SHOOT, 
+        GRAPPLE_FLIGHT, 
+        GRAPPLE_LAND, 
+        NULL 
+    };
     private AnimationState state;
     private int lastPlayedComboIndex = 0;
 
@@ -29,6 +41,19 @@ public class PlayerAnimation : PlayerComponent
     public void ProcessAnimations()
     {
         if (player.Movement == null || player.Combat == null) return;
+
+        if (player.Grapple.IsLaunching)
+        {
+            PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
+        }
+        else if (player.Grapple.IsGrappling)
+        {
+            PlayGrappleAnim(grapplePoseClip, AnimationState.GRAPPLE_FLIGHT, true);
+        }
+        else if (player.Grapple.IsLanding)
+        {
+            PlayGrappleAnim(grappleLandingClip, AnimationState.GRAPPLE_LAND, false);
+        }
 
         if (player.Combat.isAttacking)
         {
@@ -96,5 +121,12 @@ public class PlayerAnimation : PlayerComponent
             modelAnimator.Play(clipToPlay, 0.05f);
             modelAnimator.Looping = true;
         }
+    }
+    private void PlayGrappleAnim(string clip, AnimationState newState, bool loop)
+    {
+        if (state == newState) return;
+        state = newState;
+        modelAnimator.Play(clip, 0.1f);
+        modelAnimator.Looping = loop;
     }
 }
