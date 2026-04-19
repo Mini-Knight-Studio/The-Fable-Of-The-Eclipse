@@ -31,6 +31,8 @@ public class Enemy : Component
     private bool endedAttack;
     private float internal_hit_cooldown;
 
+    public string type = "Enemy";
+
     protected void UpdateEnemy()
     {
         if(internal_hit_cooldown > 0.0f)
@@ -48,9 +50,10 @@ public class Enemy : Component
         //
     }
     #region Set Up
-    protected void SetEnemy(Entity reference_enemy, float attack_cooldown, float attack_preparation_time, float attack_reach_distance)
+    protected void SetEnemy(Entity reference_enemy, float attack_cooldown, float attack_preparation_time, float attack_reach_distance, string enemyType)
     {
         reference = reference_enemy;
+        type = enemyType;
 
         health = entity.GetComponent<Health>();
         movement = entity.GetComponent<Movement>();

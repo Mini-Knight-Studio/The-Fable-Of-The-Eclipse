@@ -26,7 +26,7 @@ class Golem : Enemy
 
     void OnCreate()
     {
-        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance);
+        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance, "Golem");
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
         LayerOverride = EnemyLayer | PlayerHitLayer;

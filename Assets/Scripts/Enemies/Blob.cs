@@ -34,7 +34,7 @@ class Blob : Enemy
 
     void OnCreate()
     {
-        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance * BlobStage);
+        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance * BlobStage, "Blob");
         SetStage(BlobStage);
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("PlayerTrigger");
