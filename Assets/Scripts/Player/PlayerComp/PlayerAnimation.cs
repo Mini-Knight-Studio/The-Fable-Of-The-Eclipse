@@ -9,11 +9,14 @@ public class PlayerAnimation : PlayerComponent
     public string walkClipName = "walk";
     public string dashClipName = "dash";
     public string attackClipName = "attack";
+    public string dashFromWalkClipName = "dashFromWalk";
+    public string dashFromIdleClipName = "dashFromIdle";
 
     private enum AnimationState
     {
         IDLE,
         WALK,
+        DASH,
         NULL
 
     };
@@ -32,7 +35,11 @@ public class PlayerAnimation : PlayerComponent
     {
         if (player.Movement == null || player.Combat == null) return;
 
-        if(player.Movement.IsMoving())
+        if (player.Movement.IsDashing())
+        {
+            Dash();
+        }
+        else if (player.Movement.IsMoving())
         {
             Move();
         }
@@ -40,9 +47,9 @@ public class PlayerAnimation : PlayerComponent
         {
             Idle();
         }
-        
-    
-    
+
+
+
     }
 
     private void Idle()
@@ -68,7 +75,16 @@ public class PlayerAnimation : PlayerComponent
 
     private void Dash()
     {
-       
+        if (state == AnimationState.DASH) { return; }
+
+        string clipToPlay = (state == AnimationState.WALK) ? dashFromWalkClipName : dashFromIdleClipName;
+
+        state = AnimationState.DASH;
+
+        modelAnimator.Play(clipToPlay, 0.1f);
+        modelAnimator.Looping = false;
+
+        Debug.Log("Dashing with: " + clipToPlay);
     }
 
     private void Attack()
