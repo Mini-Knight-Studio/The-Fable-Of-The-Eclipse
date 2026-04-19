@@ -32,6 +32,7 @@ public class Hand : Component
     {
         target = Player.Instance;
         basePosition = transform;
+        endedSequence = false;
         sequence = 0;
         timer = 0;
         stage = s;
@@ -136,7 +137,7 @@ public class Hand : Component
                 yield return null;
             }
 
-            while (basePosition.position.x - transform.rotation.x < ValueByStage(fistVelocity) * Time.deltaTime)
+            while (transform.rotation.x - basePosition.rotation.x > ValueByStage(fistVelocity) * Time.deltaTime)
             {
                 transform.rotation += new Vector3(ValueByStage(fistVelocity) * Time.deltaTime, 0, 0);
                 yield return null;
