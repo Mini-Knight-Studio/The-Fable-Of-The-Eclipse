@@ -1,28 +1,21 @@
 using System;
 using Loopie;
 
-public class OrbItem : Component
+public class WeaponItem : Component
 {
-    public int orbType = 0; 
-
-    public string vfxName = "OrbVFX";
+    public string uniqueId = "Grapple"; 
+    public string vfxName = "GrappleVFX";
     public string uiManagerName = "HUD";
-    public string popupName = "Popup_Orb";
+    public string popupName = "Popup_Grapple";
 
     private bool alreadyCollected = false;
 
     void OnCreate()
     {
-        if (DatabaseRegistry.playerDB != null)
+        if (PlayerStats.collectedItems != null && PlayerStats.collectedItems.Contains(uniqueId))
         {
-            if (orbType == 0 && DatabaseRegistry.playerDB.Player.gemAirCollected) alreadyCollected = true;
-            else if (orbType == 1 && DatabaseRegistry.playerDB.Player.gemWaterCollected) alreadyCollected = true;
-            else if (orbType == 2 && DatabaseRegistry.playerDB.Player.gemFireCollected) alreadyCollected = true;
-
-            if (alreadyCollected)
-            {
-                entity.SetActive(false);
-            }
+            alreadyCollected = true;
+            entity.SetActive(false);
         }
     }
 
@@ -31,25 +24,15 @@ public class OrbItem : Component
         if (alreadyCollected) return;
 
         BoxCollider col = entity.GetComponent<BoxCollider>();
-
         if (col != null && col.HasCollided)
         {
-            switch (orbType)
+            if (!PlayerStats.collectedItems.Contains(uniqueId))
             {
-                case 0:
-                    DatabaseRegistry.playerDB.Player.gemAirCollected = true;
-                    break;
-                case 1:
-                    DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
-                    break;
-                case 2:
-                    DatabaseRegistry.playerDB.Player.gemFireCollected = true;
-                    break;
-                default:
-                    break;
+                PlayerStats.collectedItems.Add(uniqueId);
             }
 
             TriggerVFX();
+
             ShowUIPopup();
 
             alreadyCollected = true;
@@ -64,6 +47,7 @@ public class OrbItem : Component
         {
             vfx.transform.position = entity.transform.position;
             vfx.SetActive(true);
+
             AudioSource sfx = vfx.GetComponent<AudioSource>();
             if (sfx != null) sfx.Play();
         }
@@ -78,4 +62,4 @@ public class OrbItem : Component
             if (popup != null) popup.ShowPopup(popupName);
         }
     }
-};
+}; 
