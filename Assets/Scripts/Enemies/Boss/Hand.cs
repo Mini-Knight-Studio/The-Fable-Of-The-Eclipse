@@ -2,14 +2,17 @@ using System;
 using System.Collections;
 using Loopie;
 
-class Hand : Component
+public class Hand : Component
 {
     private bool available;
+    private int sequence;
     private bool doingSequence;
+    private bool endedSequence;
     private bool canAttack;
     private bool hasAttacked;
+    private int damage;
     private int stage;
-    private Vector3 basePosition;
+    private Transform basePosition;
     public Entity HandShadow;
     public bool rightHand;
     public Vector2 fistTrackTime;
@@ -19,22 +22,26 @@ class Hand : Component
     public Vector2 spikeWarn;
     public Vector2 spikeActive;
     private float timer;
-    private Entity target;
-    public Entity spikes;
+    private Player target;
+    public Entity side;
     private BoxCollider handTrigger;
-    private BoxCollider spikeTrigger;
+    private BoxCollider sideTrigger;
+    private Entity spikes;
 
-    public void SetUpHand(Entity t, int s)
+    public void SetUpHand(int s, int d)
     {
+        target = Player.Instance;
+        basePosition = transform;
+        sequence = 0;
         timer = 0;
-        target = t;
         stage = s;
+        damage = d;
         available = true;
-        available = false;
-        basePosition = transform.position;
+        doingSequence = false;
         hasAttacked = false;
         handTrigger = entity.GetComponent<BoxCollider>();
-        spikeTrigger = spikes.GetComponent<BoxCollider>();
+        sideTrigger = side.GetComponent<BoxCollider>();
+        spikes = side.GetChild(0);
     }
 
     private float ValueByStage(Vector2 vector)
@@ -42,24 +49,41 @@ class Hand : Component
         return stage == 0 ? vector.x : stage == 1 ? vector.y : 0;
     }
 
-    private Vector3 DirectionToTarget(Vector3 exclude)
+    private Vector3 SameAsTarget(Vector3 exclude)
     {
-        Vector3 direction = (target.transform.position - transform.position);
-        if(exclude.x == 1) direction.x = 0;
-        if(exclude.y == 1) direction.y = 0;
-        if(exclude.z == 1) direction.z = 0;
-        return direction.normalized;
+        Vector3 position = target.transform.position;
+        if(exclude.x == 1) position.x = transform.position.x;
+        if(exclude.y == 1) position.y = transform.position.y;
+        if (exclude.z == 1) position.z = transform.position.z;
+        return position;
     }
 
+    public void StartSequence()
+    {
+        if (!IsOnSide() || !doingSequence) return;
+        if (sequence == 0) StartCoroutine(Punch());
+        if (sequence == 1) StartCoroutine(SummonSpikes());
+        if(endedSequence) Return();
+    }
+
+    public void CancelSequence()
+    {
+        StopAllOwnedCoroutines();
+        StartCoroutine(Return());
+    }
+
+    #region Sequences
     public IEnumerator Punch()
     {
         if (available)
         {
+            endedSequence = false;
+            hasAttacked = false;
             //Tracking
             while(timer < ValueByStage(fistTrackTime))
             {
                 timer += Time.deltaTime;
-                transform.position += DirectionToTarget(Vector3.Up) * ValueByStage(fistVelocity) * Time.deltaTime;
+                transform.position = SameAsTarget(Vector3.Up);
                 yield return null;
             }
             Vector3 attackPosition = transform.position;
@@ -86,14 +110,57 @@ class Hand : Component
                 timer += Time.deltaTime;
                 yield return null;
             }
-            while (Vector3.Distance(transform.position, basePosition) > ValueByStage(fistVelocity)*Time.deltaTime)
-            {
-                transform.position += new Vector3(transform.position.x - basePosition.x, transform.position.y - basePosition.y, transform.position.z - basePosition.z) * -1 * ValueByStage(fistVelocity ) * Time.deltaTime;
-                yield return null;
-            }
-            transform.position = basePosition;
             canAttack = false;
+            endedSequence = true;
         }
         timer = 0;
+    }
+
+    public IEnumerator SummonSpikes()
+    {
+        if (available)
+        {
+            hasAttacked = false;
+            yield return null;
+        }
+        timer = 0;
+    }
+
+    public IEnumerator Return()
+    {
+        if (available)
+        {
+            while (Vector3.Distance(transform.position, basePosition.position) > ValueByStage(fistVelocity) * Time.deltaTime)
+            {
+                transform.position += new Vector3(transform.position.x - basePosition.position.x, transform.position.y - basePosition.position.y, transform.position.z - basePosition.position.z) * -1 * ValueByStage(fistVelocity) * Time.deltaTime;
+                yield return null;
+            }
+
+            while (basePosition.position.x - transform.rotation.x < ValueByStage(fistVelocity) * Time.deltaTime)
+            {
+                transform.rotation += new Vector3(ValueByStage(fistVelocity) * Time.deltaTime, 0, 0);
+                yield return null;
+            }
+            transform.position = basePosition.position;
+            transform.rotation = basePosition.rotation;
+            sequence = sequence == 0 ? 1 : 0;
+        }
+    }
+
+    #endregion
+
+    public void Attack()
+    {
+        if (!canAttack || !hasAttacked) return;
+        if(handTrigger.HasCollided || sideTrigger.HasCollided)
+        {
+            target.PlayerHealth.Damage(damage);
+            hasAttacked = true;
+        }
+    }
+
+    public bool IsOnSide()
+    {
+        return sideTrigger.IsColliding;
     }
 };

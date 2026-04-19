@@ -4,44 +4,64 @@ using Loopie;
 
 class Boss : Component
 {
-    public Entity target;
     public Vector2 actionCooldown;
     public float stageRegeneration;
+    public float startingCooldown;
+    public int damage;
     private int stage;
     private float timer;
     private bool updating;
+    public Entity leftHandEntity;
+    public Entity rightHandEntity;
     private Hand leftHand;
     private Hand rightHand;
+
     void OnCreate()
     {
         stage = 0;
         updating = false;
         timer = 0;
-        foreach (Entity child in entity.Children)
-        {
-            Hand hand_comp = child.GetComponent<Hand>();
-            if(hand_comp != null )
-            {
-                if (hand_comp.rightHand) rightHand = hand_comp;
-                else leftHand = hand_comp;
-            }
-        }
-        StartSequence();
-        StartCoroutine(leftHand.Punch());
+        leftHand = leftHandEntity.GetComponent<Hand>();
+        rightHand = rightHandEntity.GetComponent<Hand>();
+        Debug.Log(leftHand.ID);
+        Debug.Log(rightHand.ID);
     }
 
     void OnUpdate()
     {
-        if (!updating) return;
+        if (!updating && timer < startingCooldown)
+        {
+            timer += Time.deltaTime;
+            if (timer >= startingCooldown)
+            {
+                timer = 0;
+                StartSequence();
+            }
+        }
+
+        if (updating)
+        {
+            if (leftHand.IsOnSide())
+            {
+                Debug.Log("On Left");
+                rightHand.CancelSequence();
+                leftHand.StartSequence();
+            }
+
+            if (rightHand.IsOnSide())
+            {
+                Debug.Log("On Right");
+                leftHand.CancelSequence();
+                rightHand.StartSequence();
+            }
+        }
     }
 
     public void StartSequence()
     {
-        updating = true;
         timer = 0;
-        leftHand.SetUpHand(target, stage);
-        rightHand.SetUpHand(target, stage);
+        leftHand.SetUpHand(stage, damage);
+        rightHand.SetUpHand(stage, damage);
+        updating = true;
     }
-
-
 };
