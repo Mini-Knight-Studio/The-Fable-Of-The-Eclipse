@@ -5,11 +5,18 @@ public class PlayerTorch : Component
 {
     public Entity firePrefab;
     public float burnDuration = 2.0f;
-
+    public Entity torchEntity;
+    
+    void OnCreate()
+    {
+        torchEntity.SetActive(false);
+    }
+    
     void OnUpdate()
     {
         if (Input.IsKeyPressed(KeyCode.O) && DatabaseRegistry.playerDB.Player.hasBurner)
         {
+            torchEntity.SetActive(true);
             SpawnFire();
         }
     }
@@ -34,6 +41,6 @@ public class PlayerTorch : Component
             timer += Time.deltaTime;
             yield return null;
         }
-        fire.SetActive(false);
+        fire.Destroy();
     }
 }
