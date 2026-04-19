@@ -40,22 +40,27 @@ public class PlayerAnimation : PlayerComponent
 
     public void ProcessAnimations()
     {
-        if (player.Movement == null || player.Combat == null) return;
+        if (player.Movement == null || player.Combat == null || player.Grapple == null) return;
 
         if (player.Grapple.IsLaunching)
         {
+            // Debugging Launch
+            if (state != AnimationState.GRAPPLE_SHOOT) Debug.Log("ANIM: Trying to play SHOOT: " + grappleShootClip);
             PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
         }
         else if (player.Grapple.IsGrappling)
         {
+            // Debugging Flight
+            if (state != AnimationState.GRAPPLE_FLIGHT) Debug.Log("ANIM: Trying to play POSE: " + grapplePoseClip);
             PlayGrappleAnim(grapplePoseClip, AnimationState.GRAPPLE_FLIGHT, true);
         }
         else if (player.Grapple.IsLanding)
         {
+            // Debugging Landing
+            if (state != AnimationState.GRAPPLE_LAND) Debug.Log("ANIM: Trying to play LANDING: " + grappleLandingClip);
             PlayGrappleAnim(grappleLandingClip, AnimationState.GRAPPLE_LAND, false);
         }
-
-        if (player.Combat.isAttacking)
+        else if (player.Combat.isAttacking)
         {
             Attack();
         }
@@ -73,6 +78,16 @@ public class PlayerAnimation : PlayerComponent
         }
     }
 
+    private void PlayGrappleAnim(string clip, AnimationState newState, bool loop)
+    {
+        if (state == newState) return;
+        state = newState;
+
+        Debug.Log("ANIM FIRE: " + clip); 
+
+        modelAnimator.Play(clip, 0.1f);
+        modelAnimator.Looping = loop;
+    }
     private void Idle()
     {
         if (state == AnimationState.IDLE) return;
@@ -122,11 +137,5 @@ public class PlayerAnimation : PlayerComponent
             modelAnimator.Looping = true;
         }
     }
-    private void PlayGrappleAnim(string clip, AnimationState newState, bool loop)
-    {
-        if (state == newState) return;
-        state = newState;
-        modelAnimator.Play(clip, 0.1f);
-        modelAnimator.Looping = loop;
-    }
+ 
 }
