@@ -7,21 +7,16 @@ public class PlayerAnimation : PlayerComponent
 
     public string idleClipName = "idle";
     public string walkClipName = "walk";
-    public string dashClipName = "dash";
-    public string attackClipName = "attack";
-    public string dashFromWalkClipName = "dashFromWalk";
-    public string dashFromIdleClipName = "dashFromIdle";
+    public string dashIdleClipName = "DashFromIdle";
+    public string dashWalkClipName = "DashFromWalk";
+    public string attack1Clip = "Attack1";
+    public string attack2Clip = "Attack2";
+    public string attack3Clip = "Attack3";
 
-    private enum AnimationState
-    {
-        IDLE,
-        WALK,
-        DASH,
-        NULL
-
-    };
-
+    private enum AnimationState { IDLE, WALK, DASH, ATTACK, NULL };
     private AnimationState state;
+    private int lastPlayedComboIndex = 0;
+
     public Entity modelEntity;
 
     public void OnCreate()
@@ -35,7 +30,11 @@ public class PlayerAnimation : PlayerComponent
     {
         if (player.Movement == null || player.Combat == null) return;
 
-        if (player.Movement.IsDashing())
+        if (player.Combat.isAttacking)
+        {
+            Attack();
+        }
+        else if (player.Movement.IsDashing())
         {
             Dash();
         }
@@ -47,48 +46,55 @@ public class PlayerAnimation : PlayerComponent
         {
             Idle();
         }
-
-
-
     }
 
     private void Idle()
     {
-        if(state == AnimationState.IDLE) { return; }
-        state = AnimationState.IDLE;
-        modelAnimator.Play(idleClipName, .2f);
-        modelAnimator.Looping = true;
+        if (state == AnimationState.IDLE) return;
 
-        Debug.Log("idle");
+        state = AnimationState.IDLE;
+        lastPlayedComboIndex = 0;
+        modelAnimator.Play(idleClipName, 0.2f);
+        modelAnimator.Looping = true;
     }
 
     private void Move()
     {
-        if (state == AnimationState.WALK) { return; }
+        if (state == AnimationState.WALK) return;
 
         state = AnimationState.WALK;
-        modelAnimator.Play(walkClipName, .2f);
+        lastPlayedComboIndex = 0;
+        modelAnimator.Play(walkClipName, 0.2f);
         modelAnimator.Looping = true;
-        Debug.Log("Move");
-
     }
 
     private void Dash()
     {
-        if (state == AnimationState.DASH) { return; }
+        if (state == AnimationState.DASH) return;
 
-        string clipToPlay = (state == AnimationState.WALK) ? dashFromWalkClipName : dashFromIdleClipName;
-
+        string clip = (state == AnimationState.WALK) ? dashWalkClipName : dashIdleClipName;
         state = AnimationState.DASH;
+        lastPlayedComboIndex = 0;
 
-        modelAnimator.Play(clipToPlay, 0.1f);
+        modelAnimator.Play(clip, 0.1f);
         modelAnimator.Looping = false;
-
-        Debug.Log("Dashing with: " + clipToPlay);
     }
 
     private void Attack()
     {
-        
+        int currentCombo = player.Combat.GetCurrentComboIndex();
+
+        if (state != AnimationState.ATTACK || lastPlayedComboIndex != currentCombo)
+        {
+            state = AnimationState.ATTACK;
+            lastPlayedComboIndex = currentCombo;
+
+            string clipToPlay = attack1Clip;
+            if (currentCombo == 2) clipToPlay = attack2Clip;
+            else if (currentCombo == 3) clipToPlay = attack3Clip;
+
+            modelAnimator.Play(clipToPlay, 0.05f);
+            modelAnimator.Looping = true;
+        }
     }
-};
+}
