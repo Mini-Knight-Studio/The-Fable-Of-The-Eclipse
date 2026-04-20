@@ -7,6 +7,8 @@ class Settings : Component
     public float enterCooldown = 0.1f;
     private float enterTimer = 0f;
 
+    public Entity keyMenuEntity;
+
     public Entity passPageEntity;
     private SpriteAnimator passPageAnimator;
     public Entity invertedPassPageEntity;
