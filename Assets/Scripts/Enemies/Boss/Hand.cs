@@ -13,8 +13,9 @@ public class Hand : Component
             
     private int sequence;                   //0) No sequence 1) Punch | 2) Spikes
     private float timer;                    //Global internal timer
-
-    private bool defeated;                  //True if hand is burned
+    private bool vulnerable;
+    [HideInInspector]
+    public bool defeated;                  //True if hand is burned
     private bool ended_attack_sequence;     //True if hand finished its attack
     private bool doing_sequence;            //True if hand is attacking with any attack or returning from attack
     private bool already_attacked;          //True if attack has already attacked player
@@ -42,15 +43,19 @@ public class Hand : Component
         sequence = 1;
         timer = 0.0f;
 
+        vulnerable = true;
         defeated = false;
         ended_attack_sequence = false;
         doing_sequence = false;
         already_attacked = false;
         HandShadow.SetActive(false);
+        transform.rotation = Vector3.Zero;
     }
 
     public void Update()                    //Updates hand constant behaviour
     {
+        HitPlayer();
+
         if (defeated || timer == 0.0f) return;
         timer -= Time.deltaTime;
         if (timer < 0.0f) timer = 0.0f;
@@ -69,6 +74,7 @@ public class Hand : Component
     public void Attack()
     {
         if (doing_sequence) return;
+        already_attacked = false;
         boss.target_side_comparition.y = rightHand ? 1 : 0;
         if (sequence == 1) StartCoroutine(Punch());
         if (sequence == 2) StartCoroutine(Spikes());
@@ -109,8 +115,10 @@ public class Hand : Component
                 transform.position += new Vector3(0, -1 * boss.Value(boss.handVelocity * 4) * Time.deltaTime, 0);
                 yield return null;
             }
+            vulnerable = true;
             boss.target.Camera.SetIsShaking(true, boss.Value(boss.punchGroundCooldown), 2, 1);
             yield return new WaitForSeconds(boss.Value(boss.punchGroundCooldown));
+            vulnerable = false;
             ended_attack_sequence = true;
             Cancel();
         }
@@ -132,12 +140,14 @@ public class Hand : Component
                     Cancel();
                 yield return null;
             }
+            transform.rotation = Vector3.Right * 180;
             timer = boss.Value(boss.spikeWarn);
             while (timer > 0.0f)
             {
                 Shake(base_hand_transform.position);
                 yield return null;
             }
+            transform.position = base_hand_transform.position;
             timer = boss.Value(boss.spikeMovementDuration);
             time = timer;
             boss.target.Camera.SetIsShaking(true, timer, 2, 1);
@@ -147,6 +157,7 @@ public class Hand : Component
                 PushSpikes(Vector3.Up, time);
                 yield return null;
             }
+            transform.position = base_hand_transform.position;
             yield return new WaitForSeconds(boss.Value(boss.spikeActive));
             timer = 1.0f;
             time = timer;
@@ -156,6 +167,7 @@ public class Hand : Component
                 PushSpikes(Vector3.Up * -1, time);
                 yield return null;
             }
+            transform.rotation = Vector3.Zero;
             ended_attack_sequence = true;
             Cancel();
         }
@@ -163,7 +175,6 @@ public class Hand : Component
 
     public IEnumerator Recover()
     {
-        Debug.Log("Recovering");
         if (!defeated)
         {
             doing_sequence = true;
@@ -184,7 +195,6 @@ public class Hand : Component
             doing_sequence = false;
             boss.CompleteAttackCycle();
         }
-        Debug.Log("Recovered");
     }
     #endregion
 
@@ -201,7 +211,7 @@ public class Hand : Component
 
     private void RotatePalm(float angles, float duration, bool other_sense)
     {
-        if(!rightHand) angles = -angles;
+        if(rightHand) angles = -angles;
         if(other_sense) angles = -angles;
         transform.rotation += new Vector3(angles / duration, 0, 0)*Time.deltaTime;
     }
@@ -219,15 +229,22 @@ public class Hand : Component
         return side_trigger.IsColliding;
     }
 
+    private void HitPlayer()
+    {
+        if(already_attacked) return;
+        if(spike_trigger.IsColliding || hand_punch_trigger.IsColliding)
+        {
+            already_attacked = true;
+            boss.target.PlayerHealth.Damage(boss.Damage);
+            Debug.Log(boss.target.PlayerHealth.GetActualHealth());
+        }
+    }
+
     public void Cancel()
     {
-        Debug.Log(4);
         doing_sequence = false;
-        Debug.Log(5);
         StopAllOwnedCoroutines();
-        Debug.Log($"{defeated}");
         if (!defeated) StartCoroutine(Recover());
-        Debug.Log(6);
     }
     #endregion
 };

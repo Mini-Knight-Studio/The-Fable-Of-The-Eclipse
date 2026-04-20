@@ -194,7 +194,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
+            "parent_uuid": "5c1f91bd-ead0-1e7f-8f64-f4746140d160",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -448,7 +448,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
+            "parent_uuid": "5c1f91bd-ead0-1e7f-8f64-f4746140d160",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -2500,7 +2500,7 @@
             "uuid": "97bf934d-6592-3fdb-3ffb-441bc998a2d4"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "is_active": true,
@@ -5824,7 +5824,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 170.40634155273438,
+                                "x": 213.1123046875,
                                 "y": 108.0
                             }
                         },
@@ -5873,7 +5873,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
+            "parent_uuid": "5c1f91bd-ead0-1e7f-8f64-f4746140d160",
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
         {
@@ -5908,7 +5908,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
+            "parent_uuid": "5c1f91bd-ead0-1e7f-8f64-f4746140d160",
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
         {
@@ -6055,7 +6055,7 @@
                 }
             ],
             "name": "Boss_Level",
-            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
+            "parent_uuid": "5c1f91bd-ead0-1e7f-8f64-f4746140d160",
             "uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68"
         },
         {
@@ -6126,9 +6126,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 2.0,
-                            "y": 4.0,
-                            "z": 3.0
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
                         }
                     },
                     "uuid": "835e243e-d951-fb22-ac90-418a8eb21642"
@@ -7051,7 +7051,7 @@
                 }
             ],
             "name": "Boss",
-            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
+            "parent_uuid": "5c1f91bd-ead0-1e7f-8f64-f4746140d160",
             "uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d"
         },
         {
@@ -7248,7 +7248,7 @@
             "uuid": "5187434c-d229-66d1-894e-88b1e448d0be"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "is_active": true,
@@ -7419,7 +7419,7 @@
                         },
                         "position": {
                             "x": 0.0,
-                            "y": -10.0,
+                            "y": -2.0,
                             "z": 0.0
                         },
                         "rotation": {
@@ -7439,10 +7439,34 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
                         "mesh_index": 0,
                         "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
                     },
                     "uuid": "b4a26b35-53c0-c77a-0dfb-0af39f5d797c"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 2
+                    },
+                    "is_active": true,
+                    "uuid": "8b3ccb42-bae7-3f8f-6fc4-664385deb5e4"
                 }
             ],
             "name": "Cube",
@@ -7462,7 +7486,7 @@
                         },
                         "position": {
                             "x": 0.0,
-                            "y": -10.0,
+                            "y": -2.0,
                             "z": 0.0
                         },
                         "rotation": {
@@ -7482,10 +7506,34 @@
                 {
                     "is_active": true,
                     "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "00aaf634-524e-bcac-1255-1a4ed97f0058",
                         "mesh_index": 0,
                         "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
                     },
                     "uuid": "58967cbb-d7f2-0388-ac70-73e45cd68fed"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 2
+                    },
+                    "is_active": true,
+                    "uuid": "06a75b79-f023-69f8-dd79-7d62bdd10b89"
                 }
             ],
             "name": "Cube",
@@ -7515,12 +7563,34 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
+                            "x": 3.0,
+                            "y": 4.0,
+                            "z": 3.0
                         }
                     },
                     "uuid": "092cac4d-5486-66a7-8f75-6ce542a13eda"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 0.7599999904632568,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": false,
+                        "layer_index": 5
+                    },
+                    "is_active": true,
+                    "uuid": "8de4bf65-7c82-6d9d-02ed-f3b519525c88"
                 }
             ],
             "name": "HeadRotated",
@@ -7550,9 +7620,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 2.0,
-                            "y": 4.0,
-                            "z": 3.0
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
                         }
                     },
                     "uuid": "fa6d5624-4c55-2f4c-6ded-07fb0c8c31d4"
@@ -7661,6 +7731,120 @@
             "name": "eye_1",
             "parent_uuid": "f4b00e2c-2bee-6335-e2be-c40f399551ce",
             "uuid": "36a955ab-aae8-858f-72b2-99309e2a97d5"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "cbbb12e2-b716-b581-a44c-da8dc96a9afe"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 5
+                    },
+                    "is_active": true,
+                    "uuid": "4c5b7b67-c72e-e95e-244c-c992aa42343c"
+                }
+            ],
+            "name": "HitBox",
+            "parent_uuid": "d596475b-5a58-233b-70de-b60750604dcc",
+            "uuid": "120f8b06-6401-bf0e-013e-e79889047d74"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d9aba996-b81c-d53a-143a-8424c22b98b1"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 5
+                    },
+                    "is_active": true,
+                    "uuid": "e725d31c-5944-f145-ab73-fdb54fbb1b83"
+                }
+            ],
+            "name": "Hitbox",
+            "parent_uuid": "5187434c-d229-66d1-894e-88b1e448d0be",
+            "uuid": "93c0efa6-a18e-45fe-14d2-e68c42779f36"
         }
     ]
 }

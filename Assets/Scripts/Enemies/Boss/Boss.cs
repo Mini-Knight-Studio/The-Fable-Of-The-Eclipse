@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading;
 using Loopie;
 
@@ -29,6 +30,7 @@ public class Boss : Component
     [HideInInspector]
     public int stage;
     private bool on_sequence;
+    private bool vulnerable;
     private bool defeated;
     private float stage_timer;
     [HideInInspector]
@@ -60,8 +62,17 @@ public class Boss : Component
 
     void OnUpdate()
     {
+        if (leftHand.defeated && rightHand.defeated)
+        {
+            HeadMoveY(0);
+            on_sequence = false;
+            vulnerable = true;
+        }
+
+        Hit();
+
         #region Timer Between Attacks
-        if(on_sequence)
+        if (on_sequence)
         {
             headTemporalFeedback.active = true;
             if (stage_timer > 0.0f)
@@ -154,9 +165,20 @@ public class Boss : Component
         stage_timer = Value(InBetweenAttacksCooldown);
     }
 
-    private void HeadFall()
+    private IEnumerator HeadMoveY(float position)
     {
+        while (Mathf.Abs(headTemporalFeedback.head.transform.position.y - position) > Value(handVelocity) * Time.deltaTime)
+        {
+            headTemporalFeedback.head.transform.position += new Vector3(0, -1 * Value(handVelocity * 4) * Time.deltaTime * position > headTemporalFeedback.head.transform.position.y? -1:1, 0);
+            yield return null;
+        }
+    }
 
+    public void Hit()
+    {
+        if(!vulnerable || defeated) return;
+        //if(target.Combat.)
+        defeated = true;
     }
     
     #endregion
