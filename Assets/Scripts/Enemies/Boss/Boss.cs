@@ -22,6 +22,7 @@ public class Boss : Component
     public Vector2 handVelocity;
     public Vector2 punchGroundCooldown;
     public Vector2 spikeWarn;
+    public Vector2 spikeMovementDuration;
     public Vector2 spikeActive;
 
     public int Damage;
@@ -32,8 +33,10 @@ public class Boss : Component
     private float stage_timer;
     [HideInInspector]
     public Vector2 target_side_comparition;
-
+    [HideInInspector]
+    public Player target;
     private SceneTransition winScene;
+    private HeadLookAt headTemporalFeedback;
 
     #region Internal
     void OnCreate()
@@ -49,7 +52,10 @@ public class Boss : Component
         rightHand = rightHandEntity.GetComponent<Hand>();
         rightHand.SetUp(this);
 
+        target = Player.Instance;
+        headTemporalFeedback = entity.GetComponent<HeadLookAt>();
         winScene = entity.GetComponent<SceneTransition>();
+        headTemporalFeedback.active = false;
     }
 
     void OnUpdate()
@@ -57,16 +63,21 @@ public class Boss : Component
         #region Timer Between Attacks
         if(on_sequence)
         {
+            headTemporalFeedback.active = true;
             if (stage_timer > 0.0f)
                 stage_timer -= Time.deltaTime;
             else
                 StartNextAttack();
+
+            leftHand.Update();
+            rightHand.Update();
         }
         #endregion
 
         #region Start Timer | In Stage Timer | End Timer
         if(!on_sequence)
         {
+            headTemporalFeedback.active = false;
             if (StartEndWaitTime.x > 0.0f)
                 StartEndWaitTime.x -= Time.deltaTime;
             else
@@ -132,5 +143,21 @@ public class Boss : Component
             return true;
         return false;
     }
+
+    public float Value(Vector2 stage_variable)
+    {
+        return stage == 0 ? stage_variable.x : stage == 1 ? stage_variable.y : 0;
+    }
+
+    public void CompleteAttackCycle()
+    {
+        stage_timer = Value(InBetweenAttacksCooldown);
+    }
+
+    private void HeadFall()
+    {
+
+    }
+    
     #endregion
 };

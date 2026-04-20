@@ -117,9 +117,9 @@
                             "z": -2.4148366719600745e-06
                         },
                         "position": {
-                            "x": -128.9641571044922,
+                            "x": -135.7384033203125,
                             "y": 121.99996948242188,
-                            "z": -73.74144744873047
+                            "z": -79.46812438964844
                         },
                         "rotation": {
                             "w": 0.8681627511978149,
@@ -194,7 +194,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "ba83046d-5479-9478-c624-4d9ce5426cd9",
+            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
         {
@@ -279,15 +279,15 @@
                             "z": 180.0
                         },
                         "position": {
-                            "x": -28.964048385620117,
-                            "y": 2.3164564481703565e-05,
-                            "z": 26.25860595703125
+                            "x": -35.738521575927734,
+                            "y": 2.3135107767302543e-05,
+                            "z": 20.531816482543945
                         },
                         "rotation": {
                             "w": 0.3826834559440613,
-                            "x": 0.0,
-                            "y": 0.9238795638084412,
-                            "z": 0.0
+                            "x": -2.3656429704033144e-08,
+                            "y": 0.9238795042037964,
+                            "z": -2.3656429704033144e-08
                         },
                         "scale": {
                             "x": 1.0,
@@ -448,7 +448,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "ba83046d-5479-9478-c624-4d9ce5426cd9",
+            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
             "uuid": "6af92da5-ae4d-1eda-b4bc-9fe3e6aa797c"
         },
         {
@@ -5824,8 +5824,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 266.56048583984375,
-                                "y": 107.99999237060547
+                                "x": 170.40634155273438,
+                                "y": 108.0
                             }
                         },
                         "position": {
@@ -5873,7 +5873,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "ba83046d-5479-9478-c624-4d9ce5426cd9",
+            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
         {
@@ -5908,7 +5908,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "ba83046d-5479-9478-c624-4d9ce5426cd9",
+            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
         {
@@ -6055,7 +6055,7 @@
                 }
             ],
             "name": "Boss_Level",
-            "parent_uuid": "ba83046d-5479-9478-c624-4d9ce5426cd9",
+            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
             "uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68"
         },
         {
@@ -6111,12 +6111,12 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
+                            "y": 0.0,
                             "z": 0.0
                         },
                         "position": {
-                            "x": -3.5,
-                            "y": 6.0,
+                            "x": 0.0,
+                            "y": 0.0,
                             "z": 0.0
                         },
                         "rotation": {
@@ -6144,8 +6144,8 @@
                     "uuid": "48872aa0-2b4f-c61a-3ca2-ce7c23d4c7c1"
                 }
             ],
-            "name": "head",
-            "parent_uuid": "ee35d717-fae7-db6b-33a8-77eae5f31ecc",
+            "name": "Head_Base",
+            "parent_uuid": "5ed54863-c195-e066-d854-a08a2b5a70e4",
             "uuid": "1769be11-faa8-1cc8-3cb8-cb173eeb585c"
         },
         {
@@ -6983,15 +6983,46 @@
                     "script": {
                         "class_id": "Boss",
                         "fields": {
-                            "actionCooldown": {
+                            "Damage": 2,
+                            "InBetweenAttacksCooldown": {
+                                "x": 1.0,
+                                "y": 0.800000011920929
+                            },
+                            "InBetweenStagesCooldown": 5.0,
+                            "StartEndWaitTime": {
+                                "x": 5.0,
+                                "y": 5.0
+                            },
+                            "handVelocity": {
+                                "x": 10.0,
+                                "y": 10.0
+                            },
+                            "leftHandEntity": "d596475b-5a58-233b-70de-b60750604dcc",
+                            "punchGroundCooldown": {
+                                "x": 2.5,
+                                "y": 1.5
+                            },
+                            "punchTrackTime": {
+                                "x": 2.5,
+                                "y": 1.5
+                            },
+                            "rightHandEntity": "5187434c-d229-66d1-894e-88b1e448d0be",
+                            "shakeTime": {
+                                "x": 0.800000011920929,
+                                "y": 0.5
+                            },
+                            "spikeActive": {
+                                "x": 3.0,
+                                "y": 2.0
+                            },
+                            "spikeMovementDuration": {
                                 "x": 2.0,
                                 "y": 1.0
                             },
-                            "damage": 5,
-                            "leftHandEntity": "d596475b-5a58-233b-70de-b60750604dcc",
-                            "rightHandEntity": "5187434c-d229-66d1-894e-88b1e448d0be",
-                            "stageRegeneration": 5.0,
-                            "startingCooldown": 5.0
+                            "spikeWarn": {
+                                "x": 1.0,
+                                "y": 0.800000011920929
+                            }
                         }
                     },
                     "uuid": "521c3d4d-813b-5d1d-4da0-55ad2529e794"
@@ -7006,10 +7037,21 @@
                         }
                     },
                     "uuid": "6a9cfaee-bc20-9a89-4069-408fd00e863e"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "HeadLookAt",
+                        "fields": {
+                            "active": false,
+                            "head": "5ed54863-c195-e066-d854-a08a2b5a70e4"
+                        }
+                    },
+                    "uuid": "a6de2774-7453-792c-59e9-b77e3ec1410a"
                 }
             ],
             "name": "Boss",
-            "parent_uuid": "ba83046d-5479-9478-c624-4d9ce5426cd9",
+            "parent_uuid": "f85b44d8-1fce-5223-1281-e77baa31ac19",
             "uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d"
         },
         {
@@ -7059,9 +7101,9 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 39.86135482788086,
-                            "y": 0.0,
-                            "z": -17.152151107788086
+                            "x": 0.0,
+                            "y": 15.0,
+                            "z": -20.0
                         },
                         "rotation": {
                             "w": 1.0,
@@ -7093,32 +7135,8 @@
                         "class_id": "Hand",
                         "fields": {
                             "HandShadow": "beb6135f-c9bb-80f6-6c02-0b08de976e44",
-                            "fistGroundCooldown": {
-                                "x": 1.5,
-                                "y": 1.0
-                            },
-                            "fistTrackTime": {
-                                "x": 2.5,
-                                "y": 1.5
-                            },
-                            "fistVelocity": {
-                                "x": 25.0,
-                                "y": 25.0
-                            },
-                            "rightHand": false,
-                            "shakeTime": {
-                                "x": 0.800000011920929,
-                                "y": 0.5
-                            },
-                            "side": "f008c95f-21a4-d46b-cbd5-e341a71644b5",
-                            "spikeActive": {
-                                "x": 3.0,
-                                "y": 2.0
-                            },
-                            "spikeWarn": {
-                                "x": 1.0,
-                                "y": 0.800000011920929
-                            }
+                            "Side": "f008c95f-21a4-d46b-cbd5-e341a71644b5",
+                            "rightHand": false
                         }
                     },
                     "uuid": "0da0278d-3ddb-dca4-7b70-4533c03ea90a"
@@ -7168,9 +7186,9 @@
                         },
                         "rotation": {
                             "w": 1.0,
-                            "x": -4.3711395392165286e-08,
-                            "y": -3.552713678800501e-15,
-                            "z": 4.371138828673793e-08
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                         },
                         "scale": {
                             "x": 5.0,
@@ -7196,32 +7214,8 @@
                         "class_id": "Hand",
                         "fields": {
                             "HandShadow": "d30e0578-cf45-e0a0-30b1-aeee1f7028d9",
-                            "fistGroundCooldown": {
-                                "x": 1.5,
-                                "y": 1.0
-                            },
-                            "fistTrackTime": {
-                                "x": 2.5,
-                                "y": 1.5
-                            },
-                            "fistVelocity": {
-                                "x": 25.0,
-                                "y": 25.0
-                            },
-                            "rightHand": true,
-                            "shakeTime": {
-                                "x": 0.800000011920929,
-                                "y": 0.5
-                            },
-                            "side": "a5014273-9f44-1cd6-37fe-14187ce7e8ee",
-                            "spikeActive": {
-                                "x": 3.0,
-                                "y": 2.0
-                            },
-                            "spikeWarn": {
-                                "x": 1.0,
-                                "y": 0.800000011920929
-                            }
+                            "Side": "a5014273-9f44-1cd6-37fe-14187ce7e8ee",
+                            "rightHand": true
                         }
                     },
                     "uuid": "f2cd0741-c24a-06af-796f-f96d76d35321"
@@ -7497,6 +7491,176 @@
             "name": "Cube",
             "parent_uuid": "a5014273-9f44-1cd6-37fe-14187ce7e8ee",
             "uuid": "ffbfa52f-098f-6f0c-433d-17b9c6e6f9df"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": -3.5,
+                            "y": 6.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "092cac4d-5486-66a7-8f75-6ce542a13eda"
+                }
+            ],
+            "name": "HeadRotated",
+            "parent_uuid": "ee35d717-fae7-db6b-33a8-77eae5f31ecc",
+            "uuid": "5ed54863-c195-e066-d854-a08a2b5a70e4"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -90.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 0.7071067690849304,
+                            "x": 0.0,
+                            "y": -0.7071067690849304,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 2.0,
+                            "y": 4.0,
+                            "z": 3.0
+                        }
+                    },
+                    "uuid": "fa6d5624-4c55-2f4c-6ded-07fb0c8c31d4"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "44b66f04-7a2f-328d-5a1c-b98263565b49",
+                        "mesh_index": 1,
+                        "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
+                    },
+                    "uuid": "13e1f2e0-20ab-fab4-78ac-5b4408942a59"
+                }
+            ],
+            "name": "Head_Rotated",
+            "parent_uuid": "5ed54863-c195-e066-d854-a08a2b5a70e4",
+            "uuid": "f4b00e2c-2bee-6335-e2be-c40f399551ce"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.75,
+                            "y": 0.0,
+                            "z": 0.4000000059604645
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.25,
+                            "y": 0.15000000596046448,
+                            "z": 0.25
+                        }
+                    },
+                    "uuid": "6f7bbb01-73ef-d149-ec5c-8fce65fae225"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fdeea088-9ce7-09ab-3234-9e689db5eefc",
+                        "mesh_index": 18,
+                        "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
+                    },
+                    "uuid": "3b92bc23-60ce-c389-0c42-f18b040d4979"
+                }
+            ],
+            "name": "eye_2",
+            "parent_uuid": "f4b00e2c-2bee-6335-e2be-c40f399551ce",
+            "uuid": "96315c1d-3901-b88f-5756-bc5201ba60ef"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.75,
+                            "y": 0.0,
+                            "z": -0.4000000059604645
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.2500000298023224,
+                            "y": 0.15000000596046448,
+                            "z": 0.2500000298023224
+                        }
+                    },
+                    "uuid": "e434697f-e4a5-84d6-b62a-725b6143b952"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "fdeea088-9ce7-09ab-3234-9e689db5eefc",
+                        "mesh_index": 19,
+                        "mesh_uuid": "7060a05f-d9a8-bcae-d1cc-a8ef768cad35"
+                    },
+                    "uuid": "7b47cf7d-4927-38f6-5a7a-3496e7ef25d0"
+                }
+            ],
+            "name": "eye_1",
+            "parent_uuid": "f4b00e2c-2bee-6335-e2be-c40f399551ce",
+            "uuid": "36a955ab-aae8-858f-72b2-99309e2a97d5"
         }
     ]
 }
