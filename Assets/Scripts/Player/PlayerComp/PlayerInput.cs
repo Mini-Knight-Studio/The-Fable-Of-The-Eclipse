@@ -6,7 +6,7 @@ public class PlayerInput : PlayerComponent
     public Vector3 moveDirection = Vector3.Zero;
     public bool dashKeyPressed = false;
     public bool attackKeyPressed = false;
-
+    public bool grappleKeyPressed = false;
 
 
     /// <summary>
@@ -21,6 +21,8 @@ public class PlayerInput : PlayerComponent
         CollectDashInput();
 
         CollectAttackInput();
+
+        CollectGrappleInput();
         //// MORE IF NEED IT
         /// ...
 
@@ -67,7 +69,10 @@ public class PlayerInput : PlayerComponent
     {
         godModeKeyPressed = Input.IsKeyDown(KeyCode.G);
     }
-
+    private void CollectGrappleInput()
+    {
+        grappleKeyPressed = Input.IsKeyDown(KeyCode.E) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_B);
+    }
 
     //// MORE IF NEED IT
 };

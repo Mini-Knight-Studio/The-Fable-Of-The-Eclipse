@@ -11,6 +11,7 @@ class Geyser : Component
     public float movementSpeed = 2.0f;
 
     public float frequency = 3.0f;
+    public float delay = 0.0f;
     private float frequencyTimer = 0.0f;
 
     public float height = 5.0f;
@@ -27,14 +28,20 @@ class Geyser : Component
     private bool isMoving = false;
     private bool isUp = false;
 
+    public float knockbackForce = 0.0f;
+    public float knockbackDuration = 0.0f;
+
     public AudioSource riseSFX;
 
     void OnCreate()
     {
         riseSFX = entity.GetComponent<AudioSource>();
+        collider = entity.GetComponent<BoxCollider>();
 
         startPosition = entity.transform.position;
         upPosition = startPosition + new Vector3(0, height, 0);
+
+        frequencyTimer -= delay;
     }
 
     void OnUpdate()
@@ -67,6 +74,7 @@ class Geyser : Component
         {
             damageTimer = 0.0f;
             Player.Instance.PlayerHealth.Damage(damage);
+            Player.Instance.Movement.ApplyKnockback(knockbackForce, knockbackDuration, transform.position - Player.Instance.transform.position);
         }
     }
 
