@@ -18,6 +18,7 @@ class MovingPillar : Component
     public float onGoalMovementDistance = 1.0f;
     public bool onGoalPosition = false;
     public bool onGoalCalled = false;
+    private bool stopedOnGoal = false;
 
     private BoxCollider myCollider;
     private BoxCollider goalCollider;
@@ -47,17 +48,28 @@ class MovingPillar : Component
 
     public float pushTimeRequired = 1.25f;
 
+    // Particles
+    private ParticleComponent goalParticles;
+
+    // For reseting
+    private Vector3 initialPosition;
+
+
     void OnCreate()
     {
         myCollider = entity.GetComponent<BoxCollider>();
         goalCollider = goalEntity.GetComponent<BoxCollider>();
         slideSFX = entity.GetComponent<AudioSource>();
+        goalParticles = goalEntity.GetComponent<ParticleComponent>();
+        goalParticles.SetActive(false);
 
         pushForward = pushForwardEntity.GetComponent<BoxCollider>();
         pushBack = pushBackEntity.GetComponent<BoxCollider>();
         pushLeft = pushLeftEntity.GetComponent<BoxCollider>();
         pushRight = pushRightEntity.GetComponent<BoxCollider>();
-}
+
+        initialPosition = entity.transform.position;
+    }
 
     void OnUpdate()
     {
@@ -70,6 +82,11 @@ class MovingPillar : Component
         else
         {
             HandlePushColliders();
+            if (onGoalCalled && !stopedOnGoal)
+            {
+                stopedOnGoal = true;
+                goalParticles.SetActive(false);
+            }
         }
     }
 
@@ -221,6 +238,8 @@ class MovingPillar : Component
         myCollider.Static = true;
 
         Debug.LogWarning("The pillar has reached its goal");
+
+        goalParticles.SetActive(true);
     }
 
     public void CompletePillarAuto()
@@ -239,4 +258,12 @@ class MovingPillar : Component
             (float)Math.Round(pos.z / tileSize) * tileSize
         );
     }
+
+    public void ResetPillar()
+    {
+        StartMovement(initialPosition);
+        onGoalPosition = false;
+        onGoalCalled = false;
+        stopedOnGoal = false;
+}
 }

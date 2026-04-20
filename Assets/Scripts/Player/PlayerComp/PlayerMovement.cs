@@ -15,9 +15,8 @@ public class PlayerMovement : PlayerComponent
     private float dashBufferTime = 0.15f;
 
     private float dashTimer = 0.0f;
-    private float dashCooldownTimer = 0.0f;
+    public float dashCooldownTimer = 0.0f;
     private float dashBufferTimer = 0.0f;
-
     private Vector3 dashDirection = new Vector3(0, 0, 0);
     private bool isDashing = false;
 
@@ -49,7 +48,6 @@ public class PlayerMovement : PlayerComponent
             movementHelper.CanMove = true;
 
         playerCollider = entity.GetComponent<BoxCollider>();
-
 
         dashSfxSource = dashSFXEntity.GetComponent<AudioSource>();
         walkSFXSource = walkSFXEntity.GetComponent<AudioSource>();
