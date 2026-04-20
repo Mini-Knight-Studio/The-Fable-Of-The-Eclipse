@@ -165,7 +165,7 @@ class MovingPillar : Component
         origin += direction * 0.05f;
 
         RaycastHit hit;
-        bool blocked = Collisions.Raycast(origin, direction, tileSize, out hit);
+        bool blocked = Collisions.Raycast(origin, direction, tileSize, out hit, Collisions.GetLayerBit("PillarLimits")| Collisions.GetLayerBit("WorldLimits"));
 
         pushForward.SetActive(true);
         pushBack.SetActive(true);
