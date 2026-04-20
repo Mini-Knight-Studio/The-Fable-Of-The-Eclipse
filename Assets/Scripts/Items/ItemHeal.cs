@@ -27,27 +27,26 @@ public class HealItem : Component
         {
 
             Health playerHealth = Player.Instance.PlayerHealth;
-            if (playerHealth != null)
+
+            if (playerHealth.actualHealth < playerHealth.maxHealth)
             {
-                if (playerHealth.actualHealth < playerHealth.maxHealth)
+                playerHealth.actualHealth += healAmount;
+                if (playerHealth.actualHealth > playerHealth.maxHealth)
                 {
-                    playerHealth.actualHealth += healAmount;
-                    if (playerHealth.actualHealth > playerHealth.maxHealth)
-                    {
-                        playerHealth.actualHealth = playerHealth.maxHealth;
-                    }
-
-                    if (!PlayerStats.collectedItems.Contains(uniqueId))
-                    {
-                        PlayerStats.collectedItems.Add(uniqueId);
-                    }
-
-                    TriggerVFX();
-
-                    alreadyCollected = true;
-                    entity.SetActive(false);
+                    playerHealth.actualHealth = playerHealth.maxHealth;
                 }
+
+                if (!PlayerStats.collectedItems.Contains(uniqueId))
+                {
+                    PlayerStats.collectedItems.Add(uniqueId);
+                }
+
+                TriggerVFX();
+
+                alreadyCollected = true;
+                entity.SetActive(false);
             }
+            
             
         }
     }
