@@ -35,7 +35,12 @@ public class Enemy : Component
 
     protected void UpdateEnemy()
     {
-        if(internal_hit_cooldown > 0.0f)
+        if (Pause.isPaused)
+        {
+            return;
+        }
+
+        if (internal_hit_cooldown > 0.0f)
             internal_hit_cooldown -= Time.deltaTime;
         else
             internal_hit_cooldown = 0.0f;

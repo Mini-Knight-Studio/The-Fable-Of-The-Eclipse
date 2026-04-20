@@ -18,6 +18,8 @@ class IntroBookCover : Component
 
     // Internal values
     private float totalPreAnimationDelay = 0f;
+    private float totalMiniIntroDelay = 0f;
+    [ShowInInspector]
     private float timer = 0f;
     private float currentBackgroundOpacity = 1f;
 
@@ -52,6 +54,7 @@ class IntroBookCover : Component
         {
             introMiniKnightStudioScript = introMiniKnightStudioEntity.GetComponent<IntroMiniKnightStudio>();
             totalPreAnimationDelay = preAnimationDelay + introMiniKnightStudioScript.preTextDelay + introMiniKnightStudioScript.textFadeInDelay + introMiniKnightStudioScript.onTextDelay + introMiniKnightStudioScript.textFadeOutDelay + introMiniKnightStudioScript.afterTextDelay;
+            totalMiniIntroDelay = introMiniKnightStudioScript.preTextDelay + introMiniKnightStudioScript.textFadeInDelay + introMiniKnightStudioScript.onTextDelay + 1;
         }
         else
         {
@@ -75,6 +78,12 @@ class IntroBookCover : Component
             animator.Play();
             animator.Stop();
             quickStartAnimation = false;
+        }
+
+        if (timer >= totalMiniIntroDelay && !openingMusicHasPlayed)
+        {
+            openingMusicAudioSource.Play();
+            openingMusicHasPlayed = true;
         }
 
         if (!hasIntroEnded)
@@ -103,12 +112,12 @@ class IntroBookCover : Component
         if (!openingHasStarted)
         {
             animator.Play();
-            openingMusicAudioSource.Play();
             openingHasStarted = true;
         }
         else if (animator.CurrentFrame == animator.FrameCount - 1)
         {
             backgroundEntity.SetActive(false);
+            openingMusicAudioSource.Stop();
             hasIntroEnded = true;
         }
     }

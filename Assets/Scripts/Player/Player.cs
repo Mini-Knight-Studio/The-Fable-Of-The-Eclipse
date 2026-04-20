@@ -92,6 +92,11 @@ public class Player : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused)
+        {
+            return;
+        }
+
         Input.ProcessInputs();
         Movement.ProcessMovement();
         Combat.ProcessCombat();

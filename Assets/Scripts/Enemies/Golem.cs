@@ -34,6 +34,11 @@ class Golem : Enemy
 
     void OnUpdate()
     {
+        if (Pause.isPaused)
+        {
+            return;
+        }
+
         //Temporal
         TestKeys();
         //

@@ -1,21 +1,21 @@
 using System;
 using Loopie;
 
-class MainMenu : Component
+class PauseMenu : Component
 {
     // Buttons
     [Header("Buttons")]
-    public Entity newGameEntity;
-    public Entity newGameHoveredEntity;
-    private Button newGameButton;
-    private NewGame newGameScript;
-    private Image newGameHoveredImage;
-
     public Entity continueEntity;
     public Entity continueHoveredEntity;
     private Button continueButton;
     private Load continueScript;
     private Image continueHoveredImage;
+
+    public Entity mainMenuEntity;
+    public Entity mainMenuHoveredEntity;
+    private Button mainMenuButton;
+    private SceneTransition mainMenuScript;
+    private Image mainMenuHoveredImage;
 
     public Entity settingsEntity;
     public Entity settingsHoveredEntity;
@@ -31,14 +31,14 @@ class MainMenu : Component
 
     private enum Buttons
     {
-        NEW_GAME,
         CONTINUE,
+        MAIN_MENU,
         SETTINGS,
         EXIT
     }
-    private Buttons currentButton = Buttons.NEW_GAME;
+    private Buttons currentButton = Buttons.CONTINUE;
     private Buttons? mouseResult;
-    private Buttons keyboardResult = Buttons.NEW_GAME;
+    private Buttons keyboardResult = Buttons.CONTINUE;
 
     private enum InputMode
     {
@@ -60,7 +60,7 @@ class MainMenu : Component
     private bool loopMusicHasPlayed = false;
     private float openingMusicDelay = 2f;
     private float openingMusicTimer = 0f;
-    
+
     [Header("Others")]
     // Input
     public float inputCooldown = 0.2f;
@@ -106,14 +106,14 @@ class MainMenu : Component
     void OnCreate()
     {
         // Buttons
-        if (newGameEntity != null)
+        if (mainMenuEntity != null)
         {
-            newGameButton = newGameEntity.GetComponent<Button>();
+            mainMenuButton = mainMenuEntity.GetComponent<Button>();
 
-            if (newGameHoveredEntity != null)
+            if (mainMenuHoveredEntity != null)
             {
-                newGameScript = newGameHoveredEntity.GetComponent<NewGame>();
-                newGameHoveredImage = newGameHoveredEntity.GetComponent<Image>();
+                mainMenuScript = mainMenuHoveredEntity.GetComponent<SceneTransition>();
+                mainMenuHoveredImage = mainMenuHoveredEntity.GetComponent<Image>();
             }
             else
             {
@@ -251,24 +251,6 @@ class MainMenu : Component
     }
     void OnUpdate()
     {
-        // On Start
-        if (!globalDatabaseLoaded)
-        {
-            GlobalDatabase.GlobalData.LoadGlobalDatabase();
-
-            // Load Settings
-            if (GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault == false)
-            {
-                if (!settingsLoaded)
-                {
-                    loadSettingsScript.ImportSettings();
-                    settingsLoaded = true;
-                }
-            }
-
-            globalDatabaseLoaded = true;
-        }
-
         enterTimer += Time.deltaTime;
         if (quickStartAnimations)
         {
@@ -289,41 +271,6 @@ class MainMenu : Component
         }
 
         HandleMusic();
-
-        // Nullify Input while in intro.
-        preMainMenuDelayTimer += Time.deltaTime;
-        preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
-
-        if (!hasPlayedIntro)
-        {
-            if (preMainMenuDelayTimer < preMainMenuDelay)
-                return;
-
-            hasPlayedIntro = true;
-        }
-        else if (hasPlayedIntro)
-        {
-            introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
-            introBookCoverEntity.SetActive(false);
-            
-            if (!invertedPassPagePlayed)
-            {
-                invertedPassPageEntity.SetActive(true);
-
-                if (enterTimer > enterCooldown)
-                {
-                    invertedPassPageAnimator.Play();
-                    invertedPassPagePlayed = true;
-                }
-            }
-            else
-            {
-                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
-                {
-                    invertedPassPageEntity.SetActive(false);
-                }
-            }
-        }
 
         // Main Menu logic.
         Buttons previous = currentButton;
@@ -356,10 +303,10 @@ class MainMenu : Component
 
         Buttons? hovered = null;
 
-        if (newGameButton.Hovered)
-            hovered = Buttons.NEW_GAME;
-        else if (continueButton.Hovered)
+        if (continueButton.Hovered)
             hovered = Buttons.CONTINUE;
+        else if (mainMenuButton.Hovered)
+            hovered = Buttons.MAIN_MENU;
         else if (settingsButton.Hovered)
             hovered = Buttons.SETTINGS;
         else if (exitButton.Hovered)
@@ -419,22 +366,22 @@ class MainMenu : Component
             Vector4 color = new Vector4(255, 0, 0, 1);
             switch (currentButton)
             {
-                case Buttons.NEW_GAME: 
-                    newGameHoveredImage.SetTint(color);
-                    passPageEntity.SetActive(true);
-                    passPageAnimator.Play();
-                    break;
-                case Buttons.CONTINUE: 
+                case Buttons.CONTINUE:
                     continueHoveredImage.SetTint(color);
                     passPageEntity.SetActive(true);
                     passPageAnimator.Play();
                     break;
-                case Buttons.SETTINGS: 
+                case Buttons.MAIN_MENU:
+                    mainMenuHoveredImage.SetTint(color);
+                    passPageEntity.SetActive(true);
+                    passPageAnimator.Play();
+                    break;
+                case Buttons.SETTINGS:
                     settingsHoveredImage.SetTint(color);
                     passPageEntity.SetActive(true);
                     passPageAnimator.Play();
                     break;
-                case Buttons.EXIT: 
+                case Buttons.EXIT:
                     exitHoveredImage.SetTint(color);
                     closeBookEntity.SetActive(true);
                     closeBookAnimator.Play();
@@ -461,13 +408,15 @@ class MainMenu : Component
                 quickStartAnimations = false;
                 invertedPassPagePlayed = false;
                 canCallScripts = false;
+                MainMenu.quickStartAnimations = true;
+                MainMenu.invertedPassPagePlayed = false;
                 Settings.quickStartAnimations = true;
                 Settings.invertedPassPagePlayed = false;
                 Pause.isPaused = false;
                 switch (currentButton)
                 {
-                    case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
-                    case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
+                    case Buttons.CONTINUE: break;
+                    case Buttons.MAIN_MENU: mainMenuScript.StartTransition(); break;
                     case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                     case Buttons.EXIT: break;
                 }
@@ -477,8 +426,8 @@ class MainMenu : Component
 
     void HandleVisualFeedback()
     {
-        newGameHoveredEntity.SetActive(currentButton == Buttons.NEW_GAME);
         continueHoveredEntity.SetActive(currentButton == Buttons.CONTINUE);
+        mainMenuHoveredEntity.SetActive(currentButton == Buttons.MAIN_MENU);
         settingsHoveredEntity.SetActive(currentButton == Buttons.SETTINGS);
         exitHoveredEntity.SetActive(currentButton == Buttons.EXIT);
     }
@@ -511,13 +460,13 @@ class MainMenu : Component
         Vector4 color = new Vector4(255, 0, 0, 1);
         switch (currentButton)
         {
-            case Buttons.NEW_GAME:
-                newGameHoveredImage.SetTint(color);
+            case Buttons.CONTINUE:
+                continueHoveredImage.SetTint(color);
                 passPageEntity.SetActive(true);
                 passPageAnimator.Play();
                 break;
-            case Buttons.CONTINUE:
-                continueHoveredImage.SetTint(color);
+            case Buttons.MAIN_MENU:
+                mainMenuHoveredImage.SetTint(color);
                 passPageEntity.SetActive(true);
                 passPageAnimator.Play();
                 break;
