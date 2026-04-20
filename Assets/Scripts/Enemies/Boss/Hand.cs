@@ -36,7 +36,7 @@ public class Hand : Component
     {
         boss = b;
         base_hand_position = transform.position;
-        base_hand_rotation = transform.rotation;
+        base_hand_rotation = Vector3.Zero;
         spikes = Side.GetChild(0);
 
         hitbox = entity.GetChildByName("Hitbox").GetComponent<BoxCollider>();
@@ -266,6 +266,12 @@ public class Hand : Component
     {
         if(defeated) doing_sequence = false;
         else StartCoroutine(Recover());
+    }
+
+    public void ResetTransform()
+    {
+        transform.position = base_hand_position;
+        transform.rotation = base_hand_rotation;
     }
     #endregion
 };

@@ -27,7 +27,7 @@ public class Boss : Component
     public Vector2 spikeActive;
 
     public int Damage;
-    [HideInInspector]
+    //[HideInInspector]
     public int stage;
     private bool on_sequence;
     private bool vulnerable;
@@ -67,8 +67,8 @@ public class Boss : Component
         if(vulnerable) return;
         if (leftHand.defeated && rightHand.defeated)
         {
-            on_sequence = false;
             vulnerable = true;
+            on_sequence = false;
             StartCoroutine(ExposeCore());
         }
 
@@ -89,11 +89,15 @@ public class Boss : Component
         #region Start Timer | In Stage Timer | End Timer
         if(!on_sequence)
         {
-            headTemporalFeedback.active = false;
             if (StartEndWaitTime.x > 0.0f)
+            {
+                headTemporalFeedback.active = false;
                 StartEndWaitTime.x -= Time.deltaTime;
-            else
+            }
+            else if (!defeated && !vulnerable)
+            {
                 StartBattle();
+            }
 
             if (defeated && stage < 1)
             {
@@ -107,7 +111,10 @@ public class Boss : Component
                 if (StartEndWaitTime.y > 0.0f)
                     StartEndWaitTime.y -= Time.deltaTime;
                 else
+                {
+                    Debug.Log("Win");
                     winScene.StartTransition();
+                }
             }
         }
         #endregion
@@ -120,6 +127,8 @@ public class Boss : Component
     {
         on_sequence = true;
         stage_timer = 0;
+        defeated = false;
+        headTemporalFeedback.active = true;
     }
 
     private void StartNextAttack()
@@ -169,7 +178,6 @@ public class Boss : Component
 
     private bool HeadMoveY(float position)
     {
-        Debug.Log($"{Mathf.Abs(headTemporalFeedback.head.transform.position.y - position)}");
         if (Mathf.Abs(headTemporalFeedback.head.transform.position.y - position) > Value(handVelocity) * Time.deltaTime)
         {
             headTemporalFeedback.head.transform.position += new Vector3(0, -1 * Value(handVelocity * 4) * Time.deltaTime * (position > headTemporalFeedback.head.transform.position.y? -1:1), 0);
@@ -182,7 +190,6 @@ public class Boss : Component
 
     public IEnumerator ExposeCore()
     {
-        Debug.Log("Exposing Core");
         headTemporalFeedback.active = false;
         headTemporalFeedback.head.transform.rotation = Vector3.Zero;
         while (!HeadMoveY(0))
@@ -194,16 +201,15 @@ public class Boss : Component
         {
             yield return null;
         }
-
+        headTemporalFeedback.active = true;
         while (!HeadMoveY(24))
         {
             yield return null;
         }
         leftHand.defeated = false;
         rightHand.defeated = false;
-        StartCoroutine(leftHand.Recover());
-        StartCoroutine(rightHand.Recover());
-        yield return null;
+        leftHand.ResetTransform();
+        rightHand.ResetTransform();
         vulnerable = false;
         defeated = true;
     }
