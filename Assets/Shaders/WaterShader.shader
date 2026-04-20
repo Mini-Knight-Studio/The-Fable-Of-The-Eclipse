@@ -105,7 +105,7 @@ uniform float speedAlbedo = 1.0;
 uniform float u_Roughness = 128.0; // highlight, smaller value = broader spotlight (feels more shiny)
 
 uniform vec4 u_FoamColor = vec4 (1.0);
-uniform vec3 u_Specular = vec3(0.5);
+uniform vec4 u_Specular = vec4(0.5);
 
 uniform float u_MinAlpha = 0.39;
 uniform float u_MaxAlpha = 1.0;
@@ -113,8 +113,8 @@ uniform float u_Fresnel = 0.2;
 uniform float u_FoamThreshold = 1.43;
 uniform float u_FoamDistortionStrength = 0.9;
 
-uniform vec3 u_ShallowColor = vec3(0.2, 0.5, 0.9);  // light blue
-uniform vec3 u_DeepColor = vec3(2.0);    // Might be too high, should be 1.0, but this way the albedo texture is seen more clearly
+uniform vec4 u_ShallowColor = vec4(0.2, 0.5, 0.9,1.0);  // light blue
+uniform vec4 u_DeepColor = vec4(2.0);    // Might be too high, should be 1.0, but this way the albedo texture is seen more clearly
 uniform float u_DepthMaxDistance = 3.0;             // depth at which color fully saturates
 
 uniform float lp_Time = 0;
@@ -173,7 +173,7 @@ void main()
             // Specular
             vec3 reflectDir = reflect(-lightDir, blendedNormal);  
             float spec = pow(max(dot(viewDir, reflectDir), 0.0), u_Roughness);
-            vec3 specular = u_Specular * spec * lp_lights[i].l_ColorIntensity.xyz * lp_lights[i].l_ColorIntensity.w;  
+            vec3 specular = u_Specular.xyz * spec * lp_lights[i].l_ColorIntensity.xyz * lp_lights[i].l_ColorIntensity.w;  
 
             totalDiffuse += diffuse;
             totalSpecular += specular;
@@ -195,7 +195,7 @@ void main()
             // Specular
             vec3 reflectDir = reflect(-lightDir, blendedNormal);  
             float spec = pow(max(dot(viewDir, reflectDir), 0.0), u_Roughness);
-            vec3 specular = u_Specular * spec * lp_lights[i].l_ColorIntensity.xyz * lp_lights[i].l_ColorIntensity.w;  
+            vec3 specular = u_Specular.xyz * spec * lp_lights[i].l_ColorIntensity.xyz * lp_lights[i].l_ColorIntensity.w;  
 
             float angle = dot(lp_lights[i].l_DirectionInnerCone.xyz, -lightDir);
             float innerAngleCone = cos(radians(lp_lights[i].l_DirectionInnerCone.w));
@@ -223,7 +223,7 @@ void main()
             // Specular
             vec3 reflectDir = reflect(-lightDir, blendedNormal);  
             float spec = pow(max(dot(viewDir, reflectDir), 0.0), u_Roughness);
-            vec3 specular = u_Specular * spec * lp_lights[i].l_ColorIntensity.xyz * lp_lights[i].l_ColorIntensity.w;  
+            vec3 specular = u_Specular.xyz * spec * lp_lights[i].l_ColorIntensity.xyz * lp_lights[i].l_ColorIntensity.w;  
 
             totalDiffuse += diffuse * attenuation;
             totalSpecular += specular * attenuation;
@@ -234,7 +234,7 @@ void main()
     float depthFactor = clamp(depthDiff / u_DepthMaxDistance, 0.0, 1.0);
     float depthAlpha = mix(u_MinAlpha, u_MaxAlpha, depthFactor);
     float transparency = clamp(fresnel + depthAlpha, u_MinAlpha, u_MaxAlpha);
-    vec3 depthColor = mix(u_ShallowColor, u_DeepColor, depthFactor);
+    vec3 depthColor = mix(u_ShallowColor.xyz, u_DeepColor.xyz, depthFactor);
     vec3 surfaceColor = u_UseAlbedo ? texAlbedo.rgb * depthColor : depthColor;
     vec3 waterResult = totalDiffuse * surfaceColor + totalSpecular;
     vec3 finalColor = mix(waterResult, foamSample * u_FoamColor.rgb, foamAmount);
