@@ -5,19 +5,20 @@ class CheckpointCollider : Component
 {
     private BoxCollider collider;
     private bool hasSaved = false;
-    public Entity player;
+    public Player player;
 
     void OnCreate()
     {
         collider = entity.GetComponent<BoxCollider>();
+        player = Player.Instance;
     }
 
     void OnUpdate()
     {
         if (!hasSaved && collider.IsColliding)
         {
-            hasSaved = true;
-            if (DatabaseRegistry.playerDB.Exists())
+            
+            if (DatabaseRegistry.playerDB != null)
             {
                 DatabaseRegistry.playerDB.Player.playerPositionX = player.transform.position.x;
                 DatabaseRegistry.playerDB.Player.playerPositionY = player.transform.position.y;
@@ -25,17 +26,24 @@ class CheckpointCollider : Component
                 DatabaseRegistry.playerDB.Save();
                 Debug.Log("Player Data Saved");
             }
-            if (DatabaseRegistry.enemiesDB.Exists())
+            if (DatabaseRegistry.enemiesDB != null)
             {
                 //Making sure list is empty before looking for all existing enemies at the time the player has saved
                 DatabaseRegistry.enemiesDB.Enemies.enemies.Clear(); //(Inside the DB, there is data type Enemies, and then vector enemies)
 
                 Entity enemiesRoot = Entity.FindEntityByName("Enemies");
 
+                if (enemiesRoot == null)
+                {
+                    Debug.LogWarning("Enemies Root not found");
+                }
+                Debug.Log("N of enemies found:" + enemiesRoot.GetChildren().Count);
                 foreach (Entity child in enemiesRoot.GetChildren())
                 {
 
                     EnemiesData.EnemyData data = new EnemiesData.EnemyData();
+                    data.entityID = child.ID;
+
                     data.enemyPositionX = child.transform.position.x;
                     data.enemyPositionY = child.transform.position.y;
                     data.enemyPositionZ = child.transform.position.z;
@@ -73,6 +81,7 @@ class CheckpointCollider : Component
             {
                 DatabaseRegistry.puzzlesDB.Save();
             }
+            hasSaved = true;
         }
     }
 };

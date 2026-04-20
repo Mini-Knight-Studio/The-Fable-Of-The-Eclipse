@@ -27,7 +27,7 @@ public class EnemiesData
     public struct EnemyData 
     {
         public string enemyType;
-
+        public string entityID;
 
         public float enemyPositionX;
         public float enemyPositionY;
