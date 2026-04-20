@@ -14,7 +14,7 @@ class PauseMenu : Component
     public Entity mainMenuEntity;
     public Entity mainMenuHoveredEntity;
     private Button mainMenuButton;
-    private NewGame mainMenuScript;
+    private SceneTransition mainMenuScript;
     private Image mainMenuHoveredImage;
 
     public Entity settingsEntity;
@@ -112,7 +112,7 @@ class PauseMenu : Component
 
             if (mainMenuHoveredEntity != null)
             {
-                mainMenuScript = mainMenuHoveredEntity.GetComponent<NewGame>();
+                mainMenuScript = mainMenuHoveredEntity.GetComponent<SceneTransition>();
                 mainMenuHoveredImage = mainMenuHoveredEntity.GetComponent<Image>();
             }
             else
@@ -251,24 +251,6 @@ class PauseMenu : Component
     }
     void OnUpdate()
     {
-        // On Start
-        if (!globalDatabaseLoaded)
-        {
-            GlobalDatabase.GlobalData.LoadGlobalDatabase();
-
-            // Load Settings
-            if (GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault == false)
-            {
-                if (!settingsLoaded)
-                {
-                    loadSettingsScript.ImportSettings();
-                    settingsLoaded = true;
-                }
-            }
-
-            globalDatabaseLoaded = true;
-        }
-
         enterTimer += Time.deltaTime;
         if (quickStartAnimations)
         {
@@ -289,41 +271,6 @@ class PauseMenu : Component
         }
 
         HandleMusic();
-
-        // Nullify Input while in intro.
-        preMainMenuDelayTimer += Time.deltaTime;
-        preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
-
-        if (!hasPlayedIntro)
-        {
-            if (preMainMenuDelayTimer < preMainMenuDelay)
-                return;
-
-            hasPlayedIntro = true;
-        }
-        else if (hasPlayedIntro)
-        {
-            introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
-            introBookCoverEntity.SetActive(false);
-
-            if (!invertedPassPagePlayed)
-            {
-                invertedPassPageEntity.SetActive(true);
-
-                if (enterTimer > enterCooldown)
-                {
-                    invertedPassPageAnimator.Play();
-                    invertedPassPagePlayed = true;
-                }
-            }
-            else
-            {
-                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
-                {
-                    invertedPassPageEntity.SetActive(false);
-                }
-            }
-        }
 
         // Main Menu logic.
         Buttons previous = currentButton;
@@ -461,10 +408,15 @@ class PauseMenu : Component
                 quickStartAnimations = false;
                 invertedPassPagePlayed = false;
                 canCallScripts = false;
+                MainMenu.quickStartAnimations = true;
+                MainMenu.invertedPassPagePlayed = false;
+                Settings.quickStartAnimations = true;
+                Settings.invertedPassPagePlayed = false;
+                Pause.isPaused = false;
                 switch (currentButton)
                 {
-                    case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
-                    case Buttons.MAIN_MENU: mainMenuScript.StartNewGame(); break;
+                    case Buttons.CONTINUE: break;
+                    case Buttons.MAIN_MENU: mainMenuScript.StartTransition(); break;
                     case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                     case Buttons.EXIT: break;
                 }

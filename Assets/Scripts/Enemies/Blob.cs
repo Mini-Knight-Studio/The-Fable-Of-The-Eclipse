@@ -45,6 +45,11 @@ class Blob : Enemy
 
     void OnUpdate()
     {
+        if (Pause.isPaused)
+        {
+            return;
+        }
+
         //Temporal
         TestKeys();
         //
