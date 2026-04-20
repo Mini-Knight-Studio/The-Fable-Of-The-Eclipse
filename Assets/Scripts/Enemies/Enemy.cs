@@ -49,6 +49,8 @@ public class Enemy : Component
         }
         //
     }
+
+    public Health GetHealth() { return health; }
     #region Set Up
     protected void SetEnemy(Entity reference_enemy, float attack_cooldown, float attack_preparation_time, float attack_reach_distance, string enemyType)
     {
@@ -89,6 +91,8 @@ public class Enemy : Component
 
         attackParticles.Enabled = false;
         hitParticles.Enabled = false;
+
+        Debug.Log("Enemy created with type: " + enemyType);
     }
     #endregion
     #region Detection

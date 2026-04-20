@@ -151,6 +151,7 @@ public static class DatabaseRegistry
     public static PuzzlesDatabase puzzlesDB = new PuzzlesDatabase();
     public static PlayerDatabase playerDB = new PlayerDatabase();
     public static EnemiesDatabase enemiesDB = new EnemiesDatabase();
+    public static SpawnersDatabase spawnersDB = new SpawnersDatabase();
 
     public static void SaveAll()
     {
@@ -202,6 +203,13 @@ public class EnemiesDatabase : LocalDatabase
     public EnemiesDatabase() : base("enemiesDB") { }
 
     public EnemiesData Enemies { get; } = new EnemiesData();  
+}
+
+public class SpawnersDatabase : LocalDatabase
+{
+    public SpawnersDatabase() : base("spawnersDB") { }
+
+    public SpawnersData Spawners { get; } = new SpawnersData();
 }
 
 //public class ExampleLocalDataBase : LocalDatabase

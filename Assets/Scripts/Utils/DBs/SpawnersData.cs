@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using Loopie;
 
-
-public class EnemiesData
+public class SpawnersData
 {
     public string currentSceneUUID = "";
     public string previousSceneUUID = "";
@@ -21,23 +20,24 @@ public class EnemiesData
         currentSceneUUID = "";
         previousSceneUUID = "";
     }
+    public List<SpawnerData> spawners = new List<SpawnerData>();
 
-    public List<EnemyData> enemies = new List<EnemyData>();
-
-    public struct EnemyData 
+    public struct SpawnerData
     {
-        public string enemyType;
-        public string entityID;
-        public string entityName;
+        public int spawnerID;
+        public bool alreadySpawned;
 
+        // Datos del enemigo spawneado (solo relevantes si alreadySpawned == true)
+        public string enemyType;
         public float enemyPositionX;
         public float enemyPositionY;
         public float enemyPositionZ;
-
         public int hp;
 
+        // Golem
         public int shieldHP;
+
+        // Blob
         public int blobStage;
     }
-
 }
