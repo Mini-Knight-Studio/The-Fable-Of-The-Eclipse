@@ -28,6 +28,9 @@ class Geyser : Component
     private bool isMoving = false;
     private bool isUp = false;
 
+    public float knockbackForce = 0.0f;
+    public float knockbackDuration = 0.0f;
+
     public AudioSource riseSFX;
 
     void OnCreate()
@@ -71,6 +74,7 @@ class Geyser : Component
         {
             damageTimer = 0.0f;
             Player.Instance.PlayerHealth.Damage(damage);
+            Player.Instance.Movement.ApplyKnockback(knockbackForce, knockbackDuration, transform.position - Player.Instance.transform.position);
         }
     }
 

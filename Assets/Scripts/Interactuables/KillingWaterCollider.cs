@@ -10,6 +10,7 @@ class KillingWaterCollider : Component
 
     private float rayDistance = 5.0f;
 
+    public int fallingDamage = 1;
     void OnCreate()
     {
         collider = entity.GetComponent<BoxCollider>();
@@ -39,8 +40,8 @@ class KillingWaterCollider : Component
 
             if (killTimer >= killTime)
             {
-                // Kill / Tp player here
-                Debug.Log("Player drowned!");
+                Player.Instance.PlayerHealth.Damage(fallingDamage);
+                Player.Instance.StartRespawn();
                 killTimer = 0.0f;
             }
         }

@@ -20,6 +20,9 @@ public class Player : Component
     public TemporalEffectApplier Effects;
     private SceneTransition LoseTransition;
 
+    public Entity RespawnTransitionEntity;
+    public FadeInOutEvent RespawnTransition;
+
     public static Player Instance { get; private set; }
 
     void OnCreate()
@@ -55,6 +58,9 @@ public class Player : Component
         Effects = entity.GetComponent<TemporalEffectApplier>();
         LoseTransition = entity.GetComponent<SceneTransition>();
 
+        RespawnTransition = RespawnTransitionEntity.GetComponent<FadeInOutEvent>();
+        RespawnTransition.OnFadeInComplete += EndRespawn;
+
         // Debug checks
         if (Movement == null) Debug.Log("Missing PlayerMovement");
         if (Animation == null) Debug.Log("Missing PlayerAnimation");
@@ -67,9 +73,21 @@ public class Player : Component
         PlayerHealth.Init();
     }
 
-    private void PlayerHealth_OnDeath()
+    public void GoToLastCheckpoint()
     {
-        throw new NotImplementedException();
+        entity.transform.position = new Vector3(DatabaseRegistry.playerDB.Player.playerPositionX, DatabaseRegistry.playerDB.Player.playerPositionY, DatabaseRegistry.playerDB.Player.playerPositionZ);
+    }
+
+    public void StartRespawn()
+    {
+        RespawnTransition.StartFade();
+        PlayerHealth.canBeDamaged = false;
+    }
+
+    private void EndRespawn()
+    {
+        GoToLastCheckpoint();
+        PlayerHealth.canBeDamaged = true;
     }
 
     void OnUpdate()
@@ -80,5 +98,10 @@ public class Player : Component
 
         Animation.ProcessAnimations();
 
+    }
+
+    void OnDestroy()
+    {
+        RespawnTransition.OnFadeInComplete -= EndRespawn;
     }
 }
