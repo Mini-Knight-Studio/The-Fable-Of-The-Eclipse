@@ -40,8 +40,7 @@ class KillingWaterCollider : Component
 
             if (killTimer >= killTime)
             {
-
-                if (!Player.Instance.Movement.isGodMode || !Player.Instance.Grapple.IsGrappling)
+                if (!Player.Instance.Movement.isGodMode && !Player.Instance.Grapple.IsGrappling)
                 {
                     Player.Instance.PlayerHealth.Damage(fallingDamage);
                     Player.Instance.StartRespawn();
