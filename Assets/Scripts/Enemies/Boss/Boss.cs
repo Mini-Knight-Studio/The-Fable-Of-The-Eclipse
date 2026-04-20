@@ -39,6 +39,7 @@ public class Boss : Component
     public Player target;
     private SceneTransition winScene;
     private HeadLookAt headTemporalFeedback;
+    private BoxCollider headCollider;
 
     #region Internal
     void OnCreate()
@@ -58,18 +59,19 @@ public class Boss : Component
         headTemporalFeedback = entity.GetComponent<HeadLookAt>();
         winScene = entity.GetComponent<SceneTransition>();
         headTemporalFeedback.active = false;
+        headCollider = headTemporalFeedback.head.GetComponent<BoxCollider>();
     }
 
     void OnUpdate()
     {
+        if(vulnerable) return;
         if (leftHand.defeated && rightHand.defeated)
         {
             HeadMoveY(0);
             on_sequence = false;
             vulnerable = true;
+            StartCoroutine(ExposeCore());
         }
-
-        Hit();
 
         #region Timer Between Attacks
         if (on_sequence)
@@ -94,14 +96,14 @@ public class Boss : Component
             else
                 StartBattle();
 
-            if (defeated && stage < 2)
+            if (defeated && stage < 1)
             {
                 if(InBetweenStagesCooldown > 0.0f)
                     InBetweenStagesCooldown -= Time.deltaTime;
                 else
                     Evolve();
             }
-            else if (defeated && stage >= 2)
+            else if (defeated && stage >= 1)
             {
                 if (StartEndWaitTime.y > 0.0f)
                     StartEndWaitTime.y -= Time.deltaTime;
@@ -123,6 +125,7 @@ public class Boss : Component
 
     private void StartNextAttack()
     {
+        headTemporalFeedback.active = true;
         if (leftHand.IsOnSide())
             leftHand.Attack();
 
@@ -165,21 +168,42 @@ public class Boss : Component
         stage_timer = Value(InBetweenAttacksCooldown);
     }
 
-    private IEnumerator HeadMoveY(float position)
+    private bool HeadMoveY(float position)
     {
-        while (Mathf.Abs(headTemporalFeedback.head.transform.position.y - position) > Value(handVelocity) * Time.deltaTime)
+        Debug.Log($"{Mathf.Abs(headTemporalFeedback.head.transform.position.y - position)}");
+        if (Mathf.Abs(headTemporalFeedback.head.transform.position.y - position) > Value(handVelocity) * Time.deltaTime)
         {
-            headTemporalFeedback.head.transform.position += new Vector3(0, -1 * Value(handVelocity * 4) * Time.deltaTime * position > headTemporalFeedback.head.transform.position.y? -1:1, 0);
-            yield return null;
+            Debug.Log("0");
+            headTemporalFeedback.head.transform.position += new Vector3(0, -1 * Value(handVelocity * 4) * Time.deltaTime * (position > headTemporalFeedback.head.transform.position.y? -1:1), 0);
+            return false;
         }
-    }
-
-    public void Hit()
-    {
-        if(!vulnerable || defeated) return;
-        //if(target.Combat.)
-        defeated = true;
+        return true;
     }
     
     #endregion
+
+    public IEnumerator ExposeCore()
+    {
+        Debug.Log("Exposing Core");
+        headTemporalFeedback.active = false;
+        headTemporalFeedback.head.transform.rotation = Vector3.Zero;
+        while (!HeadMoveY(0))
+        {
+            yield return null;
+        }
+
+        while (!headCollider.HasCollided)
+        {
+            yield return null;
+        }
+
+        while (!HeadMoveY(6))
+        {
+            yield return null;
+        }
+        StartCoroutine(leftHand.Recover());
+        StartCoroutine(rightHand.Recover());
+        vulnerable = false;
+        defeated = true;
+    }
 };
