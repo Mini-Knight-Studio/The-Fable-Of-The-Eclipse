@@ -7,13 +7,11 @@ public class HealthHUD : Component
 
     public int maxHealthIcons = 5;
 
-    private Health playerHealth;
     private Entity[] healthIcons;
     private int lastKnownHealth = -1;
 
     void OnCreate()
     {
-        playerHealth = Player.Instance.PlayerHealth;
         healthIcons = new Entity[maxHealthIcons];
 
         for (int i = 0; i < maxHealthIcons; i++)
@@ -30,9 +28,9 @@ public class HealthHUD : Component
 
     void OnUpdate()
     {
-        if (playerHealth == null) return;
+        if (Player.Instance.PlayerHealth == null) return;
 
-        int currentHealth = playerHealth.GetActualHealth();
+        int currentHealth = Player.Instance.PlayerHealth.GetActualHealth();
 
         if (currentHealth != lastKnownHealth)
         {

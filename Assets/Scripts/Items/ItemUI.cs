@@ -3,9 +3,9 @@ using Loopie;
 
 public class WeaponItem : Component
 {
-    public string uniqueId = "Grapple"; 
-    public string vfxName = "GrappleVFX";
-    public string uiManagerName = "HUD";
+    public Entity vfx;
+    public Entity uiManager;
+    public string uniqueId = "Grapple";
     public string popupName = "Popup_Grapple";
 
     private bool alreadyCollected = false;
@@ -42,7 +42,6 @@ public class WeaponItem : Component
 
     private void TriggerVFX()
     {
-        Entity vfx = Entity.FindEntityByName(vfxName);
         if (vfx != null)
         {
             vfx.transform.position = entity.transform.position;
@@ -55,7 +54,6 @@ public class WeaponItem : Component
 
     private void ShowUIPopup()
     {
-        Entity uiManager = Entity.FindEntityByName(uiManagerName);
         if (uiManager != null)
         {
             UIPopupManager popup = uiManager.GetComponent<UIPopupManager>();
