@@ -10,18 +10,20 @@ class GODModeSpawner : Component
         public string EnemyName;
         public Entity ReferenceEntity;
     }
+
     private Text EnemyNameText;
     private List<EnemyDirection> EnemyDirections;
     private int currentListIndex = 0;
     private RaycastHit hit;
     private Entity camera;
     private int LayerMask;
+
+    public Entity enemiesContainer;
     void OnCreate()
     {
         EnemyDirections = new List<EnemyDirection>();
         EnemyNameText = Entity.FindEntityByName("EnemyName").GetComponent<Text>();
-        Entity enemies = Entity.FindEntityByName("Enemies");
-        foreach (Entity child in enemies.GetChildren())
+        foreach (Entity child in enemiesContainer.GetChildren())
         {
             if (!child.Name.Contains("_Reference"))
                 continue;
@@ -41,8 +43,7 @@ class GODModeSpawner : Component
 
     void KillAllEnemies()
     {
-        Entity enemies = Entity.FindEntityByName("Enemies");
-        foreach (Entity child in enemies.GetChildren())
+        foreach (Entity child in enemiesContainer.GetChildren())
         {
             if (child.Name.Contains("_Reference"))
                 continue;

@@ -8,12 +8,15 @@ public class Player : Component
     protected Entity CameraEntity;
     public PlayerCamera Camera;
 
-
     public PlayerInput Input;
     public PlayerMovement Movement;
     public PlayerAnimation Animation;
     public PlayerCombat Combat;
 
+    public PlayerGrapple Grapple;
+
+    public Entity GrappleLine;
+    public Entity HookAnchor;
     public TemporalEffectApplier Effects;
     private SceneTransition LoseTransition;
 
@@ -24,33 +27,42 @@ public class Player : Component
         Instance = this;
 
         PlayerHealth = entity.GetComponent<Health>();
-        Camera = CameraEntity.GetComponent<PlayerCamera>();
 
-
+        if (CameraEntity != null)
+            Camera = CameraEntity.GetComponent<PlayerCamera>();
 
         Input = entity.GetComponent<PlayerInput>();
         Input.SetOwner(this);
+
         Movement = entity.GetComponent<PlayerMovement>();
         Movement.SetOwner(this);
+
         Animation = entity.GetComponent<PlayerAnimation>();
         Animation.SetOwner(this);
+
         Combat = entity.GetComponent<PlayerCombat>();
         Combat.SetOwner(this);
 
+        // 2. Initialize Grapple and link it to the Player
+        Grapple = entity.GetComponent<PlayerGrapple>();
+        if (Grapple != null) Grapple.SetOwner(this);
+
+        GrappleLine = Entity.FindEntityByName("GrappleLine");
+        if (GrappleLine != null) GrappleLine.SetActive(false);
+
+        HookAnchor = Entity.FindEntityByName("HookAnchor");
 
         Effects = entity.GetComponent<TemporalEffectApplier>();
         LoseTransition = entity.GetComponent<SceneTransition>();
 
-
-
+        // Debug checks
         if (Movement == null) Debug.Log("Missing PlayerMovement");
         if (Animation == null) Debug.Log("Missing PlayerAnimation");
         if (Combat == null) Debug.Log("Missing PlayerCombat");
         if (PlayerHealth == null) Debug.Log("Missing Health");
-        if(Input == null) Debug.Log("Missing PlayerInput");
-        if(Camera == null) Debug.Log("Missing PlayerCamera");
-
-
+        if (Input == null) Debug.Log("Missing PlayerInput");
+        if (Camera == null) Debug.Log("Missing PlayerCamera");
+        if (Grapple == null) Debug.Log("Missing PlayerGrapple");
 
         PlayerHealth.Init();
     }
@@ -62,14 +74,11 @@ public class Player : Component
 
     void OnUpdate()
     {
- 
         Input.ProcessInputs();
         Movement.ProcessMovement();
         Combat.ProcessCombat();
 
-
         Animation.ProcessAnimations();
+
     }
 }
-
-

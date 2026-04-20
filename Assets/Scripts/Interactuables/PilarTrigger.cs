@@ -9,9 +9,11 @@ public class PillarTrigger : Component
     public Entity interactionPrompt;
     public Entity hookParticles;
 
-    public float hookTravelTime = 0.25f;
+    public float hookTravelTime = 0.5f;
+
     private bool isWaitingForHook = false;
     private float hookTimer = 0.0f;
+    private bool isTargeted = false;
 
     void OnCreate()
     {
@@ -33,29 +35,38 @@ public class PillarTrigger : Component
 
         if (triggerZone.HasCollided)
         {
-            if (interactionPrompt != null) interactionPrompt.SetActive(true);
+            Entity sensor = Entity.FindEntityByName("PlayerGrappleBox");
+
+            if (sensor != null && triggerZone.IsColliding)
+            {
+                isTargeted = true;
+                if (interactionPrompt != null) interactionPrompt.SetActive(true);
+            }
         }
         else if (triggerZone.HasEndedCollision)
         {
+            isTargeted = false;
             if (interactionPrompt != null) interactionPrompt.SetActive(false);
             isWaitingForHook = false;
         }
 
-        if (interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook && DatabaseRegistry.playerDB.Player.hasGrappling)
+        if (isTargeted && interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook)
         {
             isWaitingForHook = true;
             hookTimer = 0.0f;
+
             playerGrapple.RotateToTarget(entity.transform.position);
+            playerGrapple.ExecuteGrapple(this, hookTravelTime);
         }
 
         if (isWaitingForHook)
         {
             hookTimer += Time.deltaTime;
+
             if (hookTimer >= hookTravelTime)
             {
                 isWaitingForHook = false;
                 if (hookParticles != null) hookParticles.SetActive(true);
-                playerGrapple.ExecuteGrapple(this);
             }
         }
     }
