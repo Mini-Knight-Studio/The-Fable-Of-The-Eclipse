@@ -5,9 +5,9 @@ public class OrbItem : Component
 {
     public int orbType = 0; 
 
-    public string vfxName = "OrbVFX";
-    public string uiManagerName = "HUD";
-    public string popupName = "Popup_Orb";
+    public Entity vfx;
+    public Entity uiManager;
+    public string popUpName;
 
     private bool alreadyCollected = false;
 
@@ -59,7 +59,6 @@ public class OrbItem : Component
 
     private void TriggerVFX()
     {
-        Entity vfx = Entity.FindEntityByName(vfxName);
         if (vfx != null)
         {
             vfx.transform.position = entity.transform.position;
@@ -71,11 +70,10 @@ public class OrbItem : Component
 
     private void ShowUIPopup()
     {
-        Entity uiManager = Entity.FindEntityByName(uiManagerName);
         if (uiManager != null)
         {
             UIPopupManager popup = uiManager.GetComponent<UIPopupManager>();
-            if (popup != null) popup.ShowPopup(popupName);
+            if (popup != null) popup.ShowPopup(popUpName);
         }
     }
 };

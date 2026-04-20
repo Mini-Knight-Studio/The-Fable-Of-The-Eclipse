@@ -4,21 +4,10 @@ using Loopie;
 
 public class SkillsHUD : Component
 {
-    public string playerName = "Player";
-
-    public string dashActiveName = "Dash_Active";
-    public string dashInactiveName = "Dash_Inactive";
-
-    public string grappleActiveName = "Grapple_Active";
-    public string grappleInactiveName = "Grapple_Inactive";
-
-    private PlayerMovement playerMovement;
-    private PlayerGrapple playerGrapple;
-
-    private Entity dashActiveEntity;
-    private Entity dashInactiveEntity;
-    private Entity grappleActiveEntity;
-    private Entity grappleInactiveEntity;
+    public Entity dashActiveEntity;
+    public Entity dashInactiveEntity;
+    public Entity grappleActiveEntity;
+    public Entity grappleInactiveEntity;
 
     private bool wasDashReady = true;
     private bool wasGrappleReady = true;
@@ -28,28 +17,15 @@ public class SkillsHUD : Component
 
     void OnCreate()
     {
-        Entity player = Entity.FindEntityByName(playerName);
-        if (player != null)
-        {
-            playerMovement = player.GetComponent<PlayerMovement>();
-            playerGrapple = player.GetComponent<PlayerGrapple>();
-        }
-
-        dashActiveEntity = Entity.FindEntityByName(dashActiveName);
-        dashInactiveEntity = Entity.FindEntityByName(dashInactiveName);
-
-        grappleActiveEntity = Entity.FindEntityByName(grappleActiveName);
-        grappleInactiveEntity = Entity.FindEntityByName(grappleInactiveName);
-
         if (dashInactiveEntity != null) dashInactiveEntity.SetActive(false);
         if (grappleInactiveEntity != null) grappleInactiveEntity.SetActive(false);
     }
 
     void OnUpdate()
     {
-        if (playerMovement != null && dashActiveEntity != null && dashInactiveEntity != null)
+        if (Player.Instance.Movement != null && dashActiveEntity != null && dashInactiveEntity != null)
         {
-            bool isDashReady = playerMovement.dashCooldownTimer <= 0;
+            bool isDashReady = Player.Instance.Movement.dashCooldownTimer <= 0;
             if (isDashReady != wasDashReady)
             {
                 dashActiveEntity.SetActive(isDashReady);
@@ -58,14 +34,14 @@ public class SkillsHUD : Component
             }
         }
 
-        if (playerGrapple != null && grappleActiveEntity != null && grappleInactiveEntity != null)
+        if (Player.Instance.Grapple != null && grappleActiveEntity != null && grappleInactiveEntity != null)
         {
             if (simulatedGrappleCooldown > 0)
             {
                 simulatedGrappleCooldown -= Time.deltaTime;
             }
 
-            float currentGrappleTimer = playerGrapple.grappleCooldownTimer;
+            float currentGrappleTimer = Player.Instance.Grapple.grappleCooldownTimer;
 
             bool isNewGrapple = false;
 
@@ -80,7 +56,7 @@ public class SkillsHUD : Component
 
             if (isNewGrapple && simulatedGrappleCooldown <= 0)
             {
-                simulatedGrappleCooldown = playerGrapple.grappleCooldown;
+                simulatedGrappleCooldown = Player.Instance.Grapple.grappleCooldown;
             }
 
             lastGrappleTimerValue = currentGrappleTimer;

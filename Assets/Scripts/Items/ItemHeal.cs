@@ -4,8 +4,8 @@ using Loopie;
 public class HealItem : Component
 {
     public int healAmount = 1;
-    public string uniqueId = "Potion_1"; 
-    public string vfxName = "PotionVFX"; 
+    public string uniqueId = "Potion_1";
+    public Entity vfx;
 
     private bool alreadyCollected = false;
 
@@ -25,38 +25,35 @@ public class HealItem : Component
         BoxCollider col = entity.GetComponent<BoxCollider>();
         if (col != null && col.HasCollided)
         {
-            Entity playerEntity = Entity.FindEntityByName("Player");
-            if (playerEntity != null)
+
+            Health playerHealth = Player.Instance.PlayerHealth;
+            if (playerHealth != null)
             {
-                Health playerHealth = playerEntity.GetComponent<Health>();
-                if (playerHealth != null)
+                if (playerHealth.actualHealth < playerHealth.maxHealth)
                 {
-                    if (playerHealth.actualHealth < playerHealth.maxHealth)
+                    playerHealth.actualHealth += healAmount;
+                    if (playerHealth.actualHealth > playerHealth.maxHealth)
                     {
-                        playerHealth.actualHealth += healAmount;
-                        if (playerHealth.actualHealth > playerHealth.maxHealth)
-                        {
-                            playerHealth.actualHealth = playerHealth.maxHealth;
-                        }
-
-                        if (!PlayerStats.collectedItems.Contains(uniqueId))
-                        {
-                            PlayerStats.collectedItems.Add(uniqueId);
-                        }
-
-                        TriggerVFX();
-
-                        alreadyCollected = true;
-                        entity.SetActive(false);
+                        playerHealth.actualHealth = playerHealth.maxHealth;
                     }
+
+                    if (!PlayerStats.collectedItems.Contains(uniqueId))
+                    {
+                        PlayerStats.collectedItems.Add(uniqueId);
+                    }
+
+                    TriggerVFX();
+
+                    alreadyCollected = true;
+                    entity.SetActive(false);
                 }
             }
+            
         }
     }
 
     private void TriggerVFX()
     {
-        Entity vfx = Entity.FindEntityByName(vfxName);
         if (vfx != null)
         {
             vfx.transform.position = entity.transform.position;
