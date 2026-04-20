@@ -67,7 +67,6 @@ public class Boss : Component
         if(vulnerable) return;
         if (leftHand.defeated && rightHand.defeated)
         {
-            HeadMoveY(0);
             on_sequence = false;
             vulnerable = true;
             StartCoroutine(ExposeCore());
@@ -173,7 +172,6 @@ public class Boss : Component
         Debug.Log($"{Mathf.Abs(headTemporalFeedback.head.transform.position.y - position)}");
         if (Mathf.Abs(headTemporalFeedback.head.transform.position.y - position) > Value(handVelocity) * Time.deltaTime)
         {
-            Debug.Log("0");
             headTemporalFeedback.head.transform.position += new Vector3(0, -1 * Value(handVelocity * 4) * Time.deltaTime * (position > headTemporalFeedback.head.transform.position.y? -1:1), 0);
             return false;
         }
@@ -197,12 +195,15 @@ public class Boss : Component
             yield return null;
         }
 
-        while (!HeadMoveY(6))
+        while (!HeadMoveY(24))
         {
             yield return null;
         }
+        leftHand.defeated = false;
+        rightHand.defeated = false;
         StartCoroutine(leftHand.Recover());
         StartCoroutine(rightHand.Recover());
+        yield return null;
         vulnerable = false;
         defeated = true;
     }

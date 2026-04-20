@@ -192,7 +192,7 @@ public class Hand : Component
             Vector3 direction = new Vector3(transform.position.x - base_hand_position.x, transform.position.y - base_hand_position.y, transform.position.z - base_hand_position.z).normalized;
             while (Vector3.Distance(transform.position, base_hand_position) > (boss.Value(boss.handVelocity) * Time.deltaTime))
             {
-                transform.position += direction * -1 * boss.Value(boss.handVelocity) * 4 * Time.deltaTime;
+                transform.position += direction * -1 * boss.Value(boss.handVelocity) * Time.deltaTime;
                 yield return null;
             }
 
