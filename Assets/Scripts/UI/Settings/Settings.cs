@@ -8,6 +8,7 @@ class Settings : Component
     private float enterTimer = 0f;
 
     public Entity keyMenuEntity;
+    private bool toggleMenuKeys = false;
 
     public Entity passPageEntity;
     private SpriteAnimator passPageAnimator;
@@ -662,6 +663,7 @@ class Settings : Component
         HandleChangeValue();
         HandleApplyChanges();
         HandleBack();
+        HandleMenuKeys();
     }
 
     void HandleNavigation()
@@ -873,6 +875,27 @@ class Settings : Component
             SceneManager.LoadSceneByID("db1dd4f7-fb12-b501-b8a7-ac788f03b8ae");
             MainMenu.quickStartAnimations = true;
             MainMenu.invertedPassPagePlayed = false;
+        }
+    }
+
+    void HandleMenuKeys()
+    {
+        if (inputTimer < inputCooldown)
+            return;
+
+        if (Input.IsKeyPressed(KeyCode.TAB) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_Y))
+        {
+            toggleMenuKeys = !toggleMenuKeys;
+            inputTimer = 0f;
+        }
+
+        if (!toggleMenuKeys)
+        {
+            keyMenuEntity.SetActive(false);
+        }
+        else 
+        { 
+            keyMenuEntity.SetActive(true);
         }
     }
 
