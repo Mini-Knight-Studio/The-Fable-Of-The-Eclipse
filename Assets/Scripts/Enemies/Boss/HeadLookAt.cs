@@ -6,12 +6,12 @@ class HeadLookAt : Component
     public Entity head;
     private Entity inner_head1;
     private Entity inner_head2;
-    private Entity target;
+    public Entity target;
     public bool active;
 
     void OnCreate()
     {
-        target = Player.Instance.entity;
+        //target = Player.Instance.entity;
         inner_head1 = head.GetChildByName("Head_Base");
         inner_head2 = head.GetChildByName("Head_Rotated");
     }

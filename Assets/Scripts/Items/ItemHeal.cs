@@ -26,28 +26,18 @@ public class HealItem : Component
         if (col != null && col.HasCollided)
         {
 
-            Health playerHealth = Player.Instance.PlayerHealth;
+            Player.Instance.PlayerHealth.Heal(healAmount);
 
-            if (playerHealth.actualHealth < playerHealth.maxHealth)
+            if (!PlayerStats.collectedItems.Contains(uniqueId))
             {
-                playerHealth.actualHealth += healAmount;
-                if (playerHealth.actualHealth > playerHealth.maxHealth)
-                {
-                    playerHealth.actualHealth = playerHealth.maxHealth;
-                }
-
-                if (!PlayerStats.collectedItems.Contains(uniqueId))
-                {
-                    PlayerStats.collectedItems.Add(uniqueId);
-                }
-
-                TriggerVFX();
-
-                alreadyCollected = true;
-                entity.SetActive(false);
+                PlayerStats.collectedItems.Add(uniqueId);
             }
-            
-            
+
+            TriggerVFX();
+
+            alreadyCollected = true;
+            entity.SetActive(false);
+
         }
     }
 
