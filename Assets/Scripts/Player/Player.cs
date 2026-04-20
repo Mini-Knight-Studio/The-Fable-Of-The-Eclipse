@@ -12,8 +12,10 @@ public class Player : Component
     public PlayerMovement Movement;
     public PlayerAnimation Animation;
     public PlayerCombat Combat;
-
     public PlayerGrapple Grapple;
+
+    // --- ADD THIS LINE ---
+    public PlayerTorch Torch;
 
     public Entity GrappleLine;
     public Entity HookAnchor;
@@ -46,9 +48,12 @@ public class Player : Component
         Combat = entity.GetComponent<PlayerCombat>();
         Combat.SetOwner(this);
 
-        // 2. Initialize Grapple and link it to the Player
         Grapple = entity.GetComponent<PlayerGrapple>();
         if (Grapple != null) Grapple.SetOwner(this);
+
+        // --- ADD THESE LINES TO INITIALIZE THE TORCH ---
+        Torch = entity.GetComponent<PlayerTorch>();
+        if (Torch != null) Torch.SetOwner(this);
 
         GrappleLine = Entity.FindEntityByName("GrappleLine");
         if (GrappleLine != null) GrappleLine.SetActive(false);
@@ -69,6 +74,9 @@ public class Player : Component
         if (Input == null) Debug.Log("Missing PlayerInput");
         if (Camera == null) Debug.Log("Missing PlayerCamera");
         if (Grapple == null) Debug.Log("Missing PlayerGrapple");
+
+        // Added debug for Torch
+        if (Torch == null) Debug.Log("Missing PlayerTorch");
 
         PlayerHealth.Init();
     }
@@ -102,7 +110,6 @@ public class Player : Component
         Combat.ProcessCombat();
 
         Animation.ProcessAnimations();
-
     }
 
     void OnDestroy()

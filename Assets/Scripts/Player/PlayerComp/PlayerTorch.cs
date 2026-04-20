@@ -1,46 +1,49 @@
 using System;
+using System.Collections;
 using Loopie;
 
-public class PlayerTorch : Component
+public class PlayerTorch : PlayerComponent
 {
-    public Entity firePrefab;
     public float burnDuration = 2.0f;
+
     public Entity torchEntity;
-    
+
+    public Entity fireObject;
+
+    private bool isTorching = false;
+    public bool IsTorching => isTorching;
+
     void OnCreate()
     {
-        torchEntity.SetActive(false);
+        if (torchEntity != null) torchEntity.SetActive(false);
+        if (fireObject != null) fireObject.SetActive(false);
     }
-    
+
     void OnUpdate()
     {
-        if (Input.IsKeyPressed(KeyCode.O) && DatabaseRegistry.playerDB.Player.hasBurner)
+        if (Input.IsKeyPressed(KeyCode.O) && DatabaseRegistry.playerDB.Player.hasBurner && !isTorching)
         {
-            torchEntity.SetActive(true);
-            SpawnFire();
+            StartCoroutine(TorchSequence());
         }
     }
 
-    private void SpawnFire()
+    private IEnumerator TorchSequence()
     {
-        if (firePrefab == null) return;
+        isTorching = true;
 
-        Entity newFire = firePrefab.Clone(true);
+        if (torchEntity != null) torchEntity.SetActive(true);
+        if (fireObject != null) fireObject.SetActive(true);
 
-        Vector3 spawnOffset = entity.transform.Forward * 1.5f;
-        newFire.transform.position = entity.transform.position + spawnOffset;
-
-        StartCoroutine(ExtinguishFire(newFire));
-    }
-
-    private System.Collections.IEnumerator ExtinguishFire(Entity fire)
-    {
         float timer = 0.0f;
         while (timer < burnDuration)
         {
             timer += Time.deltaTime;
             yield return null;
         }
-        fire.Destroy();
+
+        if (fireObject != null) fireObject.SetActive(false);
+        if (torchEntity != null) torchEntity.SetActive(false);
+
+        isTorching = false;
     }
 }

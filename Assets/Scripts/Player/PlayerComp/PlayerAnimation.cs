@@ -15,6 +15,7 @@ public class PlayerAnimation : PlayerComponent
     public string grappleShootClip = "GrapleShoot";
     public string grapplePoseClip = "GraplePose";
     public string grappleLandingClip = "GrapleLanding";
+    public string TorchClip= "Torch";
 
     private enum AnimationState { 
         IDLE,
@@ -24,7 +25,8 @@ public class PlayerAnimation : PlayerComponent
         GRAPPLE_SHOOT, 
         GRAPPLE_FLIGHT, 
         GRAPPLE_LAND, 
-        NULL 
+        TORCH_BURN,
+        NULL
     };
     private AnimationState state;
     private int lastPlayedComboIndex = 0;
@@ -42,21 +44,28 @@ public class PlayerAnimation : PlayerComponent
     {
         if (player.Movement == null || player.Combat == null || player.Grapple == null) return;
 
-        if (player.Grapple.IsLaunching)
+
+        if (player.Torch != null && player.Torch.IsTorching)
         {
-            // Debugging Launch
+            if (state != AnimationState.TORCH_BURN)
+            {
+                state = AnimationState.TORCH_BURN;
+                modelAnimator.Play(TorchClip, 0.1f);
+                modelAnimator.Looping = false;
+            }
+        }
+        else if (player.Grapple.IsLaunching)
+        {
             if (state != AnimationState.GRAPPLE_SHOOT) Debug.Log("ANIM: Trying to play SHOOT: " + grappleShootClip);
             PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
         }
         else if (player.Grapple.IsGrappling)
         {
-            // Debugging Flight
             if (state != AnimationState.GRAPPLE_FLIGHT) Debug.Log("ANIM: Trying to play POSE: " + grapplePoseClip);
             PlayGrappleAnim(grapplePoseClip, AnimationState.GRAPPLE_FLIGHT, true);
         }
         else if (player.Grapple.IsLanding)
         {
-            // Debugging Landing
             if (state != AnimationState.GRAPPLE_LAND) Debug.Log("ANIM: Trying to play LANDING: " + grappleLandingClip);
             PlayGrappleAnim(grappleLandingClip, AnimationState.GRAPPLE_LAND, false);
         }
@@ -94,7 +103,7 @@ public class PlayerAnimation : PlayerComponent
 
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
-        modelAnimator.Play(idleClipName, 0.2f);
+        modelAnimator.Play(idleClipName, 0.4f);
         modelAnimator.Looping = true;
     }
 
@@ -104,7 +113,7 @@ public class PlayerAnimation : PlayerComponent
 
         state = AnimationState.WALK;
         lastPlayedComboIndex = 0;
-        modelAnimator.Play(walkClipName, 0.2f);
+        modelAnimator.Play(walkClipName, .4f);
         modelAnimator.Looping = true;
     }
 
@@ -133,8 +142,8 @@ public class PlayerAnimation : PlayerComponent
             if (currentCombo == 2) clipToPlay = attack2Clip;
             else if (currentCombo == 3) clipToPlay = attack3Clip;
 
-            modelAnimator.Play(clipToPlay, 0.05f);
-            modelAnimator.Looping = true;
+            modelAnimator.Play(clipToPlay, .1f);
+            modelAnimator.Looping = false;
         }
     }
  
