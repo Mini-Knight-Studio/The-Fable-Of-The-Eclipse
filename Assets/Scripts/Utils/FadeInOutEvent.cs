@@ -39,16 +39,19 @@ public class FadeInOutEvent : Component
 
     IEnumerator FadeSequence()
     {
-        Vector4 currentColor = fadeInImage.GetTint();
-        currentColor.w = 0f;
-        fadeInImage.SetTint(currentColor);
-
-        currentColor = fadeOutImage.GetTint();
+         
+        Vector4 currentColor = fadeOutImage.GetTint();
         currentColor.w = 1f;
         fadeOutImage.SetTint(currentColor);
 
-        fadeInImageEntity.SetActive(true);
+        currentColor = fadeInImage.GetTint();
+        currentColor.w = 0f;
+        fadeInImage.SetTint(currentColor);
+
+
+
         fadeOutImageEntity.SetActive(false);
+        fadeInImageEntity.SetActive(true);
 
         float elapsedTime = 0f;
         while (elapsedTime < fadeInTime)
@@ -66,6 +69,11 @@ public class FadeInOutEvent : Component
         yield return new WaitForSeconds(timeStatic/2);
         fadeInImageEntity.SetActive(false);
         OnFadeInComplete?.Invoke();
+
+        currentColor = fadeOutImage.GetTint();
+        currentColor.w = 1f;
+        fadeOutImage.SetTint(currentColor);
+
         fadeOutImageEntity.SetActive(true);
         yield return new WaitForSeconds(timeStatic/2);
 
