@@ -461,6 +461,8 @@ class MainMenu : Component
                 quickStartAnimations = false;
                 invertedPassPagePlayed = false;
                 canCallScripts = false;
+                Settings.quickStartAnimations = true;
+                Settings.invertedPassPagePlayed = false;
                 switch (currentButton)
                 {
                     case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;

@@ -11,11 +11,11 @@ class PauseMenu : Component
     private Load continueScript;
     private Image continueHoveredImage;
 
-    public Entity newGameEntity;
-    public Entity newGameHoveredEntity;
-    private Button newGameButton;
-    private NewGame newGameScript;
-    private Image newGameHoveredImage;
+    public Entity mainMenuEntity;
+    public Entity mainMenuHoveredEntity;
+    private Button mainMenuButton;
+    private NewGame mainMenuScript;
+    private Image mainMenuHoveredImage;
 
     public Entity settingsEntity;
     public Entity settingsHoveredEntity;
@@ -31,14 +31,14 @@ class PauseMenu : Component
 
     private enum Buttons
     {
-        NEW_GAME,
         CONTINUE,
+        MAIN_MENU,
         SETTINGS,
         EXIT
     }
-    private Buttons currentButton = Buttons.NEW_GAME;
+    private Buttons currentButton = Buttons.CONTINUE;
     private Buttons? mouseResult;
-    private Buttons keyboardResult = Buttons.NEW_GAME;
+    private Buttons keyboardResult = Buttons.CONTINUE;
 
     private enum InputMode
     {
@@ -106,14 +106,14 @@ class PauseMenu : Component
     void OnCreate()
     {
         // Buttons
-        if (newGameEntity != null)
+        if (mainMenuEntity != null)
         {
-            newGameButton = newGameEntity.GetComponent<Button>();
+            mainMenuButton = mainMenuEntity.GetComponent<Button>();
 
-            if (newGameHoveredEntity != null)
+            if (mainMenuHoveredEntity != null)
             {
-                newGameScript = newGameHoveredEntity.GetComponent<NewGame>();
-                newGameHoveredImage = newGameHoveredEntity.GetComponent<Image>();
+                mainMenuScript = mainMenuHoveredEntity.GetComponent<NewGame>();
+                mainMenuHoveredImage = mainMenuHoveredEntity.GetComponent<Image>();
             }
             else
             {
@@ -356,10 +356,10 @@ class PauseMenu : Component
 
         Buttons? hovered = null;
 
-        if (newGameButton.Hovered)
-            hovered = Buttons.NEW_GAME;
-        else if (continueButton.Hovered)
+        if (continueButton.Hovered)
             hovered = Buttons.CONTINUE;
+        else if (mainMenuButton.Hovered)
+            hovered = Buttons.MAIN_MENU;
         else if (settingsButton.Hovered)
             hovered = Buttons.SETTINGS;
         else if (exitButton.Hovered)
@@ -419,13 +419,13 @@ class PauseMenu : Component
             Vector4 color = new Vector4(255, 0, 0, 1);
             switch (currentButton)
             {
-                case Buttons.NEW_GAME:
-                    newGameHoveredImage.SetTint(color);
+                case Buttons.CONTINUE:
+                    continueHoveredImage.SetTint(color);
                     passPageEntity.SetActive(true);
                     passPageAnimator.Play();
                     break;
-                case Buttons.CONTINUE:
-                    continueHoveredImage.SetTint(color);
+                case Buttons.MAIN_MENU:
+                    mainMenuHoveredImage.SetTint(color);
                     passPageEntity.SetActive(true);
                     passPageAnimator.Play();
                     break;
@@ -463,8 +463,8 @@ class PauseMenu : Component
                 canCallScripts = false;
                 switch (currentButton)
                 {
-                    case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
                     case Buttons.CONTINUE: continueScript.LoadPreviousSave(); break;
+                    case Buttons.MAIN_MENU: mainMenuScript.StartNewGame(); break;
                     case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                     case Buttons.EXIT: break;
                 }
@@ -474,8 +474,8 @@ class PauseMenu : Component
 
     void HandleVisualFeedback()
     {
-        newGameHoveredEntity.SetActive(currentButton == Buttons.NEW_GAME);
         continueHoveredEntity.SetActive(currentButton == Buttons.CONTINUE);
+        mainMenuHoveredEntity.SetActive(currentButton == Buttons.MAIN_MENU);
         settingsHoveredEntity.SetActive(currentButton == Buttons.SETTINGS);
         exitHoveredEntity.SetActive(currentButton == Buttons.EXIT);
     }
@@ -508,13 +508,13 @@ class PauseMenu : Component
         Vector4 color = new Vector4(255, 0, 0, 1);
         switch (currentButton)
         {
-            case Buttons.NEW_GAME:
-                newGameHoveredImage.SetTint(color);
+            case Buttons.CONTINUE:
+                continueHoveredImage.SetTint(color);
                 passPageEntity.SetActive(true);
                 passPageAnimator.Play();
                 break;
-            case Buttons.CONTINUE:
-                continueHoveredImage.SetTint(color);
+            case Buttons.MAIN_MENU:
+                mainMenuHoveredImage.SetTint(color);
                 passPageEntity.SetActive(true);
                 passPageAnimator.Play();
                 break;

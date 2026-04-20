@@ -863,6 +863,11 @@ class Settings : Component
     {
         if (Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_B))
         {
+            passPageEntity.SetActive(true);
+            passPageAnimator.Play();
+        }
+        if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
+        {
             SceneManager.LoadSceneByID("db1dd4f7-fb12-b501-b8a7-ac788f03b8ae");
             MainMenu.quickStartAnimations = true;
             MainMenu.invertedPassPagePlayed = false;
