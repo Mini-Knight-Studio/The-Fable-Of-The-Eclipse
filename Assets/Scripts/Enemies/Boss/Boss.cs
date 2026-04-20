@@ -37,6 +37,7 @@ public class Boss : Component
     public Vector2 target_side_comparition;
     [HideInInspector]
     public Player target;
+    public Entity targetEntity;
     private SceneTransition winScene;
     private HeadLookAt headTemporalFeedback;
     private BoxCollider headCollider;
@@ -55,7 +56,7 @@ public class Boss : Component
         rightHand = rightHandEntity.GetComponent<Hand>();
         rightHand.SetUp(this);
 
-        target = Player.Instance;
+        target = targetEntity.GetComponent<Player>();
         headTemporalFeedback = entity.GetComponent<HeadLookAt>();
         winScene = entity.GetComponent<SceneTransition>();
         headTemporalFeedback.active = false;

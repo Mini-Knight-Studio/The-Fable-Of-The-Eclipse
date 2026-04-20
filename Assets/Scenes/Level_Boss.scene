@@ -66,7 +66,7 @@
                         "audioClips": {
                             "0": "033f4d77-425c-e46f-b482-85c99020ffb8"
                         },
-                        "channelBus": "",
+                        "channelBus": "Music",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": true,
@@ -84,7 +84,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "b2b367de-0afe-7707-aedb-bd1e8ea4f39a",
+            "parent_uuid": "04d684c6-4632-0606-b2e0-9cec1a5e7859",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -1305,7 +1305,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "b2b367de-0afe-7707-aedb-bd1e8ea4f39a",
+            "parent_uuid": "04d684c6-4632-0606-b2e0-9cec1a5e7859",
             "static": true,
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
@@ -1341,7 +1341,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "b2b367de-0afe-7707-aedb-bd1e8ea4f39a",
+            "parent_uuid": "04d684c6-4632-0606-b2e0-9cec1a5e7859",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -1377,7 +1377,7 @@
                 }
             ],
             "name": "Boss_Level",
-            "parent_uuid": "b2b367de-0afe-7707-aedb-bd1e8ea4f39a",
+            "parent_uuid": "04d684c6-4632-0606-b2e0-9cec1a5e7859",
             "static": true,
             "uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68"
         },
@@ -2484,7 +2484,8 @@
                                 "x": 1.0,
                                 "y": 0.800000011920929
                             },
-                            "stage": 0
+                            "stage": 0,
+                            "targetEntity": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
                         }
                     },
                     "uuid": "521c3d4d-813b-5d1d-4da0-55ad2529e794"
@@ -2506,15 +2507,14 @@
                         "class_id": "HeadLookAt",
                         "fields": {
                             "active": false,
-                            "head": "5ed54863-c195-e066-d854-a08a2b5a70e4",
-                            "target": ""
+                            "head": "5ed54863-c195-e066-d854-a08a2b5a70e4"
                         }
                     },
                     "uuid": "a6de2774-7453-792c-59e9-b77e3ec1410a"
                 }
             ],
             "name": "Boss",
-            "parent_uuid": "b2b367de-0afe-7707-aedb-bd1e8ea4f39a",
+            "parent_uuid": "04d684c6-4632-0606-b2e0-9cec1a5e7859",
             "static": true,
             "uuid": "01b8a810-0458-4d9a-1a59-be0c7fe8db4d"
         },
@@ -3680,7 +3680,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "b2b367de-0afe-7707-aedb-bd1e8ea4f39a",
+            "parent_uuid": "04d684c6-4632-0606-b2e0-9cec1a5e7859",
             "static": true,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -12819,6 +12819,98 @@
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "4fcd4022-87f5-ee86-b0a1-dbd39d4fae6e"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -86.23454284667969,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.5152629613876343,
+                            "x": 0.5170495510101318,
+                            "y": -0.4824659824371338,
+                            "z": 0.4841388463973999
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "6afe682a-c733-8399-bc12-43b2e1d4855e"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "1079ab98-11f7-f05c-aa66-5b66d1fd18f4"
+                }
+            ],
+            "name": "grapple_lp_37",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "94a5edef-de6b-0799-be6d-394a1dd6bc7b"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00005340576172,
+                            "y": -86.23454284667969,
+                            "z": 5.2002058509970084e-05
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.5161570310592651,
+                            "x": -0.5161569714546204,
+                            "y": -0.48330315947532654,
+                            "z": -0.48330309987068176
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "4c8a90fd-b3c9-e7ba-7131-25c81172a3a5"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "dd45fabb-69bd-57ca-7c37-2a46e6319cb5"
+                }
+            ],
+            "name": "GrappleLine_38",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "8f144848-b680-5193-b9b3-31b2311699e7"
         }
     ]
 }
