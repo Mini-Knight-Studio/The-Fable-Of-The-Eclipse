@@ -40,8 +40,11 @@ class KillingWaterCollider : Component
 
             if (killTimer >= killTime)
             {
-                Player.Instance.PlayerHealth.Damage(fallingDamage);
-                Player.Instance.StartRespawn();
+                if (!Player.Instance.Movement.isGodMode)
+                {
+                    Player.Instance.PlayerHealth.Damage(fallingDamage);
+                    Player.Instance.StartRespawn();
+                }
                 killTimer = 0.0f;
             }
         }
