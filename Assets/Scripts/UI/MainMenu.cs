@@ -87,9 +87,12 @@ class MainMenu : Component
     private SpriteAnimator closeBookAnimator;
     public Entity passPageEntity;
     private SpriteAnimator passPageAnimator;
+    public Entity invertedPassPageEntity;
+    private SpriteAnimator invertedPassPageAnimator;
 
     public static bool quickStartAnimations = true;
     public static bool hasPlayedIntro = false;
+    public static bool invertedPassPagePlayed = true;
 
     void OnCreate()
     {
@@ -227,6 +230,15 @@ class MainMenu : Component
         {
             Debug.Log("Error: There is no passPageEntity Entity assigned.");
         }
+
+        if (invertedPassPageEntity != null)
+        {
+            invertedPassPageAnimator = invertedPassPageEntity.GetComponent<SpriteAnimator>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no passPageEntity Entity assigned.");
+        }
     }
     void OnUpdate()
     {
@@ -252,9 +264,15 @@ class MainMenu : Component
         {
             passPageAnimator.Play();
             passPageAnimator.Stop();
+            //passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
             passPageEntity.SetActive(false);
+            invertedPassPageAnimator.Play();
+            invertedPassPageAnimator.Stop();
+            //invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
+            invertedPassPageEntity.SetActive(false);
             closeBookAnimator.Play();
             closeBookAnimator.Stop();
+            //closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
             closeBookEntity.SetActive(false);
             quickStartAnimations = false;
         }
@@ -276,6 +294,20 @@ class MainMenu : Component
         {
             introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
             introBookCoverEntity.SetActive(false);
+            
+            if (!invertedPassPagePlayed)
+            {
+                invertedPassPageEntity.SetActive(true);
+                invertedPassPageAnimator.Play();
+                invertedPassPagePlayed = true;
+            }
+            else
+            {
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
+                {
+                    invertedPassPageEntity.SetActive(false);
+                }
+            }
         }
 
         // Main Menu logic.
@@ -401,15 +433,19 @@ class MainMenu : Component
         // Function Call
         if (confirmTimer > inputCooldown && canCallScripts)
         {
-            if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount)
+            if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount - 1)
             {
-                exitScript.ExitGame();
                 loopMusicAudioSource.Stop();
                 canCallScripts = false;
+                exitScript.ExitGame();
             }
 
-            if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount)
+            if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
             {
+                loopMusicAudioSource.Stop();
+                quickStartAnimations = false;
+                invertedPassPagePlayed = false;
+                canCallScripts = false;
                 switch (currentButton)
                 {
                     case Buttons.NEW_GAME: newGameScript.StartNewGame(); break;
@@ -417,8 +453,6 @@ class MainMenu : Component
                     case Buttons.SETTINGS: settingsScript.StartTransition(); break;
                     case Buttons.EXIT: break;
                 }
-                loopMusicAudioSource.Stop();
-                canCallScripts = false;
             }
         }
     }

@@ -26,6 +26,10 @@ class PuzzleGoalFireLvl : Component
 
     private bool puzzle3Completed;
 
+    // Particles
+    private ParticleComponent goalParticles;
+    private bool particlesSwitched = true;
+
     void OnCreate()
     {
         pillars = new MovingPillar[3];
@@ -36,6 +40,9 @@ class PuzzleGoalFireLvl : Component
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
+
+        goalParticles = entity.GetComponent<ParticleComponent>();
+        goalParticles.SetActive(false);
     }
 
     void OnUpdate()
@@ -50,6 +57,12 @@ class PuzzleGoalFireLvl : Component
         {
             pendingMoves--;
             StartMovement(entity.transform.position + new Vector3(0, -movementDistance, 0));
+        }
+
+        if (!isMoving && !particlesSwitched)
+        {
+            goalParticles.SetActive(false);
+            particlesSwitched = true;
         }
     }
 
@@ -112,6 +125,9 @@ class PuzzleGoalFireLvl : Component
         moveTimer = 0.0f;
 
         isMoving = true;
+
+        goalParticles.SetActive(true);
+        particlesSwitched = false;
     }
 
     void MoveTowardsTarget()

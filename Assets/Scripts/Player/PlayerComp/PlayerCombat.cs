@@ -15,6 +15,11 @@ public class PlayerCombat : PlayerComponent
     public Entity attackSFXEntity;
     private AudioSource attackSfxSource;
 
+    private int comboIndex = 0;
+    private bool wantsToCombo = false;
+    public float comboWindow = 0.8f;
+    private float comboResetTimer = 0f;
+
     void OnCreate()
     {
         swordTriggerCollider = swordTriggerEntity.GetComponent<BoxCollider>();
@@ -28,35 +33,65 @@ public class PlayerCombat : PlayerComponent
 
     public void ProcessCombat()
     {
-        if (swordTriggerCollider == null)
-            return;
+        if (swordTriggerCollider == null) return;
+
+        if (isAttacking && (Input.IsKeyDown(KeyCode.J) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A)))
+        {
+            wantsToCombo = true;
+        }
+
         if (isAttacking)
         {
-            if (attackTimer <= attackCooldown && swordTriggerCollider.entity.Active == true)
+            if (attackTimer <= attackCooldown && swordTriggerCollider.entity.Active)
             {
                 swordTriggerCollider.entity.SetActive(false);
             }
 
             if (attackTimer > 0.0f)
+            {
                 attackTimer -= Time.deltaTime;
+            }
             else
             {
-                attackTimer = 0.0f;
                 isAttacking = false;
+                if (wantsToCombo)
+                {
+                    PerformAttack();
+                }
             }
-
         }
         else
         {
             if (Input.IsKeyDown(KeyCode.J) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
             {
-                isAttacking = true;
-                attackTimer = attackCooldown + hitboxDuration;
-                attackSfxSource.Play();
-                swordTriggerCollider.entity.SetActive(true);
+                PerformAttack();
+            }
 
+            comboResetTimer += Time.deltaTime;
+            if (comboResetTimer > comboWindow)
+            {
+                comboIndex = 0;
             }
         }
+    }
+
+    private void PerformAttack()
+    {
+        isAttacking = true;
+        wantsToCombo = false;
+        comboResetTimer = 0f;
+
+        comboIndex++;
+        if (comboIndex > 3) comboIndex = 1;
+
+        attackTimer = hitboxDuration;
+        attackSfxSource.Play();
+        swordTriggerCollider.entity.SetActive(true);
+    }
+
+    public int GetCurrentComboIndex()
+    {
+        return comboIndex;
     }
 
     public bool TemporalFunctionIsAttacking()
