@@ -90,7 +90,7 @@
                 }
             ],
             "name": "EnemiesRelated",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": false,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -2408,6 +2408,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
+                            "movingParticlesEntity": "56b29ea7-07a5-19ec-865b-7fa5c91825f2",
                             "numOfPathPoints": 10,
                             "pathPointEntity0": "5db9436a-049e-11fa-b019-f3ac44e605bd",
                             "pathPointEntity1": "8267f365-b44b-1056-c405-b0fde5132cf1",
@@ -7432,6 +7433,115 @@
                             "z": 1.0
                         }
                     },
+                    "uuid": "7fc477d1-b980-da26-c790-7e4e577a9276"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "12a93e26-053e-6708-13d8-ab0edb70eb91"
+                }
+            ],
+            "name": "ParticleFeedback_8",
+            "parent_uuid": "81c6c624-7981-e7fe-8c8c-6681a3e594f8",
+            "static": true,
+            "uuid": "03dcae52-b3c3-2e3f-03b6-5abac15a6aeb"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
                     "uuid": "ce925d18-135b-7d8e-6add-66af064c494d"
                 }
             ],
@@ -8553,6 +8663,52 @@
             "uuid": "4672cf71-685e-4ed9-9930-d040eb8d82fe"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19833374023438,
+                            "y": -68.61585998535156,
+                            "z": -4.683097813540371e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.5830727815628052,
+                            "x": 0.5850945711135864,
+                            "y": -0.39786359667778015,
+                            "z": 0.39924314618110657
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "316a71e0-927d-8c59-92b3-b51af95ed66d"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "a1f3aedc-e136-b554-229f-fa6aeee64625"
+                }
+            ],
+            "name": "grapple_lp_18",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "0984c022-db59-0cf1-2c82-9a117ec800e4"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -8734,6 +8890,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
+                            "movingParticlesEntity": "82dd5b36-896c-8108-7176-0291735a6bba",
                             "numOfPathPoints": 10,
                             "pathPointEntity0": "f4005b5b-aa66-6715-0ffe-35916828bded",
                             "pathPointEntity1": "7171b32b-7e99-2f9e-14b4-66b5962a9ba5",
@@ -9547,8 +9704,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 179.24346923828125,
-                                "y": 115.17554473876953
+                                "x": 185.66481018066406,
+                                "y": 111.56356048583984
                             }
                         },
                         "position": {
@@ -9613,7 +9770,7 @@
                 }
             ],
             "name": "Canvas",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "9705f3ba-8b4e-1f2a-1b49-639d5e182beb"
         },
@@ -9775,7 +9932,7 @@
                 }
             ],
             "name": "wooden_bridge",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": false,
             "uuid": "734cd308-22e2-c91e-390e-7a45d9dabad6"
         },
@@ -15098,6 +15255,52 @@
             "uuid": "4a9a1522-3b6e-f1e5-e42f-8cb46ffad4f3"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": -68.61585235595703,
+                            "z": -4.683099177782424e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.5840845704078674,
+                            "x": -0.5840845704078674,
+                            "y": -0.39855387806892395,
+                            "z": -0.3985539376735687
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "2267ab2e-9e9e-40a4-f268-9b4d3096a935"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "2f16da31-280f-cc12-15a9-ed29c06b6408"
+                }
+            ],
+            "name": "GrappleLine_20",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "c6cdeb36-c923-c1f3-445c-6d5a581136f6"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -16797,7 +17000,7 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -17349,7 +17552,7 @@
                 }
             ],
             "name": "Manager",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "49f2109a-bbd2-b2fb-548a-0bfb63d447a6"
         },
@@ -17687,6 +17890,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 7.5,
+                            "movingParticlesEntity": "bb13beb0-61e5-0017-bc9c-57393cc88d4c",
                             "numOfPathPoints": 10,
                             "pathPointEntity0": "941c4102-0a8e-e868-6648-a4c118eb37f7",
                             "pathPointEntity1": "a9b45e4f-9a50-35be-93ed-6c820d487b51",
@@ -18319,7 +18523,7 @@
                 }
             ],
             "name": "Collisions",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "5597d94f-e701-47ff-e194-ff437a9db0f4"
         },
@@ -18535,6 +18739,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 7.5,
+                            "movingParticlesEntity": "c8d2d93b-b630-8a8b-6cab-be54a5ba6ddc",
                             "numOfPathPoints": 10,
                             "pathPointEntity0": "2f95bdc6-d0b5-cd70-64f6-0b14928548c8",
                             "pathPointEntity1": "ec9b5011-9a63-cd68-c7b8-332e06e952ff",
@@ -19300,6 +19505,52 @@
             "uuid": "1eb11158-e101-aa49-aba7-25110cc36978"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19833374023438,
+                            "y": -68.61585998535156,
+                            "z": -4.683097813540371e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.5830727815628052,
+                            "x": 0.5850945711135864,
+                            "y": -0.39786359667778015,
+                            "z": 0.39924314618110657
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "288b5b12-a2c0-6965-5643-e924880592b2"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "66c20dc1-13ed-d461-a573-6466a2c005c3"
+                }
+            ],
+            "name": "grapple_lp_19",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "ff5ef093-4405-a230-10e8-d62f583b65d5"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -19854,7 +20105,7 @@
                 }
             ],
             "name": "Interactables",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "c9248883-d09c-a8d5-c4d8-4487a286a37f"
         },
@@ -20378,7 +20629,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 168.07643127441406,
+                                "x": 179.73431396484375,
                                 "y": 108.0
                             }
                         },
@@ -20429,7 +20680,7 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
@@ -20465,7 +20716,7 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -20673,7 +20924,7 @@
                 }
             ],
             "name": "Waterpath",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "28f19a5b-188c-faff-28f1-3d15aa60d09a"
         },
@@ -21213,7 +21464,7 @@
                 }
             ],
             "name": "FloorColliders",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "5cc33ddd-c9c7-a1c7-104b-586fa8ebd79e"
         },
@@ -22512,6 +22763,115 @@
             "parent_uuid": "25d31b25-f079-9f40-45e2-0dcc2dd04e92",
             "static": true,
             "uuid": "34db7c4b-a144-2991-70c8-d3de7c4bb663"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e3a97755-4cfc-cc37-4b0f-18ed63089cd9"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "36d5f6b3-59e6-56fb-bc9b-2de1637f0db9"
+                }
+            ],
+            "name": "ParticleFeedback_7",
+            "parent_uuid": "2eb9ef2c-1687-73c4-ba8d-a57af366f434",
+            "static": true,
+            "uuid": "82dd5b36-896c-8108-7176-0291735a6bba"
         },
         {
             "active": false,
@@ -24370,6 +24730,52 @@
             "uuid": "4b0d9a04-aa8d-ca43-e827-46b48d2afab6"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": -68.61585235595703,
+                            "z": -4.683099177782424e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.5840845704078674,
+                            "x": -0.5840845704078674,
+                            "y": -0.39855387806892395,
+                            "z": -0.3985539376735687
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "d43ce7e8-f9bf-f410-a575-a483263ae4d3"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "cff0e14b-6b8a-f6c5-4061-6fdb98364fcf"
+                }
+            ],
+            "name": "GrappleLine_23",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "ec3df095-b292-6588-8f1d-262427f64499"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -25862,6 +26268,52 @@
             "uuid": "a1dc6120-f0ff-c65e-3d14-f4c81de21375"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": -68.61585235595703,
+                            "z": -4.683099177782424e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.5840845704078674,
+                            "x": -0.5840845704078674,
+                            "y": -0.39855387806892395,
+                            "z": -0.3985539376735687
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "f0a94dc1-0362-a962-36b1-7e79bf1f95fa"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "233d6c2e-31fc-1135-fc2b-0afb2b081d3e"
+                }
+            ],
+            "name": "GrappleLine_22",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "d828a0d9-7527-5d46-7f42-0d31fe4f5f79"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -26650,6 +27102,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
+                            "movingParticlesEntity": "12dd50c0-b597-842e-160b-dc5eac6525f8",
                             "numOfPathPoints": 9,
                             "pathPointEntity0": "59fac29f-c11e-0e5c-b716-974fa283826a",
                             "pathPointEntity1": "016d65c1-9f13-2ac5-e784-c1439bedd4d5",
@@ -27103,6 +27556,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
+                            "movingParticlesEntity": "1611e26a-bc7d-c1c8-5c90-05bc36562576",
                             "numOfPathPoints": 10,
                             "pathPointEntity0": "a0656044-fb30-fb7d-d493-0a3141d557c7",
                             "pathPointEntity1": "c62539bb-3a04-8122-4e82-b43f42a8bad9",
@@ -27534,6 +27988,7 @@
                             "looping": true,
                             "moveOnStart": false,
                             "movementSpeed": 10.0,
+                            "movingParticlesEntity": "bd393a60-cab3-c2d4-a839-a92976df0dc5",
                             "numOfPathPoints": 8,
                             "pathPointEntity0": "b28ccf30-154c-796d-a119-229d9902c1a6",
                             "pathPointEntity1": "71982be2-3aa5-fd6a-62a0-6414b3cc9e52",
@@ -27844,7 +28299,7 @@
                 }
             ],
             "name": "Water",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "5bad2955-e793-b3b5-0d0e-f8d85aff262d"
         },
@@ -29173,6 +29628,52 @@
             "parent_uuid": "275fc1a4-b6ba-4687-a618-f33f62a7dbc1",
             "static": true,
             "uuid": "a4ef3f99-bc6d-c9d2-7476-ccdc63073fdd"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19833374023438,
+                            "y": -68.61585998535156,
+                            "z": -4.683097813540371e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.5830727815628052,
+                            "x": 0.5850945711135864,
+                            "y": -0.39786359667778015,
+                            "z": 0.39924314618110657
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "6a4e386a-34a4-2726-58cc-78a696a7a545"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "b4a3ea36-edab-5d38-8843-f0abdb57866e"
+                }
+            ],
+            "name": "grapple_lp_17",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "89af5715-4074-b3fe-6d0e-ffdb58bd9a09"
         },
         {
             "active": true,
@@ -30765,6 +31266,115 @@
             "parent_uuid": "5cc33ddd-c9c7-a1c7-104b-586fa8ebd79e",
             "static": true,
             "uuid": "ba38e1a7-c7e4-808b-9c09-92a531965ecb"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "9cfb4c86-2e3f-d893-1b51-d8a1ed2899bf"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "07005cbc-52a8-1ec1-695c-97d261275cef"
+                }
+            ],
+            "name": "ParticleFeedback_4",
+            "parent_uuid": "b41547b2-0a10-7ac3-258d-a4cef45cb706",
+            "static": true,
+            "uuid": "bb13beb0-61e5-0017-bc9c-57393cc88d4c"
         },
         {
             "active": true,
@@ -33994,6 +34604,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
+                            "movingParticlesEntity": "0d116c8c-d8a3-2289-6391-d15ec3678b5b",
                             "numOfPathPoints": 9,
                             "pathPointEntity0": "38f74983-f92b-be2b-cb0b-35872b85b140",
                             "pathPointEntity1": "d8170708-469f-8a69-0ddf-3f1c25d30a63",
@@ -34580,6 +35191,7 @@
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
+                            "movingParticlesEntity": "03dcae52-b3c3-2e3f-03b6-5abac15a6aeb",
                             "numOfPathPoints": 10,
                             "pathPointEntity0": "835a7ae3-82b0-4088-765d-285fcaa6dd4c",
                             "pathPointEntity1": "86f05ed6-1747-494b-feb5-c159547260cb",
@@ -36014,7 +36626,7 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": false,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -38784,6 +39396,115 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "02285868-658f-5be8-f9df-b1169d7b408b"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "10fd00f0-4b26-5237-5bf8-9a63db6c15f0"
+                }
+            ],
+            "name": "ParticleFeedback",
+            "parent_uuid": "a71119dd-d768-a26a-d3e5-e115aa8ead90",
+            "static": true,
+            "uuid": "12dd50c0-b597-842e-160b-dc5eac6525f8"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
                             "x": 2.9676408767700195,
                             "y": 9.601882084098179e-06,
                             "z": 2.5444437748716082e-14
@@ -38920,6 +39641,115 @@
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "225b3cc8-3589-d864-ded3-84e95720942c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "342840fe-3493-7ca7-23f6-7c8c66f4c420"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "b6f9156f-9093-9b73-3290-a7708360c21e"
+                }
+            ],
+            "name": "ParticleFeedback_1",
+            "parent_uuid": "71a05dec-f0ad-a07b-1f63-8a5a583f6e49",
+            "static": true,
+            "uuid": "1611e26a-bc7d-c1c8-5c90-05bc36562576"
         },
         {
             "active": true,
@@ -40986,7 +41816,7 @@
                 }
             ],
             "name": "Pause",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -41129,8 +41959,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 1440.0,
-                                "y": 829.0
+                                "x": 1600.0,
+                                "y": 900.0
                             }
                         },
                         "position": {
@@ -41854,7 +42684,7 @@
                         },
                         "position": {
                             "x": 44.14659881591797,
-                            "y": -2.7699999809265137,
+                            "y": -50.0,
                             "z": 140.39064025878906
                         },
                         "rotation": {
@@ -41864,9 +42694,9 @@
                             "z": 0.0
                         },
                         "scale": {
-                            "x": 25.63924789428711,
+                            "x": 30.0,
                             "y": 1.0,
-                            "z": 33.431365966796875
+                            "z": 45.0
                         }
                     },
                     "uuid": "694ba172-efbd-aa5e-6ca0-f5e8daa9c497"
@@ -41883,7 +42713,7 @@
                 }
             ],
             "name": "Plane",
-            "parent_uuid": "7969b576-883a-e480-a0ce-e1ad1c37d8a2",
+            "parent_uuid": "d3c47acf-46b5-b7eb-6d2e-6f30c970e7a4",
             "static": true,
             "uuid": "71a79029-48bf-dca6-2441-8c2b1a9e601d"
         },
@@ -42352,6 +43182,718 @@
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e1044c90-2e24-7998-5274-dbd85ec93594"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": -68.61585235595703,
+                            "z": -4.683099177782424e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.5840845704078674,
+                            "x": -0.5840845704078674,
+                            "y": -0.39855387806892395,
+                            "z": -0.3985539376735687
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "0fe1980f-d054-eebe-7d6b-43be5302eda5"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "4f137026-1761-73a7-8bc2-d1fc3bea4be8"
+                }
+            ],
+            "name": "GrappleLine_18",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "2ae37e29-24dd-f993-0a8d-0fb4e6c5bc36"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "b042420f-e65c-da68-2f0a-0d24c5c7cc8f"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "6871cd1f-c027-e72f-163b-597cb784b9d3"
+                }
+            ],
+            "name": "ParticleFeedback_2",
+            "parent_uuid": "080cd010-f495-a1a2-55ee-1d23afa86a8c",
+            "static": true,
+            "uuid": "bd393a60-cab3-c2d4-a839-a92976df0dc5"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": -68.61585235595703,
+                            "z": -4.683099177782424e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.5840845704078674,
+                            "x": -0.5840845704078674,
+                            "y": -0.39855387806892395,
+                            "z": -0.3985539376735687
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "8b00ceb6-bd33-e63f-e3bb-c6ecd966ccf6"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "8f44a6f0-876f-f23f-fb7d-70be4cf06c82"
+                }
+            ],
+            "name": "GrappleLine_19",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "2f8b4949-bd3e-5d06-05ff-c8a933093989"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "229fd3fe-2540-7217-99e2-5eff3a45fca2"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "bbc792ba-5d61-8f89-2545-02596e00ab82"
+                }
+            ],
+            "name": "ParticleFeedback_3",
+            "parent_uuid": "4ecc6b2d-5ead-0bb2-c4de-28f98222b20d",
+            "static": true,
+            "uuid": "c8d2d93b-b630-8a8b-6cab-be54a5ba6ddc"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "4898bb98-571f-5d5c-b952-d0ada44bca90"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "89a29901-fed3-e67c-7604-452586d825c5"
+                }
+            ],
+            "name": "ParticleFeedback_5",
+            "parent_uuid": "3b3e9e8f-f25c-1096-134c-d3b13cc4f022",
+            "static": true,
+            "uuid": "0d116c8c-d8a3-2289-6391-d15ec3678b5b"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "9c92a2ab-90f7-1513-3dc1-b954ed0ad05b"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6784313917160034,
+                                    "g": 0.48627451062202454,
+                                    "r": 0.09019608050584793
+                                },
+                                "lifetime": 0.75,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 2.0,
+                                "sizeend": 0.4000000059604645,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 3.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 61.009090423583984,
+                                "y": -2.0,
+                                "z": 64.00665283203125
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -0.10000000149011612,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 60
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "87ce4d88-75aa-52af-856e-78fac09e4e58"
+                }
+            ],
+            "name": "ParticleFeedback_6",
+            "parent_uuid": "2a11976d-e187-d954-7fd8-dcf1f0a999fc",
+            "static": true,
+            "uuid": "56b29ea7-07a5-19ec-865b-7fa5c91825f2"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19833374023438,
+                            "y": -68.61585998535156,
+                            "z": -4.683097813540371e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.5830727815628052,
+                            "x": 0.5850945711135864,
+                            "y": -0.39786359667778015,
+                            "z": 0.39924314618110657
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "caa8caf5-d44d-06a7-688f-e75cb14070f9"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "6b89fd44-fd7e-4bb7-8352-0b166736ed15"
+                }
+            ],
+            "name": "grapple_lp_20",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "34d5e7b2-ff6f-816d-b029-28a67cd090bc"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": -68.61585235595703,
+                            "z": -4.683099177782424e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.5840845704078674,
+                            "x": -0.5840845704078674,
+                            "y": -0.39855387806892395,
+                            "z": -0.3985539376735687
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "2fe4a233-6eae-14f4-3996-28c411f03101"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "dda7222b-4bcb-3faa-971b-75e4b4ab0b83"
+                }
+            ],
+            "name": "GrappleLine_21",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "38e0f99a-b2af-7ad8-a5a9-88fc3933da18"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19833374023438,
+                            "y": -68.61585998535156,
+                            "z": -4.683097813540371e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.5830727815628052,
+                            "x": 0.5850945711135864,
+                            "y": -0.39786359667778015,
+                            "z": 0.39924314618110657
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "2c652a1e-948f-1ce7-234a-c26d0e1d51cb"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "09b34934-4617-7fa8-596f-7afe67a7ee8d"
+                }
+            ],
+            "name": "grapple_lp_21",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "d9e26f27-8843-59b7-08ba-0587e5966e9a"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19833374023438,
+                            "y": -68.61585998535156,
+                            "z": -4.683097813540371e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.5830727815628052,
+                            "x": 0.5850945711135864,
+                            "y": -0.39786359667778015,
+                            "z": 0.39924314618110657
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "075869b5-58ca-57af-0ac2-6b40098a7e40"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "e4697335-4b09-6b11-67a0-6a4e68b3f5b1"
+                }
+            ],
+            "name": "grapple_lp_22",
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "6ae38213-7145-59b5-d706-893efba276f9"
         }
     ]
 }
