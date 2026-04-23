@@ -21,8 +21,8 @@ public class Enemy : Component
     protected Player target;
 
     private float attackCooldown;
-    private float attackPreparationTime;
-    private float attackReachDistance;
+    private float PreparationTime;
+    private float ReachDistance;
 
     private bool wanderRange = false;
     protected bool isAttacking;
@@ -87,8 +87,8 @@ public class Enemy : Component
         ResetWander();
 
         attackCooldown = attack_cooldown;
-        attackPreparationTime = attack_preparation_time;
-        attackReachDistance = attack_reach_distance;
+        PreparationTime = attack_preparation_time;
+        ReachDistance = attack_reach_distance;
         internal_hit_cooldown = 0.0f;
         target = Player.Instance;
 
@@ -140,7 +140,7 @@ public class Enemy : Component
         endedPreparingAttack = false;
         endedAttack = false;
         PlayAnimation("Armature|ChargeAttack", 0.0f);
-        while (timer < attackPreparationTime)
+        while (timer < PreparationTime)
         {
             timer += Time.deltaTime;
             yield return null;
@@ -149,7 +149,7 @@ public class Enemy : Component
         animator.Looping = false;
         endedPreparingAttack = true;
         attackBox.entity.SetActive(true);
-        if (attackBox.IsColliding || Vector3.Distance(transform.position, target.transform.position) < attackReachDistance)
+        if (attackBox.IsColliding || Vector3.Distance(transform.position, target.transform.position) < ReachDistance)
         {
             target.Effects.AddEffect(effect);
             Attack(damage);
@@ -268,8 +268,13 @@ public class Enemy : Component
         Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position + right * field_depth + transform.Up, Color.White);
         Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position + left * field_depth + transform.Up, Color.White);
     }
+
+    protected void DebugForcedDetection(float detection_distance)
+    {
+        Gizmo.DrawLine(transform.position + transform.Up, transform.position + transform.Up + GetDirectionToTarget()*detection_distance, Color.Red);
+    }
     #endregion
-    #region Visualw
+    #region Visual
     public void PlayAnimation(string clipName, float transitionTime)
     {
         if (!animator.InTransition)

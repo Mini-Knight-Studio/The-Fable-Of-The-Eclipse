@@ -4,38 +4,39 @@ using Loopie;
 
 class Blob : Enemy
 {
+    [Header("Global Enemy")]
     public Entity Reference;
-
-    public int BlobStage;
-    public float BlobStageSize;
-
+    public Vector2 ViewField;
+    public float ForcedDetectionDistance;
+    [Space(5)]
+    public int Damage;
+    public float ReachDistance;
+    public float KnockbackForce;
+    public float KnockbackTime;
+    [Space(5)]
+    public float PreparationTime;
+    public float AttackCooldown;
+    [Space(10)]
+    [Header("Blob")]
+    public int Stage;
+    public float StageScale;
+    [Space(5)]
     public int SplitAmmount;
     public float SplitDistance;
+
+    //Private//
+    [HideInInspector]
+    protected float parentY;
+
     private Vector3 SplitDirection;
     private bool spawn;
     private bool isSpawning;
-
-    protected float parentY;
-
-    public float ViewFieldWidth;
-    public float ViewFieldFar;
-
-    public float KnockbackForce;
-    public float KnockbackTime;
-
-    public int Damage;
-    public float AttackReachDistance;
-    public float AttackCooldownTime;
-    public float AttackPreparationTime;
-
-    public float TargetForcedDetectionDistance;
-
     private int LayerOverride;
 
     void OnCreate()
     {
-        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance * BlobStage, "Blob");
-        SetStage(BlobStage);
+        SetEnemy(Reference, AttackCooldown, PreparationTime, ReachDistance * Stage, "Blob");
+        SetStage(Stage);
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("PlayerTrigger");
         LayerOverride = EnemyLayer | PlayerHitLayer;
@@ -64,14 +65,14 @@ class Blob : Enemy
             attackBox.entity.SetActive(true);
             #region Movement
             
-            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar) || DetectedTargetInDistance(TargetForcedDetectionDistance))
+            if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(ForcedDetectionDistance))
             {
                 PlayAnimation("Armature|Chase", 0.25f);
                 transform.LookAt(target.transform.position, transform.Up);
-                movement.Move(BlobStage, transform.Forward);
+                movement.Move(Stage, transform.Forward);
                 ResetWander();
                 #region Attack
-                if (Vector3.Distance(target.transform.position, transform.position) < AttackReachDistance * BlobStage)
+                if (Vector3.Distance(target.transform.position, transform.position) < ReachDistance * Stage)
                 {
                     StartCoroutine(DoAttack(Damage));
                 }
@@ -80,14 +81,14 @@ class Blob : Enemy
             else
             {
                 PlayAnimation("Armature|IdleWalk", 0.25f);
-                Wander(ViewFieldWidth, ViewFieldFar * BlobStage, BlobStage);
+                Wander(ViewField.x, ViewField.y * Stage, Stage);
             }
             #endregion
         }
         #region Health
         if (health.IsDead())
         {
-            if (BlobStage > 1)
+            if (Stage > 1)
                 Split();
             entity.Destroy();
         }
@@ -96,8 +97,8 @@ class Blob : Enemy
 
     public void SetStage(int newStage)
     {
-        BlobStage = newStage;
-        transform.scale = Vector3.One * BlobStageSize * BlobStage;
+        Stage = newStage;
+        transform.scale = Vector3.One * StageScale * Stage;
     }
 
     private IEnumerator SplitLerp()
@@ -110,7 +111,7 @@ class Blob : Enemy
         while (timer < 1.0f)
         {
             timer += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * BlobStage * SplitDistance / 20.0f, timer);
+            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, timer);
             yield return null;
         }
         collision.RemoveExcludeMask(LayerOverride);
@@ -127,7 +128,7 @@ class Blob : Enemy
             Blob Blob_component = new_Blob.GetComponent<Blob>();
             Blob_component.collision.AddExcludeMask(LayerOverride);
             Blob_component.SplitDirection = new Vector3(Mathf.Sin(random + 180 * i / SplitAmmount), 0, Mathf.Cos(random + 180 * i / SplitAmmount));
-            Blob_component.SetStage(BlobStage - 1);
+            Blob_component.SetStage(Stage - 1);
             new_Blob.transform.position = transform.position;
             new_Blob.transform.rotation = transform.rotation;
             new_Blob.Name = entity.Name;
@@ -151,7 +152,8 @@ class Blob : Enemy
 
     void OnDrawGizmo()
     {
-        DebugViewField(ViewFieldWidth, ViewFieldFar);
+        DebugViewField(ViewField.x, ViewField.y);
+        DebugForcedDetection(ForcedDetectionDistance);
     }
 
     void OnDestroy()

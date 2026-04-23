@@ -25,6 +25,7 @@ public class PlayerCombat : PlayerComponent
         swordTriggerCollider = swordTriggerEntity.GetComponent<BoxCollider>();
         if (swordTriggerCollider != null) swordTriggerCollider.entity.SetActive(false);
         swordTriggerCollider.Trigger = true;
+
         attackSfxSource = attackSFXEntity.GetComponent<AudioSource>();
 
         attackTimer = 0.0f;
