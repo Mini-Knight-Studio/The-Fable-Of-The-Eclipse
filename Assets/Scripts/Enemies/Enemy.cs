@@ -20,7 +20,6 @@ public class Enemy : Component
 
     protected Player target;
 
-
     //-- Wander --//
     private bool wanderRange = false;
     private Vector3 lastWanderPosition;
@@ -29,10 +28,6 @@ public class Enemy : Component
     protected bool isAttacking;
     private Vector2 attack_stages; //x: ended preparing attack | y: ended attacking
     private float knockback_time;
-
-    private float attack_cooldown;
-    private float preparation_time;
-    private float reach_distance;
 
     public string type = "Enemy";
     #region Set Up
@@ -63,13 +58,13 @@ public class Enemy : Component
         }
         health.Init();
         wanderRange = false;
-        //ResetWander();
-
+        ResetWander();
 
         attackParticles.Enabled = false;
         hitParticles.Enabled = false;
     }
     #endregion
+
     #region Detection
     protected bool DetectedTargetInViewField(float field_width, float field_depth)
     {
@@ -108,31 +103,31 @@ public class Enemy : Component
     #endregion
 
     #region Attack
-    protected IEnumerator Attack(float reach_distance, float preparation_time, float attack_cooldown, int damage)
+    protected IEnumerator Attack(float reach_distance, float preparation_time, float attack_cooldown, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string idle_clip)
     {
         isAttacking = true;
-        DoChargeAttack();
+        DoChargeAttack(charge_attack_clip);
         yield return new WaitForSeconds(preparation_time);
-        DoAttack(reach_distance, damage);
+        DoAttack(reach_distance, damage, attack_clip);
         yield return new WaitForSeconds(animator.ClipDuration());
-        DoAttackCooldown();
+        DoAttackCooldown(cooldown_clip);
         yield return new WaitForSeconds(attack_cooldown);
-        EndAttack();
+        EndAttack(idle_clip);
         isAttacking = false;
     }
 
-    public virtual void DoChargeAttack()
+    public virtual void DoChargeAttack(string charge_attack_clip)
     {
         attack_stages = Vector2.Zero;
         movement.CanMove = false;
         transform.LookAt(target.transform.position, Vector3.Up);
-        animator.PlayClip("Armature|ChargeAttack", false, 0.0f);
+        animator.PlayClip(charge_attack_clip, false, 0.0f);
     }
 
-    public virtual void DoAttack(float reach_distance, int damage)
+    public virtual void DoAttack(float reach_distance, int damage, string attack_clip)
     {
         attack_stages.x = 1.0f;
-        animator.PlayClip("Armature|Attack", false, 0.0f);
+        animator.PlayClip(attack_clip, false, 0.0f);
         if (Mathf.Abs((float)Vector3.Distance(transform.position, target.transform.position)) <= reach_distance)
         {
             target.Effects.AddEffect(effect);
@@ -141,19 +136,20 @@ public class Enemy : Component
         }
     }
 
-    public virtual void DoAttackCooldown()
+    public virtual void DoAttackCooldown(string cooldown_clip)
     {
         attack_stages.y = 1.0f;
-        animator.PlayClip("Armature|IdleWalk", false, 0.0f);
+        animator.PlayClip(cooldown_clip, false, 0.0f);
     }
 
-    public virtual void EndAttack()
+    public virtual void EndAttack(string idle_clip)
     {
+        animator.PlayClip(idle_clip, false, 0.0f);
         attack_stages = Vector2.Zero;
         movement.CanMove = true;
     }
 
-    public virtual void Hit(int points, float force_scale)
+    public virtual void Hit(int points, float force_scale, string hit_clip)
     {
         if (OnHitCooldown() || !health.canBeDamaged) return;
         if (target.Combat.TemporalFunctionIsAttacking())
@@ -161,6 +157,7 @@ public class Enemy : Component
             if (hitbox.HasCollided)
             {
                 health.Damage(points);
+                animator.PlayClip(hit_clip, false, 0.0f, true);
                 StartCoroutine(movement.Push(points * force_scale, knockback_time, GetDirectionToTarget() * -1));
             }
         }

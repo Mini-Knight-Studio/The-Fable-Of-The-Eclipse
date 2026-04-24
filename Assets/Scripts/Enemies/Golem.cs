@@ -37,7 +37,7 @@ class Golem : Enemy
         {
             return;
         }
-        Hit(1, PushForceScale);
+        Hit(1, PushForceScale, "Armature|IdleWalk");
         if (!isAttacking)
         {
             if (ShieldLife > 0)
@@ -53,7 +53,7 @@ class Golem : Enemy
                 #region Attack
                 if (Vector3.Distance(target.transform.position, transform.position) < ReachDistance)
                 {
-                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage));
+                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|IdleWalk", "Armature|IdleWalk"));
                 }
                 #endregion
             }
@@ -74,14 +74,15 @@ class Golem : Enemy
         #endregion
     }
 
-    public override void Hit(int points, float force_scale)
+    public override void Hit(int points, float force_scale, string hit_clip)
     {
         if (isShielding && !OnHitCooldown())
         {
             ShieldLife--;
+            animator.PlayClip("Armature|IdleWalk", false, 0.0f, true);
         }
         else
-            base.Hit(points, force_scale);
+            base.Hit(points, force_scale, hit_clip);
     }
 
     void OnDrawGizmo()

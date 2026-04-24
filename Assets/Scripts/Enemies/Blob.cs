@@ -56,7 +56,7 @@ class Blob : Enemy
             StartCoroutine(SplitLerp());
         }
 
-        Hit(1, PushForceScale);
+        Hit(1, PushForceScale, "Armature|IdleWalk");
         if (!isSpawning && !isAttacking)
         {
             #region Movement
@@ -69,7 +69,7 @@ class Blob : Enemy
                 #region Attack
                 if (Vector3.Distance(target.transform.position, transform.position) < ReachDistance * Stage)
                 {
-                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage));
+                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|Chase", "Armature|Chase", "Armature|Chase", "Armature|Chase"));
                 }
                 #endregion
             }

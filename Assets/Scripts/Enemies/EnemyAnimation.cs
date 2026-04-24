@@ -23,13 +23,12 @@ public class EnemyAnimation : Component
             animation_timer -= animator.GetCurrentClipDuration();
     }
 
-    public void PlayClip(string clip_name, bool loop, float transition)
+    public void PlayClip(string clip_name, bool loop, float transition, bool reset = false)
     {
         animator.Looping = loop;
-        if (animator.GetCurrentClipName() == clip_name && !animator.InTransition) return;
-        if (animator.GetNextClipName() == clip_name && animator.InTransition) return;
+        if (animator.GetCurrentClipName() == clip_name && !animator.InTransition && !reset) return;
+        if (animator.GetNextClipName() == clip_name && animator.InTransition && !reset) return;
         animator.Play(clip_name, transition);
-        animation_timer = 0;
     }
 
     public float ClipDuration()
