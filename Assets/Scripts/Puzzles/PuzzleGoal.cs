@@ -44,7 +44,7 @@ class PuzzleGoal : Component
         Gem.GetComponent<BoxCollider>().SetActive(false);
 
         goalParticles = entity.GetComponent<ParticleComponent>();
-        goalParticles.SetActive(false);
+        goalParticles.Stop();
     }
 
     void OnUpdate()
@@ -63,7 +63,7 @@ class PuzzleGoal : Component
 
         if (!isMoving && !particlesSwitched)
         {
-            goalParticles.SetActive(false);
+            goalParticles.Stop();
             particlesSwitched = true;
         }
     }
@@ -129,7 +129,7 @@ class PuzzleGoal : Component
 
         isMoving = true;
 
-        goalParticles.SetActive(true);
+        goalParticles.Play();
         particlesSwitched = false;
     }
 

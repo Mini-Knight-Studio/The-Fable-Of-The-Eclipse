@@ -61,7 +61,7 @@ class MovingPillar : Component
         goalCollider = goalEntity.GetComponent<BoxCollider>();
         slideSFX = entity.GetComponent<AudioSource>();
         goalParticles = goalEntity.GetComponent<ParticleComponent>();
-        goalParticles.SetActive(false);
+        goalParticles.Stop();
 
         pushForward = pushForwardEntity.GetComponent<BoxCollider>();
         pushBack = pushBackEntity.GetComponent<BoxCollider>();
@@ -85,7 +85,7 @@ class MovingPillar : Component
             if (onGoalCalled && !stopedOnGoal)
             {
                 stopedOnGoal = true;
-                goalParticles.SetActive(false);
+                goalParticles.Stop();
             }
         }
     }
@@ -239,7 +239,7 @@ class MovingPillar : Component
 
         Debug.LogWarning("The pillar has reached its goal");
 
-        goalParticles.SetActive(true);
+        goalParticles.Play();
     }
 
     public void CompletePillarAuto()

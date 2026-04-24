@@ -62,9 +62,83 @@
                         }
                     },
                     "uuid": "54bc88f0-d9b1-87d0-3feb-48531f8d5332"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 1000,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": true,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "lifetime": 1.0,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 1.0,
+                                "sizeend": 1.0,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "poolindex": 999,
+                            "position": {
+                                "x": 11.947250366210938,
+                                "y": 11.061722755432129,
+                                "z": -8.047653198242188
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 100
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "753e91b2-dd0b-4e90-060b-15067370f78f"
                 }
             ],
             "name": "Air_Gem",
+            "order": 0,
             "parent_uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd",
             "static": true,
             "uuid": "b8f86ec8-a32b-6010-e0ec-c3025e1a34fa"
@@ -206,6 +280,7 @@
                 }
             ],
             "name": "AirTile",
+            "order": 0,
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
             "static": true,
             "uuid": "84b5b998-d514-87ed-c859-4a2dbc923019"
@@ -299,7 +374,8 @@
                 }
             ],
             "name": "PlayerCamera",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 0,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -345,6 +421,7 @@
                 }
             ],
             "name": "Plane_5_1_1",
+            "order": 1,
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
             "static": true,
             "uuid": "225ff386-5347-f47c-fcc5-f9ce66fd6e82"
@@ -391,6 +468,7 @@
                 }
             ],
             "name": "Plane",
+            "order": 0,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "2c965225-fbcd-f4c1-5156-5058bd156721"
@@ -407,7 +485,7 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 2.9802322387695313e-08,
+                            "x": 2.60770320892334e-08,
                             "y": 3.999999761581421,
                             "z": 0.0
                         },
@@ -504,6 +582,7 @@
                 }
             ],
             "name": "AirPillar",
+            "order": 0,
             "parent_uuid": "fb076017-00ea-c384-dd59-90aafe82e22d",
             "static": true,
             "uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9"
@@ -579,6 +658,7 @@
                 }
             ],
             "name": "Life_Bar",
+            "order": 0,
             "parent_uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3",
             "static": true,
             "uuid": "61822d7e-b4b2-8b04-58a0-f8a06bf826e7"
@@ -625,6 +705,7 @@
                 }
             ],
             "name": "Plane_5_1_2_1",
+            "order": 1,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "6ea53f93-e471-bc51-1961-ef6f94ff0625"
@@ -661,7 +742,8 @@
                 }
             ],
             "name": "Environment",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 1,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
@@ -707,6 +789,7 @@
                 }
             ],
             "name": "Plane_11_1",
+            "order": 2,
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
             "static": true,
             "uuid": "3d41989d-e7a3-5594-b91b-fa151dbedc9d"
@@ -753,6 +836,7 @@
                 }
             ],
             "name": "Plane_16_1_1",
+            "order": 2,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "52207d68-d354-3bff-ba16-2bb32fc33166"
@@ -799,6 +883,7 @@
                 }
             ],
             "name": "Plane_10",
+            "order": 3,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "e38f994f-d752-a0cd-2d7c-7ceea107b14b"
@@ -845,6 +930,7 @@
                 }
             ],
             "name": "Plane_9",
+            "order": 4,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "bd9737e3-f65c-928e-58af-91993420244a"
@@ -891,6 +977,7 @@
                 }
             ],
             "name": "Ground",
+            "order": 0,
             "parent_uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a",
             "static": true,
             "uuid": "50f50d06-afe4-a9e0-4257-79d24217bf30"
@@ -937,6 +1024,7 @@
                 }
             ],
             "name": "Plane_6",
+            "order": 5,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "5b329cd7-4f5b-b85e-5e1a-0812060e6908"
@@ -973,6 +1061,7 @@
                 }
             ],
             "name": "BW_Cape_Point1_3_L_jt",
+            "order": 0,
             "parent_uuid": "97dd106d-07f7-51c5-0ead-5f88cda48b37",
             "static": true,
             "uuid": "1d818310-6366-df53-5098-c676ad2521c0"
@@ -1048,6 +1137,7 @@
                 }
             ],
             "name": "Gems_Row",
+            "order": 1,
             "parent_uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3",
             "static": true,
             "uuid": "513e7d88-60fd-a10c-e572-b2b9b865233f"
@@ -1084,6 +1174,7 @@
                 }
             ],
             "name": "BW_Cape_Point2_L_jt",
+            "order": 0,
             "parent_uuid": "38e198b3-476f-5a85-59fc-e11b32fed398",
             "static": true,
             "uuid": "844bbb31-617d-2d2f-7ccb-3d7ec0b7ce70"
@@ -1130,6 +1221,7 @@
                 }
             ],
             "name": "Plane_11",
+            "order": 3,
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
             "static": true,
             "uuid": "030c4178-01c7-915b-48ed-016018e38d7c"
@@ -1176,6 +1268,7 @@
                 }
             ],
             "name": "Plane_15_2",
+            "order": 6,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "3265bff4-8953-d2f6-5667-fb6c71a78476"
@@ -1234,6 +1327,7 @@
                 }
             ],
             "name": "pushF_Earth",
+            "order": 0,
             "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
             "static": true,
             "uuid": "f399d9d9-001a-60b2-d708-95ccc774bd82"
@@ -1280,6 +1374,7 @@
                 }
             ],
             "name": "Plane_5",
+            "order": 0,
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "static": true,
             "uuid": "5dbf5ee0-915a-f339-0b4a-6e5b1013ac9e"
@@ -1326,6 +1421,7 @@
                 }
             ],
             "name": "Plane_5_1_2",
+            "order": 7,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "a10591ec-8719-cef4-3140-bbb36db60f09"
@@ -1362,6 +1458,7 @@
                 }
             ],
             "name": "CleanRow_1",
+            "order": 8,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d"
@@ -1408,6 +1505,7 @@
                 }
             ],
             "name": "Plane_5_1_1_1",
+            "order": 1,
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "static": true,
             "uuid": "31b628a5-325c-0442-5f9a-f74dbe5b2e6b"
@@ -1521,6 +1619,7 @@
                 }
             ],
             "name": "EarthPillar",
+            "order": 1,
             "parent_uuid": "fb076017-00ea-c384-dd59-90aafe82e22d",
             "static": true,
             "uuid": "0dd35820-8247-5742-a616-9ea8abb14a25"
@@ -1557,7 +1656,8 @@
                 }
             ],
             "name": "Puzzle_Borders",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 2,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "666815e3-731b-f199-1238-ff869804f25c"
         },
@@ -1603,6 +1703,7 @@
                 }
             ],
             "name": "Plane_3_1",
+            "order": 9,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "95193ace-4c4e-2808-07bf-bc2fb51b1e56"
@@ -1744,6 +1845,7 @@
                 }
             ],
             "name": "EarthTile",
+            "order": 10,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "43f32ffc-ad0e-0e3f-a7ca-41fd32d44176"
@@ -1790,6 +1892,7 @@
                 }
             ],
             "name": "Plane_6_1_1_1",
+            "order": 11,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "605c7d2f-8512-69f1-48a0-5355b67dbcd2"
@@ -1836,6 +1939,7 @@
                 }
             ],
             "name": "Plane_3",
+            "order": 12,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "4f08f7e1-d62a-363a-0578-7b99930f696a"
@@ -1872,6 +1976,7 @@
                 }
             ],
             "name": "BW_Tail2_Base_jt",
+            "order": 0,
             "parent_uuid": "35b6dbf8-d413-46ad-4b89-b745d64337f1",
             "static": true,
             "uuid": "4e500087-e432-9c0f-7192-1a48f0ca6132"
@@ -1918,6 +2023,7 @@
                 }
             ],
             "name": "Plane_2",
+            "order": 13,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "1fbaef38-b78d-54bf-09aa-4fa0c1886286"
@@ -1954,6 +2060,7 @@
                 }
             ],
             "name": "CleanRow",
+            "order": 14,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416"
@@ -2000,6 +2107,7 @@
                 }
             ],
             "name": "Plane_4_1",
+            "order": 15,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "01234f75-bc34-fe3c-5c5b-3c992d5aab64"
@@ -2046,6 +2154,7 @@
                 }
             ],
             "name": "Plane_4",
+            "order": 16,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "3fe54f47-b515-f937-e95d-a4c710367811"
@@ -2164,6 +2273,7 @@
                 }
             ],
             "name": "MainMenu",
+            "order": 0,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f"
@@ -2210,6 +2320,7 @@
                 }
             ],
             "name": "Plane_11_1",
+            "order": 2,
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "static": true,
             "uuid": "5e027124-5694-d945-d694-6cf8c4fbc97b"
@@ -2246,7 +2357,8 @@
                 }
             ],
             "name": "PuzzleBoard",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 3,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
@@ -2292,6 +2404,7 @@
                 }
             ],
             "name": "Plane_11",
+            "order": 3,
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "static": true,
             "uuid": "d005fce6-d1af-d439-bfae-59223cd6dcd5"
@@ -2433,6 +2546,7 @@
                 }
             ],
             "name": "WaterTile",
+            "order": 17,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "b1c84545-7c17-34f7-501a-8197e0b474c2"
@@ -2479,6 +2593,7 @@
                 }
             ],
             "name": "Plane_15",
+            "order": 18,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "bbc147bc-ac44-fe14-a8c8-a24410d4121b"
@@ -2525,6 +2640,7 @@
                 }
             ],
             "name": "Plane_15_1",
+            "order": 19,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "12609a44-4367-1bf6-f2ec-6282d03060e6"
@@ -2571,6 +2687,7 @@
                 }
             ],
             "name": "GrappleLine",
+            "order": 0,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "fe235637-ae42-f676-1a49-814938932021"
@@ -2629,6 +2746,7 @@
                 }
             ],
             "name": "pushB_Air",
+            "order": 0,
             "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
             "static": true,
             "uuid": "d36bbc19-1512-cbea-3b89-97195b7ca95e"
@@ -2675,6 +2793,7 @@
                 }
             ],
             "name": "Plane_16_1",
+            "order": 20,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "2f379191-f1cb-9044-25e7-50026f561022"
@@ -2721,6 +2840,7 @@
                 }
             ],
             "name": "Plane_15_3",
+            "order": 21,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "89c8a3ab-5db5-8f25-ae55-f1ea47d26e22"
@@ -2767,6 +2887,7 @@
                 }
             ],
             "name": "Plane_16",
+            "order": 22,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "afdfd870-f39e-8807-1966-b7f394b4da83"
@@ -2813,6 +2934,7 @@
                 }
             ],
             "name": "Plane_4_1_1_1",
+            "order": 23,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "7a1d7662-1d68-6ae3-3d18-4cf9d208959f"
@@ -2859,6 +2981,7 @@
                 }
             ],
             "name": "Plane_2_1",
+            "order": 24,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "83690ad0-31bd-a5f5-2d49-bf0c0a65dfb9"
@@ -2905,6 +3028,7 @@
                 }
             ],
             "name": "Plane_2_1_1",
+            "order": 25,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "ee0312a9-ae8a-c7c0-374f-3c5f160d11f9"
@@ -2951,6 +3075,7 @@
                 }
             ],
             "name": "pasted__pasted__pasted__pasted__pCube1",
+            "order": 0,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "9c7cab9c-341d-e0a2-61b1-dfe89f130a07"
@@ -2997,6 +3122,7 @@
                 }
             ],
             "name": "Plane_5_1",
+            "order": 4,
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "static": true,
             "uuid": "c22d5d2f-10f2-e2cf-9b91-7e5a0ba2ae20"
@@ -3043,6 +3169,7 @@
                 }
             ],
             "name": "Plane_10_1",
+            "order": 26,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "412a090f-a958-1b26-bf6a-43be4a831536"
@@ -3089,6 +3216,7 @@
                 }
             ],
             "name": "pasted__pasted__pasted__pasted__pasted__pCube1",
+            "order": 1,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "dfe95afb-0c45-b6aa-4215-1fc0d32143c7"
@@ -3135,6 +3263,7 @@
                 }
             ],
             "name": "Plane_10_1_1",
+            "order": 27,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "537d9a4b-2cbe-cf65-4879-7903a1141ffe"
@@ -3276,6 +3405,7 @@
                 }
             ],
             "name": "FireTile",
+            "order": 28,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "ca324d90-f87d-cdc5-983a-a55e1c9f8818"
@@ -3334,6 +3464,7 @@
                 }
             ],
             "name": "WallCollider_2",
+            "order": 0,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "9ede48f6-fb61-e297-3b37-51f2835c0fca"
@@ -3380,6 +3511,7 @@
                 }
             ],
             "name": "Plane_5_1_1",
+            "order": 5,
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "static": true,
             "uuid": "6a3457eb-354e-a38b-581a-9572f3a8748d"
@@ -3426,6 +3558,7 @@
                 }
             ],
             "name": "Plane_11_1_1",
+            "order": 6,
             "parent_uuid": "cea34b0b-7bee-432b-9de5-5e74b2f08416",
             "static": true,
             "uuid": "ae7a41f8-3f6e-8b40-1a6a-7f74acc8b517"
@@ -3472,6 +3605,7 @@
                 }
             ],
             "name": "Plane_6_1",
+            "order": 29,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "2cf053d8-2924-c2ea-b43d-d4bb22d272f1"
@@ -3518,6 +3652,7 @@
                 }
             ],
             "name": "Plane_6_1_1",
+            "order": 30,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "0f384e98-42d7-07e3-5a45-af2e018db829"
@@ -3554,6 +3689,7 @@
                 }
             ],
             "name": "BW_Cape_Point1_3_R_jt",
+            "order": 0,
             "parent_uuid": "c430e063-37de-bf2f-bf38-a9a0da92ccb5",
             "static": true,
             "uuid": "512864f5-f9be-e172-83e9-e31562528d0c"
@@ -3600,6 +3736,7 @@
                 }
             ],
             "name": "Plane_5",
+            "order": 4,
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
             "static": true,
             "uuid": "74292485-8a72-50a9-dd03-dda2936b5fa3"
@@ -3658,6 +3795,7 @@
                 }
             ],
             "name": "Puzzle_Border_3",
+            "order": 0,
             "parent_uuid": "666815e3-731b-f199-1238-ff869804f25c",
             "static": true,
             "uuid": "761808d5-d68b-c70d-c5b2-e1bf22d1bf45"
@@ -3704,6 +3842,7 @@
                 }
             ],
             "name": "Plane_5_1",
+            "order": 5,
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
             "static": true,
             "uuid": "7593e5ad-905d-5b06-b062-b9e4a2df1ac1"
@@ -3750,6 +3889,7 @@
                 }
             ],
             "name": "Plane_5_1_1_1",
+            "order": 6,
             "parent_uuid": "511e485c-47d2-6396-268e-fcdfe9207e3d",
             "static": true,
             "uuid": "ad1fec1a-f305-14e4-9a6f-6d10b182a96a"
@@ -3786,6 +3926,7 @@
                 }
             ],
             "name": "CleanRow_1_1",
+            "order": 31,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5"
@@ -3832,6 +3973,7 @@
                 }
             ],
             "name": "Plane_5",
+            "order": 0,
             "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
             "static": true,
             "uuid": "a496ad1f-c976-f7af-5690-f88208830983"
@@ -3878,6 +4020,7 @@
                 }
             ],
             "name": "Plane_11",
+            "order": 1,
             "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
             "static": true,
             "uuid": "d12e1a52-e471-4161-9ffc-93c8bb1a7d0e"
@@ -3924,6 +4067,7 @@
                 }
             ],
             "name": "Plane_5_1",
+            "order": 2,
             "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
             "static": true,
             "uuid": "a40e3104-c943-7d32-7c0f-428f3ee1e509"
@@ -3970,6 +4114,7 @@
                 }
             ],
             "name": "Plane_11_1",
+            "order": 3,
             "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
             "static": true,
             "uuid": "1a357f44-7619-badb-246f-0f4544815d5b"
@@ -4016,6 +4161,7 @@
                 }
             ],
             "name": "Plane_5_1_1",
+            "order": 4,
             "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
             "static": true,
             "uuid": "3c35e56a-545d-2e65-f322-bccae3a903ed"
@@ -4062,6 +4208,7 @@
                 }
             ],
             "name": "BW_eyes",
+            "order": 0,
             "parent_uuid": "773896bd-047a-070a-1457-c002bd65a38a",
             "static": true,
             "uuid": "ade99927-be2b-277e-7bbe-5a0cf3e4f480"
@@ -4108,6 +4255,7 @@
                 }
             ],
             "name": "Plane_11_1_1",
+            "order": 5,
             "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
             "static": true,
             "uuid": "fb138774-67b1-03ae-44ce-1ca4bd9fdefe"
@@ -4154,6 +4302,7 @@
                 }
             ],
             "name": "Plane_5_1_1_1",
+            "order": 6,
             "parent_uuid": "1c518640-468b-dc0e-565f-3858bfb52cf5",
             "static": true,
             "uuid": "9e46377e-0073-4de9-1695-1d6f24ef8410"
@@ -4200,6 +4349,7 @@
                 }
             ],
             "name": "Cube",
+            "order": 1,
             "parent_uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd",
             "static": true,
             "uuid": "3dd10b25-292f-f3c5-597a-5cf4bac0ee08"
@@ -4236,6 +4386,7 @@
                 }
             ],
             "name": "BW_Muzzle_jt",
+            "order": 0,
             "parent_uuid": "c0a2c8fc-55dc-2fa4-2917-a6adec49c5e2",
             "static": true,
             "uuid": "8639a2ea-2791-00fa-dc0d-257cff797aac"
@@ -4307,10 +4458,84 @@
                     },
                     "is_active": true,
                     "uuid": "1dc5b75a-a2eb-facc-9932-b04d60d613a7"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": false,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": true,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.4274509847164154,
+                                    "g": 0.4274509847164154,
+                                    "r": 0.4274509847164154
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.7568627595901489,
+                                    "g": 0.7568627595901489,
+                                    "r": 0.7568627595901489
+                                },
+                                "lifetime": 0.6499999761581421,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 1.25,
+                                "sizeend": 0.15000000596046448,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 2.0,
+                                    "y": 0.10000000149011612,
+                                    "z": 2.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 12.0,
+                                "y": 0.0,
+                                "z": -8.0
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 25
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "b7b4093a-fbc0-a2be-538a-a3fdafcb1777"
                 }
             ],
             "name": "Puzzle_Goal",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 4,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": false,
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
@@ -4368,6 +4593,7 @@
                 }
             ],
             "name": "Puzzle_Border_2",
+            "order": 1,
             "parent_uuid": "666815e3-731b-f199-1238-ff869804f25c",
             "static": true,
             "uuid": "8aaadfaf-d2d3-9c7b-f47b-a3c89fc03e48"
@@ -4426,6 +4652,7 @@
                 }
             ],
             "name": "Puzzle_Border",
+            "order": 2,
             "parent_uuid": "666815e3-731b-f199-1238-ff869804f25c",
             "static": true,
             "uuid": "c3fb6f7d-e29c-5426-799a-44f8380b5624"
@@ -4484,6 +4711,7 @@
                 }
             ],
             "name": "Puzzle_Border_1",
+            "order": 3,
             "parent_uuid": "666815e3-731b-f199-1238-ff869804f25c",
             "static": true,
             "uuid": "0026828f-ebe5-9041-1da7-3eb7405cec31"
@@ -4542,6 +4770,7 @@
                 }
             ],
             "name": "WallCollider_3",
+            "order": 1,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "23f69f1d-fca0-3bab-03a5-fec863fedd3b"
@@ -4571,7 +4800,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 168.07643127441406,
+                                "x": 170.14012145996094,
                                 "y": 108.0
                             }
                         },
@@ -4622,7 +4851,8 @@
                 }
             ],
             "name": "HUD",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 5,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3"
         },
@@ -4658,6 +4888,7 @@
                 }
             ],
             "name": "BW_Botom_BackHair2_L_jt",
+            "order": 0,
             "parent_uuid": "79c6afb9-4982-4c26-3afa-a7b7d746a285",
             "static": true,
             "uuid": "7e1bb0e8-cb10-37dd-1e4d-931af983abc4"
@@ -4694,6 +4925,7 @@
                 }
             ],
             "name": "BW_Cape_Point2_3_R_jt",
+            "order": 0,
             "parent_uuid": "59c82c3e-120a-e3a1-71a0-bcaf8880e59e",
             "static": true,
             "uuid": "9028e780-ebd5-0f16-fc51-9864d6106b89"
@@ -4752,6 +4984,7 @@
                 }
             ],
             "name": "pushR_Earth",
+            "order": 1,
             "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
             "static": true,
             "uuid": "6c1cda81-b840-a934-f3e0-6e5a85abdb7b"
@@ -4788,6 +5021,7 @@
                 }
             ],
             "name": "BW_HipBone_R_jt",
+            "order": 0,
             "parent_uuid": "c5ac6454-f07b-aff9-a3bf-337eb6751df3",
             "static": true,
             "uuid": "6acafe52-a4b3-1ba6-d4c6-99a17b202777"
@@ -4824,6 +5058,7 @@
                 }
             ],
             "name": "BW_FingersMid_R_jt",
+            "order": 0,
             "parent_uuid": "a8857823-830a-610b-5606-1d5749fb737f",
             "static": true,
             "uuid": "174136e8-6dbf-9ff1-73a2-be9f9af4169b"
@@ -4860,6 +5095,7 @@
                 }
             ],
             "name": "BW_Scapula_L_jt",
+            "order": 0,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "f8a09c30-7e04-8a36-1b8a-30c837a47431"
@@ -4918,6 +5154,7 @@
                 }
             ],
             "name": "WallCollider_5",
+            "order": 2,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "95e4bbf0-e550-34bd-a05b-f1ad5dbe1f5e"
@@ -4976,6 +5213,7 @@
                 }
             ],
             "name": "WallCollider_8",
+            "order": 3,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "9732918d-2397-bb9c-14b4-cb2808fe95a0"
@@ -5034,6 +5272,7 @@
                 }
             ],
             "name": "pushF_Fire",
+            "order": 0,
             "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
             "static": true,
             "uuid": "7061f17e-a69d-255a-7661-98173aa21f0f"
@@ -5092,6 +5331,7 @@
                 }
             ],
             "name": "pushB_Fire",
+            "order": 1,
             "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
             "static": true,
             "uuid": "affea250-c1a7-9f50-d6b3-c7c4f9613608"
@@ -5128,6 +5368,7 @@
                 }
             ],
             "name": "BW_Botom_SideHair2_L_jt",
+            "order": 0,
             "parent_uuid": "ba6e7ccf-92da-1a77-b41b-093e1a11046b",
             "static": true,
             "uuid": "f477a99a-ed12-4fc7-64e7-f9e6823bbdaa"
@@ -5164,6 +5405,7 @@
                 }
             ],
             "name": "BW_Top_MidBigHair_jt",
+            "order": 0,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "7396f20b-5648-576c-5813-bb8fd53d0b35"
@@ -5222,6 +5464,7 @@
                 }
             ],
             "name": "pushB_Water",
+            "order": 0,
             "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
             "static": true,
             "uuid": "80cf3233-9c08-195b-23e3-39fb7c730a20"
@@ -5258,6 +5501,7 @@
                 }
             ],
             "name": "Armature",
+            "order": 0,
             "parent_uuid": "bb2f06c8-f8e8-d1c5-da7a-df4a81dd8830",
             "static": true,
             "uuid": "3682d03d-2752-4f70-1cd7-320f32fa7418"
@@ -5319,6 +5563,7 @@
                 }
             ],
             "name": "Directional Light",
+            "order": 0,
             "parent_uuid": "07a093b1-5552-f8af-16ed-156f6110db5a",
             "static": true,
             "uuid": "42f65713-a2e2-d234-6343-d798b1443267"
@@ -5377,6 +5622,7 @@
                 }
             ],
             "name": "WallCollider_11",
+            "order": 4,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "5c4c28a9-ec18-69cc-9e24-d04d0bf9470f"
@@ -5413,6 +5659,7 @@
                 }
             ],
             "name": "BW_FingersMid_L_jt",
+            "order": 0,
             "parent_uuid": "e527cc65-ef9e-d0a6-bebe-ab50a3696bf7",
             "static": true,
             "uuid": "6697c3fb-b3bd-bfe2-ed76-08583d749052"
@@ -5471,6 +5718,7 @@
                 }
             ],
             "name": "pushF_Air",
+            "order": 1,
             "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
             "static": true,
             "uuid": "53b57763-be04-9db0-7cf7-7af0f740daf1"
@@ -5507,7 +5755,8 @@
                 }
             ],
             "name": "Lighting",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 6,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "07a093b1-5552-f8af-16ed-156f6110db5a"
         },
@@ -5568,6 +5817,7 @@
                 }
             ],
             "name": "Ambient Light",
+            "order": 1,
             "parent_uuid": "07a093b1-5552-f8af-16ed-156f6110db5a",
             "static": true,
             "uuid": "deba53fc-105b-2052-6078-9a77189bb58a"
@@ -5604,7 +5854,8 @@
                 }
             ],
             "name": "LunariTemple",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 7,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9"
         },
@@ -5650,6 +5901,7 @@
                 }
             ],
             "name": "pCube1",
+            "order": 2,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "4b2f4f74-6e70-d834-af8c-d6331aa04143"
@@ -5708,6 +5960,7 @@
                 }
             ],
             "name": "pushL_Earth",
+            "order": 2,
             "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
             "static": true,
             "uuid": "eb5b2c94-1dd5-e1c0-3ecf-4fd819aca2bb"
@@ -5744,7 +5997,8 @@
                 }
             ],
             "name": "Colliders",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 8,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be"
         },
@@ -5790,6 +6044,7 @@
                 }
             ],
             "name": "pasted__pCube1",
+            "order": 3,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "8dba5786-b260-8ec7-46c1-4b171d729490"
@@ -5834,6 +6089,7 @@
                 }
             ],
             "name": "pasted__pCube1_1",
+            "order": 4,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "c0ece8b1-9ecd-069a-a08b-93b492adba92"
@@ -5880,6 +6136,7 @@
                 }
             ],
             "name": "pasted__pCube3",
+            "order": 5,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "109242b3-a421-7380-8a89-ccf2065a15e2"
@@ -5926,6 +6183,7 @@
                 }
             ],
             "name": "pasted__pasted__pCube1",
+            "order": 6,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "befe07e8-758c-31a0-32c9-68c74ab8c339"
@@ -5962,6 +6220,7 @@
                 }
             ],
             "name": "BW_Mid_SideHair_L_jt",
+            "order": 1,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "fd02d452-49dc-1031-f69b-b55603e5684d"
@@ -6006,6 +6265,7 @@
                 }
             ],
             "name": "pasted__pasted__pCube1_1",
+            "order": 7,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "9eb4d18b-7f26-a344-a0b7-35fd75ef25da"
@@ -6042,6 +6302,7 @@
                 }
             ],
             "name": "PlayerSFX",
+            "order": 1,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "7dc2227d-da53-2120-71cc-d879424f34bb"
@@ -6100,6 +6361,7 @@
                 }
             ],
             "name": "pushR_Air",
+            "order": 2,
             "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
             "static": true,
             "uuid": "453fa0ba-fa09-33c1-ddf2-602145e14f39"
@@ -6146,6 +6408,7 @@
                 }
             ],
             "name": "pasted__pasted__pasted__pCube1",
+            "order": 8,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "d975c908-b980-9e25-abbc-8aa0fb1b07e8"
@@ -6190,6 +6453,7 @@
                 }
             ],
             "name": "pasted__pasted__pasted__pasted__pasted__pCube1_1",
+            "order": 9,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "208cbf97-8493-c692-9e0c-e75818a8eb16"
@@ -6236,6 +6500,7 @@
                 }
             ],
             "name": "pasted__pasted__pasted__pasted__pCube2",
+            "order": 10,
             "parent_uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9",
             "static": true,
             "uuid": "cb7d6281-86df-d43e-f822-8634a0d452c7"
@@ -6294,6 +6559,7 @@
                 }
             ],
             "name": "WallCollider",
+            "order": 5,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "8f8ba220-f56b-f747-04e8-c581108bc9b5"
@@ -6352,6 +6618,7 @@
                 }
             ],
             "name": "WallCollider_1",
+            "order": 6,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "ef8340d4-49ca-2c9b-cba1-b10672b7b95b"
@@ -6410,6 +6677,7 @@
                 }
             ],
             "name": "WallCollider_4",
+            "order": 7,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "1a1bde5c-22c2-5dc4-6e8d-b1db93a8c4fe"
@@ -6468,6 +6736,7 @@
                 }
             ],
             "name": "WallCollider_6",
+            "order": 8,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "79827790-0261-66a7-3430-dc3608a3902b"
@@ -6526,6 +6795,7 @@
                 }
             ],
             "name": "WallCollider_7",
+            "order": 9,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "26028d42-b2ee-bb69-53ca-3abc4f864250"
@@ -6584,6 +6854,7 @@
                 }
             ],
             "name": "WallCollider_9",
+            "order": 10,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "3825c04b-14c4-3e76-d5c5-d4bfb6ccefd4"
@@ -6642,6 +6913,7 @@
                 }
             ],
             "name": "WallCollider_10",
+            "order": 11,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "a18d7eff-ce6c-f11d-c1a2-8b2660fd537a"
@@ -6710,6 +6982,7 @@
                 }
             ],
             "name": "TransitionCollider",
+            "order": 12,
             "parent_uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be",
             "static": true,
             "uuid": "3eb1f158-b046-73ec-f150-3caf405d6aba"
@@ -6746,7 +7019,8 @@
                 }
             ],
             "name": "Pillars",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 9,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": false,
             "uuid": "fb076017-00ea-c384-dd59-90aafe82e22d"
         },
@@ -6790,7 +7064,8 @@
                 }
             ],
             "name": "puzzleDebugger",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 10,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "39b5386b-aea9-18a2-fd63-d9a0ae1855bd"
         },
@@ -6848,6 +7123,7 @@
                 }
             ],
             "name": "pushL_Air",
+            "order": 3,
             "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
             "static": true,
             "uuid": "7063484f-cf61-8d63-a2cf-88ae20021d56"
@@ -6906,6 +7182,7 @@
                 }
             ],
             "name": "pushB_Earth",
+            "order": 3,
             "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
             "static": true,
             "uuid": "b5dce982-3ece-b082-e8e4-ad109902681e"
@@ -7019,6 +7296,7 @@
                 }
             ],
             "name": "FirePillar",
+            "order": 2,
             "parent_uuid": "fb076017-00ea-c384-dd59-90aafe82e22d",
             "static": true,
             "uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158"
@@ -7077,6 +7355,7 @@
                 }
             ],
             "name": "pushR_Fire",
+            "order": 2,
             "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
             "static": true,
             "uuid": "c38b1926-b9e5-cb83-016e-499d6effa485"
@@ -7135,6 +7414,7 @@
                 }
             ],
             "name": "pushL_Fire",
+            "order": 3,
             "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
             "static": true,
             "uuid": "b4a98a1c-e163-ab67-866b-c991b579a9a4"
@@ -7248,6 +7528,7 @@
                 }
             ],
             "name": "WaterPillar",
+            "order": 3,
             "parent_uuid": "fb076017-00ea-c384-dd59-90aafe82e22d",
             "static": true,
             "uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e"
@@ -7306,6 +7587,7 @@
                 }
             ],
             "name": "pushF_Water",
+            "order": 1,
             "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
             "static": true,
             "uuid": "8e0224c2-7d2c-3a9d-415e-08ba92b821db"
@@ -7364,6 +7646,7 @@
                 }
             ],
             "name": "pushR_Water",
+            "order": 2,
             "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
             "static": true,
             "uuid": "0f366b9e-3f8a-4963-1c79-6d68fd9b3169"
@@ -7400,6 +7683,7 @@
                 }
             ],
             "name": "BW_Tail17_Base_jt",
+            "order": 0,
             "parent_uuid": "54f9759d-d59e-7c8f-e563-754ea936effb",
             "static": true,
             "uuid": "23ef193f-3dad-1431-0d60-a0787bbba7e1"
@@ -7458,6 +7742,7 @@
                 }
             ],
             "name": "pushL_Water",
+            "order": 3,
             "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
             "static": true,
             "uuid": "50ff8a0d-2538-b9d8-2dab-73e1b1d843f1"
@@ -7519,6 +7804,7 @@
                 }
             ],
             "name": "Spot Light",
+            "order": 2,
             "parent_uuid": "07a093b1-5552-f8af-16ed-156f6110db5a",
             "static": true,
             "uuid": "5df8999c-f1d4-901a-aeae-081d1d3a03d9"
@@ -7555,6 +7841,7 @@
                 }
             ],
             "name": "Air_Gem",
+            "order": 0,
             "parent_uuid": "b8f86ec8-a32b-6010-e0ec-c3025e1a34fa",
             "static": true,
             "uuid": "5f6dc03c-70ae-d0fc-7004-1ee1687570d9"
@@ -7601,6 +7888,7 @@
                 }
             ],
             "name": "pPlane1",
+            "order": 0,
             "parent_uuid": "5f6dc03c-70ae-d0fc-7004-1ee1687570d9",
             "static": true,
             "uuid": "1be93133-31a2-2ffa-b912-07d6452f3769"
@@ -7807,7 +8095,8 @@
                 }
             ],
             "name": "Player",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 11,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": false,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -7843,6 +8132,7 @@
                 }
             ],
             "name": "BW_Botom_BackHair3_L_jt",
+            "order": 0,
             "parent_uuid": "7e1bb0e8-cb10-37dd-1e4d-931af983abc4",
             "static": true,
             "uuid": "576aee6d-0b0c-2067-9017-c8dfc2f0b1bc"
@@ -7889,6 +8179,7 @@
                 }
             ],
             "name": "GrappleLine_4",
+            "order": 2,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "2a9de9d1-48d7-d65d-ddd5-4544bb9b86d4"
@@ -7925,6 +8216,7 @@
                 }
             ],
             "name": "BW_Waist_jt",
+            "order": 0,
             "parent_uuid": "d6cb79a6-0d5c-5fdf-ae03-48a435b1989f",
             "static": true,
             "uuid": "29cf764c-6020-50d7-5c9f-d8c7f427dcb8"
@@ -7971,6 +8263,7 @@
                 }
             ],
             "name": "grapple_lp_8",
+            "order": 3,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "201aec9a-1c87-71a2-66c3-30c84138d0ad"
@@ -8017,6 +8310,7 @@
                 }
             ],
             "name": "grapple_lp_1",
+            "order": 4,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "5989e75f-6ea2-e698-b377-9b1f866e186d"
@@ -8063,6 +8357,7 @@
                 }
             ],
             "name": "grapple_lp_4",
+            "order": 5,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "c1c93218-a49a-bf47-db92-d99fb26a625c"
@@ -8121,6 +8416,7 @@
                 }
             ],
             "name": "PlayerSwordTrigger",
+            "order": 6,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "857b8823-128d-4571-4dc6-521df2ac5fc6"
@@ -8167,6 +8463,7 @@
                 }
             ],
             "name": "GrappleLine_11",
+            "order": 7,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "9eabf3fe-0739-23be-840a-c32861e44673"
@@ -8213,6 +8510,7 @@
                 }
             ],
             "name": "GrappleLine_9",
+            "order": 8,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e51ef564-535a-e386-5146-fd7fa2300cea"
@@ -8259,6 +8557,7 @@
                 }
             ],
             "name": "grapple_lp_10",
+            "order": 9,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e09fceef-1504-d713-b9a3-d9b14e1c97f5"
@@ -8305,6 +8604,7 @@
                 }
             ],
             "name": "GrappleLine_3",
+            "order": 10,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "f87a2051-93a7-190c-2dd4-1cbcafa2f4d3"
@@ -8351,6 +8651,7 @@
                 }
             ],
             "name": "grapple_lp",
+            "order": 11,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "8e4c57a3-7350-1eec-f60a-820865d5d4ab"
@@ -8397,6 +8698,7 @@
                 }
             ],
             "name": "GrappleLine_21",
+            "order": 12,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "5b2272af-e2b4-920e-9de6-e289723a4aae"
@@ -8443,6 +8745,7 @@
                 }
             ],
             "name": "GrappleLine_7",
+            "order": 13,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "28bb5a6c-986f-e5ea-d64b-d6ad6835fcdc"
@@ -8489,6 +8792,7 @@
                 }
             ],
             "name": "grapple_lp_3",
+            "order": 14,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "88c352cc-5349-43f5-c790-d2d3b2920f7c"
@@ -8535,6 +8839,7 @@
                 }
             ],
             "name": "GrappleLine_6",
+            "order": 15,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "1ada4bc3-bfa9-d4a7-75c0-0fb35286c0b2"
@@ -8571,6 +8876,7 @@
                 }
             ],
             "name": "BW_Mid_SideHair2_L_jt",
+            "order": 0,
             "parent_uuid": "fd02d452-49dc-1031-f69b-b55603e5684d",
             "static": true,
             "uuid": "32a6b48f-ec84-4d73-99bc-de0984dc790a"
@@ -8617,6 +8923,7 @@
                 }
             ],
             "name": "GrappleLine_1",
+            "order": 16,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e9879e38-4a46-3244-5725-5c42fa3dad70"
@@ -8663,6 +8970,7 @@
                 }
             ],
             "name": "GrappleLine_18",
+            "order": 17,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e2f52447-0a10-2cd7-ca61-f66cad12d599"
@@ -8728,6 +9036,7 @@
                 }
             ],
             "name": "PlayerModel",
+            "order": 18,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "773896bd-047a-070a-1457-c002bd65a38a"
@@ -8764,6 +9073,7 @@
                 }
             ],
             "name": "RootNode",
+            "order": 1,
             "parent_uuid": "773896bd-047a-070a-1457-c002bd65a38a",
             "static": true,
             "uuid": "bb2f06c8-f8e8-d1c5-da7a-df4a81dd8830"
@@ -8800,6 +9110,7 @@
                 }
             ],
             "name": "BW_Root_jt",
+            "order": 0,
             "parent_uuid": "3682d03d-2752-4f70-1cd7-320f32fa7418",
             "static": true,
             "uuid": "d2b53dcd-0858-2914-dd85-5443f013c50e"
@@ -8836,6 +9147,7 @@
                 }
             ],
             "name": "BW_Crotch_jt",
+            "order": 0,
             "parent_uuid": "d2b53dcd-0858-2914-dd85-5443f013c50e",
             "static": true,
             "uuid": "c5ac6454-f07b-aff9-a3bf-337eb6751df3"
@@ -8872,6 +9184,7 @@
                 }
             ],
             "name": "BW_HipBone_L_jt",
+            "order": 1,
             "parent_uuid": "c5ac6454-f07b-aff9-a3bf-337eb6751df3",
             "static": true,
             "uuid": "75213e64-dd77-7f5f-25d6-28a22eef5e99"
@@ -8908,6 +9221,7 @@
                 }
             ],
             "name": "BW_Knee_L_jt",
+            "order": 0,
             "parent_uuid": "75213e64-dd77-7f5f-25d6-28a22eef5e99",
             "static": true,
             "uuid": "521b08bb-7b71-32b0-08fa-567d7be43b50"
@@ -8944,6 +9258,7 @@
                 }
             ],
             "name": "BW_Talon_L_jt",
+            "order": 0,
             "parent_uuid": "521b08bb-7b71-32b0-08fa-567d7be43b50",
             "static": true,
             "uuid": "115380ad-4094-6b1c-a0c4-00c4c0f46c25"
@@ -8980,6 +9295,7 @@
                 }
             ],
             "name": "BW_Heel_L_jt",
+            "order": 0,
             "parent_uuid": "115380ad-4094-6b1c-a0c4-00c4c0f46c25",
             "static": true,
             "uuid": "bd4a997e-b45b-5aa7-1151-25be567997c4"
@@ -9016,6 +9332,7 @@
                 }
             ],
             "name": "BW_Toe_L_jt",
+            "order": 0,
             "parent_uuid": "bd4a997e-b45b-5aa7-1151-25be567997c4",
             "static": true,
             "uuid": "70eee1a7-6bec-8c36-28bf-ebd655c7ad5a"
@@ -9052,6 +9369,7 @@
                 }
             ],
             "name": "BW_ToeTip_L_jt",
+            "order": 0,
             "parent_uuid": "70eee1a7-6bec-8c36-28bf-ebd655c7ad5a",
             "static": true,
             "uuid": "f5986504-81f3-6401-13e1-58eb5b748902"
@@ -9088,6 +9406,7 @@
                 }
             ],
             "name": "BW_Hip_jt",
+            "order": 2,
             "parent_uuid": "c5ac6454-f07b-aff9-a3bf-337eb6751df3",
             "static": true,
             "uuid": "d6cb79a6-0d5c-5fdf-ae03-48a435b1989f"
@@ -9124,6 +9443,7 @@
                 }
             ],
             "name": "BW_Chest_jt",
+            "order": 0,
             "parent_uuid": "29cf764c-6020-50d7-5c9f-d8c7f427dcb8",
             "static": true,
             "uuid": "183e665c-cd21-e707-519c-835915d2ee4c"
@@ -9160,6 +9480,7 @@
                 }
             ],
             "name": "BW_Cleavage_jt",
+            "order": 0,
             "parent_uuid": "183e665c-cd21-e707-519c-835915d2ee4c",
             "static": true,
             "uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355"
@@ -9196,6 +9517,7 @@
                 }
             ],
             "name": "BW_Shoulder_CapePeak_L_jt",
+            "order": 1,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "cea9fb41-8f4c-d57f-4196-f9ca6091cb3e"
@@ -9232,6 +9554,7 @@
                 }
             ],
             "name": "BW_Shoulder_CapePeak2_L_jt",
+            "order": 0,
             "parent_uuid": "cea9fb41-8f4c-d57f-4196-f9ca6091cb3e",
             "static": true,
             "uuid": "6e9cb30b-2d49-64ed-f08c-07b3c3614794"
@@ -9268,6 +9591,7 @@
                 }
             ],
             "name": "BW_Shoulder_CapePeak3_L_jt",
+            "order": 0,
             "parent_uuid": "6e9cb30b-2d49-64ed-f08c-07b3c3614794",
             "static": true,
             "uuid": "93415a14-7e15-4992-0a17-4dc567122acd"
@@ -9304,6 +9628,7 @@
                 }
             ],
             "name": "BW_Cape_Top_R_jt",
+            "order": 2,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "225b3cc8-3589-d864-ded3-84e95720942c"
@@ -9340,6 +9665,7 @@
                 }
             ],
             "name": "BW_Cape_Mid_R_jt",
+            "order": 0,
             "parent_uuid": "225b3cc8-3589-d864-ded3-84e95720942c",
             "static": true,
             "uuid": "5e624420-4f35-0a45-0b96-11da795a6ec1"
@@ -9376,6 +9702,7 @@
                 }
             ],
             "name": "BW_Cape_Point1_R_jt",
+            "order": 0,
             "parent_uuid": "5e624420-4f35-0a45-0b96-11da795a6ec1",
             "static": true,
             "uuid": "cd543e24-80b5-0072-8a2d-201a289f80c8"
@@ -9412,6 +9739,7 @@
                 }
             ],
             "name": "BW_Cape_Point1_2_R_jt",
+            "order": 0,
             "parent_uuid": "cd543e24-80b5-0072-8a2d-201a289f80c8",
             "static": true,
             "uuid": "c430e063-37de-bf2f-bf38-a9a0da92ccb5"
@@ -9448,6 +9776,7 @@
                 }
             ],
             "name": "BW_Cape_Bottom_R_jt",
+            "order": 1,
             "parent_uuid": "5e624420-4f35-0a45-0b96-11da795a6ec1",
             "static": true,
             "uuid": "b57cf377-edc0-dac0-426a-b217ceb81da4"
@@ -9484,6 +9813,7 @@
                 }
             ],
             "name": "BW_Cape_Point2_R_jt",
+            "order": 0,
             "parent_uuid": "b57cf377-edc0-dac0-426a-b217ceb81da4",
             "static": true,
             "uuid": "d0d4b0e1-0cd7-4ff6-029b-6136d506b289"
@@ -9520,6 +9850,7 @@
                 }
             ],
             "name": "BW_Cape_Point2_2_R_jt",
+            "order": 0,
             "parent_uuid": "d0d4b0e1-0cd7-4ff6-029b-6136d506b289",
             "static": true,
             "uuid": "59c82c3e-120a-e3a1-71a0-bcaf8880e59e"
@@ -9556,6 +9887,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_R_jt",
+            "order": 1,
             "parent_uuid": "b57cf377-edc0-dac0-426a-b217ceb81da4",
             "static": true,
             "uuid": "b15ded80-3c42-194d-9ef2-0bf4f81ba80b"
@@ -9592,6 +9924,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_2_R_jt",
+            "order": 0,
             "parent_uuid": "b15ded80-3c42-194d-9ef2-0bf4f81ba80b",
             "static": true,
             "uuid": "fd46c92c-b4c8-a8d8-a268-f3eedf574f73"
@@ -9638,6 +9971,7 @@
                 }
             ],
             "name": "grapple_lp_19",
+            "order": 19,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "3f658500-c7f2-8b6f-cba1-32b858bdac41"
@@ -9674,6 +10008,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_3_R_jt",
+            "order": 0,
             "parent_uuid": "fd46c92c-b4c8-a8d8-a268-f3eedf574f73",
             "static": true,
             "uuid": "0e9ddccf-1f4b-f5d9-d458-caa556026ad9"
@@ -9710,6 +10045,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_4_R_jt",
+            "order": 0,
             "parent_uuid": "0e9ddccf-1f4b-f5d9-d458-caa556026ad9",
             "static": true,
             "uuid": "235811b4-5e41-22a6-39fe-16122563a00c"
@@ -9746,6 +10082,7 @@
                 }
             ],
             "name": "BW_Shoulder_CapePeak_R_jt",
+            "order": 3,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "9b927561-f03e-7823-8718-e8fd5f466d77"
@@ -9782,6 +10119,7 @@
                 }
             ],
             "name": "BW_Shoulder_CapePeak2_R_jt",
+            "order": 0,
             "parent_uuid": "9b927561-f03e-7823-8718-e8fd5f466d77",
             "static": true,
             "uuid": "c260ce74-0ddf-72b8-d7b2-7459bdddbdb0"
@@ -9818,6 +10156,7 @@
                 }
             ],
             "name": "BW_Shoulder_CapePeak3_R_jt",
+            "order": 0,
             "parent_uuid": "c260ce74-0ddf-72b8-d7b2-7459bdddbdb0",
             "static": true,
             "uuid": "08dce40a-ffdc-3c54-b962-677255b72a42"
@@ -9854,6 +10193,7 @@
                 }
             ],
             "name": "BW_Shoulder_L_jt",
+            "order": 0,
             "parent_uuid": "f8a09c30-7e04-8a36-1b8a-30c837a47431",
             "static": true,
             "uuid": "574f14e2-e938-b07d-9f0c-a071e11efeb8"
@@ -9890,6 +10230,7 @@
                 }
             ],
             "name": "BW_Elbow_L_jt",
+            "order": 0,
             "parent_uuid": "574f14e2-e938-b07d-9f0c-a071e11efeb8",
             "static": true,
             "uuid": "2a396584-7e42-6c6c-2f13-59dda9e983e2"
@@ -9926,6 +10267,7 @@
                 }
             ],
             "name": "BW_Wrist_L_jt",
+            "order": 0,
             "parent_uuid": "2a396584-7e42-6c6c-2f13-59dda9e983e2",
             "static": true,
             "uuid": "d08a98b4-21c2-22e5-c398-58618d754e6a"
@@ -9962,6 +10304,7 @@
                 }
             ],
             "name": "BW_WeaponHook_L_jt",
+            "order": 0,
             "parent_uuid": "d08a98b4-21c2-22e5-c398-58618d754e6a",
             "static": true,
             "uuid": "1f5d241e-9bdd-0067-5859-fe317208d94a"
@@ -9998,6 +10341,7 @@
                 }
             ],
             "name": "BW_ThumbBase_L_jt",
+            "order": 1,
             "parent_uuid": "d08a98b4-21c2-22e5-c398-58618d754e6a",
             "static": true,
             "uuid": "345dd8bb-7b21-a91f-2519-a18f3c2cbd4a"
@@ -10034,6 +10378,7 @@
                 }
             ],
             "name": "BW_ThumbMid_L_jt",
+            "order": 0,
             "parent_uuid": "345dd8bb-7b21-a91f-2519-a18f3c2cbd4a",
             "static": true,
             "uuid": "5620d245-b8c9-ca83-3925-f86b31765713"
@@ -10070,6 +10415,7 @@
                 }
             ],
             "name": "BW_ThumbTip_L_jt",
+            "order": 0,
             "parent_uuid": "5620d245-b8c9-ca83-3925-f86b31765713",
             "static": true,
             "uuid": "5039d842-fb9c-feaf-656b-789813d5d062"
@@ -10106,6 +10452,7 @@
                 }
             ],
             "name": "BW_FingersBase_L_jt",
+            "order": 2,
             "parent_uuid": "d08a98b4-21c2-22e5-c398-58618d754e6a",
             "static": true,
             "uuid": "e527cc65-ef9e-d0a6-bebe-ab50a3696bf7"
@@ -10142,6 +10489,7 @@
                 }
             ],
             "name": "BW_FingersTip_L_jt",
+            "order": 0,
             "parent_uuid": "6697c3fb-b3bd-bfe2-ed76-08583d749052",
             "static": true,
             "uuid": "f593872a-f76e-d414-21cc-ff3ef6969e9b"
@@ -10178,6 +10526,7 @@
                 }
             ],
             "name": "BW_Scapula_R_jt",
+            "order": 4,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "f6f6ac4a-0b76-27d5-5a01-9228725903e3"
@@ -10214,6 +10563,7 @@
                 }
             ],
             "name": "BW_Shoulder_R_jt",
+            "order": 0,
             "parent_uuid": "f6f6ac4a-0b76-27d5-5a01-9228725903e3",
             "static": true,
             "uuid": "4aaa76de-c580-ce48-2d71-33f89572ade9"
@@ -10250,6 +10600,7 @@
                 }
             ],
             "name": "BW_Elbow_R_jt",
+            "order": 0,
             "parent_uuid": "4aaa76de-c580-ce48-2d71-33f89572ade9",
             "static": true,
             "uuid": "1328345e-7b4c-0fbf-f157-612a6e36ef14"
@@ -10286,6 +10637,7 @@
                 }
             ],
             "name": "BW_Wrist_R_jt",
+            "order": 0,
             "parent_uuid": "1328345e-7b4c-0fbf-f157-612a6e36ef14",
             "static": true,
             "uuid": "ae8ecf36-2cee-5494-4ae0-6742acaaaa9e"
@@ -10322,6 +10674,7 @@
                 }
             ],
             "name": "BW_ThumbBase_R_jt",
+            "order": 0,
             "parent_uuid": "ae8ecf36-2cee-5494-4ae0-6742acaaaa9e",
             "static": true,
             "uuid": "62529919-b4d9-fa0f-e12a-4db752cff78c"
@@ -10358,6 +10711,7 @@
                 }
             ],
             "name": "BW_ThumbMid_R_jt",
+            "order": 0,
             "parent_uuid": "62529919-b4d9-fa0f-e12a-4db752cff78c",
             "static": true,
             "uuid": "6cfbc591-a920-a477-8d92-6f5c153c7666"
@@ -10394,6 +10748,7 @@
                 }
             ],
             "name": "BW_ThumbTip_R_jt",
+            "order": 0,
             "parent_uuid": "6cfbc591-a920-a477-8d92-6f5c153c7666",
             "static": true,
             "uuid": "a9cfb633-fa23-82fe-5a71-000783e3ab03"
@@ -10430,6 +10785,7 @@
                 }
             ],
             "name": "BW_FingersBase_R_jt",
+            "order": 1,
             "parent_uuid": "ae8ecf36-2cee-5494-4ae0-6742acaaaa9e",
             "static": true,
             "uuid": "a8857823-830a-610b-5606-1d5749fb737f"
@@ -10466,6 +10822,7 @@
                 }
             ],
             "name": "BW_FingersTip_R_jt",
+            "order": 0,
             "parent_uuid": "174136e8-6dbf-9ff1-73a2-be9f9af4169b",
             "static": true,
             "uuid": "439249be-c519-112c-d30c-f749e35e21e3"
@@ -10502,6 +10859,7 @@
                 }
             ],
             "name": "BW_WeaponHook_R_jt",
+            "order": 2,
             "parent_uuid": "ae8ecf36-2cee-5494-4ae0-6742acaaaa9e",
             "static": true,
             "uuid": "1844728f-8421-2ed0-7185-f578b51eda3c"
@@ -10538,6 +10896,7 @@
                 }
             ],
             "name": "BW_Front_CapePeak_jt",
+            "order": 5,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "c319a2fe-cc53-dde0-f3eb-ce4806f9e749"
@@ -10574,6 +10933,7 @@
                 }
             ],
             "name": "BW_Tail7_Base_jt",
+            "order": 0,
             "parent_uuid": "82c34844-fa04-5c43-bfa1-358018c0b045",
             "static": true,
             "uuid": "fb9b1885-c040-2238-4fbb-227308195e42"
@@ -10610,6 +10970,7 @@
                 }
             ],
             "name": "BW_Front_Peak2_jt",
+            "order": 0,
             "parent_uuid": "c319a2fe-cc53-dde0-f3eb-ce4806f9e749",
             "static": true,
             "uuid": "0933e117-29d6-0436-a5de-27f7afb36b80"
@@ -10646,6 +11007,7 @@
                 }
             ],
             "name": "BW_Front_Peak3_jt",
+            "order": 0,
             "parent_uuid": "0933e117-29d6-0436-a5de-27f7afb36b80",
             "static": true,
             "uuid": "4a671384-a703-bc22-2a92-8bbf1f5a3332"
@@ -10682,6 +11044,7 @@
                 }
             ],
             "name": "BW_Neck_jt",
+            "order": 6,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "667fd867-cca9-5e4d-443e-0464e8b45ccb"
@@ -10718,6 +11081,7 @@
                 }
             ],
             "name": "BW_Jaw_jt",
+            "order": 0,
             "parent_uuid": "667fd867-cca9-5e4d-443e-0464e8b45ccb",
             "static": true,
             "uuid": "c0a2c8fc-55dc-2fa4-2917-a6adec49c5e2"
@@ -10754,6 +11118,7 @@
                 }
             ],
             "name": "BW_Head_jt",
+            "order": 1,
             "parent_uuid": "c0a2c8fc-55dc-2fa4-2917-a6adec49c5e2",
             "static": true,
             "uuid": "7b97b595-15ab-5dc8-18a7-724971395200"
@@ -10790,6 +11155,7 @@
                 }
             ],
             "name": "BW_Eye_R_jt",
+            "order": 2,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "489282fa-6915-59f0-27d7-7ac613ddd5ed"
@@ -10826,6 +11192,7 @@
                 }
             ],
             "name": "BW_TopHead_jt",
+            "order": 3,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "aaddd5de-1d32-4a21-f04e-e684f4d91834"
@@ -10862,6 +11229,7 @@
                 }
             ],
             "name": "BW_Top_SideHair_R_jt",
+            "order": 4,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "caeb7e26-994d-300d-5b98-4937223a2de5"
@@ -10898,6 +11266,7 @@
                 }
             ],
             "name": "BW_Top_SideHair2_R_jt",
+            "order": 0,
             "parent_uuid": "caeb7e26-994d-300d-5b98-4937223a2de5",
             "static": true,
             "uuid": "33e4bf49-427e-d2a0-b86c-946c298af2b9"
@@ -10934,6 +11303,7 @@
                 }
             ],
             "name": "BW_Mid_SideHair_R_jt",
+            "order": 5,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "4ae8eabf-c7bb-c9b7-9ec3-4953a58884f7"
@@ -10970,6 +11340,7 @@
                 }
             ],
             "name": "BW_Mid_SideHair2_R_jt",
+            "order": 0,
             "parent_uuid": "4ae8eabf-c7bb-c9b7-9ec3-4953a58884f7",
             "static": true,
             "uuid": "7bcc7369-357f-f885-ab55-159a902622bf"
@@ -11006,6 +11377,7 @@
                 }
             ],
             "name": "BW_Front_Hair_jt",
+            "order": 6,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "d4241246-6ac5-9638-762e-80ef79c5b00e"
@@ -11042,6 +11414,7 @@
                 }
             ],
             "name": "BW_Front_Hair2_jt",
+            "order": 0,
             "parent_uuid": "d4241246-6ac5-9638-762e-80ef79c5b00e",
             "static": true,
             "uuid": "1cec00b9-afe7-dd03-f542-7d9983be8617"
@@ -11078,6 +11451,7 @@
                 }
             ],
             "name": "BW_Front_Hair3_jt",
+            "order": 0,
             "parent_uuid": "1cec00b9-afe7-dd03-f542-7d9983be8617",
             "static": true,
             "uuid": "56a76605-c895-3316-3777-b5f7101ae685"
@@ -11114,6 +11488,7 @@
                 }
             ],
             "name": "BW_Botom_BackHair_R_jt",
+            "order": 7,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "80149a94-d0d4-2953-c748-2d8f2d4b8c48"
@@ -11150,6 +11525,7 @@
                 }
             ],
             "name": "BW_Botom_BackHair2_R_jt",
+            "order": 0,
             "parent_uuid": "80149a94-d0d4-2953-c748-2d8f2d4b8c48",
             "static": true,
             "uuid": "e7885fe2-6115-0965-a431-046b999867dd"
@@ -11186,6 +11562,7 @@
                 }
             ],
             "name": "BW_Top_SideHair_L_jt",
+            "order": 8,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "2d4e6f1e-8d71-5e70-c1be-3edaaef16894"
@@ -11222,6 +11599,7 @@
                 }
             ],
             "name": "BW_Top_SideHair2_L_jt",
+            "order": 0,
             "parent_uuid": "2d4e6f1e-8d71-5e70-c1be-3edaaef16894",
             "static": true,
             "uuid": "18878bfc-64c7-d1bf-530e-286aa148381a"
@@ -11258,6 +11636,7 @@
                 }
             ],
             "name": "BW_Botom_SideHair_L_jt",
+            "order": 9,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "ba6e7ccf-92da-1a77-b41b-093e1a11046b"
@@ -11294,6 +11673,7 @@
                 }
             ],
             "name": "BW_UpperEyelid_L_jt",
+            "order": 10,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "7e627d93-afe4-9b17-5c77-68c04ee4799c"
@@ -11330,6 +11710,7 @@
                 }
             ],
             "name": "BW_Eye_L_jt",
+            "order": 11,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "204b2549-a2d1-9935-2adc-a5ed68f3cdfd"
@@ -11366,6 +11747,7 @@
                 }
             ],
             "name": "BW_Back_SideHair_L_jt",
+            "order": 12,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "39755b7e-36b2-cbf3-45f8-bdeb4ffafdca"
@@ -11402,6 +11784,7 @@
                 }
             ],
             "name": "BW_Back_SideHair2_L_jt",
+            "order": 0,
             "parent_uuid": "39755b7e-36b2-cbf3-45f8-bdeb4ffafdca",
             "static": true,
             "uuid": "9a7d50ec-b008-881b-9393-4501758293f3"
@@ -11438,6 +11821,7 @@
                 }
             ],
             "name": "BW_Back_SideHair2_L_jt.001",
+            "order": 0,
             "parent_uuid": "9a7d50ec-b008-881b-9393-4501758293f3",
             "static": true,
             "uuid": "c9f7fceb-4e55-5f88-fcd4-fdb2f8fbfecd"
@@ -11474,6 +11858,7 @@
                 }
             ],
             "name": "BW_Botom_BackHair_L_jt",
+            "order": 13,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "79c6afb9-4982-4c26-3afa-a7b7d746a285"
@@ -11510,6 +11895,7 @@
                 }
             ],
             "name": "BW_Top_Backhair_L_jt",
+            "order": 14,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "6b591bd9-c26c-1dcb-1456-b8a89ad9b7af"
@@ -11546,6 +11932,7 @@
                 }
             ],
             "name": "BW_Top_Backhair2_L_jt",
+            "order": 0,
             "parent_uuid": "6b591bd9-c26c-1dcb-1456-b8a89ad9b7af",
             "static": true,
             "uuid": "46f62630-51ce-4867-7afd-468de7edb7ab"
@@ -11582,6 +11969,7 @@
                 }
             ],
             "name": "BW_Top_Backhair3_L_jt",
+            "order": 0,
             "parent_uuid": "46f62630-51ce-4867-7afd-468de7edb7ab",
             "static": true,
             "uuid": "13bee164-64dc-59f3-cb6c-5392b7f99d02"
@@ -11618,6 +12006,7 @@
                 }
             ],
             "name": "BW_EarBase_R_jt",
+            "order": 15,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "1d1d4b40-b4b9-642e-1e57-05d2d2d1c957"
@@ -11654,6 +12043,7 @@
                 }
             ],
             "name": "BW_EarMid_jt",
+            "order": 0,
             "parent_uuid": "1d1d4b40-b4b9-642e-1e57-05d2d2d1c957",
             "static": true,
             "uuid": "26563606-622d-62a7-d5ba-c75a0b34a4ae"
@@ -11690,6 +12080,7 @@
                 }
             ],
             "name": "BW_EarPoint_jt",
+            "order": 0,
             "parent_uuid": "26563606-622d-62a7-d5ba-c75a0b34a4ae",
             "static": true,
             "uuid": "381a0679-9ede-aadc-2335-61e94823e45c"
@@ -11726,6 +12117,7 @@
                 }
             ],
             "name": "BW_Top_MidSmallHair_jt",
+            "order": 16,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "56c6f572-67cb-d98f-5b98-d07ede03dc6e"
@@ -11762,6 +12154,7 @@
                 }
             ],
             "name": "BW_Top_MidSmallHair2_jt",
+            "order": 0,
             "parent_uuid": "56c6f572-67cb-d98f-5b98-d07ede03dc6e",
             "static": true,
             "uuid": "8fddb622-3fc4-8feb-ac00-c3e81fbf3ca9"
@@ -11798,6 +12191,7 @@
                 }
             ],
             "name": "BW_LowerEyelid_L_jt",
+            "order": 17,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "06c3ac3e-f742-129f-aaaa-2f6cb8409c82"
@@ -11834,6 +12228,7 @@
                 }
             ],
             "name": "BW_EarBase_L_jt",
+            "order": 18,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "9c3c4e53-9dde-ede4-3e16-43dad730f96c"
@@ -11870,6 +12265,7 @@
                 }
             ],
             "name": "BW_EarMid_jt.001",
+            "order": 0,
             "parent_uuid": "9c3c4e53-9dde-ede4-3e16-43dad730f96c",
             "static": true,
             "uuid": "ee32e068-4262-81f4-c2d9-2daf6f239664"
@@ -11906,6 +12302,7 @@
                 }
             ],
             "name": "BW_EarPoint_jt.001",
+            "order": 0,
             "parent_uuid": "ee32e068-4262-81f4-c2d9-2daf6f239664",
             "static": true,
             "uuid": "1908fc08-d913-cd93-e746-57f8170da3a6"
@@ -11942,6 +12339,7 @@
                 }
             ],
             "name": "BW_Mid_BackHair_L_jt",
+            "order": 19,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "b1dddb98-23bf-2333-9213-8aa3f7b58432"
@@ -11978,6 +12376,7 @@
                 }
             ],
             "name": "BW_Mid_BackHair2_L_jt",
+            "order": 0,
             "parent_uuid": "b1dddb98-23bf-2333-9213-8aa3f7b58432",
             "static": true,
             "uuid": "d37e935e-c248-185b-09de-bdf9ab3f8fe2"
@@ -12014,6 +12413,7 @@
                 }
             ],
             "name": "BW_Mid_BackHair3_L_jt",
+            "order": 0,
             "parent_uuid": "d37e935e-c248-185b-09de-bdf9ab3f8fe2",
             "static": true,
             "uuid": "1e08ff1f-d869-045d-e50e-b48f7599115e"
@@ -12050,6 +12450,7 @@
                 }
             ],
             "name": "BW_Back_SideHair_R_jt",
+            "order": 20,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "4a3838f2-c8b4-5579-a5a5-ef8153b9a9df"
@@ -12086,6 +12487,7 @@
                 }
             ],
             "name": "BW_Botom_SideHair_R_jt",
+            "order": 21,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "b53197b4-9d76-0d1b-7f65-8ff48b73a5a8"
@@ -12122,6 +12524,7 @@
                 }
             ],
             "name": "BW_Botom_SideHair2_R_jt",
+            "order": 0,
             "parent_uuid": "b53197b4-9d76-0d1b-7f65-8ff48b73a5a8",
             "static": true,
             "uuid": "4ac0d044-9d2c-33e5-e04e-97956f90f992"
@@ -12158,6 +12561,7 @@
                 }
             ],
             "name": "BW_Back_SideHair2_R_jt",
+            "order": 0,
             "parent_uuid": "4a3838f2-c8b4-5579-a5a5-ef8153b9a9df",
             "static": true,
             "uuid": "fecac0a8-3c61-591e-d682-da44946411cd"
@@ -12194,6 +12598,7 @@
                 }
             ],
             "name": "BW_Back_SideHair2_R_jt.001",
+            "order": 0,
             "parent_uuid": "fecac0a8-3c61-591e-d682-da44946411cd",
             "static": true,
             "uuid": "e9a2ac28-0136-b4e7-a42e-45a9527e48ec"
@@ -12230,6 +12635,7 @@
                 }
             ],
             "name": "BW_Top_MidBigHair2_jt",
+            "order": 0,
             "parent_uuid": "7396f20b-5648-576c-5813-bb8fd53d0b35",
             "static": true,
             "uuid": "737a799a-05e4-2699-cb1b-e94f7583cd24"
@@ -12266,6 +12672,7 @@
                 }
             ],
             "name": "BW_Top_MidBigHair3_jt",
+            "order": 0,
             "parent_uuid": "737a799a-05e4-2699-cb1b-e94f7583cd24",
             "static": true,
             "uuid": "77641369-7dd7-d02b-8ada-ea844cebc559"
@@ -12302,6 +12709,7 @@
                 }
             ],
             "name": "BW_Mid_Backhair_jt",
+            "order": 22,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "1ffd6f38-b551-140d-5e19-621772a58d8b"
@@ -12338,6 +12746,7 @@
                 }
             ],
             "name": "BW_Mid_Backhair2_jt",
+            "order": 0,
             "parent_uuid": "1ffd6f38-b551-140d-5e19-621772a58d8b",
             "static": true,
             "uuid": "3e69e029-bca7-396b-72bc-c784e4a9e6a7"
@@ -12374,6 +12783,7 @@
                 }
             ],
             "name": "BW_Mid_Backhair3_jt",
+            "order": 0,
             "parent_uuid": "3e69e029-bca7-396b-72bc-c784e4a9e6a7",
             "static": true,
             "uuid": "683aaf2d-8572-c8f3-88b5-61592624d0af"
@@ -12410,6 +12820,7 @@
                 }
             ],
             "name": "BW_Mid_BackHair_R_jt",
+            "order": 23,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "018369da-e2ed-017d-ede9-a697988b215e"
@@ -12446,6 +12857,7 @@
                 }
             ],
             "name": "BW_Mid_BackHair2_R_jt",
+            "order": 0,
             "parent_uuid": "018369da-e2ed-017d-ede9-a697988b215e",
             "static": true,
             "uuid": "e2d17cdc-9a9f-6896-23b6-5df694c19e5a"
@@ -12482,6 +12894,7 @@
                 }
             ],
             "name": "BW_Mid_BackHair3_R_jt",
+            "order": 0,
             "parent_uuid": "e2d17cdc-9a9f-6896-23b6-5df694c19e5a",
             "static": true,
             "uuid": "62469d4c-51c6-06d1-9305-710eecb71f33"
@@ -12518,6 +12931,7 @@
                 }
             ],
             "name": "BW_Top_Backhair_L_jt1",
+            "order": 24,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "59748ae7-8fc1-715b-b2af-daa103ba4005"
@@ -12554,6 +12968,7 @@
                 }
             ],
             "name": "BW_Top_Backhair2_L_jt.001",
+            "order": 0,
             "parent_uuid": "59748ae7-8fc1-715b-b2af-daa103ba4005",
             "static": true,
             "uuid": "94cbea83-c424-fbb0-33e4-ca8ffac2556f"
@@ -12590,6 +13005,7 @@
                 }
             ],
             "name": "BW_Top_Backhair3_L_jt.001",
+            "order": 0,
             "parent_uuid": "94cbea83-c424-fbb0-33e4-ca8ffac2556f",
             "static": true,
             "uuid": "024fab4c-4c88-c6bf-a68d-656d2f117ed1"
@@ -12626,6 +13042,7 @@
                 }
             ],
             "name": "BW_UpperEyelid_R_jt",
+            "order": 25,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "848ff301-a995-30af-e63f-657184f79aa7"
@@ -12662,6 +13079,7 @@
                 }
             ],
             "name": "BW_LowerEyelid_R_jt",
+            "order": 26,
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "55863322-c71f-32e7-f614-eb54418a0095"
@@ -12698,6 +13116,7 @@
                 }
             ],
             "name": "BW_CapePin_jt",
+            "order": 7,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "0488b03a-9b4b-551a-ccf4-8c66d36e0abf"
@@ -12734,6 +13153,7 @@
                 }
             ],
             "name": "BW_CapePinEnd_jt",
+            "order": 0,
             "parent_uuid": "0488b03a-9b4b-551a-ccf4-8c66d36e0abf",
             "static": true,
             "uuid": "f778a4e4-2eec-c8ea-fa1e-ed398e611a9e"
@@ -12770,6 +13190,7 @@
                 }
             ],
             "name": "BW_Cape_Top_L_jt",
+            "order": 8,
             "parent_uuid": "9f150ec8-0ce4-8fc9-f6fe-7d2ff0631355",
             "static": true,
             "uuid": "fd586fc3-14be-29df-7ccf-2bd236c8a970"
@@ -12806,6 +13227,7 @@
                 }
             ],
             "name": "BW_Cape_Mid_L_jt",
+            "order": 0,
             "parent_uuid": "fd586fc3-14be-29df-7ccf-2bd236c8a970",
             "static": true,
             "uuid": "115b837f-46c6-b4f3-ab12-57ed6a50f58f"
@@ -12842,6 +13264,7 @@
                 }
             ],
             "name": "BW_Cape_Bottom_L_jt",
+            "order": 0,
             "parent_uuid": "115b837f-46c6-b4f3-ab12-57ed6a50f58f",
             "static": true,
             "uuid": "38e198b3-476f-5a85-59fc-e11b32fed398"
@@ -12878,6 +13301,7 @@
                 }
             ],
             "name": "BW_Cape_Point2_2_L_jt",
+            "order": 0,
             "parent_uuid": "844bbb31-617d-2d2f-7ccb-3d7ec0b7ce70",
             "static": true,
             "uuid": "fd073d96-00ed-310a-b380-e2d389394104"
@@ -12914,6 +13338,7 @@
                 }
             ],
             "name": "BW_Cape_Point2_3_L_jt",
+            "order": 0,
             "parent_uuid": "fd073d96-00ed-310a-b380-e2d389394104",
             "static": true,
             "uuid": "91a8d486-2cff-e6f0-b80f-5cba124f3402"
@@ -12950,6 +13375,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_L_jt",
+            "order": 1,
             "parent_uuid": "38e198b3-476f-5a85-59fc-e11b32fed398",
             "static": true,
             "uuid": "67e7f565-9166-8ca9-1386-89c7f0f6200f"
@@ -12986,6 +13412,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_2_L_jt",
+            "order": 0,
             "parent_uuid": "67e7f565-9166-8ca9-1386-89c7f0f6200f",
             "static": true,
             "uuid": "0fb86c78-cd73-5622-8402-8d0b8596bfa2"
@@ -13022,6 +13449,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_3_L_jt",
+            "order": 0,
             "parent_uuid": "0fb86c78-cd73-5622-8402-8d0b8596bfa2",
             "static": true,
             "uuid": "63e81482-012d-9421-3883-cbfc3bd2fc86"
@@ -13058,6 +13486,7 @@
                 }
             ],
             "name": "BW_Cape_Point3_4_L_jt",
+            "order": 0,
             "parent_uuid": "63e81482-012d-9421-3883-cbfc3bd2fc86",
             "static": true,
             "uuid": "5a95da87-7c60-ffc3-6ca7-1e2179fe24e1"
@@ -13094,6 +13523,7 @@
                 }
             ],
             "name": "BW_Cape_Point1_L_jt",
+            "order": 1,
             "parent_uuid": "115b837f-46c6-b4f3-ab12-57ed6a50f58f",
             "static": true,
             "uuid": "fdc34d04-fe48-19a8-029c-f47af992e3e6"
@@ -13130,6 +13560,7 @@
                 }
             ],
             "name": "BW_Cape_Point1_2_L_jt",
+            "order": 0,
             "parent_uuid": "fdc34d04-fe48-19a8-029c-f47af992e3e6",
             "static": true,
             "uuid": "97dd106d-07f7-51c5-0ead-5f88cda48b37"
@@ -13166,6 +13597,7 @@
                 }
             ],
             "name": "BW_Ass_jt",
+            "order": 1,
             "parent_uuid": "d6cb79a6-0d5c-5fdf-ae03-48a435b1989f",
             "static": true,
             "uuid": "3b6879fe-32d4-2601-775c-f1809a8cd3c1"
@@ -13202,6 +13634,7 @@
                 }
             ],
             "name": "BW_Tail_Base_jt",
+            "order": 0,
             "parent_uuid": "3b6879fe-32d4-2601-775c-f1809a8cd3c1",
             "static": true,
             "uuid": "35b6dbf8-d413-46ad-4b89-b745d64337f1"
@@ -13238,6 +13671,7 @@
                 }
             ],
             "name": "BW_Tail3_Base_jt",
+            "order": 0,
             "parent_uuid": "4e500087-e432-9c0f-7192-1a48f0ca6132",
             "static": true,
             "uuid": "7b8f7a45-9404-3be6-2ce0-2f65b740d16b"
@@ -13274,6 +13708,7 @@
                 }
             ],
             "name": "BW_Tail4_Base_jt",
+            "order": 0,
             "parent_uuid": "7b8f7a45-9404-3be6-2ce0-2f65b740d16b",
             "static": true,
             "uuid": "8cab7ca6-6e84-ee37-93b4-250bb6983800"
@@ -13310,6 +13745,7 @@
                 }
             ],
             "name": "BW_Tail5_Base_jt",
+            "order": 0,
             "parent_uuid": "8cab7ca6-6e84-ee37-93b4-250bb6983800",
             "static": true,
             "uuid": "eca47f90-631a-5539-acf6-8bfa5a7c89cf"
@@ -13346,6 +13782,7 @@
                 }
             ],
             "name": "BW_Tail6_Base_jt",
+            "order": 0,
             "parent_uuid": "eca47f90-631a-5539-acf6-8bfa5a7c89cf",
             "static": true,
             "uuid": "82c34844-fa04-5c43-bfa1-358018c0b045"
@@ -13382,6 +13819,7 @@
                 }
             ],
             "name": "BW_Tail8_Base_jt",
+            "order": 0,
             "parent_uuid": "fb9b1885-c040-2238-4fbb-227308195e42",
             "static": true,
             "uuid": "6887dff2-4947-3853-37f0-8b7f77cb707a"
@@ -13418,6 +13856,7 @@
                 }
             ],
             "name": "BW_Tail9_Base_jt",
+            "order": 0,
             "parent_uuid": "6887dff2-4947-3853-37f0-8b7f77cb707a",
             "static": true,
             "uuid": "56dc5be9-8a91-0b76-8894-ea740b0aae78"
@@ -13454,6 +13893,7 @@
                 }
             ],
             "name": "BW_Tail10_Base_jt",
+            "order": 0,
             "parent_uuid": "56dc5be9-8a91-0b76-8894-ea740b0aae78",
             "static": true,
             "uuid": "f549c3d6-886b-1600-47b8-881f588d87f0"
@@ -13490,6 +13930,7 @@
                 }
             ],
             "name": "BW_Tail11_Base_jt",
+            "order": 0,
             "parent_uuid": "f549c3d6-886b-1600-47b8-881f588d87f0",
             "static": true,
             "uuid": "a55b2817-520b-4d01-52fc-57b0ecf6182e"
@@ -13526,6 +13967,7 @@
                 }
             ],
             "name": "BW_Tail12_Base_jt",
+            "order": 0,
             "parent_uuid": "a55b2817-520b-4d01-52fc-57b0ecf6182e",
             "static": true,
             "uuid": "764f2f82-70e0-3fe3-8fb6-fb1c6e68965a"
@@ -13562,6 +14004,7 @@
                 }
             ],
             "name": "BW_Tail13_Base_jt",
+            "order": 0,
             "parent_uuid": "764f2f82-70e0-3fe3-8fb6-fb1c6e68965a",
             "static": true,
             "uuid": "a5725346-9a26-b205-b141-2754eda3f072"
@@ -13598,6 +14041,7 @@
                 }
             ],
             "name": "BW_Tail14_Base_jt",
+            "order": 0,
             "parent_uuid": "a5725346-9a26-b205-b141-2754eda3f072",
             "static": true,
             "uuid": "57ba8a84-5093-130f-c089-d4143d90af6e"
@@ -13634,6 +14078,7 @@
                 }
             ],
             "name": "BW_Tail15_Base_jt",
+            "order": 0,
             "parent_uuid": "57ba8a84-5093-130f-c089-d4143d90af6e",
             "static": true,
             "uuid": "2a0e8961-32ff-6789-83d0-172a9be186b1"
@@ -13670,6 +14115,7 @@
                 }
             ],
             "name": "BW_Tail16_Base_jt",
+            "order": 0,
             "parent_uuid": "2a0e8961-32ff-6789-83d0-172a9be186b1",
             "static": true,
             "uuid": "54f9759d-d59e-7c8f-e563-754ea936effb"
@@ -13706,6 +14152,7 @@
                 }
             ],
             "name": "BW_Tail18_Base_jt",
+            "order": 0,
             "parent_uuid": "23ef193f-3dad-1431-0d60-a0787bbba7e1",
             "static": true,
             "uuid": "26689eb2-5e92-976d-6a4b-1f86cea537c4"
@@ -13792,6 +14239,7 @@
                 }
             ],
             "name": "MainMenu_Hovered",
+            "order": 0,
             "parent_uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
             "static": true,
             "uuid": "6f4fc9ec-b929-a8c0-9729-6866009d711e"
@@ -13828,6 +14276,7 @@
                 }
             ],
             "name": "BW_Tail19_Base_jt",
+            "order": 0,
             "parent_uuid": "26689eb2-5e92-976d-6a4b-1f86cea537c4",
             "static": true,
             "uuid": "8a259dff-0c42-1901-7ec0-70a0765364fa"
@@ -13864,6 +14313,7 @@
                 }
             ],
             "name": "BW_Tail20_Base_jt",
+            "order": 0,
             "parent_uuid": "8a259dff-0c42-1901-7ec0-70a0765364fa",
             "static": true,
             "uuid": "1c3bfc45-3f32-b46a-35b0-05bd14fbad86"
@@ -13900,6 +14350,7 @@
                 }
             ],
             "name": "BW_TailWeaponHandle_jt",
+            "order": 1,
             "parent_uuid": "764f2f82-70e0-3fe3-8fb6-fb1c6e68965a",
             "static": true,
             "uuid": "837d720c-f736-708d-c121-e399408d7a45"
@@ -13936,6 +14387,7 @@
                 }
             ],
             "name": "BW_Knee_R_jt",
+            "order": 0,
             "parent_uuid": "6acafe52-a4b3-1ba6-d4c6-99a17b202777",
             "static": true,
             "uuid": "24e1ff1a-bcf2-ea65-a950-7f0f1b4eb333"
@@ -13972,6 +14424,7 @@
                 }
             ],
             "name": "BW_Talon_R_jt",
+            "order": 0,
             "parent_uuid": "24e1ff1a-bcf2-ea65-a950-7f0f1b4eb333",
             "static": true,
             "uuid": "74bdfed5-a856-2f2f-4f0d-d6902f5da296"
@@ -14008,6 +14461,7 @@
                 }
             ],
             "name": "BW_Heel_R_jt",
+            "order": 0,
             "parent_uuid": "74bdfed5-a856-2f2f-4f0d-d6902f5da296",
             "static": true,
             "uuid": "1f6ee93f-fad7-0105-6743-18b48c9eb502"
@@ -14044,6 +14498,7 @@
                 }
             ],
             "name": "BW_Toe_R_jt",
+            "order": 0,
             "parent_uuid": "1f6ee93f-fad7-0105-6743-18b48c9eb502",
             "static": true,
             "uuid": "e82c2432-3a3a-b966-14c8-f59d0e6c7af3"
@@ -14080,6 +14535,7 @@
                 }
             ],
             "name": "BW_ToeTip_R_jt",
+            "order": 0,
             "parent_uuid": "e82c2432-3a3a-b966-14c8-f59d0e6c7af3",
             "static": true,
             "uuid": "3a112ae7-d100-7944-4a97-b8877df9d8a0"
@@ -14116,6 +14572,7 @@
                 }
             ],
             "name": "BW_SwordHandle_jt",
+            "order": 1,
             "parent_uuid": "3682d03d-2752-4f70-1cd7-320f32fa7418",
             "static": true,
             "uuid": "ae798017-bbc6-ec99-0c89-cacf8f13b121"
@@ -14152,6 +14609,7 @@
                 }
             ],
             "name": "BW_SwordTip_jt",
+            "order": 0,
             "parent_uuid": "ae798017-bbc6-ec99-0c89-cacf8f13b121",
             "static": true,
             "uuid": "3c434620-546b-789d-fd87-f47eb6c3eaa2"
@@ -14198,6 +14656,7 @@
                 }
             ],
             "name": "BW_body",
+            "order": 2,
             "parent_uuid": "773896bd-047a-070a-1457-c002bd65a38a",
             "static": true,
             "uuid": "4dba6930-2ac8-934c-a075-7136beb1b27c"
@@ -14244,6 +14703,7 @@
                 }
             ],
             "name": "BW_cloak",
+            "order": 3,
             "parent_uuid": "773896bd-047a-070a-1457-c002bd65a38a",
             "static": true,
             "uuid": "dd712e8f-3a82-bcbd-522d-9d1d08a28f92"
@@ -14290,6 +14750,7 @@
                 }
             ],
             "name": "BW_Sword",
+            "order": 4,
             "parent_uuid": "773896bd-047a-070a-1457-c002bd65a38a",
             "static": true,
             "uuid": "92056fb7-2061-66ff-30e9-ded06102e338"
@@ -14336,6 +14797,7 @@
                 }
             ],
             "name": "BW_eyelids",
+            "order": 5,
             "parent_uuid": "773896bd-047a-070a-1457-c002bd65a38a",
             "static": true,
             "uuid": "e2bba185-cc5e-8765-8ab6-2350551ea8c2"
@@ -14393,6 +14855,7 @@
                 }
             ],
             "name": "Walking_SFX",
+            "order": 0,
             "parent_uuid": "7dc2227d-da53-2120-71cc-d879424f34bb",
             "static": true,
             "uuid": "8b5d50c5-88c1-0620-28aa-b82707cf6ddf"
@@ -14450,6 +14913,7 @@
                 }
             ],
             "name": "Idle_SFX",
+            "order": 1,
             "parent_uuid": "7dc2227d-da53-2120-71cc-d879424f34bb",
             "static": true,
             "uuid": "9a5c33b2-8996-6187-d13c-e5c3a43b3d69"
@@ -14507,6 +14971,7 @@
                 }
             ],
             "name": "Dash_SFX",
+            "order": 2,
             "parent_uuid": "7dc2227d-da53-2120-71cc-d879424f34bb",
             "static": true,
             "uuid": "f67fac1d-6faa-f024-1606-39ad79803494"
@@ -14564,6 +15029,7 @@
                 }
             ],
             "name": "Attack_SFX",
+            "order": 3,
             "parent_uuid": "7dc2227d-da53-2120-71cc-d879424f34bb",
             "static": true,
             "uuid": "f0d12cb0-dc1c-b894-e9dd-6d7bdc704907"
@@ -14600,6 +15066,7 @@
                 }
             ],
             "name": "Torch",
+            "order": 20,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "93730288-b819-d796-482c-9bb40a5ada75"
@@ -14636,6 +15103,7 @@
                 }
             ],
             "name": "HookAnchor",
+            "order": 21,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "0795e968-11b3-99f1-1e79-704e7d5782e5"
@@ -14694,6 +15162,7 @@
                 }
             ],
             "name": "PlayerGrappleBox",
+            "order": 22,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e055c6a4-c159-18e0-7068-590e705ee82f"
@@ -14740,6 +15209,7 @@
                 }
             ],
             "name": "grapple_lp_2",
+            "order": 23,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "f11097de-b5ba-afad-137a-4c499dbe8473"
@@ -14786,6 +15256,7 @@
                 }
             ],
             "name": "GrappleLine_2",
+            "order": 24,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "4f553693-9bed-62a2-3a4c-3b50bb1ea1c6"
@@ -14832,6 +15303,7 @@
                 }
             ],
             "name": "GrappleLine_5",
+            "order": 25,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "360e671c-e921-9ac4-7a42-fba14ba95ff1"
@@ -14924,6 +15396,7 @@
                 }
             ],
             "name": "InversePassPage",
+            "order": 1,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "d440ede7-daaf-32af-b161-b2e43a77f106"
@@ -14970,6 +15443,7 @@
                 }
             ],
             "name": "grapple_lp_5",
+            "order": 26,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "1314c9f4-ee53-4c6f-5491-a15be200835c"
@@ -15016,6 +15490,7 @@
                 }
             ],
             "name": "grapple_lp_6",
+            "order": 27,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "2d563aa4-fafb-02e5-7584-c293576e6c65"
@@ -15062,6 +15537,7 @@
                 }
             ],
             "name": "grapple_lp_7",
+            "order": 28,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "31ca77d9-88d0-b6df-8fc4-d663781549a1"
@@ -15108,6 +15584,7 @@
                 }
             ],
             "name": "GrappleLine_8",
+            "order": 29,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "d1eda75d-f2bd-a38f-02e0-5ae65518ce40"
@@ -15154,6 +15631,7 @@
                 }
             ],
             "name": "grapple_lp_9",
+            "order": 30,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "81149fca-066b-3dfc-6a25-3baffee7af97"
@@ -15200,6 +15678,7 @@
                 }
             ],
             "name": "GrappleLine_10",
+            "order": 31,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "eb84fe1f-0264-4404-564b-ae135fab8adc"
@@ -15246,6 +15725,7 @@
                 }
             ],
             "name": "grapple_lp_11",
+            "order": 32,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "3511a70c-3e8b-6e3e-9a42-a46324d4cae8"
@@ -15292,6 +15772,7 @@
                 }
             ],
             "name": "GrappleLine_12",
+            "order": 33,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "ab8f7294-6f4d-0fbd-3a10-579d891ad6c2"
@@ -15338,6 +15819,7 @@
                 }
             ],
             "name": "grapple_lp_12",
+            "order": 34,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "6a2aaba2-c149-83cf-6a35-09ca7494edd1"
@@ -15384,6 +15866,7 @@
                 }
             ],
             "name": "GrappleLine_13",
+            "order": 35,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e98449c7-2f95-eb4c-66d0-6de2ea8a43cf"
@@ -15430,6 +15913,7 @@
                 }
             ],
             "name": "grapple_lp_13",
+            "order": 36,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "bb690428-4db5-87a5-c535-c97f06ef2c0a"
@@ -15476,6 +15960,7 @@
                 }
             ],
             "name": "GrappleLine_14",
+            "order": 37,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "29b75ad2-106a-3947-8df1-35ef1d879fd9"
@@ -15522,6 +16007,7 @@
                 }
             ],
             "name": "grapple_lp_14",
+            "order": 38,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "c0e2a28f-b42d-a582-ad5a-1afefddbb1e9"
@@ -15568,6 +16054,7 @@
                 }
             ],
             "name": "GrappleLine_15",
+            "order": 39,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "04c1299e-f3f9-e956-99cc-401be575e09a"
@@ -15614,6 +16101,7 @@
                 }
             ],
             "name": "grapple_lp_15",
+            "order": 40,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "7633d657-581e-6694-caed-04a426280448"
@@ -15660,9 +16148,57 @@
                 }
             ],
             "name": "GrappleLine_16",
+            "order": 41,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "47e4bf81-9349-cd26-7483-843427021817"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "81fb7585-4a72-0b08-3783-a70ac0c13b5d"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "e80d4446-cd5e-b04c-5081-e1bb18a83a22"
+                }
+            ],
+            "name": "GrappleLine_25",
+            "order": 56,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "e9c175b8-6bbc-803c-21a0-5ae7600eaa20"
         },
         {
             "active": false,
@@ -15706,6 +16242,7 @@
                 }
             ],
             "name": "grapple_lp_16",
+            "order": 42,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "572e0a69-3f3f-3fa2-805c-7d7464eeb2f5"
@@ -15752,6 +16289,7 @@
                 }
             ],
             "name": "GrappleLine_17",
+            "order": 43,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "b2c2b66d-efc8-b809-5684-ee9fa951aae2"
@@ -15798,6 +16336,7 @@
                 }
             ],
             "name": "grapple_lp_17",
+            "order": 44,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "f274916c-9de2-6435-796a-c1076273dfb6"
@@ -15844,6 +16383,7 @@
                 }
             ],
             "name": "grapple_lp_18",
+            "order": 45,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "4b0f13fe-b7b4-e5e5-0ec5-325b1c35cdd7"
@@ -15890,6 +16430,7 @@
                 }
             ],
             "name": "GrappleLine_19",
+            "order": 46,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "c4678bb7-1850-70e4-4c91-7e2f9838f802"
@@ -15936,6 +16477,7 @@
                 }
             ],
             "name": "GrappleLine_20",
+            "order": 47,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e6f56b5d-bac6-2be5-8147-375d5d6b61d2"
@@ -15982,6 +16524,7 @@
                 }
             ],
             "name": "grapple_lp_20",
+            "order": 48,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "71711dd5-eb6e-1a31-7c14-e30c9692cf46"
@@ -16028,6 +16571,7 @@
                 }
             ],
             "name": "grapple_lp_21",
+            "order": 49,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "1f7a0f02-8cf7-15a5-08f3-eb38787d6ec5"
@@ -16074,6 +16618,7 @@
                 }
             ],
             "name": "GrappleLine_22",
+            "order": 50,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "19a8b259-6d2b-9a5f-132e-d8b23b2f624f"
@@ -16120,6 +16665,7 @@
                 }
             ],
             "name": "grapple_lp_22",
+            "order": 51,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "a71cbedd-db36-7d88-5144-2c26c6be0632"
@@ -16166,6 +16712,7 @@
                 }
             ],
             "name": "GrappleLine_23",
+            "order": 52,
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "73db0f37-751d-1de0-3539-47a180811056"
@@ -16213,7 +16760,8 @@
                 }
             ],
             "name": "Pause",
-            "parent_uuid": "ee756015-7519-c76f-e4ec-9729da611ac5",
+            "order": 12,
+            "parent_uuid": "8e0f7683-d2b7-bcbc-0069-8c2904d5440d",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -16249,6 +16797,7 @@
                 }
             ],
             "name": "PauseAudio",
+            "order": 0,
             "parent_uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51",
             "static": true,
             "uuid": "29bf89f6-5a26-9335-38dd-5d465f6b1685"
@@ -16306,6 +16855,7 @@
                 }
             ],
             "name": "select_SFX",
+            "order": 0,
             "parent_uuid": "29bf89f6-5a26-9335-38dd-5d465f6b1685",
             "static": true,
             "uuid": "06967563-59c0-e196-a4ab-39cf70e41a09"
@@ -16363,6 +16913,7 @@
                 }
             ],
             "name": "loopMusicPause",
+            "order": 1,
             "parent_uuid": "29bf89f6-5a26-9335-38dd-5d465f6b1685",
             "static": true,
             "uuid": "15c44f9f-58a7-22d6-9e0c-1fd31fc86303"
@@ -16443,6 +16994,7 @@
                 }
             ],
             "name": "PauseMenu",
+            "order": 1,
             "parent_uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51",
             "static": true,
             "uuid": "8a69222f-640f-90dc-dae6-c043822435b4"
@@ -16564,6 +17116,7 @@
                 }
             ],
             "name": "Settings",
+            "order": 2,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a"
@@ -16650,6 +17203,7 @@
                 }
             ],
             "name": "Settings_Hovered",
+            "order": 0,
             "parent_uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
             "static": true,
             "uuid": "b340ab3c-76a9-5f4e-6435-27bd74755279"
@@ -16768,6 +17322,7 @@
                 }
             ],
             "name": "Exit",
+            "order": 3,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "4765b331-c2d2-1734-58f1-27d7172168e1"
@@ -16853,6 +17408,7 @@
                 }
             ],
             "name": "Exit_Hovered",
+            "order": 0,
             "parent_uuid": "4765b331-c2d2-1734-58f1-27d7172168e1",
             "static": true,
             "uuid": "97b3b74a-5788-495d-6424-505417bbbc37"
@@ -16953,6 +17509,7 @@
                 }
             ],
             "name": "Background",
+            "order": 4,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4"
@@ -17071,6 +17628,7 @@
                 }
             ],
             "name": "Continue",
+            "order": 5,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a"
@@ -17154,6 +17712,7 @@
                 }
             ],
             "name": "Continue_Hovered",
+            "order": 0,
             "parent_uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
             "static": true,
             "uuid": "7e6d4794-a47e-5ede-7897-fd0801ca318d"
@@ -17246,6 +17805,7 @@
                 }
             ],
             "name": "PassPage",
+            "order": 6,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "0f41dcc3-80fe-1317-1f76-a78bcf1c6532"
@@ -17338,9 +17898,151 @@
                 }
             ],
             "name": "BookCover",
+            "order": 7,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "e86b62b9-9922-1bee-8eb0-16d2c15f35b8"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "8ea86b3c-f5bf-45a2-c330-ebdd5698b149"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "bd1525b7-fec2-4277-5ca7-d56c46a5f15f"
+                }
+            ],
+            "name": "grapple_lp_23",
+            "order": 53,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "3b837159-1022-a98f-4bbb-e9113d117e62"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "938c7731-9b74-e7a7-d02e-1a4b616b629d"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "9af5a0bc-6f6c-e68d-e09e-23def04adb45"
+                }
+            ],
+            "name": "GrappleLine_24",
+            "order": 54,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "d3840e79-9fee-2c1b-53e2-2a4198bb0150"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "1fa05f63-79df-2091-3d4c-260a25f8fa9f"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "e5aedf06-6410-2a93-c2d3-ce159ca9ed85"
+                }
+            ],
+            "name": "grapple_lp_24",
+            "order": 55,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "cf27e31e-83a9-50e1-c4a1-63cd8ca1ebaa"
         }
     ]
 }

@@ -42,7 +42,7 @@ class PuzzleGoalFireLvl : Component
         Gem.GetComponent<BoxCollider>().SetActive(false);
 
         goalParticles = entity.GetComponent<ParticleComponent>();
-        goalParticles.SetActive(false);
+        goalParticles.Stop();
     }
 
     void OnUpdate()
@@ -61,7 +61,7 @@ class PuzzleGoalFireLvl : Component
 
         if (!isMoving && !particlesSwitched)
         {
-            goalParticles.SetActive(false);
+            goalParticles.Stop();
             particlesSwitched = true;
         }
     }
@@ -126,7 +126,7 @@ class PuzzleGoalFireLvl : Component
 
         isMoving = true;
 
-        goalParticles.SetActive(true);
+        goalParticles.Play();
         particlesSwitched = false;
     }
 

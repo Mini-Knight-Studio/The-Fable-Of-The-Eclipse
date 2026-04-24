@@ -44,6 +44,10 @@ class PuzzleGoalSimonSays : Component
 
     public Entity Gem;
 
+    // Particles
+    private ParticleComponent goalParticles;
+    private bool particlesSwitched = true;
+
     private enum State
     {
         WaitingForPillars,
@@ -75,6 +79,9 @@ class PuzzleGoalSimonSays : Component
                 simonPillars[i] = pillarEntities[i].GetComponent<MovingPillarSimonSays>();
             }
         }
+
+        goalParticles = entity.GetComponent<ParticleComponent>();
+        goalParticles.Stop();
 
         LockAllPillars();
 
@@ -125,6 +132,12 @@ class PuzzleGoalSimonSays : Component
                 break;
         }
 
+        if (!isMoving && !particlesSwitched)
+        {
+            goalParticles.Stop();
+            particlesSwitched = true;
+        }
+
         if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed && !puzzle2Completed)
         {
             CompletePuzzleAuto();
@@ -149,6 +162,9 @@ class PuzzleGoalSimonSays : Component
         moveTimer = 0.0f;
 
         isMoving = true;
+
+        goalParticles.Play();
+        particlesSwitched = false;
     }
 
     void MoveTowardsTarget()
