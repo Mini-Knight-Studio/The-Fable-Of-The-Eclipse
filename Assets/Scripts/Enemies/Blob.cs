@@ -11,8 +11,7 @@ class Blob : Enemy
     [Space(5)]
     public int Damage;
     public float ReachDistance;
-    public float KnockbackForce;
-    public float KnockbackTime;
+    public float PushForceScale;
     [Space(5)]
     public float PreparationTime;
     public float AttackCooldown;
@@ -39,6 +38,7 @@ class Blob : Enemy
         SetStage(Stage);
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("PlayerTrigger");
+        
         LayerOverride = EnemyLayer | PlayerHitLayer;
         spawn = false;
         isSpawning = false;
@@ -51,36 +51,31 @@ class Blob : Enemy
             return;
         }
 
-        //Temporal
-        TestKeys();
-        //
         if (spawn)
         {
             StartCoroutine(SplitLerp());
         }
-        UpdateEnemy();
 
+        Hit(1, PushForceScale);
         if (!isSpawning && !isAttacking)
         {
-            attackBox.entity.SetActive(true);
             #region Movement
-            
             if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(ForcedDetectionDistance))
             {
-                PlayAnimation("Armature|Chase", 0.25f);
+                animator.PlayClip("Armature|Chase", true, 0.25f);
                 transform.LookAt(target.transform.position, transform.Up);
-                movement.Move(Stage, transform.Forward);
+                movement.Move(4-Stage, transform.Forward);
                 ResetWander();
                 #region Attack
                 if (Vector3.Distance(target.transform.position, transform.position) < ReachDistance * Stage)
                 {
-                    StartCoroutine(DoAttack(Damage));
+                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage));
                 }
                 #endregion
             }
             else
             {
-                PlayAnimation("Armature|IdleWalk", 0.25f);
+                animator.PlayClip("Armature|IdleWalk", true, 0.25f);
                 Wander(ViewField.x, ViewField.y * Stage, Stage);
             }
             #endregion
@@ -136,17 +131,7 @@ class Blob : Enemy
             Blob_component.spawn = true;
             Blob_component.isSpawning = true;
             Blob_component.ResetWander();
-            Blob_component.StartHitCooldown(target.Combat.GetAttackDuration());
             new_Blob.SetActive(true);
-        }
-    }
-
-    private void TestKeys()
-    {
-        if (Input.IsKeyDown(KeyCode.P))
-        {
-            Hit(1);
-            StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
         }
     }
 

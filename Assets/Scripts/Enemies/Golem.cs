@@ -4,29 +4,28 @@ using static Loopie.Transform;
 
 class Golem : Enemy
 {
+    [Header("Global Enemy")]
     public Entity Reference;
-
-    public int ShieldLife;
-    public bool isShielding;
-
-    public float ViewFieldWidth;
-    public float ViewFieldFar;
-
-    public float KnockbackForce;
-    public float KnockbackTime;
-
+    public Vector2 ViewField;
+    public float ForcedDetectionDistance;
+    [Space(5)]
     public int Damage;
-    public float AttackReachDistance;
-    public float AttackCooldownTime;
-    public float AttackPreparationTime;
+    public float ReachDistance;
+    public float PushForceScale;
+    [Space(5)]
+    public float PreparationTime;
+    public float AttackCooldown;
+    [Space(10)]
+    [Header("Golem")]
+    public int ShieldLife;
 
-    public float TargetForcedDetectionDistance;
-
+    //Private//
     private int LayerOverride;
+    private bool isShielding;
 
     void OnCreate()
     {
-        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance, "Golem");
+        SetEnemy(Reference, AttackCooldown, PreparationTime, ReachDistance, "Golem");
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
         LayerOverride = EnemyLayer | PlayerHitLayer;
@@ -38,13 +37,7 @@ class Golem : Enemy
         {
             return;
         }
-
-        //Temporal
-        TestKeys();
-        //
-
-        UpdateEnemy();
-
+        Hit(1, PushForceScale);
         if (!isAttacking)
         {
             if (ShieldLife > 0)
@@ -52,20 +45,20 @@ class Golem : Enemy
             else
                 isShielding = false;
             #region Movement
-            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar) || DetectedTargetInDistance(TargetForcedDetectionDistance))
+            if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(ForcedDetectionDistance))
             {
                 transform.LookAt(target.transform.position, transform.Up);
                 movement.Move(isShielding ? 0.5f : 1.0f, transform.Forward);
                 ResetWander();
                 #region Attack
-                if (Vector3.Distance(target.transform.position, transform.position) < AttackReachDistance)
+                if (Vector3.Distance(target.transform.position, transform.position) < ReachDistance)
                 {
-                    StartCoroutine(DoAttack(Damage));
+                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage));
                 }
                 #endregion
             }
             else
-                Wander(ViewFieldWidth, ViewFieldFar, isShielding ? 0.5f : 1.0f);
+                Wander(ViewField.x, ViewField.y, isShielding ? 0.5f : 1.0f);
             #endregion
 
         }
@@ -81,29 +74,20 @@ class Golem : Enemy
         #endregion
     }
 
-    public override void Hit(int points)
+    public override void Hit(int points, float force_scale)
     {
         if (isShielding && !OnHitCooldown())
         {
             ShieldLife--;
-            StartHitCooldown(target.Combat.GetAttackDuration());
         }
         else
-            base.Hit(points);
-    }
-
-    private void TestKeys()
-    {
-        if (Input.IsKeyDown(KeyCode.P))
-        {
-            Hit(1);
-            StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
-        }
+            base.Hit(points, force_scale);
     }
 
     void OnDrawGizmo()
     {
-        DebugViewField(ViewFieldWidth, ViewFieldFar);
+        DebugViewField(ViewField.x, ViewField.y);
+        DebugForcedDetection(ForcedDetectionDistance);
     }
 
     void OnDestroy()

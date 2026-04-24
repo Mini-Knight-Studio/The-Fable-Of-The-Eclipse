@@ -8,8 +8,8 @@ public class Enemy : Component
     protected Entity reference;
     protected Health health;
     protected Movement movement;
-    protected Animator animator;
-    protected BoxCollider attackBox;
+    protected EnemyAnimation animator;
+    protected EnemyFeedback feedback;
     protected BoxCollider collision;
     protected BoxCollider hitbox;
     protected TemporalEffect effect;
@@ -20,50 +20,34 @@ public class Enemy : Component
 
     protected Player target;
 
-    private float attackCooldown;
-    private float PreparationTime;
-    private float ReachDistance;
 
+    //-- Wander --//
     private bool wanderRange = false;
-    protected bool isAttacking;
     private Vector3 lastWanderPosition;
-    private bool endedPreparingAttack;
-    private bool endedAttack;
-    private float internal_hit_cooldown;
+
+    //-- Attack --//
+    protected bool isAttacking;
+    private Vector2 attack_stages; //x: ended preparing attack | y: ended attacking
+    private float knockback_time;
+
+    private float attack_cooldown;
+    private float preparation_time;
+    private float reach_distance;
 
     public string type = "Enemy";
-
-    protected void UpdateEnemy()
-    {
-        if (Pause.isPaused)
-        {
-            return;
-        }
-
-        if (internal_hit_cooldown > 0.0f)
-            internal_hit_cooldown -= Time.deltaTime;
-        else
-            internal_hit_cooldown = 0.0f;
-        //Temporal
-        if(target.Combat.TemporalFunctionIsAttacking())
-        {
-            if (hitbox.IsColliding)
-            {
-                Hit(1);
-            }
-        }
-        //
-    }
     #region Set Up
-    protected void SetEnemy(Entity reference_enemy, float attack_cooldown, float attack_preparation_time, float attack_reach_distance, string enemyType)
+    protected void SetEnemy(Entity reference_enemy, float attack_cooldown, float preparation_time, float reach_distance, string enemyType)
     {
         reference = reference_enemy;
         type = enemyType;
+        target = Player.Instance;
+        knockback_time = 0.25f;
 
         health = entity.GetComponent<Health>();
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
-        animator = entity.GetChildByName("Visuals").GetComponent<Animator>();
+        animator = entity.GetComponent<EnemyAnimation>();
+        feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
 
         attackParticles = entity.GetComponent<ParticleComponent>();
@@ -71,11 +55,6 @@ public class Enemy : Component
 
         foreach(Entity child in entity.GetChildren())
         {
-            if (child.Name == "AttackBox")
-            {
-                attackBox = child.GetComponent<BoxCollider>();
-                attackParticles = child.GetComponent<ParticleComponent>();
-            }
             if (child.Name == "Hitbox")
             {
                 hitbox = child.GetComponent<BoxCollider>();
@@ -84,13 +63,8 @@ public class Enemy : Component
         }
         health.Init();
         wanderRange = false;
-        ResetWander();
+        //ResetWander();
 
-        attackCooldown = attack_cooldown;
-        PreparationTime = attack_preparation_time;
-        ReachDistance = attack_reach_distance;
-        internal_hit_cooldown = 0.0f;
-        target = Player.Instance;
 
         attackParticles.Enabled = false;
         hitParticles.Enabled = false;
@@ -125,97 +99,74 @@ public class Enemy : Component
         return false;
     }
     #endregion
+
     #region Target
     protected Vector3 GetDirectionToTarget()
     {
         return (target.transform.position - transform.position).normalized;
     }
     #endregion
+
     #region Attack
-    protected IEnumerator DoAttack(int damage)
+    protected IEnumerator Attack(float reach_distance, float preparation_time, float attack_cooldown, int damage)
     {
-        float timer = 0.0f;
-        movement.CanMove = false;
         isAttacking = true;
-        endedPreparingAttack = false;
-        endedAttack = false;
-        PlayAnimation("Armature|ChargeAttack", 0.0f);
-        while (timer < PreparationTime)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        PlayAnimation("Armature|Attack", 0.0f);
-        animator.Looping = false;
-        endedPreparingAttack = true;
-        attackBox.entity.SetActive(true);
-        if (attackBox.IsColliding || Vector3.Distance(transform.position, target.transform.position) < ReachDistance)
+        DoChargeAttack();
+        yield return new WaitForSeconds(preparation_time);
+        DoAttack(reach_distance, damage);
+        yield return new WaitForSeconds(animator.ClipDuration());
+        DoAttackCooldown();
+        yield return new WaitForSeconds(attack_cooldown);
+        EndAttack();
+        isAttacking = false;
+    }
+
+    public virtual void DoChargeAttack()
+    {
+        attack_stages = Vector2.Zero;
+        movement.CanMove = false;
+        transform.LookAt(target.transform.position, Vector3.Up);
+        animator.PlayClip("Armature|ChargeAttack", false, 0.0f);
+    }
+
+    public virtual void DoAttack(float reach_distance, int damage)
+    {
+        attack_stages.x = 1.0f;
+        animator.PlayClip("Armature|Attack", false, 0.0f);
+        if (Mathf.Abs((float)Vector3.Distance(transform.position, target.transform.position)) <= reach_distance)
         {
             target.Effects.AddEffect(effect);
-            Attack(damage);
+            target.PlayerHealth.Damage(target.Effects.GetEffectValueInt(damage, "ModifyDamage"));
+            target.Movement.ApplyKnockback((float)damage * 10.0f, 0.3f, GetDirectionToTarget());
         }
-        attackParticles.Enabled = true;
-        yield return new WaitForSeconds(Time.deltaTime);
-        attackParticles.Enabled = false;
-        timer = 0.0f;
-        float animation_duration = animator.GetCurrentClipDuration();
-        while (timer < animation_duration)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        PlayAnimation("Armature|IdleWalk", 0.0f);
-        animator.Looping = true;
-        timer = 0.0f;
-        attackBox.entity.SetActive(false);
-        endedAttack = true;
-        while (timer < attackCooldown)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        attackBox.entity.SetActive(true);
+    }
+
+    public virtual void DoAttackCooldown()
+    {
+        attack_stages.y = 1.0f;
+        animator.PlayClip("Armature|IdleWalk", false, 0.0f);
+    }
+
+    public virtual void EndAttack()
+    {
+        attack_stages = Vector2.Zero;
         movement.CanMove = true;
-        isAttacking = false;
-        endedPreparingAttack = false;
-        endedAttack = false;
     }
 
-    private void Attack(int points)
-    {
-        target.PlayerHealth.Damage(target.Effects.GetEffectValueInt(points, "ModifyDamage"));
-        target.Movement.ApplyKnockback((float)points * 10.0f, 0.3f, GetDirectionToTarget());
-    }
-
-    protected bool EndedPreparingAttack()
-    {
-        return endedPreparingAttack;
-    }
-
-    protected bool EndedAttack()
-    {
-        return endedPreparingAttack;
-    }
-
-    protected bool OnHitCooldown()
-    {
-        return internal_hit_cooldown > 0.0f;
-    }
-
-    protected void StartHitCooldown(float attack_duration)
-    {
-        internal_hit_cooldown = attack_duration;
-    }
-
-    public virtual void Hit(int points)
+    public virtual void Hit(int points, float force_scale)
     {
         if (OnHitCooldown() || !health.canBeDamaged) return;
-        StartHitCooldown(target.Combat.GetAttackDuration());
-        StartCoroutine(ParticleTick(hitParticles, Vector3.Up, Time.deltaTime));
-        health.Damage(points);
-        StartCoroutine(movement.Push(points * 25 - health.maxHealth, 0.3f, GetDirectionToTarget() * -1));
+        if (target.Combat.TemporalFunctionIsAttacking())
+        {
+            if (hitbox.HasCollided)
+            {
+                health.Damage(points);
+                StartCoroutine(movement.Push(points * force_scale, knockback_time, GetDirectionToTarget() * -1));
+            }
+        }
     }
     #endregion
+
     #region Wander
     protected void ResetWander()
     {
@@ -228,7 +179,7 @@ public class Enemy : Component
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
         int Wall2Layer = Collisions.GetLayerBit("EnemyLimit");
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
-        int LayerMask = WallLayer | Wall2Layer /*| EnemyLayer*/;
+        int LayerMask = WallLayer | Wall2Layer | EnemyLayer;
 
         if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask, collision))
         {
@@ -258,6 +209,7 @@ public class Enemy : Component
         }
     }
     #endregion
+
     #region Debug
     protected void DebugViewField(float field_width, float field_depth)
     {
@@ -274,39 +226,26 @@ public class Enemy : Component
         Gizmo.DrawLine(transform.position + transform.Up, transform.position + transform.Up + GetDirectionToTarget()*detection_distance, Color.Red);
     }
     #endregion
-    #region Visual
-    public void PlayAnimation(string clipName, float transitionTime)
+
+    #region Variables & Control
+    public bool Bool(float value)
     {
-        if (!animator.InTransition)
-        {
-            if (animator.GetCurrentClipName() == clipName)
-                return;
-        }
-        else
-        {
-            if (animator.GetNextClipName() == clipName)
-                return;
-        }
-        Debug.Log(clipName);
-        animator.Play(clipName, transitionTime);
+        return value == 1.0f;
     }
 
-    public IEnumerator ParticleTick(ParticleComponent particles, Vector3 sequence, float tick_duration/*, string emitter, bool force_system_active, bool only_active*/) //Sequence options: -2 no modify | -1 opposite | 0 false | 1 true 
+    protected bool EndedPreparingAttack()
     {
-        particles.SetActive(TranslateBool(particles, sequence.x));
-        yield return new WaitForSeconds(tick_duration);
-        particles.SetActive(TranslateBool(particles, sequence.y));
-        yield return new WaitForSeconds(tick_duration);
-        particles.SetActive(TranslateBool(particles, sequence.z));
+        return Bool(attack_stages.x);
     }
 
-    private bool TranslateBool(ParticleComponent particles, float number)
+    protected bool EndedAttack()
     {
-        if( particles == null ) return false;
-        if (number == -1) return !particles.Enabled;
-        if (number == 0) return false;
-        if (number == 1) return true;
-        return particles.Enabled;
+        return Bool(attack_stages.y);
+    }
+
+    protected bool OnHitCooldown()
+    {
+        return (attack_stages == Vector2.One && isAttacking);
     }
     #endregion
 }

@@ -1,15 +1,15 @@
 using System;
 using Loopie;
 
-class EnemyFeedback : Component
+public class EnemyFeedback : Component
 {
+    public Entity FeedbackEntity;
+    private ParticleComponent Particles;
+    private AudioSource SFX;
+
     void OnCreate()
     {
-
-    }
-
-    void OnUpdate()
-    {
-
+        Particles = FeedbackEntity.GetComponent<ParticleComponent>();
+        SFX = FeedbackEntity.GetComponent<AudioSource>();
     }
 };
