@@ -3,12 +3,14 @@ using Loopie;
 
 public class WeaponItem : Component
 {
-    public Entity vfx;
-    public Entity uiManager;
+    [Header("Configuration")]
     public string uniqueId = "Grapple";
     public string popupName = "Popup_Grapple";
+    [Header("Feedback")]
+    public Entity vfx;
 
     private bool alreadyCollected = false;
+    BoxCollider triggerDetection;
 
     void OnCreate()
     {
@@ -17,14 +19,15 @@ public class WeaponItem : Component
             alreadyCollected = true;
             entity.SetActive(false);
         }
+        triggerDetection = entity.GetComponent<BoxCollider>();
     }
 
     void OnUpdate()
     {
         if (alreadyCollected) return;
 
-        BoxCollider col = entity.GetComponent<BoxCollider>();
-        if (col != null && col.HasCollided)
+       
+        if (triggerDetection != null && triggerDetection.HasCollided)
         {
             if (!PlayerStats.collectedItems.Contains(uniqueId))
             {
@@ -54,10 +57,9 @@ public class WeaponItem : Component
 
     private void ShowUIPopup()
     {
-        if (uiManager != null)
+        if (UIPopupManager.Instance != null)
         {
-            UIPopupManager popup = uiManager.GetComponent<UIPopupManager>();
-            if (popup != null) popup.ShowPopup(popupName);
+            UIPopupManager.Instance.ShowPopup(popupName);
         }
     }
 }; 

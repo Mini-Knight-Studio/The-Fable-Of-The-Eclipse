@@ -1,10 +1,12 @@
-using System;
 using Loopie;
+using System;
+using System.Reflection.Emit;
 
 public class PlayerMovement : PlayerComponent
 {
     private Movement movementHelper;
 
+    [Header("Settings")]
     public float moveSpeed = 10.0f;
     public float rotationSpeed = 5.0f;
     private bool isMoving = false;
@@ -20,19 +22,16 @@ public class PlayerMovement : PlayerComponent
     private Vector3 dashDirection = new Vector3(0, 0, 0);
     private bool isDashing = false;
 
-    // Dash SFX
-    public Entity dashSFXEntity;
-    private AudioSource dashSfxSource;
+    [Header("Gravity")]
+    public bool gravityActive;
+    public float gravity;
 
+    [Header("Others")]
     // Walk SFX
-    public Entity walkSFXEntity;
-    private AudioSource walkSFXSource;
     private float walkSFXTimer = 0;
     public float walkSFXInterval = 5;
 
     // Idle SFX
-    public Entity idleSFXEntity;
-    private AudioSource idleSFXSource;
     private float idleSFXTimer = 0;
     public float idleSFXInterval = 5;
 
@@ -48,11 +47,6 @@ public class PlayerMovement : PlayerComponent
             movementHelper.CanMove = true;
 
         playerCollider = entity.GetComponent<BoxCollider>();
-
-        dashSfxSource = dashSFXEntity.GetComponent<AudioSource>();
-        walkSFXSource = walkSFXEntity.GetComponent<AudioSource>();
-        idleSFXSource = idleSFXEntity.GetComponent<AudioSource>();
-
     }                          
 
     public void ProcessMovement()
@@ -68,12 +62,25 @@ public class PlayerMovement : PlayerComponent
 
             if (idleSFXTimer >= idleSFXInterval)
             {
-                idleSFXSource.Play();
+                player.Feedback.PlayIdle();
                 idleSFXTimer = 0f;
             }
         }
 
+
+
         HandleGodMode();
+        HandleGravity();
+    }
+
+    private void HandleGravity()
+    {
+        if (gravityActive && !isGodMode)
+        {
+
+            movementHelper.Speed = -gravity;
+            movementHelper.Move(Vector3.Up);
+        }
     }
 
     private void HandleGodMode()
@@ -113,7 +120,7 @@ public class PlayerMovement : PlayerComponent
             dashBufferTimer = 0;
 
             dashDirection = entity.transform.Forward;
-            dashSfxSource.Play();
+            player.Feedback.PlayDash();
         }
 
         return false;
@@ -157,7 +164,7 @@ public class PlayerMovement : PlayerComponent
 
             if (walkSFXTimer >= walkSFXInterval)
             {
-                walkSFXSource.Play();
+                player.Feedback.PlayWalk();
                 walkSFXTimer = 0f;
             }
         }
