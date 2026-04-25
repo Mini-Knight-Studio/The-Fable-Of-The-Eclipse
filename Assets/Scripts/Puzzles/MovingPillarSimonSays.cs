@@ -38,7 +38,7 @@ class MovingPillarSimonSays : Component
         if (!enabled)
         {
             if (torch != null) torch.SetActive(true);
-            if (torchParticles != null) torchParticles.SetActive(false);
+            if (torchParticles != null) torchParticles.Stop();
             enabled = true;
         }
 
@@ -55,12 +55,12 @@ class MovingPillarSimonSays : Component
 
         if (active && !activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(true);
+            if (torchParticles != null) torchParticles.Play();
             activated = true;
         }
         else if (!active && activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(false);
+            if (torchParticles != null) torchParticles.Stop();
             activated = false;
         }
     }
@@ -71,7 +71,7 @@ class MovingPillarSimonSays : Component
 
         if (!activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(true);
+            if (torchParticles != null) torchParticles.Play();
             activated = true;
         }
     }
@@ -83,7 +83,7 @@ class MovingPillarSimonSays : Component
 
         if (activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(false);
+            if (torchParticles != null) torchParticles.Stop();
             activated = false;
         }
     }

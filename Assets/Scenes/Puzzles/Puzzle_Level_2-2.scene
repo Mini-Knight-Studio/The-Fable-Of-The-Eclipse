@@ -34,7 +34,7 @@
                     "is_active": true,
                     "meshrenderer": {
                         "casts_shadows": true,
-                        "material_uuid": "2484b504-01eb-9b16-587e-ab77d294d3b5",
+                        "material_uuid": "9a147a43-094d-1023-befd-258a281f887d",
                         "mesh_index": 0,
                         "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
                     },
@@ -136,7 +136,7 @@
                     "uuid": "dd46f7aa-755d-4a4e-7cc1-d36f86c5ae57"
                 }
             ],
-            "name": "AirTile",
+            "name": "EarthTile",
             "order": 0,
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
@@ -227,7 +227,7 @@
             ],
             "name": "PlayerCamera",
             "order": 0,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -262,10 +262,10 @@
                     "uuid": "080a3f41-92be-f4d2-6fb7-7c1740644a70"
                 },
                 {
-                    "is_active": true,
+                    "is_active": false,
                     "meshrenderer": {
                         "casts_shadows": true,
-                        "material_uuid": "2484b504-01eb-9b16-587e-ab77d294d3b5",
+                        "material_uuid": "9a147a43-094d-1023-befd-258a281f887d",
                         "mesh_index": 0,
                         "mesh_uuid": "f07bcd0e-898d-1edc-993e-67a499ff51d1"
                     },
@@ -339,7 +339,7 @@
                     "uuid": "4d38d19d-9446-cffd-f387-939accabb7fb"
                 }
             ],
-            "name": "AirPillar",
+            "name": "EarthPillar",
             "order": 0,
             "parent_uuid": "fb076017-00ea-c384-dd59-90aafe82e22d",
             "static": true,
@@ -454,7 +454,7 @@
             ],
             "name": "Interactables",
             "order": 1,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
@@ -538,7 +538,7 @@
             ],
             "name": "Puzzle_Borders_1",
             "order": 2,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "4d862f55-ac58-625d-134c-b7e8a1bef8f1"
         },
@@ -817,7 +817,7 @@
             ],
             "name": "PuzzleBoard",
             "order": 3,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
@@ -1072,6 +1072,53 @@
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "b1c84545-7c17-34f7-501a-8197e0b474c2"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 180.0,
+                            "y": -45.0,
+                            "z": 180.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.029999999329447746,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": -0.3826834559440613,
+                            "x": -5.711168071798056e-08,
+                            "y": 0.9238795042037964,
+                            "z": -5.711168071798056e-08
+                        },
+                        "scale": {
+                            "x": 1.4520000219345093,
+                            "y": 1.0399999618530273,
+                            "z": 1.4520000219345093
+                        }
+                    },
+                    "uuid": "c3b6695a-a28b-615b-b80c-afd2758a4abe"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "0bfa45ee-a527-0915-6921-aaffb0231d8d",
+                        "mesh_index": 0,
+                        "mesh_uuid": "b4c955dd-73cf-dddf-aceb-d6d8ebe5cb0b"
+                    },
+                    "uuid": "43fb882a-ad2f-2c07-a943-63b09631bfdf"
+                }
+            ],
+            "name": "pCylinder1",
+            "order": 0,
+            "parent_uuid": "ae722233-7cf7-84bb-bba5-3ba48c765cc1",
+            "static": true,
+            "uuid": "49203ecc-81e8-bbf6-bb91-7fda265fe732"
         },
         {
             "active": false,
@@ -1805,7 +1852,7 @@
             ],
             "name": "Puzzle_Goal",
             "order": 4,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": false,
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
@@ -1923,7 +1970,7 @@
             ],
             "name": "HUD",
             "order": 5,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3"
         },
@@ -2333,7 +2380,7 @@
             ],
             "name": "Fire_Puzzle",
             "order": 6,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "114aa9f2-2b4e-3b49-75a8-2e4e7571f724"
         },
@@ -3290,7 +3337,7 @@
             ],
             "name": "Lighting",
             "order": 7,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "07a093b1-5552-f8af-16ed-156f6110db5a"
         },
@@ -3485,7 +3532,7 @@
             ],
             "name": "Pillars",
             "order": 8,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": false,
             "uuid": "fb076017-00ea-c384-dd59-90aafe82e22d"
         },
@@ -3589,7 +3636,7 @@
             ],
             "name": "puzzleDebugger",
             "order": 9,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "39b5386b-aea9-18a2-fd63-d9a0ae1855bd"
         },
@@ -3666,7 +3713,7 @@
                         "position": {
                             "x": 8.0,
                             "y": 4.0,
-                            "z": 0.0
+                            "z": -1.1920928955078125e-07
                         },
                         "rotation": {
                             "w": 1.0,
@@ -3683,7 +3730,7 @@
                     "uuid": "ae76b5ec-ced5-0ef6-38d2-4d7438ad2ab9"
                 },
                 {
-                    "is_active": true,
+                    "is_active": false,
                     "meshrenderer": {
                         "casts_shadows": true,
                         "material_uuid": "b5e91f05-d326-322e-14b7-af09a4a7474c",
@@ -3915,7 +3962,7 @@
                     "uuid": "109fdcf3-cba4-f1a8-9c0a-b37b41fe657f"
                 },
                 {
-                    "is_active": true,
+                    "is_active": false,
                     "meshrenderer": {
                         "casts_shadows": true,
                         "material_uuid": "7577ab4d-cfac-eb48-924f-4922a9b2942a",
@@ -8320,7 +8367,7 @@
             ],
             "name": "Player",
             "order": 10,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": false,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -8785,6 +8832,43 @@
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "e51ef564-535a-e386-5146-fd7fa2300cea"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "c88c80d2-ef2c-c5b1-7873-5449ef899839"
+                }
+            ],
+            "name": "Water_Air_Totem",
+            "order": 7,
+            "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
+            "static": true,
+            "uuid": "23aeb035-fccc-c1a4-707a-d91203828d9c"
         },
         {
             "active": false,
@@ -18997,7 +19081,7 @@
             ],
             "name": "FloorColliders",
             "order": 11,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "1fb52e5a-8cd5-9bf9-8e50-f0eb972e77aa"
         },
@@ -19303,7 +19387,7 @@
             ],
             "name": "Canvas",
             "order": 12,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "d675e9fb-2046-e828-7031-0cd9b03aa568"
         },
@@ -22858,7 +22942,7 @@
             ],
             "name": "Pause",
             "order": 13,
-            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
+            "parent_uuid": "406a3766-b20d-aa03-c590-fa83fcc0e561",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -25313,6 +25397,174 @@
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "cc215d82-5532-5a63-f4db-fb98314b9235"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "a109a71a-9cae-1815-c579-92b9945bb127"
+                }
+            ],
+            "name": "Fire_Totem",
+            "order": 7,
+            "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
+            "static": true,
+            "uuid": "76657f66-b3b6-406d-cbc4-a80ab19e7cec"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 180.0,
+                            "y": -45.0,
+                            "z": 180.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.029999999329447746,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": -0.3826834559440613,
+                            "x": -5.711168071798056e-08,
+                            "y": 0.9238795042037964,
+                            "z": -5.711168071798056e-08
+                        },
+                        "scale": {
+                            "x": 1.4520000219345093,
+                            "y": 1.0399999618530273,
+                            "z": 1.4520000219345093
+                        }
+                    },
+                    "uuid": "424c179c-b203-2094-d07d-1063e22fbd71"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "8b84758b-8f55-fdeb-42a3-279ebe4fedd6",
+                        "mesh_index": 0,
+                        "mesh_uuid": "582edf8f-cee9-5018-dc1e-67ed1989cbcc"
+                    },
+                    "uuid": "e3e805df-92db-f108-1d36-5710655e70ca"
+                }
+            ],
+            "name": "pCylinder1",
+            "order": 0,
+            "parent_uuid": "76657f66-b3b6-406d-cbc4-a80ab19e7cec",
+            "static": true,
+            "uuid": "2b7c848b-0b52-004c-67fd-0835be6955ca"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "596acabf-7e67-1d9f-bf9b-bcb4c9c08b85"
+                }
+            ],
+            "name": "Earth_Totem",
+            "order": 7,
+            "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
+            "static": true,
+            "uuid": "ae722233-7cf7-84bb-bba5-3ba48c765cc1"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 180.0,
+                            "y": -45.0,
+                            "z": 180.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.029999999329447746,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": -0.3826834559440613,
+                            "x": -5.711168071798056e-08,
+                            "y": 0.9238795042037964,
+                            "z": -5.711168071798056e-08
+                        },
+                        "scale": {
+                            "x": 1.4520000219345093,
+                            "y": 1.0399999618530273,
+                            "z": 1.4520000219345093
+                        }
+                    },
+                    "uuid": "9249186f-3e47-4f4c-2351-0e63152e2fd6"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "01215717-8bc6-8a7b-c8ad-43cb4d4d9caf",
+                        "mesh_index": 0,
+                        "mesh_uuid": "4596ddcd-d6f2-c850-81d8-6a49a9a79be1"
+                    },
+                    "uuid": "04521e99-e452-30a0-8e40-53c35aaefde0"
+                }
+            ],
+            "name": "pCylinder1",
+            "order": 0,
+            "parent_uuid": "23aeb035-fccc-c1a4-707a-d91203828d9c",
+            "static": true,
+            "uuid": "7e28b1ec-2932-2d21-d0f4-e2bd4be640c3"
         }
     ]
 }
