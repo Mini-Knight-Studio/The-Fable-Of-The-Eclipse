@@ -3,10 +3,6 @@ using Loopie;
 
 class MovingPlatform : Component
 {
-    // Have a collider, if the player is colliding, make the player movement the same as the platform (or sum them or smthn)
-    // PlatformObj --> script, have a minimum of points and an int public to set how many you are sing
-    //  > model (collider)
-    //  > points (from path, entities)
     public Entity platformModel;
     private BoxCollider collider;
 
@@ -24,6 +20,9 @@ class MovingPlatform : Component
 
     private Entity[] pathPoints;
 
+    public Entity movingParticlesEntity;
+    private ParticleComponent movingParticles;
+
     public float movementSpeed = 2.0f;
 
     public bool moveOnStart = false;
@@ -37,6 +36,8 @@ class MovingPlatform : Component
     void OnCreate()
     {
         collider = platformModel.GetComponent<BoxCollider>();
+        movingParticles = movingParticlesEntity.GetComponent<ParticleComponent>();
+        movingParticles.Stop();
 
         pathPoints = new Entity[10];
 
@@ -71,6 +72,7 @@ class MovingPlatform : Component
 
         goingToPoint = true;
         targetPoint = pointNum;
+        movingParticles.Play();
     }
 
     void ManageMovement()

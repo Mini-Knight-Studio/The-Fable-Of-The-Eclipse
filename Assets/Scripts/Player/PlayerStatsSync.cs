@@ -21,7 +21,7 @@ public class PlayerStatsSync : Component
         {
             if (playerHealth != null)
             {
-                playerHealth.actualHealth = PlayerStats.savedHealth;
+                playerHealth.ModifyActualHealth(PlayerStats.savedHealth);
             }
         }
     }

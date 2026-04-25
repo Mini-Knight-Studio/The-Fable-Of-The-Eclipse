@@ -1,0 +1,217 @@
+using System;
+using System.Collections;
+using System.Threading;
+using Loopie;
+
+public class Boss : Component
+{
+    [Header("Boss Parts")]
+    public Entity leftHandEntity;
+    public Entity rightHandEntity;
+
+    private Hand leftHand;
+    private Hand rightHand;
+    [Space(10)]
+    [Header("Boss Variables")]
+    public Vector2 StartEndWaitTime;
+    public float InBetweenStagesCooldown;
+    public Vector2 InBetweenAttacksCooldown;
+    [Space(10)]
+    [Header("Hand Variables")]
+    public Vector2 punchTrackTime;
+    public Vector2 shakeTime;
+    public Vector2 handVelocity;
+    public Vector2 punchGroundCooldown;
+    public Vector2 spikeWarn;
+    public Vector2 spikeMovementDuration;
+    public Vector2 spikeActive;
+
+    public int Damage;
+    //[HideInInspector]
+    public int stage;
+    private bool on_sequence;
+    private bool vulnerable;
+    private bool defeated;
+    private float stage_timer;
+    [HideInInspector]
+    public Vector2 target_side_comparition;
+    [HideInInspector]
+    public Player target;
+    public Entity targetEntity;
+    private SceneTransition winScene;
+    private HeadLookAt headTemporalFeedback;
+    private BoxCollider headCollider;
+
+    #region Internal
+    void OnCreate()
+    {
+        stage = 0;
+        on_sequence = false;
+        stage_timer = 0;
+        target_side_comparition = new Vector2(-1, -1);
+
+        leftHand = leftHandEntity.GetComponent<Hand>();
+        leftHand.SetUp(this);
+        
+        rightHand = rightHandEntity.GetComponent<Hand>();
+        rightHand.SetUp(this);
+
+        target = targetEntity.GetComponent<Player>();
+        headTemporalFeedback = entity.GetComponent<HeadLookAt>();
+        winScene = entity.GetComponent<SceneTransition>();
+        headTemporalFeedback.active = false;
+        headCollider = headTemporalFeedback.head.GetComponent<BoxCollider>();
+    }
+
+    void OnUpdate()
+    {
+        if(vulnerable) return;
+        if (leftHand.defeated && rightHand.defeated)
+        {
+            vulnerable = true;
+            on_sequence = false;
+            StartCoroutine(ExposeCore());
+        }
+
+        #region Timer Between Attacks
+        if (on_sequence)
+        {
+            headTemporalFeedback.active = true;
+            if (stage_timer > 0.0f)
+                stage_timer -= Time.deltaTime;
+            else
+                StartNextAttack();
+
+            leftHand.Update();
+            rightHand.Update();
+        }
+        #endregion
+
+        #region Start Timer | In Stage Timer | End Timer
+        if(!on_sequence)
+        {
+            if (StartEndWaitTime.x > 0.0f)
+            {
+                headTemporalFeedback.active = false;
+                StartEndWaitTime.x -= Time.deltaTime;
+            }
+            else if (!defeated && !vulnerable)
+            {
+                StartBattle();
+            }
+
+            if (defeated && stage < 1)
+            {
+                if(InBetweenStagesCooldown > 0.0f)
+                    InBetweenStagesCooldown -= Time.deltaTime;
+                else
+                    Evolve();
+            }
+            else if (defeated && stage >= 1)
+            {
+                if (StartEndWaitTime.y > 0.0f)
+                    StartEndWaitTime.y -= Time.deltaTime;
+                else
+                {
+                    Debug.Log("Win");
+                    winScene.StartTransition();
+                }
+            }
+        }
+        #endregion
+    }
+
+    #endregion
+
+    #region Combat Control
+    public void StartBattle()
+    {
+        on_sequence = true;
+        stage_timer = 0;
+        defeated = false;
+        headTemporalFeedback.active = true;
+    }
+
+    private void StartNextAttack()
+    {
+        headTemporalFeedback.active = true;
+        if (leftHand.IsOnSide())
+            leftHand.Attack();
+
+        if (rightHand.IsOnSide())
+            rightHand.Attack();
+    }
+
+    public void Evolve()
+    {
+        stage = 1;
+        StartBattle();
+    }
+
+    private void GetTargetSide()
+    {
+        target_side_comparition.x = -1;
+        if (leftHand.IsOnSide())
+            target_side_comparition.x = 0;
+        if(rightHand.IsOnSide())
+            target_side_comparition.x = 1;
+    }
+
+    public bool NeedsToCancel()
+    {
+        GetTargetSide();
+        if(target_side_comparition.x == -1 || target_side_comparition.y == -1)
+            return true;
+        if (target_side_comparition.x != target_side_comparition.y)
+            return true;
+        return false;
+    }
+
+    public float Value(Vector2 stage_variable)
+    {
+        return stage == 0 ? stage_variable.x : stage == 1 ? stage_variable.y : 0;
+    }
+
+    public void CompleteAttackCycle()
+    {
+        stage_timer = Value(InBetweenAttacksCooldown);
+    }
+
+    private bool HeadMoveY(float position)
+    {
+        if (Mathf.Abs(headTemporalFeedback.head.transform.position.y - position) > Value(handVelocity) * Time.deltaTime)
+        {
+            headTemporalFeedback.head.transform.position += new Vector3(0, -1 * Value(handVelocity * 4) * Time.deltaTime * (position > headTemporalFeedback.head.transform.position.y? -1:1), 0);
+            return false;
+        }
+        return true;
+    }
+    
+    #endregion
+
+    public IEnumerator ExposeCore()
+    {
+        headTemporalFeedback.active = false;
+        headTemporalFeedback.head.transform.rotation = Vector3.Zero;
+        while (!HeadMoveY(0))
+        {
+            yield return null;
+        }
+
+        while (!headCollider.HasCollided)
+        {
+            yield return null;
+        }
+        headTemporalFeedback.active = true;
+        while (!HeadMoveY(24))
+        {
+            yield return null;
+        }
+        leftHand.defeated = false;
+        rightHand.defeated = false;
+        leftHand.ResetTransform();
+        rightHand.ResetTransform();
+        vulnerable = false;
+        defeated = true;
+    }
+};
