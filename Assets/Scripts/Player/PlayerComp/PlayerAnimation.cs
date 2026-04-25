@@ -5,17 +5,17 @@ public class PlayerAnimation : PlayerComponent
 {
     private Animator modelAnimator;
 
-    public string idleClipName = "idle";
-    public string walkClipName = "walk";
-    public string dashIdleClipName = "DashFromIdle";
-    public string dashWalkClipName = "DashFromWalk";
-    public string attack1Clip = "Attack1";
-    public string attack2Clip = "Attack2";
-    public string attack3Clip = "Attack3";
-    public string grappleShootClip = "GrapleShoot";
-    public string grapplePoseClip = "GraplePose";
-    public string grappleLandingClip = "GrapleLanding";
-    public string TorchClip= "Torch";
+    public string idleClipName = "";
+    public string walkClipName = "";
+    public string dashIdleClipName = "";
+    public string dashWalkClipName = "";
+    public string attack1Clip = "";
+    public string attack2Clip = "";
+    public string attack3Clip = "";
+    public string grappleShootClip = "";
+    public string grapplePoseClip = "";
+    public string grappleLandingClip = "";
+    public string TorchClip= "";
 
     private enum AnimationState { 
         IDLE,
@@ -33,6 +33,9 @@ public class PlayerAnimation : PlayerComponent
 
     public Entity modelEntity;
 
+    private float loopDelayTimer = 0f;
+    private bool isWaitingForLoop = false;
+
     public void OnCreate()
     {
         state = AnimationState.NULL;
@@ -43,7 +46,21 @@ public class PlayerAnimation : PlayerComponent
     public void ProcessAnimations()
     {
         if (player.Movement == null || player.Combat == null || player.Grapple == null) return;
+       
+        if (state != AnimationState.IDLE)
+        {
+            isWaitingForLoop = false;
+        }
 
+        if (isWaitingForLoop)
+        {
+            loopDelayTimer -= Time.deltaTime;
+            if (loopDelayTimer <= 0f)
+            {
+                modelAnimator.Looping = true;
+                isWaitingForLoop = false;
+            }
+        }
 
         if (player.Torch != null && player.Torch.IsTorching)
         {
@@ -103,8 +120,12 @@ public class PlayerAnimation : PlayerComponent
 
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
+
         modelAnimator.Play(idleClipName, 0.4f);
-        modelAnimator.Looping = true;
+        modelAnimator.Looping = false;
+
+        isWaitingForLoop = true;
+        loopDelayTimer = 0.4f;
     }
 
     private void Move()
@@ -142,7 +163,7 @@ public class PlayerAnimation : PlayerComponent
             if (currentCombo == 2) clipToPlay = attack2Clip;
             else if (currentCombo == 3) clipToPlay = attack3Clip;
 
-            modelAnimator.Play(clipToPlay, .1f);
+            modelAnimator.Play(clipToPlay, .3f);
             modelAnimator.Looping = false;
         }
     }
