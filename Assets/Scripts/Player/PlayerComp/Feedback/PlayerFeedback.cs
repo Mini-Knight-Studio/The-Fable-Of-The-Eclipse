@@ -170,7 +170,6 @@ public class PlayerFeedback : PlayerComponent
 
         if (particle != null)
         {
-            Debug.LogWarning(particle.ID);
             PlayFeedback(particle, duration);
         }
     }

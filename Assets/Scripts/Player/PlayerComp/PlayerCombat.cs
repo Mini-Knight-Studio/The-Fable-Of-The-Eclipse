@@ -81,7 +81,6 @@ public class PlayerCombat : PlayerComponent
         if (comboIndex > 3) comboIndex = 1;
 
         attackTimer = hitboxDuration + attackCooldown;
-        attackSfxSource.Play();
         player.Feedback.PlayAttack();
         swordTriggerCollider.entity.SetActive(true);
     }
