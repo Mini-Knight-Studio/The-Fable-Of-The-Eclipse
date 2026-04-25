@@ -12,9 +12,6 @@ public class PlayerCombat : PlayerComponent
     public Entity swordTriggerEntity;
     private BoxCollider swordTriggerCollider;
 
-    public Entity attackSFXEntity;
-    private AudioSource attackSfxSource;
-
     private int comboIndex = 0;
     private bool wantsToCombo = false;
     public float comboWindow = 0.8f;
@@ -25,7 +22,6 @@ public class PlayerCombat : PlayerComponent
         swordTriggerCollider = swordTriggerEntity.GetComponent<BoxCollider>();
         if (swordTriggerCollider != null) swordTriggerCollider.entity.SetActive(false);
         swordTriggerCollider.Trigger = true;
-        attackSfxSource = attackSFXEntity.GetComponent<AudioSource>();
 
         attackTimer = 0.0f;
         isAttacking = false;
@@ -85,7 +81,7 @@ public class PlayerCombat : PlayerComponent
         if (comboIndex > 3) comboIndex = 1;
 
         attackTimer = hitboxDuration;
-        attackSfxSource.Play();
+        player.Feedback.PlayAttack();
         swordTriggerCollider.entity.SetActive(true);
     }
 
