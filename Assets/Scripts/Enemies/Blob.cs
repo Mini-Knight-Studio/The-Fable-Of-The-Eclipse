@@ -30,6 +30,7 @@ class Blob : Enemy
     private Vector3 SplitDirection;
     private bool spawn;
     private bool isSpawning;
+    private bool splitting;
     private int LayerOverride;
 
     void OnCreate()
@@ -42,52 +43,57 @@ class Blob : Enemy
         LayerOverride = EnemyLayer | PlayerHitLayer;
         spawn = false;
         isSpawning = false;
+        splitting = false;
     }
 
     void OnUpdate()
     {
-        if (Pause.isPaused)
-        {
-            return;
-        }
-
         if (spawn)
         {
             StartCoroutine(SplitLerp());
         }
 
-        Hit(1, PushForceScale, "Armature|IdleWalk");
-        if (!isSpawning && !isAttacking)
+        Hit(1, PushForceScale, "Armature|Walk");
+        
+        #region Health
+        if (health.IsDead())
+        {
+            movement.CanMove = false;
+            if (!splitting)
+            {
+                splitting = true;
+                if (Stage > 1)
+                    Split();
+                animator.PlayClip("Armature|SplitStart", false, 0.0f);
+                feedback.PlaySound("Death");
+            }
+            if (animator.AnimationEnded())
+                entity.Destroy();
+        }
+        #endregion
+        if (!isSpawning && !isAttacking && !splitting)
         {
             #region Movement
-            if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(ForcedDetectionDistance))
+            if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance * 0.75f))
             {
                 animator.PlayClip("Armature|Chase", true, 0.25f);
-                transform.LookAt(target.transform.position, transform.Up);
+                transform.LookAt(Player.Instance.transform.position, transform.Up);
                 movement.Move(4-Stage, transform.Forward);
                 ResetWander();
                 #region Attack
-                if (Vector3.Distance(target.transform.position, transform.position) < ReachDistance * Stage)
+                if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + ReachDistance && !health.IsDead())
                 {
-                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|Chase", "Armature|Chase", "Armature|Chase", "Armature|Chase"));
+                    StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
                 }
                 #endregion
             }
             else
             {
-                animator.PlayClip("Armature|IdleWalk", true, 0.25f);
-                Wander(ViewField.x, ViewField.y * Stage, Stage);
+                animator.PlayClip("Armature|Walk", true, 0.25f);
+                Wander(ViewField, 4-Stage);
             }
             #endregion
         }
-        #region Health
-        if (health.IsDead())
-        {
-            if (Stage > 1)
-                Split();
-            entity.Destroy();
-        }
-        #endregion
     }
 
     public void SetStage(int newStage)
@@ -98,12 +104,13 @@ class Blob : Enemy
 
     private IEnumerator SplitLerp()
     {
+        animator.PlayClip("Armature|SplitEnd", false, 0.0f);
         float timer = 0.0f;
         spawn = false;
         isSpawning = true;
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         collision.AddExcludeMask(LayerOverride);
-        while (timer < 1.0f)
+        while (timer < animator.ClipDuration())
         {
             timer += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, timer);
@@ -115,7 +122,7 @@ class Blob : Enemy
 
     protected void Split()
     {
-        collision.AddExcludeMask(LayerOverride);
+        collision.SetActive(false);
         int random = Loopie.Random.Range(0, 360);
         for (int i = 0; i < SplitAmmount; i++)
         {
@@ -138,7 +145,10 @@ class Blob : Enemy
     void OnDrawGizmo()
     {
         DebugViewField(ViewField.x, ViewField.y);
-        DebugForcedDetection(ForcedDetectionDistance);
+        if (!DetectedTargetInViewField(ViewField.x, ViewField.y) && !DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
+            DebugToTargetLine(Stage * StageScale + ForcedDetectionDistance, Color.Red);
+        else
+            DebugForwardLine(Stage * StageScale + ReachDistance, Color.Green);
     }
 
     void OnDestroy()

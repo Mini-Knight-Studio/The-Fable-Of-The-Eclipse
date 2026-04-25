@@ -3,6 +3,7 @@ using System.Threading;
 using Loopie;
 public class EnemyAnimation : Component
 {
+    [HideInInspector]
     public Entity model;
     private Animator animator;
     private bool clip_ended;
@@ -28,6 +29,8 @@ public class EnemyAnimation : Component
         animator.Looping = loop;
         if (animator.GetCurrentClipName() == clip_name && !animator.InTransition && !reset) return;
         if (animator.GetNextClipName() == clip_name && animator.InTransition && !reset) return;
+        Debug.Log(clip_name);
+        animation_timer = 0;
         animator.Play(clip_name, transition);
     }
 

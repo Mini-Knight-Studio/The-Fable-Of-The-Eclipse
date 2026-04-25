@@ -6,19 +6,15 @@ using Loopie;
 public class Enemy : Component
 {
     protected Entity reference;
+
     protected Health health;
     protected Movement movement;
     protected EnemyAnimation animator;
     protected EnemyFeedback feedback;
     protected BoxCollider collision;
     protected BoxCollider hitbox;
+
     protected TemporalEffect effect;
-
-    protected ParticleComponent enemyParticles;
-    protected ParticleComponent attackParticles;
-    protected ParticleComponent hitParticles;
-
-    protected Player target;
 
     //-- Wander --//
     private bool wanderRange = false;
@@ -35,7 +31,6 @@ public class Enemy : Component
     {
         reference = reference_enemy;
         type = enemyType;
-        target = Player.Instance;
         knockback_time = 0.25f;
 
         health = entity.GetComponent<Health>();
@@ -45,23 +40,26 @@ public class Enemy : Component
         feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
 
-        attackParticles = entity.GetComponent<ParticleComponent>();
-        hitParticles = entity.GetComponent<ParticleComponent>();
-
         foreach(Entity child in entity.GetChildren())
         {
+            if (child.Name == "Visuals")
+            {
+                animator.model = child;
+            }
+            if (child.Name == "Feedback")
+            {
+                feedback.FeedbackEntity = child;
+            }
             if (child.Name == "Hitbox")
             {
                 hitbox = child.GetComponent<BoxCollider>();
-                hitParticles = child.GetComponent<ParticleComponent>();
             }
         }
         health.Init();
         wanderRange = false;
+        feedback.Initialize();
+        feedback.EmitterFixRotation("Trail", Vector3.Zero);
         ResetWander();
-
-        attackParticles.Enabled = false;
-        hitParticles.Enabled = false;
     }
     #endregion
 
@@ -82,11 +80,13 @@ public class Enemy : Component
         RaycastHit hit;
         int PlayerLayer = Collisions.GetLayerBit("Player");
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
-        int LayerMask = PlayerLayer | WallLayer;
+        int EnemyWallLayer = Collisions.GetLayerBit("EnemyLimit");
+        int EnemyLayer = Collisions.GetLayerBit("Enemy");
+        int LayerMask = PlayerLayer | WallLayer | EnemyWallLayer | EnemyLayer;
 
-        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, LayerMask))
+        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, LayerMask, collision))
         {
-            if (hit.entity == target.entity)
+            if (hit.entity == Player.Instance.entity)
             {
                 return true;
             }
@@ -98,7 +98,7 @@ public class Enemy : Component
     #region Target
     protected Vector3 GetDirectionToTarget()
     {
-        return (target.transform.position - transform.position).normalized;
+        return (Player.Instance.transform.position - transform.position).normalized;
     }
     #endregion
 
@@ -106,8 +106,14 @@ public class Enemy : Component
     protected IEnumerator Attack(float reach_distance, float preparation_time, float attack_cooldown, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string idle_clip)
     {
         isAttacking = true;
+        float timer = 0.0f;
         DoChargeAttack(charge_attack_clip);
-        yield return new WaitForSeconds(preparation_time);
+        while (timer < preparation_time)
+        {
+            timer += Time.deltaTime;
+            transform.LookAt(Player.Instance.transform.position, Vector3.Up);
+            yield return null;
+        }
         DoAttack(reach_distance, damage, attack_clip);
         yield return new WaitForSeconds(animator.ClipDuration());
         DoAttackCooldown(cooldown_clip);
@@ -120,7 +126,6 @@ public class Enemy : Component
     {
         attack_stages = Vector2.Zero;
         movement.CanMove = false;
-        transform.LookAt(target.transform.position, Vector3.Up);
         animator.PlayClip(charge_attack_clip, false, 0.0f);
     }
 
@@ -128,11 +133,15 @@ public class Enemy : Component
     {
         attack_stages.x = 1.0f;
         animator.PlayClip(attack_clip, false, 0.0f);
-        if (Mathf.Abs((float)Vector3.Distance(transform.position, target.transform.position)) <= reach_distance)
+        if (Mathf.Abs((float)Vector3.Distance(transform.position, Player.Instance.transform.position)) <= reach_distance)
         {
-            target.Effects.AddEffect(effect);
-            target.PlayerHealth.Damage(target.Effects.GetEffectValueInt(damage, "ModifyDamage"));
-            target.Movement.ApplyKnockback((float)damage * 10.0f, 0.3f, GetDirectionToTarget());
+            if (Player.Instance.Effects.AddEffect(effect))feedback.TickParticles("Effect", Time.deltaTime);
+            else feedback.TickParticles("Attack", Time.deltaTime);
+            feedback.PlaySound("Attack");
+            feedback.ShakeCamera(damage / 20.0f, knockback_time/2);
+
+            Player.Instance.PlayerHealth.Damage(Player.Instance.Effects.GetEffectValueInt(damage, "ModifyDamage"));
+            Player.Instance.Movement.ApplyKnockback((float)damage * 10.0f, 0.3f, GetDirectionToTarget());
         }
     }
 
@@ -152,11 +161,14 @@ public class Enemy : Component
     public virtual void Hit(int points, float force_scale, string hit_clip)
     {
         if (OnHitCooldown() || !health.canBeDamaged) return;
-        if (target.Combat.TemporalFunctionIsAttacking())
+        if (Player.Instance.Combat.TemporalFunctionIsAttacking())
         {
             if (hitbox.HasCollided)
             {
                 health.Damage(points);
+                transform.LookAt(Player.Instance.transform.position, Vector3.Up);
+                feedback.TickParticles("Hurt", Time.deltaTime);
+                feedback.PlaySound("Hit");
                 animator.PlayClip(hit_clip, false, 0.0f, true);
                 StartCoroutine(movement.Push(points * force_scale, knockback_time, GetDirectionToTarget() * -1));
             }
@@ -170,18 +182,18 @@ public class Enemy : Component
         lastWanderPosition = transform.position + Vector3.Forward;
     }
 
-    protected void Wander(float areaWidth, float reachDistance, float speedMultiplier)
+    protected void Wander(Vector2 ViewField, float speedMultiplier)
     {
         RaycastHit hit;
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
-        int Wall2Layer = Collisions.GetLayerBit("EnemyLimit");
+        int EnemyWallLayer = Collisions.GetLayerBit("EnemyLimit");
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
-        int LayerMask = WallLayer | Wall2Layer | EnemyLayer;
+        int LayerMask = WallLayer | EnemyWallLayer;
 
-        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask, collision))
+        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, ViewField.y, out hit, LayerMask, collision))
         {
-            movement.Move(speedMultiplier / 2, transform.Forward);
-            if (Vector3.Distance(lastWanderPosition, transform.position) > reachDistance)
+            movement.Move(speedMultiplier, transform.Forward);
+            if (Vector3.Distance(lastWanderPosition, transform.position) > ViewField.y)
                 return;
         }
 
@@ -191,13 +203,13 @@ public class Enemy : Component
             int tries = 0;
             while (tries < 10)
             {
-                float newDir = Loopie.Random.Range(!wanderRange ? -180.0f : -areaWidth, !wanderRange ? 180.0f : areaWidth);
+                float newDir = Loopie.Random.Range(!wanderRange ? -180.0f : -ViewField.x, !wanderRange ? 180.0f : ViewField.x);
 
                 Vector3 newDirection = Vector3.RotateAroundAxis(transform.Forward, transform.Up, newDir);
-                if (!Collisions.Raycast(transform.position + transform.Up, newDirection, reachDistance, out hit, LayerMask))
+                if (!Collisions.Raycast(transform.position + transform.Up, newDirection, ViewField.y, out hit, LayerMask))
                 {
                     transform.LookAt(transform.position + newDirection, transform.Up);
-                    lastWanderPosition = transform.position + transform.Forward * reachDistance * 1.5f;
+                    lastWanderPosition = transform.position + transform.Forward * ViewField.y * 1.5f;
                     return;
                 }
                 tries++;
@@ -218,9 +230,14 @@ public class Enemy : Component
         Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position + left * field_depth + transform.Up, Color.White);
     }
 
-    protected void DebugForcedDetection(float detection_distance)
+    protected void DebugToTargetLine(float magnitude, Color color)
     {
-        Gizmo.DrawLine(transform.position + transform.Up, transform.position + transform.Up + GetDirectionToTarget()*detection_distance, Color.Red);
+        Gizmo.DrawLine(transform.position + transform.Up, transform.position + transform.Up + GetDirectionToTarget() * magnitude, color);
+    }
+
+    protected void DebugForwardLine(float magnitude, Color color)
+    {
+        Gizmo.DrawLine(transform.position + transform.Up, transform.position + transform.Up + transform.Forward * magnitude, color);
     }
     #endregion
 

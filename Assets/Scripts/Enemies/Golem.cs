@@ -3,7 +3,7 @@ using System;
 using static Loopie.Transform;
 
 class Golem : Enemy
-{
+{/*
     [Header("Global Enemy")]
     public Entity Reference;
     public Vector2 ViewField;
@@ -47,18 +47,19 @@ class Golem : Enemy
             #region Movement
             if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(ForcedDetectionDistance))
             {
-                transform.LookAt(target.transform.position, transform.Up);
+                animator.PlayClip("Armature|Chase", true, 0.25f);
+                transform.LookAt(Player.Instance.transform.position, transform.Up);
                 movement.Move(isShielding ? 0.5f : 1.0f, transform.Forward);
                 ResetWander();
                 #region Attack
-                if (Vector3.Distance(target.transform.position, transform.position) < ReachDistance)
+                if (Vector3.Distance(Player.Instance.transform.position, transform.position) < ReachDistance)
                 {
                     StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|IdleWalk", "Armature|IdleWalk"));
                 }
                 #endregion
             }
             else
-                Wander(ViewField.x, ViewField.y, isShielding ? 0.5f : 1.0f);
+                Wander(ViewField, isShielding ? 0.5f : 1.0f);
             #endregion
 
         }
@@ -95,4 +96,5 @@ class Golem : Enemy
     {
         StopAllOwnedCoroutines();
     }
+*/
 };
