@@ -401,6 +401,8 @@ class PuzzleGoalSimonSays : Component
         Debug.Log("Puzzle Fully Completed!");
 
         currentState = State.Completed;
+        Gem.GetComponent<BoxCollider>().SetActive(true);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
     }
 
     void CompletePuzzleAuto()
@@ -415,6 +417,7 @@ class PuzzleGoalSimonSays : Component
 
         Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
         Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
 
         ResetAllPillars();
 

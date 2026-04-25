@@ -131,7 +131,7 @@
                             "spawnrate": 75
                         },
                         "emitterscount": 1,
-                        "playing": true
+                        "playing": false
                     },
                     "uuid": "dd46f7aa-755d-4a4e-7cc1-d36f86c5ae57"
                 }
@@ -227,7 +227,7 @@
             ],
             "name": "PlayerCamera",
             "order": 0,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -454,7 +454,7 @@
             ],
             "name": "Interactables",
             "order": 1,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
@@ -538,7 +538,7 @@
             ],
             "name": "Puzzle_Borders_1",
             "order": 2,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "4d862f55-ac58-625d-134c-b7e8a1bef8f1"
         },
@@ -817,7 +817,7 @@
             ],
             "name": "PuzzleBoard",
             "order": 3,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
@@ -1062,7 +1062,7 @@
                             "spawnrate": 75
                         },
                         "emitterscount": 1,
-                        "playing": true
+                        "playing": false
                     },
                     "uuid": "b69a1d6b-32c7-3482-ee4d-4dea80028119"
                 }
@@ -1475,7 +1475,7 @@
                             "spawnrate": 75
                         },
                         "emitterscount": 1,
-                        "playing": true
+                        "playing": false
                     },
                     "uuid": "acb7ec16-5714-11c4-a55b-b1bf331d84c0"
                 }
@@ -1805,7 +1805,7 @@
             ],
             "name": "Puzzle_Goal",
             "order": 4,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": false,
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
@@ -1923,7 +1923,7 @@
             ],
             "name": "HUD",
             "order": 5,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3"
         },
@@ -2333,7 +2333,7 @@
             ],
             "name": "Fire_Puzzle",
             "order": 6,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "114aa9f2-2b4e-3b49-75a8-2e4e7571f724"
         },
@@ -2388,6 +2388,18 @@
                     },
                     "is_active": false,
                     "uuid": "ece05155-a1f9-921e-5c0a-46c3b7f11bf6"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "Gem_Idle",
+                        "fields": {
+                            "amplitude": 0.30000001192092896,
+                            "interactionPrompt": "7c3c9d60-216b-91e1-d7af-b11ef06f3da1",
+                            "speed": 1.0
+                        }
+                    },
+                    "uuid": "9fd93cd0-0fcb-f178-818a-5225cfcbde7b"
                 }
             ],
             "name": "GemColl",
@@ -2425,17 +2437,6 @@
                         }
                     },
                     "uuid": "97e14ffb-c14f-bf9e-1a04-785bb3e741e2"
-                },
-                {
-                    "is_active": true,
-                    "script": {
-                        "class_id": "Gem_Idle",
-                        "fields": {
-                            "amplitude": 0.30000001192092896,
-                            "speed": 1.0
-                        }
-                    },
-                    "uuid": "3c39e451-8ab2-820e-e660-e89797865590"
                 }
             ],
             "name": "fire_gem",
@@ -3289,7 +3290,7 @@
             ],
             "name": "Lighting",
             "order": 7,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "07a093b1-5552-f8af-16ed-156f6110db5a"
         },
@@ -3484,7 +3485,7 @@
             ],
             "name": "Pillars",
             "order": 8,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": false,
             "uuid": "fb076017-00ea-c384-dd59-90aafe82e22d"
         },
@@ -3588,7 +3589,7 @@
             ],
             "name": "puzzleDebugger",
             "order": 9,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "39b5386b-aea9-18a2-fd63-d9a0ae1855bd"
         },
@@ -8319,7 +8320,7 @@
             ],
             "name": "Player",
             "order": 10,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": false,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -11655,6 +11656,53 @@
             "parent_uuid": "c0a2c8fc-55dc-2fa4-2917-a6adec49c5e2",
             "static": true,
             "uuid": "7b97b595-15ab-5dc8-18a7-724971395200"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": -47.00003433227539,
+                            "z": 5.007485924579669e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.648459255695343,
+                            "x": -0.6484593749046326,
+                            "y": -0.28195837140083313,
+                            "z": -0.28195837140083313
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "85a06033-c36b-93a7-cbdd-b7f17007ef5e"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "20391a62-103a-4890-a9b2-da53942c72ff"
+                }
+            ],
+            "name": "GrappleLine_120",
+            "order": 200,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "9861772c-7012-0133-d94f-c2befe1a1e5b"
         },
         {
             "active": false,
@@ -18949,7 +18997,7 @@
             ],
             "name": "FloorColliders",
             "order": 11,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "1fb52e5a-8cd5-9bf9-8e50-f0eb972e77aa"
         },
@@ -19255,7 +19303,7 @@
             ],
             "name": "Canvas",
             "order": 12,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "d675e9fb-2046-e828-7031-0cd9b03aa568"
         },
@@ -22810,7 +22858,7 @@
             ],
             "name": "Pause",
             "order": 13,
-            "parent_uuid": "bad4bfc7-131c-d2fd-403d-e5ea308cdac1",
+            "parent_uuid": "f95e2a74-a2c8-6be3-82d3-08478550d5a4",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -25079,6 +25127,192 @@
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "7bc83133-4dca-8990-8a01-128e926fa73d"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -42.775001525878906,
+                            "y": 14.22599983215332,
+                            "z": 40.48699951171875
+                        },
+                        "position": {
+                            "x": 0.5,
+                            "y": 3.0,
+                            "z": 0.5
+                        },
+                        "rotation": {
+                            "w": 0.8512716293334961,
+                            "x": -0.3794095516204834,
+                            "y": -0.017032474279403687,
+                            "z": 0.3620702028274536
+                        },
+                        "scale": {
+                            "x": 0.06300000101327896,
+                            "y": 0.06300000101327896,
+                            "z": 0.06300000101327896
+                        }
+                    },
+                    "uuid": "5c229de9-4355-0950-4c8d-0c03bcaa16bc"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "mesh_index": 0,
+                        "mesh_uuid": "0e88a49e-5cc8-79d6-15f3-0c3a41fdb313"
+                    },
+                    "uuid": "b701c76a-056c-62c7-e15e-c9018d8a9346"
+                }
+            ],
+            "name": "Prompt",
+            "order": 1,
+            "parent_uuid": "ebd105aa-1583-64d6-4416-a57a45390726",
+            "static": true,
+            "uuid": "7c3c9d60-216b-91e1-d7af-b11ef06f3da1"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19831848144531,
+                            "y": -47.00003433227539,
+                            "z": 7.511227977374801e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.6473360657691956,
+                            "x": 0.6495805978775024,
+                            "y": -0.2814699411392212,
+                            "z": 0.2824459671974182
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "2f31b098-e884-6038-b623-e312691fe75f"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "a408145b-c8b6-e7a7-0d04-f7ac1b4287f4"
+                }
+            ],
+            "name": "grapple_lp_73",
+            "order": 197,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "fced9a5b-4e8d-c29d-d532-1367d910a61d"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": -47.00003433227539,
+                            "z": 5.007485924579669e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.648459255695343,
+                            "x": -0.6484593749046326,
+                            "y": -0.28195837140083313,
+                            "z": -0.28195837140083313
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "0adbc0b9-fd80-491b-d524-a0c7d76d2998"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "50653f4f-0928-ca1d-19bd-c766576269b6"
+                }
+            ],
+            "name": "GrappleLine_118",
+            "order": 198,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "c8dcfecd-a865-33f4-2125-dcc849bb250e"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": -47.00003433227539,
+                            "z": 5.007485924579669e-06
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.648459255695343,
+                            "x": -0.6484593749046326,
+                            "y": -0.28195837140083313,
+                            "z": -0.28195837140083313
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "6b6fd097-d09b-4c18-4594-34678b91fe46"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "efa43ac3-3d62-1301-a66a-2fd1f528bc05"
+                }
+            ],
+            "name": "GrappleLine_119",
+            "order": 199,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "cc215d82-5532-5a63-f4db-fb98314b9235"
         }
     ]
 }

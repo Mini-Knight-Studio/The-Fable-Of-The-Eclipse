@@ -93,6 +93,7 @@ class PuzzleGoalFireLvl : Component
             CompletePuzzleAuto();
 
             Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
             Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
         }
 
@@ -103,6 +104,7 @@ class PuzzleGoalFireLvl : Component
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed = true;
 
             Gem.GetComponent<BoxCollider>().SetActive(true);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         }
 
         if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
