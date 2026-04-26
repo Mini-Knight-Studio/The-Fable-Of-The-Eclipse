@@ -133,7 +133,6 @@ public class PlayerFeedback : PlayerComponent
     public void PlayIdle()
     {
         int randomValue = Loopie.Random.Range(0, 100) + 1;
-        Debug.Log(randomValue);
         if (randomValue < 30)
             PlayFeedback(idleAudio);
     }
