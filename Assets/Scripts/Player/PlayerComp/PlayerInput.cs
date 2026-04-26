@@ -7,7 +7,7 @@ public class PlayerInput : PlayerComponent
     public bool dashKeyPressed = false;
     public bool attackKeyPressed = false;
     public bool grappleKeyPressed = false;
-
+    public bool torchKeyPressed = false;
 
     /// <summary>
     /// DEBUG KEYS
@@ -23,6 +23,8 @@ public class PlayerInput : PlayerComponent
         CollectAttackInput();
 
         CollectGrappleInput();
+
+        CollectTorch();
         //// MORE IF NEED IT
         /// ...
 
@@ -72,6 +74,11 @@ public class PlayerInput : PlayerComponent
     private void CollectGrappleInput()
     {
         grappleKeyPressed = Input.IsKeyDown(KeyCode.E) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_B);
+    }
+
+    private void CollectTorch()
+    {
+        torchKeyPressed = Input.IsKeyPressed(KeyCode.O) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_Y);
     }
 
     //// MORE IF NEED IT

@@ -3,11 +3,12 @@ using Loopie;
 
 public class OrbItem : Component
 {
+    [Header("Configuration")]
     public int orbType = 0; 
-
-    public Entity vfx;
-    public Entity uiManager;
     public string popUpName;
+
+    [Header("Feedback")]
+    public Entity vfx;
 
     private bool alreadyCollected = false;
 
@@ -70,10 +71,11 @@ public class OrbItem : Component
 
     private void ShowUIPopup()
     {
-        if (uiManager != null)
+
+
+        if (UIPopupManager.Instance != null)
         {
-            UIPopupManager popup = uiManager.GetComponent<UIPopupManager>();
-            if (popup != null) popup.ShowPopup(popUpName);
+            UIPopupManager.Instance.ShowPopup(popUpName);
         }
     }
 };

@@ -4,64 +4,36 @@ using Loopie;
 
 public class SkillsHUD : Component
 {
-    public Entity dashActiveEntity;
-    public Entity dashInactiveEntity;
+    public Entity torchActiveEntity;
+    public Entity torchInactiveEntity;
     public Entity grappleActiveEntity;
     public Entity grappleInactiveEntity;
 
     private bool wasDashReady = true;
     private bool wasGrappleReady = true;
 
-    private float simulatedGrappleCooldown = 0.0f; 
-    private float lastGrappleTimerValue = 0.0f;    
-
     void OnCreate()
     {
-        if (dashInactiveEntity != null) dashInactiveEntity.SetActive(false);
+        if (torchInactiveEntity != null) torchInactiveEntity.SetActive(false);
         if (grappleInactiveEntity != null) grappleInactiveEntity.SetActive(false);
     }
 
     void OnUpdate()
     {
-        if (Player.Instance.Movement != null && dashActiveEntity != null && dashInactiveEntity != null)
+        if (Player.Instance.Movement != null && torchActiveEntity != null && torchInactiveEntity != null)
         {
-            bool isDashReady = Player.Instance.Movement.dashCooldownTimer <= 0;
-            if (isDashReady != wasDashReady)
+            bool isTorchReady = !Player.Instance.Torch.IsTorching;
+            if (isTorchReady != wasDashReady)
             {
-                dashActiveEntity.SetActive(isDashReady);
-                dashInactiveEntity.SetActive(!isDashReady);
-                wasDashReady = isDashReady;
+                torchActiveEntity.SetActive(isTorchReady);
+                torchInactiveEntity.SetActive(!isTorchReady);
+                wasDashReady = isTorchReady;
             }
         }
 
         if (Player.Instance.Grapple != null && grappleActiveEntity != null && grappleInactiveEntity != null)
         {
-            if (simulatedGrappleCooldown > 0)
-            {
-                simulatedGrappleCooldown -= Time.deltaTime;
-            }
-
-            float currentGrappleTimer = Player.Instance.Grapple.grappleCooldownTimer;
-
-            bool isNewGrapple = false;
-
-            if (currentGrappleTimer < lastGrappleTimerValue)
-            {
-                isNewGrapple = true;
-            }
-            else if (lastGrappleTimerValue == 0.0f && currentGrappleTimer > 0.0f)
-            {
-                isNewGrapple = true;
-            }
-
-            if (isNewGrapple && simulatedGrappleCooldown <= 0)
-            {
-                simulatedGrappleCooldown = Player.Instance.Grapple.grappleCooldown;
-            }
-
-            lastGrappleTimerValue = currentGrappleTimer;
-
-            bool isGrappleReady = simulatedGrappleCooldown <= 0;
+            bool isGrappleReady = !Player.Instance.Grapple.IsGrappling;
 
             if (isGrappleReady != wasGrappleReady)
             {

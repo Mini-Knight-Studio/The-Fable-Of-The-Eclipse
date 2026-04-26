@@ -115,7 +115,7 @@ public class PlayerFeedback : PlayerComponent
 
     public void PlayHurt()
     {
-        PlayFeedback(hurtAudio, hurtParticle,0.7f);
+        PlayFeedback(hurtAudio, hurtParticle,0.1f);
     }
 
     public void PlayHeal()
@@ -127,12 +127,15 @@ public class PlayerFeedback : PlayerComponent
 
     public void PlayDash()
     {
-        PlayFeedback(dashAudio, dashParticle,0.2f);
+        PlayFeedback(dashAudio, dashParticle,0.3f);
     }
 
     public void PlayIdle()
     {
-        PlayFeedback(idleAudio);
+        int randomValue = Loopie.Random.Range(0, 100) + 1;
+        Debug.Log(randomValue);
+        if (randomValue < 30)
+            PlayFeedback(idleAudio);
     }
 
     public void PlayWalk()
@@ -170,7 +173,6 @@ public class PlayerFeedback : PlayerComponent
 
         if (particle != null)
         {
-            Debug.LogWarning(particle.ID);
             PlayFeedback(particle, duration);
         }
     }

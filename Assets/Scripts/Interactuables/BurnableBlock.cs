@@ -4,19 +4,32 @@ using Loopie;
 
 public class BurnableBlock : Component
 {
-    private BoxCollider myCollider;
+    [Header("Visuals")]
+    public Entity visuals;
+
+    [Header("References")]
+    public Entity colliderEntity;
+    public Entity audioSourceEntity;
+    public Entity particlesEntity;
+
+    private BoxCollider collider;
+    private AudioSource source;
+    private ParticleComponent particles;
+
     private bool isBurning = false;
 
     void OnCreate()
     {
-        myCollider = entity.GetComponent<BoxCollider>();
+        collider = colliderEntity.GetComponent<BoxCollider>();
+        source = audioSourceEntity.GetComponent<AudioSource>();
+        particles = particlesEntity.GetComponent<ParticleComponent>();
     }
 
     void OnUpdate()
     {
-        if (myCollider == null || isBurning) return;
+        if (collider == null || isBurning) return;
 
-        if (myCollider.IsColliding)
+        if (collider.IsColliding)
         {
             StartCoroutine(BurnSequence());
         }
@@ -25,6 +38,11 @@ public class BurnableBlock : Component
     private IEnumerator BurnSequence()
     {
         isBurning = true;
+        if(source != null)
+            source.Play();
+
+        if(particles != null)
+            particles.Play();
 
         float timer = 0.0f;
         while (timer < 1.5f)
@@ -33,6 +51,13 @@ public class BurnableBlock : Component
             yield return null;
         }
 
+        if (particles != null)
+            particles.Stop();
+
+        collider.SetActive(false);
+        visuals.SetActive(false);
+
+        yield return new WaitForSeconds(3);
         entity.SetActive(false);
     }
 }

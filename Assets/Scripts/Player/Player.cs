@@ -18,6 +18,8 @@ public class Player : Component
     public PlayerGrapple Grapple;
     public PlayerFeedback Feedback;
 
+    public PlayerTorch Torch;
+
     [Header("Others")]
     public Entity GrappleLine;
     public Entity HookAnchor;
@@ -55,9 +57,11 @@ public class Player : Component
         Feedback = entity.GetComponent<PlayerFeedback>();
         Feedback.SetOwner(this);
 
-        // 2. Initialize Grapple and link it to the Player
         Grapple = entity.GetComponent<PlayerGrapple>();
         if (Grapple != null) Grapple.SetOwner(this);
+
+        Torch = entity.GetComponent<PlayerTorch>();
+        if (Torch != null) Torch.SetOwner(this);
 
         GrappleLine = Entity.FindEntityByName("GrappleLine");
         if (GrappleLine != null) GrappleLine.SetActive(false);
@@ -70,7 +74,6 @@ public class Player : Component
         RespawnTransition = RespawnTransitionEntity.GetComponent<FadeInOutEvent>();
         RespawnTransition.OnFadeInComplete += EndRespawn;
 
-        // Debug checks
         if (Movement == null) Debug.Log("Missing PlayerMovement");
         if (Animation == null) Debug.Log("Missing PlayerAnimation");
         if (Combat == null) Debug.Log("Missing PlayerCombat");
@@ -79,6 +82,7 @@ public class Player : Component
         if (Camera == null) Debug.Log("Missing PlayerCamera");
         if (Grapple == null) Debug.Log("Missing PlayerGrapple");
         if (Feedback == null) Debug.Log("Missing PlayerFeedback");
+        if (Torch == null) Debug.Log("Missing PlayerTorch");
 
         PlayerHealth.Init();
         Feedback.Initialize();
@@ -112,7 +116,8 @@ public class Player : Component
         Input.ProcessInputs();
         Movement.ProcessMovement();
         Combat.ProcessCombat();
-
+        Torch.ProcessTorch();
+        Grapple.ProcessGrappel();
         Animation.ProcessAnimations();
         Feedback.ProcessFeedback();
 

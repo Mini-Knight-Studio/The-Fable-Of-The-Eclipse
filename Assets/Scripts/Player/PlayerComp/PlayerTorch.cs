@@ -1,46 +1,62 @@
 using System;
+using System.Collections;
 using Loopie;
 
-public class PlayerTorch : Component
+public class PlayerTorch : PlayerComponent
 {
-    public Entity firePrefab;
     public float burnDuration = 2.0f;
+
     public Entity torchEntity;
-    
+
+    public Entity fireParticleEntity;
+    private ParticleComponent fireParticle;
+
+    private bool isTorching = false;
+    public bool IsTorching => isTorching;
+
     void OnCreate()
     {
-        torchEntity.SetActive(false);
-    }
-    
-    void OnUpdate()
-    {
-        if (Input.IsKeyPressed(KeyCode.O) && DatabaseRegistry.playerDB.Player.hasBurner)
+        if (torchEntity != null) torchEntity.SetActive(false);
+        if (fireParticleEntity != null)
         {
-            torchEntity.SetActive(true);
-            SpawnFire();
+            fireParticle = fireParticleEntity.GetComponent<ParticleComponent>();
         }
     }
 
-    private void SpawnFire()
+    public void ProcessTorch()
     {
-        if (firePrefab == null) return;
+        if (isTorching || player.Grapple.IsGrappling || player.Combat.isAttacking || player.Movement.IsDashing())
+            return;
 
-        Entity newFire = firePrefab.Clone(true);
-
-        Vector3 spawnOffset = entity.transform.Forward * 1.5f;
-        newFire.transform.position = entity.transform.position + spawnOffset;
-
-        StartCoroutine(ExtinguishFire(newFire));
+        if (player.Input.torchKeyPressed /*DatabaseRegistry.playerDB.Player.hasBurner && !isTorching*/)
+        {
+            StartCoroutine(TorchSequence());
+        }
     }
 
-    private System.Collections.IEnumerator ExtinguishFire(Entity fire)
+    private IEnumerator TorchSequence()
     {
+        isTorching = true;
+
+        float sequenceDuration = burnDuration;
+        float torchDelay = 0.6f;
+
+        sequenceDuration -= torchDelay;
+        yield return new WaitForSeconds(torchDelay);
+
+        if (torchEntity != null) torchEntity.SetActive(true);
+        if (fireParticle != null) fireParticle.Play();
+
         float timer = 0.0f;
-        while (timer < burnDuration)
+        while (timer < sequenceDuration)
         {
             timer += Time.deltaTime;
             yield return null;
         }
-        fire.Destroy();
+
+        if (fireParticle != null) fireParticle.Stop();
+        if (torchEntity != null) torchEntity.SetActive(false);
+
+        isTorching = false;
     }
 }
