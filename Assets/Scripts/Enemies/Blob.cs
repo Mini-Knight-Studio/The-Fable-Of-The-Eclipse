@@ -53,8 +53,6 @@ class Blob : Enemy
             StartCoroutine(SplitLerp());
         }
 
-        Hit(1, PushForceScale, "Armature|Walk");
-        
         #region Health
         if (health.IsDead())
         {
@@ -71,28 +69,32 @@ class Blob : Enemy
                 entity.Destroy();
         }
         #endregion
-        if (!isSpawning && !isAttacking && !splitting)
+        if (!isSpawning && !splitting)
         {
-            #region Movement
-            if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance * 0.75f))
+            Hit(1, PushForceScale, "Armature|Walk");
+            if(!isAttacking)
             {
-                animator.PlayClip("Armature|Chase", true, 0.25f);
-                transform.LookAt(Player.Instance.transform.position, transform.Up);
-                movement.Move(4-Stage, transform.Forward);
-                ResetWander();
-                #region Attack
-                if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + ReachDistance && !health.IsDead())
+                #region Movement
+                if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
                 {
-                    StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
+                    animator.PlayClip("Armature|Chase", true, 0.25f);
+                    transform.LookAt(Player.Instance.transform.position, transform.Up);
+                    movement.Move(4-Stage, transform.Forward);
+                    ResetWander();
+                    #region Attack
+                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + (ReachDistance*0.25f) && !health.IsDead())
+                    {
+                        StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
+                    }
+                    #endregion
+                }
+                else
+                {
+                    animator.PlayClip("Armature|Walk", true, 0.25f);
+                    Wander(ViewField, 4-Stage);
                 }
                 #endregion
             }
-            else
-            {
-                animator.PlayClip("Armature|Walk", true, 0.25f);
-                Wander(ViewField, 4-Stage);
-            }
-            #endregion
         }
     }
 

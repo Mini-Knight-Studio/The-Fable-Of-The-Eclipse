@@ -29,7 +29,6 @@ public class EnemyAnimation : Component
         animator.Looping = loop;
         if (animator.GetCurrentClipName() == clip_name && !animator.InTransition && !reset) return;
         if (animator.GetNextClipName() == clip_name && animator.InTransition && !reset) return;
-        Debug.Log(clip_name);
         animation_timer = 0;
         animator.Play(clip_name, transition);
     }
