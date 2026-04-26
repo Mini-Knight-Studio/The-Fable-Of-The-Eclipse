@@ -40,8 +40,11 @@ public class PlayerGrapple : PlayerComponent
         ropeSegments.Clear();
     }
 
-    public void OnUpdate()
+    public void ProcessGrappel()
     {
+        if (player.Combat.isAttacking || player.Torch.IsTorching || player.Movement.IsDashing())
+            return;
+
         if (grappleCooldownTimer > 0) grappleCooldownTimer -= Time.deltaTime;
 
         if (isLanding)

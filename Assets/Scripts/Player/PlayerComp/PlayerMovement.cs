@@ -43,17 +43,18 @@ public class PlayerMovement : PlayerComponent
     public void OnCreate()
     {
         movementHelper = entity.GetComponent<Movement>();
-        if(movementHelper!=null)
+        if (movementHelper != null)
             movementHelper.CanMove = true;
 
         playerCollider = entity.GetComponent<BoxCollider>();
-    }                          
+    }
 
     public void ProcessMovement()
     {
-        isDashing = HandleDash();
+        if (!player.Grapple.IsGrappling && !player.Torch.IsTorching && !player.Combat.isAttacking)
+            isDashing = HandleDash();
 
-        if (!isDashing) 
+        if (!isDashing)
             HandleNormalMovement();
 
         if (!isMoving && !isDashing)
@@ -97,9 +98,9 @@ public class PlayerMovement : PlayerComponent
 
     private bool HandleDash()
     {
-        if (dashCooldownTimer > 0) 
+        if (dashCooldownTimer > 0)
             dashCooldownTimer -= Time.deltaTime;
-        if (dashBufferTimer > 0) 
+        if (dashBufferTimer > 0)
             dashBufferTimer -= Time.deltaTime;
 
         if (player.Input.dashKeyPressed)
@@ -132,6 +133,9 @@ public class PlayerMovement : PlayerComponent
 
     private void HandleNormalMovement()
     {
+        if (IsDashing() || player.Grapple.IsGrappling || player.Torch.IsTorching || player.Combat.isAttacking)
+            return;
+
         Vector3 moveDirection = player.Input.moveDirection;
 
         float length = (float)Mathf.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);

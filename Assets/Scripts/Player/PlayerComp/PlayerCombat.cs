@@ -6,14 +6,25 @@ public class PlayerCombat : PlayerComponent
     public bool isAttacking;
     private float attackTimer = 0f;
 
-    public float attackCooldown;
-    public float hitboxDuration;
+    [Header("Cooldowns")]
+    public float attack1_Cooldown;
+    public float hitbox1_Duration;
+
+    public float attack2_Cooldown;
+    public float hitbox2_Duration;
+
+    public float attack3_Cooldown;
+    public float hitbox3_Duration;
+
+    [Header("References")]
 
     public Entity swordTriggerEntity;
     private BoxCollider swordTriggerCollider;
 
-    private int comboIndex = 0;
+    [ShowInInspector]private int comboIndex = 0;
     private bool wantsToCombo = false;
+
+    [Header("Settings")]
     public float comboWindow = 0.8f;
     private float comboResetTimer = 0f;
 
@@ -29,16 +40,17 @@ public class PlayerCombat : PlayerComponent
 
     public void ProcessCombat()
     {
-        if (swordTriggerCollider == null) return;
+        if (swordTriggerCollider == null || player.Grapple.IsGrappling || player.Torch.IsTorching || player.Movement.IsDashing())
+            return;
 
-        if (isAttacking && (Input.IsKeyDown(KeyCode.J) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A)))
+        if (isAttacking && player.Input.attackKeyPressed)
         {
             wantsToCombo = true;
         }
 
         if (isAttacking)
         {
-            if (attackTimer <= attackCooldown && swordTriggerCollider.entity.Active)
+            if (attackTimer <= GetAttackCooldownTime() && swordTriggerCollider.entity.Active)
             {
                 swordTriggerCollider.entity.SetActive(false);
             }
@@ -58,7 +70,7 @@ public class PlayerCombat : PlayerComponent
         }
         else
         {
-            if (Input.IsKeyDown(KeyCode.J) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A))
+            if (player.Input.attackKeyPressed)
             {
                 PerformAttack();
             }
@@ -80,7 +92,7 @@ public class PlayerCombat : PlayerComponent
         comboIndex++;
         if (comboIndex > 3) comboIndex = 1;
 
-        attackTimer = hitboxDuration + attackCooldown;
+        attackTimer = GetAttackDuration();
         player.Feedback.PlayAttack();
         swordTriggerCollider.entity.SetActive(true);
     }
@@ -97,6 +109,38 @@ public class PlayerCombat : PlayerComponent
 
     public float GetAttackDuration()
     {
-        return hitboxDuration + attackCooldown;
+        return GetAttackHitboxTime() + GetAttackCooldownTime();
+    }
+
+    private float GetAttackCooldownTime()
+    {
+
+        switch (comboIndex)
+        {
+            case (1):
+                return attack1_Cooldown;
+            case (2):
+                return attack2_Cooldown;
+            case (3):
+                return attack3_Cooldown;
+            default:
+                return 0;
+        }
+    }
+
+    private float GetAttackHitboxTime()
+    {
+
+        switch (comboIndex)
+        {
+            case (1):
+                return hitbox1_Duration;
+            case (2):
+                return hitbox2_Duration;
+            case (3):
+                return hitbox3_Duration;
+            default:
+                return 0;
+        }
     }
 };

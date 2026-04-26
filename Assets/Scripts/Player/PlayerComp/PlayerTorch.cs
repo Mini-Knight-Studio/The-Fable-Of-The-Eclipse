@@ -8,7 +8,8 @@ public class PlayerTorch : PlayerComponent
 
     public Entity torchEntity;
 
-    public Entity fireObject;
+    public Entity fireParticleEntity;
+    private ParticleComponent fireParticle;
 
     private bool isTorching = false;
     public bool IsTorching => isTorching;
@@ -16,12 +17,18 @@ public class PlayerTorch : PlayerComponent
     void OnCreate()
     {
         if (torchEntity != null) torchEntity.SetActive(false);
-        if (fireObject != null) fireObject.SetActive(false);
+        if (fireParticleEntity != null)
+        {
+            fireParticle = fireParticleEntity.GetComponent<ParticleComponent>();
+        }
     }
 
     public void ProcessTorch()
     {
-        if (Input.IsKeyPressed(KeyCode.O) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_Y)/*DatabaseRegistry.playerDB.Player.hasBurner && !isTorching*/)
+        if (isTorching || player.Grapple.IsGrappling || player.Combat.isAttacking || player.Movement.IsDashing())
+            return;
+
+        if (player.Input.torchKeyPressed /*DatabaseRegistry.playerDB.Player.hasBurner && !isTorching*/)
         {
             StartCoroutine(TorchSequence());
         }
@@ -31,17 +38,23 @@ public class PlayerTorch : PlayerComponent
     {
         isTorching = true;
 
+        float sequenceDuration = burnDuration;
+        float torchDelay = 0.6f;
+
+        sequenceDuration -= torchDelay;
+        yield return new WaitForSeconds(torchDelay);
+
         if (torchEntity != null) torchEntity.SetActive(true);
-        if (fireObject != null) fireObject.SetActive(true);
+        if (fireParticle != null) fireParticle.Play();
 
         float timer = 0.0f;
-        while (timer < burnDuration)
+        while (timer < sequenceDuration)
         {
             timer += Time.deltaTime;
             yield return null;
         }
 
-        if (fireObject != null) fireObject.SetActive(false);
+        if (fireParticle != null) fireParticle.Stop();
         if (torchEntity != null) torchEntity.SetActive(false);
 
         isTorching = false;

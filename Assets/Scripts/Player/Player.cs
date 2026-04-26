@@ -117,6 +117,7 @@ public class Player : Component
         Movement.ProcessMovement();
         Combat.ProcessCombat();
         Torch.ProcessTorch();
+        Grapple.ProcessGrappel();
         Animation.ProcessAnimations();
         Feedback.ProcessFeedback();
 
