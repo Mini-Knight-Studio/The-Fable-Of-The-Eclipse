@@ -202,32 +202,11 @@
                         }
                     },
                     "uuid": "6f335f81-6d93-2c3d-e8fb-1dc35093b9b3"
-                },
-                {
-                    "audiosource": {
-                        "audioClips": {
-                            "0": "2ed50d47-735d-93ed-904b-3ad4f3f26f80"
-                        },
-                        "channelBus": "Music",
-                        "currentClipIndex": 0,
-                        "isSpatial": false,
-                        "loop": true,
-                        "loopStrategy": 0,
-                        "maxDistance": 100.0,
-                        "minDistance": 2.0,
-                        "noLoopStrategy": 0,
-                        "pan": 0.0,
-                        "pitch": 1.0,
-                        "playOnAwake": true,
-                        "volume": 0.5
-                    },
-                    "is_active": true,
-                    "uuid": "cd206996-e949-33aa-4941-10de07a07d39"
                 }
             ],
             "name": "PlayerCamera",
             "order": 0,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -375,10 +354,10 @@
                             "cameraShakeRotation": 0.15000000596046448,
                             "goalEntity": "84b5b998-d514-87ed-c859-4a2dbc923019",
                             "movementSpeed": 4.0,
+                            "movingParticlesEntity": "a4d003e2-e966-0feb-8c55-c6ab16d15a3c",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
-                            "playerCamera": "7be8bed2-1395-f0d2-b4ad-90234ff2a278",
                             "pushBackEntity": "d36bbc19-1512-cbea-3b89-97195b7ca95e",
                             "pushForwardEntity": "53b57763-be04-9db0-7cf7-7af0f740daf1",
                             "pushLeftEntity": "7063484f-cf61-8d63-a2cf-88ae20021d56",
@@ -394,7 +373,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -438,6 +417,8 @@
                         "class_id": "MovingPillarSimonSays",
                         "fields": {
                             "active": false,
+                            "fireSFXEntity": "741fd75b-c047-13ae-df6a-692459aa460d",
+                            "igniteSFXEntity": "125e7552-668e-3cb5-5a54-22856e715605",
                             "torch": "42eb5cfb-20a4-53cc-e726-f70d7e2b3d21",
                             "wasPressed": false
                         }
@@ -1211,10 +1192,10 @@
                             "cameraShakeRotation": 0.15000000596046448,
                             "goalEntity": "43f32ffc-ad0e-0e3f-a7ca-41fd32d44176",
                             "movementSpeed": 4.0,
+                            "movingParticlesEntity": "658acea4-87ed-3450-c1da-969420da5a89",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
-                            "playerCamera": "7be8bed2-1395-f0d2-b4ad-90234ff2a278",
                             "pushBackEntity": "b5dce982-3ece-b082-e8e4-ad109902681e",
                             "pushForwardEntity": "f399d9d9-001a-60b2-d708-95ccc774bd82",
                             "pushLeftEntity": "eb5b2c94-1dd5-e1c0-3ecf-4fd819aca2bb",
@@ -1230,7 +1211,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -1274,6 +1255,8 @@
                         "class_id": "MovingPillarSimonSays",
                         "fields": {
                             "active": false,
+                            "fireSFXEntity": "0523c658-a3a0-48c0-e653-b6aa3e422673",
+                            "igniteSFXEntity": "3742aa68-dcac-3516-db29-085e34d55e22",
                             "torch": "717dafa4-5d2b-61a8-0a5e-0f4f7f4371af",
                             "wasPressed": false
                         }
@@ -1320,7 +1303,7 @@
             ],
             "name": "Puzzle_Borders",
             "order": 1,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "666815e3-731b-f199-1238-ff869804f25c"
         },
@@ -2188,6 +2171,53 @@
             "uuid": "5e027124-5694-d945-d694-6cf8c4fbc97b"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "022a9dc8-3612-e8dd-22dd-964f4356289b"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "b9ab2db5-3807-183d-4296-6cc053f1c84d"
+                }
+            ],
+            "name": "GrappleLine_50",
+            "order": 106,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "8c04909f-22b2-ebab-126e-4918fee6c192"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -2408,7 +2438,7 @@
             ],
             "name": "PuzzleBoard",
             "order": 2,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
@@ -3946,6 +3976,64 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "929581b0-81aa-8e28-4b56-17a826488cf5"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "232a3571-6535-f327-4342-11ff862b51ce"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0219999551773071,
+                        "playOnAwake": false,
+                        "volume": 0.652999997138977
+                    },
+                    "is_active": true,
+                    "uuid": "3897ae01-9dfd-5750-2f48-f6582bcb01ce"
+                }
+            ],
+            "name": "FireSFX",
+            "order": 0,
+            "parent_uuid": "42eb5cfb-20a4-53cc-e726-f70d7e2b3d21",
+            "static": true,
+            "uuid": "741fd75b-c047-13ae-df6a-692459aa460d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 4.0,
                             "y": 0.0,
                             "z": -8.0
@@ -4541,6 +4629,10 @@
                             "Pillar2": "0dd35820-8247-5742-a616-9ea8abb14a25",
                             "Pillar3": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
                             "Pillar4": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
+                            "activateSFX": "b9034908-f570-af1c-346d-caaec7dde0cc",
+                            "collectGemSFX": "61620816-1d0c-2ceb-c8fc-305cf8869d49",
+                            "completeSFX": "0fa1cd41-1003-75a1-f9ad-20a12aa79be0",
+                            "failSFX": "5dc118b6-6f4d-35f2-8b7e-cbd02d5d55d3",
                             "maxRounds": 4,
                             "movementDistance": 1.75,
                             "movementSpeed": 1.0,
@@ -4621,11 +4713,32 @@
                         "playing": false
                     },
                     "uuid": "f0f7123c-4d86-a8b7-1538-019df68205f0"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 40.0,
+                        "minDistance": 5.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.6819999814033508,
+                        "playOnAwake": false,
+                        "volume": 0.20100000500679016
+                    },
+                    "is_active": true,
+                    "uuid": "bc0d11ea-3170-27fe-c169-22d7efd512c3"
                 }
             ],
             "name": "Puzzle_Goal",
             "order": 3,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": false,
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
@@ -4942,7 +5055,7 @@
             ],
             "name": "HUD",
             "order": 4,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "56c79a88-ab2e-7016-618d-49cd056e22e3"
         },
@@ -5250,6 +5363,53 @@
             "uuid": "f8a09c30-7e04-8a36-1b8a-30c837a47431"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "297aa897-375e-3094-8fc7-d269e6a54487"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "48dc0e7a-234c-6ea6-4aee-88342a951740"
+                }
+            ],
+            "name": "grapple_lp_39",
+            "order": 85,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "c7fa0ef5-1763-fb31-4661-d4e9645cf8e4"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -5282,7 +5442,7 @@
             ],
             "name": "Colliders",
             "order": 5,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "4b04ae2a-bcc1-14d6-0bf2-627617b726a2"
         },
@@ -5923,6 +6083,53 @@
             "uuid": "53b57763-be04-9db0-7cf7-7af0f740daf1"
         },
         {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "a480d66a-2da8-5b36-ff81-4dc5e588d71e"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "c422ca05-e70c-cde0-f489-7a61e8ca06d7"
+                }
+            ],
+            "name": "GrappleLine_41",
+            "order": 88,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "de827d12-eb6d-2314-715f-76398a58fb98"
+        },
+        {
             "active": true,
             "components": [
                 {
@@ -5987,7 +6194,7 @@
             ],
             "name": "TransitionCollider",
             "order": 6,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "3eb1f158-b046-73ec-f150-3caf405d6aba"
         },
@@ -6024,7 +6231,7 @@
             ],
             "name": "Lighting",
             "order": 7,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "07a093b1-5552-f8af-16ed-156f6110db5a"
         },
@@ -6325,7 +6532,7 @@
             ],
             "name": "Pillars",
             "order": 8,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "fb076017-00ea-c384-dd59-90aafe82e22d"
         },
@@ -6395,7 +6602,7 @@
             ],
             "name": "VistaPoint",
             "order": 9,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "dc611498-9522-91e4-547c-d67ba3d29a23"
         },
@@ -6487,7 +6694,7 @@
             ],
             "name": "puzzleDebugger",
             "order": 10,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "39b5386b-aea9-18a2-fd63-d9a0ae1855bd"
         },
@@ -6659,10 +6866,10 @@
                             "cameraShakeRotation": 0.15000000596046448,
                             "goalEntity": "ca324d90-f87d-cdc5-983a-a55e1c9f8818",
                             "movementSpeed": 4.0,
+                            "movingParticlesEntity": "d214c3c0-f5b4-b2c0-57ec-2d98a0c64fa4",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
-                            "playerCamera": "7be8bed2-1395-f0d2-b4ad-90234ff2a278",
                             "pushBackEntity": "affea250-c1a7-9f50-d6b3-c7c4f9613608",
                             "pushForwardEntity": "7061f17e-a69d-255a-7661-98173aa21f0f",
                             "pushLeftEntity": "b4a98a1c-e163-ab67-866b-c991b579a9a4",
@@ -6678,7 +6885,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -6722,6 +6929,8 @@
                         "class_id": "MovingPillarSimonSays",
                         "fields": {
                             "active": false,
+                            "fireSFXEntity": "675e5e07-dc66-ed08-f3f2-b9a4539e7dee",
+                            "igniteSFXEntity": "43ce97f0-f475-4d60-8cd6-c29e9b52680a",
                             "torch": "c01c35ce-bf8d-4d57-5466-3b22196b7852",
                             "wasPressed": false
                         }
@@ -6793,6 +7002,53 @@
             "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
             "static": true,
             "uuid": "c38b1926-b9e5-cb83-016e-499d6effa485"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "36f53132-7031-aae4-1cd4-da37037dd505"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "da19b5c8-9db6-9c15-3efc-99b1b25ec76f"
+                }
+            ],
+            "name": "grapple_lp_45",
+            "order": 97,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "1fde0d2c-fddb-feaa-894a-3e780bb886ba"
         },
         {
             "active": true,
@@ -6950,10 +7206,10 @@
                             "cameraShakeRotation": 0.15000000596046448,
                             "goalEntity": "b1c84545-7c17-34f7-501a-8197e0b474c2",
                             "movementSpeed": 4.0,
+                            "movingParticlesEntity": "91842952-60dd-3d87-982a-db6ab7fd0b5f",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
-                            "playerCamera": "7be8bed2-1395-f0d2-b4ad-90234ff2a278",
                             "pushBackEntity": "80cf3233-9c08-195b-23e3-39fb7c730a20",
                             "pushForwardEntity": "8e0224c2-7d2c-3a9d-415e-08ba92b821db",
                             "pushLeftEntity": "50ff8a0d-2538-b9d8-2dab-73e1b1d843f1",
@@ -6969,7 +7225,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -7013,6 +7269,8 @@
                         "class_id": "MovingPillarSimonSays",
                         "fields": {
                             "active": false,
+                            "fireSFXEntity": "38163fba-ad40-96ff-14bb-d913b2ba0994",
+                            "igniteSFXEntity": "283a5d14-57c9-a1a1-c03a-f1f683bb7ce0",
                             "torch": "4ab6267b-c4a3-76f0-1548-7949f92b6b9d",
                             "wasPressed": false
                         }
@@ -7753,7 +8011,7 @@
             ],
             "name": "Water_Puzzle",
             "order": 11,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "7af5518f-e90f-a929-5f15-a0c919e3ab3c"
         },
@@ -9116,15 +9374,14 @@
                             "dashCooldown": 1.0,
                             "dashCooldownTimer": 0.0,
                             "dashDuration": 0.20000000298023224,
-                            "dashSFXEntity": "f67fac1d-6faa-f024-1606-39ad79803494",
                             "dashSpeed": 30.0,
                             "godModeSpeedMultiplier": 5.0,
-                            "idleSFXEntity": "9a5c33b2-8996-6187-d13c-e5c3a43b3d69",
+                            "gravity": 0.0,
+                            "gravityActive": false,
                             "idleSFXInterval": 5.0,
                             "isGodMode": false,
                             "moveSpeed": 10.0,
                             "rotationSpeed": 5.0,
-                            "walkSFXEntity": "8b5d50c5-88c1-0620-28aa-b82707cf6ddf",
                             "walkSFXInterval": 0.5
                         }
                     },
@@ -9156,7 +9413,6 @@
                         "class_id": "PlayerCombat",
                         "fields": {
                             "attackCooldown": 1.0,
-                            "attackSFXEntity": "f0d12cb0-dc1c-b894-e9dd-6d7bdc704907",
                             "comboWindow": 0.25,
                             "hitboxDuration": 0.5,
                             "isAttacking": false,
@@ -9281,7 +9537,7 @@
             ],
             "name": "Player",
             "order": 12,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -9605,6 +9861,53 @@
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "857b8823-128d-4571-4dc6-521df2ac5fc6"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "007928f1-7715-8eda-0cad-c5ff1f0821c4"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "fc53ff3f-f5e1-4289-12b4-ed753e37ebb8"
+                }
+            ],
+            "name": "grapple_lp_43",
+            "order": 93,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "3eb42b49-716a-d20f-d07d-41c401838335"
         },
         {
             "active": false,
@@ -11417,6 +11720,64 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "abb25996-3c9d-c633-c303-9e3b58ea5874"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "4aa94b5e-6a19-9dad-310f-78f4e1df2203"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 1.0
+                    },
+                    "is_active": true,
+                    "uuid": "b9618fb9-cf5a-5489-a8b9-6abc3164c6b8"
+                }
+            ],
+            "name": "Fail",
+            "order": 2,
+            "parent_uuid": "05c172d7-957f-5af6-d630-8df561993e36",
+            "static": true,
+            "uuid": "5dc118b6-6f4d-35f2-8b7e-cbd02d5d55d3"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
                             "x": -6.697892240481451e-05,
                             "y": 4.5103937736712396e-05,
                             "z": 0.00010094723256770521
@@ -12260,6 +12621,64 @@
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "aaddd5de-1d32-4a21-f04e-e684f4d91834"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "326e2571-f770-d1b3-7a4b-19aab7d08588"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "dff44d9f-6f0b-3a6d-54e7-e78eed3b987f"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.6190000176429749
+                    },
+                    "is_active": true,
+                    "uuid": "88078066-4991-7803-cf29-7ee6b8df7341"
+                }
+            ],
+            "name": "CollectGem",
+            "order": 3,
+            "parent_uuid": "753d2b54-8d8c-fa7e-980f-bdcce89af298",
+            "static": true,
+            "uuid": "61620816-1d0c-2ceb-c8fc-305cf8869d49"
         },
         {
             "active": true,
@@ -13240,6 +13659,64 @@
                     "is_active": true,
                     "transform": {
                         "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "29fbdfa8-3fc7-52f7-9f27-6b940642c22f"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "999a7c56-ed5e-7f36-f6dd-664a8aec03df"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": true,
+                        "volume": 1.0
+                    },
+                    "is_active": true,
+                    "uuid": "fa6d8a14-2f60-a0a7-6dde-128af02e2f9b"
+                }
+            ],
+            "name": "EntranceSFX",
+            "order": 14,
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
+            "static": true,
+            "uuid": "70442e90-92f2-75b4-af1f-512ad0f1fd98"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
                             "x": -3.2774547435110435e-05,
                             "y": -8.41418204799993e-06,
                             "z": -1.2404629429438758e-16
@@ -13343,6 +13820,53 @@
             "parent_uuid": "7b97b595-15ab-5dc8-18a7-724971395200",
             "static": true,
             "uuid": "9c3c4e53-9dde-ede4-3e16-43dad730f96c"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "7e79753b-9d65-f2e3-a1ef-f44bd32bcb49"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "8bb7076f-45a1-bbe2-b441-366a7f5e48de"
+                }
+            ],
+            "name": "GrappleLine_48",
+            "order": 102,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "aee8a4c6-43c5-6346-73a6-d6c21a220d5d"
         },
         {
             "active": true,
@@ -15871,9 +16395,7 @@
                 },
                 {
                     "audiosource": {
-                        "audioClips": {
-                            "0": "a6f257ee-f793-9327-2d68-0b6b82e5ad54"
-                        },
+                        "audioClips": {},
                         "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
@@ -15929,9 +16451,7 @@
                 },
                 {
                     "audiosource": {
-                        "audioClips": {
-                            "0": "8d72694a-7cf0-3003-fc95-8970c68abf8d"
-                        },
+                        "audioClips": {},
                         "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
@@ -15987,9 +16507,7 @@
                 },
                 {
                     "audiosource": {
-                        "audioClips": {
-                            "0": "c2f912c9-2b4f-ebc9-b65f-c060a66f1ec4"
-                        },
+                        "audioClips": {},
                         "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
@@ -16983,6 +17501,53 @@
                             "z": 1.359961986541748
                         }
                     },
+                    "uuid": "1e13b344-41a7-c7f7-1f02-c2733f922b49"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "349c58ee-6485-c94d-1eb2-738800098651"
+                }
+            ],
+            "name": "GrappleLine_42",
+            "order": 90,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "48fc090d-4b90-e220-697f-aa8d6170fab8"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
                     "uuid": "94eb2b29-0be2-ea94-edbc-badb1af0c6df"
                 },
                 {
@@ -17657,7 +18222,7 @@
             ],
             "name": "Pause",
             "order": 13,
-            "parent_uuid": "219f34d6-f7fb-88d7-b4ca-2dde6131b6d6",
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -19954,6 +20519,2426 @@
             "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
             "static": true,
             "uuid": "bf60a1e2-904e-4d2a-7b64-14638129d785"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -1.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "a4458007-769a-2b8b-cbc6-228f88300187"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.4274509847164154,
+                                    "g": 0.4274509847164154,
+                                    "r": 0.4274509847164154
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6287128925323486,
+                                    "g": 0.6287128925323486,
+                                    "r": 0.6287128925323486
+                                },
+                                "lifetime": 0.4000000059604645,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 1.0,
+                                "sizeend": 0.15000000596046448,
+                                "sizevariation": 0.20000000298023224,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 2.0,
+                                    "y": 0.30000001192092896,
+                                    "z": 2.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 4.0
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 25
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "6d167430-5365-e3a1-8e31-546ffec59b8d"
+                }
+            ],
+            "name": "MovingParticles_Air",
+            "order": 6,
+            "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
+            "static": true,
+            "uuid": "a4d003e2-e966-0feb-8c55-c6ab16d15a3c"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "d8c4f572-6fa3-d399-4342-b401a9dbdcd3"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "a5da6c0c-956b-ffdb-7120-0d266078dc27"
+                }
+            ],
+            "name": "grapple_lp_33",
+            "order": 73,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "c90a36d9-26bd-b341-fc95-1b3f2e1924fc"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "5e7b4d2b-a14a-c514-93f0-01229dcf746e"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "d8ff52cf-dd87-bf2b-5633-73c1688c5a5b"
+                }
+            ],
+            "name": "GrappleLine_34",
+            "order": 74,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "24f0a74a-8a43-fb44-c78a-0b4eeaef9fd1"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "c58f54e5-f540-78f9-26da-6277c0d8d2b1"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "d63c64cd-74bd-4fa0-0e9c-4c9f3affea19"
+                }
+            ],
+            "name": "grapple_lp_34",
+            "order": 75,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "3a145168-99c9-f688-3f47-03421ef1dd31"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "20f6414a-12f4-49b8-e90a-e30f1426c829"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "45a5c767-05d5-0ff6-9f49-2831ab3e24c6"
+                }
+            ],
+            "name": "GrappleLine_35",
+            "order": 76,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "40c5a887-2e71-1d0d-de59-611107d4d8ca"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "e4780708-25ab-20bb-792f-cdb144af9504"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "af91934e-4eda-ce5c-e782-747dff1a3588"
+                }
+            ],
+            "name": "grapple_lp_35",
+            "order": 77,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "3b26cc61-8131-a801-9f70-def540c96ed2"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "81c34aea-f242-7815-d4b7-46ff7834ce6d"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "5ce2fe61-5188-8afc-2475-ad9c9fbb732b"
+                }
+            ],
+            "name": "GrappleLine_36",
+            "order": 78,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "40d04ecd-5a63-0762-1330-d9109226d357"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -1.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "a4980e5b-3436-12ae-9a73-1f6663864e29"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.4274509847164154,
+                                    "g": 0.4274509847164154,
+                                    "r": 0.4274509847164154
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6287128925323486,
+                                    "g": 0.6287128925323486,
+                                    "r": 0.6287128925323486
+                                },
+                                "lifetime": 0.4000000059604645,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 1.0,
+                                "sizeend": 0.15000000596046448,
+                                "sizevariation": 0.20000000298023224,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 2.0,
+                                    "y": 0.30000001192092896,
+                                    "z": 2.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 4.0
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 25
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "588b0051-9fcb-28ea-da78-8ea89c3e407a"
+                }
+            ],
+            "name": "MovingParticles_Earth",
+            "order": 6,
+            "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
+            "static": true,
+            "uuid": "658acea4-87ed-3450-c1da-969420da5a89"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -1.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d8f42c55-3776-1ce8-6b47-a89925b963a8"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.4274509847164154,
+                                    "g": 0.4274509847164154,
+                                    "r": 0.4274509847164154
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6287128925323486,
+                                    "g": 0.6287128925323486,
+                                    "r": 0.6287128925323486
+                                },
+                                "lifetime": 0.4000000059604645,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 1.0,
+                                "sizeend": 0.15000000596046448,
+                                "sizevariation": 0.20000000298023224,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 2.0,
+                                    "y": 0.30000001192092896,
+                                    "z": 2.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 4.0
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 25
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "f0c6227f-e452-2884-49a2-dbdf53fc3a28"
+                }
+            ],
+            "name": "MovingParticles_Fire",
+            "order": 6,
+            "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
+            "static": true,
+            "uuid": "d214c3c0-f5b4-b2c0-57ec-2d98a0c64fa4"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": -1.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "73d655aa-e0f0-eb4f-8852-9d98aead86c5"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 500,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": false,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.4274509847164154,
+                                    "g": 0.4274509847164154,
+                                    "r": 0.4274509847164154
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.6287128925323486,
+                                    "g": 0.6287128925323486,
+                                    "r": 0.6287128925323486
+                                },
+                                "lifetime": 0.4000000059604645,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 1.0,
+                                "sizeend": 0.15000000596046448,
+                                "sizevariation": 0.20000000298023224,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 2.0,
+                                    "y": 0.30000001192092896,
+                                    "z": 2.0
+                                }
+                            },
+                            "poolindex": 499,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 4.0
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 25
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "ff1cc5e8-6f79-8682-a767-b2356a1d030b"
+                }
+            ],
+            "name": "MovingParticles_Water",
+            "order": 6,
+            "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
+            "static": true,
+            "uuid": "91842952-60dd-3d87-982a-db6ab7fd0b5f"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "037c33bf-1089-e32b-e61b-793d61b1f67c"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "df288d3d-cfca-17c0-9764-c881acb32fe3"
+                }
+            ],
+            "name": "grapple_lp_36",
+            "order": 79,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "cd7b312a-ded9-fa5f-fdef-3c1951053fd1"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "594e210e-e1f5-a96e-9ab2-020364a3b039"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "c9ee40be-dbd3-d12d-b104-c07f532db6b9"
+                }
+            ],
+            "name": "GrappleLine_37",
+            "order": 80,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "d20ae398-449d-fe99-a6f6-cdcbaa48ebf5"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 0.7071067690849304,
+                            "x": -0.7071067690849304,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "eee213b5-00f9-f6cf-6838-fed398cb5dd7"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "12e6f950-551c-8bd2-1fa5-03c2bb7fec1b"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 2.624000072479248,
+                        "playOnAwake": false,
+                        "volume": 0.5860000252723694
+                    },
+                    "is_active": true,
+                    "uuid": "cb8345ad-2ec1-ad2b-74d7-21a0a523e756"
+                }
+            ],
+            "name": "IgniteSFX",
+            "order": 1,
+            "parent_uuid": "42eb5cfb-20a4-53cc-e726-f70d7e2b3d21",
+            "static": true,
+            "uuid": "125e7552-668e-3cb5-5a54-22856e715605"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "1c4cdd3b-41c5-b04d-781e-9e32bfed7bd0"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "b57bc6ff-be54-cad5-f855-632ae3e68b93"
+                }
+            ],
+            "name": "grapple_lp_37",
+            "order": 81,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "9fe78742-7058-57c3-6b52-c062c0bf2a75"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "b0d7ab5e-388d-5d89-c086-b183eff149d5"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "6531c6c1-a9d3-61ee-5b47-978c60a73d57"
+                }
+            ],
+            "name": "GrappleLine_38",
+            "order": 82,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "efb099b3-fb10-b924-21ff-bf79edae8f80"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "b67e2007-ec65-c67f-df2a-09670d677dd3"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "72521354-eeb0-5704-648b-3e9f58226a85"
+                }
+            ],
+            "name": "grapple_lp_38",
+            "order": 83,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "cf834347-de40-3ce0-1d2f-7e55a7ba078a"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "012d8bd9-0b2c-bc94-9122-095f21014559"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "f7108272-e7ea-d453-03cb-57dff1bac7ef"
+                }
+            ],
+            "name": "GrappleLine_39",
+            "order": 84,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "158754d6-aa9d-cd2d-ba5e-34bbbf733ceb"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "e77b26ff-2131-c3c7-44fa-916986c89769"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "542f6822-6ee2-3efa-d700-8b9f29b38273"
+                }
+            ],
+            "name": "GrappleLine_40",
+            "order": 86,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "a2354311-1a6e-6e13-0a55-6520f7b78836"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 0.7071067690849304,
+                            "x": -0.7071067690849304,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ea21b0e9-4f0a-1523-6f3f-a7b15709fcbc"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "232a3571-6535-f327-4342-11ff862b51ce"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0219999551773071,
+                        "playOnAwake": false,
+                        "volume": 0.652999997138977
+                    },
+                    "is_active": true,
+                    "uuid": "20925d3c-1ac2-a1ad-c815-dc9857290a9d"
+                }
+            ],
+            "name": "FireSFX_1",
+            "order": 0,
+            "parent_uuid": "717dafa4-5d2b-61a8-0a5e-0f4f7f4371af",
+            "static": true,
+            "uuid": "0523c658-a3a0-48c0-e653-b6aa3e422673"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 180.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": -4.371138828673793e-08,
+                            "x": 1.0,
+                            "y": 0.0,
+                            "z": -0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "b9ab66df-64cd-5931-f589-9aea354072dd"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "12e6f950-551c-8bd2-1fa5-03c2bb7fec1b"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 2.0169999599456787,
+                        "playOnAwake": false,
+                        "volume": 0.5860000252723694
+                    },
+                    "is_active": true,
+                    "uuid": "a6915e89-7866-491d-5513-5d4be698336e"
+                }
+            ],
+            "name": "IgniteSFX_1",
+            "order": 1,
+            "parent_uuid": "717dafa4-5d2b-61a8-0a5e-0f4f7f4371af",
+            "static": true,
+            "uuid": "3742aa68-dcac-3516-db29-085e34d55e22"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 0.7071067690849304,
+                            "x": -0.7071067690849304,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "abcc4dee-70f3-c874-5e0e-3dad23d3f30b"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "232a3571-6535-f327-4342-11ff862b51ce"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0219999551773071,
+                        "playOnAwake": false,
+                        "volume": 0.6650000214576721
+                    },
+                    "is_active": true,
+                    "uuid": "84c843bc-e3c5-d401-06bf-2c77f4144d3d"
+                }
+            ],
+            "name": "FireSFX_2",
+            "order": 0,
+            "parent_uuid": "c01c35ce-bf8d-4d57-5466-3b22196b7852",
+            "static": true,
+            "uuid": "675e5e07-dc66-ed08-f3f2-b9a4539e7dee"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 0.7071067690849304,
+                            "x": -0.7071067690849304,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "443911ad-6740-b911-4110-2d04912dca21"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "232a3571-6535-f327-4342-11ff862b51ce"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0219999551773071,
+                        "playOnAwake": false,
+                        "volume": 0.652999997138977
+                    },
+                    "is_active": true,
+                    "uuid": "6eab1c66-cb9a-75d8-2a2e-30335b072ac8"
+                }
+            ],
+            "name": "FireSFX_3",
+            "order": 0,
+            "parent_uuid": "4ab6267b-c4a3-76f0-1548-7949f92b6b9d",
+            "static": true,
+            "uuid": "38163fba-ad40-96ff-14bb-d913b2ba0994"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 180.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": -4.371138828673793e-08,
+                            "x": 1.0,
+                            "y": 0.0,
+                            "z": -0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e3358053-70d0-45e6-c904-ada3c64a63b8"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "12e6f950-551c-8bd2-1fa5-03c2bb7fec1b"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0829999446868896,
+                        "playOnAwake": false,
+                        "volume": 0.5860000252723694
+                    },
+                    "is_active": true,
+                    "uuid": "97241765-3acf-a069-38c6-69306aba8c00"
+                }
+            ],
+            "name": "IgniteSFX_2",
+            "order": 1,
+            "parent_uuid": "c01c35ce-bf8d-4d57-5466-3b22196b7852",
+            "static": true,
+            "uuid": "43ce97f0-f475-4d60-8cd6-c29e9b52680a"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 180.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": -4.371138828673793e-08,
+                            "x": 1.0,
+                            "y": 0.0,
+                            "z": -0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "2c104aef-b9ce-a93d-c9b9-6d5f481002ac"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "12e6f950-551c-8bd2-1fa5-03c2bb7fec1b"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.409999966621399,
+                        "playOnAwake": false,
+                        "volume": 0.5860000252723694
+                    },
+                    "is_active": true,
+                    "uuid": "ee0706a6-61cb-6564-cf81-3ff845a46fa4"
+                }
+            ],
+            "name": "IgniteSFX_3",
+            "order": 1,
+            "parent_uuid": "4ab6267b-c4a3-76f0-1548-7949f92b6b9d",
+            "static": true,
+            "uuid": "283a5d14-57c9-a1a1-c03a-f1f683bb7ce0"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "c1bc9130-58f9-ec8c-0e65-0266ce758ea8"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "c36fced9-aa07-1aa4-a794-f09cbcf8bebe"
+                }
+            ],
+            "name": "grapple_lp_40",
+            "order": 87,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "9f27b4f4-159e-d456-e937-1a9d1a3eae69"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "9fb8af86-dbed-23fe-d137-b7c903f6a595"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "1ff0247b-f704-25a5-030c-357dc487c4c0"
+                }
+            ],
+            "name": "grapple_lp_41",
+            "order": 89,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "a0d12606-b15f-a56b-855f-e4256a2eadfe"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "645d7159-ca19-7775-249b-fb85c4a8d923"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "a9784ffb-4618-7fc6-c721-b0a0c066a1ad"
+                }
+            ],
+            "name": "grapple_lp_42",
+            "order": 91,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "d1afb3c0-181a-40dc-9a46-24e4f4065729"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "a87bef46-72c5-8936-c517-61e430f0e41e"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "b632ec10-2f76-36ff-c877-d693ed303658"
+                }
+            ],
+            "name": "GrappleLine_43",
+            "order": 92,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "9872fd75-a551-ed71-ace1-b37fdc906054"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "714bce6e-3844-2e7b-3ebd-78975d7e27cf"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "afdf865c-2ad6-0c50-93cd-98bcf55d553d"
+                }
+            ],
+            "name": "GrappleLine_44",
+            "order": 94,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "b8be3dec-12db-1401-f212-53674cb0edbd"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "2de0c0d8-7b7c-cbe6-cc1f-8259b4fe53ed"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "155ae71e-c11a-de44-f7fb-7bfdb45f6e7a"
+                }
+            ],
+            "name": "grapple_lp_44",
+            "order": 95,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "82b5b601-8af1-67ea-cd2b-d660dc43d7bc"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "7801339a-f81c-bb5a-4468-31b2be904d29"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "a49a0ce6-a888-5257-2589-149f22621996"
+                }
+            ],
+            "name": "GrappleLine_45",
+            "order": 96,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "88c78054-165d-71de-f2a2-225eee8e3a7f"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "5916e630-2974-77e0-8a1e-c262d3ff006b"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "ed7bcfe2-9a41-c4c3-4546-15cf63ea4ef0"
+                }
+            ],
+            "name": "GrappleLine_46",
+            "order": 98,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "7e9019b1-7d1d-6462-54fd-c5a4447f738e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "4f26faa1-d842-ec93-f842-3e20221b4a80"
+                }
+            ],
+            "name": "Feedback",
+            "order": 2,
+            "parent_uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd",
+            "static": true,
+            "uuid": "05c172d7-957f-5af6-d630-8df561993e36"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "852ec2ea-a30f-5a82-622f-51f43c2801e0"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "969bc999-7614-bc6b-0d31-218468849a59"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 1.0
+                    },
+                    "is_active": true,
+                    "uuid": "0712c84c-0643-4d83-af43-dc5a9f0e72d4"
+                }
+            ],
+            "name": "Complete",
+            "order": 0,
+            "parent_uuid": "05c172d7-957f-5af6-d630-8df561993e36",
+            "static": true,
+            "uuid": "0fa1cd41-1003-75a1-f9ad-20a12aa79be0"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "1333efd5-e0c1-7a2a-81c6-825d38de7e92"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "d58bf692-6a4f-32fc-c39a-b5ec092e0cf2"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.8029999732971191
+                    },
+                    "is_active": true,
+                    "uuid": "6bf59519-245f-1acc-eaad-4408800d3e06"
+                }
+            ],
+            "name": "Activate",
+            "order": 1,
+            "parent_uuid": "05c172d7-957f-5af6-d630-8df561993e36",
+            "static": true,
+            "uuid": "b9034908-f570-af1c-346d-caaec7dde0cc"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "962208c3-6cc3-5f6f-508f-162c5ff7c092"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "692a85b3-029f-037a-8de1-1b1c381d9fb9"
+                }
+            ],
+            "name": "grapple_lp_46",
+            "order": 99,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "458ee661-a052-809b-c9ac-07c6f2812c6f"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "aed55e04-954e-33fc-3cc4-af26a55e4586"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "ad4df586-9ef8-3a57-e96a-ebea33939a78"
+                }
+            ],
+            "name": "GrappleLine_47",
+            "order": 100,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "875f1ac1-24a8-09ad-0181-6454d6a9f72b"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "e18a7eac-7d8a-4976-64b3-b54b1acd66b2"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "7702da16-1da5-af35-a018-963ae1eb271e"
+                }
+            ],
+            "name": "grapple_lp_47",
+            "order": 101,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "4938730c-dc1d-d192-3202-b99286eca5ac"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "4d8aeda3-5f48-8ed1-ce76-7a9629de6698"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "2ed50d47-735d-93ed-904b-3ad4f3f26f80"
+                        },
+                        "channelBus": "Music",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": true,
+                        "volume": 0.5019999742507935
+                    },
+                    "is_active": true,
+                    "uuid": "c585ff4c-6e5c-210e-bffc-0ec653604ef7"
+                }
+            ],
+            "name": "Music",
+            "order": 15,
+            "parent_uuid": "9cca1b9e-77fc-2e23-8d85-87b9906d1ef0",
+            "static": true,
+            "uuid": "3a4b9f74-49a2-3616-84d0-7ababa58a8d7"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "dbba604f-04eb-5323-caf0-d460f8b1a072"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "8f6b531a-0fab-f8ef-1fa0-4e18f6329f4c"
+                }
+            ],
+            "name": "grapple_lp_48",
+            "order": 103,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "b74dc731-a956-f1b5-4d6a-4b15249a13bb"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "76b172ac-64ca-ff96-8912-2d908973d710"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "0db14925-f97b-4996-40be-b83cdc40a41d"
+                }
+            ],
+            "name": "GrappleLine_49",
+            "order": 104,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "6b03ed37-347e-1ad6-27df-e4fc61fe4d77"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "045405a5-ede9-4070-1c48-796ebbe4e289"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "14b89fa1-24a1-18a0-0b93-1802d504320f"
+                }
+            ],
+            "name": "grapple_lp_49",
+            "order": 105,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "cf202c90-06ce-cea4-a769-ec1c7518d7c5"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 90.19832611083984,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.9048993587493896,
+                            "z": -1.8445457220077515
+                        },
+                        "rotation": {
+                            "w": 0.7058819532394409,
+                            "x": 0.7083294987678528,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 0.9999996423721313,
+                            "z": 0.9999996423721313
+                        }
+                    },
+                    "uuid": "db276f9e-7673-2153-a21c-cb5c2983c129"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "6ec9a5c6-f059-ee12-71cc-408fc1be6f7b",
+                        "mesh_index": 0,
+                        "mesh_uuid": "c0960c86-b8b5-4f9f-6481-0f765250be7e"
+                    },
+                    "uuid": "71de22fc-a775-db2e-c65c-9052ae5f4423"
+                }
+            ],
+            "name": "grapple_lp_50",
+            "order": 107,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "4141e07d-d652-0268-a552-ca2e931711d3"
+        },
+        {
+            "active": false,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -90.00000762939453,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 3.0265462398529053,
+                            "z": 1.7644184827804565
+                        },
+                        "rotation": {
+                            "w": 0.7071067094802856,
+                            "x": -0.7071068286895752,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.3600000143051147,
+                            "y": 1.359961986541748,
+                            "z": 1.359961986541748
+                        }
+                    },
+                    "uuid": "34aeca23-6ebc-0c61-b3bf-0c32ce7fba4f"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "66f49e44-d168-24e0-4583-cc5e57a1b477",
+                        "mesh_index": 0,
+                        "mesh_uuid": "1a28f6b1-c8e7-580d-2486-174da402cd0d"
+                    },
+                    "uuid": "3106ed14-2c1d-aa6f-8599-71d26680f844"
+                }
+            ],
+            "name": "GrappleLine_51",
+            "order": 108,
+            "parent_uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d",
+            "static": true,
+            "uuid": "03a84b28-06f8-b6c1-c987-bb71ea7cd6df"
         }
     ]
 }

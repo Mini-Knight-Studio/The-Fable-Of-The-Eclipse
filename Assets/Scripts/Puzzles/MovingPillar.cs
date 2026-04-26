@@ -23,9 +23,9 @@ class MovingPillar : Component
     private BoxCollider myCollider;
     private BoxCollider goalCollider;
 
+    [HideInInspector]
     public AudioSource slideSFX;
 
-    public Entity playerCamera;
     public float cameraShakeDuration = 0.5f;
     public float cameraShakeAmount = 0.3f;
     public float cameraShakeRotation = 0.3f;
@@ -50,6 +50,8 @@ class MovingPillar : Component
 
     // Particles
     private ParticleComponent goalParticles;
+    public Entity movingParticlesEntity;
+    private ParticleComponent movingParticles;
 
     // For reseting
     private Vector3 initialPosition;
@@ -62,6 +64,8 @@ class MovingPillar : Component
         slideSFX = entity.GetComponent<AudioSource>();
         goalParticles = goalEntity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
+        movingParticles = movingParticlesEntity.GetComponent<ParticleComponent>();
+        movingParticles.Stop();
 
         pushForward = pushForwardEntity.GetComponent<BoxCollider>();
         pushBack = pushBackEntity.GetComponent<BoxCollider>();
@@ -188,7 +192,8 @@ class MovingPillar : Component
         isMoving = true;
 
         slideSFX.Play();
-        playerCamera.GetComponent<PlayerCamera>().SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
+        movingParticles.Play();
+        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
     }
 
     void MoveTowardsTarget()
@@ -201,6 +206,7 @@ class MovingPillar : Component
         {
             entity.transform.position = targetPosition;
             isMoving = false;
+            movingParticles.Stop();
             return;
         }
 

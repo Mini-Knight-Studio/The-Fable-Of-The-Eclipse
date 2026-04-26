@@ -48,6 +48,15 @@ class PuzzleGoalSimonSays : Component
     private ParticleComponent goalParticles;
     private bool particlesSwitched = true;
 
+    // Sounds
+    [HideInInspector]
+    public AudioSource moveSFX;
+
+    public Entity activateSFX;
+    public Entity completeSFX;
+    public Entity collectGemSFX;
+    public Entity failSFX;
+
     private enum State
     {
         WaitingForPillars,
@@ -79,6 +88,8 @@ class PuzzleGoalSimonSays : Component
                 simonPillars[i] = pillarEntities[i].GetComponent<MovingPillarSimonSays>();
             }
         }
+
+        moveSFX = entity.GetComponent<AudioSource>();
 
         goalParticles = entity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
@@ -164,6 +175,7 @@ class PuzzleGoalSimonSays : Component
         isMoving = true;
 
         goalParticles.Play();
+        moveSFX.Play();
         particlesSwitched = false;
     }
 
@@ -223,6 +235,7 @@ class PuzzleGoalSimonSays : Component
             {
                 simonStarted = true;
                 Debug.LogWarning("Starting Simon Says.");
+                activateSFX.GetComponent<AudioSource>().Play();
                 StartSimonPhase();
             }
         }
@@ -379,6 +392,7 @@ class PuzzleGoalSimonSays : Component
         LockAllPillars();
         currentState = State.WaitingForPillars;
         simonStarted = false;
+        failSFX.GetComponent<AudioSource>().Play();
     }
 
     void HandleCompleted()
@@ -389,6 +403,8 @@ class PuzzleGoalSimonSays : Component
 
             DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
             DatabaseRegistry.playerDB.Player.hasGrappling = true;
+
+            collectGemSFX.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -403,6 +419,8 @@ class PuzzleGoalSimonSays : Component
         currentState = State.Completed;
         Gem.GetComponent<BoxCollider>().SetActive(true);
         Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+
+        completeSFX.GetComponent<AudioSource>().Play();
     }
 
     void CompletePuzzleAuto()
