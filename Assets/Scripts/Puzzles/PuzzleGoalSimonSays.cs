@@ -48,9 +48,7 @@ class PuzzleGoalSimonSays : Component
     private bool particlesSwitched = true;
 
     // Sounds
-    [HideInInspector]
-    public AudioSource moveSFX;
-
+    private AudioSource moveSFX;
     public Entity activateSFX;
     public Entity completeSFX;
     public Entity collectGemSFX;
