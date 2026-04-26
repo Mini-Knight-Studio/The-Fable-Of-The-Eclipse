@@ -230,11 +230,13 @@ class PuzzleGoalSimonSays : Component
 
         if (allOnGoal && !simonStarted)
         {
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
             if (goalCollider != null && goalCollider.IsColliding && Input.IsKeyDown(KeyCode.E))
             {
                 simonStarted = true;
                 Debug.LogWarning("Starting Simon Says.");
                 activateSFX.GetComponent<AudioSource>().Play();
+                Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(false);
                 StartSimonPhase();
             }
         }
