@@ -19,9 +19,9 @@ public class PlayerTorch : PlayerComponent
         if (fireObject != null) fireObject.SetActive(false);
     }
 
-    void OnUpdate()
+    public void ProcessTorch()
     {
-        if (Input.IsKeyPressed(KeyCode.O) && DatabaseRegistry.playerDB.Player.hasBurner && !isTorching)
+        if (Input.IsKeyPressed(KeyCode.O) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_Y)/*DatabaseRegistry.playerDB.Player.hasBurner && !isTorching*/)
         {
             StartCoroutine(TorchSequence());
         }

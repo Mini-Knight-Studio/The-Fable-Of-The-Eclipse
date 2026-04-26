@@ -116,7 +116,7 @@ public class Player : Component
         Input.ProcessInputs();
         Movement.ProcessMovement();
         Combat.ProcessCombat();
-
+        Torch.ProcessTorch();
         Animation.ProcessAnimations();
         Feedback.ProcessFeedback();
 
