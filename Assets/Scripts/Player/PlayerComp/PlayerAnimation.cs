@@ -34,8 +34,8 @@ public class PlayerAnimation : PlayerComponent
     public Entity modelEntity;
     public Entity swordEntity;
 
-    //private float loopDelayTimer = 0f;
-    //private bool isWaitingForLoop = false;
+    private float loopDelayTimer = 0f;
+    private bool isWaitingForLoop = false;
 
     public void OnCreate()
     {
@@ -48,20 +48,20 @@ public class PlayerAnimation : PlayerComponent
     {
         if (player.Movement == null || player.Combat == null || player.Grapple == null || player.Torch == null) return;
 
-        //if (state != AnimationState.IDLE)
-        //{
-        //    isWaitingForLoop = false;
-        //}
+        if (state != AnimationState.IDLE)
+        {
+            isWaitingForLoop = false;
+        }
 
-        //if (isWaitingForLoop)
-        //{
-        //    loopDelayTimer -= Time.deltaTime;
-        //    if (loopDelayTimer <= 0f)
-        //    {
-        //        modelAnimator.Looping = true;
-        //        isWaitingForLoop = false;
-        //    }
-        //}
+        if (isWaitingForLoop)
+        {
+            loopDelayTimer -= Time.deltaTime;
+            if (loopDelayTimer <= 0f)
+            {
+                modelAnimator.Looping = true;
+                isWaitingForLoop = false;
+            }
+        }
 
         if (player.Grapple.IsLaunching)
         {
@@ -115,16 +115,17 @@ public class PlayerAnimation : PlayerComponent
     }
     private void Idle()
     {
-        if (state == AnimationState.IDLE) return;
 
+        if (state == AnimationState.IDLE) return;
+        Debug.Log("Idle");
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
 
-        modelAnimator.Looping = true;
+        modelAnimator.Looping = false;
         modelAnimator.Play(idleClipName, 0.4f);
 
-        //isWaitingForLoop = true;
-        //loopDelayTimer = 0.4f;
+        isWaitingForLoop = true;
+        loopDelayTimer = 0.4f;
     }
 
     private void Move()
@@ -145,11 +146,11 @@ public class PlayerAnimation : PlayerComponent
         lastPlayedComboIndex = 0;
 
         modelAnimator.Looping = false;
-        modelAnimator.Play(clip, 0.1f);
+        modelAnimator.Play(clip, 0.0f);
     }
 
     private void Torch()
-    {
+    { 
         if (state == AnimationState.TORCH_BURN) return;
 
         state = AnimationState.TORCH_BURN;

@@ -127,7 +127,7 @@ public class PlayerFeedback : PlayerComponent
 
     public void PlayDash()
     {
-        PlayFeedback(dashAudio, dashParticle,0.2f);
+        PlayFeedback(dashAudio, dashParticle,0.3f);
     }
 
     public void PlayIdle()

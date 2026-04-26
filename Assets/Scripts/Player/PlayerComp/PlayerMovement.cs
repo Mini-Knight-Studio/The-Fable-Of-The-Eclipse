@@ -20,7 +20,7 @@ public class PlayerMovement : PlayerComponent
     public float dashCooldownTimer = 0.0f;
     private float dashBufferTimer = 0.0f;
     private Vector3 dashDirection = new Vector3(0, 0, 0);
-    private bool isDashing = false;
+    [ShowInInspector]private bool isDashing = false;
 
     [Header("Gravity")]
     public bool gravityActive;
@@ -51,8 +51,8 @@ public class PlayerMovement : PlayerComponent
 
     public void ProcessMovement()
     {
-        if (!player.Grapple.IsGrappling && !player.Torch.IsTorching && !player.Combat.isAttacking)
-            isDashing = HandleDash();
+        
+        isDashing = HandleDash();
 
         if (!isDashing)
             HandleNormalMovement();
@@ -114,14 +114,19 @@ public class PlayerMovement : PlayerComponent
             return true;
         }
 
+
         if (dashBufferTimer > 0 && dashCooldownTimer <= 0)
         {
-            dashTimer = dashDuration;
-            dashCooldownTimer = dashCooldown;
-            dashBufferTimer = 0;
+            if (!player.Grapple.IsGrappling && !player.Torch.IsTorching && !player.Combat.isAttacking)
+            {
+                dashTimer = dashDuration;
+                dashCooldownTimer = dashCooldown;
+                dashBufferTimer = 0;
 
-            dashDirection = entity.transform.Forward;
-            player.Feedback.PlayDash();
+                dashDirection = entity.transform.Forward;
+                player.Feedback.PlayDash();
+                return true;
+            }           
         }
 
         return false;
