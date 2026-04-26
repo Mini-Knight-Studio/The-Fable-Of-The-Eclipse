@@ -28,6 +28,7 @@ class MovingPillarSimonSays : Component
         if (torch != null)
         {
             torchParticles = torch.GetComponent<ParticleComponent>();
+            torchParticles.Stop();
             torchCollider = torch.GetComponent<BoxCollider>();
         }
     }
@@ -42,7 +43,12 @@ class MovingPillarSimonSays : Component
         if (!enabled)
         {
             if (torch != null) torch.SetActive(true);
-            if (torchParticles != null) torchParticles.Stop();
+
+            if (torchParticles != null && !active)
+            {
+                torchParticles.Stop();
+            }
+
             enabled = true;
         }
 

@@ -40,7 +40,6 @@ class PuzzleGoalSimonSays : Component
     private int showIndex = 0;
 
     private bool simonStarted = false;
-    private float inputCooldown = 0.0f;
 
     public Entity Gem;
 
@@ -311,7 +310,6 @@ class PuzzleGoalSimonSays : Component
     void PreparePlayerPhase()
     {
         playerIndex = 0;
-        inputCooldown = 0.4f;
 
         for (int i = 0; i < pillarPressedThisRound.Length; i++)
             pillarPressedThisRound[i] = false;
@@ -323,12 +321,6 @@ class PuzzleGoalSimonSays : Component
 
     void UpdatePlayerInput()
     {
-        if (inputCooldown > 0)
-        {
-            inputCooldown -= Time.deltaTime;
-            return;
-        }
-
         for (int i = 0; i < simonPillars.Length; i++)
         {
             var pillar = simonPillars[i];
@@ -341,8 +333,6 @@ class PuzzleGoalSimonSays : Component
                 pillarPressedThisRound[i] = true;
 
                 CheckPlayerInput(i);
-
-                inputCooldown = 0.3f;
                 break;
             }
         }
@@ -397,6 +387,11 @@ class PuzzleGoalSimonSays : Component
 
     void HandleCompleted()
     {
+        foreach (var pillar in simonPillars)
+        {
+            if (pillar != null) pillar.ForceActive();
+        }
+
         if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
         {
             Gem.SetActive(false);
@@ -439,20 +434,20 @@ class PuzzleGoalSimonSays : Component
 
         ResetAllPillars();
 
-        Pillar1.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
+        foreach (var pillar in basePillars)
+        {
+            if (pillar != null) pillar.CompletePillarAuto();
+        }
 
-        Pillar1.GetComponent<MovingPillarSimonSays>().Lock();
-        Pillar2.GetComponent<MovingPillarSimonSays>().Lock();
-        Pillar3.GetComponent<MovingPillarSimonSays>().Lock();
-        Pillar4.GetComponent<MovingPillarSimonSays>().Lock();
+        foreach (var pillar in simonPillars)
+        {
+            if (pillar != null) pillar.Lock();
+        }
 
-        Pillar1.GetComponent<MovingPillarSimonSays>().ForceActive();
-        Pillar2.GetComponent<MovingPillarSimonSays>().ForceActive();
-        Pillar3.GetComponent<MovingPillarSimonSays>().ForceActive();
-        Pillar4.GetComponent<MovingPillarSimonSays>().ForceActive();
+        foreach (var pillar in simonPillars)
+        {
+            if (pillar != null) pillar.ForceActive();
+        }
 
         successfulRounds = maxRounds;
         pendingMoves = maxRounds;
