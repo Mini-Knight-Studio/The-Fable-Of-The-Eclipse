@@ -61,6 +61,13 @@ class PauseMenu : Component
     private float openingMusicDelay = 2f;
     private float openingMusicTimer = 0f;
 
+    [Header("Debug")]
+    public Entity ilustrationEntity;
+    private Image ilustrationImage;
+    private Image backgroundImage;
+
+    public bool debugMode = false;
+
     [Header("Others")]
     // Input
     public float inputCooldown = 0.2f;
@@ -105,6 +112,8 @@ class PauseMenu : Component
 
     void OnCreate()
     {
+        backgroundImage = entity.GetComponent<Image>();
+
         // Buttons
         if (mainMenuEntity != null)
         {
@@ -248,6 +257,15 @@ class PauseMenu : Component
         {
             Debug.Log("Error: There is no passPageEntity Entity assigned.");
         }
+
+        if (ilustrationEntity != null)
+        {
+            ilustrationImage = ilustrationEntity.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Ilustration Entity assigned.");
+        }
     }
     void OnUpdate()
     {
@@ -278,6 +296,8 @@ class PauseMenu : Component
         HandleMouseNavigation();
         HandleNavigation();
 
+        HandleDebug();
+
         if (currentInputMode == InputMode.MOUSE)
         {
             if (mouseResult.HasValue)
@@ -291,7 +311,34 @@ class PauseMenu : Component
         HandleVisualFeedback();
         HandleConfirm();
     }
+    public void HandleDebug()
+    {
+        if (Input.IsKeyPressed(KeyCode.O))
+        {
+            if (inputTimer < inputCooldown)
+                return;
 
+            ToggleDebug();
+            inputTimer = 0f;
+        }
+
+        if (debugMode)
+        {
+            Vector4 lowOpacityColor = new Vector4(1, 1, 1, 0.25f);
+            backgroundImage.SetTint(lowOpacityColor);
+            ilustrationImage.SetTint(lowOpacityColor);
+        }
+        else
+        {
+            Vector4 fullOpacityColor = new Vector4(1, 1, 1, 1);
+            backgroundImage.SetTint(fullOpacityColor);
+            ilustrationImage.SetTint(fullOpacityColor);
+        }
+    }
+    public void ToggleDebug()
+    {
+        debugMode = !debugMode;
+    }
     void HandleMouseNavigation()
     {
         Vector2 currentMouse = Input.MousePosition;
