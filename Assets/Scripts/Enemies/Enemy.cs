@@ -19,6 +19,8 @@ public class Enemy : Component
     //-- Wander --//
     private bool wanderRange = false;
     private Vector3 lastWanderPosition;
+    private Vector3 interest_position;
+    private bool interest_position_checked;
 
     //-- Attack --//
     protected bool isAttacking;
@@ -92,6 +94,11 @@ public class Enemy : Component
             }
         }
         return false;
+    }
+
+    protected bool TargetDetected()
+    {
+        return true;
     }
     #endregion
 
@@ -177,6 +184,17 @@ public class Enemy : Component
     #endregion
 
     #region Wander
+
+    protected Vector3 ApplySideCorrection(Vector3 point)
+    {
+        return point;
+    }
+
+    protected void Chase()
+    {
+
+    }
+
     protected void ResetWander()
     {
         lastWanderPosition = transform.position + Vector3.Forward;

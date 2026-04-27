@@ -48,11 +48,14 @@ class Blob : Enemy
 
     void OnUpdate()
     {
+        if (Pause.isPaused)
+        {
+            return;
+        }
         if (spawn)
         {
             StartCoroutine(SplitLerp());
         }
-
         #region Health
         if (health.IsDead())
         {
@@ -72,7 +75,7 @@ class Blob : Enemy
         if (!isSpawning && !splitting)
         {
             Hit(1, PushForceScale, "Armature|Walk");
-            if(!isAttacking)
+            if(!isAttacking && !health.IsDead())
             {
                 #region Movement
                 if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
@@ -82,13 +85,13 @@ class Blob : Enemy
                     movement.Move(4-Stage, transform.Forward);
                     ResetWander();
                     #region Attack
-                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + (ReachDistance*0.25f) && !health.IsDead())
+                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + (ReachDistance*0.25f))
                     {
                         StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
                     }
                     #endregion
                 }
-                else
+                else if (!health.IsDead())
                 {
                     animator.PlayClip("Armature|Walk", true, 0.25f);
                     Wander(ViewField, 4-Stage);
