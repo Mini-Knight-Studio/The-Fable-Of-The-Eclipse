@@ -42,7 +42,6 @@ public class Enemy : Component
         feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
 
-        Debug.Log("1");
 
         foreach(Entity child in entity.GetChildren())
         {
@@ -52,12 +51,10 @@ public class Enemy : Component
             }
         }
 
-        Debug.Log("2");
-
+ 
         health.Init();
         wanderRange = false;
         ResetWander();
-        Debug.Log("3");
     }
     #endregion
 

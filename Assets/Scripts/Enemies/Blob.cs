@@ -35,9 +35,7 @@ class Blob : Enemy
 
     void OnCreate()
     {
-        Debug.Log("0");
         SetEnemy(Reference, AttackCooldown, PreparationTime, ReachDistance * Stage, "Blob");
-        Debug.Log("4");
         SetStage(Stage);
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("PlayerTrigger");
@@ -46,7 +44,6 @@ class Blob : Enemy
         spawn = false;
         isSpawning = false;
         splitting = false;
-        Debug.Log("5");
     }
 
     void OnUpdate()
