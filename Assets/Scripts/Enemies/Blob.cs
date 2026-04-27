@@ -147,6 +147,11 @@ class Blob : Enemy
             Blob_component.isSpawning = true;
             Blob_component.ResetWander();
             Blob_component.feedback.SetParticlesState("Hurt", false);
+
+            Blob_component.entity.transform.rotation = Vector3.Zero;
+            Blob_component.hitbox.entity.transform.rotation = Vector3.Zero;
+            Blob_component.animator.model.transform.rotation = Vector3.Zero;
+            Blob_component.feedback.FeedbackEntity.transform.rotation = Vector3.Right * 90;
             new_Blob.SetActive(true);
         }
     }
