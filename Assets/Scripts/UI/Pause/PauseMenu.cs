@@ -1,7 +1,7 @@
 using System;
 using Loopie;
 
-public class PauseMenu : Component
+class PauseMenu : Component
 {
     // Buttons
     [Header("Buttons")]
