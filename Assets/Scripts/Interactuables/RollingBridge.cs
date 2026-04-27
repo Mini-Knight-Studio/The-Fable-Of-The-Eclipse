@@ -95,4 +95,9 @@ class RollingBridge : Component
         if (particles != null)
             particles.Stop();
     }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
 }

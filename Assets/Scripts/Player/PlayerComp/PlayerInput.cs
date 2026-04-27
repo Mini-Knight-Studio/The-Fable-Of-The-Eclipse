@@ -8,6 +8,8 @@ public class PlayerInput : PlayerComponent
     public bool attackKeyPressed = false;
     public bool grappleKeyPressed = false;
     public bool torchKeyPressed = false;
+    public bool interactKeyPressed = false;
+    public bool optionsKeyPressed = false;
 
     /// <summary>
     /// DEBUG KEYS
@@ -24,7 +26,11 @@ public class PlayerInput : PlayerComponent
 
         CollectGrappleInput();
 
-        CollectTorch();
+        CollectTorchInput();
+
+        CollectInteractInput();
+
+        CollectOptionsInput();
         //// MORE IF NEED IT
         /// ...
 
@@ -59,12 +65,12 @@ public class PlayerInput : PlayerComponent
 
     private void CollectDashInput()
     {
-        dashKeyPressed = Input.IsKeyDown(KeyCode.SPACE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_X);
+        dashKeyPressed = Input.IsKeyDown(KeyCode.SPACE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_Y);
     }
 
     private void CollectAttackInput()
     {
-        attackKeyPressed = Input.IsKeyDown(KeyCode.J) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A);
+        attackKeyPressed = Input.IsKeyDown(KeyCode.J) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_X);
     }
 
     private void CollectDebugInputs()
@@ -73,12 +79,22 @@ public class PlayerInput : PlayerComponent
     }
     private void CollectGrappleInput()
     {
-        grappleKeyPressed = Input.IsKeyDown(KeyCode.E) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_B);
+        grappleKeyPressed = Input.IsKeyDown(KeyCode.E) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_LEFT_SHOULDER) || Input.LeftTrigger > 0);
     }
 
-    private void CollectTorch()
+    private void CollectTorchInput()
     {
-        torchKeyPressed = Input.IsKeyPressed(KeyCode.O) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_Y);
+        torchKeyPressed = Input.IsKeyPressed(KeyCode.O) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_RIGHT_SHOULDER) || Input.RightTrigger > 0);
+    }
+
+    private void CollectInteractInput()
+    {
+        interactKeyPressed = Input.IsKeyPressed(KeyCode.E) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A);
+    }
+
+    private void CollectOptionsInput()
+    {
+        optionsKeyPressed = Input.IsKeyPressed(KeyCode.ESCAPE) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_START);
     }
 
     //// MORE IF NEED IT

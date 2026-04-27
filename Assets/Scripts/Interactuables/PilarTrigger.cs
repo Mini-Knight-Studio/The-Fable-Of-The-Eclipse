@@ -52,7 +52,7 @@ public class PillarTrigger : Component
             isWaitingForHook = false;
         }
 
-        if (isTargeted && interactionPrompt != null && interactionPrompt.Active && Input.IsKeyPressed(KeyCode.I) && !isWaitingForHook)
+        if (isTargeted && interactionPrompt != null && interactionPrompt.Active && Player.Instance.Input.grappleKeyPressed && !isWaitingForHook)
         {
             isWaitingForHook = true;
             hookTimer = 0.0f;
