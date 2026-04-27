@@ -6,8 +6,11 @@ public class UIPopupManager : Component
 {
     public float showDuration = 3.0f;
 
+    public static UIPopupManager Instance { get; private set; }
+
     void OnCreate()
     {
+        Instance = this;
     }
 
     void OnUpdate() { }

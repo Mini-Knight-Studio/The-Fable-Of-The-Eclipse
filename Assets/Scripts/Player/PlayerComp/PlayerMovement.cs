@@ -1,10 +1,12 @@
-using System;
 using Loopie;
+using System;
+using System.Reflection.Emit;
 
 public class PlayerMovement : PlayerComponent
 {
     private Movement movementHelper;
 
+    [Header("Settings")]
     public float moveSpeed = 10.0f;
     public float rotationSpeed = 5.0f;
     private bool isMoving = false;
@@ -18,21 +20,18 @@ public class PlayerMovement : PlayerComponent
     public float dashCooldownTimer = 0.0f;
     private float dashBufferTimer = 0.0f;
     private Vector3 dashDirection = new Vector3(0, 0, 0);
-    private bool isDashing = false;
+    [ShowInInspector]private bool isDashing = false;
 
-    // Dash SFX
-    public Entity dashSFXEntity;
-    private AudioSource dashSfxSource;
+    [Header("Gravity")]
+    public bool gravityActive;
+    public float gravity;
 
+    [Header("Others")]
     // Walk SFX
-    public Entity walkSFXEntity;
-    private AudioSource walkSFXSource;
     private float walkSFXTimer = 0;
     public float walkSFXInterval = 5;
 
     // Idle SFX
-    public Entity idleSFXEntity;
-    private AudioSource idleSFXSource;
     private float idleSFXTimer = 0;
     public float idleSFXInterval = 5;
 
@@ -44,22 +43,18 @@ public class PlayerMovement : PlayerComponent
     public void OnCreate()
     {
         movementHelper = entity.GetComponent<Movement>();
-        if(movementHelper!=null)
+        if (movementHelper != null)
             movementHelper.CanMove = true;
 
         playerCollider = entity.GetComponent<BoxCollider>();
-
-        dashSfxSource = dashSFXEntity.GetComponent<AudioSource>();
-        walkSFXSource = walkSFXEntity.GetComponent<AudioSource>();
-        idleSFXSource = idleSFXEntity.GetComponent<AudioSource>();
-
-    }                          
+    }
 
     public void ProcessMovement()
     {
+        
         isDashing = HandleDash();
 
-        if (!isDashing) 
+        if (!isDashing)
             HandleNormalMovement();
 
         if (!isMoving && !isDashing)
@@ -68,12 +63,25 @@ public class PlayerMovement : PlayerComponent
 
             if (idleSFXTimer >= idleSFXInterval)
             {
-                idleSFXSource.Play();
+                player.Feedback.PlayIdle();
                 idleSFXTimer = 0f;
             }
         }
 
+
+
         HandleGodMode();
+        HandleGravity();
+    }
+
+    private void HandleGravity()
+    {
+        if (gravityActive && !isGodMode)
+        {
+
+            movementHelper.Speed = -gravity;
+            movementHelper.Move(Vector3.Up);
+        }
     }
 
     private void HandleGodMode()
@@ -90,9 +98,9 @@ public class PlayerMovement : PlayerComponent
 
     private bool HandleDash()
     {
-        if (dashCooldownTimer > 0) 
+        if (dashCooldownTimer > 0)
             dashCooldownTimer -= Time.deltaTime;
-        if (dashBufferTimer > 0) 
+        if (dashBufferTimer > 0)
             dashBufferTimer -= Time.deltaTime;
 
         if (player.Input.dashKeyPressed)
@@ -106,14 +114,19 @@ public class PlayerMovement : PlayerComponent
             return true;
         }
 
+
         if (dashBufferTimer > 0 && dashCooldownTimer <= 0)
         {
-            dashTimer = dashDuration;
-            dashCooldownTimer = dashCooldown;
-            dashBufferTimer = 0;
+            if (!player.Grapple.IsGrappling && !player.Torch.IsTorching && !player.Combat.isAttacking)
+            {
+                dashTimer = dashDuration;
+                dashCooldownTimer = dashCooldown;
+                dashBufferTimer = 0;
 
-            dashDirection = entity.transform.Forward;
-            dashSfxSource.Play();
+                dashDirection = entity.transform.Forward;
+                player.Feedback.PlayDash();
+                return true;
+            }           
         }
 
         return false;
@@ -125,6 +138,9 @@ public class PlayerMovement : PlayerComponent
 
     private void HandleNormalMovement()
     {
+        if (IsDashing() || player.Grapple.IsGrappling || player.Torch.IsTorching || player.Combat.isAttacking)
+            return;
+
         Vector3 moveDirection = player.Input.moveDirection;
 
         float length = (float)Mathf.Sqrt(moveDirection.x * moveDirection.x + moveDirection.z * moveDirection.z);
@@ -157,7 +173,7 @@ public class PlayerMovement : PlayerComponent
 
             if (walkSFXTimer >= walkSFXInterval)
             {
-                walkSFXSource.Play();
+                player.Feedback.PlayWalk();
                 walkSFXTimer = 0f;
             }
         }

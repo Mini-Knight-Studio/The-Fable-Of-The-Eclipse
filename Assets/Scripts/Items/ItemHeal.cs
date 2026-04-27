@@ -3,11 +3,14 @@ using Loopie;
 
 public class HealItem : Component
 {
+    [Header("Configuration")]
     public int healAmount = 1;
     public string uniqueId = "Potion_1";
+    [Header("Feedback")]
     public Entity vfx;
 
     private bool alreadyCollected = false;
+    BoxCollider triggerDetection;
 
     void OnCreate()
     {
@@ -16,14 +19,14 @@ public class HealItem : Component
             alreadyCollected = true;
             entity.SetActive(false);
         }
+        triggerDetection = entity.GetComponent<BoxCollider>();
     }
 
     void OnUpdate()
     {
         if (alreadyCollected) return;
 
-        BoxCollider col = entity.GetComponent<BoxCollider>();
-        if (col != null && col.HasCollided)
+        if(triggerDetection != null && triggerDetection.HasCollided)
         {
 
             Player.Instance.PlayerHealth.Heal(healAmount);

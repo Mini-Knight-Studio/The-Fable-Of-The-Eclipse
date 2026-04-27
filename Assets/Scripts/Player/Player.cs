@@ -3,18 +3,24 @@ using Loopie;
 
 public class Player : Component
 {
+    [Header("Health")]
     public Health PlayerHealth;
 
+    [Header("Camera")]
     protected Entity CameraEntity;
     public PlayerCamera Camera;
 
+    [Header("PlayerComponents")]
     public PlayerInput Input;
     public PlayerMovement Movement;
     public PlayerAnimation Animation;
     public PlayerCombat Combat;
-
     public PlayerGrapple Grapple;
+    public PlayerFeedback Feedback;
 
+    public PlayerTorch Torch;
+
+    [Header("Others")]
     public Entity GrappleLine;
     public Entity HookAnchor;
     public TemporalEffectApplier Effects;
@@ -22,6 +28,8 @@ public class Player : Component
 
     public Entity RespawnTransitionEntity;
     public FadeInOutEvent RespawnTransition;
+
+
 
     public static Player Instance { get; private set; }
 
@@ -46,9 +54,14 @@ public class Player : Component
         Combat = entity.GetComponent<PlayerCombat>();
         Combat.SetOwner(this);
 
-        // 2. Initialize Grapple and link it to the Player
+        Feedback = entity.GetComponent<PlayerFeedback>();
+        Feedback.SetOwner(this);
+
         Grapple = entity.GetComponent<PlayerGrapple>();
         if (Grapple != null) Grapple.SetOwner(this);
+
+        Torch = entity.GetComponent<PlayerTorch>();
+        if (Torch != null) Torch.SetOwner(this);
 
         GrappleLine = Entity.FindEntityByName("GrappleLine");
         if (GrappleLine != null) GrappleLine.SetActive(false);
@@ -61,7 +74,6 @@ public class Player : Component
         RespawnTransition = RespawnTransitionEntity.GetComponent<FadeInOutEvent>();
         RespawnTransition.OnFadeInComplete += EndRespawn;
 
-        // Debug checks
         if (Movement == null) Debug.Log("Missing PlayerMovement");
         if (Animation == null) Debug.Log("Missing PlayerAnimation");
         if (Combat == null) Debug.Log("Missing PlayerCombat");
@@ -69,8 +81,11 @@ public class Player : Component
         if (Input == null) Debug.Log("Missing PlayerInput");
         if (Camera == null) Debug.Log("Missing PlayerCamera");
         if (Grapple == null) Debug.Log("Missing PlayerGrapple");
+        if (Feedback == null) Debug.Log("Missing PlayerFeedback");
+        if (Torch == null) Debug.Log("Missing PlayerTorch");
 
         PlayerHealth.Init();
+        Feedback.Initialize();
     }
 
     public void GoToLastCheckpoint()
@@ -88,6 +103,7 @@ public class Player : Component
     {
         GoToLastCheckpoint();
         PlayerHealth.canBeDamaged = true;
+        Movement.gravityActive = false;
     }
 
     void OnUpdate()
@@ -100,8 +116,10 @@ public class Player : Component
         Input.ProcessInputs();
         Movement.ProcessMovement();
         Combat.ProcessCombat();
-
+        Torch.ProcessTorch();
+        Grapple.ProcessGrappel();
         Animation.ProcessAnimations();
+        Feedback.ProcessFeedback();
 
     }
 
