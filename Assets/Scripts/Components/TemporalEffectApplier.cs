@@ -32,16 +32,16 @@ public class TemporalEffectApplier : Component
         }
     }
 
-    public void AddEffect(TemporalEffect effect)
+    public bool AddEffect(TemporalEffect effect)
     {
-        if (effect == null) return;
+        if (effect == null) return false;
 
         effect.InitEffect();
         int random = Loopie.Random.Range(0, 100);
         if (random >= effect.probability)
-            return;
-        Debug.Log("Applied Effect");
+            return false;
         effects.Add(effect);
+        return true;
     }
 
     public int GetEffectValueInt(int baseValue, string category)

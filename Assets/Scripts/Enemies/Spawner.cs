@@ -23,6 +23,7 @@ class Spawner : Component
             Entity newClone = entityToClone.Clone(true);
             newClone.Name = newClone.Name.Replace("_Reference_", "");
             newClone.transform.position = transform.position;
+            newClone.transform.rotation = transform.rotation;
             newClone.SetActive(true);
         }
     }
