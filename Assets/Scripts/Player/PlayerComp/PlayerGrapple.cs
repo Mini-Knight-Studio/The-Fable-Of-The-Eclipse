@@ -90,6 +90,8 @@ public class PlayerGrapple : PlayerComponent
 
     public void ExecuteGrapple(PillarTrigger pillarScript, float waitTime)
     {
+        if (!DatabaseRegistry.playerDB.Player.hasGrappling)
+            return;
         if (pillarScript == null || grappleCooldownTimer > 0) return;
 
         DestroyGrappleObjects();

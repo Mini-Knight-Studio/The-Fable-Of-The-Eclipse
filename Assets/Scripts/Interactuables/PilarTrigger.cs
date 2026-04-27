@@ -31,6 +31,8 @@ public class PillarTrigger : Component
 
     void OnUpdate()
     {
+        if (!DatabaseRegistry.playerDB.Player.hasGrappling)
+            return;
         if (triggerZone == null || playerGrapple == null) return;
 
         if (triggerZone.HasCollided)
