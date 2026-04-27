@@ -1,7 +1,7 @@
 using System;
 using Loopie;
 
-class PauseMenu : Component
+public class PauseMenu : Component
 {
     // Buttons
     [Header("Buttons")]
@@ -63,10 +63,10 @@ class PauseMenu : Component
 
     [Header("Debug")]
     public Entity ilustrationEntity;
-    private Image ilustrationImage;
-    private Image backgroundImage;
-
-    public bool debugMode = false;
+    [HideInInspector]
+    public Image ilustrationImage;
+    [HideInInspector]
+    public Image backgroundImage;
 
     [Header("Others")]
     // Input
@@ -80,20 +80,6 @@ class PauseMenu : Component
     private float enterTimer = 0f;
 
     private bool canCallScripts = false;
-
-    // Intro Book Cover
-    public Entity introBookCoverEntity;
-    private IntroBookCover introBookCoverScript;
-
-    private float preMainMenuDelay = 0f;
-    private float preMainMenuDelayTimer = 0f;
-
-    // Load
-    public Entity LoadSettingsEntity;
-    private LoadSettings loadSettingsScript;
-
-    private bool settingsLoaded = false;
-    private bool globalDatabaseLoaded = false;
 
     // On Start
     public Entity closeBookEntity;
@@ -191,17 +177,6 @@ class PauseMenu : Component
             Debug.Log("Error: There is no Exit Entity assigned.");
         }
 
-        // External
-        if (introBookCoverEntity != null)
-        {
-            introBookCoverScript = introBookCoverEntity.GetComponent<IntroBookCover>();
-            preMainMenuDelay = introBookCoverScript.GetTotalPreAnimationDelay() + introBookCoverScript.inAnimationDelay;
-        }
-        else
-        {
-            Debug.Log("Error: There is no IntroBookCover Entity assigned.");
-        }
-
         if (loopMusicEntity != null)
         {
             loopMusicAudioSource = loopMusicEntity.GetComponent<AudioSource>();
@@ -218,16 +193,6 @@ class PauseMenu : Component
         else
         {
             Debug.Log("Error: There is no Loop Music Entity assigned.");
-        }
-
-        // Load Settings
-        if (LoadSettingsEntity != null)
-        {
-            loadSettingsScript = LoadSettingsEntity.GetComponent<LoadSettings>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no LoadSettingsEntity Entity assigned.");
         }
 
         // On Start
@@ -296,8 +261,6 @@ class PauseMenu : Component
         HandleMouseNavigation();
         HandleNavigation();
 
-        HandleDebug();
-
         if (currentInputMode == InputMode.MOUSE)
         {
             if (mouseResult.HasValue)
@@ -310,34 +273,6 @@ class PauseMenu : Component
 
         HandleVisualFeedback();
         HandleConfirm();
-    }
-    public void HandleDebug()
-    {
-        if (Input.IsKeyPressed(KeyCode.O))
-        {
-            if (inputTimer < inputCooldown)
-                return;
-
-            ToggleDebug();
-            inputTimer = 0f;
-        }
-
-        if (debugMode)
-        {
-            Vector4 lowOpacityColor = new Vector4(1, 1, 1, 0.25f);
-            backgroundImage.SetTint(lowOpacityColor);
-            ilustrationImage.SetTint(lowOpacityColor);
-        }
-        else
-        {
-            Vector4 fullOpacityColor = new Vector4(1, 1, 1, 1);
-            backgroundImage.SetTint(fullOpacityColor);
-            ilustrationImage.SetTint(fullOpacityColor);
-        }
-    }
-    public void ToggleDebug()
-    {
-        debugMode = !debugMode;
     }
     void HandleMouseNavigation()
     {
@@ -484,22 +419,8 @@ class PauseMenu : Component
         if (loopMusicHasPlayed)
             return;
 
-        if (introBookCoverScript.HasOpeningStarted())
-        {
-            openingMusicTimer += Time.deltaTime;
-
-            if (openingMusicTimer < openingMusicDelay)
-                return;
-
-            loopMusicAudioSource.Play();
-            loopMusicHasPlayed = true;
-        }
-
-        if (hasPlayedIntro)
-        {
-            loopMusicAudioSource.Play();
-            loopMusicHasPlayed = true;
-        }
+        loopMusicAudioSource.Play();
+        loopMusicHasPlayed = true;
     }
 
     public void HandleClickConfirm()

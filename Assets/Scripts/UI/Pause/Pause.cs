@@ -4,6 +4,7 @@ using Loopie;
 public class Pause : Component
 {
     public Entity pauseMenuEntity;
+    public Entity infoDebugEntity;
 
     public static bool isPaused = false;
 
@@ -30,10 +31,12 @@ public class Pause : Component
         if (!isPaused)
         {
             pauseMenuEntity.SetActive(false);
+            infoDebugEntity.SetActive(false);
         }
         else
         {
             pauseMenuEntity.SetActive(true);
+            infoDebugEntity.SetActive(true);
         }
     }
 
