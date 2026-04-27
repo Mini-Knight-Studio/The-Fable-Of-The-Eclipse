@@ -3,21 +3,13 @@ using Loopie;
 
 public class SkillsHUD : Component
 {
-    public string playerName = "Player";
-
-    public string torchActiveName = "Torch_Active";
-    public string torchInactiveName = "Torch_Inactive";
-
-    public string grappleActiveName = "Grapple_Active";
-    public string grappleInactiveName = "Grapple_Inactive";
+    public Entity torchActiveEntity;
+    public Entity torchInactiveEntity;
+    public Entity grappleActiveEntity;
+    public Entity grappleInactiveEntity;
 
     private PlayerTorch playerTorch;
     private PlayerGrapple playerGrapple;
-
-    private Entity torchActiveEntity;
-    private Entity torchInactiveEntity;
-    private Entity grappleActiveEntity;
-    private Entity grappleInactiveEntity;
 
     private bool wasTorchReady = true;
     private bool wasGrappleReady = true;
@@ -27,18 +19,9 @@ public class SkillsHUD : Component
 
     void OnCreate()
     {
-        Entity player = Entity.FindEntityByName(playerName);
-        if (player != null)
-        {
-            playerTorch = player.GetComponent<PlayerTorch>();
-            playerGrapple = player.GetComponent<PlayerGrapple>();
-        }
 
-        torchActiveEntity = Entity.FindEntityByName(torchActiveName);
-        torchInactiveEntity = Entity.FindEntityByName(torchInactiveName);
-
-        grappleActiveEntity = Entity.FindEntityByName(grappleActiveName);
-        grappleInactiveEntity = Entity.FindEntityByName(grappleInactiveName);
+        playerTorch = Player.Instance.Torch;
+        playerGrapple = Player.Instance.Grapple;    
 
         if (torchInactiveEntity != null) torchInactiveEntity.SetActive(false);
         if (grappleInactiveEntity != null) grappleInactiveEntity.SetActive(false);
@@ -71,34 +54,27 @@ public class SkillsHUD : Component
             }
         }
 
-        if (playerGrapple != null && grappleActiveEntity != null && grappleInactiveEntity != null)
+        if (playerGrapple != null && grappleActiveEntity != null && grappleInactiveEntity != null && DatabaseRegistry.playerDB != null)
         {
-            if (simulatedGrappleCooldown > 0)
+            if (DatabaseRegistry.playerDB.Player.hasGrappling)
             {
-                simulatedGrappleCooldown -= Time.deltaTime;
+                bool isGrappleReady = !playerGrapple.IsGrappling;
+
+                if (isGrappleReady != wasGrappleReady)
+                {
+                    grappleActiveEntity.SetActive(isGrappleReady);
+                    grappleInactiveEntity.SetActive(!isGrappleReady);
+                    wasGrappleReady = isGrappleReady;
+                }
             }
-
-            float currentGrappleTimer = playerGrapple.grappleCooldownTimer;
-            bool isNewGrapple = false;
-
-            if (currentGrappleTimer < lastGrappleTimerValue)
-                isNewGrapple = true;
-            else if (lastGrappleTimerValue == 0.0f && currentGrappleTimer > 0.0f)
-                isNewGrapple = true;
-
-            if (isNewGrapple && simulatedGrappleCooldown <= 0)
+            else
             {
-                simulatedGrappleCooldown = playerGrapple.grappleCooldown;
-            }
-
-            lastGrappleTimerValue = currentGrappleTimer;
-            bool isGrappleReady = simulatedGrappleCooldown <= 0;
-
-            if (isGrappleReady != wasGrappleReady)
-            {
-                grappleActiveEntity.SetActive(isGrappleReady);
-                grappleInactiveEntity.SetActive(!isGrappleReady);
-                wasGrappleReady = isGrappleReady;
+                if (wasGrappleReady)
+                {
+                    grappleActiveEntity.SetActive(false);
+                    grappleInactiveEntity.SetActive(true);
+                    wasGrappleReady = false;
+                }
             }
         }
     }
