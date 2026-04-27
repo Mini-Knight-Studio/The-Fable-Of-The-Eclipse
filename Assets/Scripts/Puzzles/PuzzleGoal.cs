@@ -44,7 +44,7 @@ class PuzzleGoal : Component
         Gem.GetComponent<BoxCollider>().SetActive(false);
 
         goalParticles = entity.GetComponent<ParticleComponent>();
-        goalParticles.SetActive(false);
+        goalParticles.Stop();
     }
 
     void OnUpdate()
@@ -63,7 +63,7 @@ class PuzzleGoal : Component
 
         if (!isMoving && !particlesSwitched)
         {
-            goalParticles.SetActive(false);
+            goalParticles.Stop();
             particlesSwitched = true;
         }
     }
@@ -95,6 +95,7 @@ class PuzzleGoal : Component
             CompletePuzzleAuto();
 
             Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
             Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
         }
 
@@ -105,6 +106,7 @@ class PuzzleGoal : Component
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
 
             Gem.GetComponent<BoxCollider>().SetActive(true);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         }
 
         if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
@@ -129,7 +131,7 @@ class PuzzleGoal : Component
 
         isMoving = true;
 
-        goalParticles.SetActive(true);
+        goalParticles.Play();
         particlesSwitched = false;
     }
 

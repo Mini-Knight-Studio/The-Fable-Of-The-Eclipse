@@ -38,12 +38,18 @@ class KillingWaterCollider : Component
         {
             killTimer += Time.deltaTime;
 
+            if (!Player.Instance.Movement.isGodMode && !Player.Instance.Grapple.IsGrappling && !Player.Instance.Movement.IsDashing() && Player.Instance.Movement.gravityActive)
+            {
+                Player.Instance.Movement.gravityActive = false;
+            }
+
             if (killTimer >= killTime)
             {
-                if (!Player.Instance.Movement.isGodMode && !Player.Instance.Grapple.IsGrappling)
+                if (!Player.Instance.Movement.isGodMode && !Player.Instance.Grapple.IsGrappling && !Player.Instance.Movement.IsDashing())
                 {
                     Player.Instance.PlayerHealth.Damage(fallingDamage);
                     Player.Instance.StartRespawn();
+                    Player.Instance.Movement.gravityActive = true;
                 }
                 killTimer = 0.0f;
             }

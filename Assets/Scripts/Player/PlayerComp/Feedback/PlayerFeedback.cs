@@ -35,16 +35,25 @@ public class PlayerFeedback : PlayerComponent
     [Header("Flint&Steel - Particles")]
     [ShowInInspector] Entity flintSteelParticleEntity;
 
+    [Header("Grapple - Audio")]
+    [ShowInInspector] Entity grappleAudioEntity;
+
+    [Header("Grapple - Particles")]
+    [ShowInInspector] Entity grappleParticleEntity;
+
 
     AudioSource hurtAudio, healAudio, deathAudio;
     AudioSource walkAudio, dashAudio, idleAudio;
     AudioSource attackAudio;
     AudioSource flintSteelAudio;
+    AudioSource grappleAudio;
 
     ParticleComponent hurtParticle, healParticle, deathParticle;
     ParticleComponent walkParticle, dashParticle;
     ParticleComponent attackParticle;
     ParticleComponent flintSteelParticle;
+    ParticleComponent grappleParticle;
+
 
     private bool initialized = false;
 
@@ -76,6 +85,11 @@ public class PlayerFeedback : PlayerComponent
         flintSteelAudio = flintSteelAudioEntity.GetComponent<AudioSource>();  
         
         flintSteelParticle = flintSteelParticleEntity.GetComponent<ParticleComponent>();
+
+
+        grappleAudio = grappleAudioEntity.GetComponent<AudioSource>();  
+        
+        grappleParticle = grappleParticleEntity.GetComponent<ParticleComponent>();
     }
 
     public void ProcessFeedback()
@@ -115,7 +129,7 @@ public class PlayerFeedback : PlayerComponent
 
     public void PlayHurt()
     {
-        PlayFeedback(hurtAudio, hurtParticle,0.7f);
+        PlayFeedback(hurtAudio, hurtParticle,0.1f);
     }
 
     public void PlayHeal()
@@ -127,12 +141,14 @@ public class PlayerFeedback : PlayerComponent
 
     public void PlayDash()
     {
-        PlayFeedback(dashAudio, dashParticle,0.2f);
+        PlayFeedback(dashAudio, dashParticle,0.3f);
     }
 
     public void PlayIdle()
     {
-        PlayFeedback(idleAudio);
+        int randomValue = Loopie.Random.Range(0, 100) + 1;
+        if (randomValue < 30)
+            PlayFeedback(idleAudio);
     }
 
     public void PlayWalk()
@@ -147,6 +163,11 @@ public class PlayerFeedback : PlayerComponent
 
     public void PlayFlintSteel(){
         PlayFeedback(flintSteelAudio,flintSteelParticle,0.3f);
+    }
+
+    public void PlayGrapple()
+    {
+        PlayFeedback(grappleAudio, grappleParticle, 0.3f);
     }
 
     // --- CORE ---
@@ -170,7 +191,6 @@ public class PlayerFeedback : PlayerComponent
 
         if (particle != null)
         {
-            Debug.LogWarning(particle.ID);
             PlayFeedback(particle, duration);
         }
     }

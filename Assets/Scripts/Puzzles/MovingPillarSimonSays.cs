@@ -17,6 +17,10 @@ class MovingPillarSimonSays : Component
 
     private MovingPillar movingPillar;
 
+    public Entity igniteSFXEntity;
+
+    public Entity fireSFXEntity;
+
     void OnCreate()
     {
         movingPillar = entity.GetComponent<MovingPillar>();
@@ -24,6 +28,7 @@ class MovingPillarSimonSays : Component
         if (torch != null)
         {
             torchParticles = torch.GetComponent<ParticleComponent>();
+            torchParticles.Stop();
             torchCollider = torch.GetComponent<BoxCollider>();
         }
     }
@@ -38,7 +43,12 @@ class MovingPillarSimonSays : Component
         if (!enabled)
         {
             if (torch != null) torch.SetActive(true);
-            if (torchParticles != null) torchParticles.SetActive(false);
+
+            if (torchParticles != null && !active)
+            {
+                torchParticles.Stop();
+            }
+
             enabled = true;
         }
 
@@ -55,12 +65,21 @@ class MovingPillarSimonSays : Component
 
         if (active && !activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(true);
+            if (torchParticles != null)
+            {
+                torchParticles.Play();
+                fireSFXEntity.GetComponent<AudioSource>().Play();
+                igniteSFXEntity.GetComponent<AudioSource>().Play();
+            }
             activated = true;
         }
         else if (!active && activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(false);
+            if (torchParticles != null)
+            {
+                torchParticles.Stop();
+                fireSFXEntity.GetComponent<AudioSource>().Stop();
+            }
             activated = false;
         }
     }
@@ -71,7 +90,12 @@ class MovingPillarSimonSays : Component
 
         if (!activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(true);
+            if (torchParticles != null)
+            {
+                torchParticles.Play();
+                fireSFXEntity.GetComponent<AudioSource>().Play();
+                igniteSFXEntity.GetComponent<AudioSource>().Play();
+            }
             activated = true;
         }
     }
@@ -83,7 +107,11 @@ class MovingPillarSimonSays : Component
 
         if (activated)
         {
-            if (torchParticles != null) torchParticles.SetActive(false);
+            if (torchParticles != null)
+            {
+                torchParticles.Stop();
+                fireSFXEntity.GetComponent<AudioSource>().Stop();
+            }
             activated = false;
         }
     }
