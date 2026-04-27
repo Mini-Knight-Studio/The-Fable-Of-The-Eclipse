@@ -64,7 +64,7 @@
             ],
             "name": "PlayerCamera",
             "order": 1,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -289,7 +289,7 @@
                             "onDeathAudioEntity": "9cb09dd9-e1b3-6267-aada-d0cfb2d510b6",
                             "onDeathParticleEntity": "",
                             "onHealAudioEntity": "8d6613d2-4e62-e769-2778-633415fce8dd",
-                            "onHealParticleEntity": "",
+                            "onHealParticleEntity": "8dffcaa7-4b53-5b71-afa6-09a9236bd85f",
                             "onHurtAudioEntity": "a3bb2c7e-448d-c1b7-2abb-38d97f309f07",
                             "onHurtParticleEntity": "a78efc65-9c31-05c7-83bf-f9178e1cb865",
                             "walkingAudioEntity": "0ef01ef8-f458-ae77-c290-fbb70cd7eb01",
@@ -320,7 +320,7 @@
             ],
             "name": "Player",
             "order": 2,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": false,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -699,7 +699,7 @@
             ],
             "name": "Interactables",
             "order": 11,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816"
         },
@@ -859,7 +859,7 @@
             ],
             "name": "//////////////// UI",
             "order": 3,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "e1ecfd16-32bd-cfc4-3caa-cd96c4d76dbf"
         },
@@ -1449,7 +1449,7 @@
             ],
             "name": "BurneableVines",
             "order": 18,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "3feb03d2-2ef9-fcb8-4b6d-0e39350cd41d"
         },
@@ -1808,9 +1808,9 @@
                             "z": 0.0
                         },
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
+                            "x": -9.5367431640625e-06,
+                            "y": -1.1920928955078125e-07,
+                            "z": 2.384185791015625e-06
                         },
                         "rotation": {
                             "w": 1.0,
@@ -3162,6 +3162,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -3457,6 +3458,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.01152428612112999,
                             "followowner": true,
                             "localvelocity": true,
@@ -5563,6 +5565,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -8432,8 +8435,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 170.14012145996094,
-                                "y": 108.0
+                                "x": 179.73434448242188,
+                                "y": 108.00001525878906
                             }
                         },
                         "position": {
@@ -8496,7 +8499,7 @@
             ],
             "name": "HUD",
             "order": 4,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
@@ -9171,7 +9174,13 @@
                 },
                 {
                     "audiosource": {
-                        "audioClips": {},
+                        "audioClips": {
+                            "0": "36302402-ed5c-4cdf-4335-c09e7c85769f",
+                            "1": "3fcd4b09-ed36-a1c5-5359-8cf92b9bff9e",
+                            "2": "46939e8e-d545-3467-3d00-e7986d58bc11",
+                            "3": "11c6cc56-2582-ac22-e694-e133928185e9",
+                            "4": "c3a4b241-adf2-7fc1-c5ab-577fb36e1f8f"
+                        },
                         "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
@@ -9179,7 +9188,7 @@
                         "loopStrategy": 0,
                         "maxDistance": 100.0,
                         "minDistance": 2.0,
-                        "noLoopStrategy": 0,
+                        "noLoopStrategy": 1,
                         "pan": 0.0,
                         "pitch": 1.0,
                         "playOnAwake": false,
@@ -9600,6 +9609,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0035952706821262836,
                             "followowner": true,
                             "localvelocity": true,
@@ -13248,7 +13258,7 @@
             ],
             "name": "Pause",
             "order": 5,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -13477,8 +13487,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 1440.0,
-                                "y": 829.0
+                                "x": 1600.0,
+                                "y": 900.0
                             }
                         },
                         "position": {
@@ -14607,7 +14617,7 @@
             ],
             "name": "Lighting",
             "order": 8,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -14860,7 +14870,7 @@
             ],
             "name": "Level_Container",
             "order": 10,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "2fe4f35d-68d0-0ee8-356e-96bd16b54747"
         },
@@ -15030,7 +15040,7 @@
             ],
             "name": "Enemies",
             "order": 12,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -15175,6 +15185,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": false,
+                            "billboard": 0,
                             "emmitertimer": 0.006993718445301056,
                             "followowner": true,
                             "localvelocity": true,
@@ -15240,6 +15251,7 @@
                         },
                         "1": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0068708136677742004,
                             "followowner": true,
                             "localvelocity": true,
@@ -17667,7 +17679,7 @@
             ],
             "name": "//////////////// WORLD",
             "order": 9,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "1a511023-f8de-375a-8197-ca8e36bf62f1"
         },
@@ -18291,6 +18303,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.010943986475467682,
                             "followowner": true,
                             "localvelocity": true,
@@ -18481,6 +18494,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -19143,6 +19157,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": false,
+                            "billboard": 0,
                             "emmitertimer": 0.006993718445301056,
                             "followowner": true,
                             "localvelocity": true,
@@ -19208,6 +19223,7 @@
                         },
                         "1": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0068708136677742004,
                             "followowner": true,
                             "localvelocity": true,
@@ -19273,6 +19289,7 @@
                         },
                         "2": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.01699378527700901,
                             "followowner": true,
                             "localvelocity": true,
@@ -20759,7 +20776,7 @@
             ],
             "name": "WoodenBridge",
             "order": 13,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "734cd308-22e2-c91e-390e-7a45d9dabad6"
         },
@@ -22555,6 +22572,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -22734,6 +22752,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": false,
+                            "billboard": 0,
                             "emmitertimer": 0.006993718445301056,
                             "followowner": true,
                             "localvelocity": true,
@@ -25287,6 +25306,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -25419,6 +25439,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -25662,7 +25683,7 @@
             ],
             "name": "//////////////// LIGHTS",
             "order": 7,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "038bed1e-61d2-b9b1-df40-ee2bf7d50fc9"
         },
@@ -25699,7 +25720,7 @@
             ],
             "name": "//////////////// OTHERS",
             "order": 14,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "eb583655-1b63-12dd-8ccc-c1ca88b7cd4c"
         },
@@ -25736,7 +25757,7 @@
             ],
             "name": "//////////////// PLAYER",
             "order": 0,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "7e248101-17e2-52c9-4275-8d812874cdc7"
         },
@@ -26422,7 +26443,7 @@
                         "pan": 0.0,
                         "pitch": 1.0,
                         "playOnAwake": false,
-                        "volume": 1.0
+                        "volume": 0.33899998664855957
                     },
                     "is_active": true,
                     "uuid": "74cf2453-ea2b-3345-a226-b20205c38ef8"
@@ -26590,6 +26611,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0171528160572052,
                             "followowner": true,
                             "localvelocity": true,
@@ -26735,8 +26757,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 180.41029357910156,
-                                "y": 114.51920318603516
+                                "x": 185.76597595214844,
+                                "y": 111.62434387207031
                             }
                         },
                         "position": {
@@ -26802,7 +26824,7 @@
             ],
             "name": "BasicFadeInOut",
             "order": 6,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "2da5757b-f4be-2828-ea50-3286484f8028"
         },
@@ -26991,7 +27013,7 @@
             ],
             "name": "WaterLevel",
             "order": 15,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "c9248883-d09c-a8d5-c4d8-4487a286a37f"
         },
@@ -27104,6 +27126,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.011075692251324654,
                             "followowner": true,
                             "localvelocity": true,
@@ -27272,6 +27295,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.010943986475467682,
                             "followowner": true,
                             "localvelocity": true,
@@ -27440,6 +27464,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.011075692251324654,
                             "followowner": true,
                             "localvelocity": true,
@@ -28096,7 +28121,7 @@
             ],
             "name": "Music",
             "order": 16,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "e2bde98c-df70-8af1-6539-ab61511e723e"
         },
@@ -28367,6 +28392,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.008260563015937805,
                             "followowner": true,
                             "localvelocity": true,
@@ -28519,7 +28545,7 @@
             ],
             "name": "GrapplePillar",
             "order": 17,
-            "parent_uuid": "cd7c742a-4c81-c812-8c06-0edd4aba4f7d",
+            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
             "static": true,
             "uuid": "10693382-bf71-fb19-c002-91b4d31030f7"
         },
@@ -28558,6 +28584,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0007313229143619537,
                             "followowner": true,
                             "localvelocity": false,
@@ -28737,6 +28764,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0068798065185546875,
                             "followowner": true,
                             "localvelocity": true,
@@ -28802,6 +28830,7 @@
                         },
                         "1": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0057679275050759315,
                             "followowner": true,
                             "localvelocity": true,
@@ -29100,6 +29129,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -29165,6 +29195,7 @@
                         },
                         "1": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -29230,6 +29261,7 @@
                         },
                         "2": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -29531,6 +29563,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.005686149001121521,
                             "followowner": true,
                             "localvelocity": true,
@@ -30405,6 +30438,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.0,
                             "followowner": true,
                             "localvelocity": true,
@@ -30713,6 +30747,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "billboard": 0,
                             "emmitertimer": 0.01152428612112999,
                             "followowner": true,
                             "localvelocity": true,
@@ -30936,6 +30971,118 @@
             "parent_uuid": "ca3bd17c-e071-06e9-b89b-09f60bfac0fa",
             "static": true,
             "uuid": "36ab2131-df4d-5866-ba24-c4ce3c2efd8d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": -164.183837890625,
+                            "y": -89.9720230102539,
+                            "z": 164.183837890625
+                        },
+                        "position": {
+                            "x": -2.86102294921875e-06,
+                            "y": 3.011965751647949,
+                            "z": -3.814697265625e-06
+                        },
+                        "rotation": {
+                            "w": 0.7069406509399414,
+                            "x": -4.706531763076782e-05,
+                            "y": -0.7072729468345642,
+                            "z": 4.70578670501709e-05
+                        },
+                        "scale": {
+                            "x": 1.0000003576278687,
+                            "y": 1.0,
+                            "z": 1.0000003576278687
+                        }
+                    },
+                    "uuid": "135251cc-22ee-dfa9-8e5b-a49bfbb6e823"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "billboard": 0,
+                            "emmitertimer": 0.005686149001121521,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 300,
+                            "name": "Heal",
+                            "particlefollowemitter": true,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.0,
+                                    "g": 1.0,
+                                    "r": 0.30588236451148987
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "lifetime": 0.9700000286102295,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 1.5,
+                                    "y": 1.5,
+                                    "z": 1.5
+                                },
+                                "sizebegin": 1.3300000429153442,
+                                "sizeend": 0.0,
+                                "sizevariation": 0.9599999785423279,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 3.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            },
+                            "poolindex": 299,
+                            "position": {
+                                "x": -10.776494026184082,
+                                "y": 3.011965751647949,
+                                "z": -4.768212795257568
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": -1.0,
+                                "x": 4.371135275960114e-08,
+                                "y": 2.980232238769531e-07,
+                                "z": -1.0552860629786665e-07
+                            },
+                            "spawnrate": 25,
+                            "sprite_uuid": "5c6b747c-43af-58e5-4e49-f002f51a7109"
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "1b608244-9e8d-9d23-241c-c887cb3846db"
+                }
+            ],
+            "name": "Heal",
+            "order": 3,
+            "parent_uuid": "57a4522e-60c2-f3c2-f2fd-c3535994f107",
+            "static": true,
+            "uuid": "8dffcaa7-4b53-5b71-afa6-09a9236bd85f"
         }
     ]
 }
