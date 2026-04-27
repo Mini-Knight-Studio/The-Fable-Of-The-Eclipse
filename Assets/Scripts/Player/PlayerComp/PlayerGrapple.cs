@@ -95,6 +95,8 @@ public class PlayerGrapple : PlayerComponent
         DestroyGrappleObjects();
         CreateGrappleObjects();
 
+        player.Feedback.PlayGrapple();
+
         currentWaitTime = waitTime > 0.01f ? waitTime : 0.5f;
         isLanding = false;
         isLaunching = true;

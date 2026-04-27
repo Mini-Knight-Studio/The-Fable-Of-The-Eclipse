@@ -38,6 +38,8 @@ public class PlayerTorch : PlayerComponent
     {
         isTorching = true;
 
+        player.Feedback.PlayFlintSteel();
+
         float sequenceDuration = burnDuration;
         float torchDelay = 0.6f;
 

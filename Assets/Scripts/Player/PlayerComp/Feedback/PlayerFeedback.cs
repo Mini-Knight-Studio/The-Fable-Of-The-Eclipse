@@ -35,16 +35,25 @@ public class PlayerFeedback : PlayerComponent
     [Header("Flint&Steel - Particles")]
     [ShowInInspector] Entity flintSteelParticleEntity;
 
+    [Header("Grapple - Audio")]
+    [ShowInInspector] Entity grappleAudioEntity;
+
+    [Header("Grapple - Particles")]
+    [ShowInInspector] Entity grappleParticleEntity;
+
 
     AudioSource hurtAudio, healAudio, deathAudio;
     AudioSource walkAudio, dashAudio, idleAudio;
     AudioSource attackAudio;
     AudioSource flintSteelAudio;
+    AudioSource grappleAudio;
 
     ParticleComponent hurtParticle, healParticle, deathParticle;
     ParticleComponent walkParticle, dashParticle;
     ParticleComponent attackParticle;
     ParticleComponent flintSteelParticle;
+    ParticleComponent grappleParticle;
+
 
     private bool initialized = false;
 
@@ -76,6 +85,11 @@ public class PlayerFeedback : PlayerComponent
         flintSteelAudio = flintSteelAudioEntity.GetComponent<AudioSource>();  
         
         flintSteelParticle = flintSteelParticleEntity.GetComponent<ParticleComponent>();
+
+
+        grappleAudio = grappleAudioEntity.GetComponent<AudioSource>();  
+        
+        grappleParticle = grappleParticleEntity.GetComponent<ParticleComponent>();
     }
 
     public void ProcessFeedback()
@@ -149,6 +163,11 @@ public class PlayerFeedback : PlayerComponent
 
     public void PlayFlintSteel(){
         PlayFeedback(flintSteelAudio,flintSteelParticle,0.3f);
+    }
+
+    public void PlayGrapple()
+    {
+        PlayFeedback(grappleAudio, grappleParticle, 0.3f);
     }
 
     // --- CORE ---

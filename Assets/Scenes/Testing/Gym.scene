@@ -64,7 +64,7 @@
             ],
             "name": "PlayerCamera",
             "order": 1,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -285,6 +285,8 @@
                             "dashParticleEntity": "bec49ced-51d8-e764-e54d-831aa60ee3d3",
                             "flintSteelAudioEntity": "6decea71-2a7e-4b66-01cb-39e6063dd0a7",
                             "flintSteelParticleEntity": "",
+                            "grappleAudioEntity": "c76afd29-9aef-1ca1-70c6-a50a0addd855",
+                            "grappleParticleEntity": "",
                             "idleAudioEntity": "5dd151e5-31d9-1407-9ee2-44db179ea976",
                             "onDeathAudioEntity": "9cb09dd9-e1b3-6267-aada-d0cfb2d510b6",
                             "onDeathParticleEntity": "",
@@ -320,7 +322,7 @@
             ],
             "name": "Player",
             "order": 2,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": false,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -699,7 +701,7 @@
             ],
             "name": "Interactables",
             "order": 11,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816"
         },
@@ -859,7 +861,7 @@
             ],
             "name": "//////////////// UI",
             "order": 3,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "e1ecfd16-32bd-cfc4-3caa-cd96c4d76dbf"
         },
@@ -1449,7 +1451,7 @@
             ],
             "name": "BurneableVines",
             "order": 18,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "3feb03d2-2ef9-fcb8-4b6d-0e39350cd41d"
         },
@@ -8499,7 +8501,7 @@
             ],
             "name": "HUD",
             "order": 4,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
@@ -9388,6 +9390,64 @@
             "parent_uuid": "a5725346-9a26-b205-b141-2754eda3f072",
             "static": true,
             "uuid": "57ba8a84-5093-130f-c089-d4143d90af6e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "1ac220d8-2f41-a370-4869-4a452a4a69df"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "760d30bd-03dc-4900-e68d-668d8b4481be"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 1.0
+                    },
+                    "is_active": true,
+                    "uuid": "43251ce3-4842-cd20-254a-010bfa1a23f5"
+                }
+            ],
+            "name": "Grapple",
+            "order": 8,
+            "parent_uuid": "6f59a06c-a687-a49a-b54c-a3ae10b57679",
+            "static": true,
+            "uuid": "c76afd29-9aef-1ca1-70c6-a50a0addd855"
         },
         {
             "active": true,
@@ -10338,7 +10398,7 @@
             "uuid": "dd712e8f-3a82-bcbd-522d-9d1d08a28f92"
         },
         {
-            "active": false,
+            "active": true,
             "components": [
                 {
                     "is_active": true,
@@ -13258,7 +13318,7 @@
             ],
             "name": "Pause",
             "order": 5,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -14617,7 +14677,7 @@
             ],
             "name": "Lighting",
             "order": 8,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -14870,7 +14930,7 @@
             ],
             "name": "Level_Container",
             "order": 10,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "2fe4f35d-68d0-0ee8-356e-96bd16b54747"
         },
@@ -15040,7 +15100,7 @@
             ],
             "name": "Enemies",
             "order": 12,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -17679,7 +17739,7 @@
             ],
             "name": "//////////////// WORLD",
             "order": 9,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "1a511023-f8de-375a-8197-ca8e36bf62f1"
         },
@@ -20776,7 +20836,7 @@
             ],
             "name": "WoodenBridge",
             "order": 13,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "734cd308-22e2-c91e-390e-7a45d9dabad6"
         },
@@ -25683,7 +25743,7 @@
             ],
             "name": "//////////////// LIGHTS",
             "order": 7,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "038bed1e-61d2-b9b1-df40-ee2bf7d50fc9"
         },
@@ -25720,7 +25780,7 @@
             ],
             "name": "//////////////// OTHERS",
             "order": 14,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "eb583655-1b63-12dd-8ccc-c1ca88b7cd4c"
         },
@@ -25757,7 +25817,7 @@
             ],
             "name": "//////////////// PLAYER",
             "order": 0,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "7e248101-17e2-52c9-4275-8d812874cdc7"
         },
@@ -26824,7 +26884,7 @@
             ],
             "name": "BasicFadeInOut",
             "order": 6,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "2da5757b-f4be-2828-ea50-3286484f8028"
         },
@@ -27013,7 +27073,7 @@
             ],
             "name": "WaterLevel",
             "order": 15,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "c9248883-d09c-a8d5-c4d8-4487a286a37f"
         },
@@ -27985,17 +28045,21 @@
                 },
                 {
                     "audiosource": {
-                        "audioClips": {},
+                        "audioClips": {
+                            "0": "391d7fd4-ed38-a93b-c5f1-e8fa827e0d93",
+                            "1": "f2762de6-1028-d9e2-e7bd-5970d4332deb",
+                            "2": "0e881fbd-5e8a-b3ba-5479-7c7f32be6343"
+                        },
                         "channelBus": "Sfx",
-                        "currentClipIndex": 0,
+                        "currentClipIndex": 2,
                         "isSpatial": false,
                         "loop": false,
                         "loopStrategy": 0,
                         "maxDistance": 100.0,
                         "minDistance": 2.0,
-                        "noLoopStrategy": 0,
+                        "noLoopStrategy": 1,
                         "pan": 0.0,
-                        "pitch": 1.0,
+                        "pitch": 1.3619999885559082,
                         "playOnAwake": false,
                         "volume": 1.0
                     },
@@ -28042,7 +28106,7 @@
                 {
                     "audiosource": {
                         "audioClips": {
-                            "0": "8d217de2-9419-a3b5-fa27-c5897032447b"
+                            "0": "10bc453e-de4a-6a7c-81de-b8013c1c1c4c"
                         },
                         "channelBus": "Sfx",
                         "currentClipIndex": 0,
@@ -28055,7 +28119,7 @@
                         "pan": 0.0,
                         "pitch": 1.0,
                         "playOnAwake": false,
-                        "volume": 1.0
+                        "volume": 0.7279999852180481
                     },
                     "is_active": true,
                     "uuid": "25910dcd-a388-15ad-6a29-bff7912cebec"
@@ -28121,7 +28185,7 @@
             ],
             "name": "Music",
             "order": 16,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "e2bde98c-df70-8af1-6539-ab61511e723e"
         },
@@ -28545,7 +28609,7 @@
             ],
             "name": "GrapplePillar",
             "order": 17,
-            "parent_uuid": "983b15bc-1bb5-d398-0dae-cbc401056c52",
+            "parent_uuid": "4040d99c-a4ec-cf46-9552-90f32e8487cd",
             "static": true,
             "uuid": "10693382-bf71-fb19-c002-91b4d31030f7"
         },
@@ -29407,7 +29471,7 @@
                 {
                     "audiosource": {
                         "audioClips": {
-                            "0": "ce08621b-9277-1bb2-cb72-1ba3dbcd0a32"
+                            "0": "cb651170-d10a-ecde-a627-b40ec3dcb64f"
                         },
                         "channelBus": "Sfx",
                         "currentClipIndex": 0,
@@ -29420,7 +29484,7 @@
                         "pan": 0.0,
                         "pitch": 1.0,
                         "playOnAwake": false,
-                        "volume": 0.5289999842643738
+                        "volume": 0.4519999921321869
                     },
                     "is_active": true,
                     "uuid": "6161e745-3523-bda9-a7d3-856668679b8d"
