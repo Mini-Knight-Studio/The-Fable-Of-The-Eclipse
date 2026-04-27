@@ -5,12 +5,11 @@ using Loopie;
 
 public class EnemyFeedback : Component
 {
-    [HideInInspector]
     public Entity FeedbackEntity;
     private ParticleComponent Particles;
     private Dictionary<string, AudioSource> audioDatas;
 
-    public void Initialize()
+    void OnCreate()
     {
         audioDatas = new Dictionary<string, AudioSource> ();
         Particles = FeedbackEntity.GetComponent<ParticleComponent>();
@@ -33,15 +32,6 @@ public class EnemyFeedback : Component
     #endregion
 
     #region Particles
-    public void EmitterFixRotation(string emitter_name, Vector3 rotation)
-    {
-        int index = Particles.GetEmitterIndex(emitter_name);
-        if (index != -1)
-        {
-            Particles.SetRotation(index, rotation);
-        }
-    }
-
     public void TickParticles(string emitter_name, float tick_duration)
     {
         int index = Particles.GetEmitterIndex(emitter_name);
@@ -60,5 +50,12 @@ public class EnemyFeedback : Component
     public void ShakeCamera(float amount, float duration)
     {
         Player.Instance.Camera.SetIsShaking(true, duration, amount);
+    }
+
+    public void SetParticlesState(string emitter_name, bool state)
+    {
+        int index = Particles.GetEmitterIndex(emitter_name);
+        if (index != -1)
+            Particles.SetEmitterState(index, state);
     }
 };

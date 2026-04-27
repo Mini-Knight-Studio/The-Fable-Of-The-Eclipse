@@ -79,7 +79,7 @@ public class PlayerInput : PlayerComponent
     }
     private void CollectGrappleInput()
     {
-        grappleKeyPressed = Input.IsKeyDown(KeyCode.E) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_LEFT_SHOULDER) || Input.LeftTrigger > 0);
+        grappleKeyPressed = Input.IsKeyDown(KeyCode.I) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_LEFT_SHOULDER) || Input.LeftTrigger > 0);
     }
 
     private void CollectTorchInput()

@@ -42,26 +42,22 @@ public class Enemy : Component
         feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
 
+        Debug.Log("1");
+
         foreach(Entity child in entity.GetChildren())
         {
-            if (child.Name == "Visuals")
-            {
-                animator.model = child;
-            }
-            if (child.Name == "Feedback")
-            {
-                feedback.FeedbackEntity = child;
-            }
             if (child.Name == "Hitbox")
             {
                 hitbox = child.GetComponent<BoxCollider>();
             }
         }
+
+        Debug.Log("2");
+
         health.Init();
         wanderRange = false;
-        feedback.Initialize();
-        feedback.EmitterFixRotation("Trail", Vector3.Zero);
         ResetWander();
+        Debug.Log("3");
     }
     #endregion
 

@@ -3,7 +3,7 @@ using System.Threading;
 using Loopie;
 public class EnemyAnimation : Component
 {
-    [HideInInspector]
+
     public Entity model;
     private Animator animator;
     private bool clip_ended;
