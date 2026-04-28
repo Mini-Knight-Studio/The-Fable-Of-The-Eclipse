@@ -74,13 +74,13 @@ class Chest : Component
         elapsedTime = 0f;
         Loopie.Vector3 targetMoonRot = new Loopie.Vector3(-90f, moonStartRot.y, moonStartRot.z);
 
-        moonSFXEntity.GetComponent<AudioSource>().Play();
-
         moonParticlesEntity.GetComponent<ParticleComponent>().Play();
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
 
         moonParticlesEntity.GetComponent<ParticleComponent>().Stop();
+
+        moonSFXEntity.GetComponent<AudioSource>().Play();
 
         while (true)
         {
@@ -99,6 +99,12 @@ class Chest : Component
 
         staticMoon.SetActive(true);
         animatedMoon.SetActive(false);
+
+        moonParticlesEntity.GetComponent<ParticleComponent>().Play();
+
+        yield return new WaitForSeconds(0.15f);
+
+        moonParticlesEntity.GetComponent<ParticleComponent>().Stop();
 
         yield return new WaitForSeconds(yieldTime);
 
@@ -137,6 +143,8 @@ class Chest : Component
                 {
                     rewardItem.transform.local_position = targetRewardPos;
                     rewardItem.transform.scale = targetRewardScale;
+
+                    rewardItem.GetComponent<Key_Idle>().StartMoving();
                 }
                 break;
             }
@@ -149,7 +157,13 @@ class Chest : Component
 
     void ChestOpened()
     {
+        staticMoon.SetActive(true);
+        animatedMoon.SetActive(false);
 
+        Loopie.Vector3 targetLidRot = new Loopie.Vector3(lidStartRot.x, lidStartRot.y, lidStartRot.z + 108.0f);
+        upperPart.transform.local_rotation = targetLidRot;
+
+        // check if reward already collected and activate onbase of that rewardItem.SetActive(-------);
     }
 
     public void RewardCollected()
