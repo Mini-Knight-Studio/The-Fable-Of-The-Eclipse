@@ -34,6 +34,8 @@ class Chest : Component
     private float elapsedTime = 0f;
     private bool isOpen = false;
     private bool animationStarted = false;
+    private bool rewardCollected = false;
+    private bool particlesStopped = false;
 
     void OnCreate()
     {
@@ -45,10 +47,18 @@ class Chest : Component
             rewardItem.transform.scale = Loopie.Vector3.Zero;
             rewardItem.SetActive(false);
         }
+
+        // if database.chest is open --> ChestOpened()
     }
 
     void OnUpdate()
     {
+        if (rewardCollected && !particlesStopped)
+        {
+            openParticlesEntity.GetComponent<ParticleComponent>().Stop();
+            particlesStopped = true;
+        }
+
         if (isOpen || animationStarted) return;
 
         if (entity.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
@@ -68,6 +78,9 @@ class Chest : Component
 
         moonParticlesEntity.GetComponent<ParticleComponent>().Play();
 
+        yield return new WaitForSeconds(0.2f);
+
+        moonParticlesEntity.GetComponent<ParticleComponent>().Stop();
 
         while (true)
         {
@@ -88,8 +101,6 @@ class Chest : Component
         animatedMoon.SetActive(false);
 
         yield return new WaitForSeconds(yieldTime);
-
-        moonParticlesEntity.GetComponent<ParticleComponent>().Stop();
 
         openParticlesEntity.GetComponent<ParticleComponent>().Play();
 
@@ -134,6 +145,17 @@ class Chest : Component
 
         isOpen = true;
         // DatabaseRegistry.playerDB.hasOpenedChest(tostring(chestId)) or whatever
+    }
+
+    void ChestOpened()
+    {
+
+    }
+
+    public void RewardCollected()
+    {
+        rewardCollected = true;
+        // rewardCollected on database
     }
 
     void OnDestroy()
