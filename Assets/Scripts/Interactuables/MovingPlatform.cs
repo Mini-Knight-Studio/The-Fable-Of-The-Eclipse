@@ -61,6 +61,9 @@ class MovingPlatform : Component
     private float sunkenTimer = 0.0f;
     private Vector3 positionBeforeSink;
 
+    private Vector3 logicalPosition;
+    private float currentSinkOffset = 0.0f;
+
     void OnCreate()
     {
         collider = platformModel.GetComponent<BoxCollider>();
@@ -80,6 +83,8 @@ class MovingPlatform : Component
         pathPoints[8] = pathPointEntity8;
         pathPoints[9] = pathPointEntity9;
 
+        logicalPosition = platformModel.transform.position;
+
         if (activateOnCollision)
         {
             isWaitingForPlayer = true;
@@ -93,6 +98,8 @@ class MovingPlatform : Component
 
     void OnUpdate()
     {
+        Vector3 previousActualPos = platformModel.transform.position;
+
         if (canSink)
         {
             ManageSinking();
@@ -100,7 +107,7 @@ class MovingPlatform : Component
 
         if (activateOnCollision && isWaitingForPlayer)
         {
-            if (collider.IsColliding)
+            if (collider.IsColliding && sinkState == SinkState.Normal)
             {
                 isWaitingForPlayer = false;
                 GoToPoint((currentPoint + 1) % numOfPathPoints);
@@ -109,6 +116,15 @@ class MovingPlatform : Component
         else if (goingToPoint)
         {
             ManageMovement();
+        }
+
+        Vector3 newActualPos = logicalPosition - new Vector3(0, currentSinkOffset, 0);
+        platformModel.transform.position = newActualPos;
+
+        Vector3 platformDelta = newActualPos - previousActualPos;
+        if (collider.IsColliding && platformDelta != Vector3.Zero && sinkState == SinkState.Normal)
+        {
+            Player.Instance.transform.position += platformDelta;
         }
     }
 
@@ -125,14 +141,14 @@ class MovingPlatform : Component
     {
         if (pathPoints[targetPoint] == null) return;
 
-        Vector3 currentPos = platformModel.transform.position;
         Vector3 targetPos = pathPoints[targetPoint].transform.position;
 
-        Vector3 directionVec = targetPos - currentPos;
+        Vector3 directionVec = targetPos - logicalPosition;
         float distance = (float)directionVec.magnitude;
 
-        if (distance < 0.1f)
+        if (distance < 0.2f)
         {
+            logicalPosition = targetPos;
             currentPoint = targetPoint;
 
             if (activateOnCollision && currentPoint == 0)
@@ -157,12 +173,7 @@ class MovingPlatform : Component
         }
 
         Vector3 moveDir = directionVec.normalized;
-        platformModel.transform.position += moveDir * movementSpeed * Time.deltaTime;
-
-        if (collider.IsColliding && sinkState == SinkState.Normal)
-        {
-            Player.Instance.transform.position += moveDir * movementSpeed * Time.deltaTime;
-        }
+        logicalPosition += moveDir * movementSpeed * Time.deltaTime;
     }
 
     void ManageSinking()
@@ -177,10 +188,7 @@ class MovingPlatform : Component
                     if (stepTimer >= timeBeforeSink)
                     {
                         sinkState = SinkState.Sinking;
-                        positionBeforeSink = platformModel.transform.position;
-                        //if (goingToPoint) movingParticles.Stop();
                     }
-                Debug.Log("normal");
                 }
                 else
                 {
@@ -189,9 +197,12 @@ class MovingPlatform : Component
                 break;
 
             case SinkState.Sinking:
-                Vector3 sinkTarget = positionBeforeSink - new Vector3(0, sinkDistance, 0);
-                HandleVerticalMovement(sinkTarget, sinkSpeed, SinkState.Sunken);
-                Debug.Log("sinking");
+                currentSinkOffset += sinkSpeed * Time.deltaTime;
+                if (currentSinkOffset >= sinkDistance)
+                {
+                    currentSinkOffset = sinkDistance;
+                    sinkState = SinkState.Sunken;
+                }
                 break;
 
             case SinkState.Sunken:
@@ -200,44 +211,23 @@ class MovingPlatform : Component
                 {
                     sinkState = SinkState.Rising;
                     sunkenTimer = 0.0f;
-                    Debug.Log("reset");
                 }
-                Debug.Log("sunken");
                 break;
 
             case SinkState.Rising:
-                Debug.Log("rising");
-                HandleVerticalMovement(positionBeforeSink, sinkSpeed, SinkState.Normal);
+                currentSinkOffset -= sinkSpeed * Time.deltaTime;
+                if (currentSinkOffset <= 0.0f)
+                {
+                    currentSinkOffset = 0.0f;
+                    sinkState = SinkState.Normal;
+                    stepTimer = 0.0f;
+                }
+
+                //if (collider.IsColliding)
+                //{
+                //    Player.Instance.Movement.gravityActive = false;
+                //}
                 break;
         }
     }
-
-    void HandleVerticalMovement(Vector3 targetPos, float speed, SinkState nextState)
-    {
-        Vector3 directionVec = targetPos - platformModel.transform.position;
-        float distance = (float)directionVec.magnitude;
-
-        if (distance < 0.1f)
-        {
-            platformModel.transform.position = targetPos;
-            sinkState = nextState;
-
-            if (nextState == SinkState.Normal)
-            {
-                stepTimer = 0.0f;
-                if (goingToPoint) movingParticles.Play();
-            }
-        }
-        else
-        {
-            Vector3 moveDir = directionVec.normalized;
-            Vector3 velocity = moveDir * speed * Time.deltaTime;
-            platformModel.transform.position += velocity;
-
-            //if (collider.IsColliding)
-            //{
-            //    Player.Instance.Movement.gravityActive = false;
-            //}
-        }
-    }
-};
+}
