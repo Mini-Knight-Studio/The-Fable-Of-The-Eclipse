@@ -32,6 +32,7 @@ class Blob : Enemy
     private bool isSpawning;
     private bool splitting;
     private int LayerOverride;
+    private Coroutine attackCoroutine;
 
     void OnCreate()
     {
@@ -72,10 +73,10 @@ class Blob : Enemy
                 entity.Destroy();
         }
         #endregion
-        if (!isSpawning && !splitting)
+        if (!isSpawning && !splitting && !health.IsDead())
         {
             Hit(1, PushForceScale, "Armature|Walk");
-            if(!isAttacking && !health.IsDead())
+            if(!isAttacking)
             {
                 #region Movement
                 if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
@@ -87,7 +88,7 @@ class Blob : Enemy
                     #region Attack
                     if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + (ReachDistance*0.25f))
                     {
-                        StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
                     }
                     #endregion
                 }
@@ -105,6 +106,21 @@ class Blob : Enemy
     {
         Stage = newStage;
         transform.scale = Vector3.One * StageScale * Stage;
+    }
+
+    public override void Hit(int points, float force_scale, string hit_clip)
+    {
+        if (OnHitCooldown() || !health.canBeDamaged) return;
+        if (Player.Instance.Combat.TemporalFunctionIsAttacking())
+        {
+            if (hitbox.HasCollided)
+            {
+                StopCoroutine(attackCoroutine);
+                isAttacking = false;
+                movement.CanMove = true;
+                base.Hit(points, force_scale, hit_clip);
+            }
+        }
     }
 
     private IEnumerator SplitLerp()
