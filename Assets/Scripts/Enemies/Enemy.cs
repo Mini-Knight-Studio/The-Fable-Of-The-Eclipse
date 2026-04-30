@@ -20,7 +20,7 @@ public class Enemy : Component
 
     protected Player target;
 
-    private float attackCooldown;
+    public float attackCooldown;
     private float attackPreparationTime;
     private float attackReachDistance;
 

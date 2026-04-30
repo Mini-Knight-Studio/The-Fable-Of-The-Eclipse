@@ -14,13 +14,14 @@ class EnemyRestorer : Component
     {
         if (!DatabaseRegistry.enemiesDB.Exists())
         {
-            Debug.Log("No save found");
+            Debug.LogError("EnemiesDB not Found");
             return;
         }
 
         List<EnemiesData.EnemyData> savedEnemies = DatabaseRegistry.enemiesDB.Enemies.enemies;
         if (savedEnemies == null || savedEnemies.Count == 0)
         {
+            Debug.Log("Saved Enemies Count: " + savedEnemies.Count);
             Debug.Log("No enemies in save");
             return;
         }
@@ -31,7 +32,6 @@ class EnemyRestorer : Component
             if (reference == null)
             {
                 Debug.LogWarning("No reference found for type " + data.enemyType);
-                continue;
             }
 
             Entity spawned = Spawner.Spawn(reference, new Vector3(data.enemyPositionX, data.enemyPositionY, data.enemyPositionZ));
@@ -72,6 +72,7 @@ class EnemyRestorer : Component
         if (enemyType == "WaterBlob") return WaterBlobReference;
         if (enemyType == "GroundBlob") return GroundBlobReference;
         if (enemyType == "FireBlob") return FireBlobReference;
+        if (enemyType == "Blob") return GroundBlobReference;
         if (enemyType == "Golem") return GolemReference;
         return null;
     }

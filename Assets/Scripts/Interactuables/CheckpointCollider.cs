@@ -54,30 +54,31 @@ class CheckpointCollider : Component
                         {
                             data.hp = health.actualHealth;
                         }
-                        Debug.Log("DEBUG TYPE: " + child.GetComponent<Enemy>().type);
-                        //if (child.GetComponent<Enemy>().type == "Golem")
-                        //{
-                        //    data.enemyType = "Golem";
-                        //    data.shieldHP = child.GetComponent<Golem>().ShieldLife;
-                        //}
+                        Debug.Log("DEBUG ENEMY TYPE: " + child.GetComponent<Enemy>().type);
+                        Debug.Log("DEBUG ENEMY ATTACK COOLDOWN: " + child.GetComponent<Enemy>().attackCooldown);
+                        if (child.GetComponent<Enemy>().type == "Golem")
+                        {
+                            data.enemyType = "Golem";
+                            data.shieldHP = child.GetComponent<Golem>().ShieldLife;
+                        }
 
-                        //if (child.GetComponent<Enemy>().type == "Blob")
+                        if (child.GetComponent<Enemy>().type == "Blob")
+                        {
+                            data.enemyType = "Blob";
+                            data.blobStage = child.GetComponent<Blob>().BlobStage;
+                        }
+                        //if (child.HasComponent<Golem>())
                         //{
-                        //    data.enemyType = "Blob";
-                        //    data.blobStage = child.GetComponent<Blob>().BlobStage;
+                        //    Golem golem = child.GetComponent<Golem>();
+                        //    data.enemyType = golem.type;
+                        //    data.shieldHP = golem.ShieldLife;
                         //}
-                        if (child.HasComponent<Golem>())
-                        {
-                            Golem golem = child.GetComponent<Golem>();
-                            data.enemyType = golem.type;
-                            data.shieldHP = golem.ShieldLife;
-                        }
-                        else if (child.HasComponent<Blob>())
-                        {
-                            Blob blob = child.GetComponent<Blob>();
-                            data.enemyType = "Blob";//For now
-                            data.blobStage = blob.BlobStage;
-                        }
+                        //else if (child.HasComponent<Blob>())
+                        //{
+                        //    Blob blob = child.GetComponent<Blob>();
+                        //    data.enemyType = "Blob";//For now
+                        //    data.blobStage = blob.BlobStage;
+                        //}
 
                         DatabaseRegistry.enemiesDB.Enemies.enemies.Add(data);
                     }
@@ -111,25 +112,6 @@ class CheckpointCollider : Component
                         SpawnersData.SpawnerData sData = new SpawnersData.SpawnerData();
                         sData.spawnerID = spawner.spawnerID;
                         sData.alreadySpawned = spawner.alreadySpawned;
-
-                        if (spawner.alreadySpawned)
-                        {
-                            
-                            //foreach (EnemiesData.EnemyData eData in DatabaseRegistry.enemiesDB.Enemies.enemies)
-                            //{
-                            //    if (/*I need a condition to determine that the enemy corresponds to the spawner*/)
-                            //    {
-                            //        sData.enemyType = eData.enemyType;
-                            //        sData.enemyPositionX = eData.enemyPositionX;
-                            //        sData.enemyPositionY = eData.enemyPositionY;
-                            //        sData.enemyPositionZ = eData.enemyPositionZ;
-                            //        sData.hp = eData.hp;
-                            //        sData.shieldHP = eData.shieldHP;
-                            //        sData.blobStage = eData.blobStage;
-                                    
-                            //    }
-                            //}
-                        }
 
                         DatabaseRegistry.spawnersDB.Spawners.spawners.Add(sData);
                     }

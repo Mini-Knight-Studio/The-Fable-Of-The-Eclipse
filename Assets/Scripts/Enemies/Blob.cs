@@ -41,6 +41,7 @@ class Blob : Enemy
         LayerOverride = EnemyLayer | PlayerHitLayer;
         spawn = false;
         isSpawning = false;
+        Debug.Log("Blob_EType: " + reference.GetComponent<Enemy>().type);
     }
 
     void OnUpdate()
