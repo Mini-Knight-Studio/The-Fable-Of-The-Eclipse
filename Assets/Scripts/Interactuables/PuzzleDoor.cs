@@ -14,6 +14,7 @@ class PuzzleDoor : Component
     [Header("Settings")]
     public Vector3 finalRightDoorRot = Vector3.Zero;
     public Vector3 finalLefttDoorRot = Vector3.Zero;
+    public float camFocusDuration = 1.0f;
     public float keyTravelDuration = 1.0f;
     public float doorOpenDuration = 2.0f;
     public float pauseBeforeOpening = 0.5f;
@@ -28,6 +29,22 @@ class PuzzleDoor : Component
     private Vector3 initialLeftDoorRot;
     private Vector3 finalKeyScale;
 
+    [Header("Feedback")]
+    public Entity rightParticle1;
+    public Entity rightParticle2;
+    public Entity rightParticle3;
+    public Entity leftParticle1;
+    public Entity leftParticle2;
+    public Entity leftParticle3;
+
+    public Entity keyParticles;
+
+    public Entity door1SFX;
+    public Entity door2SFX;
+    public Entity door3SFX;
+
+    public Entity impactSFX;
+
     void OnCreate()
     {
         finalKeyScale = animatedKey.transform.scale;
@@ -39,6 +56,21 @@ class PuzzleDoor : Component
         initialRightDoorRot = rightDoor.transform.local_rotation;
         initialLeftDoorPos = leftDoor.transform.local_position;
         initialLeftDoorRot = leftDoor.transform.local_rotation;
+
+        rightParticle1.GetComponent<ParticleComponent>().Stop();
+        rightParticle2.GetComponent<ParticleComponent>().Stop();
+        rightParticle3.GetComponent<ParticleComponent>().Stop();
+        leftParticle1.GetComponent<ParticleComponent>().Stop();
+        leftParticle2.GetComponent<ParticleComponent>().Stop();
+        leftParticle3.GetComponent<ParticleComponent>().Stop();
+
+        keyParticles.GetComponent<ParticleComponent>().Stop();
+
+        door1SFX.GetComponent<AudioSource>().Stop();
+        door2SFX.GetComponent<AudioSource>().Stop();
+        door3SFX.GetComponent<AudioSource>().Stop();
+
+        impactSFX.GetComponent<AudioSource>().Stop();
     }
 
     void OnUpdate()
@@ -66,9 +98,9 @@ class PuzzleDoor : Component
 
         float elapsedTime = 0f;
 
-        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, 15, 7);
+        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, 15, 4);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(camFocusDuration);
 
         while (true)
         {
@@ -80,6 +112,10 @@ class PuzzleDoor : Component
             animatedKey.transform.position = Vector3.Lerp(startKeyPos, targetKeyPos, curvedT);
             animatedKey.transform.scale = Vector3.Lerp(startKeyScale, targetKeyScale, curvedT);
 
+            if(t >= 0.85f && !keyParticles.GetComponent<ParticleComponent>().IsPlaying)
+            {
+                keyParticles.GetComponent<ParticleComponent>().Play();
+            }
             if (t >= 1f)
             {
                 animatedKey.transform.position = targetKeyPos;
@@ -92,7 +128,15 @@ class PuzzleDoor : Component
         animatedKey.SetActive(false);
         staticKey.SetActive(true);
 
-        yield return new WaitForSeconds(pauseBeforeOpening);
+        yield return new WaitForSeconds(pauseBeforeOpening * 0.05f);
+
+        keyParticles.GetComponent<ParticleComponent>().Stop();
+
+        yield return new WaitForSeconds(pauseBeforeOpening * 0.95f);
+
+        door1SFX.GetComponent<AudioSource>().Play();
+        door2SFX.GetComponent<AudioSource>().Play();
+        door3SFX.GetComponent<AudioSource>().Play();
 
         elapsedTime = 0f;
 
@@ -107,16 +151,37 @@ class PuzzleDoor : Component
 
             leftDoor.transform.local_rotation = Vector3.Lerp(initialLeftDoorRot, finalLefttDoorRot, curvedT);
 
+            if(t >= 0.1f && !rightParticle1.GetComponent<ParticleComponent>().IsPlaying)
+            {
+                rightParticle1.GetComponent<ParticleComponent>().Play();
+                rightParticle2.GetComponent<ParticleComponent>().Play();
+                rightParticle3.GetComponent<ParticleComponent>().Play();
+                leftParticle1.GetComponent<ParticleComponent>().Play();
+                leftParticle2.GetComponent<ParticleComponent>().Play();
+                leftParticle3.GetComponent<ParticleComponent>().Play();
+            }
+
             if (t >= 1f)
             {
                 rightDoor.transform.local_rotation = finalRightDoorRot;
                 leftDoor.transform.local_rotation = finalLefttDoorRot;
+                door1SFX.GetComponent<AudioSource>().Stop();
+                door2SFX.GetComponent<AudioSource>().Stop();
+                door3SFX.GetComponent<AudioSource>().Stop();
+                impactSFX.GetComponent<AudioSource>().Play();
                 break;
             }
             yield return null;
         }
 
         Player.Instance.Camera.StopFocus();
+
+        rightParticle1.GetComponent<ParticleComponent>().Stop();
+        rightParticle2.GetComponent<ParticleComponent>().Stop();
+        rightParticle3.GetComponent<ParticleComponent>().Stop();
+        leftParticle1.GetComponent<ParticleComponent>().Stop();
+        leftParticle2.GetComponent<ParticleComponent>().Stop();
+        leftParticle3.GetComponent<ParticleComponent>().Stop();
 
         hasOpened = true;
 
