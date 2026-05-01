@@ -66,7 +66,7 @@ class Blob : Enemy
                 splitting = true;
                 if (Stage > 1)
                     Split();
-                animator.PlayClip("Armature|SplitStart", false, 0.0f);
+                animator.PlayClip("Armature|Split", false, 0.0f, false, true);
                 feedback.PlaySound("Death");
             }
             if (animator.AnimationEnded())
@@ -75,7 +75,8 @@ class Blob : Enemy
         #endregion
         if (!isSpawning && !splitting && !health.IsDead())
         {
-            Hit(1, PushForceScale, "Armature|Walk");
+            Hit(1, PushForceScale, "Armature|GetHit");
+            movement.CanMove = (animator.CurrentClip() == "Armature|GetHit" || isAttacking)? false : true;
             if(!isAttacking)
             {
                 #region Movement
@@ -88,7 +89,7 @@ class Blob : Enemy
                     #region Attack
                     if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + (ReachDistance*0.25f))
                     {
-                        attackCoroutine = StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown,0, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
                     }
                     #endregion
                 }
@@ -125,18 +126,22 @@ class Blob : Enemy
 
     private IEnumerator SplitLerp()
     {
-        animator.PlayClip("Armature|SplitEnd", false, 0.0f);
+        animator.PlayClip("Armature|Spawn", false, 0.0f, false, true);
         float timer = 0.0f;
         spawn = false;
         isSpawning = true;
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         collision.AddExcludeMask(LayerOverride);
-        while (timer < animator.ClipDuration())
+        Vector3 startPosition = transform.position;
+        float animationTime = animator.ClipDuration();
+        while (timer < animationTime)
         {
             timer += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, timer);
+            transform.position = Vector3.Lerp(startPosition, startPosition + SplitDirection.normalized * Stage * SplitDistance, timer / animationTime);
             yield return null;
         }
+
+        transform.LookAt(Player.Instance.transform.position, Vector3.Up);
         collision.RemoveExcludeMask(LayerOverride);
         isSpawning = false;
     }

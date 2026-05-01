@@ -12,6 +12,7 @@ public class Enemy : Component
     protected EnemyAnimation animator;
     protected EnemyFeedback feedback;
     protected BoxCollider collision;
+    protected BoxCollider enemyAvoid;
     protected BoxCollider hitbox;
 
     protected TemporalEffect effect;
@@ -38,6 +39,7 @@ public class Enemy : Component
         health = entity.GetComponent<Health>();
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
+        enemyAvoid = entity.GetComponent<BoxCollider>(1);
         animator = entity.GetComponent<EnemyAnimation>();
         feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
@@ -79,7 +81,7 @@ public class Enemy : Component
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
         int LayerMask = PlayerLayer | WallLayer | EnemyWallLayer | EnemyLayer;
 
-        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, LayerMask, collision))
+        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, entity, LayerMask))
         {
             if (hit.entity == Player.Instance.entity)
             {
@@ -103,7 +105,7 @@ public class Enemy : Component
     #endregion
 
     #region Attack
-    protected IEnumerator Attack(float reach_distance, float preparation_time, float attack_cooldown, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string idle_clip)
+    protected IEnumerator Attack(float reach_distance, float preparation_time, float attack_cooldown, float end_attack_duration, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string end_attack_clip)
     {
         isAttacking = true;
         float timer = 0.0f;
@@ -118,7 +120,9 @@ public class Enemy : Component
         yield return new WaitForSeconds(animator.ClipDuration());
         DoAttackCooldown(cooldown_clip);
         yield return new WaitForSeconds(attack_cooldown);
-        EndAttack(idle_clip);
+        EndAttack(end_attack_clip);
+        yield return new WaitForSeconds(end_attack_duration);
+        movement.CanMove = true;
         isAttacking = false;
     }
 
@@ -148,14 +152,13 @@ public class Enemy : Component
     public virtual void DoAttackCooldown(string cooldown_clip)
     {
         attack_stages.y = 1.0f;
-        animator.PlayClip(cooldown_clip, false, 0.0f);
+        animator.PlayClip(cooldown_clip, true, 0.0f);
     }
 
     public virtual void EndAttack(string idle_clip)
     {
         animator.PlayClip(idle_clip, false, 0.0f);
         attack_stages = Vector2.Zero;
-        movement.CanMove = true;
     }
 
     public virtual void Hit(int points, float force_scale, string hit_clip)
@@ -169,7 +172,8 @@ public class Enemy : Component
                 transform.LookAt(Player.Instance.transform.position, Vector3.Up);
                 feedback.TickParticles("Hurt", Time.deltaTime);
                 feedback.PlaySound("Hit");
-                animator.PlayClip(hit_clip, false, 0.0f, true);
+                if(!health.IsDead())
+                    animator.PlayClip(hit_clip, false, 0.0f, true, true);
                 StartCoroutine(movement.Push(points * force_scale, knockback_time, GetDirectionToTarget() * -1));
             }
         }
@@ -199,9 +203,9 @@ public class Enemy : Component
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
         int EnemyWallLayer = Collisions.GetLayerBit("EnemyLimit");
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
-        int LayerMask = WallLayer | EnemyWallLayer;
+        int LayerMask = WallLayer | EnemyWallLayer | EnemyLayer;
 
-        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, ViewField.y, out hit, LayerMask, collision))
+        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, ViewField.y, out hit, entity, LayerMask))
         {
             movement.Move(speedMultiplier, transform.Forward);
             if (Vector3.Distance(lastWanderPosition, transform.position) > ViewField.y)

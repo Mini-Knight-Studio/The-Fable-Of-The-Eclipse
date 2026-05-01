@@ -59,7 +59,7 @@ class Golem : Enemy
                 #region Attack
                 if (Vector3.Distance(Player.Instance.transform.position, transform.position) < (transform.scale.x + ReachDistance*0.25f))
                 {
-                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|IdleWalk", "Armature|IdleWalk"));
+                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, 0, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|IdleWalk", "Armature|IdleWalk"));
                 }
                 #endregion
             }
