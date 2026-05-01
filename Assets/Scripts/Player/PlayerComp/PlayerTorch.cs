@@ -25,10 +25,13 @@ public class PlayerTorch : PlayerComponent
 
     public void ProcessTorch()
     {
+        if (!DatabaseRegistry.playerDB.Player.hasBurner)
+            return;
+
         if (isTorching || player.Grapple.IsGrappling || player.Combat.isAttacking || player.Movement.IsDashing())
             return;
 
-        if (player.Input.torchKeyPressed /*DatabaseRegistry.playerDB.Player.hasBurner && !isTorching*/)
+        if (player.Input.torchKeyPressed)
         {
             StartCoroutine(TorchSequence());
         }
@@ -37,6 +40,8 @@ public class PlayerTorch : PlayerComponent
     private IEnumerator TorchSequence()
     {
         isTorching = true;
+
+        player.Feedback.PlayFlintSteel();
 
         float sequenceDuration = burnDuration;
         float torchDelay = 0.6f;

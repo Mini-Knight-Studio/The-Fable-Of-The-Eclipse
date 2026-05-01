@@ -117,7 +117,6 @@ public class PlayerAnimation : PlayerComponent
     {
 
         if (state == AnimationState.IDLE) return;
-        Debug.Log("Idle");
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
 

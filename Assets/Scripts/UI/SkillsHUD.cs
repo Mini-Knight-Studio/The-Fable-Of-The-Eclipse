@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using Loopie;
 
 public class SkillsHUD : Component
@@ -9,37 +8,73 @@ public class SkillsHUD : Component
     public Entity grappleActiveEntity;
     public Entity grappleInactiveEntity;
 
-    private bool wasDashReady = true;
+    private PlayerTorch playerTorch;
+    private PlayerGrapple playerGrapple;
+
+    private bool wasTorchReady = true;
     private bool wasGrappleReady = true;
+
+    private float simulatedGrappleCooldown = 0.0f;
+    private float lastGrappleTimerValue = 0.0f;
 
     void OnCreate()
     {
+
+        playerTorch = Player.Instance.Torch;
+        playerGrapple = Player.Instance.Grapple;    
+
         if (torchInactiveEntity != null) torchInactiveEntity.SetActive(false);
         if (grappleInactiveEntity != null) grappleInactiveEntity.SetActive(false);
     }
 
     void OnUpdate()
     {
-        if (Player.Instance.Movement != null && torchActiveEntity != null && torchInactiveEntity != null)
+
+        if (playerTorch != null && torchActiveEntity != null && torchInactiveEntity != null && DatabaseRegistry.playerDB != null)
         {
-            bool isTorchReady = !Player.Instance.Torch.IsTorching;
-            if (isTorchReady != wasDashReady)
+            if (DatabaseRegistry.playerDB.Player.hasBurner)
             {
-                torchActiveEntity.SetActive(isTorchReady);
-                torchInactiveEntity.SetActive(!isTorchReady);
-                wasDashReady = isTorchReady;
+                bool isTorchReady = !playerTorch.IsTorching;
+
+                if (isTorchReady != wasTorchReady)
+                {
+                    torchActiveEntity.SetActive(isTorchReady);
+                    torchInactiveEntity.SetActive(!isTorchReady);
+                    wasTorchReady = isTorchReady;
+                }
+            }
+            else
+            {
+                if (wasTorchReady)
+                {
+                    torchActiveEntity.SetActive(false);
+                    torchInactiveEntity.SetActive(true);
+                    wasTorchReady = false;
+                }
             }
         }
 
-        if (Player.Instance.Grapple != null && grappleActiveEntity != null && grappleInactiveEntity != null)
+        if (playerGrapple != null && grappleActiveEntity != null && grappleInactiveEntity != null && DatabaseRegistry.playerDB != null)
         {
-            bool isGrappleReady = !Player.Instance.Grapple.IsGrappling;
-
-            if (isGrappleReady != wasGrappleReady)
+            if (DatabaseRegistry.playerDB.Player.hasGrappling)
             {
-                grappleActiveEntity.SetActive(isGrappleReady);
-                grappleInactiveEntity.SetActive(!isGrappleReady);
-                wasGrappleReady = isGrappleReady;
+                bool isGrappleReady = !playerGrapple.IsGrappling;
+
+                if (isGrappleReady != wasGrappleReady)
+                {
+                    grappleActiveEntity.SetActive(isGrappleReady);
+                    grappleInactiveEntity.SetActive(!isGrappleReady);
+                    wasGrappleReady = isGrappleReady;
+                }
+            }
+            else
+            {
+                if (wasGrappleReady)
+                {
+                    grappleActiveEntity.SetActive(false);
+                    grappleInactiveEntity.SetActive(true);
+                    wasGrappleReady = false;
+                }
             }
         }
     }

@@ -4,29 +4,28 @@ using static Loopie.Transform;
 
 class Golem : Enemy
 {
+    [Header("Global Enemy")]
     public Entity Reference;
-
-    public int ShieldLife;
-    public bool isShielding;
-
-    public float ViewFieldWidth;
-    public float ViewFieldFar;
-
-    public float KnockbackForce;
-    public float KnockbackTime;
-
+    public Vector2 ViewField;
+    public float ForcedDetectionDistance;
+    [Space(5)]
     public int Damage;
-    public float AttackReachDistance;
-    public float AttackCooldownTime;
-    public float AttackPreparationTime;
+    public float ReachDistance;
+    public float PushForceScale;
+    [Space(5)]
+    public float PreparationTime;
+    public float AttackCooldown;
+    [Space(10)]
+    [Header("Golem")]
+    public int ShieldLife;
 
-    public float TargetForcedDetectionDistance;
-
+    //Private//
     private int LayerOverride;
+    private bool isShielding;
 
     void OnCreate()
     {
-        SetEnemy(Reference, AttackCooldownTime, AttackPreparationTime, AttackReachDistance, "Golem");
+        SetEnemy(Reference, AttackCooldown, PreparationTime, ReachDistance, "Golem");
         int EnemyLayer = Collisions.GetLayerBit("Player");
         int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
         LayerOverride = EnemyLayer | PlayerHitLayer;
@@ -38,76 +37,62 @@ class Golem : Enemy
         {
             return;
         }
-
-        //Temporal
-        TestKeys();
-        //
-
-        UpdateEnemy();
-
-        if (!isAttacking)
+        #region Health
+        if (health.IsDead())
         {
-            if (ShieldLife > 0)
-                isShielding = true;
-            else
-                isShielding = false;
+            movement.CanMove = false;
+            entity.Destroy();
+        }
+        #endregion
+        Hit(1, PushForceScale, "Armature|IdleWalk");
+        if (!isAttacking && !health.IsDead())
+        {
+            isShielding = ShieldLife > 0;
+            
             #region Movement
-            if (DetectedTargetInViewField(ViewFieldWidth, ViewFieldFar) || DetectedTargetInDistance(TargetForcedDetectionDistance))
+            if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(transform.scale.x + ForcedDetectionDistance))
             {
-                transform.LookAt(target.transform.position, transform.Up);
+                animator.PlayClip("Armature|Chase", true, 0.25f);
+                transform.LookAt(Player.Instance.transform.position, transform.Up);
                 movement.Move(isShielding ? 0.5f : 1.0f, transform.Forward);
                 ResetWander();
                 #region Attack
-                if (Vector3.Distance(target.transform.position, transform.position) < AttackReachDistance)
+                if (Vector3.Distance(Player.Instance.transform.position, transform.position) < (transform.scale.x + ReachDistance*0.25f))
                 {
-                    StartCoroutine(DoAttack(Damage));
+                    StartCoroutine(Attack(ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|IdleWalk", "Armature|IdleWalk"));
                 }
                 #endregion
             }
             else
-                Wander(ViewFieldWidth, ViewFieldFar, isShielding ? 0.5f : 1.0f);
+                Wander(ViewField, isShielding ? 0.5f : 1.0f);
             #endregion
-
         }
-        else if (EndedPreparingAttack())
+        else if (EndedPreparingAttack() && !health.IsDead())
         {
             isShielding = false;
         }
-        #region Health
-        if (health.IsDead())
-        {
-            entity.Destroy();
-        }
-        #endregion
     }
 
-    public override void Hit(int points)
+    public override void Hit(int points, float force_scale, string hit_clip)
     {
         if (isShielding && !OnHitCooldown())
         {
             ShieldLife--;
-            StartHitCooldown(target.Combat.GetAttackDuration());
+            animator.PlayClip("Armature|IdleWalk", false, 0.0f, true);
         }
         else
-            base.Hit(points);
-    }
-
-    private void TestKeys()
-    {
-        if (Input.IsKeyDown(KeyCode.P))
-        {
-            Hit(1);
-            StartCoroutine(movement.Push(KnockbackForce, KnockbackTime, GetDirectionToTarget() * -1));
-        }
+            base.Hit(points, force_scale, hit_clip);
     }
 
     void OnDrawGizmo()
     {
-        DebugViewField(ViewFieldWidth, ViewFieldFar);
+        DebugViewField(ViewField.x, ViewField.y);
+        DebugToTargetLine(ForcedDetectionDistance, Color.Red);
     }
 
     void OnDestroy()
     {
         StopAllOwnedCoroutines();
     }
+
 };
