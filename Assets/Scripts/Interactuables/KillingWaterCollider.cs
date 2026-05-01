@@ -32,7 +32,7 @@ class KillingWaterCollider : Component
         Vector3 direction = transform.Down.normalized;
 
         RaycastHit hit;
-        bool didHit = Collisions.Raycast(origin, direction, rayDistance, out hit, Collisions.GetLayerBit("PlayerRaycast"), playerCollider);
+        bool didHit = Collisions.Raycast(origin, direction, rayDistance, out hit, playerCollider, Collisions.GetLayerBit("PlayerRaycast"));
 
         if (didHit && hit.collider == collider)
         {

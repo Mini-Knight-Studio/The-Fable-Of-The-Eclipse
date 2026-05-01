@@ -79,7 +79,7 @@ public class Enemy : Component
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
         int LayerMask = PlayerLayer | WallLayer | EnemyWallLayer | EnemyLayer;
 
-        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, LayerMask, collision))
+        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, collision, LayerMask))
         {
             if (hit.entity == Player.Instance.entity)
             {
@@ -201,7 +201,7 @@ public class Enemy : Component
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
         int LayerMask = WallLayer | EnemyWallLayer;
 
-        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, ViewField.y, out hit, LayerMask, collision))
+        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, ViewField.y, out hit, collision, LayerMask))
         {
             movement.Move(speedMultiplier, transform.Forward);
             if (Vector3.Distance(lastWanderPosition, transform.position) > ViewField.y)
