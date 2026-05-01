@@ -115,10 +115,13 @@ class Blob : Enemy
         isSpawning = true;
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         collision.AddExcludeMask(LayerOverride);
-        while (timer < animator.ClipDuration())
+        Vector3 startPosition = transform.position;
+
+        float animationTime = animator.ClipDuration();
+        while (timer < animationTime)
         {
             timer += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, transform.position + SplitDirection.normalized * Stage * SplitDistance / 20.0f, timer);
+            transform.position = Vector3.Lerp(startPosition, startPosition + SplitDirection.normalized * Stage * SplitDistance, timer / animationTime);
             yield return null;
         }
         collision.RemoveExcludeMask(LayerOverride);

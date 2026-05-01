@@ -56,11 +56,10 @@ public class PlayerInput : PlayerComponent
         if (Input.IsKeyPressed(KeyCode.A) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_LEFT)) moveDirection.x -= 1;
         if (Input.IsKeyPressed(KeyCode.D) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT)) moveDirection.x += 1;
 
-        if (Input.LeftAxis.x != 0 || Input.LeftAxis.y != 0)
-        {
+        if (Mathf.Abs(Input.LeftAxis.x) > 0.15 )
             moveDirection.x = Input.LeftAxis.x;
+        if (Mathf.Abs(Input.LeftAxis.y) > 0.15)
             moveDirection.z = Input.LeftAxis.y;
-        }
     }
 
     private void CollectDashInput()
@@ -79,12 +78,12 @@ public class PlayerInput : PlayerComponent
     }
     private void CollectGrappleInput()
     {
-        grappleKeyPressed = Input.IsKeyDown(KeyCode.I) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_LEFT_SHOULDER) || Input.LeftTrigger > 0);
+        grappleKeyPressed = Input.IsKeyDown(KeyCode.I) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_LEFT_SHOULDER) || Input.LeftTriggerRaw > 0.15f);
     }
 
     private void CollectTorchInput()
     {
-        torchKeyPressed = Input.IsKeyPressed(KeyCode.O) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_RIGHT_SHOULDER) || Input.RightTrigger > 0);
+        torchKeyPressed = Input.IsKeyPressed(KeyCode.O) || (Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_RIGHT_SHOULDER) || Input.RightTriggerRaw > 0.15f);
     }
 
     private void CollectInteractInput()

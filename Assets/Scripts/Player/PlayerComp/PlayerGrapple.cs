@@ -1,9 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Loopie;
 
 public class PlayerGrapple : PlayerComponent
 {
+    // --- Global Pillar Management ---
+    private static List<PillarTrigger> availablePillars = new List<PillarTrigger>();
+    public static void RegisterPillar(PillarTrigger p) { if (!availablePillars.Contains(p)) availablePillars.Add(p); }
+    public static void UnregisterPillar(PillarTrigger p) { availablePillars.Remove(p); }
+
+    [Header("Settings")]
+    //public float maxGrappleDistance = 25.0f;
+    public float maxGrappleAngle = 60.0f;
+    public float grappleCooldownTimer = 0.0f;
+
+    [Header("Rope")]
     public Entity segmentPrefab;
     public Entity hookPrefab;
     public int segmentCount = 10;
@@ -12,6 +24,7 @@ public class PlayerGrapple : PlayerComponent
     private Entity hookInstance;
     private List<Entity> ropeSegments = new List<Entity>();
 
+    [Header("Timings")]
     public float currentWaitTime = 0.5f;
     public float grappleDuration = 0.3f;
     public float stoppingDistance = 2.0f;
@@ -19,10 +32,10 @@ public class PlayerGrapple : PlayerComponent
     public float landingDuration = 0.5f;
 
     private bool isLaunching = false;
-    private bool isGrappling = false;
+    private bool isTraveling = false;
     private bool isLanding = false;
 
-    public float grappleCooldownTimer = 0.0f;
+
     private float stateTimer = 0.0f;
     private float landingTimer = 0f;
 
@@ -30,18 +43,26 @@ public class PlayerGrapple : PlayerComponent
     private Vector3 targetPos = new Vector3(0, 0, 0);
     private Vector3 pillarPos = new Vector3(0, 0, 0);
     private PillarTrigger activePillar;
+    private PillarTrigger currentlyLookedAtPillar;
 
     public bool IsLaunching => isLaunching;
-    public bool IsGrappling => isGrappling;
+    public bool IsTraveling => isTraveling;
     public bool IsLanding => isLanding;
+
+    public bool IsGrappling => isLaunching || isTraveling || isLanding;
 
     public void OnCreate()
     {
         ropeSegments.Clear();
+
+        availablePillars.Clear();
     }
 
     public void ProcessGrappel()
     {
+        if (!DatabaseRegistry.playerDB.Player.hasGrappling)
+            return;
+
         if (player.Combat.isAttacking || player.Torch.IsTorching || player.Movement.IsDashing())
             return;
 
@@ -53,7 +74,16 @@ public class PlayerGrapple : PlayerComponent
             if (landingTimer <= 0) isLanding = false;
         }
 
-        if (!isLaunching && !isGrappling) return;
+        if (!isLaunching && !isTraveling)
+        {
+            UpdateTargetPrompt();
+
+            if (Player.Instance.Input.grappleKeyPressed && grappleCooldownTimer <= 0)
+            {
+                TryExecuteGrapple();
+            }
+            return;
+        }
 
         stateTimer += Time.deltaTime;
 
@@ -66,12 +96,13 @@ public class PlayerGrapple : PlayerComponent
             if (stateTimer >= currentWaitTime)
             {
                 isLaunching = false;
-                isGrappling = true;
+                isTraveling = true;
                 stateTimer = 0.0f;
                 startPos = transform.position;
+                if (activePillar != null) activePillar.PlayHookParticles();
             }
         }
-        else if (isGrappling)
+        else if (isTraveling)
         {
             float t = stateTimer / grappleDuration;
             if (t > 1.0f) t = 1.0f;
@@ -88,12 +119,117 @@ public class PlayerGrapple : PlayerComponent
         }
     }
 
-    public void ExecuteGrapple(PillarTrigger pillarScript, float waitTime)
+    private void TryExecuteGrapple()
     {
         if (!DatabaseRegistry.playerDB.Player.hasGrappling)
             return;
-        if (pillarScript == null || grappleCooldownTimer > 0) return;
 
+        PillarTrigger bestPillar = null;
+        float bestScore = float.MaxValue;
+
+        Vector3 playerPos = transform.position;
+        Vector3 playerForward = transform.Forward;
+
+        foreach (var pillar in availablePillars)
+        {
+            if (IsValidGrappleTarget(pillar, playerPos, playerForward, true, out float score))
+            {
+                if (score < bestScore)
+                {
+                    bestScore = score;
+                    bestPillar = pillar;
+                }
+            }
+        }
+
+        if (bestPillar != null)
+        {
+            RotateToTarget(bestPillar.entity.transform.position);
+            ExecuteGrapple(bestPillar, bestPillar.hookTravelTime);
+        }
+    }
+
+    private void UpdateTargetPrompt()
+    {
+        PillarTrigger bestLookedAt = null;
+        float bestScore = float.MaxValue;
+
+        Vector3 playerPos = transform.position;
+        Vector3 playerForward = transform.Forward;
+
+        foreach (var pillar in availablePillars)
+        {
+            if (IsValidGrappleTarget(pillar, playerPos, playerForward, false, out float score))
+            {
+                if (score < bestScore)
+                {
+                    bestScore = score;
+                    bestLookedAt = pillar;
+                }
+            }
+        }
+
+        if (bestLookedAt != null &&
+            !bestLookedAt.CheckLineOfSight(playerPos))
+        {
+            bestLookedAt = null;
+        }
+
+        if (currentlyLookedAtPillar != bestLookedAt)
+        {
+            if (currentlyLookedAtPillar != null)
+                currentlyLookedAtPillar.SetTargetedState(false);
+
+            currentlyLookedAtPillar = bestLookedAt;
+
+            if (currentlyLookedAtPillar != null)
+                currentlyLookedAtPillar.SetTargetedState(true);
+        }
+    }
+
+    private bool IsValidGrappleTarget(PillarTrigger pillar, Vector3 playerPos, Vector3 playerForward, bool requireLineOfSight, out float score)
+    {
+        score = float.MaxValue;
+
+        if (pillar == null || pillar.entity == null)
+            return false;
+
+        Vector3 pillarPos = pillar.entity.transform.position;
+
+        float distance = (float)Vector3.Distance(playerPos, pillarPos);
+        if (distance > pillar.reachDistance)
+            return false;
+
+        Vector3 toPillar = pillarPos - playerPos;
+        toPillar.y = 0f;
+
+        Vector3 forwardFlat = playerForward;
+        forwardFlat.y = 0f;
+
+        if (toPillar.magnitude < 0.0001f || forwardFlat.magnitude < 0.0001f)
+            return false;
+
+        toPillar.Normalize();
+        forwardFlat.Normalize();
+
+        float dot = Vector3.Dot(forwardFlat, toPillar);
+        dot = Math.Max(-1.0f, Math.Min(1.0f, dot));
+
+        float angle = (float)(Math.Acos(dot) * (180.0 / Math.PI));
+
+        if (angle > maxGrappleAngle)
+            return false;
+
+        if (requireLineOfSight && !pillar.CheckLineOfSight(playerPos))
+            return false;
+
+        score = (angle * 2.0f) + distance;
+
+        return true;
+    }
+
+    public void ExecuteGrapple(PillarTrigger pillarScript, float waitTime)
+    {
         DestroyGrappleObjects();
         CreateGrappleObjects();
 
@@ -102,7 +238,7 @@ public class PlayerGrapple : PlayerComponent
         currentWaitTime = waitTime > 0.01f ? waitTime : 0.5f;
         isLanding = false;
         isLaunching = true;
-        isGrappling = false;
+        isTraveling = false;
         stateTimer = 0.0f;
         activePillar = pillarScript;
         pillarPos = activePillar.entity.transform.position;
@@ -115,7 +251,8 @@ public class PlayerGrapple : PlayerComponent
 
     private void CreateGrappleObjects()
     {
-        if (segmentPrefab == null || hookPrefab == null) return;
+        if (segmentPrefab == null || hookPrefab == null) 
+            return;
 
         hookInstance = hookPrefab.Clone(true);
         hookInstance.SetActive(true);
@@ -130,7 +267,7 @@ public class PlayerGrapple : PlayerComponent
 
     private void FinalizeGrapple()
     {
-        isGrappling = false;
+        isTraveling = false;
         isLaunching = false;
         stateTimer = 0.0f;
         grappleCooldownTimer = grappleCooldown;
@@ -159,7 +296,8 @@ public class PlayerGrapple : PlayerComponent
 
     private void UpdateRopeVisuals(float progress, bool isLaunchingPhase)
     {
-        if (player.HookAnchor == null || hookInstance == null) return;
+        if (player.HookAnchor == null || hookInstance == null) 
+            return;
 
         Vector3 start = player.HookAnchor.transform.position;
         Vector3 end = isLaunchingPhase ? Vector3.Lerp(start, pillarPos, progress) : pillarPos;
