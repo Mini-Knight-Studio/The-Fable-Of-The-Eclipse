@@ -11,6 +11,7 @@ class PuzzleDoor : Component
     public Entity animatedKey;
     public Entity focusPointOnInsert;
     public Entity blockingCollider;
+    public Entity interactPrompt;
 
     [Header("Settings")]
     public Vector3 finalRightDoorRot = Vector3.Zero;
@@ -74,11 +75,28 @@ class PuzzleDoor : Component
     {
         if (hasOpened || isOpening) return;
 
-        if (entity.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E) /*&& player has key*/)
+        if (entity.GetComponent<BoxCollider>().IsColliding /*&& player has key*/)
         {
-            isOpening = true;
-            StartCoroutine(OpenDoors());
+            if (!interactPrompt.Active)
+            {
+                interactPrompt.SetActive(true);
+            }
+
+            if (Player.Instance.Input.interactKeyPressed)
+            {
+                isOpening = true;
+                StartCoroutine(OpenDoors());
+                interactPrompt.SetActive(false);
+            }
         }
+        else
+        {
+            if (interactPrompt.Active)
+            {
+                interactPrompt.SetActive(false);
+            }
+        }
+
     }
 
     IEnumerator OpenDoors()
