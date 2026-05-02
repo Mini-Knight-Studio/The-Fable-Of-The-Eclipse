@@ -18,6 +18,8 @@ class KillingWaterCollider : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         Entity player = Player.Instance.entity;
         BoxCollider playerCollider = player.GetComponent<BoxCollider>();
 

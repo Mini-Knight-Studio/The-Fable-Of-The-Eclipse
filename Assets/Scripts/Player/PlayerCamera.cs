@@ -40,6 +40,8 @@ public class PlayerCamera : Component
     private bool isShaking = false;
     private float transformShakeAmount = 1;
     private float rotationShakeAmount = 1.5f;
+    private float rotationShakeSpeed = 1f;
+    private float transformShakeSpeed = 1f;
     private Vector3 shakeOffset = Vector3.Zero;
     private Vector3 shakeRotationOffset = Vector3.Zero;
     
@@ -76,6 +78,8 @@ public class PlayerCamera : Component
 
     public void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (cameraUser == null) return;
 
         hasInput = CheckInput();
@@ -238,17 +242,16 @@ public class PlayerCamera : Component
         }
 
         float strength = 1f - Mathf.SmoothStep(0f, 1f, progress);
-
         float currentTransformShake = transformShakeAmount * strength;
         float currentRotationShake = rotationShakeAmount * strength;
 
-        float offsetX = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
-        float offsetY = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
-        float offsetZ = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
+        float offsetX = Mathf.Sin(shakeTimer * transformShakeSpeed) * currentTransformShake;
+        float offsetY = Mathf.Sin(shakeTimer * transformShakeSpeed * 1.1f + 1.0f) * currentTransformShake;
+        float offsetZ = Mathf.Sin(shakeTimer * transformShakeSpeed * 0.9f + 2.0f) * currentTransformShake;
 
         shakeOffset = new Vector3(offsetX, offsetY, offsetZ);
 
-        float rotZ = Loopie.Random.Range(-currentRotationShake, currentRotationShake);
+        float rotZ = Mathf.Sin(shakeTimer * rotationShakeSpeed) * currentRotationShake;
 
         shakeRotationOffset = new Vector3(0f, 0f, rotZ);
 
@@ -256,12 +259,14 @@ public class PlayerCamera : Component
         cameraEntity.transform.rotation += shakeRotationOffset;
     }
 
-    public void SetIsShaking(bool active, float time = 1f, float amount = 1f, float rotationAmount = 1f)
+    public void SetIsShaking(bool active, float time = 1f, float amount = 1f, float rotationAmount = 1f, float rotationSpeed = 1, float transformSpeed = 1)
     {
         isShaking = active;
         timeToShake = time;
         transformShakeAmount = amount;
         rotationShakeAmount = rotationAmount;
+        rotationShakeSpeed = rotationSpeed;
+        transformShakeSpeed = transformSpeed;
 
         shakeTimer = 0f;
     }

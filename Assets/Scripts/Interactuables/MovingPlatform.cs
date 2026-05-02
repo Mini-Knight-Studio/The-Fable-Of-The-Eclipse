@@ -89,6 +89,8 @@ class MovingPlatform : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (canSink)
         {
             ManageSinking();

@@ -41,6 +41,8 @@ class RollingBridge : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (animationFinished) return;
 
         if (DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown == true)

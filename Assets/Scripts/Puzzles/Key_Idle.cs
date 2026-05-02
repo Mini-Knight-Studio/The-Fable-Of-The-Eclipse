@@ -33,6 +33,8 @@ class Key_Idle : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (collected)
             return;
 
