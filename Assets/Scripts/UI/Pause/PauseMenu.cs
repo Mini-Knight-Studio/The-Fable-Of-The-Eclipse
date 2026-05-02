@@ -31,14 +31,15 @@ class PauseMenu : Component
 
     private enum Buttons
     {
+        DEBUG,
         CONTINUE,
         MAIN_MENU,
         SETTINGS,
         EXIT
     }
-    private Buttons currentButton = Buttons.CONTINUE;
+    private Buttons currentButton = Buttons.DEBUG;
     private Buttons? mouseResult;
-    private Buttons keyboardResult = Buttons.CONTINUE;
+    private Buttons keyboardResult = Buttons.DEBUG;
 
     private enum InputMode
     {
@@ -320,14 +321,14 @@ class PauseMenu : Component
 
         bool moved = false;
 
-        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.LeftAxis.y > 0)
+        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Mathf.Abs(Input.LeftAxis.y) > 0.15)
         {
-            keyboardResult = (Buttons)(((int)keyboardResult + 3) % 4);
+            keyboardResult = (Buttons)(((int)keyboardResult + 4) % 5);
             moved = true;
         }
-        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y < 0)
+        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Mathf.Abs(Input.LeftAxis.y) < 0.15)
         {
-            keyboardResult = (Buttons)(((int)keyboardResult + 1) % 4);
+            keyboardResult = (Buttons)(((int)keyboardResult + 1) % 5);
             moved = true;
         }
 
@@ -397,10 +398,10 @@ class PauseMenu : Component
                 Pause.isPaused = false;
                 switch (currentButton)
                 {
-                    case Buttons.CONTINUE: break;
+                    case Buttons.CONTINUE: Pause.isPaused = false; break;
                     case Buttons.MAIN_MENU: mainMenuScript.StartTransition(); break;
                     case Buttons.SETTINGS: settingsScript.StartTransition(); break;
-                    case Buttons.EXIT: break;
+                    case Buttons.EXIT: exitScript.ExitGame(); break;
                 }
             }
         }
