@@ -118,7 +118,7 @@ class PuzzleGoal : Component
             Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         }
 
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             Gem.SetActive(false);
 

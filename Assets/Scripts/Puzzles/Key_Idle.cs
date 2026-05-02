@@ -5,7 +5,7 @@ using Loopie;
 class Key_Idle : Component
 {
     [Header("References")]
-    public Entity interactionPrompt;
+    public Entity interactPrompt;
     public Entity ownerChest;
     public Entity focusPointOnCollect;
 
@@ -23,7 +23,7 @@ class Key_Idle : Component
 
     void OnCreate()
     {
-        interactionPrompt.SetActive(false);
+        interactPrompt.SetActive(false);
 
         collider = entity.GetComponent<BoxCollider>();
         collider.SetActive(false);
@@ -36,9 +36,25 @@ class Key_Idle : Component
         if (collected)
             return;
 
-        if(collider.IsColliding && Input.IsKeyDown(KeyCode.E))
+        if(collider.IsColliding)
         {
-            StartCoroutine(Collect());
+            if (!interactPrompt.Active)
+            {
+                interactPrompt.SetActive(true);
+            }
+
+            if (Player.Instance.Input.interactKeyPressed)
+            {
+                StartCoroutine(Collect());
+                interactPrompt.SetActive(false);
+            }
+        }
+        else
+        {
+            if (interactPrompt.Active)
+            {
+                interactPrompt.SetActive(false);
+            }
         }
 
         if (!started) return;
@@ -93,9 +109,9 @@ class Key_Idle : Component
 
         if(focusPointOnCollect != null)
         {
-            Player.Instance.Camera.FocusOnPoint(focusPointOnCollect.transform.position, 15, 7);
+            Player.Instance.Camera.FocusOnPoint(focusPointOnCollect.transform.position, 15, 6);
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(2.5f);
 
             Player.Instance.Camera.StopFocus();
         }

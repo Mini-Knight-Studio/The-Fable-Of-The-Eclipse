@@ -9,6 +9,7 @@ class Chest : Component
     public Entity staticMoon;
     public Entity upperPart;
     public Entity rewardItem;
+    public Entity interactPrompt;
 
     [Header("Feedback")]
     public Entity openSFXEntity;
@@ -61,10 +62,26 @@ class Chest : Component
 
         if (isOpen || animationStarted) return;
 
-        if (entity.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        if (entity.GetComponent<BoxCollider>().IsColliding)
         {
-            animationStarted = true;
-            StartCoroutine(HandleChestAnimation());
+            if (!interactPrompt.Active)
+            {
+                interactPrompt.SetActive(true);
+            }
+
+            if (Player.Instance.Input.interactKeyPressed)
+            {
+                animationStarted = true;
+                StartCoroutine(HandleChestAnimation());
+                interactPrompt.SetActive(false);
+            }
+        }
+        else
+        {
+            if (interactPrompt.Active)
+            {
+                interactPrompt.SetActive(false);
+            }
         }
     }
 
