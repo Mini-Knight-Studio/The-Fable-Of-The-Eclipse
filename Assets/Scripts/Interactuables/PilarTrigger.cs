@@ -4,7 +4,9 @@ using Loopie;
 public class PillarTrigger : Component
 {
     public Entity interactionPrompt;
-    public Entity hookParticles;
+    public Entity hookParticlesEntity;
+
+    private ParticleComponent hookParticles;
 
     public float reachDistance = 10.0f;
     public float hookTravelTime = 0.5f;
@@ -12,7 +14,7 @@ public class PillarTrigger : Component
     void OnCreate()
     {
         if (interactionPrompt != null) interactionPrompt.SetActive(false);
-        if (hookParticles != null) hookParticles.SetActive(false);
+        if (hookParticlesEntity != null) hookParticles = hookParticlesEntity.GetComponent<ParticleComponent>();
 
         PlayerGrapple.RegisterPillar(this);
     }
@@ -31,13 +33,13 @@ public class PillarTrigger : Component
     public void PlayHookParticles()
     {
         if (hookParticles != null) 
-            hookParticles.SetActive(true);
+            hookParticles.Play();
     }
 
     public void ResetParticles()
     {
         if (hookParticles != null) 
-            hookParticles.SetActive(false);
+            hookParticles.Stop();
     }
 
     public bool CheckLineOfSight(Vector3 playerPos)
