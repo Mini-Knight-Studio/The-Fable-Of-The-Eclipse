@@ -10,6 +10,7 @@ class PuzzleDoor : Component
     public Entity staticKey;
     public Entity animatedKey;
     public Entity focusPointOnInsert;
+    public Entity blockingCollider;
 
     [Header("Settings")]
     public Vector3 finalRightDoorRot = Vector3.Zero;
@@ -23,9 +24,7 @@ class PuzzleDoor : Component
     private bool isOpening = false;
     private bool hasOpened = false;
 
-    private Vector3 initialRightDoorPos;
     private Vector3 initialRightDoorRot;
-    private Vector3 initialLeftDoorPos;
     private Vector3 initialLeftDoorRot;
     private Vector3 finalKeyScale;
 
@@ -42,8 +41,8 @@ class PuzzleDoor : Component
     public Entity door1SFX;
     public Entity door2SFX;
     public Entity door3SFX;
-
     public Entity impactSFX;
+    public Entity insertKeySFX;
 
     void OnCreate()
     {
@@ -52,9 +51,7 @@ class PuzzleDoor : Component
         staticKey.SetActive(false);
         animatedKey.SetActive(false);
 
-        initialRightDoorPos = rightDoor.transform.local_position;
         initialRightDoorRot = rightDoor.transform.local_rotation;
-        initialLeftDoorPos = leftDoor.transform.local_position;
         initialLeftDoorRot = leftDoor.transform.local_rotation;
 
         rightParticle1.GetComponent<ParticleComponent>().Stop();
@@ -115,6 +112,7 @@ class PuzzleDoor : Component
             if(t >= 0.85f && !keyParticles.GetComponent<ParticleComponent>().IsPlaying)
             {
                 keyParticles.GetComponent<ParticleComponent>().Play();
+                insertKeySFX.GetComponent<AudioSource>().Play();
             }
             if (t >= 1f)
             {
@@ -182,6 +180,8 @@ class PuzzleDoor : Component
         leftParticle1.GetComponent<ParticleComponent>().Stop();
         leftParticle2.GetComponent<ParticleComponent>().Stop();
         leftParticle3.GetComponent<ParticleComponent>().Stop();
+
+        blockingCollider.SetActive(false);
 
         hasOpened = true;
 
