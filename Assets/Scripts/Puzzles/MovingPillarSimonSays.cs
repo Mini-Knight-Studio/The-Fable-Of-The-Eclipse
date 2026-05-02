@@ -57,7 +57,7 @@ class MovingPillarSimonSays : Component
 
     void HandleActivation()
     {
-        if (torchCollider != null && torchCollider.IsColliding && !locked && Input.IsKeyDown(KeyCode.E))
+        if (torchCollider != null && torchCollider.IsColliding && !locked && Player.Instance.Input.interactKeyPressed)
         {
             wasPressed = true;
             active = true;

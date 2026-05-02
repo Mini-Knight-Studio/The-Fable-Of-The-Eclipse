@@ -30,6 +30,11 @@ class PuzzleGoalFireLvl : Component
     private ParticleComponent goalParticles;
     private bool particlesSwitched = true;
 
+    // Sounds
+    private AudioSource moveSFX;
+    public Entity completeSFX;
+    public Entity collectGemSFX;
+
     void OnCreate()
     {
         pillars = new MovingPillar[3];
@@ -40,6 +45,8 @@ class PuzzleGoalFireLvl : Component
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
+
+        moveSFX = entity.GetComponent<AudioSource>();
 
         goalParticles = entity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
@@ -103,13 +110,17 @@ class PuzzleGoalFireLvl : Component
 
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed = true;
 
+            completeSFX.GetComponent<AudioSource>().Play();
+
             Gem.GetComponent<BoxCollider>().SetActive(true);
             Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         }
 
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             Gem.SetActive(false);
+
+            collectGemSFX.GetComponent<AudioSource>().Play();
 
             DatabaseRegistry.playerDB.Player.gemFireCollected = true;
         }
@@ -129,6 +140,7 @@ class PuzzleGoalFireLvl : Component
         isMoving = true;
 
         goalParticles.Play();
+        moveSFX.Play();
         particlesSwitched = false;
     }
 
@@ -153,5 +165,7 @@ class PuzzleGoalFireLvl : Component
         Pillar1.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
+
+        completeSFX.GetComponent<AudioSource>().Play();
     }
 };

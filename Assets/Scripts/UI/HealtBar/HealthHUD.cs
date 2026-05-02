@@ -7,6 +7,7 @@ public class HealthHUD : Component
 
     private HealthSlot[] healthIcons;
     private int lastKnownHealth = -1;
+    private int lastKnownMaxHealth = -1;
 
     void OnCreate()
     {
@@ -27,16 +28,19 @@ public class HealthHUD : Component
         if (Player.Instance.PlayerHealth == null) return;
 
         int currentHealth = Player.Instance.PlayerHealth.GetActualHealth();
+        int maxHealth = Player.Instance.PlayerHealth.GetMaxHealth();
 
-        if (currentHealth != lastKnownHealth)
+        if (currentHealth != lastKnownHealth || maxHealth != lastKnownMaxHealth)
         {
-            UpdateIcons(currentHealth);
+            UpdateIcons(currentHealth, maxHealth);
             lastKnownHealth = currentHealth;
+            lastKnownMaxHealth = maxHealth;
         }
     }
 
-    private void UpdateIcons(int currentHealth)
+    private void UpdateIcons(int currentHealth, int maxHealth)
     {
+        int healthCount = 0;
         foreach (var icon in healthIcons)
         {
             if (currentHealth >= 2)
@@ -52,7 +56,14 @@ public class HealthHUD : Component
                 icon.UpdateVisuals(0);
             }
 
-            currentHealth -= 2;
+            if(maxHealth<= healthCount)
+            {
+                icon.Lock();
+            }else
+                icon.Unlock();
+
+                currentHealth -= 2;
+            healthCount += 2;
         }
     }
 };
