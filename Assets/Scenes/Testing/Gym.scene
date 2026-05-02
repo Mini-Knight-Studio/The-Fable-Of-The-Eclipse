@@ -268,7 +268,8 @@
                         "fields": {
                             "canBeDamaged": true,
                             "canBeHealed": true,
-                            "maxHealth": 20
+                            "healthCap": 0,
+                            "maxHealth": 6
                         }
                     },
                     "uuid": "e37538f0-9d1c-a25d-fc98-76ec07d30533"
@@ -498,7 +499,7 @@
             ],
             "name": "Interactables",
             "order": 7,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816"
         },
@@ -10577,7 +10578,7 @@
                     "uuid": "41d3f518-70d6-9322-9265-85154dce7394"
                 }
             ],
-            "name": "HealPlant",
+            "name": "HealPlant_Heal",
             "order": 4,
             "parent_uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816",
             "static": true,
@@ -11410,6 +11411,7 @@
                         "fields": {
                             "canBeDamaged": true,
                             "canBeHealed": false,
+                            "healthCap": 0,
                             "maxHealth": 5
                         }
                     },
@@ -12859,7 +12861,7 @@
             ],
             "name": "Lighting",
             "order": 3,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -13065,7 +13067,7 @@
             ],
             "name": "Level_Container",
             "order": 5,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "2fe4f35d-68d0-0ee8-356e-96bd16b54747"
         },
@@ -13272,7 +13274,7 @@
             ],
             "name": "Enemies",
             "order": 6,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -13393,7 +13395,7 @@
             ],
             "name": "//////////////// WORLD",
             "order": 4,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "1a511023-f8de-375a-8197-ca8e36bf62f1"
         },
@@ -13752,7 +13754,7 @@
             ],
             "name": "WoodenBridge",
             "order": 8,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "734cd308-22e2-c91e-390e-7a45d9dabad6"
         },
@@ -13937,7 +13939,7 @@
             ],
             "name": "//////////////// LIGHTS",
             "order": 2,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "038bed1e-61d2-b9b1-df40-ee2bf7d50fc9"
         },
@@ -13974,7 +13976,7 @@
             ],
             "name": "//////////////// OTHERS",
             "order": 13,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "eb583655-1b63-12dd-8ccc-c1ca88b7cd4c"
         },
@@ -14058,7 +14060,7 @@
             ],
             "name": "//////////////// PLAYER",
             "order": 0,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "7e248101-17e2-52c9-4275-8d812874cdc7"
         },
@@ -14070,18 +14072,18 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -3.3706891536712646,
+                            "y": -3.370755910873413,
                             "z": 0.0
                         },
                         "position": {
-                            "x": 15.146856307983398,
+                            "x": 19.306713104248047,
                             "y": 0.0,
                             "z": 29.66187286376953
                         },
                         "rotation": {
                             "w": 0.9995673894882202,
                             "x": 0.0,
-                            "y": -0.029410570859909058,
+                            "y": -0.029411153867840767,
                             "z": 0.0
                         },
                         "scale": {
@@ -14711,7 +14713,9 @@
                     "script": {
                         "class_id": "HealItem",
                         "fields": {
+                            "canIncreaseMaxHealth": false,
                             "healAmount": 3,
+                            "maxHealthIncreaseAmount": 0,
                             "uniqueId": "Acorn1",
                             "vfx": "0449c45d-8607-9df1-83fc-0e644424a1c4"
                         }
@@ -15408,7 +15412,7 @@
             ],
             "name": "WaterLevel",
             "order": 14,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "c9248883-d09c-a8d5-c4d8-4487a286a37f"
         },
@@ -16523,7 +16527,7 @@
             ],
             "name": "Music",
             "order": 15,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "e2bde98c-df70-8af1-6539-ab61511e723e"
         },
@@ -17933,6 +17937,53 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": -9.5367431640625e-06,
+                            "y": -1.1920928955078125e-07,
+                            "z": 2.384185791015625e-06
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "0af59f9c-0d82-58f3-a0a9-2cb2fc533cbb"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "ed132db8-d1b7-2832-909a-bb39c5943789",
+                        "mesh_index": 0,
+                        "mesh_uuid": "3f3472ae-b915-e382-b223-8591ef1187ca"
+                    },
+                    "uuid": "617f23f4-720a-ed2a-0498-8af8ca29ebcf"
+                }
+            ],
+            "name": "stem_lp",
+            "order": 0,
+            "parent_uuid": "35b29044-b743-ca62-16fe-e0f2af4e882b",
+            "static": true,
+            "uuid": "c71dc7ea-f967-8655-41a1-f5c6b7cdf2d7"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": 0.0,
                             "y": 0.0,
                             "z": 0.0
@@ -18455,6 +18506,118 @@
             "parent_uuid": "9ae7e51b-2988-abdc-ea6d-dd6156044e6c",
             "static": true,
             "uuid": "9c61b325-896a-d9f7-5507-11b085aa3efa"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 1.9115772247314453,
+                            "y": 4.871458530426025,
+                            "z": 0.0006866455078125
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.9999998807907104,
+                            "y": 1.0,
+                            "z": 0.9999998807907104
+                        }
+                    },
+                    "uuid": "a475fa5f-b772-ce4d-4ef0-575e64686214"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "applyScale": false,
+                            "billboard": 0,
+                            "emmitertimer": 0.03976500779390335,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 1000,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": true,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "colorend": {
+                                    "a": 1.0,
+                                    "b": 0.5235761404037476,
+                                    "g": 0.9481821060180664,
+                                    "r": 0.9702970385551453
+                                },
+                                "lifetime": 1.0,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "sizebegin": 0.30000001192092896,
+                                "sizeend": 0.0,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "poolindex": 583,
+                            "position": {
+                                "x": 7.064864635467529,
+                                "y": 4.104891300201416,
+                                "z": 27.279420852661133
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 0.7072288393974304,
+                                "x": 0.0,
+                                "y": 0.7069846987724304,
+                                "z": 0.0
+                            },
+                            "spawnrate": 20
+                        },
+                        "emitterscount": 1,
+                        "playing": true
+                    },
+                    "uuid": "0fa22f5e-698b-d2bf-b843-2bdc6c998f30"
+                }
+            ],
+            "name": "Particles",
+            "order": 1,
+            "parent_uuid": "0d0aca3d-87dd-ffd2-ce72-6ad699fd1c30",
+            "static": true,
+            "uuid": "0cd6dba4-ad22-997a-ef51-4580c70612d2"
         },
         {
             "active": true,
@@ -19738,6 +19901,7 @@
                         "fields": {
                             "canBeDamaged": true,
                             "canBeHealed": false,
+                            "healthCap": 0,
                             "maxHealth": 5
                         }
                     },
@@ -23764,7 +23928,7 @@
             ],
             "name": "TempleDoorWind",
             "order": 12,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "ae046e1e-da0a-471e-ef9c-4de2ef865b26"
         },
@@ -23950,6 +24114,7 @@
                         "fields": {
                             "canBeDamaged": true,
                             "canBeHealed": false,
+                            "healthCap": 0,
                             "maxHealth": 5
                         }
                     },
@@ -25931,6 +26096,43 @@
             "parent_uuid": "0fd0796f-b4f4-2930-039a-2857ca2ef80a",
             "static": true,
             "uuid": "d50e54a1-370a-a289-5e51-09b11e944a86"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 2.1577021419583176e-11,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0002040863037109375,
+                            "y": 0.0,
+                            "z": -5.1021575927734375e-05
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 1.8829503115134344e-13,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.999993622303009,
+                            "y": 1.0,
+                            "z": 0.999993622303009
+                        }
+                    },
+                    "uuid": "f70acfc4-f8ed-8012-65ba-5eb06df1f580"
+                }
+            ],
+            "name": "healing_plant",
+            "order": 0,
+            "parent_uuid": "3dfbf63c-776b-9bdc-893f-bf88f68022fb",
+            "static": true,
+            "uuid": "35b29044-b743-ca62-16fe-e0f2af4e882b"
         },
         {
             "active": true,
@@ -35007,7 +35209,7 @@
             ],
             "name": "ChestGroup",
             "order": 9,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "ddb1b4f0-deaf-6f6e-d85c-0831b7a46876"
         },
@@ -35057,7 +35259,7 @@
             ],
             "name": "BurneableVines",
             "order": 11,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "204e4921-a92e-2512-31f2-0abce2d8bafa"
         },
@@ -35285,7 +35487,7 @@
             ],
             "name": "Pilars",
             "order": 10,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "01d75178-5ee1-efb9-b73c-ae552387c23e"
         },
@@ -36260,7 +36462,7 @@
             ],
             "name": "PREFAB_BLOCK",
             "order": 1,
-            "parent_uuid": "31d12eb5-459c-05ca-3e57-f859ad30d61b",
+            "parent_uuid": "dc15197b-5981-5120-8453-bc50c0b19193",
             "static": true,
             "uuid": "214a877e-b110-5f9f-4d00-a888bf417561"
         },
@@ -36366,6 +36568,43 @@
             "parent_uuid": "ddb1b4f0-deaf-6f6e-d85c-0831b7a46876",
             "static": false,
             "uuid": "026eb8df-6cdf-9450-e502-60ba30ed1446"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e3e733d6-138f-0f57-55d8-a66f96bac3fb"
+                }
+            ],
+            "name": "Visual",
+            "order": 0,
+            "parent_uuid": "f1d64976-4ab3-7942-0f11-a62953fe563a",
+            "static": true,
+            "uuid": "0d0aca3d-87dd-ffd2-ce72-6ad699fd1c30"
         },
         {
             "active": true,
@@ -38539,6 +38778,327 @@
             "parent_uuid": "ae046e1e-da0a-471e-ef9c-4de2ef865b26",
             "static": true,
             "uuid": "2465137c-5393-aead-733d-e1ebd5139ac9"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 89.98021697998047,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 12.507122039794922,
+                            "y": -0.7665671110153198,
+                            "z": 29.230987548828125
+                        },
+                        "rotation": {
+                            "w": 0.7072288393974304,
+                            "x": 0.0,
+                            "y": 0.7069846987724304,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.9999943971633911,
+                            "y": 1.0,
+                            "z": 0.9999943971633911
+                        }
+                    },
+                    "uuid": "5340fdc2-50b9-c8f2-37e1-7518fe8bfc44"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 0.4000000059604645,
+                            "y": 5.440000057220459,
+                            "z": 0.4000000059604645
+                        },
+                        "include_mask": 0,
+                        "is_static": true,
+                        "is_trigger": false,
+                        "layer_index": 3
+                    },
+                    "is_active": true,
+                    "uuid": "f62fb50f-431c-9cd3-0d63-9db8a35ebe7a"
+                }
+            ],
+            "name": "HealPlant_Heal&Increase",
+            "order": 5,
+            "parent_uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816",
+            "static": true,
+            "uuid": "c1c69f97-f615-ec68-7543-4a5286bdc6b6"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "3cf4aff1-8ecf-720d-1fb5-bad5a97344e4"
+                }
+            ],
+            "name": "Visual",
+            "order": 0,
+            "parent_uuid": "c1c69f97-f615-ec68-7543-4a5286bdc6b6",
+            "static": true,
+            "uuid": "3dfbf63c-776b-9bdc-893f-bf88f68022fb"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "dcbda8ff-9487-3378-94b8-bb12323e4743"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "ed132db8-d1b7-2832-909a-bb39c5943789",
+                        "mesh_index": 1,
+                        "mesh_uuid": "3f3472ae-b915-e382-b223-8591ef1187ca"
+                    },
+                    "uuid": "f1b9dc0b-86f5-5ec9-cc53-ee3c353ffa3c"
+                }
+            ],
+            "name": "leaves_lp",
+            "order": 1,
+            "parent_uuid": "35b29044-b743-ca62-16fe-e0f2af4e882b",
+            "static": true,
+            "uuid": "ccf71047-c669-4c87-ab7d-1f568fdfdd8a"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.04000039026141167,
+                            "y": 0.0,
+                            "z": -4.76837158203125e-07
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "fc806bec-5158-a7f5-3f2b-9696fc22b208"
+                },
+                {
+                    "boxcollider": {
+                        "center": {
+                            "x": 1.9500000476837158,
+                            "y": 5.071000099182129,
+                            "z": 0.0
+                        },
+                        "draw_gizmo": true,
+                        "exclude_mask": 0,
+                        "extents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "include_mask": 0,
+                        "is_static": false,
+                        "is_trigger": true,
+                        "layer_index": 11
+                    },
+                    "is_active": true,
+                    "uuid": "d40334ba-ed3b-1c64-1f03-f860c0c7314d"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "32df02c8-2db6-e81f-ebb9-1efc988b5870"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.33899998664855957
+                    },
+                    "is_active": true,
+                    "uuid": "c40c04b0-597c-ed6e-cfc4-2967be67cf32"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "HealItem",
+                        "fields": {
+                            "canIncreaseMaxHealth": true,
+                            "healAmount": 99999,
+                            "maxHealthIncreaseAmount": 2,
+                            "uniqueId": "Acorn2",
+                            "vfx": "f1d64976-4ab3-7942-0f11-a62953fe563a"
+                        }
+                    },
+                    "uuid": "7ffa8ffb-2b68-b984-f798-0077c8fafdc2"
+                }
+            ],
+            "name": "Acorn",
+            "order": 1,
+            "parent_uuid": "c1c69f97-f615-ec68-7543-4a5286bdc6b6",
+            "static": true,
+            "uuid": "f1d64976-4ab3-7942-0f11-a62953fe563a"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "684e965b-991f-b275-ff61-39255b8268ee"
+                }
+            ],
+            "name": "healing_plant_acorn",
+            "order": 0,
+            "parent_uuid": "0d0aca3d-87dd-ffd2-ce72-6ad699fd1c30",
+            "static": true,
+            "uuid": "258d4d89-52e4-13a7-afdf-19e9ec4d93f0"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 6.091375350952148
+                        },
+                        "position": {
+                            "x": 2.1386220455169678,
+                            "y": 4.033756256103516,
+                            "z": -1.8270455370839045e-07
+                        },
+                        "rotation": {
+                            "w": 0.9985874891281128,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.05313224717974663
+                        },
+                        "scale": {
+                            "x": 0.4891210198402405,
+                            "y": 0.4891210198402405,
+                            "z": 0.4891210198402405
+                        }
+                    },
+                    "uuid": "6492eb05-8572-d4c7-2214-07f75960894f"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "a763fce0-a528-cbde-dd35-7806a627b4c9",
+                        "mesh_index": 0,
+                        "mesh_uuid": "eb1701bf-43da-7754-de58-f17e82d386c4"
+                    },
+                    "uuid": "78ac2c64-991f-8be1-3675-1d615f99bd39"
+                }
+            ],
+            "name": "acorn_lp",
+            "order": 0,
+            "parent_uuid": "258d4d89-52e4-13a7-afdf-19e9ec4d93f0",
+            "static": true,
+            "uuid": "186f4946-4a6c-aa9c-e016-c94fdefc5899"
         }
     ]
 }
