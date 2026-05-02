@@ -23,13 +23,15 @@ public class PlayerMovement : PlayerComponent
     [ShowInInspector]private bool isDashing = false;
 
     [Header("Gravity")]
-    public bool gravityActive;
-    public float gravity;
+    public bool gravityActive = true;
+    public float gravityForce = 9.81f;
+    public float terminalVerticalVelocity = 50f;
+    private float verticalVelocity = 0.0f;
 
     [Header("Others")]
     // Walk SFX
-    private float walkSFXTimer = 0;
     public float walkSFXInterval = 5;
+    private float walkSFXTimer = 0;
 
     // Idle SFX
     private float idleSFXTimer = 0;
@@ -76,12 +78,19 @@ public class PlayerMovement : PlayerComponent
 
     private void HandleGravity()
     {
-        if (gravityActive && !isGodMode)
+        if (!gravityActive || isGodMode)
         {
-
-            movementHelper.Speed = -gravity;
-            movementHelper.Move(Vector3.Up);
+            verticalVelocity = 0;
+            return;
         }
+
+        verticalVelocity -= gravityForce * Time.deltaTime;
+
+        if (verticalVelocity < -terminalVerticalVelocity)
+            verticalVelocity = -terminalVerticalVelocity;
+
+        Vector3 gravityMove = new Vector3(0, verticalVelocity, 0);
+        movementHelper.Move(gravityMove);
     }
 
     private void HandleGodMode()

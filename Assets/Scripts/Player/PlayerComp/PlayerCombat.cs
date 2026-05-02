@@ -26,6 +26,7 @@ public class PlayerCombat : PlayerComponent
 
     [Header("Settings")]
     public float comboWindow = 0.8f;
+    public float inputBufferWindow = 0.2f;
     private float comboResetTimer = 0f;
 
     void OnCreate()
@@ -45,7 +46,10 @@ public class PlayerCombat : PlayerComponent
 
         if (isAttacking && player.Input.attackKeyPressed)
         {
-            wantsToCombo = true;
+            if (attackTimer <= inputBufferWindow)
+            {
+                wantsToCombo = true;
+            }
         }
 
         if (isAttacking)
