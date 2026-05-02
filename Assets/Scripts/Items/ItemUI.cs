@@ -24,6 +24,8 @@ public class WeaponItem : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (alreadyCollected) return;
 
        

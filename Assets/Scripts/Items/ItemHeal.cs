@@ -26,6 +26,8 @@ public class HealItem : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (alreadyCollected) return;
 
         if(triggerDetection != null && triggerDetection.HasCollided)

@@ -6,6 +6,8 @@ class PuzzleDebugController : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (Input.IsKeyDown(KeyCode.NUM_1))
         {
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = !DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed;

@@ -54,6 +54,8 @@ class PuzzleGoalFireLvl : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         CheckPillars();
 
         if (isMoving)
