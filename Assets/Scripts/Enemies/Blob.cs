@@ -11,6 +11,7 @@ class Blob : Enemy
     [Space(5)]
     public int Damage;
     public float ReachDistance;
+    public float AttackDistance;
     public float PushForceScale;
     [Space(5)]
     public float PreparationTime;
@@ -80,16 +81,16 @@ class Blob : Enemy
             if(!isAttacking)
             {
                 #region Movement
-                if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
+                if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
                 {
                     animator.PlayClip("Armature|Chase", true, 0.25f);
                     transform.LookAt(Player.Instance.transform.position, transform.Up);
                     movement.Move(4-Stage, transform.Forward);
                     ResetWander();
                     #region Attack
-                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + (ReachDistance*0.25f))
+                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
                     {
-                        attackCoroutine = StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown,0, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, Damage*Stage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
                     }
                     #endregion
                 }
@@ -177,10 +178,27 @@ class Blob : Enemy
     void OnDrawGizmo()
     {
         DebugViewField(ViewField.x, ViewField.y);
-        if (!DetectedTargetInViewField(ViewField.x, ViewField.y) && !DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
-            DebugToTargetLine(Stage * StageScale + ForcedDetectionDistance, Color.Red);
-        else
-            DebugForwardLine(Stage * StageScale + ReachDistance, Color.Green);
+        #region Target Not Detected
+        if (!DetectedTargetInViewField(ViewField.x, ViewField.y) && !DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
+            Gizmo.DrawCircle(transform.position, GetEntityForwardBase() + ForcedDetectionDistance, Vector3.Up, 32, Color.White);
+        #endregion
+        if(DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
+        {
+            if (ReachDistance < AttackDistance)
+            {
+                DebugForwardLine(GetEntityForwardBase() + (ReachDistance), Color.Orange);
+                DebugForwardLine(GetEntityForwardBase() + (AttackDistance), Color.Red, GetEntityForwardBase() + (ReachDistance));
+            }
+            else if (ReachDistance > AttackDistance)
+            {
+                DebugForwardLine(GetEntityForwardBase() + (ReachDistance), Color.Orange, GetEntityForwardBase() + (AttackDistance));
+                DebugForwardLine(GetEntityForwardBase() + (AttackDistance), Color.Red);
+            }
+            else
+            {
+                DebugForwardLine(GetEntityForwardBase() + (ReachDistance), Color.Red);
+            }
+        }
     }
 
     void OnDestroy()
