@@ -33,7 +33,6 @@ class Blob : Enemy
     private bool isSpawning;
     private bool splitting;
     private int LayerOverride;
-    private Coroutine attackCoroutine;
 
     void OnCreate()
     {

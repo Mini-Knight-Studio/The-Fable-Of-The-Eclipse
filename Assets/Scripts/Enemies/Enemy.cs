@@ -2,7 +2,6 @@ using Loopie;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using static Loopie.Transform;
 
 public class Enemy : Component
 {
@@ -23,6 +22,7 @@ public class Enemy : Component
     private Vector3 lastWanderPosition;
     private Vector3 interest_position;
     private bool interest_position_checked;
+    protected Coroutine attackCoroutine;
 
     //-- Attack --//
     protected bool isAttacking;
@@ -127,6 +127,14 @@ public class Enemy : Component
         isAttacking = false;
     }
 
+    protected IEnumerator CancelAttack(string end_attack_clip, float end_attack_duration)
+    {
+        EndAttack(end_attack_clip);
+        yield return new WaitForSeconds(end_attack_duration);
+        movement.CanMove = true;
+        isAttacking = false;
+    }
+
     public virtual void DoChargeAttack(string charge_attack_clip)
     {
         attack_stages = Vector2.Zero;
@@ -164,7 +172,7 @@ public class Enemy : Component
 
     public virtual void Hit(int points, float force_scale, string hit_clip)
     {
-        if (OnHitCooldown() || !health.canBeDamaged) return;
+        if (!health.canBeDamaged) return;
         if (Player.Instance.Combat.TemporalFunctionIsAttacking())
         {
             if (hitbox.HasCollided)

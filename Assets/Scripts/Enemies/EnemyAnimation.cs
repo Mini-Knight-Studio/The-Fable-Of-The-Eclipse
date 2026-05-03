@@ -30,12 +30,11 @@ public class EnemyAnimation : Component
     {
         if (stay_until_finish && !clip_ended) return;
         animator.Looping = loop;
-        if (animator.GetCurrentClipName() == clip_name && !animator.InTransition /*&& !reset*/) return;
+        if (animator.GetCurrentClipName() == clip_name && !animator.InTransition && !reset) return;
         if (animator.GetNextClipName() == clip_name && animator.InTransition && !reset) return;
         if (animator.GetClipIndex(clip_name) == -1) return;
         animation_timer = 0;
         stay_until_finish = stay_until_end;
-        Debug.Log(clip_name);
         animator.Play(clip_name, transition);
     }
 
@@ -47,6 +46,11 @@ public class EnemyAnimation : Component
     public float ClipDuration()
     {
         return animator.GetCurrentClipDuration();
+    }
+    public float ClipDuration(string clip)
+    {
+        int index = animator.GetClipIndex(clip);
+        return animator.GetClipDuration(index);
     }
 
     public bool AnimationEnded()
