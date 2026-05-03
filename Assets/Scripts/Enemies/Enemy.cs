@@ -220,8 +220,7 @@ public class Enemy : Component
             if (Vector3.Distance(lastWanderPosition, transform.position) > ViewField.y)
                 return;
         }
-
-            wanderRange = true;
+        wanderRange = true;
         for (int i = 0; i < 2; i++)
         {
             int tries = 0;
@@ -230,7 +229,7 @@ public class Enemy : Component
                 float newDir = Loopie.Random.Range(!wanderRange ? -180.0f : -ViewField.x, !wanderRange ? 180.0f : ViewField.x);
 
                 Vector3 newDirection = Vector3.RotateAroundAxis(transform.Forward, transform.Up, newDir);
-                if (!Collisions.Raycast(transform.position + transform.Up, newDirection, ViewField.y, out hit, LayerMask))
+                if (!Collisions.Raycast(transform.position + transform.Up, newDirection, ViewField.y, out hit, entity, LayerMask))
                 {
                     transform.LookAt(transform.position + newDirection, transform.Up);
                     lastWanderPosition = transform.position + transform.Forward * ViewField.y * 1.5f;
