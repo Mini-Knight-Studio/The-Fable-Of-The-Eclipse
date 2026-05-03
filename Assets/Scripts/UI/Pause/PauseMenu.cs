@@ -1,54 +1,25 @@
 using System;
 using Loopie;
 
-class PauseMenu : Component
+public class PauseMenu : Component
 {
     // Buttons
     [Header("Buttons")]
     public Entity continueEntity;
-    public Entity continueHoveredEntity;
     private Button continueButton;
     private Load continueScript;
-    private Image continueHoveredImage;
 
     public Entity mainMenuEntity;
-    public Entity mainMenuHoveredEntity;
     private Button mainMenuButton;
     private SceneTransition mainMenuScript;
-    private Image mainMenuHoveredImage;
 
     public Entity settingsEntity;
-    public Entity settingsHoveredEntity;
     private Button settingsButton;
     private SceneTransition settingsScript;
-    private Image settingsHoveredImage;
 
     public Entity exitEntity;
-    public Entity exitHoveredEntity;
     private Button exitButton;
     private Exit exitScript;
-    private Image exitHoveredImage;
-
-    private enum Buttons
-    {
-        DEBUG,
-        CONTINUE,
-        MAIN_MENU,
-        SETTINGS,
-        EXIT
-    }
-    private Buttons currentButton = Buttons.DEBUG;
-    private Buttons? mouseResult;
-    private Buttons keyboardResult = Buttons.DEBUG;
-
-    private enum InputMode
-    {
-        MOUSE,
-        KEYBOARD
-    }
-    private InputMode currentInputMode = InputMode.KEYBOARD;
-
-    private Vector2 lastMousePosition;
 
     // Audio
     [Header("Audio")]
@@ -70,15 +41,8 @@ class PauseMenu : Component
     public Image backgroundImage;
 
     [Header("Others")]
-    // Input
-    public float inputCooldown = 0.2f;
-    [HideInInspector]
-    public float enterCooldown = 0.1f;
-
-    private float inputTimer = 0f;
-    private float confirmTimer = 0f;
-    private float mouseTimer = 0f;
-    private float enterTimer = 0f;
+    public Entity uiManagerEntity;
+    private UIManager uiManagerScript;
 
     private bool canCallScripts = false;
 
@@ -105,16 +69,7 @@ class PauseMenu : Component
         if (mainMenuEntity != null)
         {
             mainMenuButton = mainMenuEntity.GetComponent<Button>();
-
-            if (mainMenuHoveredEntity != null)
-            {
-                mainMenuScript = mainMenuHoveredEntity.GetComponent<SceneTransition>();
-                mainMenuHoveredImage = mainMenuHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no NewGame Hovered Entity assigned.");
-            }
+            mainMenuScript = mainMenuEntity.GetComponent<SceneTransition>();
         }
         else
         {
@@ -124,16 +79,7 @@ class PauseMenu : Component
         if (continueEntity != null)
         {
             continueButton = continueEntity.GetComponent<Button>();
-
-            if (continueHoveredEntity != null)
-            {
-                continueScript = continueHoveredEntity.GetComponent<Load>();
-                continueHoveredImage = continueHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no Continue Hovered Entity assigned.");
-            }
+            continueScript = continueEntity.GetComponent<Load>();
         }
         else
         {
@@ -143,16 +89,7 @@ class PauseMenu : Component
         if (settingsEntity != null)
         {
             settingsButton = settingsEntity.GetComponent<Button>();
-
-            if (settingsHoveredEntity != null)
-            {
-                settingsScript = settingsHoveredEntity.GetComponent<SceneTransition>();
-                settingsHoveredImage = settingsHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no Settings Hovered Entity assigned.");
-            }
+            settingsScript = settingsEntity.GetComponent<SceneTransition>();
         }
         else
         {
@@ -162,16 +99,7 @@ class PauseMenu : Component
         if (exitEntity != null)
         {
             exitButton = exitEntity.GetComponent<Button>();
-
-            if (exitHoveredEntity != null)
-            {
-                exitScript = exitHoveredEntity.GetComponent<Exit>();
-                exitHoveredImage = exitHoveredEntity.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.Log("Error: There is no Exit Hovered Entity assigned.");
-            }
+            exitScript = exitEntity.GetComponent<Exit>();
         }
         else
         {
@@ -232,10 +160,18 @@ class PauseMenu : Component
         {
             Debug.Log("Error: There is no Ilustration Entity assigned.");
         }
+
+        if (uiManagerEntity != null)
+        {
+            uiManagerScript = mainMenuEntity.GetComponent<UIManager>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no UIManager Entity assigned.");
+        }
     }
     void OnUpdate()
     {
-        enterTimer += Time.deltaTime;
         if (quickStartAnimations)
         {
             passPageAnimator.Play();
@@ -251,207 +187,70 @@ class PauseMenu : Component
             closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
             closeBookEntity.SetActive(false);
             quickStartAnimations = false;
-            enterTimer = 0f;
         }
 
-        HandleMusic();
-
-        // Main Menu logic.
-        Buttons previous = currentButton;
-
-        HandleMouseNavigation();
-        HandleNavigation();
-
-        if (currentInputMode == InputMode.MOUSE)
+        if (!loopMusicHasPlayed)
         {
-            if (mouseResult.HasValue)
-                currentButton = mouseResult.Value;
+            loopMusicAudioSource.Play();
+            loopMusicHasPlayed = true;
+        }
+            
+        if (canCallScripts)
+        {
+            HandleConfirm();
+        }
+    }
+    public void Open()
+    {
+        uiManagerScript.SelectedElement = continueEntity;
+        entity.SetActive(true);
+    }
+    void HandleConfirm()
+    {
+        if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount - 1)
+        {
+            exitScript.ExitGame();
+        }
+
+        if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
+        {
+            loopMusicAudioSource.Stop();
+            quickStartAnimations = false;
+            invertedPassPagePlayed = false;
+            canCallScripts = false;
+            MainMenu.quickStartAnimations = true;
+            MainMenu.invertedPassPagePlayed = false;
+            Settings.quickStartAnimations = true;
+            Settings.invertedPassPagePlayed = false;
+            Pause.isPaused = false;
+
+            if (continueButton.Hovered)
+            {
+                Pause.isPaused = false;
+            }
+            else if (mainMenuButton.Hovered)
+            {
+                mainMenuScript.StartTransition();
+            }
+            else if (settingsButton.Hovered)
+            {
+                settingsScript.StartTransition();
+            }
+        }
+    }
+    public void HandleConfirmAnimation()
+    {
+        if (exitButton.Hovered)
+        {
+            closeBookEntity.SetActive(true);
+            closeBookAnimator.Play();
         }
         else
         {
-            currentButton = keyboardResult;
-        }
-
-        HandleVisualFeedback();
-        HandleConfirm();
-    }
-    void HandleMouseNavigation()
-    {
-        Vector2 currentMouse = Input.MousePosition;
-        Vector2 delta = currentMouse - lastMousePosition;
-
-        float sqrDistance = delta.x * delta.x + delta.y * delta.y;
-
-        lastMousePosition = currentMouse;
-
-        Buttons? hovered = null;
-
-        if (continueButton.Hovered)
-            hovered = Buttons.CONTINUE;
-        else if (mainMenuButton.Hovered)
-            hovered = Buttons.MAIN_MENU;
-        else if (settingsButton.Hovered)
-            hovered = Buttons.SETTINGS;
-        else if (exitButton.Hovered)
-            hovered = Buttons.EXIT;
-
-        if (sqrDistance > 1.0f)
-            currentInputMode = InputMode.MOUSE;
-
-        if (currentInputMode != InputMode.MOUSE)
-            return;
-
-        mouseResult = hovered;
-    }
-
-    void HandleNavigation()
-    {
-        bool input = Input.IsKeyPressed(KeyCode.UP) || Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Input.LeftAxis.y != 0;
-
-        if (input)
-            currentInputMode = InputMode.KEYBOARD;
-
-        if (currentInputMode != InputMode.KEYBOARD)
-            return;
-
-        inputTimer += Time.deltaTime;
-
-        if (inputTimer < inputCooldown || canCallScripts)
-            return;
-
-        bool moved = false;
-
-        if (Input.IsKeyPressed(KeyCode.UP) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_UP) || Mathf.Abs(Input.LeftAxis.y) > 0.15)
-        {
-            keyboardResult = (Buttons)(((int)keyboardResult + 4) % 5);
-            moved = true;
-        }
-        else if (Input.IsKeyPressed(KeyCode.DOWN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_DOWN) || Mathf.Abs(Input.LeftAxis.y) < 0.15)
-        {
-            keyboardResult = (Buttons)(((int)keyboardResult + 1) % 5);
-            moved = true;
-        }
-
-        if (moved)
-        {
-            selectSfxAudioSource.Play();
-            inputTimer = 0f;
-        }
-    }
-
-    void HandleConfirm()
-    {
-        confirmTimer += Time.deltaTime;
-
-        // Read Input
-        if ((Input.IsKeyPressed(KeyCode.RETURN) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A)) && !canCallScripts)
-        {
-            Vector4 color = new Vector4(255, 0, 0, 1);
-            switch (currentButton)
-            {
-                case Buttons.CONTINUE:
-                    continueHoveredImage.SetTint(color);
-                    passPageEntity.SetActive(true);
-                    passPageAnimator.Play();
-                    break;
-                case Buttons.MAIN_MENU:
-                    mainMenuHoveredImage.SetTint(color);
-                    passPageEntity.SetActive(true);
-                    passPageAnimator.Play();
-                    break;
-                case Buttons.SETTINGS:
-                    settingsHoveredImage.SetTint(color);
-                    passPageEntity.SetActive(true);
-                    passPageAnimator.Play();
-                    break;
-                case Buttons.EXIT:
-                    exitHoveredImage.SetTint(color);
-                    closeBookEntity.SetActive(true);
-                    closeBookAnimator.Play();
-                    break;
-            }
-
-            canCallScripts = true;
-            confirmTimer = 0f;
-        }
-
-        // Function Call
-        if (confirmTimer > inputCooldown && canCallScripts)
-        {
-            if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount - 1)
-            {
-                loopMusicAudioSource.Stop();
-                canCallScripts = false;
-                exitScript.ExitGame();
-            }
-
-            if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
-            {
-                loopMusicAudioSource.Stop();
-                quickStartAnimations = false;
-                invertedPassPagePlayed = false;
-                canCallScripts = false;
-                MainMenu.quickStartAnimations = true;
-                MainMenu.invertedPassPagePlayed = false;
-                Settings.quickStartAnimations = true;
-                Settings.invertedPassPagePlayed = false;
-                Pause.isPaused = false;
-                switch (currentButton)
-                {
-                    case Buttons.CONTINUE: Pause.isPaused = false; break;
-                    case Buttons.MAIN_MENU: mainMenuScript.StartTransition(); break;
-                    case Buttons.SETTINGS: settingsScript.StartTransition(); break;
-                    case Buttons.EXIT: exitScript.ExitGame(); break;
-                }
-            }
-        }
-    }
-
-    void HandleVisualFeedback()
-    {
-        continueHoveredEntity.SetActive(currentButton == Buttons.CONTINUE);
-        mainMenuHoveredEntity.SetActive(currentButton == Buttons.MAIN_MENU);
-        settingsHoveredEntity.SetActive(currentButton == Buttons.SETTINGS);
-        exitHoveredEntity.SetActive(currentButton == Buttons.EXIT);
-    }
-
-    void HandleMusic()
-    {
-        if (loopMusicHasPlayed)
-            return;
-
-        loopMusicAudioSource.Play();
-        loopMusicHasPlayed = true;
-    }
-
-    public void HandleClickConfirm()
-    {
-        Vector4 color = new Vector4(255, 0, 0, 1);
-        switch (currentButton)
-        {
-            case Buttons.CONTINUE:
-                continueHoveredImage.SetTint(color);
-                passPageEntity.SetActive(true);
-                passPageAnimator.Play();
-                break;
-            case Buttons.MAIN_MENU:
-                mainMenuHoveredImage.SetTint(color);
-                passPageEntity.SetActive(true);
-                passPageAnimator.Play();
-                break;
-            case Buttons.SETTINGS:
-                settingsHoveredImage.SetTint(color);
-                passPageEntity.SetActive(true);
-                passPageAnimator.Play();
-                break;
-            case Buttons.EXIT:
-                exitHoveredImage.SetTint(color);
-                closeBookEntity.SetActive(true);
-                closeBookAnimator.Play();
-                break;
+            passPageEntity.SetActive(true);
+            passPageAnimator.Play();
         }
 
         canCallScripts = true;
-        confirmTimer = 0f;
     }
 };
