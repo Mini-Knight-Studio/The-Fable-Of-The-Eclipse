@@ -21,7 +21,7 @@ class PuzzleDoor : Component
     public float doorOpenDuration = 2.0f;
     public float pauseBeforeOpening = 0.5f;
     public float easeIntensity = 1.5f;
-    public float cameraZoom = 1.5f;
+    public float cameraZoom = 20;
 
     private bool isOpening = false;
     private bool hasOpened = false;
@@ -116,7 +116,7 @@ class PuzzleDoor : Component
 
         float elapsedTime = 0f;
 
-        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, 15, 4);
+        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom, 4);
 
         yield return new WaitForSeconds(camFocusDuration);
 
