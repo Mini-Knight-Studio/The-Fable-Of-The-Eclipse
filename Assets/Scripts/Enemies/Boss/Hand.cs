@@ -54,6 +54,7 @@ public class Hand : Component
         already_attacked = false;
         HandShadow.SetActive(false);
         transform.rotation = Vector3.Zero;
+        hand_punch_trigger.SetActive(false);
     }
 
     public void Update()                    //Updates hand constant behaviour
@@ -115,12 +116,13 @@ public class Hand : Component
             }
             transform.position = attackPos;
             HandShadow.SetActive(false);
-            
+            hand_punch_trigger.SetActive(true);
             while (transform.position.y > boss.Value(boss.handVelocity) * Time.deltaTime)
             {
                 transform.position += new Vector3(0, -1 * boss.Value(boss.handVelocity * 4) * Time.deltaTime, 0);
                 yield return null;
             }
+            hand_punch_trigger.SetActive(false);
             vulnerable = true;
             boss.target.Camera.SetIsShaking(true, boss.Value(boss.punchGroundCooldown), 2, 1);
             yield return new WaitForSeconds(boss.Value(boss.punchGroundCooldown));
