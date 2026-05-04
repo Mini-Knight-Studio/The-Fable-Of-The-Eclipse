@@ -197,7 +197,7 @@ public class PlayerGrapple : PlayerComponent
         Vector3 pillarPos = pillar.entity.transform.position;
 
         float distance = (float)Vector3.Distance(playerPos, pillarPos);
-        if (distance > pillar.reachDistance)
+        if (distance > pillar.reachDistance || distance < pillar.minReachDistance)
             return false;
 
         Vector3 toPillar = pillarPos - playerPos;
