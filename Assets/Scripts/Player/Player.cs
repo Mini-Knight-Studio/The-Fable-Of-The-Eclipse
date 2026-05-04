@@ -30,8 +30,10 @@ public class Player : Component
     [Header("Canvas (OPTIONAL)")]
     public Entity RespawnTransitionEntity;
     public Entity LoseScreenEntity;
+    public Entity CreditsScreenEntity;
     private FadeInOutEvent RespawnTransition;
     private LoseScreen LoseScreen;
+    private CreditsScreen CreditsScreen;
 
 
 
@@ -93,6 +95,8 @@ public class Player : Component
 
         RespawnTransition = RespawnTransitionEntity.GetComponent<FadeInOutEvent>();
         LoseScreen = LoseScreenEntity.GetComponent<LoseScreen>();
+        CreditsScreen = CreditsScreenEntity.GetComponent<CreditsScreen>();
+
         if(RespawnTransition!=null)
             RespawnTransition.OnFadeInComplete += EndRespawn;
         if (LoseScreen != null)
