@@ -106,7 +106,7 @@ public class Enemy : Component
     #endregion
 
     #region Attack
-    protected IEnumerator Attack(float attack_distance, float preparation_time, float attack_cooldown, float end_attack_duration, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string end_attack_clip)
+    protected IEnumerator Attack(float attack_distance, float preparation_time, float attack_cooldown, float end_attack_duration, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string end_attack_clip, bool applyFeedbackOnlyOnhit = true)
     {
         isAttacking = true;
         float timer = 0.0f;
@@ -117,7 +117,7 @@ public class Enemy : Component
             transform.LookAt(Player.Instance.transform.position, Vector3.Up);
             yield return null;
         }
-        DoAttack(attack_distance, damage, attack_clip);
+        DoAttack(attack_distance, damage, attack_clip, applyFeedbackOnlyOnhit);
         yield return new WaitForSeconds(animator.ClipDuration());
         DoAttackCooldown(cooldown_clip);
         yield return new WaitForSeconds(attack_cooldown);
@@ -142,19 +142,25 @@ public class Enemy : Component
         animator.PlayClip(charge_attack_clip, false, 0.0f);
     }
 
-    public virtual void DoAttack(float attack_distance, int damage, string attack_clip)
+    public virtual void DoAttack(float attack_distance, int damage, string attack_clip, bool feedback_only_on_hit)
     {
         attack_stages.x = 1.0f;
         animator.PlayClip(attack_clip, false, 0.0f);
         if (Mathf.Abs((float)Vector3.Distance(transform.position, Player.Instance.transform.position)) <= GetEntityForwardBase() + attack_distance)
         {
-            if (Player.Instance.Effects.AddEffect(effect))feedback.TickParticles("Effect", Time.deltaTime);
+            if (Player.Instance.Effects.AddEffect(effect)) feedback.TickParticles("Effect", Time.deltaTime);
             else feedback.TickParticles("Attack", Time.deltaTime);
             feedback.PlaySound("Attack");
-            feedback.ShakeCamera(damage / 20.0f, knockback_time/2);
+            feedback.ShakeCamera(damage / 20.0f, knockback_time / 2);
 
             Player.Instance.PlayerHealth.Damage(Player.Instance.Effects.GetEffectValueInt(damage, "ModifyDamage"));
             Player.Instance.Movement.ApplyKnockback((float)damage * 10.0f, 0.3f, GetDirectionToTarget());
+        }
+        else if (!feedback_only_on_hit)
+        {
+            feedback.TickParticles("Attack", Time.deltaTime);
+            feedback.ShakeCamera(damage / 20.0f, knockback_time / 2);
+            feedback.PlaySound("Attack");
         }
     }
 

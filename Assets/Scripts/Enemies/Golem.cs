@@ -60,7 +60,7 @@ class Golem : Enemy
                 ResetWander();
                 #region Attack
                 if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
-                    attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|AttackRecovery_ArmOut"), Damage, "G_Scale_CTRL|ChargeAttack", "G_Scale_CTRL|Attack", "G_Scale_CTRL|AttackRecovery_ArmStuck", "G_Scale_CTRL|AttackRecovery_ArmOut"));
+                    attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|AttackRecovery_ArmOut"), Damage, "G_Scale_CTRL|ChargeAttack", "G_Scale_CTRL|Attack", "G_Scale_CTRL|AttackRecovery_ArmStuck", "G_Scale_CTRL|AttackRecovery_ArmOut", false));
                 #endregion
             }
             else if (!health.IsDead())
