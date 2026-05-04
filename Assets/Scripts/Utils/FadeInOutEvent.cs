@@ -17,6 +17,10 @@ public class FadeInOutEvent : Component
     public float timeStatic = 1f;
 
     public event Action OnFadeInComplete;
+    public event Action OnFadeOutComplete;
+
+    [Header("Settings")]
+    public bool StartFadingOut = false;
 
     [ReadOnly]
     [ShowInInspector]
@@ -26,75 +30,82 @@ public class FadeInOutEvent : Component
     {
         fadeInImage = fadeInImageEntity.GetComponent<Image>();
         fadeOutImage = fadeOutImageEntity.GetComponent<Image>();
+
+        if(StartFadingOut)
+        {
+            StartFade(false, true);
+        }
     }
 
 
-    public void StartFade()
+    public void StartFade(bool doIn = true, bool doOut = true)
     {
         if (isRunning) return;
 
         isRunning = true;
-        StartCoroutine(FadeSequence());
+        StartCoroutine(FadeSequence(doIn, doOut));
     }
 
-    IEnumerator FadeSequence()
+    IEnumerator FadeSequence(bool doIn, bool doOut)
     {
-         
-        Vector4 currentColor = fadeOutImage.GetTint();
-        currentColor.w = 1f;
-        fadeOutImage.SetTint(currentColor);
+        isRunning = true;
+        float elapsedTime;
+        Vector4 currentColor;
+        float halfStatic = timeStatic / 2f;
 
-        currentColor = fadeInImage.GetTint();
-        currentColor.w = 0f;
-        fadeInImage.SetTint(currentColor);
-
-
-
-        fadeOutImageEntity.SetActive(false);
-        fadeInImageEntity.SetActive(true);
-
-        float elapsedTime = 0f;
-        while (elapsedTime < fadeInTime)
+        if (doIn)
         {
-            elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Clamp01(elapsedTime / fadeInTime);
+            fadeInImageEntity.SetActive(true);
+            elapsedTime = 0f;
 
-            currentColor = fadeInImage.GetTint();
-            currentColor.w = alpha;
-            fadeInImage.SetTint(currentColor);
+            while (elapsedTime < fadeInTime)
+            {
+                elapsedTime += Time.deltaTime;
+                float alpha = Mathf.Clamp01(elapsedTime / fadeInTime);
 
-            yield return null;
+                currentColor = fadeInImage.GetTint();
+                currentColor.w = alpha;
+                fadeInImage.SetTint(currentColor);
+                yield return null;
+            }
+
+            OnFadeInComplete?.Invoke();
+
+            yield return new WaitForSeconds(halfStatic);
+
+            if (doOut && fadeInImageEntity != fadeOutImageEntity)
+            {
+                fadeInImageEntity.SetActive(false);
+            }
         }
 
-        yield return new WaitForSeconds(timeStatic/2);
-        fadeInImageEntity.SetActive(false);
-        OnFadeInComplete?.Invoke();
-
-        currentColor = fadeOutImage.GetTint();
-        currentColor.w = 1f;
-        fadeOutImage.SetTint(currentColor);
-
-        fadeOutImageEntity.SetActive(true);
-        yield return new WaitForSeconds(timeStatic/2);
-
-        elapsedTime = 0f;
-        while (elapsedTime < fadeOutTime)
+        if (doOut)
         {
-            elapsedTime += Time.deltaTime;
-            float alpha = 1f - Mathf.Clamp01(elapsedTime / fadeOutTime);
+            fadeOutImageEntity.SetActive(true);
 
             currentColor = fadeOutImage.GetTint();
-            currentColor.w = alpha;
+            currentColor.w = 1f;
             fadeOutImage.SetTint(currentColor);
 
-            yield return null;
+            yield return new WaitForSeconds(halfStatic);
+
+            elapsedTime = 0f;
+            while (elapsedTime < fadeOutTime)
+            {
+                elapsedTime += Time.deltaTime;
+                float alpha = 1f - Mathf.Clamp01(elapsedTime / fadeOutTime);
+
+                currentColor = fadeOutImage.GetTint();
+                currentColor.w = alpha;
+                fadeOutImage.SetTint(currentColor);
+                yield return null;
+            }
+
+            fadeOutImageEntity.SetActive(false);
+            OnFadeOutComplete?.Invoke();
         }
+
         isRunning = false;
-
-        fadeInImageEntity.SetActive(false);
-        fadeOutImageEntity.SetActive(false);
-
-        //OnFadeInComplete = null;
     }
 
     void OnDestroy()
