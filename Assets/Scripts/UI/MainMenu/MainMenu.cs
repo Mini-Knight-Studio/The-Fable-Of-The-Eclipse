@@ -218,7 +218,7 @@ class MainMenu : Component
         {
             introBookCoverScript.introMiniKnightStudioEntity.SetActive(false);
             introBookCoverEntity.SetActive(false);
-            
+
             if (!invertedPassPagePlayed)
             {
                 invertedPassPageEntity.SetActive(true);
@@ -227,9 +227,19 @@ class MainMenu : Component
             }
             else
             {
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.StartFrame)
+                {
+                    uiManagerScript.BlockNavigation = false;
+                }
+                else 
+                {
+                    uiManagerScript.BlockNavigation = true;
+                }
+
                 if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
                 {
                     invertedPassPageEntity.SetActive(false);
+                    uiManagerScript.BlockNavigation = false;
                 }
             }
         }
@@ -345,5 +355,6 @@ class MainMenu : Component
     {
         uiManagerScript.SelectedElement = newGameEntity;
         entity.SetActive(true);
+        uiManagerScript.BlockNavigation = true;
     }
 };
