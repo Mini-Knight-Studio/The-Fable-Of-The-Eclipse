@@ -10,7 +10,7 @@ class InitialPlayerPositionManager : Component
     public Entity fromPuzzleReference;
     public Entity fromLvl2Reference;
 
-    void OnCreate()
+    void OnPostCreate()
     {
         DatabaseRegistry.playerDB.Player.SetCurrentScene(level1SceneUUID);
 

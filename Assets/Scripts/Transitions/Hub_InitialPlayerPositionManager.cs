@@ -12,7 +12,7 @@ class Hub_InitialPlayerPositionManager : Component
     public Entity fromWaterpathReference;
     public Entity fromFirepathReference;
 
-    void OnCreate()
+    void OnPostCreate()
     {
         DatabaseRegistry.playerDB.Player.SetCurrentScene(level2SceneUUID);
 

@@ -10,7 +10,7 @@ class Firepath_InitialPlayerPositionManager : Component
     public Entity fromPuzzleReference;
     public Entity fromLvl2Reference;
 
-    void OnCreate()
+    void OnPostCreate()
     {
         DatabaseRegistry.playerDB.Player.SetCurrentScene(firepathUUID);
 
