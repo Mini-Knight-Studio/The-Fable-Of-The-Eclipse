@@ -40,9 +40,19 @@ class PuzzleGoalSimonSays : Component
     private int showIndex = 0;
 
     private bool simonStarted = false;
-    private float inputCooldown = 0.0f;
 
     public Entity Gem;
+
+    // Particles
+    private ParticleComponent goalParticles;
+    private bool particlesSwitched = true;
+
+    // Sounds
+    private AudioSource moveSFX;
+    public Entity activateSFX;
+    public Entity completeSFX;
+    public Entity collectGemSFX;
+    public Entity failSFX;
 
     private enum State
     {
@@ -76,6 +86,11 @@ class PuzzleGoalSimonSays : Component
             }
         }
 
+        moveSFX = entity.GetComponent<AudioSource>();
+
+        goalParticles = entity.GetComponent<ParticleComponent>();
+        goalParticles.Stop();
+
         LockAllPillars();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
@@ -83,6 +98,8 @@ class PuzzleGoalSimonSays : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (isMoving)
         {
             MoveTowardsTarget();
@@ -125,6 +142,12 @@ class PuzzleGoalSimonSays : Component
                 break;
         }
 
+        if (!isMoving && !particlesSwitched)
+        {
+            goalParticles.Stop();
+            particlesSwitched = true;
+        }
+
         if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed && !puzzle2Completed)
         {
             CompletePuzzleAuto();
@@ -149,6 +172,10 @@ class PuzzleGoalSimonSays : Component
         moveTimer = 0.0f;
 
         isMoving = true;
+
+        goalParticles.Play();
+        moveSFX.Play();
+        particlesSwitched = false;
     }
 
     void MoveTowardsTarget()
@@ -203,10 +230,13 @@ class PuzzleGoalSimonSays : Component
 
         if (allOnGoal && !simonStarted)
         {
-            if (goalCollider != null && goalCollider.IsColliding && Input.IsKeyDown(KeyCode.E))
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+            if (goalCollider != null && goalCollider.IsColliding && Player.Instance.Input.interactKeyPressed)
             {
                 simonStarted = true;
                 Debug.LogWarning("Starting Simon Says.");
+                activateSFX.GetComponent<AudioSource>().Play();
+                Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(false);
                 StartSimonPhase();
             }
         }
@@ -282,7 +312,6 @@ class PuzzleGoalSimonSays : Component
     void PreparePlayerPhase()
     {
         playerIndex = 0;
-        inputCooldown = 0.4f;
 
         for (int i = 0; i < pillarPressedThisRound.Length; i++)
             pillarPressedThisRound[i] = false;
@@ -294,12 +323,6 @@ class PuzzleGoalSimonSays : Component
 
     void UpdatePlayerInput()
     {
-        if (inputCooldown > 0)
-        {
-            inputCooldown -= Time.deltaTime;
-            return;
-        }
-
         for (int i = 0; i < simonPillars.Length; i++)
         {
             var pillar = simonPillars[i];
@@ -312,8 +335,6 @@ class PuzzleGoalSimonSays : Component
                 pillarPressedThisRound[i] = true;
 
                 CheckPlayerInput(i);
-
-                inputCooldown = 0.3f;
                 break;
             }
         }
@@ -363,16 +384,24 @@ class PuzzleGoalSimonSays : Component
         LockAllPillars();
         currentState = State.WaitingForPillars;
         simonStarted = false;
+        failSFX.GetComponent<AudioSource>().Play();
     }
 
     void HandleCompleted()
     {
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        foreach (var pillar in simonPillars)
+        {
+            if (pillar != null) pillar.ForceActive();
+        }
+
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             Gem.SetActive(false);
 
             DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
             DatabaseRegistry.playerDB.Player.hasGrappling = true;
+
+            collectGemSFX.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -385,6 +414,10 @@ class PuzzleGoalSimonSays : Component
         Debug.Log("Puzzle Fully Completed!");
 
         currentState = State.Completed;
+        Gem.GetComponent<BoxCollider>().SetActive(true);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+
+        completeSFX.GetComponent<AudioSource>().Play();
     }
 
     void CompletePuzzleAuto()
@@ -399,23 +432,24 @@ class PuzzleGoalSimonSays : Component
 
         Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
         Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
 
         ResetAllPillars();
 
-        Pillar1.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
-        Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
+        foreach (var pillar in basePillars)
+        {
+            if (pillar != null) pillar.CompletePillarAuto();
+        }
 
-        Pillar1.GetComponent<MovingPillarSimonSays>().Lock();
-        Pillar2.GetComponent<MovingPillarSimonSays>().Lock();
-        Pillar3.GetComponent<MovingPillarSimonSays>().Lock();
-        Pillar4.GetComponent<MovingPillarSimonSays>().Lock();
+        foreach (var pillar in simonPillars)
+        {
+            if (pillar != null) pillar.Lock();
+        }
 
-        Pillar1.GetComponent<MovingPillarSimonSays>().ForceActive();
-        Pillar2.GetComponent<MovingPillarSimonSays>().ForceActive();
-        Pillar3.GetComponent<MovingPillarSimonSays>().ForceActive();
-        Pillar4.GetComponent<MovingPillarSimonSays>().ForceActive();
+        foreach (var pillar in simonPillars)
+        {
+            if (pillar != null) pillar.ForceActive();
+        }
 
         successfulRounds = maxRounds;
         pendingMoves = maxRounds;

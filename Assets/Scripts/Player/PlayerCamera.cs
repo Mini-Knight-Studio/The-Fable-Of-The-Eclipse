@@ -6,7 +6,8 @@ public class PlayerCamera : Component
     public float speed = 25f;
     public float verticalScale = 1.22f;
 
-    public Entity player;
+    public Entity cameraUser;
+    public Entity cameraEntity;
     private Camera camera;
 
     private cameraState currentState = cameraState.FOLLOWING_PLAYER;
@@ -39,6 +40,8 @@ public class PlayerCamera : Component
     private bool isShaking = false;
     private float transformShakeAmount = 1;
     private float rotationShakeAmount = 1.5f;
+    private float rotationShakeSpeed = 1f;
+    private float transformShakeSpeed = 1f;
     private Vector3 shakeOffset = Vector3.Zero;
     private Vector3 shakeRotationOffset = Vector3.Zero;
     
@@ -52,16 +55,16 @@ public class PlayerCamera : Component
 
     public void OnCreate()
     {
-        if (player != null)
+        if (cameraUser != null)
         {
             // Get any player data.
         }
         else
         {
-            Debug.Log("Error: There is no Player.");
+            Debug.Log("Error: There is no CameraUser.");
         }
 
-        camera = entity.GetComponent<Camera>();
+        camera = cameraEntity.GetComponent<Camera>();
         if (camera != null)
         {
             originalZoom = camera.GetOrthoSize();
@@ -75,7 +78,9 @@ public class PlayerCamera : Component
 
     public void OnUpdate()
     {
-        if (player == null) return;
+        if (Pause.isPaused) { return; }
+
+        if (cameraUser == null) return;
 
         hasInput = CheckInput();
 
@@ -101,7 +106,7 @@ public class PlayerCamera : Component
 
     private void UpdateFollowPlayer()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
+        Vector3 cameraOriginalPosition = cameraUser.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
         Vector2 movementDirection = GetInputDirection();
 
         float delta = Time.deltaTime;
@@ -134,7 +139,7 @@ public class PlayerCamera : Component
         Vector3 rotatedOffset = new Vector3(inputOffset.x * cos + inputOffset.z * sin, 0f, inputOffset.x * sin - inputOffset.z * cos);
         Vector3 targetPosition = cameraOriginalPosition + rotatedOffset;
 
-        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, Time.deltaTime / timeToFollowPlayer);
+        cameraEntity.transform.position = Vector3.Lerp(cameraEntity.transform.position, targetPosition, Time.deltaTime / timeToFollowPlayer);
     }
 
     private Vector2 GetInputDirection()
@@ -164,9 +169,9 @@ public class PlayerCamera : Component
 
     private void UpdateFocus()
     {
-        Vector3 targetPosition = new Vector3(focusTarget.x - distance, entity.transform.position.y, focusTarget.z - distance);
+        Vector3 targetPosition = new Vector3(focusTarget.x - distance, cameraEntity.transform.position.y, focusTarget.z - distance);
 
-        entity.transform.position = Vector3.Lerp(entity.transform.position, targetPosition, lerpTimer/timeToFocus);
+        cameraEntity.transform.position = Vector3.Lerp(cameraEntity.transform.position, targetPosition, lerpTimer/timeToFocus);
 
         currentZoom = Mathf.Lerp(currentZoom, focusZoom, lerpTimer/timeToFocus);
         camera.SetOrthoSize(currentZoom);
@@ -185,21 +190,21 @@ public class PlayerCamera : Component
 
     private void UpdateStopFocus()
     {
-        Vector3 cameraOriginalPosition = player.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
+        Vector3 cameraOriginalPosition = cameraUser.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
 
         if (Mathf.Abs(currentZoom - originalZoom) < 0.1f)
         {
             currentZoom = originalZoom;
 
-            if (Vector3.Distance(entity.transform.position, cameraOriginalPosition) < 0.1f)
+            if (Vector3.Distance(cameraEntity.transform.position, cameraOriginalPosition) < 0.1f)
             {
-                entity.transform.position = cameraOriginalPosition;
+                cameraEntity.transform.position = cameraOriginalPosition;
                 currentState = cameraState.FOLLOWING_PLAYER;
                 lerpTimer = 0;
             }
             else
             {
-                entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
+                cameraEntity.transform.position = Vector3.Lerp(cameraEntity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
             }
         }
         else
@@ -207,7 +212,7 @@ public class PlayerCamera : Component
             currentZoom = Mathf.Lerp(currentZoom, originalZoom, lerpTimer/timeToStopFocusing);
             camera.SetOrthoSize(currentZoom);
 
-            entity.transform.position = Vector3.Lerp(entity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
+            cameraEntity.transform.position = Vector3.Lerp(cameraEntity.transform.position, cameraOriginalPosition, lerpTimer/timeToStopFocusing);
         }
     }
 
@@ -237,30 +242,31 @@ public class PlayerCamera : Component
         }
 
         float strength = 1f - Mathf.SmoothStep(0f, 1f, progress);
-
         float currentTransformShake = transformShakeAmount * strength;
         float currentRotationShake = rotationShakeAmount * strength;
 
-        float offsetX = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
-        float offsetY = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
-        float offsetZ = Loopie.Random.Range(-currentTransformShake, currentTransformShake);
+        float offsetX = Mathf.Sin(shakeTimer * transformShakeSpeed) * currentTransformShake;
+        float offsetY = Mathf.Sin(shakeTimer * transformShakeSpeed * 1.1f + 1.0f) * currentTransformShake;
+        float offsetZ = Mathf.Sin(shakeTimer * transformShakeSpeed * 0.9f + 2.0f) * currentTransformShake;
 
         shakeOffset = new Vector3(offsetX, offsetY, offsetZ);
 
-        float rotZ = Loopie.Random.Range(-currentRotationShake, currentRotationShake);
+        float rotZ = Mathf.Sin(shakeTimer * rotationShakeSpeed) * currentRotationShake;
 
         shakeRotationOffset = new Vector3(0f, 0f, rotZ);
 
-        entity.transform.position += shakeOffset;
-        entity.transform.rotation += shakeRotationOffset;
+        cameraEntity.transform.position += shakeOffset;
+        cameraEntity.transform.rotation += shakeRotationOffset;
     }
 
-    public void SetIsShaking(bool active, float time = 1f, float amount = 1f, float rotationAmount = 1f)
+    public void SetIsShaking(bool active, float time = 1f, float amount = 1f, float rotationAmount = 1f, float rotationSpeed = 1, float transformSpeed = 1)
     {
         isShaking = active;
         timeToShake = time;
         transformShakeAmount = amount;
         rotationShakeAmount = rotationAmount;
+        rotationShakeSpeed = rotationSpeed;
+        transformShakeSpeed = transformSpeed;
 
         shakeTimer = 0f;
     }

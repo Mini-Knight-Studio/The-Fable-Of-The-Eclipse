@@ -3,8 +3,12 @@ using Loopie;
 
 public class PlayerData
 {
+    // Health
+    public int maxHealth = 6;
+    public int currentHealth = 6;
+
     // Items, Abilities and Gems
-    public bool gemEarthCollected = false;
+    public bool gemAirCollected = false;
     public bool gemFireCollected = false;
     public bool gemWaterCollected = false;
 

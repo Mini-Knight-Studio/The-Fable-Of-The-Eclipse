@@ -27,6 +27,15 @@ class PuzzleGoal : Component
 
     private bool puzzle1Completed;
 
+    // Particles
+    private ParticleComponent goalParticles;
+    private bool particlesSwitched = true;
+
+    // Sounds
+    private AudioSource moveSFX;
+    public Entity completeSFX;
+    public Entity collectGemSFX;
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -38,10 +47,17 @@ class PuzzleGoal : Component
         pillars[3] = Pillar4.GetComponent<MovingPillar>();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
+
+        moveSFX = entity.GetComponent<AudioSource>();
+
+        goalParticles = entity.GetComponent<ParticleComponent>();
+        goalParticles.Stop();
     }
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         CheckPillars();
 
         if (isMoving)
@@ -52,6 +68,12 @@ class PuzzleGoal : Component
         {
             pendingMoves--;
             StartMovement(entity.transform.position + new Vector3(0, -movementDistance, 0));
+        }
+
+        if (!isMoving && !particlesSwitched)
+        {
+            goalParticles.Stop();
+            particlesSwitched = true;
         }
     }
 
@@ -81,8 +103,9 @@ class PuzzleGoal : Component
             
             CompletePuzzleAuto();
 
-            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
-            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemEarthCollected);
+            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
         }
 
         if (allOnGoal && !puzzle1Completed)
@@ -91,14 +114,19 @@ class PuzzleGoal : Component
 
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
 
+            completeSFX.GetComponent<AudioSource>().Play();
+
             Gem.GetComponent<BoxCollider>().SetActive(true);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         }
 
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             Gem.SetActive(false);
 
-            DatabaseRegistry.playerDB.Player.gemEarthCollected = true;
+            collectGemSFX.GetComponent<AudioSource>().Play();
+
+            DatabaseRegistry.playerDB.Player.gemAirCollected = true;
             DatabaseRegistry.playerDB.Player.hasBurner = true;
         }
     }
@@ -115,6 +143,10 @@ class PuzzleGoal : Component
         moveTimer = 0.0f;
 
         isMoving = true;
+
+        goalParticles.Play();
+        moveSFX.Play();
+        particlesSwitched = false;
     }
 
     void MoveTowardsTarget()
@@ -139,5 +171,7 @@ class PuzzleGoal : Component
         Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
+
+        completeSFX.GetComponent<AudioSource>().Play();
     }
 };

@@ -18,13 +18,14 @@ class MovingPillar : Component
     public float onGoalMovementDistance = 1.0f;
     public bool onGoalPosition = false;
     public bool onGoalCalled = false;
+    private bool stopedOnGoal = false;
 
     private BoxCollider myCollider;
     private BoxCollider goalCollider;
 
+    [HideInInspector]
     public AudioSource slideSFX;
 
-    public Entity playerCamera;
     public float cameraShakeDuration = 0.5f;
     public float cameraShakeAmount = 0.3f;
     public float cameraShakeRotation = 0.3f;
@@ -47,20 +48,37 @@ class MovingPillar : Component
 
     public float pushTimeRequired = 1.25f;
 
+    // Particles
+    private ParticleComponent goalParticles;
+    public Entity movingParticlesEntity;
+    private ParticleComponent movingParticles;
+
+    // For reseting
+    private Vector3 initialPosition;
+
+
     void OnCreate()
     {
         myCollider = entity.GetComponent<BoxCollider>();
         goalCollider = goalEntity.GetComponent<BoxCollider>();
         slideSFX = entity.GetComponent<AudioSource>();
+        goalParticles = goalEntity.GetComponent<ParticleComponent>();
+        goalParticles.Stop();
+        movingParticles = movingParticlesEntity.GetComponent<ParticleComponent>();
+        movingParticles.Stop();
 
         pushForward = pushForwardEntity.GetComponent<BoxCollider>();
         pushBack = pushBackEntity.GetComponent<BoxCollider>();
         pushLeft = pushLeftEntity.GetComponent<BoxCollider>();
         pushRight = pushRightEntity.GetComponent<BoxCollider>();
-}
+
+        initialPosition = entity.transform.position;
+    }
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         HandleGoal();
 
         if (isMoving)
@@ -70,6 +88,11 @@ class MovingPillar : Component
         else
         {
             HandlePushColliders();
+            if (onGoalCalled && !stopedOnGoal)
+            {
+                stopedOnGoal = true;
+                goalParticles.Stop();
+            }
         }
     }
 
@@ -148,7 +171,7 @@ class MovingPillar : Component
         origin += direction * 0.05f;
 
         RaycastHit hit;
-        bool blocked = Collisions.Raycast(origin, direction, tileSize, out hit);
+        bool blocked = Collisions.Raycast(origin, direction, tileSize, out hit, Collisions.GetLayerBit("PillarLimits")| Collisions.GetLayerBit("WorldLimits") | Collisions.GetLayerBit("Pillars"));
 
         pushForward.SetActive(true);
         pushBack.SetActive(true);
@@ -171,7 +194,8 @@ class MovingPillar : Component
         isMoving = true;
 
         slideSFX.Play();
-        playerCamera.GetComponent<PlayerCamera>().SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
+        movingParticles.Play();
+        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
     }
 
     void MoveTowardsTarget()
@@ -184,6 +208,7 @@ class MovingPillar : Component
         {
             entity.transform.position = targetPosition;
             isMoving = false;
+            movingParticles.Stop();
             return;
         }
 
@@ -221,6 +246,8 @@ class MovingPillar : Component
         myCollider.Static = true;
 
         Debug.LogWarning("The pillar has reached its goal");
+
+        goalParticles.Play();
     }
 
     public void CompletePillarAuto()
@@ -239,4 +266,12 @@ class MovingPillar : Component
             (float)Math.Round(pos.z / tileSize) * tileSize
         );
     }
+
+    public void ResetPillar()
+    {
+        StartMovement(initialPosition);
+        onGoalPosition = false;
+        onGoalCalled = false;
+        stopedOnGoal = false;
+}
 }

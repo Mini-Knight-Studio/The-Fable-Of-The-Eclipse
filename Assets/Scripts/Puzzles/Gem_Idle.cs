@@ -9,14 +9,20 @@ class Gem_Idle : Component
     public float amplitude = 0.5f;
     public float speed = 2.0f;
 
+    public Entity interactionPrompt;
+
     void OnCreate()
     {
         startLocalPos = transform.local_position;
         time = 0f;
+
+        interactionPrompt.SetActive(false);
     }
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         time += Time.deltaTime * speed;
 
         float offsetY = (float)Math.Sin(time) * amplitude;

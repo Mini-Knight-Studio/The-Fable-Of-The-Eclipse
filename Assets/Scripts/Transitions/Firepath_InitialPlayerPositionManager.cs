@@ -7,29 +7,43 @@ class Firepath_InitialPlayerPositionManager : Component
     public string puzzleSceneUUID;
     public string level2SceneUUID;
 
-    public Vector3 FromPuzzlePlayerPos;
-    public Vector3 FromPuzzlePlayerRot;
-    public Vector3 FromLvl2PlayerPos;
-    public Vector3 FromLvl2PlayerRot;
+    public Entity fromPuzzleReference;
+    public Entity fromLvl2Reference;
 
-    public Entity player;
     void OnCreate()
     {
         DatabaseRegistry.playerDB.Player.SetCurrentScene(firepathUUID);
 
+        float previousY = Player.Instance.transform.position.y;
+
         if (DatabaseRegistry.playerDB.Player.previousSceneUUID == puzzleSceneUUID)
         {
-            FromPuzzlePlayerPos.y = player.transform.local_position.y;
+            var pos = fromPuzzleReference.transform.position;
+            pos.y = previousY;
 
-            player.transform.local_position = FromPuzzlePlayerPos;
-            player.transform.local_rotation = FromPuzzlePlayerRot;
+            Player.Instance.transform.local_position = pos;
+            Player.Instance.transform.local_rotation = fromPuzzleReference.transform.rotation;
         }
         else if (DatabaseRegistry.playerDB.Player.previousSceneUUID == level2SceneUUID)
         {
-            FromLvl2PlayerPos.y = player.transform.local_position.y;
+            var pos = fromLvl2Reference.transform.position;
+            pos.y = previousY;
 
-            player.transform.local_position = FromLvl2PlayerPos;
-            player.transform.local_rotation = FromLvl2PlayerRot;
+            Player.Instance.transform.local_position = pos;
+            Player.Instance.transform.local_rotation = fromLvl2Reference.transform.rotation;
         }
     }
-};
+
+    //void OnDrawGizmo()
+    //{
+    //    if (fromPuzzleReference != null)
+    //    {
+    //        Gizmo.DrawLine(fromPuzzleReference.transform.position, fromPuzzleReference.transform.Forward, Color.Green);
+    //    }
+
+    //    if (fromLvl2Reference != null)
+    //    {
+    //        Gizmo.DrawLine(fromLvl2Reference.transform.position, fromLvl2Reference.transform.Forward, Color.Green);
+    //    }
+    //}
+}

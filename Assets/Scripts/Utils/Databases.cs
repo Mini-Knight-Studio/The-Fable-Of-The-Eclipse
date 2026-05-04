@@ -1,7 +1,10 @@
-using System;
 using Loopie;
-using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+
 
 public abstract class LocalDatabase
 {
@@ -21,7 +24,7 @@ public abstract class LocalDatabase
         File.WriteAllText(FilePath, json);
     }
 
-    public void Load()
+    public virtual void Load()
     {
         if (!File.Exists(FilePath))
             return;
@@ -76,22 +79,97 @@ public static class GlobalDatabase
     }
 }
 
+public static class PlayerPrefs
+{
+    public static PlayerPrefsData Data { get; } = new PlayerPrefsData();
+
+    public class PlayerPrefsData : LocalDatabase
+    {
+        internal PlayerPrefsData() : base("playerPrefsDB") { Load(); }
+        public Dictionary<string, string> Data = new Dictionary<string, string>();
+
+        public void SetString(string key, string value)
+        {
+            Data[key] = value;
+        }
+
+        public void SetInt(string key, int value)
+        {
+            SetString(key, value.ToString());
+        }
+
+        public void SetFloat(string key, float value)
+        {
+            SetString(key, value.ToString());
+        }
+
+        public void SetBool(string key, bool value)
+        {
+            SetString(key, value.ToString());
+        }
+
+        public string GetString(string key, string defaultValue = "")
+        {
+            return Data.TryGetValue(key, out var value) ? value : defaultValue;
+        }
+
+        public int GetInt(string key, int defaultValue = 0)
+        {
+            return int.TryParse(GetString(key), out var result) ? result : defaultValue;
+        }
+
+        public float GetFloat(string key, float defaultValue = 0f)
+        {
+            return float.TryParse(GetString(key), out var result) ? result : defaultValue;
+        }
+
+        public bool GetBool(string key, bool defaultValue = false)
+        {
+            return bool.TryParse(GetString(key), out var result) ? result : defaultValue;
+        }
+
+        public bool HasKey(string key)
+        {
+            return Data.ContainsKey(key);
+        }
+
+        public void DeleteKey(string key)
+        {
+            Data.Remove(key);
+        }
+
+        public void DeleteAll()
+        {
+            Data.Clear();
+        }
+    }
+
+
+}
+
 // Registry
 public static class DatabaseRegistry
 {
     public static PuzzlesDatabase puzzlesDB = new PuzzlesDatabase();
     public static PlayerDatabase playerDB = new PlayerDatabase();
+    public static LevelsDatabase levelsDB = new LevelsDatabase();
+    //public static EnemiesDatabase enemiesDB = new EnemiesDatabase();
+    //public static SpawnersDatabase spawnersDB = new SpawnersDatabase();
 
     public static void SaveAll()
     {
         puzzlesDB.Save();
         playerDB.Save();
+        //enemiesDB.Save();
+        levelsDB.Save();
     }
 
     public static void LoadAll()
     {
         puzzlesDB.Load();
         playerDB.Load();
+        //enemiesDB.Load();
+        levelsDB.Save();
     }
 }
 
@@ -125,6 +203,40 @@ public class PlayerDatabase : LocalDatabase
     public PlayerData Player { get; } = new PlayerData();
 }
 
+public class LevelsDatabase : LocalDatabase
+{
+    public LevelsDatabase() : base("levelsDB") { }
+
+    public LevelsData Levels { get; } = new LevelsData();
+}
+
+//public class EnemiesDatabase : LocalDatabase
+//{
+//    public EnemiesDatabase() : base("enemiesDB") { }
+
+//    public EnemiesData Enemies { get; set; } = new EnemiesData();
+
+//    public override void Load()
+//    {
+//        if (!File.Exists(FilePath))
+//            return;
+
+//        string json = File.ReadAllText(FilePath);
+//        JObject root = JObject.Parse(json);
+//        string enemiesJson = root["Enemies"].ToString();
+//        EnemiesData deserialized = JsonConvert.DeserializeObject<EnemiesData>(enemiesJson);
+//        Debug.Log("Deserialized count: " + deserialized.enemies.Count);
+//        Enemies = deserialized;
+//        Debug.Log("Enemies assigned, count: " + Enemies.enemies.Count);
+//    }
+//}
+
+//public class SpawnersDatabase : LocalDatabase
+//{
+//    public SpawnersDatabase() : base("spawnersDB") { }
+
+//    public SpawnersData Spawners { get; set; } = new SpawnersData();
+//}
 
 //public class ExampleLocalDataBase : LocalDatabase
 //{
