@@ -64,7 +64,7 @@ public class PlayerInput : PlayerComponent
 
     private void CollectDashInput()
     {
-        dashKeyPressed = Input.IsKeyDown(KeyCode.SPACE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_Y);
+        dashKeyPressed = Input.IsKeyDown(KeyCode.SPACE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_A);
     }
 
     private void CollectAttackInput()
@@ -88,7 +88,7 @@ public class PlayerInput : PlayerComponent
 
     private void CollectInteractInput()
     {
-        interactKeyPressed = Input.IsKeyPressed(KeyCode.E) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A);
+        interactKeyPressed = Input.IsKeyPressed(KeyCode.E) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_Y);
     }
 
     private void CollectOptionsInput()

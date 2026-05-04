@@ -9,6 +9,7 @@ public class PillarTrigger : Component
     private ParticleComponent hookParticles;
 
     public float reachDistance = 10.0f;
+    public float minReachDistance = 1.0f;
     public float hookTravelTime = 0.5f;
 
     void OnCreate()
@@ -57,5 +58,6 @@ public class PillarTrigger : Component
     void OnDrawGizmo()
     {
         Gizmo.DrawCircle(transform.position, reachDistance, Vector3.Up, 32, Color.Red);
+        Gizmo.DrawCircle(transform.position, minReachDistance, Vector3.Up, 32, Color.Yellow);
     }
 }
