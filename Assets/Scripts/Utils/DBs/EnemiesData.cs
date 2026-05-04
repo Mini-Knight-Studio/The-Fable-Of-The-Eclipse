@@ -24,20 +24,22 @@ public class EnemiesData
 
     public List<EnemyData> enemies = new List<EnemyData>();
 
-    public struct EnemyData 
-    {
-        public string enemyType;
-        public string entityID;
-        public string entityName;
 
-        public float enemyPositionX;
-        public float enemyPositionY;
-        public float enemyPositionZ;
 
-        public int hp;
+}
 
-        public int shieldHP;
-        public int blobStage;
-    }
+public class EnemyData
+{
+    public string enemyType;
+    public string entityID;
+    public string entityName;
 
+    public float enemyPositionX;
+    public float enemyPositionY;
+    public float enemyPositionZ;
+
+    public int hp;
+
+    public int shieldHP;
+    public int blobStage;
 }

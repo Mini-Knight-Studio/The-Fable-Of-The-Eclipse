@@ -43,7 +43,7 @@ class CheckpointCollider : Component
                             continue;
                         }
 
-                        EnemiesData.EnemyData data = new EnemiesData.EnemyData();
+                        EnemyData data = new EnemyData();
                         data.entityID = child.ID;
                         data.enemyPositionX = child.transform.position.x;
                         data.enemyPositionY = child.transform.position.y;
@@ -54,31 +54,45 @@ class CheckpointCollider : Component
                         {
                             data.hp = health.actualHealth;
                         }
-                        Debug.Log("DEBUG ENEMY TYPE: " + child.GetComponent<Enemy>().type);
-                        Debug.Log("DEBUG ENEMY ATTACK COOLDOWN: " + child.GetComponent<Enemy>().attackCooldown);
-                        if (child.GetComponent<Enemy>().type == "Golem")
+
+                        switch (child.Name)
                         {
-                            data.enemyType = "Golem";
-                            data.shieldHP = child.GetComponent<Golem>().ShieldLife;
+                            default:
+                                break;
                         }
 
-                        if (child.GetComponent<Enemy>().type == "Blob")
+                        if (child.Name.Contains("Golem"))
                         {
-                            data.enemyType = "Blob";
-                            data.blobStage = child.GetComponent<Blob>().BlobStage;
+                            Golem golem = child.GetComponent<Golem>();
+                            data.enemyType = golem.type;
+                            data.shieldHP = golem.ShieldLife;
+                            Debug.Log("Enemy saved with type Golem");
                         }
-                        //if (child.HasComponent<Golem>())
-                        //{
-                        //    Golem golem = child.GetComponent<Golem>();
-                        //    data.enemyType = golem.type;
-                        //    data.shieldHP = golem.ShieldLife;
-                        //}
-                        //else if (child.HasComponent<Blob>())
-                        //{
-                        //    Blob blob = child.GetComponent<Blob>();
-                        //    data.enemyType = "Blob";//For now
-                        //    data.blobStage = blob.BlobStage;
-                        //}
+                        else if (child.Name.Contains("Blob"))
+                        {
+                            Blob blob = child.GetComponent<Blob>();
+                            data.blobStage = blob.BlobStage;
+
+                            if (child.Name.Contains("WaterBlob"))
+                            {
+                                data.enemyType = "WaterBlob";
+                            }
+                            else if (child.Name.Contains("GroundBlob"))
+                            {
+                                data.enemyType = "GroundBlob";
+                            }
+                            else if (child.Name.Contains("FireBlob"))
+                            {
+                                data.enemyType = "FireBlob";
+                            }
+                            else 
+                            {
+                                data.enemyType = "Blob";
+                            }
+
+
+                                Debug.Log("Enemy saved with type Blob");
+                        }
 
                         DatabaseRegistry.enemiesDB.Enemies.enemies.Add(data);
                     }
@@ -116,6 +130,7 @@ class CheckpointCollider : Component
                         DatabaseRegistry.spawnersDB.Spawners.spawners.Add(sData);
                     }
                     Debug.Log(DatabaseRegistry.spawnersDB.Spawners.spawners.Count + " spawners saved");
+                    DatabaseRegistry.spawnersDB.Save();
                 }
             }
         }

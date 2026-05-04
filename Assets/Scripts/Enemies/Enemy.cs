@@ -92,7 +92,6 @@ public class Enemy : Component
         attackParticles.Enabled = false;
         hitParticles.Enabled = false;
 
-        Debug.Log("Enemy created with type: " + enemyType);
     }
     #endregion
     #region Detection
@@ -221,7 +220,7 @@ public class Enemy : Component
         lastWanderPosition = transform.position + Vector3.Forward;
     }
 
-    protected void Wander(float areaWidth, float reachDistance, float speedMultiplier)
+protected void Wander(float areaWidth, float reachDistance, float speedMultiplier)
     {
         RaycastHit hit;
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
@@ -229,7 +228,7 @@ public class Enemy : Component
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
         int LayerMask = WallLayer | Wall2Layer /*| EnemyLayer*/;
 
-        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, LayerMask, collision))
+        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, reachDistance, out hit, collision, LayerMask))
         {
             movement.Move(speedMultiplier / 2, transform.Forward);
             if (Vector3.Distance(lastWanderPosition, transform.position) > reachDistance)
