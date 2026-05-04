@@ -64,7 +64,7 @@
             ],
             "name": "PlayerCamera",
             "order": 1,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -329,7 +329,7 @@
             ],
             "name": "Player",
             "order": 2,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": false,
             "uuid": "6da645cf-96e8-0e7d-8091-2dcd4fc3b19d"
         },
@@ -499,7 +499,7 @@
             ],
             "name": "Interactables",
             "order": 14,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816"
         },
@@ -647,6 +647,10 @@
                         "font_size": 39.0,
                         "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
                         "horizontal_alignment": 1,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "scale": 1.0,
                         "size_mode": 1,
@@ -743,7 +747,7 @@
             ],
             "name": "//////////////// UI",
             "order": 3,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "e1ecfd16-32bd-cfc4-3caa-cd96c4d76dbf"
         },
@@ -970,7 +974,7 @@
             ],
             "name": "BurneableVines",
             "order": 20,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "3feb03d2-2ef9-fcb8-4b6d-0e39350cd41d"
         },
@@ -1108,6 +1112,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
@@ -1300,6 +1308,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -1307,11 +1319,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "450852ed-61ed-362f-5cf5-1939d9916520": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "c6cfd09a-ed9b-55fc-2b24-28501dc604c0",
+                                    "entity_uuid": "450852ed-61ed-362f-5cf5-1939d9916520",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -1340,6 +1352,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -1348,10 +1364,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "55c09bd6-600a-5227-2b94-9311eedba4d7"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "0f72e4b7-3952-8bb0-530c-4ed830d262b4"
+                        }
+                    },
+                    "uuid": "c6cfd09a-ed9b-55fc-2b24-28501dc604c0"
                 }
             ],
             "name": "PauseLevel2FirePathButton",
-            "order": 7,
+            "order": 6,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "450852ed-61ed-362f-5cf5-1939d9916520"
@@ -1892,7 +1919,7 @@
                     "script": {
                         "class_id": "PillarTrigger",
                         "fields": {
-                            "hookParticles": "26e59cae-7b0f-f1f7-ba3d-198bf2982aa6",
+                            "hookParticlesEntity": "",
                             "hookTravelTime": 0.4000000059604645,
                             "interactionPrompt": "583ae5f7-2bd2-a148-b538-c758470b805c",
                             "reachDistance": 20.0
@@ -1903,7 +1930,7 @@
             ],
             "name": "GrapplePillar_1_1",
             "order": 24,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "d192e9e0-20e4-e66c-fb7e-1d0034e392ad"
         },
@@ -2633,6 +2660,10 @@
                         "font_size": 24.0,
                         "font_uuid": "d95f5dbe-852f-636c-58fd-61f191812e94",
                         "horizontal_alignment": 1,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -2795,6 +2826,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.0007998943328857422,
@@ -4519,6 +4551,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -4526,11 +4562,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "eab0e0f9-820a-2c2b-99f9-603c42dacce2": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "23b3d3f7-3544-e0e2-dcea-7a8f928185bc",
+                                    "entity_uuid": "eab0e0f9-820a-2c2b-99f9-603c42dacce2",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -4559,6 +4595,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -4567,10 +4607,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "0748e318-4490-cb6d-aa9b-189b4fe4ced4"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "78cd08eb-a820-fda3-a8cf-67397a2c8f21"
+                        }
+                    },
+                    "uuid": "23b3d3f7-3544-e0e2-dcea-7a8f928185bc"
                 }
             ],
             "name": "PauseLevel2WaterPathButton",
-            "order": 5,
+            "order": 4,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "eab0e0f9-820a-2c2b-99f9-603c42dacce2"
@@ -5478,6 +5529,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -5485,11 +5540,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "e512e16a-5c79-2e1d-285b-95300c6e0646": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "42c394f8-365d-3232-05f8-2b4b3a15fe77",
+                                    "entity_uuid": "e512e16a-5c79-2e1d-285b-95300c6e0646",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -5518,6 +5573,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -5526,10 +5585,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "8d6e4657-938c-4e82-efab-e9d482e8517a"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "bdde65ce-fdd0-5614-bade-3e233a1084ad"
+                        }
+                    },
+                    "uuid": "42c394f8-365d-3232-05f8-2b4b3a15fe77"
                 }
             ],
             "name": "PauseLevelBossButton",
-            "order": 9,
+            "order": 8,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "e512e16a-5c79-2e1d-285b-95300c6e0646"
@@ -6097,6 +6167,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.003922868520021439,
@@ -6631,6 +6702,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 3,
                         "sorting_layer": 5,
                         "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4",
@@ -7686,6 +7761,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "4b345b2d-e9bf-e1bf-dd8b-9d01da287b97",
@@ -8150,6 +8229,10 @@
                             "r": 1.0
                         },
                         "draw_gizmo": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "render_mode": 1,
                         "sorting_layer": 0
@@ -8181,8 +8264,8 @@
                 }
             ],
             "name": "HUD",
-            "order": 4,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "order": 5,
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "6d4afc31-e4a9-61ba-3f2a-e78295fbcfb5"
         },
@@ -9332,6 +9415,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.002042863517999649,
@@ -9408,93 +9492,6 @@
             "parent_uuid": "57a4522e-60c2-f3c2-f2fd-c3535994f107",
             "static": true,
             "uuid": "bec49ced-51d8-e764-e54d-831aa60ee3d3"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "is_active": true,
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 205.0,
-                                "y": 46.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.0,
-                            "y": -6.0,
-                            "z": -0.8839952349662781
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "1478e22c-187b-5cbc-bc24-a6a5a658e039"
-                },
-                {
-                    "image": {
-                        "order_in_layer": 3,
-                        "sorting_layer": 12,
-                        "texture_uuid": "7ecbb69c-f084-eedd-0fb4-e27d4547c8d1",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "is_active": true,
-                    "uuid": "cf410aa0-6c6d-4b77-ea08-b596ad7f944a"
-                },
-                {
-                    "is_active": true,
-                    "script": {
-                        "class_id": "SceneTransition",
-                        "fields": {
-                            "Blocked": false,
-                            "UUID": "db1dd4f7-fb12-b501-b8a7-ac788f03b8ae"
-                        }
-                    },
-                    "uuid": "4f2d192c-9a71-acdc-1611-64997f80c434"
-                }
-            ],
-            "name": "MainMenu_Hovered",
-            "order": 0,
-            "parent_uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
-            "static": true,
-            "uuid": "6f4fc9ec-b929-a8c0-9729-6866009d711e"
         },
         {
             "active": true,
@@ -10535,6 +10532,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "060c5853-6c54-50c0-6836-f74bca9eb865",
@@ -10665,6 +10666,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "f62d521f-878e-8f91-a737-e03250530d33",
@@ -10758,6 +10763,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "eb587c64-9e3f-a2d2-fd6b-b6c22822e613",
@@ -10911,6 +10920,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
@@ -11034,6 +11047,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": -1,
                         "sorting_layer": 0,
                         "texture_uuid": "b9c24790-18a2-19b3-d9d8-1faf84ccb285",
@@ -11374,6 +11391,10 @@
                             "r": 1.0
                         },
                         "draw_gizmo": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "render_mode": 1,
                         "sorting_layer": 6
@@ -11406,8 +11427,8 @@
                 }
             ],
             "name": "Debug",
-            "order": 5,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "order": 22,
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "5a828715-7a63-57da-2777-ff5608c9197f"
         },
@@ -11521,6 +11542,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 0.0,
                             "b": 1.0,
@@ -11551,6 +11576,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
@@ -11637,6 +11666,10 @@
                         "font_size": 15.0,
                         "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "scale": 1.0,
                         "size_mode": 1,
@@ -11713,6 +11746,10 @@
                         "font_size": 20.0,
                         "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "scale": 1.0,
                         "size_mode": 1,
@@ -11792,6 +11829,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 0.0,
                             "b": 1.0,
@@ -11814,6 +11855,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
@@ -11937,6 +11982,10 @@
                         "font_size": 24.0,
                         "font_uuid": "da322b45-877c-505c-c895-75d81545824d",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "scale": 1.0,
                         "size_mode": 1,
@@ -12016,6 +12065,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -12023,11 +12076,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "10eca0e5-c9d0-7c16-a62d-986843e0aa79": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "4e951e40-634f-b6c0-d219-13022691e2d1",
+                                    "entity_uuid": "10eca0e5-c9d0-7c16-a62d-986843e0aa79",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -12056,6 +12109,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -12064,10 +12121,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "20976941-e7e7-91c3-b9d2-3fed890e94f1"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "3f429952-ba9b-1638-d14d-310234813159"
+                        }
+                    },
+                    "uuid": "4e951e40-634f-b6c0-d219-13022691e2d1"
                 }
             ],
             "name": "PauseLevel2FireTempleButton",
-            "order": 8,
+            "order": 7,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "10eca0e5-c9d0-7c16-a62d-986843e0aa79"
@@ -12122,6 +12190,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "8f4fe4d0-3c3f-2c39-74c3-e8da4cc2b3c3",
@@ -12198,6 +12270,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "83575eaa-cc8f-7783-87bb-cfdb462fa90d",
@@ -12274,6 +12350,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 1,
                         "texture_uuid": "478b1687-7af1-c949-a8ff-dc1a226bd810",
@@ -12350,6 +12430,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "27da88b6-2a54-b18f-5e89-add06ea96454",
@@ -12421,7 +12505,7 @@
             ],
             "name": "Pause",
             "order": 6,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "25ce82a9-68e4-6366-6656-97d61c24fb51"
         },
@@ -12524,19 +12608,25 @@
                             "g": 0.800000011920929,
                             "r": 0.800000011920929
                         },
+                        "hovered_texture": "848b2e12-2af7-bb91-d06d-d0b76da6ee94",
                         "interactable": true,
+                        "nav_down": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "06bf664a-64ba-c082-0727-8becbbf1da78",
+                        "nav_up": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
+                        "normal_texture": "37457ba3-0df7-09d3-5fb0-0158ea8c7ca1",
                         "on_click_bindings": {
                             "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4": {
                                 "0": {
                                     "component_uuid": "9aaf84eb-4a33-de50-e51c-e7731d5e07b9",
                                     "entity_uuid": "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4",
-                                    "function": "HandleClickConfirm"
+                                    "function": "HandleConfirmAnimation"
                                 }
                             }
                         },
@@ -12548,13 +12638,17 @@
                             "r": 0.6000000238418579
                         },
                         "sorting_layer": 5,
-                        "transition_mode": 0
+                        "transition_mode": 1
                     },
                     "is_active": true,
                     "uuid": "848540e0-bfc4-5239-ece3-23e95547da5b"
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 5,
                         "texture_uuid": "37457ba3-0df7-09d3-5fb0-0158ea8c7ca1",
@@ -12573,6 +12667,16 @@
                     },
                     "is_active": true,
                     "uuid": "cbcecc30-22b8-6bc9-3113-c2b596d8e5bb"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "Exit",
+                        "fields": {
+                            "Blocked": false
+                        }
+                    },
+                    "uuid": "39aed537-1d75-8218-e369-715bb7c0296f"
                 }
             ],
             "name": "Exit",
@@ -12680,19 +12784,25 @@
                             "g": 0.800000011920929,
                             "r": 0.800000011920929
                         },
+                        "hovered_texture": "7ecbb69c-f084-eedd-0fb4-e27d4547c8d1",
                         "interactable": true,
+                        "nav_down": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "06bf664a-64ba-c082-0727-8becbbf1da78",
+                        "nav_up": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
+                        "normal_texture": "e5ef1ad3-0ce9-72de-4940-4eae555b814b",
                         "on_click_bindings": {
                             "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4": {
                                 "0": {
                                     "component_uuid": "9aaf84eb-4a33-de50-e51c-e7731d5e07b9",
                                     "entity_uuid": "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4",
-                                    "function": "HandleClickConfirm"
+                                    "function": "HandleConfirmAnimation"
                                 }
                             }
                         },
@@ -12704,13 +12814,17 @@
                             "r": 0.6000000238418579
                         },
                         "sorting_layer": 5,
-                        "transition_mode": 0
+                        "transition_mode": 1
                     },
                     "is_active": true,
                     "uuid": "3c3e2585-2251-9539-529d-a5c3e56382ae"
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 5,
                         "texture_uuid": "e5ef1ad3-0ce9-72de-4940-4eae555b814b",
@@ -12729,6 +12843,17 @@
                     },
                     "is_active": true,
                     "uuid": "0e28d2ed-7d57-2d25-a611-c791bcf4f597"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "db1dd4f7-fb12-b501-b8a7-ac788f03b8ae"
+                        }
+                    },
+                    "uuid": "f48d5e41-a815-9a6c-c7f3-06dbf4ba4e71"
                 }
             ],
             "name": "MainMenu",
@@ -12807,7 +12932,7 @@
             ],
             "name": "Lighting",
             "order": 10,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -13013,7 +13138,7 @@
             ],
             "name": "Level_Container",
             "order": 12,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "2fe4f35d-68d0-0ee8-356e-96bd16b54747"
         },
@@ -13161,7 +13286,7 @@
             ],
             "name": "Enemies",
             "order": 13,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -13341,7 +13466,7 @@
             ],
             "name": "//////////////// WORLD",
             "order": 11,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "1a511023-f8de-375a-8197-ca8e36bf62f1"
         },
@@ -13417,6 +13542,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.013373343273997307,
@@ -13642,7 +13768,7 @@
             ],
             "name": "WoodenBridge",
             "order": 15,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "734cd308-22e2-c91e-390e-7a45d9dabad6"
         },
@@ -13827,7 +13953,7 @@
             ],
             "name": "//////////////// LIGHTS",
             "order": 9,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "038bed1e-61d2-b9b1-df40-ee2bf7d50fc9"
         },
@@ -13864,7 +13990,7 @@
             ],
             "name": "//////////////// OTHERS",
             "order": 16,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "eb583655-1b63-12dd-8ccc-c1ca88b7cd4c"
         },
@@ -13901,7 +14027,7 @@
             ],
             "name": "//////////////// PLAYER",
             "order": 0,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "7e248101-17e2-52c9-4275-8d812874cdc7"
         },
@@ -14009,6 +14135,11 @@
                     "script": {
                         "class_id": "VistaPoint",
                         "fields": {
+                            "offset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
                             "time": 50.0,
                             "zoom": 20.0
                         }
@@ -14794,6 +14925,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.03976500779390335,
@@ -14973,6 +15105,10 @@
                             "r": 1.0
                         },
                         "draw_gizmo": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "render_mode": 1,
                         "sorting_layer": 2
@@ -15008,7 +15144,7 @@
             ],
             "name": "BasicFadeInOut",
             "order": 8,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "2da5757b-f4be-2828-ea50-3286484f8028"
         },
@@ -15062,6 +15198,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
@@ -15138,6 +15278,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -15214,6 +15358,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "88ee7c58-7d9e-24c3-0dac-02f44f96ce89",
@@ -15310,7 +15458,7 @@
             ],
             "name": "WaterLevel",
             "order": 17,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "c9248883-d09c-a8d5-c4d8-4487a286a37f"
         },
@@ -15423,6 +15571,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.015592148527503014,
@@ -15593,6 +15742,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.013373343273997307,
@@ -15763,6 +15913,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.015592148527503014,
@@ -16425,7 +16576,7 @@
             ],
             "name": "Music",
             "order": 18,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "e2bde98c-df70-8af1-6539-ab61511e723e"
         },
@@ -16807,6 +16958,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.005727669224143028,
@@ -16951,7 +17103,7 @@
                     "script": {
                         "class_id": "PillarTrigger",
                         "fields": {
-                            "hookParticles": "97681561-cf4b-4293-580c-efa5e625fa09",
+                            "hookParticlesEntity": "",
                             "hookTravelTime": 0.4000000059604645,
                             "interactionPrompt": "4ada8c74-1f4a-12cf-0553-c5a9103140fe",
                             "reachDistance": 20.0
@@ -16962,7 +17114,7 @@
             ],
             "name": "GrapplePillar",
             "order": 19,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "10693382-bf71-fb19-c002-91b4d31030f7"
         },
@@ -17001,6 +17153,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.003922868520021439,
@@ -17182,6 +17335,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.005034215748310089,
@@ -17249,6 +17403,7 @@
                         },
                         "1": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.0078110708855092525,
@@ -17549,6 +17704,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -17616,6 +17772,7 @@
                         },
                         "1": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -17683,6 +17840,7 @@
                         },
                         "2": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -18023,6 +18181,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.005686149001121521,
@@ -19010,6 +19169,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -19357,6 +19517,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.0007998943328857422,
@@ -19618,6 +19779,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.005686149001121521,
@@ -19729,54 +19891,9 @@
             ],
             "name": "//////////////// DEBUG",
             "order": 21,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "8683e695-a844-e997-2cfe-19bd6d94b4bc"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "a2297d89-06da-cc86-09b3-adc5e314564f"
-                },
-                {
-                    "is_active": true,
-                    "script": {
-                        "class_id": "PuzzleDebugController",
-                        "fields": {}
-                    },
-                    "uuid": "d4b9ed60-88e9-28a8-3809-b90a2c01607e"
-                }
-            ],
-            "name": "PuzzleDebugger",
-            "order": 22,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
-            "static": true,
-            "uuid": "8792693d-ff8f-d91b-c3c2-690257bbc75d"
         },
         {
             "active": true,
@@ -19871,6 +19988,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 3,
                             "emmitertimer": 0.0,
@@ -20971,6 +21089,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -21397,12 +21519,16 @@
                             "r": 0.5
                         },
                         "hovered": {
-                            "a": 0.800000011920929,
-                            "b": 0.800000011920929,
-                            "g": 0.800000011920929,
-                            "r": 0.800000011920929
+                            "a": 1.0,
+                            "b": 0.3529411852359772,
+                            "g": 0.3529411852359772,
+                            "r": 0.729411780834198
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -21410,11 +21536,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "2ca4886e-f929-9e60-f8ad-c337aab0dec9": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "4ec6ab07-0c40-fba1-59b8-e3f62760801f",
+                                    "entity_uuid": "2ca4886e-f929-9e60-f8ad-c337aab0dec9",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -21443,6 +21569,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -21451,10 +21581,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "e615a423-fda9-4755-9fd6-33df2140605f"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "8e5971c1-452c-562e-0de4-581e07cca376"
+                        }
+                    },
+                    "uuid": "4ec6ab07-0c40-fba1-59b8-e3f62760801f"
                 }
             ],
             "name": "PauseLevel1Button",
-            "order": 2,
+            "order": 1,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "2ca4886e-f929-9e60-f8ad-c337aab0dec9"
@@ -23402,6 +23543,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 3,
                             "emmitertimer": 0.0,
@@ -23469,6 +23611,7 @@
                         },
                         "1": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -23536,6 +23679,7 @@
                         },
                         "2": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -23603,6 +23747,7 @@
                         },
                         "3": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -23670,6 +23815,7 @@
                         },
                         "4": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -23738,6 +23884,7 @@
                         },
                         "5": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -24207,6 +24354,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 3,
                             "emmitertimer": 0.0,
@@ -24274,6 +24422,7 @@
                         },
                         "1": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -24341,6 +24490,7 @@
                         },
                         "2": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -24526,6 +24676,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -27694,6 +27848,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 3,
                             "emmitertimer": 0.0,
@@ -27761,6 +27916,7 @@
                         },
                         "1": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -27828,6 +27984,7 @@
                         },
                         "2": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -27895,6 +28052,7 @@
                         },
                         "3": {
                             "active": false,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -27962,6 +28120,7 @@
                         },
                         "4": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -28029,6 +28188,7 @@
                         },
                         "5": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": true,
                             "billboard": 0,
                             "emmitertimer": 0.0,
@@ -28732,6 +28892,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -29030,6 +29194,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "e5eaa899-9d07-068f-389d-a4b85af66f66",
@@ -29156,6 +29324,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -29163,11 +29335,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "84ba9c74-d679-f08b-3654-a9aed3acc530": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "88e6313b-e2f3-576f-590e-1fef8c02a62f",
+                                    "entity_uuid": "84ba9c74-d679-f08b-3654-a9aed3acc530",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -29196,6 +29368,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -29204,10 +29380,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "3ba038e0-6d12-3fee-f2a1-93cf4b33cecb"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "5e40eec1-b66f-2ee1-ddf3-d2d982a7c619"
+                        }
+                    },
+                    "uuid": "88e6313b-e2f3-576f-590e-1fef8c02a62f"
                 }
             ],
-            "name": "PauseLevel2WaterPathButton_1",
-            "order": 6,
+            "name": "PauseLevel2WaterTempleButton",
+            "order": 5,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "84ba9c74-d679-f08b-3654-a9aed3acc530"
@@ -31495,7 +31682,7 @@
             "uuid": "3ddb8973-b3e2-83a3-3e26-3fa79de1a002"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "is_active": true,
@@ -31557,6 +31744,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
+                        "nav_right": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -31587,6 +31778,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 6,
                         "texture_uuid": "423e09bf-8fea-406f-c280-9ec2419f85b2",
@@ -31614,7 +31809,7 @@
             "uuid": "06bf664a-64ba-c082-0727-8becbbf1da78"
         },
         {
-            "active": true,
+            "active": false,
             "components": [
                 {
                     "is_active": true,
@@ -31663,6 +31858,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 5,
                         "texture_uuid": "8e98422e-12d8-abaa-c841-abd013eb6fb8",
@@ -31702,25 +31901,25 @@
                         },
                         "layout": {
                             "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 1.0,
+                                "y": 0.5
                             },
                             "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 1.0,
+                                "y": 0.5
                             },
                             "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 1.0,
+                                "y": 0.5
                             },
                             "size_delta": {
-                                "x": 50.0,
+                                "x": 33.0,
                                 "y": 50.0
                             }
                         },
                         "position": {
-                            "x": 14.0,
-                            "y": 89.5,
+                            "x": -40.29999923706055,
+                            "y": 59.900001525878906,
                             "z": 0.0
                         },
                         "rotation": {
@@ -31752,6 +31951,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -31792,6 +31995,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -31803,7 +32010,7 @@
                 }
             ],
             "name": "PauseTransparencyButton",
-            "order": 0,
+            "order": 12,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "3d4064ca-a610-d60e-33b6-e1a50398c8b3"
@@ -32018,6 +32225,10 @@
                             "r": 1.0
                         },
                         "draw_gizmo": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "render_mode": 1,
                         "sorting_layer": 5
@@ -32067,12 +32278,12 @@
                                 "y": 0.5
                             },
                             "size_delta": {
-                                "x": 133.0,
+                                "x": 160.0,
                                 "y": 48.0
                             }
                         },
                         "position": {
-                            "x": 28.836999893188477,
+                            "x": 27.23699951171875,
                             "y": -16.826000213623047,
                             "z": -0.1456599235534668
                         },
@@ -32106,6 +32317,10 @@
                         },
                         "hovered_texture": "1f1fd865-fcf7-966f-6696-202e1fe8eff8",
                         "interactable": true,
+                        "nav_down": "4765b331-c2d2-1734-58f1-27d7172168e1",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "06bf664a-64ba-c082-0727-8becbbf1da78",
+                        "nav_up": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -32118,7 +32333,7 @@
                                 "0": {
                                     "component_uuid": "9aaf84eb-4a33-de50-e51c-e7731d5e07b9",
                                     "entity_uuid": "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4",
-                                    "function": "HandleClickConfirm"
+                                    "function": "HandleConfirmAnimation"
                                 }
                             }
                         },
@@ -32131,13 +32346,17 @@
                         },
                         "pressed_texture": "1f1fd865-fcf7-966f-6696-202e1fe8eff8",
                         "sorting_layer": 5,
-                        "transition_mode": 0
+                        "transition_mode": 1
                     },
                     "is_active": true,
                     "uuid": "27d66ad3-5daa-baf4-f24f-c3df380ea0db"
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 5,
                         "texture_uuid": "385f4d85-501e-3c2f-887c-9968bc60b9a9",
@@ -32156,82 +32375,6 @@
                     },
                     "is_active": true,
                     "uuid": "707e048a-f2c2-2117-fb8b-0871045efd81"
-                }
-            ],
-            "name": "Settings",
-            "order": 5,
-            "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
-            "static": true,
-            "uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "is_active": true,
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 145.0,
-                                "y": 60.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.0,
-                            "y": -6.0,
-                            "z": -3.547407627105713
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "7dacc96f-a4c2-3e5d-a0e6-9de5faced4ab"
-                },
-                {
-                    "image": {
-                        "order_in_layer": 3,
-                        "sorting_layer": 12,
-                        "texture_uuid": "5a99e466-892b-afe9-7607-f48f6083af0c",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "is_active": true,
-                    "uuid": "c0e8eca3-509d-168d-cba9-fd03b741d0c8"
                 },
                 {
                     "is_active": true,
@@ -32242,100 +32385,14 @@
                             "UUID": "b51ec635-d666-ffa8-336e-9e908e4cefaa"
                         }
                     },
-                    "uuid": "220b53ef-f268-c378-7da5-c87ef625007d"
+                    "uuid": "9da86800-45ee-4444-cdc0-bf0222788557"
                 }
             ],
-            "name": "Settings_Hovered",
-            "order": 0,
-            "parent_uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
+            "name": "Settings",
+            "order": 5,
+            "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
-            "uuid": "b340ab3c-76a9-5f4e-6435-27bd74755279"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "is_active": true,
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 84.0,
-                                "y": 45.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.0,
-                            "y": -6.0,
-                            "z": -4.412818908691406
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        }
-                    },
-                    "uuid": "0a5ed0d0-8872-869f-9bd8-fe9cd5417b7f"
-                },
-                {
-                    "image": {
-                        "order_in_layer": 3,
-                        "sorting_layer": 12,
-                        "texture_uuid": "848b2e12-2af7-bb91-d06d-d0b76da6ee94",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "is_active": true,
-                    "uuid": "ea8a7a42-4656-6850-a58d-7b0b9ba82651"
-                },
-                {
-                    "is_active": true,
-                    "script": {
-                        "class_id": "Exit",
-                        "fields": {
-                            "Blocked": false
-                        }
-                    },
-                    "uuid": "3dce541c-4fa9-a024-2a09-f0592ce943e3"
-                }
-            ],
-            "name": "Exit_Hovered",
-            "order": 0,
-            "parent_uuid": "4765b331-c2d2-1734-58f1-27d7172168e1",
-            "static": true,
-            "uuid": "97b3b74a-5788-495d-6424-505417bbbc37"
+            "uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a"
         },
         {
             "active": true,
@@ -32400,6 +32457,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -32407,11 +32468,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "8dcaf574-f9ae-5501-b8b7-b5a5561fbff0": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "7b958dc5-5667-a252-965e-87d2598b2f3b",
+                                    "entity_uuid": "8dcaf574-f9ae-5501-b8b7-b5a5561fbff0",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -32440,6 +32501,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -32448,10 +32513,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "b8fb3679-d445-7c8c-34be-265b444da13e"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "4eee6a91-e662-16cc-dce1-1d332da46fe2"
+                        }
+                    },
+                    "uuid": "7b958dc5-5667-a252-965e-87d2598b2f3b"
                 }
             ],
             "name": "PauseLevel2HubButton",
-            "order": 4,
+            "order": 3,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "8dcaf574-f9ae-5501-b8b7-b5a5561fbff0"
@@ -32506,6 +32582,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 5,
                         "texture_uuid": "8e98422e-12d8-abaa-c841-abd013eb6fb8",
@@ -32532,19 +32612,15 @@
                         "fields": {
                             "closeBookEntity": "fe246ab7-1b45-8d7e-1acc-2d8f979b5a1e",
                             "continueEntity": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
-                            "continueHoveredEntity": "7e6d4794-a47e-5ede-7897-fd0801ca318d",
                             "exitEntity": "4765b331-c2d2-1734-58f1-27d7172168e1",
-                            "exitHoveredEntity": "97b3b74a-5788-495d-6424-505417bbbc37",
                             "ilustrationEntity": "bd264aa8-4f1f-eaef-c463-68a026efce0f",
-                            "inputCooldown": 0.20000000298023224,
                             "invertedPassPageEntity": "8f07135b-74d6-a539-1387-1851a5cfc0d5",
                             "loopMusicEntity": "15c44f9f-58a7-22d6-9e0c-1fd31fc86303",
                             "mainMenuEntity": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
-                            "mainMenuHoveredEntity": "6f4fc9ec-b929-a8c0-9729-6866009d711e",
                             "passPageEntity": "87520640-668d-b217-9d25-4c9f28d44c59",
                             "selectSfxEntity": "06967563-59c0-e196-a4ab-39cf70e41a09",
                             "settingsEntity": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a",
-                            "settingsHoveredEntity": "b340ab3c-76a9-5f4e-6435-27bd74755279"
+                            "uiManagerEntity": "47f9801f-c490-498b-396a-c912f7e2237c"
                         }
                     },
                     "uuid": "9aaf84eb-4a33-de50-e51c-e7731d5e07b9"
@@ -32618,19 +32694,25 @@
                             "g": 0.800000011920929,
                             "r": 0.800000011920929
                         },
+                        "hovered_texture": "2f3c8b24-1883-15b6-de93-3070fac02f0e",
                         "interactable": true,
+                        "nav_down": "6ef401e6-8efb-369f-27d9-51ace9d2d81f",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "06bf664a-64ba-c082-0727-8becbbf1da78",
+                        "nav_up": "4765b331-c2d2-1734-58f1-27d7172168e1",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
+                        "normal_texture": "d5922286-ac26-e928-40ec-405ac814da1e",
                         "on_click_bindings": {
                             "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4": {
                                 "0": {
                                     "component_uuid": "9aaf84eb-4a33-de50-e51c-e7731d5e07b9",
                                     "entity_uuid": "7c0e2050-cf2a-e315-1eb8-bdf8edf45cb4",
-                                    "function": "HandleClickConfirm"
+                                    "function": "HandleConfirmAnimation"
                                 }
                             }
                         },
@@ -32642,90 +32724,18 @@
                             "r": 0.6000000238418579
                         },
                         "sorting_layer": 5,
-                        "transition_mode": 0
+                        "transition_mode": 1
                     },
                     "is_active": true,
                     "uuid": "70c3896b-00cb-bf4c-1546-158a7f45bb3a"
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
-                        "sorting_layer": 5,
-                        "texture_uuid": "d5922286-ac26-e928-40ec-405ac814da1e",
-                        "tint": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "uv_rect": {
-                            "max_u": 1.0,
-                            "max_v": 1.0,
-                            "min_u": 0.0,
-                            "min_v": 0.0
-                        }
-                    },
-                    "is_active": true,
-                    "uuid": "ec219308-9812-dd64-476a-12c1fdb2887f"
-                }
-            ],
-            "name": "Continue",
-            "order": 3,
-            "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
-            "static": true,
-            "uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a"
-        },
-        {
-            "active": false,
-            "components": [
-                {
-                    "is_active": true,
-                    "recttransform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": -0.0,
-                            "z": 0.0
-                        },
-                        "layout": {
-                            "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "anchor_min": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
-                            },
-                            "size_delta": {
-                                "x": 214.0,
-                                "y": 46.0
-                            }
-                        },
-                        "position": {
-                            "x": -6.000518798828125,
-                            "y": -5.900196075439453,
-                            "z": -1.0159633159637451
-                        },
-                        "rotation": {
-                            "w": 1.0,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "scale": {
-                            "x": 0.9999999403953552,
-                            "y": 0.9999999403953552,
-                            "z": 0.9999999403953552
-                        }
-                    },
-                    "uuid": "44c4be33-3496-50bc-a5d3-65194fa44630"
-                },
-                {
-                    "image": {
-                        "order_in_layer": 2,
                         "sorting_layer": 5,
                         "texture_uuid": "2f3c8b24-1883-15b6-de93-3070fac02f0e",
                         "tint": {
@@ -32742,7 +32752,7 @@
                         }
                     },
                     "is_active": true,
-                    "uuid": "a393736d-2384-2a6c-3387-aac2059814b5"
+                    "uuid": "ec219308-9812-dd64-476a-12c1fdb2887f"
                 },
                 {
                     "is_active": true,
@@ -32750,14 +32760,14 @@
                         "class_id": "Load",
                         "fields": {}
                     },
-                    "uuid": "c527aca1-76c8-5b09-7054-426d56dd2763"
+                    "uuid": "dcb90169-fb75-acd9-a790-bbb23bbb6c55"
                 }
             ],
-            "name": "Continue_Hovered",
-            "order": 0,
-            "parent_uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a",
+            "name": "Continue",
+            "order": 3,
+            "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
-            "uuid": "7e6d4794-a47e-5ede-7897-fd0801ca318d"
+            "uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a"
         },
         {
             "active": true,
@@ -32819,6 +32829,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -32885,6 +32899,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 5,
                         "texture_uuid": "bfadf068-4451-aa6a-2554-623ce47eeb07",
@@ -32961,6 +32979,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 5,
                         "texture_uuid": "1f5f03f0-52ac-b207-f1b9-b9713b8c4994",
@@ -33037,7 +33059,11 @@
                 },
                 {
                     "image": {
-                        "order_in_layer": 4,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 3,
                         "sorting_layer": 5,
                         "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4",
                         "tint": {
@@ -33130,7 +33156,11 @@
                 },
                 {
                     "image": {
-                        "order_in_layer": 5,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 3,
                         "sorting_layer": 5,
                         "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4",
                         "tint": {
@@ -33230,6 +33260,10 @@
                             "r": 1.0
                         },
                         "draw_gizmo": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "render_mode": 1,
                         "sorting_layer": 6
@@ -33284,7 +33318,7 @@
             ],
             "name": "LoseScreen",
             "order": 7,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "cbadd15c-800d-7570-32bd-bf58d736ab62"
         },
@@ -33338,6 +33372,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "2774f2fd-30ea-3b03-9c37-9c292182a544",
@@ -33414,6 +33452,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 0,
                         "texture_uuid": "33ecb557-e519-9bd2-08c3-8c12d8e06a52",
@@ -33555,6 +33597,10 @@
                         "font_size": 24.0,
                         "font_uuid": "d95f5dbe-852f-636c-58fd-61f191812e94",
                         "horizontal_alignment": 1,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -33621,6 +33667,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -33697,6 +33747,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -33773,6 +33827,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -33915,6 +33973,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -34057,6 +34119,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -34133,6 +34199,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -34275,6 +34345,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -34417,6 +34491,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -34493,6 +34571,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -34569,6 +34651,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -34645,6 +34731,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -34787,6 +34877,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -34929,6 +35023,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "479825da-4a76-c704-30ff-27259bccf22b",
@@ -35005,6 +35103,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "c8962e01-3a56-64f2-f3a4-e7d06244b10e",
@@ -35147,6 +35249,10 @@
                 },
                 {
                     "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "sorting_layer": 0,
                         "texture_uuid": "e5eaa899-9d07-068f-389d-a4b85af66f66",
@@ -35218,7 +35324,7 @@
                     "script": {
                         "class_id": "PillarTrigger",
                         "fields": {
-                            "hookParticles": "bd6b079d-bd52-dc1e-cce8-b7df1af196c0",
+                            "hookParticlesEntity": "",
                             "hookTravelTime": 0.4000000059604645,
                             "interactionPrompt": "e7181627-e7ed-c5a0-1788-b379f29dbc5e",
                             "reachDistance": 20.0
@@ -35229,7 +35335,7 @@
             ],
             "name": "GrapplePillar_1",
             "order": 23,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "031e973f-45ac-0144-2f4b-8161f8fce8f4"
         },
@@ -35268,6 +35374,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.003922868520021439,
@@ -35480,7 +35587,7 @@
                     "script": {
                         "class_id": "PillarTrigger",
                         "fields": {
-                            "hookParticles": "9ffe4449-643f-dbe6-c6fa-3544df3bc4d2",
+                            "hookParticlesEntity": "",
                             "hookTravelTime": 0.4000000059604645,
                             "interactionPrompt": "f8be0cb3-2732-0e71-5e9d-e62a28a14780",
                             "reachDistance": 20.0
@@ -35491,7 +35598,7 @@
             ],
             "name": "GrapplePillar_1_1_1",
             "order": 25,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "a3dcfeca-edfe-9e55-a748-c23dba479301"
         },
@@ -35530,6 +35637,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.003922868520021439,
@@ -35697,7 +35805,7 @@
                     "script": {
                         "class_id": "PillarTrigger",
                         "fields": {
-                            "hookParticles": "ea9d8f8c-ee35-63a6-96ce-c416c48e239e",
+                            "hookParticlesEntity": "",
                             "hookTravelTime": 0.4000000059604645,
                             "interactionPrompt": "98a2f511-613a-f136-f90a-2b3dea0310c5",
                             "reachDistance": 20.0
@@ -35708,7 +35816,7 @@
             ],
             "name": "GrapplePillar_1_1_1_1",
             "order": 26,
-            "parent_uuid": "5e9454a9-a042-9659-ddc2-349efc818539",
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
             "static": true,
             "uuid": "a6020094-f0d3-ca95-fedd-e72275286e25"
         },
@@ -35747,6 +35855,7 @@
                     "particlecomponent": {
                         "0": {
                             "active": true,
+                            "applyRotation": false,
                             "applyScale": false,
                             "billboard": 0,
                             "emmitertimer": 0.003922868520021439,
@@ -35932,6 +36041,10 @@
                             "r": 0.800000011920929
                         },
                         "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "normal": {
                             "a": 1.0,
                             "b": 1.0,
@@ -35939,11 +36052,11 @@
                             "r": 1.0
                         },
                         "on_click_bindings": {
-                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                            "7db0137e-e0d0-d4da-ff85-b22579b94c85": {
                                 "0": {
-                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
-                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
-                                    "function": "TogglePauseTransparency"
+                                    "component_uuid": "34b1a610-72d5-007f-89cd-189da7c14761",
+                                    "entity_uuid": "7db0137e-e0d0-d4da-ff85-b22579b94c85",
+                                    "function": "StartTransition"
                                 }
                             }
                         },
@@ -35972,6 +36085,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -35980,10 +36097,21 @@
                         "vertical_alignment": 0
                     },
                     "uuid": "53097954-37ed-078d-8c47-e7fb3f3162dc"
+                },
+                {
+                    "is_active": true,
+                    "script": {
+                        "class_id": "SceneTransition",
+                        "fields": {
+                            "Blocked": false,
+                            "UUID": "e4d2d639-29e4-df7c-2b3e-87a59c8c9429"
+                        }
+                    },
+                    "uuid": "34b1a610-72d5-007f-89cd-189da7c14761"
                 }
             ],
             "name": "PauseLevel1EarthTempleButton",
-            "order": 3,
+            "order": 2,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "7db0137e-e0d0-d4da-ff85-b22579b94c85"
@@ -36048,6 +36176,10 @@
                         "font_size": 24.0,
                         "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
                         "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 1,
                         "scale": 1.0,
                         "size_mode": 0,
@@ -36059,10 +36191,606 @@
                 }
             ],
             "name": "/////// Teleports",
-            "order": 1,
+            "order": 0,
             "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
             "static": true,
             "uuid": "cbd763a6-76a8-8ab1-f557-646e9a6baa2d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.5
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.5
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.5
+                            },
+                            "size_delta": {
+                                "x": 19.0,
+                                "y": 50.0
+                            }
+                        },
+                        "position": {
+                            "x": 11.699999809265137,
+                            "y": 67.30000305175781,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "dc49925f-46fe-7dd5-7d82-fbddcc76e868"
+                },
+                {
+                    "is_active": true,
+                    "text": {
+                        "color": {
+                            "a": 1.0,
+                            "b": 0.5098039507865906,
+                            "g": 0.19607843458652496,
+                            "r": 0.19607843458652496
+                        },
+                        "font_size": 24.0,
+                        "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
+                        "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 1,
+                        "scale": 1.0,
+                        "size_mode": 0,
+                        "sorting_layer": 5,
+                        "value": "Controls",
+                        "vertical_alignment": 0
+                    },
+                    "uuid": "8b5f980f-0b97-0697-3e6f-16718afb7d78"
+                }
+            ],
+            "name": "/////// Controls",
+            "order": 9,
+            "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
+            "static": true,
+            "uuid": "9c1eb0b1-0330-ac46-05bf-6389684072fb"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 0.0,
+                                "y": 0.5
+                            },
+                            "anchor_min": {
+                                "x": 0.0,
+                                "y": 0.5
+                            },
+                            "pivot": {
+                                "x": 0.0,
+                                "y": 0.5
+                            },
+                            "size_delta": {
+                                "x": 80.0,
+                                "y": 50.0
+                            }
+                        },
+                        "position": {
+                            "x": 13.5,
+                            "y": 31.100000381469727,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "598ae6c1-f2f1-38b5-135f-01db38a21d83"
+                },
+                {
+                    "is_active": true,
+                    "text": {
+                        "color": {
+                            "a": 1.0,
+                            "b": 0.5098039507865906,
+                            "g": 0.19607843458652496,
+                            "r": 0.19607843458652496
+                        },
+                        "font_size": 24.0,
+                        "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
+                        "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 1,
+                        "scale": 1.0,
+                        "size_mode": 0,
+                        "sorting_layer": 5,
+                        "value": "Move Player - WASD/Left Stick/Gamepad Arrows\nMove Camera - Arrow Keys/Right Stick\nDash - Space/A\nAttack - J/X\nGrapple - I/Left Trigger\nTorch - O/Right Trigger\nInteract - E/Y\nOptions - Esc/Start",
+                        "vertical_alignment": 0
+                    },
+                    "uuid": "5ff3e1b6-1a95-0245-540e-8082b1e0cc63"
+                }
+            ],
+            "name": "ControlsDefinition",
+            "order": 10,
+            "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
+            "static": true,
+            "uuid": "330bc3f0-d46a-e9f3-2d60-78d0658a8176"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "anchor_min": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "pivot": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "size_delta": {
+                                "x": 14.0,
+                                "y": 50.0
+                            }
+                        },
+                        "position": {
+                            "x": -61.400001525878906,
+                            "y": 67.4000015258789,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "71007ebe-c476-5f94-b6f7-bd65bd0f5c2a"
+                },
+                {
+                    "is_active": true,
+                    "text": {
+                        "color": {
+                            "a": 1.0,
+                            "b": 0.5098039507865906,
+                            "g": 0.19607843458652496,
+                            "r": 0.19607843458652496
+                        },
+                        "font_size": 24.0,
+                        "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
+                        "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 1,
+                        "scale": 1.0,
+                        "size_mode": 0,
+                        "sorting_layer": 5,
+                        "value": "Menus",
+                        "vertical_alignment": 0
+                    },
+                    "uuid": "4b9ce3a5-c251-c791-c779-bb9dd9b7f705"
+                }
+            ],
+            "name": "/////// Menus",
+            "order": 11,
+            "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
+            "static": true,
+            "uuid": "76069b93-528a-724c-0179-30be740c9a2e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "anchor_min": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "pivot": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "size_delta": {
+                                "x": 14.0,
+                                "y": 50.0
+                            }
+                        },
+                        "position": {
+                            "x": -61.400001525878906,
+                            "y": 53.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "cf6dd3d8-8a92-b015-3461-eca5066598d2"
+                },
+                {
+                    "is_active": true,
+                    "text": {
+                        "color": {
+                            "a": 1.0,
+                            "b": 0.5098039507865906,
+                            "g": 0.19607843458652496,
+                            "r": 0.19607843458652496
+                        },
+                        "font_size": 24.0,
+                        "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
+                        "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 1,
+                        "scale": 1.0,
+                        "size_mode": 0,
+                        "sorting_layer": 5,
+                        "value": "Player",
+                        "vertical_alignment": 0
+                    },
+                    "uuid": "10de4f49-728e-2e23-8fb1-41b96c598fa8"
+                }
+            ],
+            "name": "/////// Player",
+            "order": 13,
+            "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
+            "static": true,
+            "uuid": "21bf3a0c-6783-ef8d-e111-d01f2212c846"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "anchor_min": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "pivot": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "size_delta": {
+                                "x": 16.0,
+                                "y": 50.0
+                            }
+                        },
+                        "position": {
+                            "x": -57.20000076293945,
+                            "y": 47.29999923706055,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "10090470-dad4-5548-889a-0bcd20de0d71"
+                },
+                {
+                    "button": {
+                        "disabled": {
+                            "a": 0.5,
+                            "b": 0.5,
+                            "g": 0.5,
+                            "r": 0.5
+                        },
+                        "hovered": {
+                            "a": 0.800000011920929,
+                            "b": 0.800000011920929,
+                            "g": 0.800000011920929,
+                            "r": 0.800000011920929
+                        },
+                        "interactable": true,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "normal": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "on_click_bindings": {
+                            "5a828715-7a63-57da-2777-ff5608c9197f": {
+                                "0": {
+                                    "component_uuid": "35073d1c-4f66-2512-bbe8-a8bfd5500759",
+                                    "entity_uuid": "5a828715-7a63-57da-2777-ff5608c9197f",
+                                    "function": "TogglePauseTransparency"
+                                }
+                            }
+                        },
+                        "order_in_layer": 0,
+                        "pressed": {
+                            "a": 0.6000000238418579,
+                            "b": 0.6000000238418579,
+                            "g": 0.6000000238418579,
+                            "r": 0.6000000238418579
+                        },
+                        "sorting_layer": 0,
+                        "transition_mode": 0
+                    },
+                    "is_active": true,
+                    "uuid": "9d984914-abf4-d948-182c-ec1ca03d823e"
+                },
+                {
+                    "is_active": true,
+                    "text": {
+                        "color": {
+                            "a": 1.0,
+                            "b": 0.5098039507865906,
+                            "g": 0.19607843458652496,
+                            "r": 0.19607843458652496
+                        },
+                        "font_size": 24.0,
+                        "font_uuid": "082d03e2-126c-1139-79b3-e4c9d01a62ef",
+                        "horizontal_alignment": 0,
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 1,
+                        "scale": 1.0,
+                        "size_mode": 0,
+                        "sorting_layer": 5,
+                        "value": "Godmode",
+                        "vertical_alignment": 0
+                    },
+                    "uuid": "c8156d1a-bad5-3f5c-2f72-b4286170e76e"
+                }
+            ],
+            "name": "PauseGodmodeButton",
+            "order": 14,
+            "parent_uuid": "efd527e1-2147-21e9-f889-4006c2212e48",
+            "static": true,
+            "uuid": "000b4ffc-bd62-a126-31f4-4fd48c012c6d"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "e7fd85af-5784-6416-c5b1-2ab27745e0d0"
+                },
+                {
+                    "is_active": true,
+                    "ui_manager": {
+                        "move_down": [
+                            {
+                                "axis_dir": 1.0,
+                                "code": 22,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 81,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 12,
+                                "type": 1
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 1,
+                                "type": 2
+                            }
+                        ],
+                        "move_left": [
+                            {
+                                "axis_dir": 1.0,
+                                "code": 4,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 80,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": -1.0,
+                                "code": 0,
+                                "type": 2
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 13,
+                                "type": 1
+                            }
+                        ],
+                        "move_right": [
+                            {
+                                "axis_dir": 1.0,
+                                "code": 7,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 79,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 14,
+                                "type": 1
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 0,
+                                "type": 2
+                            }
+                        ],
+                        "move_up": [
+                            {
+                                "axis_dir": 1.0,
+                                "code": 26,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 82,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 11,
+                                "type": 1
+                            },
+                            {
+                                "axis_dir": -1.0,
+                                "code": 1,
+                                "type": 2
+                            }
+                        ],
+                        "select": [
+                            {
+                                "axis_dir": 1.0,
+                                "code": 40,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 44,
+                                "type": 0
+                            },
+                            {
+                                "axis_dir": 1.0,
+                                "code": 0,
+                                "type": 1
+                            }
+                        ],
+                        "selected_entity": "e294d23b-a1f7-7479-63c7-9e3974c51d0a"
+                    },
+                    "uuid": "e0f44947-1cdb-6be6-7f01-d4257acb28cb"
+                }
+            ],
+            "name": "UIManager",
+            "order": 4,
+            "parent_uuid": "e3bd5f49-576d-b431-a7e6-9eb047a069a7",
+            "static": true,
+            "uuid": "47f9801f-c490-498b-396a-c912f7e2237c"
         }
     ]
 }

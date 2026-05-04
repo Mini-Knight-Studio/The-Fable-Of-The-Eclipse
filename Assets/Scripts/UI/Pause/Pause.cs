@@ -26,17 +26,22 @@ public class Pause : Component
         {
             isPaused = !isPaused;
             inputTimer = 0f;
-        }
 
-        if (!isPaused)
-        {
-            pauseMenuEntity.SetActive(false);
-            infoDebugEntity.SetActive(false);
-        }
-        else
-        {
-            pauseMenuEntity.SetActive(true);
-            infoDebugEntity.SetActive(true);
+            if (!isPaused)
+            {
+                pauseMenuEntity.SetActive(false);
+                infoDebugEntity.SetActive(false);
+            }
+            else
+            {
+                pauseMenuEntity.SetActive(true);
+                infoDebugEntity.SetActive(true);
+
+                if (!pauseMenuEntity.Active)
+                {
+                    pauseMenuEntity.GetComponent<PauseMenu>().Open();
+                }
+            }
         }
     }
 

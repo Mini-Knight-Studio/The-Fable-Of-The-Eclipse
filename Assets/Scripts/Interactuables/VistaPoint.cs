@@ -6,6 +6,8 @@ class VistaPoint : Component
     public float zoom = 20;
     public float time = 50f;
 
+    public Vector3 offset = new Vector3(0, 0, 0);
+
     private string cameraName = "PlayerCamera";
 
     private PlayerCamera camera;
@@ -39,7 +41,7 @@ class VistaPoint : Component
 
         if (collider.HasCollided)
         {
-            camera.FocusOnPoint(entity.transform.position, zoom, time);
+            camera.FocusOnPoint(entity.transform.position + offset, zoom, time);
         }
         else if (collider.HasEndedCollision)
         {
