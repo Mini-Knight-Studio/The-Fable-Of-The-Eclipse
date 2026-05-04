@@ -18,13 +18,13 @@ class ColliderSceneTransition : SceneTransition
         UUID = SceneUUID;
 
         levelFadeInOutEvent = levelFadeInOut.GetComponent<FadeInOutEvent>();
-        levelFadeInOutEvent.OnFadeInComplete += GoToScene;
     }
 
     void OnUpdate()
     {
         if(collision.HasCollided)
         {
+            levelFadeInOutEvent.OnFadeInComplete += GoToScene;
             levelFadeInOutEvent.StartFade();
         }
     }
