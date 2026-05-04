@@ -1,5 +1,5 @@
-using System;
 using Loopie;
+using System;
 
 public class HealthHUD : Component
 {
@@ -13,13 +13,20 @@ public class HealthHUD : Component
     {
         healthIcons = new HealthSlot[maxHealthIcons];
 
-        int index = 0;
-        foreach (var icon in entity.Children)
+        int childCount = entity.GetChildren().Count;
+        for (int i = 0; i < childCount; i++)
         {
-            if (index >= maxHealthIcons) 
+            if (i >= maxHealthIcons)
                 break;
-            healthIcons[index] = icon.GetComponent<HealthSlot>();
-            index++;
+            Entity healthSlotEntity = entity.GetChildByName("Life_" + (i));
+            if(healthSlotEntity != null)
+            {
+                HealthSlot healthSlot = healthSlotEntity.GetComponent<HealthSlot>();
+                if (healthSlot != null)
+                {
+                    healthIcons[i] = healthSlot;
+                }
+            }
         }
     }
 
