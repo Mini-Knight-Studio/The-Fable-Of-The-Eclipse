@@ -1,7 +1,7 @@
+using Loopie;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Loopie;
 
 public class Enemy : Component
 {
@@ -12,6 +12,7 @@ public class Enemy : Component
     protected EnemyAnimation animator;
     protected EnemyFeedback feedback;
     protected BoxCollider collision;
+    protected BoxCollider enemyAvoid;
     protected BoxCollider hitbox;
 
     protected TemporalEffect effect;
@@ -21,6 +22,7 @@ public class Enemy : Component
     private Vector3 lastWanderPosition;
     private Vector3 interest_position;
     private bool interest_position_checked;
+    protected Coroutine attackCoroutine;
 
     //-- Attack --//
     protected bool isAttacking;
@@ -38,6 +40,7 @@ public class Enemy : Component
         health = entity.GetComponent<Health>();
         movement = entity.GetComponent<Movement>();
         collision = entity.GetComponent<BoxCollider>();
+        enemyAvoid = entity.GetComponent<BoxCollider>(1);
         animator = entity.GetComponent<EnemyAnimation>();
         feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
@@ -79,7 +82,7 @@ public class Enemy : Component
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
         int LayerMask = PlayerLayer | WallLayer | EnemyWallLayer | EnemyLayer;
 
-        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, collision, LayerMask))
+        if (Collisions.Raycast(transform.position + transform.Up, GetDirectionToTarget(), distance, out hit, entity, LayerMask))
         {
             if (hit.entity == Player.Instance.entity)
             {
@@ -103,7 +106,7 @@ public class Enemy : Component
     #endregion
 
     #region Attack
-    protected IEnumerator Attack(float reach_distance, float preparation_time, float attack_cooldown, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string idle_clip)
+    protected IEnumerator Attack(float attack_distance, float preparation_time, float attack_cooldown, float end_attack_duration, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string end_attack_clip, bool applyFeedbackOnlyOnhit = true)
     {
         isAttacking = true;
         float timer = 0.0f;
@@ -114,11 +117,21 @@ public class Enemy : Component
             transform.LookAt(Player.Instance.transform.position, Vector3.Up);
             yield return null;
         }
-        DoAttack(reach_distance, damage, attack_clip);
+        DoAttack(attack_distance, damage, attack_clip, applyFeedbackOnlyOnhit);
         yield return new WaitForSeconds(animator.ClipDuration());
         DoAttackCooldown(cooldown_clip);
         yield return new WaitForSeconds(attack_cooldown);
-        EndAttack(idle_clip);
+        EndAttack(end_attack_clip);
+        yield return new WaitForSeconds(end_attack_duration);
+        movement.CanMove = true;
+        isAttacking = false;
+    }
+
+    protected IEnumerator CancelAttack(string end_attack_clip, float end_attack_duration)
+    {
+        EndAttack(end_attack_clip);
+        yield return new WaitForSeconds(end_attack_duration);
+        movement.CanMove = true;
         isAttacking = false;
     }
 
@@ -129,38 +142,43 @@ public class Enemy : Component
         animator.PlayClip(charge_attack_clip, false, 0.0f);
     }
 
-    public virtual void DoAttack(float reach_distance, int damage, string attack_clip)
+    public virtual void DoAttack(float attack_distance, int damage, string attack_clip, bool feedback_only_on_hit)
     {
         attack_stages.x = 1.0f;
         animator.PlayClip(attack_clip, false, 0.0f);
-        if (Mathf.Abs((float)Vector3.Distance(transform.position, Player.Instance.transform.position)) <= reach_distance)
+        if (Mathf.Abs((float)Vector3.Distance(transform.position, Player.Instance.transform.position)) <= GetEntityForwardBase() + attack_distance)
         {
-            if (Player.Instance.Effects.AddEffect(effect))feedback.TickParticles("Effect", Time.deltaTime);
+            if (Player.Instance.Effects.AddEffect(effect)) feedback.TickParticles("Effect", Time.deltaTime);
             else feedback.TickParticles("Attack", Time.deltaTime);
             feedback.PlaySound("Attack");
-            feedback.ShakeCamera(damage / 20.0f, knockback_time/2);
+            feedback.ShakeCamera(damage / 20.0f, knockback_time / 2);
 
             Player.Instance.PlayerHealth.Damage(Player.Instance.Effects.GetEffectValueInt(damage, "ModifyDamage"));
             Player.Instance.Movement.ApplyKnockback((float)damage * 10.0f, 0.3f, GetDirectionToTarget());
+        }
+        else if (!feedback_only_on_hit)
+        {
+            feedback.TickParticles("Attack", Time.deltaTime);
+            feedback.ShakeCamera(damage / 20.0f, knockback_time / 2);
+            feedback.PlaySound("Attack");
         }
     }
 
     public virtual void DoAttackCooldown(string cooldown_clip)
     {
         attack_stages.y = 1.0f;
-        animator.PlayClip(cooldown_clip, false, 0.0f);
+        animator.PlayClip(cooldown_clip, true, 0.0f);
     }
 
     public virtual void EndAttack(string idle_clip)
     {
         animator.PlayClip(idle_clip, false, 0.0f);
         attack_stages = Vector2.Zero;
-        movement.CanMove = true;
     }
 
     public virtual void Hit(int points, float force_scale, string hit_clip)
     {
-        if (OnHitCooldown() || !health.canBeDamaged) return;
+        if (!health.canBeDamaged) return;
         if (Player.Instance.Combat.TemporalFunctionIsAttacking())
         {
             if (hitbox.HasCollided)
@@ -169,7 +187,8 @@ public class Enemy : Component
                 transform.LookAt(Player.Instance.transform.position, Vector3.Up);
                 feedback.TickParticles("Hurt", Time.deltaTime);
                 feedback.PlaySound("Hit");
-                animator.PlayClip(hit_clip, false, 0.0f, true);
+                if(!health.IsDead())
+                    animator.PlayClip(hit_clip, false, 0.0f, true, true);
                 StartCoroutine(movement.Push(points * force_scale, knockback_time, GetDirectionToTarget() * -1));
             }
         }
@@ -193,22 +212,21 @@ public class Enemy : Component
         lastWanderPosition = transform.position + Vector3.Forward;
     }
 
-    protected void Wander(Vector2 ViewField, float speedMultiplier)
+    protected void Wander(Vector2 ViewField, float speedMultiplier = 1.0f)
     {
         RaycastHit hit;
         int WallLayer = Collisions.GetLayerBit("WorldLimits");
         int EnemyWallLayer = Collisions.GetLayerBit("EnemyLimit");
         int EnemyLayer = Collisions.GetLayerBit("Enemy");
-        int LayerMask = WallLayer | EnemyWallLayer;
+        int LayerMask = WallLayer | EnemyWallLayer | EnemyLayer;
 
-        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, ViewField.y, out hit, collision, LayerMask))
+        if (!Collisions.Raycast(transform.position + transform.Up, transform.Forward, ViewField.y, out hit, entity, LayerMask))
         {
             movement.Move(speedMultiplier, transform.Forward);
             if (Vector3.Distance(lastWanderPosition, transform.position) > ViewField.y)
                 return;
         }
-
-            wanderRange = true;
+        wanderRange = true;
         for (int i = 0; i < 2; i++)
         {
             int tries = 0;
@@ -217,7 +235,7 @@ public class Enemy : Component
                 float newDir = Loopie.Random.Range(!wanderRange ? -180.0f : -ViewField.x, !wanderRange ? 180.0f : ViewField.x);
 
                 Vector3 newDirection = Vector3.RotateAroundAxis(transform.Forward, transform.Up, newDir);
-                if (!Collisions.Raycast(transform.position + transform.Up, newDirection, ViewField.y, out hit, LayerMask))
+                if (!Collisions.Raycast(transform.position + transform.Up, newDirection, ViewField.y, out hit, entity, LayerMask))
                 {
                     transform.LookAt(transform.position + newDirection, transform.Up);
                     lastWanderPosition = transform.position + transform.Forward * ViewField.y * 1.5f;
@@ -241,14 +259,14 @@ public class Enemy : Component
         Gizmo.DrawLine(transform.position + transform.Forward * field_depth + transform.Up, transform.position + left * field_depth + transform.Up, Color.White);
     }
 
-    protected void DebugToTargetLine(float magnitude, Color color)
+    protected void DebugToTargetLine(float magnitude, Color color, float quit_base = 0)
     {
-        Gizmo.DrawLine(transform.position + transform.Up, transform.position + transform.Up + GetDirectionToTarget() * magnitude, color);
+        Gizmo.DrawLine(transform.position + transform.Up + transform.Forward * quit_base, transform.position + transform.Up + GetDirectionToTarget() * magnitude, color);
     }
 
-    protected void DebugForwardLine(float magnitude, Color color)
+    protected void DebugForwardLine(float magnitude, Color color, float quit_base = 0)
     {
-        Gizmo.DrawLine(transform.position + transform.Up, transform.position + transform.Up + transform.Forward * magnitude, color);
+        Gizmo.DrawLine(transform.position + transform.Up + transform.Forward * quit_base, transform.position + transform.Up + transform.Forward * magnitude, color);
     }
     #endregion
 
@@ -256,6 +274,11 @@ public class Enemy : Component
     public bool Bool(float value)
     {
         return value == 1.0f;
+    }
+
+    protected float GetEntityForwardBase()
+    {
+        return collision.LocalExtents.z * entity.transform.scale.z + collision.LocalCenter.z;
     }
 
     protected bool EndedPreparingAttack()
