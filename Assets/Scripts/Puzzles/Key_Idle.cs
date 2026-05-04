@@ -4,6 +4,9 @@ using Loopie;
 
 class Key_Idle : Component
 {
+    [Header("Identity")]
+    public string keyID = "UNASSIGNED_KEY";
+
     [Header("References")]
     public Entity interactPrompt;
     public Entity ownerChest;
@@ -30,6 +33,11 @@ class Key_Idle : Component
         collider.SetActive(false);
 
         particles = entity.GetComponent<ParticleComponent>();
+
+        if (DatabaseRegistry.levelsDB.Levels.IsRewardCollected(keyID))
+        {
+            entity.SetActive(false);
+        }
     }
 
     void OnUpdate()
@@ -109,6 +117,8 @@ class Key_Idle : Component
         if (ownerChest != null) ownerChest.GetComponent<Chest>().RewardCollected();
 
         entity.SetActive(false);
+
+        DatabaseRegistry.levelsDB.Levels.SetRewardCollected(keyID);
 
         if(focusPointOnCollect != null)
         {

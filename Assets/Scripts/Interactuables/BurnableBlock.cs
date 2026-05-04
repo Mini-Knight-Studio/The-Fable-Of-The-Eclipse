@@ -4,6 +4,9 @@ using Loopie;
 
 public class BurnableBlock : Component
 {
+    [Header("Identity")]
+    public string burnableID = "UNASSIGNED_BURNABLE";
+
     [Header("Visuals")]
     public Entity visuals;
 
@@ -23,6 +26,11 @@ public class BurnableBlock : Component
         collider = colliderEntity.GetComponent<BoxCollider>();
         source = audioSourceEntity.GetComponent<AudioSource>();
         particles = particlesEntity.GetComponent<ParticleComponent>();
+
+        if (DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID))
+        {
+            entity.SetActive(false);
+        }
     }
 
     void OnUpdate()
@@ -61,5 +69,7 @@ public class BurnableBlock : Component
 
         yield return new WaitForSeconds(3);
         entity.SetActive(false);
+
+        DatabaseRegistry.levelsDB.Levels.SetBurnableBurned(burnableID);
     }
 }

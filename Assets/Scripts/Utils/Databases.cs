@@ -152,6 +152,7 @@ public static class DatabaseRegistry
 {
     public static PuzzlesDatabase puzzlesDB = new PuzzlesDatabase();
     public static PlayerDatabase playerDB = new PlayerDatabase();
+    public static LevelsDatabase levelsDB = new LevelsDatabase();
     //public static EnemiesDatabase enemiesDB = new EnemiesDatabase();
     //public static SpawnersDatabase spawnersDB = new SpawnersDatabase();
 
@@ -160,6 +161,7 @@ public static class DatabaseRegistry
         puzzlesDB.Save();
         playerDB.Save();
         //enemiesDB.Save();
+        levelsDB.Save();
     }
 
     public static void LoadAll()
@@ -167,6 +169,7 @@ public static class DatabaseRegistry
         puzzlesDB.Load();
         playerDB.Load();
         //enemiesDB.Load();
+        levelsDB.Save();
     }
 }
 
@@ -198,6 +201,13 @@ public class PlayerDatabase : LocalDatabase
     public PlayerDatabase() : base("playerDB") { }
 
     public PlayerData Player { get; } = new PlayerData();
+}
+
+public class LevelsDatabase : LocalDatabase
+{
+    public LevelsDatabase() : base("levelsDB") { }
+
+    public LevelsData Levels { get; } = new LevelsData();
 }
 
 //public class EnemiesDatabase : LocalDatabase

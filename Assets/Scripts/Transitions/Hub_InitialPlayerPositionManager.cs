@@ -8,38 +8,57 @@ class Hub_InitialPlayerPositionManager : Component
     public string waterpathUUID;
     public string firepathUUID;
 
-    public Vector3 FromLvl1PlayerPos;
-    public Vector3 FromLvl1PlayerRot;
-    public Vector3 FromWaterpathPlayerPos;
-    public Vector3 FromWaterpathPlayerRot;
-    public Vector3 FromFirepathPlayerPos;
-    public Vector3 FromFirepathPlayerRot;
+    public Entity fromLvl1Reference;
+    public Entity fromWaterpathReference;
+    public Entity fromFirepathReference;
 
-    public Entity player;
     void OnCreate()
     {
         DatabaseRegistry.playerDB.Player.SetCurrentScene(level2SceneUUID);
 
-        if(DatabaseRegistry.playerDB.Player.previousSceneUUID == level1SceneUUID)
-        {
-            FromLvl1PlayerPos.y = player.transform.local_position.y;
+        float previousY = Player.Instance.transform.position.y;
 
-            player.transform.local_position = FromLvl1PlayerPos;
-            player.transform.local_rotation = FromLvl1PlayerRot;
+        if (DatabaseRegistry.playerDB.Player.previousSceneUUID == level1SceneUUID)
+        {
+            var pos = fromLvl1Reference.transform.position;
+            pos.y = previousY;
+
+            Player.Instance.transform.local_position = pos;
+            Player.Instance.transform.local_rotation = fromLvl1Reference.transform.rotation;
         }
         else if (DatabaseRegistry.playerDB.Player.previousSceneUUID == waterpathUUID)
         {
-            FromWaterpathPlayerPos.y = player.transform.local_position.y;
+            var pos = fromWaterpathReference.transform.position;
+            pos.y = previousY;
 
-            player.transform.local_position = FromWaterpathPlayerPos;
-            player.transform.local_rotation = FromWaterpathPlayerRot;
+            Player.Instance.transform.local_position = pos;
+            Player.Instance.transform.local_rotation = fromWaterpathReference.transform.rotation;
         }
         else if (DatabaseRegistry.playerDB.Player.previousSceneUUID == firepathUUID)
         {
-            FromFirepathPlayerPos.y = player.transform.local_position.y;
+            var pos = fromFirepathReference.transform.position;
+            pos.y = previousY;
 
-            player.transform.local_position = FromFirepathPlayerPos;
-            player.transform.local_rotation = FromFirepathPlayerRot;
+            Player.Instance.transform.local_position = pos;
+            Player.Instance.transform.local_rotation = fromFirepathReference.transform.rotation;
         }
     }
-};
+
+    //void OnDrawGizmo()
+    //{
+    //    if (fromLvl1Reference != null)
+    //    {
+    //        Gizmo.DrawLine(fromLvl1Reference.transform.position, fromLvl1Reference.transform.Forward, Color.Green);
+    //    }
+
+    //    if (fromWaterpathReference != null)
+    //    {
+    //        Gizmo.DrawLine(fromWaterpathReference.transform.position, fromWaterpathReference.transform.Forward, Color.Green);
+    //    }
+
+    //    if (fromFirepathReference != null)
+    //    {
+    //        Gizmo.DrawLine(fromFirepathReference.transform.position, fromFirepathReference.transform.Forward, Color.Green);
+    //    }
+    //}
+}

@@ -50,13 +50,13 @@ class RollingBridge : Component
 
         if (animationFinished) return;
 
-        if (DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown == true)
-        {
-            bridgeBase.transform.local_position = finalPos;
-            bridgeBase.transform.local_rotation = finalRotation;
-            blockingCollider.GetComponent<BoxCollider>().SetActive(false);
-            animationFinished = true;
-        }
+        //if (DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown == true)
+        //{
+        //    bridgeBase.transform.local_position = finalPos;
+        //    bridgeBase.transform.local_rotation = finalRotation;
+        //    blockingCollider.GetComponent<BoxCollider>().SetActive(false);
+        //    animationFinished = true;
+        //}
 
         if (!animationFinished && !animationStarted && collider.IsColliding && Player.Instance.Movement.IsDashing())
         {
@@ -101,7 +101,7 @@ class RollingBridge : Component
 
         animationFinished = true;
         blockingCollider.GetComponent<BoxCollider>().SetActive(false);
-        DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown = true;
+        //DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown = true;
 
         if (particles != null)
             particles.Play();

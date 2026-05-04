@@ -4,6 +4,10 @@ using Loopie;
 
 class PuzzleDoor : Component
 {
+    [Header("Identity")]
+    public string puzzleDoorID = "UNASSIGNED_PUZZLEDOOR";
+    public string requiredKeyID = "UNASSIGNED_KEY";
+
     [Header("References")]
     public Entity rightDoor;
     public Entity leftDoor;
@@ -70,6 +74,12 @@ class PuzzleDoor : Component
         door3SFX.GetComponent<AudioSource>().Stop();
 
         impactSFX.GetComponent<AudioSource>().Stop();
+
+        if (DatabaseRegistry.levelsDB.Levels.IsPuzzleDoorOpened(puzzleDoorID))
+        {
+            hasOpened = true;
+            DoorOpened();
+        }
     }
 
     void OnUpdate()
@@ -78,7 +88,7 @@ class PuzzleDoor : Component
 
         if (hasOpened || isOpening) return;
 
-        if (entity.GetComponent<BoxCollider>().IsColliding /*&& player has key*/)
+        if (entity.GetComponent<BoxCollider>().IsColliding && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyID))
         {
             if (!interactPrompt.Active)
             {
@@ -205,8 +215,20 @@ class PuzzleDoor : Component
         blockingCollider.SetActive(false);
 
         hasOpened = true;
+        DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);
 
         yield return null;
+    }
+
+    void DoorOpened()
+    {
+        staticKey.SetActive(true);
+        animatedKey.SetActive(false);
+
+        rightDoor.transform.local_rotation = finalRightDoorRot;
+        leftDoor.transform.local_rotation = finalLefttDoorRot;
+
+        blockingCollider.SetActive(false);
     }
 
     void OnDestroy()

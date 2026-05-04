@@ -4,6 +4,9 @@ using Loopie;
 
 class Chest : Component
 {
+    [Header("Identity")]
+    public string chestID = "UNASSIGNED_CHEST";
+
     [Header("References")]
     public Entity animatedMoon;
     public Entity staticMoon;
@@ -49,7 +52,11 @@ class Chest : Component
             rewardItem.SetActive(false);
         }
 
-        // if database.chest is open --> ChestOpened()
+        if (DatabaseRegistry.levelsDB.Levels.IsChestOpen(chestID))
+        {
+            isOpen = true;
+            ChestOpened();
+        }
     }
 
     void OnUpdate()
@@ -171,7 +178,7 @@ class Chest : Component
         }
 
         isOpen = true;
-        // DatabaseRegistry.playerDB.hasOpenedChest(tostring(chestId)) or whatever
+        DatabaseRegistry.levelsDB.Levels.SetChestOpened(chestID);
     }
 
     void ChestOpened()
@@ -182,13 +189,20 @@ class Chest : Component
         Loopie.Vector3 targetLidRot = new Loopie.Vector3(lidStartRot.x, lidStartRot.y, lidStartRot.z + 108.0f);
         upperPart.transform.local_rotation = targetLidRot;
 
-        // check if reward already collected and activate onbase of that rewardItem.SetActive(-------);
+        if (DatabaseRegistry.levelsDB.Levels.IsRewardCollected(chestID))
+        {
+            if (rewardItem != null) rewardItem.SetActive(false);
+        }
+        else
+        {
+            if (rewardItem != null) rewardItem.SetActive(true);
+        }
     }
 
     public void RewardCollected()
     {
         rewardCollected = true;
-        // rewardCollected on database
+        DatabaseRegistry.levelsDB.Levels.SetRewardCollected(chestID);
     }
 
     void OnDestroy()
