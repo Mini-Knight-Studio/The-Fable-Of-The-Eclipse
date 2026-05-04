@@ -163,7 +163,7 @@ public class PauseMenu : Component
 
         if (uiManagerEntity != null)
         {
-            uiManagerScript = mainMenuEntity.GetComponent<UIManager>();
+            uiManagerScript = uiManagerEntity.GetComponent<UIManager>();
         }
         else
         {
@@ -174,19 +174,7 @@ public class PauseMenu : Component
     {
         if (quickStartAnimations)
         {
-            passPageAnimator.Play();
-            passPageAnimator.Stop();
-            passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
-            passPageEntity.SetActive(false);
-            invertedPassPageAnimator.Play();
-            invertedPassPageAnimator.Stop();
-            invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
-            invertedPassPageEntity.SetActive(false);
-            closeBookAnimator.Play();
-            closeBookAnimator.Stop();
-            closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
-            closeBookEntity.SetActive(false);
-            quickStartAnimations = false;
+            PrepareAnimations();
         }
 
         if (!loopMusicHasPlayed)
@@ -252,5 +240,21 @@ public class PauseMenu : Component
         }
 
         canCallScripts = true;
+    }
+    public void PrepareAnimations()
+    {
+        passPageAnimator.Play();
+        passPageAnimator.Stop();
+        passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
+        passPageEntity.SetActive(false);
+        invertedPassPageAnimator.Play();
+        invertedPassPageAnimator.Stop();
+        invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
+        invertedPassPageEntity.SetActive(false);
+        closeBookAnimator.Play();
+        closeBookAnimator.Stop();
+        closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
+        closeBookEntity.SetActive(false);
+        quickStartAnimations = false;
     }
 };
