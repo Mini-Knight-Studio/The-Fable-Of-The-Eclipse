@@ -126,19 +126,19 @@
                     "script": {
                         "class_id": "PlayerAnimation",
                         "fields": {
-                            "attack1Clip": "Armature|Armature|Attack1|BaseLayer",
-                            "attack2Clip": "Armature|Armature|Attack2|BaseLayer",
-                            "attack3Clip": "Armature|Armature|Attack3|BaseLayer",
-                            "dashIdleClipName": "Armature|Armature|DashFromWalk|BaseLayer",
-                            "dashWalkClipName": "Armature|Armature|DashFromWalk|BaseLayer",
-                            "grappleLandingClip": "Armature|Armature|GrapleLanding|BaseLayer",
-                            "grapplePoseClip": "Armature|Armature|GraplePose|BaseLayer",
-                            "grappleShootClip": "Armature|Armature|GrapleShoot|BaseLayer",
-                            "idleClipName": "Armature|Armature|IdleBasic|BaseLayer",
+                            "attack1Clip": "Armature|Attack1|BaseLayer",
+                            "attack2Clip": "Armature|Attack2|BaseLayer",
+                            "attack3Clip": "Armature|Attack3|BaseLayer",
+                            "dashIdleClipName": "Armature|DashFromWalk|BaseLayer",
+                            "dashWalkClipName": "Armature|DashFromWalk|BaseLayer",
+                            "grappleLandingClip": "Armature|GrapleLanding|BaseLayer",
+                            "grapplePoseClip": "Armature|GraplePose|BaseLayer",
+                            "grappleShootClip": "Armature|GrapleShoot|BaseLayer",
+                            "idleClipName": "Armature|IdleBasic|BaseLayer",
                             "modelEntity": "773896bd-047a-070a-1457-c002bd65a38a",
                             "swordEntity": "92056fb7-2061-66ff-30e9-ded06102e338",
-                            "torchClip": "Armature|Armature|Torch|BaseLayer",
-                            "walkClipName": "Armature|Armature|Walk|BaseLayer"
+                            "torchClip": "Armature|TorchEnemies|BaseLayer",
+                            "walkClipName": "Armature|Walk|BaseLayer"
                         }
                     },
                     "uuid": "d34a01c0-196b-a229-a3b9-ecf06afabbf7"
@@ -499,7 +499,7 @@
             ],
             "name": "Interactables",
             "order": 7,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816"
         },
@@ -703,7 +703,7 @@
                         "casts_shadows": true,
                         "material_uuid": "c171b731-4e45-3428-7e0b-44642e6729f0",
                         "mesh_index": 1,
-                        "mesh_uuid": "b3b7e176-cece-1cf6-acf5-ab1a2dda53b2"
+                        "mesh_uuid": "aad004bb-3b7b-1cf9-487e-f8b22671cdae"
                     },
                     "uuid": "ca8c7e76-a488-3053-7900-e6cda5a25267"
                 }
@@ -1144,6 +1144,18 @@
                             {
                                 "ownerUUID": "ade99927-be2b-277e-7bbe-5a0cf3e4f480",
                                 "rendererUUID": "64607b1b-c64f-02d4-db06-c908182f3a2d"
+                            },
+                            {
+                                "ownerUUID": "94d9e028-88f0-86e3-eb94-e3a32cc07bfe",
+                                "rendererUUID": "b12948b8-8f7e-6f18-abae-42a3b6a0a91c"
+                            },
+                            {
+                                "ownerUUID": "7a6fb3a8-6a20-b40f-0441-3cfc0cf0b9a9",
+                                "rendererUUID": "427852e5-0c29-1c4f-5975-0f48d1933186"
+                            },
+                            {
+                                "ownerUUID": "b6df68a3-e52f-756f-067e-473663a584c0",
+                                "rendererUUID": "a79e9912-0dc7-85e7-bb45-c081a69eb64b"
                             }
                         ],
                         "targetRendererUUID": "ca8c7e76-a488-3053-7900-e6cda5a25267"
@@ -8087,8 +8099,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 169.9705047607422,
-                                "y": 108.00001525878906
+                                "x": 200.26707458496094,
+                                "y": 108.0
                             }
                         },
                         "position": {
@@ -10221,7 +10233,7 @@
                         "casts_shadows": true,
                         "material_uuid": "bb1e2b68-878f-5c68-57a4-f602d05e1875",
                         "mesh_index": 2,
-                        "mesh_uuid": "b3b7e176-cece-1cf6-acf5-ab1a2dda53b2"
+                        "mesh_uuid": "aad004bb-3b7b-1cf9-487e-f8b22671cdae"
                     },
                     "uuid": "88942b22-fff0-edd1-839a-331f9e905e96"
                 }
@@ -10315,7 +10327,7 @@
                         "casts_shadows": true,
                         "material_uuid": "c171b731-4e45-3428-7e0b-44642e6729f0",
                         "mesh_index": 4,
-                        "mesh_uuid": "b3b7e176-cece-1cf6-acf5-ab1a2dda53b2"
+                        "mesh_uuid": "aad004bb-3b7b-1cf9-487e-f8b22671cdae"
                     },
                     "uuid": "64607b1b-c64f-02d4-db06-c908182f3a2d"
                 }
@@ -10362,7 +10374,7 @@
                         "casts_shadows": true,
                         "material_uuid": "c171b731-4e45-3428-7e0b-44642e6729f0",
                         "mesh_index": 3,
-                        "mesh_uuid": "b3b7e176-cece-1cf6-acf5-ab1a2dda53b2"
+                        "mesh_uuid": "aad004bb-3b7b-1cf9-487e-f8b22671cdae"
                     },
                     "uuid": "7bbe5c89-c923-0aa4-317d-9c9b773a459b"
                 }
@@ -11467,8 +11479,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 180.6497802734375,
-                                "y": 114.7856674194336
+                                "x": 196.08998107910156,
+                                "y": 105.74737548828125
                             }
                         },
                         "position": {
@@ -12877,7 +12889,7 @@
             ],
             "name": "Lighting",
             "order": 3,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -13083,7 +13095,7 @@
             ],
             "name": "Level_Container",
             "order": 5,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "2fe4f35d-68d0-0ee8-356e-96bd16b54747"
         },
@@ -13231,7 +13243,7 @@
             ],
             "name": "Enemies",
             "order": 6,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -13411,7 +13423,7 @@
             ],
             "name": "//////////////// WORLD",
             "order": 4,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "1a511023-f8de-375a-8197-ca8e36bf62f1"
         },
@@ -13713,7 +13725,7 @@
             ],
             "name": "WoodenBridge",
             "order": 8,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "734cd308-22e2-c91e-390e-7a45d9dabad6"
         },
@@ -13956,7 +13968,7 @@
             ],
             "name": "//////////////// LIGHTS",
             "order": 2,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "038bed1e-61d2-b9b1-df40-ee2bf7d50fc9"
         },
@@ -13993,7 +14005,7 @@
             ],
             "name": "//////////////// OTHERS",
             "order": 13,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "eb583655-1b63-12dd-8ccc-c1ca88b7cd4c"
         },
@@ -14030,7 +14042,7 @@
             ],
             "name": "//////////////// PLAYER",
             "order": 0,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "7e248101-17e2-52c9-4275-8d812874cdc7"
         },
@@ -15071,8 +15083,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 180.6497802734375,
-                                "y": 114.7856674194336
+                                "x": 196.08998107910156,
+                                "y": 105.74737548828125
                             }
                         },
                         "position": {
@@ -15442,7 +15454,7 @@
             ],
             "name": "WaterLevel",
             "order": 14,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "c9248883-d09c-a8d5-c4d8-4487a286a37f"
         },
@@ -16560,7 +16572,7 @@
             ],
             "name": "Music",
             "order": 15,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "e2bde98c-df70-8af1-6539-ab61511e723e"
         },
@@ -24039,7 +24051,7 @@
             ],
             "name": "TempleDoorWind",
             "order": 12,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "ae046e1e-da0a-471e-ef9c-4de2ef865b26"
         },
@@ -32687,8 +32699,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 1600.0,
-                                "y": 900.0
+                                "x": 1920.0,
+                                "y": 1017.0
                             }
                         },
                         "position": {
@@ -33949,8 +33961,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 1600.0,
-                                "y": 900.0
+                                "x": 1920.0,
+                                "y": 1017.0
                             }
                         },
                         "position": {
@@ -34819,7 +34831,7 @@
             ],
             "name": "ChestGroup",
             "order": 9,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "ddb1b4f0-deaf-6f6e-d85c-0831b7a46876"
         },
@@ -34869,7 +34881,7 @@
             ],
             "name": "BurneableVines",
             "order": 11,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "204e4921-a92e-2512-31f2-0abce2d8bafa"
         },
@@ -35097,7 +35109,7 @@
             ],
             "name": "Pilars",
             "order": 10,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "01d75178-5ee1-efb9-b73c-ae552387c23e"
         },
@@ -36149,7 +36161,7 @@
             ],
             "name": "PREFAB_BLOCK",
             "order": 1,
-            "parent_uuid": "531b0d60-fc32-0023-f2c0-611bcd7ea6aa",
+            "parent_uuid": "6d2b3ebe-728a-6f5b-74da-9c7e1605d0af",
             "static": true,
             "uuid": "214a877e-b110-5f9f-4d00-a888bf417561"
         },
@@ -39483,6 +39495,7 @@
                 {
                     "is_active": true,
                     "ui_manager": {
+                        "block_navigation": false,
                         "move_down": [
                             {
                                 "axis_dir": 1.0,
