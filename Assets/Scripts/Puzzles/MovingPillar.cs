@@ -77,6 +77,8 @@ class MovingPillar : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         HandleGoal();
 
         if (isMoving)

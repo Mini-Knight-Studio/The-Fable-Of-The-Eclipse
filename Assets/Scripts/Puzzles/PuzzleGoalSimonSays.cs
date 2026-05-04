@@ -48,9 +48,7 @@ class PuzzleGoalSimonSays : Component
     private bool particlesSwitched = true;
 
     // Sounds
-    [HideInInspector]
-    public AudioSource moveSFX;
-
+    private AudioSource moveSFX;
     public Entity activateSFX;
     public Entity completeSFX;
     public Entity collectGemSFX;
@@ -100,6 +98,8 @@ class PuzzleGoalSimonSays : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (isMoving)
         {
             MoveTowardsTarget();
@@ -231,7 +231,7 @@ class PuzzleGoalSimonSays : Component
         if (allOnGoal && !simonStarted)
         {
             Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
-            if (goalCollider != null && goalCollider.IsColliding && Input.IsKeyDown(KeyCode.E))
+            if (goalCollider != null && goalCollider.IsColliding && Player.Instance.Input.interactKeyPressed)
             {
                 simonStarted = true;
                 Debug.LogWarning("Starting Simon Says.");
@@ -394,7 +394,7 @@ class PuzzleGoalSimonSays : Component
             if (pillar != null) pillar.ForceActive();
         }
 
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             Gem.SetActive(false);
 

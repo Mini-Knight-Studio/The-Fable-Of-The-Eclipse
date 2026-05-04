@@ -26,8 +26,14 @@ public class Player : Component
     public TemporalEffectApplier Effects;
     private SceneTransition LoseTransition;
 
+
+    [Header("Canvas (OPTIONAL)")]
     public Entity RespawnTransitionEntity;
-    public FadeInOutEvent RespawnTransition;
+    public Entity LoseScreenEntity;
+    public Entity CreditsScreenEntity;
+    private FadeInOutEvent RespawnTransition;
+    private LoseScreen LoseScreen;
+    private CreditsScreen CreditsScreen;
 
 
 
@@ -71,8 +77,7 @@ public class Player : Component
         Effects = entity.GetComponent<TemporalEffectApplier>();
         LoseTransition = entity.GetComponent<SceneTransition>();
 
-        RespawnTransition = RespawnTransitionEntity.GetComponent<FadeInOutEvent>();
-        RespawnTransition.OnFadeInComplete += EndRespawn;
+
 
         if (Movement == null) Debug.Log("Missing PlayerMovement");
         if (Animation == null) Debug.Log("Missing PlayerAnimation");
@@ -86,6 +91,16 @@ public class Player : Component
 
         PlayerHealth.Init();
         Feedback.Initialize();
+
+
+        RespawnTransition = RespawnTransitionEntity.GetComponent<FadeInOutEvent>();
+        LoseScreen = LoseScreenEntity.GetComponent<LoseScreen>();
+        CreditsScreen = CreditsScreenEntity.GetComponent<CreditsScreen>();
+
+        if(RespawnTransition!=null)
+            RespawnTransition.OnFadeInComplete += EndRespawn;
+        if (LoseScreen != null)
+            PlayerHealth.OnDeath += LoseScreen.OpenLoseScreen;
     }
 
     public void GoToLastCheckpoint()
@@ -95,8 +110,13 @@ public class Player : Component
 
     public void StartRespawn()
     {
-        RespawnTransition.StartFade();
-        PlayerHealth.canBeDamaged = false;
+        if (RespawnTransition == null)
+            return;
+        if (PlayerHealth.GetActualHealth() > 0)
+        {
+            RespawnTransition.StartFade();
+            PlayerHealth.canBeDamaged = false;
+        }
     }
 
     private void EndRespawn()
@@ -108,10 +128,7 @@ public class Player : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused)
-        {
-            return;
-        }
+        if (Pause.isPaused) { return; }
 
         Input.ProcessInputs();
         Movement.ProcessMovement();
@@ -125,6 +142,8 @@ public class Player : Component
 
     void OnDestroy()
     {
+        if (RespawnTransition == null)
+            return;
         RespawnTransition.OnFadeInComplete -= EndRespawn;
     }
 }

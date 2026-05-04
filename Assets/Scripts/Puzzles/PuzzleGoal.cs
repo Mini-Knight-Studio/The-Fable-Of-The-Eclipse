@@ -31,6 +31,11 @@ class PuzzleGoal : Component
     private ParticleComponent goalParticles;
     private bool particlesSwitched = true;
 
+    // Sounds
+    private AudioSource moveSFX;
+    public Entity completeSFX;
+    public Entity collectGemSFX;
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -43,12 +48,16 @@ class PuzzleGoal : Component
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
 
+        moveSFX = entity.GetComponent<AudioSource>();
+
         goalParticles = entity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
     }
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         CheckPillars();
 
         if (isMoving)
@@ -105,13 +114,17 @@ class PuzzleGoal : Component
 
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
 
+            completeSFX.GetComponent<AudioSource>().Play();
+
             Gem.GetComponent<BoxCollider>().SetActive(true);
             Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         }
 
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Input.IsKeyDown(KeyCode.E))
+        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             Gem.SetActive(false);
+
+            collectGemSFX.GetComponent<AudioSource>().Play();
 
             DatabaseRegistry.playerDB.Player.gemAirCollected = true;
             DatabaseRegistry.playerDB.Player.hasBurner = true;
@@ -132,6 +145,7 @@ class PuzzleGoal : Component
         isMoving = true;
 
         goalParticles.Play();
+        moveSFX.Play();
         particlesSwitched = false;
     }
 
@@ -157,5 +171,7 @@ class PuzzleGoal : Component
         Pillar2.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
+
+        completeSFX.GetComponent<AudioSource>().Play();
     }
 };

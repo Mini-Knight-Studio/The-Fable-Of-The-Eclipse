@@ -41,6 +41,8 @@ class RollingBridge : Component
 
     void OnUpdate()
     {
+        if (Pause.isPaused) { return; }
+
         if (animationFinished) return;
 
         if (DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown == true)
@@ -70,7 +72,8 @@ class RollingBridge : Component
             elapsedTime += Time.deltaTime;
 
             float t = elapsedTime / duration;
-            float curvedT = Mathf.Pow(t, easeIntensity);
+
+            float curvedT = Mathf.Lerp( 0f,1f, t, Mathf.LerpCurve.ExponentialIn, easeIntensity, Mathf.LerpStrengthMode.Power);
 
             Loopie.Vector3 pos = Loopie.Vector3.Lerp(standingPos, finalPos, curvedT);
             Loopie.Vector3 rot = Loopie.Vector3.Lerp(standingRotation, finalRotation, curvedT);

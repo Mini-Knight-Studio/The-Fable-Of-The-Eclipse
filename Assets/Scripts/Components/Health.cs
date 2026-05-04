@@ -5,7 +5,9 @@ using Loopie;
 public class Health : Component
 {
     public int maxHealth;
+    public int healthCap;
     private int actualHealth;
+
     public bool canBeDamaged;
     public bool canBeHealed;
     private EffectApplier effectApplier;
@@ -19,6 +21,10 @@ public class Health : Component
         effectApplier = entity.GetComponent<EffectApplier>();
         canBeDamaged = true;
         canBeHealed = true;
+
+        if (healthCap <= 0) 
+            healthCap = 9999;
+
         Reset();
     }
 
@@ -32,18 +38,24 @@ public class Health : Component
         return maxHealth;
     }
 
+    public void ModifyMaxHealth(int new_max_health)
+    {
+        if (new_max_health >= healthCap)
+            maxHealth = healthCap;
+        else
+            maxHealth = new_max_health;
+        actualHealth = Mathf.Clamp(actualHealth, 0, maxHealth);
+    }
+    public void IncreaseMaxHealth(int amount)
+    {
+        ModifyMaxHealth(maxHealth + amount);
+    }
+
     public void ModifyActualHealth(int new_actual_health)
     {
         new_actual_health = new_actual_health < 0 ? 0 : new_actual_health;
         new_actual_health = new_actual_health > maxHealth ? maxHealth : new_actual_health;
         actualHealth = new_actual_health;
-    }
-
-    public void ModifyMaxHealth(int new_max_health)
-    {
-        maxHealth = new_max_health;
-        actualHealth = actualHealth < 0 ? 0 : actualHealth;
-        actualHealth = actualHealth > maxHealth ? maxHealth : actualHealth;
     }
 
     public bool IsDead()
