@@ -22,22 +22,12 @@ public class SpawnersData
     }
     public List<SpawnerData> spawners = new List<SpawnerData>();
 
-    public struct SpawnerData
-    {
-        public int spawnerID;
-        public bool alreadySpawned;
 
-        // Datos del enemigo spawneado (solo relevantes si alreadySpawned == true)
-        public string enemyType;
-        public float enemyPositionX;
-        public float enemyPositionY;
-        public float enemyPositionZ;
-        public int hp;
+}
 
-        // Golem
-        public int shieldHP;
+public class SpawnerData
+{
+    public int spawnerID;
+    public bool alreadySpawned;
 
-        // Blob
-        public int blobStage;
-    }
 }

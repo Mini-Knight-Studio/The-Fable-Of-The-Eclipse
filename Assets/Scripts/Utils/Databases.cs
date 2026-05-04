@@ -160,6 +160,7 @@ public static class DatabaseRegistry
         puzzlesDB.Save();
         playerDB.Save();
         enemiesDB.Save();
+        spawnersDB.Save();
     }
 
     public static void LoadAll()
@@ -167,6 +168,7 @@ public static class DatabaseRegistry
         puzzlesDB.Load();
         playerDB.Load();
         enemiesDB.Load();
+        spawnersDB.Load();  
     }
 }
 
@@ -215,9 +217,7 @@ public class EnemiesDatabase : LocalDatabase
         JObject root = JObject.Parse(json);
         string enemiesJson = root["Enemies"].ToString();
         EnemiesData deserialized = JsonConvert.DeserializeObject<EnemiesData>(enemiesJson);
-        Debug.Log("Deserialized count: " + deserialized.enemies.Count);
         Enemies = deserialized;
-        Debug.Log("Enemies assigned, count: " + Enemies.enemies.Count);
     }
 }
 
@@ -226,6 +226,19 @@ public class SpawnersDatabase : LocalDatabase
     public SpawnersDatabase() : base("spawnersDB") { }
 
     public SpawnersData Spawners { get; set; } = new SpawnersData();
+
+
+    public override void Load()
+    {
+        if (!File.Exists(FilePath))
+            return;
+
+        string json = File.ReadAllText(FilePath);
+        JObject root = JObject.Parse(json);
+        string spawnersJson = root["Spawners"].ToString();
+        SpawnersData deserialized = JsonConvert.DeserializeObject<SpawnersData>(spawnersJson);
+        Spawners = deserialized;
+    }
 }
 
 //public class ExampleLocalDataBase : LocalDatabase

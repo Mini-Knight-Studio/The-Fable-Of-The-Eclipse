@@ -16,15 +16,11 @@ class Spawner : Component
 
         if (DatabaseRegistry.spawnersDB.Exists())
         {
-            foreach (SpawnersData.SpawnerData data in DatabaseRegistry.spawnersDB.Spawners.spawners)
+            foreach (SpawnerData data in DatabaseRegistry.spawnersDB.Spawners.spawners)
             {
                 if (data.spawnerID == spawnerID)
                 {
                     alreadySpawned = data.alreadySpawned;
-                    if (alreadySpawned)
-                    {
-
-                    }
                 }
             }
         }

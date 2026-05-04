@@ -66,7 +66,6 @@ class CheckpointCollider : Component
                             Golem golem = child.GetComponent<Golem>();
                             data.enemyType = golem.type;
                             data.shieldHP = golem.ShieldLife;
-                            Debug.Log("Enemy saved with type Golem");
                         }
                         else if (child.Name.Contains("Blob"))
                         {
@@ -91,7 +90,6 @@ class CheckpointCollider : Component
                             }
 
 
-                                Debug.Log("Enemy saved with type Blob");
                         }
 
                         DatabaseRegistry.enemiesDB.Enemies.enemies.Add(data);
@@ -122,8 +120,8 @@ class CheckpointCollider : Component
                         {
                             continue;
                         }
-                           
-                        SpawnersData.SpawnerData sData = new SpawnersData.SpawnerData();
+
+                        SpawnerData sData = new SpawnerData();
                         sData.spawnerID = spawner.spawnerID;
                         sData.alreadySpawned = spawner.alreadySpawned;
 
