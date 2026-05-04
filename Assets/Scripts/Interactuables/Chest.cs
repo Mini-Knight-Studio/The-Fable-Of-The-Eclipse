@@ -185,6 +185,7 @@ class Chest : Component
     {
         staticMoon.SetActive(true);
         animatedMoon.SetActive(false);
+        interactPrompt.SetActive(false);
 
         Loopie.Vector3 targetLidRot = new Loopie.Vector3(lidStartRot.x, lidStartRot.y, lidStartRot.z + 108.0f);
         upperPart.transform.local_rotation = targetLidRot;

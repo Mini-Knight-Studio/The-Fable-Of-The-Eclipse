@@ -4,6 +4,9 @@ using Loopie;
 
 class RollingBridge : Component
 {
+    [Header("Identity")]
+    public string bridgeID = "UNASSIGNED_BRIDGE";
+
     private BoxCollider collider;
 
     [Header("References")]
@@ -50,13 +53,13 @@ class RollingBridge : Component
 
         if (animationFinished) return;
 
-        //if (DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown == true)
-        //{
-        //    bridgeBase.transform.local_position = finalPos;
-        //    bridgeBase.transform.local_rotation = finalRotation;
-        //    blockingCollider.GetComponent<BoxCollider>().SetActive(false);
-        //    animationFinished = true;
-        //}
+        if (DatabaseRegistry.levelsDB.Levels.IsBridgePushed(bridgeID))
+        {
+            bridgeBase.transform.local_position = finalPos;
+            bridgeBase.transform.local_rotation = finalRotation;
+            blockingCollider.GetComponent<BoxCollider>().SetActive(false);
+            animationFinished = true;
+        }
 
         if (!animationFinished && !animationStarted && collider.IsColliding && Player.Instance.Movement.IsDashing())
         {
@@ -101,7 +104,7 @@ class RollingBridge : Component
 
         animationFinished = true;
         blockingCollider.GetComponent<BoxCollider>().SetActive(false);
-        //DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown = true;
+        DatabaseRegistry.levelsDB.Levels.SetBridgePushed(bridgeID);
 
         if (particles != null)
             particles.Play();

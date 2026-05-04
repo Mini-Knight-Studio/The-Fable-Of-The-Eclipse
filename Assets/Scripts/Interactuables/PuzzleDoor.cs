@@ -229,6 +229,7 @@ class PuzzleDoor : Component
         leftDoor.transform.local_rotation = finalLefttDoorRot;
 
         blockingCollider.SetActive(false);
+        interactPrompt.SetActive(false);
     }
 
     void OnDestroy()
