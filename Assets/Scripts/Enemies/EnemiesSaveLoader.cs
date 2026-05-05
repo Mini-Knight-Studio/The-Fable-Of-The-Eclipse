@@ -21,7 +21,6 @@ class EnemyRestorer : Component
         {
 
             hasRestored = true;
-            DatabaseRegistry.LoadAll();
             RestoreEnemies();
             RestoreSpawners();
             
@@ -31,38 +30,24 @@ class EnemyRestorer : Component
     void RestoreEnemies() 
     {
 
-        string path = "enemiesDB.json";
-
-        string rawJson = System.IO.File.ReadAllText(path);
-        JObject root = JObject.Parse(rawJson);
-        string enemiesJson = root["Enemies"].ToString();
-        EnemiesData testData = JsonConvert.DeserializeObject<EnemiesData>(enemiesJson);
-        Debug.Log("Direct count: " + testData.enemies.Count);
-
-        if (System.IO.File.Exists(path))
-        {
-            string json = System.IO.File.ReadAllText(path);
-            //Debug.Log("RAW JSON: " + json);
-        }
-        else
-        {
-            Debug.LogError("FILE NOT FOUND: " + path);
-        }
-
         if (!DatabaseRegistry.enemiesDB.Exists())
         {
             Debug.LogError("EnemiesDB not Found");
             return;
         }
 
-        List<EnemyData> savedEnemies = DatabaseRegistry.enemiesDB.Enemies.enemies;
+        Dictionary<string, List<EnemyData>> savedEnemies = DatabaseRegistry.enemiesDB.Enemies.enemiesDictionary;
         if (savedEnemies == null || savedEnemies.Count == 0)
         {
             Debug.Log("Saved Enemies Count: " + savedEnemies.Count);
             Debug.Log("No enemies in save");
             return;
         }
-        foreach (EnemyData data in savedEnemies)
+
+        if (!savedEnemies.ContainsKey(DatabaseRegistry.playerDB.Player.currentSceneUUID))
+            return;
+
+        foreach (EnemyData data in savedEnemies[DatabaseRegistry.playerDB.Player.currentSceneUUID])
         {
             Entity reference = GetReferenceForType(data.enemyType);
             if (reference == null)
@@ -106,24 +91,6 @@ class EnemyRestorer : Component
 
     void RestoreSpawners() 
     {
-
-        string path = "spawnersDB.json";
-
-        string rawJson = System.IO.File.ReadAllText(path);
-        JObject root = JObject.Parse(rawJson);
-        string spawnersJson = root["Spawners"].ToString();
-        SpawnersData testData = JsonConvert.DeserializeObject<SpawnersData>(spawnersJson);
-        Debug.Log("Direct count: " + testData.spawners.Count);
-
-        if (System.IO.File.Exists(path))
-        {
-            string json = System.IO.File.ReadAllText(path);
-            //Debug.Log("RAW JSON: " + json);
-        }
-        else
-        {
-            Debug.LogError("FILE NOT FOUND: " + path);
-        }
 
         if (!DatabaseRegistry.spawnersDB.Exists())
         {

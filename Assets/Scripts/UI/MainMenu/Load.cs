@@ -11,8 +11,5 @@ class Load : Component
 
         DatabaseRegistry.LoadAll();
         SceneManager.LoadSceneByID(DatabaseRegistry.playerDB.Player.currentSceneUUID);
-
-        Debug.Log("Load Success");
-        Debug.Log(DatabaseRegistry.enemiesDB.Enemies.enemies.Count);
     }
 };

@@ -22,10 +22,7 @@ public class EnemiesData
         previousSceneUUID = "";
     }
 
-    public List<EnemyData> enemies = new List<EnemyData>();
-
-
-
+    public Dictionary<string, List<EnemyData>> enemiesDictionary = new Dictionary<string, List<EnemyData>>();
 }
 
 public class EnemyData
@@ -42,4 +39,5 @@ public class EnemyData
 
     public int shieldHP;
     public int blobStage;
+
 }

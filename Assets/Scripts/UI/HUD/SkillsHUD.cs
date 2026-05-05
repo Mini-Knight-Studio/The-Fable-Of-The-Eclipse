@@ -25,6 +25,18 @@ public class SkillsHUD : Component
 
         if (torchInactiveEntity != null) torchInactiveEntity.SetActive(false);
         if (grappleInactiveEntity != null) grappleInactiveEntity.SetActive(false);
+
+
+        if(DatabaseRegistry.playerDB.Player.hasBurner)
+        {
+            torchActiveEntity.SetActive(true);
+            torchInactiveEntity.SetActive(false);
+        }
+        if (DatabaseRegistry.playerDB.Player.hasGrappling)
+        {
+            grappleActiveEntity.SetActive(true);
+            grappleInactiveEntity.SetActive(false);
+        }
     }
 
     void OnUpdate()

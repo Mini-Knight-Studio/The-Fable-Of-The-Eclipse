@@ -216,39 +216,14 @@ public class EnemiesDatabase : LocalDatabase
 {
     public EnemiesDatabase() : base("enemiesDB") { }
 
-    public EnemiesData Enemies { get; set; } = new EnemiesData();
-
-    public override void Load()
-    {
-        if (!File.Exists(FilePath))
-            return;
-
-        string json = File.ReadAllText(FilePath);
-        JObject root = JObject.Parse(json);
-        string enemiesJson = root["Enemies"].ToString();
-        EnemiesData deserialized = JsonConvert.DeserializeObject<EnemiesData>(enemiesJson);
-        Enemies = deserialized;
-    }
+    public EnemiesData Enemies { get; } = new EnemiesData();
 }
 
 public class SpawnersDatabase : LocalDatabase
 {
     public SpawnersDatabase() : base("spawnersDB") { }
 
-    public SpawnersData Spawners { get; set; } = new SpawnersData();
-
-
-    public override void Load()
-    {
-        if (!File.Exists(FilePath))
-            return;
-
-        string json = File.ReadAllText(FilePath);
-        JObject root = JObject.Parse(json);
-        string spawnersJson = root["Spawners"].ToString();
-        SpawnersData deserialized = JsonConvert.DeserializeObject<SpawnersData>(spawnersJson);
-        Spawners = deserialized;
-    }
+    public SpawnersData Spawners { get;} = new SpawnersData();
 }
 
 //public class ExampleLocalDataBase : LocalDatabase

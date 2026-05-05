@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Loopie;
 
 class CheckpointCollider : Component
@@ -28,7 +29,13 @@ class CheckpointCollider : Component
             }
             if (DatabaseRegistry.enemiesDB != null)
             {
-                DatabaseRegistry.enemiesDB.Enemies.enemies.Clear();
+                if (!DatabaseRegistry.enemiesDB.Enemies.enemiesDictionary.ContainsKey(DatabaseRegistry.playerDB.Player.currentSceneUUID))
+                {
+                    DatabaseRegistry.enemiesDB.Enemies.enemiesDictionary.Add(DatabaseRegistry.playerDB.Player.currentSceneUUID, new List<EnemyData>());
+                }
+
+
+                DatabaseRegistry.enemiesDB.Enemies.enemiesDictionary[DatabaseRegistry.playerDB.Player.currentSceneUUID].Clear();
                 Entity enemiesReferences = Entity.FindEntityByName("EnemiesReferences");
                 if (enemiesReferences == null)
                 {
@@ -92,7 +99,7 @@ class CheckpointCollider : Component
 
                         }
 
-                        DatabaseRegistry.enemiesDB.Enemies.enemies.Add(data);
+                        DatabaseRegistry.enemiesDB.Enemies.enemiesDictionary[DatabaseRegistry.playerDB.Player.currentSceneUUID].Add(data);
                     }
                     DatabaseRegistry.enemiesDB.Save();
                     Debug.Log("Enemy Data Saved");
