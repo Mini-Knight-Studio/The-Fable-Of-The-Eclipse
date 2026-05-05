@@ -22,6 +22,14 @@ public class GameDebug : Component
             Debug.Log("Error: There is no passPageEntity Entity assigned.");
         }
     }
+    void OnDestroy()
+    {
+        if (debugMenuEntity.Active)
+        {
+            Pause.isPaused = false;
+            Time.timeScale = 1;
+        }
+    }
     void OnUpdate()
     {
         if (Input.IsKeyDown(KeyCode.NUM_1))

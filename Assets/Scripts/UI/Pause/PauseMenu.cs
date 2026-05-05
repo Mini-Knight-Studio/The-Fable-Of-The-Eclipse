@@ -177,11 +177,11 @@ public class PauseMenu : Component
             PrepareAnimations();
         }
 
-        if (!loopMusicHasPlayed)
-        {
-            loopMusicAudioSource.Play();
-            loopMusicHasPlayed = true;
-        }
+        //if (!loopMusicHasPlayed)
+        //{
+        //    //loopMusicAudioSource.Play();
+        //    loopMusicHasPlayed = true;
+        //}
             
         if (canCallScripts)
         {
@@ -202,7 +202,7 @@ public class PauseMenu : Component
 
         if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
         {
-            loopMusicAudioSource.Stop();
+            //oopMusicAudioSource.Stop();
             quickStartAnimations = false;
             invertedPassPagePlayed = false;
             canCallScripts = false;
