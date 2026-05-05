@@ -3,22 +3,25 @@ using Loopie;
 
 public class HealItem : Component
 {
+    [Header("Identity")]
+    public string healItemID = "UNASSIGNED_HEALITEM";
+
     [Header("Configuration")]
     public int healAmount = 1;
     public bool canIncreaseMaxHealth = false;
     public int maxHealthIncreaseAmount = 1;
-    public string uniqueId = "Potion_1";
+
     [Header("Feedback")]
     public Entity vfx;
 
-    private bool alreadyCollected = false;
+    private bool collected = false;
     BoxCollider triggerDetection;
 
     void OnCreate()
     {
-        if (PlayerStats.collectedItems != null && PlayerStats.collectedItems.Contains(uniqueId))
+        if (DatabaseRegistry.levelsDB.Levels.IsHealingItemCollected(healItemID))
         {
-            alreadyCollected = true;
+            collected = true;
             entity.SetActive(false);
         }
         triggerDetection = entity.GetComponent<BoxCollider>();
@@ -28,22 +31,19 @@ public class HealItem : Component
     {
         if (Pause.isPaused) { return; }
 
-        if (alreadyCollected) return;
+        if (collected) return;
 
         if(triggerDetection != null && triggerDetection.HasCollided)
         {
             if (canIncreaseMaxHealth)
-                Player.Instance.PlayerHealth.IncreaseMaxHealth(maxHealthIncreaseAmount);
+            Player.Instance.PlayerHealth.IncreaseMaxHealth(maxHealthIncreaseAmount);
             Player.Instance.PlayerHealth.Heal(healAmount);
 
-            if (!PlayerStats.collectedItems.Contains(uniqueId))
-            {
-                PlayerStats.collectedItems.Add(uniqueId);
-            }
+            DatabaseRegistry.levelsDB.Levels.SetHealingItemCollected(healItemID);
 
             TriggerVFX();
 
-            alreadyCollected = true;
+            collected = true;
             entity.SetActive(false);
 
         }

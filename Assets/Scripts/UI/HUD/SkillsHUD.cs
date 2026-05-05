@@ -17,7 +17,7 @@ public class SkillsHUD : Component
     private float simulatedGrappleCooldown = 0.0f;
     private float lastGrappleTimerValue = 0.0f;
 
-    void OnCreate()
+    void OnPostCreate()
     {
 
         playerTorch = Player.Instance.Torch;

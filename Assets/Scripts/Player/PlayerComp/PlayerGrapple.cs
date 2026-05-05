@@ -53,8 +53,11 @@ public class PlayerGrapple : PlayerComponent
 
     public void OnCreate()
     {
-        ropeSegments.Clear();
+        ropeSegments.Clear(); 
+    }
 
+    void OnDestroy()
+    {
         availablePillars.Clear();
     }
 
