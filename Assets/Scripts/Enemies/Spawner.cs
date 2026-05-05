@@ -13,8 +13,18 @@ class Spawner : Component
     void OnCreate()
     {
         player = Entity.FindEntityByName("Player");
-    }
 
+        if (DatabaseRegistry.spawnersDB.Exists())
+        {
+            foreach (SpawnerData data in DatabaseRegistry.spawnersDB.Spawners.spawners)
+            {
+                if (data.spawnerID == spawnerID)
+                {
+                    alreadySpawned = data.alreadySpawned;
+                }
+            }
+        }
+    }
     void OnUpdate()
     {
         if(!alreadySpawned && Vector3.Distance(transform.position, player.transform.position) <= distance)
@@ -43,11 +53,12 @@ class Spawner : Component
 
 
     /// YOU MUST PASS THE CORRECT ENTITY REFERENCE BASED ON THE ENEMY TYPE (GOLEM, OR BLOB -> TAKE CARE OF THE TYPE OF THE SLIME)
-    public static void Spawn(Entity entityToSpawn, Vector3 position)
+    public static Entity Spawn(Entity entityToSpawn, Vector3 position)
     {
         Entity newClone = entityToSpawn.Clone(true);
-        newClone.Name = newClone.Name.Replace("_Reference_", "");
+        newClone.Name = newClone.Name.Replace("_Reference_", "").Replace("_Reference", "");
         newClone.transform.position = position;
         newClone.SetActive(true);
+        return newClone;
     }
 };

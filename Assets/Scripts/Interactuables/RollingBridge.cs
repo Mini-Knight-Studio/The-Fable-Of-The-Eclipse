@@ -4,6 +4,9 @@ using Loopie;
 
 class RollingBridge : Component
 {
+    [Header("Identity")]
+    public string bridgeID = "UNASSIGNED_BRIDGE";
+
     private BoxCollider collider;
 
     [Header("References")]
@@ -13,6 +16,10 @@ class RollingBridge : Component
     [Header("Feedback")]
     public Entity audioSourceEntity;
     private AudioSource audioSource;
+
+    public Entity audio2SourceEntity;
+    private AudioSource audio2Source;
+    private bool splashOnce = false;
 
     public Entity particlesEntity;
     private ParticleComponent particles;
@@ -36,6 +43,7 @@ class RollingBridge : Component
     {
         collider = entity.GetComponent<BoxCollider>();
         audioSource = audioSourceEntity.GetComponent<AudioSource>();
+        if (audio2SourceEntity != null)   audio2Source = audio2SourceEntity.GetComponent<AudioSource>();
         particles = particlesEntity.GetComponent<ParticleComponent>();
     }
 
@@ -45,7 +53,7 @@ class RollingBridge : Component
 
         if (animationFinished) return;
 
-        if (DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown == true)
+        if (DatabaseRegistry.levelsDB.Levels.IsBridgePushed(bridgeID))
         {
             bridgeBase.transform.local_position = finalPos;
             bridgeBase.transform.local_rotation = finalRotation;
@@ -81,6 +89,12 @@ class RollingBridge : Component
             bridgeBase.transform.local_position = pos;
             bridgeBase.transform.local_rotation = rot;
 
+            if(t >= 0.8f && !splashOnce)
+            {
+                splashOnce = true;
+                if (audio2Source != null) audio2Source.Play();
+            }
+
             if (t >= 1f)
             {
                 break;
@@ -90,7 +104,7 @@ class RollingBridge : Component
 
         animationFinished = true;
         blockingCollider.GetComponent<BoxCollider>().SetActive(false);
-        DatabaseRegistry.puzzlesDB.Puzzles.BridgePushedDown = true;
+        DatabaseRegistry.levelsDB.Levels.SetBridgePushed(bridgeID);
 
         if (particles != null)
             particles.Play();

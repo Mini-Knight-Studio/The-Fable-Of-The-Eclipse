@@ -11,6 +11,7 @@ class Blob : Enemy
     [Space(5)]
     public int Damage;
     public float ReachDistance;
+    public float AttackDistance;
     public float PushForceScale;
     [Space(5)]
     public float PreparationTime;
@@ -48,8 +49,10 @@ class Blob : Enemy
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (Pause.isPaused)
+        {
+            return;
+        }
         if (spawn)
         {
             StartCoroutine(SplitLerp());
@@ -63,29 +66,30 @@ class Blob : Enemy
                 splitting = true;
                 if (Stage > 1)
                     Split();
-                animator.PlayClip("Armature|SplitStart", false, 0.0f);
+                animator.PlayClip("Armature|Split", false, 0.0f, false, true);
                 feedback.PlaySound("Death");
             }
             if (animator.AnimationEnded())
                 entity.Destroy();
         }
         #endregion
-        if (!isSpawning && !splitting)
+        if (!isSpawning && !splitting && !health.IsDead())
         {
-            Hit(1, PushForceScale, "Armature|Walk");
-            if(!isAttacking && !health.IsDead())
+            Hit(1, PushForceScale, "Armature|GetHit");
+            movement.CanMove = (animator.CurrentClip() == "Armature|GetHit" || isAttacking)? false : true;
+            if(!isAttacking)
             {
                 #region Movement
-                if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
+                if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
                 {
                     animator.PlayClip("Armature|Chase", true, 0.25f);
                     transform.LookAt(Player.Instance.transform.position, transform.Up);
                     movement.Move(4-Stage, transform.Forward);
                     ResetWander();
                     #region Attack
-                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < Stage * StageScale + (ReachDistance*0.25f))
+                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
                     {
-                        StartCoroutine(Attack(Stage * StageScale + ReachDistance, PreparationTime, AttackCooldown, Damage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Chase", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, Damage*Stage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
                     }
                     #endregion
                 }
@@ -105,16 +109,30 @@ class Blob : Enemy
         transform.scale = Vector3.One * StageScale * Stage;
     }
 
+    public override void Hit(int points, float force_scale, string hit_clip)
+    {
+        if (OnHitCooldown() || !health.canBeDamaged) return;
+        if (Player.Instance.Combat.TemporalFunctionIsAttacking())
+        {
+            if (hitbox.HasCollided)
+            {
+                StopCoroutine(attackCoroutine);
+                isAttacking = false;
+                movement.CanMove = true;
+                base.Hit(points, force_scale, hit_clip);
+            }
+        }
+    }
+
     private IEnumerator SplitLerp()
     {
-        animator.PlayClip("Armature|SplitEnd", false, 0.0f);
+        animator.PlayClip("Armature|Spawn", false, 0.0f, false, true);
         float timer = 0.0f;
         spawn = false;
         isSpawning = true;
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         collision.AddExcludeMask(LayerOverride);
         Vector3 startPosition = transform.position;
-
         float animationTime = animator.ClipDuration();
         while (timer < animationTime)
         {
@@ -122,6 +140,8 @@ class Blob : Enemy
             transform.position = Vector3.Lerp(startPosition, startPosition + SplitDirection.normalized * Stage * SplitDistance, timer / animationTime);
             yield return null;
         }
+
+        transform.LookAt(Player.Instance.transform.position, Vector3.Up);
         collision.RemoveExcludeMask(LayerOverride);
         isSpawning = false;
     }
@@ -157,10 +177,27 @@ class Blob : Enemy
     void OnDrawGizmo()
     {
         DebugViewField(ViewField.x, ViewField.y);
-        if (!DetectedTargetInViewField(ViewField.x, ViewField.y) && !DetectedTargetInDistance(Stage * StageScale + ForcedDetectionDistance))
-            DebugToTargetLine(Stage * StageScale + ForcedDetectionDistance, Color.Red);
-        else
-            DebugForwardLine(Stage * StageScale + ReachDistance, Color.Green);
+        #region Target Not Detected
+        if (!DetectedTargetInViewField(ViewField.x, ViewField.y) && !DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
+            Gizmo.DrawCircle(transform.position, GetEntityForwardBase() + ForcedDetectionDistance, Vector3.Up, 32, Color.White);
+        #endregion
+        if(DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
+        {
+            if (ReachDistance < AttackDistance)
+            {
+                DebugForwardLine(GetEntityForwardBase() + (ReachDistance), Color.Orange);
+                DebugForwardLine(GetEntityForwardBase() + (AttackDistance), Color.Red, GetEntityForwardBase() + (ReachDistance));
+            }
+            else if (ReachDistance > AttackDistance)
+            {
+                DebugForwardLine(GetEntityForwardBase() + (ReachDistance), Color.Orange, GetEntityForwardBase() + (AttackDistance));
+                DebugForwardLine(GetEntityForwardBase() + (AttackDistance), Color.Red);
+            }
+            else
+            {
+                DebugForwardLine(GetEntityForwardBase() + (ReachDistance), Color.Red);
+            }
+        }
     }
 
     void OnDestroy()

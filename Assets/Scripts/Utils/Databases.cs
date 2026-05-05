@@ -1,8 +1,10 @@
 using Loopie;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+
 
 public abstract class LocalDatabase
 {
@@ -22,7 +24,7 @@ public abstract class LocalDatabase
         File.WriteAllText(FilePath, json);
     }
 
-    public void Load()
+    public virtual void Load()
     {
         if (!File.Exists(FilePath))
             return;
@@ -150,17 +152,26 @@ public static class DatabaseRegistry
 {
     public static PuzzlesDatabase puzzlesDB = new PuzzlesDatabase();
     public static PlayerDatabase playerDB = new PlayerDatabase();
+    public static LevelsDatabase levelsDB = new LevelsDatabase();
+    public static EnemiesDatabase enemiesDB = new EnemiesDatabase();
+    public static SpawnersDatabase spawnersDB = new SpawnersDatabase();
 
     public static void SaveAll()
     {
         puzzlesDB.Save();
         playerDB.Save();
+        levelsDB.Save();
+        enemiesDB.Save();
+        spawnersDB.Save();
     }
 
     public static void LoadAll()
     {
         puzzlesDB.Load();
         playerDB.Load();
+        levelsDB.Save();
+        enemiesDB.Load();
+        spawnersDB.Load(); 
     }
 }
 
@@ -194,6 +205,26 @@ public class PlayerDatabase : LocalDatabase
     public PlayerData Player { get; } = new PlayerData();
 }
 
+public class LevelsDatabase : LocalDatabase
+{
+    public LevelsDatabase() : base("levelsDB") { }
+
+    public LevelsData Levels { get; } = new LevelsData();
+}
+
+public class EnemiesDatabase : LocalDatabase
+{
+    public EnemiesDatabase() : base("enemiesDB") { }
+
+    public EnemiesData Enemies { get; } = new EnemiesData();
+}
+
+public class SpawnersDatabase : LocalDatabase
+{
+    public SpawnersDatabase() : base("spawnersDB") { }
+
+    public SpawnersData Spawners { get;} = new SpawnersData();
+}
 
 //public class ExampleLocalDataBase : LocalDatabase
 //{

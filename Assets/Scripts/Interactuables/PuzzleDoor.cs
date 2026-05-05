@@ -4,6 +4,10 @@ using Loopie;
 
 class PuzzleDoor : Component
 {
+    [Header("Identity")]
+    public string puzzleDoorID = "UNASSIGNED_PUZZLEDOOR";
+    public string requiredKeyID = "UNASSIGNED_KEY";
+
     [Header("References")]
     public Entity rightDoor;
     public Entity leftDoor;
@@ -21,6 +25,7 @@ class PuzzleDoor : Component
     public float doorOpenDuration = 2.0f;
     public float pauseBeforeOpening = 0.5f;
     public float easeIntensity = 1.5f;
+    public float cameraZoom = 20;
 
     private bool isOpening = false;
     private bool hasOpened = false;
@@ -69,6 +74,12 @@ class PuzzleDoor : Component
         door3SFX.GetComponent<AudioSource>().Stop();
 
         impactSFX.GetComponent<AudioSource>().Stop();
+
+        if (DatabaseRegistry.levelsDB.Levels.IsPuzzleDoorOpened(puzzleDoorID))
+        {
+            hasOpened = true;
+            DoorOpened();
+        }
     }
 
     void OnUpdate()
@@ -77,7 +88,7 @@ class PuzzleDoor : Component
 
         if (hasOpened || isOpening) return;
 
-        if (entity.GetComponent<BoxCollider>().IsColliding /*&& player has key*/)
+        if (entity.GetComponent<BoxCollider>().IsColliding && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyID))
         {
             if (!interactPrompt.Active)
             {
@@ -115,7 +126,7 @@ class PuzzleDoor : Component
 
         float elapsedTime = 0f;
 
-        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, 15, 4);
+        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom, 4);
 
         yield return new WaitForSeconds(camFocusDuration);
 
@@ -204,8 +215,21 @@ class PuzzleDoor : Component
         blockingCollider.SetActive(false);
 
         hasOpened = true;
+        DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);
 
         yield return null;
+    }
+
+    void DoorOpened()
+    {
+        staticKey.SetActive(true);
+        animatedKey.SetActive(false);
+
+        rightDoor.transform.local_rotation = finalRightDoorRot;
+        leftDoor.transform.local_rotation = finalLefttDoorRot;
+
+        blockingCollider.SetActive(false);
+        interactPrompt.SetActive(false);
     }
 
     void OnDestroy()
