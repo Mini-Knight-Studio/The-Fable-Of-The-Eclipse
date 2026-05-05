@@ -4,16 +4,27 @@ using Loopie;
 
 public class UIPopupManager : Component
 {
-    public float showDuration = 3.0f;
-
     public static UIPopupManager Instance { get; private set; }
+
+    private Entity currentActivePanel = null;
+    private bool isWaitingForInput = false;
 
     void OnCreate()
     {
         Instance = this;
     }
 
-    void OnUpdate() { }
+    void OnUpdate()
+    {
+        if (isWaitingForInput && currentActivePanel != null)
+        {
+            if (Input.IsKeyPressed(KeyCode.E) ||
+                Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+            {
+                ClosePopup();
+            }
+        }
+    }
 
     public void ShowPopup(string panelName)
     {
@@ -21,8 +32,10 @@ public class UIPopupManager : Component
         if (panel != null)
         {
             panel.SetActive(true);
+            currentActivePanel = panel;
+            isWaitingForInput = true;
 
-            StartCoroutine(HidePopupRoutine(panel));
+            Time.timeScale = 0.0f;
         }
         else
         {
@@ -30,18 +43,16 @@ public class UIPopupManager : Component
         }
     }
 
-    private IEnumerator HidePopupRoutine(Entity panelToHide)
+    private void ClosePopup()
     {
-        float timer = 0f;
-        while (timer < showDuration)
+        if (currentActivePanel != null)
         {
-            timer += Time.deltaTime;
-            yield return null;
+            currentActivePanel.SetActive(false);
+            currentActivePanel = null;
         }
 
-        if (panelToHide != null)
-        {
-            panelToHide.SetActive(false);
-        }
+        isWaitingForInput = false;
+
+        Time.timeScale = 1.0f;
     }
-}; 
+};
