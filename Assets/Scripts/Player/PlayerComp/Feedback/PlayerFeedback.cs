@@ -60,36 +60,36 @@ public class PlayerFeedback : PlayerComponent
     void OnCreate()
     {
 
-        hurtAudio = onHurtAudioEntity.GetComponent<AudioSource>();
-        healAudio = onHealAudioEntity.GetComponent<AudioSource>();
-        deathAudio = onDeathAudioEntity.GetComponent<AudioSource>();
+        hurtAudio = GetAudioSource(onHurtAudioEntity);
+        healAudio = GetAudioSource(onHealAudioEntity);
+        deathAudio = GetAudioSource(onDeathAudioEntity);
 
-        hurtParticle = onHurtParticleEntity.GetComponent<ParticleComponent>();
-        healParticle = onHealParticleEntity.GetComponent<ParticleComponent>();
-        deathParticle = onDeathParticleEntity.GetComponent<ParticleComponent>();
-
-
-        walkAudio = walkingAudioEntity.GetComponent<AudioSource>();
-        dashAudio = dashAudioEntity.GetComponent<AudioSource>();
-        idleAudio = idleAudioEntity.GetComponent<AudioSource>();
-
-        walkParticle = walkingParticleEntity.GetComponent<ParticleComponent>();
-        dashParticle = dashParticleEntity.GetComponent<ParticleComponent>();
+        hurtParticle = GetParticleComponent(onHurtParticleEntity);
+        healParticle = GetParticleComponent(onHealParticleEntity);
+        deathParticle = GetParticleComponent(onDeathParticleEntity);
 
 
-        attackAudio = attackAudioEntity.GetComponent<AudioSource>();  
+        walkAudio = GetAudioSource(walkingAudioEntity);
+        dashAudio = GetAudioSource(dashAudioEntity);
+        idleAudio = GetAudioSource(idleAudioEntity);
+
+        walkParticle = GetParticleComponent(walkingParticleEntity);
+        dashParticle = GetParticleComponent(dashParticleEntity);
+
+
+        attackAudio = GetAudioSource(attackAudioEntity);  
         
-        attackParticle = attackParticleEntity.GetComponent<ParticleComponent>();
+        attackParticle = GetParticleComponent(attackParticleEntity);
 
 
-        flintSteelAudio = flintSteelAudioEntity.GetComponent<AudioSource>();  
+        flintSteelAudio = GetAudioSource(flintSteelAudioEntity);  
         
-        flintSteelParticle = flintSteelParticleEntity.GetComponent<ParticleComponent>();
+        flintSteelParticle = GetParticleComponent(flintSteelParticleEntity);    
 
 
-        grappleAudio = grappleAudioEntity.GetComponent<AudioSource>();  
+        grappleAudio = GetAudioSource(grappleAudioEntity);  
         
-        grappleParticle = grappleParticleEntity.GetComponent<ParticleComponent>();
+        grappleParticle = GetParticleComponent(grappleParticleEntity);
     }
 
     public void ProcessFeedback()
@@ -202,7 +202,17 @@ public class PlayerFeedback : PlayerComponent
         component.Stop();
     }
 
-    void ShakeCamera(float amount, float time){
-        
+    private AudioSource GetAudioSource(Entity entity)
+    {
+        if(entity == null)
+            return null;
+        return entity.GetComponent<AudioSource>();
+    }
+
+    private ParticleComponent GetParticleComponent(Entity entity)
+    {
+        if (entity == null)
+            return null;
+        return entity.GetComponent<ParticleComponent>();
     }
 }
