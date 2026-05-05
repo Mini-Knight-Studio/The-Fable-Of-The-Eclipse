@@ -79,7 +79,7 @@ class EnemyRestorer : Component
             Health health = spawned.GetComponent<Health>();
             if (health != null)
             {
-                health.actualHealth = data.hp;
+                health.ModifyActualHealth(data.hp);
             }
 
 
@@ -87,10 +87,6 @@ class EnemyRestorer : Component
             if (data.enemyType == "Golem")
             {
                 Golem golem = spawned.GetComponent<Golem>();
-                if (golem != null)
-                {
-                    golem.ShieldLife = data.shieldHP;
-                }
             }
             else
             {

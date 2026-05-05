@@ -7,7 +7,7 @@ class CheckpointCollider : Component
     private bool hasSaved = false;
     public Player player;
 
-    void OnCreate()
+    void OnPostCreate()
     {
         collider = entity.GetComponent<BoxCollider>();
         player = Player.Instance;
@@ -52,7 +52,7 @@ class CheckpointCollider : Component
                         Health health = child.GetComponent<Health>();
                         if (health != null)
                         {
-                            data.hp = health.actualHealth;
+                            data.hp = health.GetActualHealth();
                         }
 
                         switch (child.Name)
@@ -65,12 +65,12 @@ class CheckpointCollider : Component
                         {
                             Golem golem = child.GetComponent<Golem>();
                             data.enemyType = golem.type;
-                            data.shieldHP = golem.ShieldLife;
+                            data.shieldHP = 0;
                         }
                         else if (child.Name.Contains("Blob"))
                         {
                             Blob blob = child.GetComponent<Blob>();
-                            data.blobStage = blob.BlobStage;
+                            data.blobStage = blob.Stage;
 
                             if (child.Name.Contains("WaterBlob"))
                             {
