@@ -153,23 +153,25 @@ public static class DatabaseRegistry
     public static PuzzlesDatabase puzzlesDB = new PuzzlesDatabase();
     public static PlayerDatabase playerDB = new PlayerDatabase();
     public static LevelsDatabase levelsDB = new LevelsDatabase();
-    //public static EnemiesDatabase enemiesDB = new EnemiesDatabase();
-    //public static SpawnersDatabase spawnersDB = new SpawnersDatabase();
+    public static EnemiesDatabase enemiesDB = new EnemiesDatabase();
+    public static SpawnersDatabase spawnersDB = new SpawnersDatabase();
 
     public static void SaveAll()
     {
         puzzlesDB.Save();
         playerDB.Save();
-        //enemiesDB.Save();
         levelsDB.Save();
+        enemiesDB.Save();
+        spawnersDB.Save();
     }
 
     public static void LoadAll()
     {
         puzzlesDB.Load();
         playerDB.Load();
-        //enemiesDB.Load();
         levelsDB.Save();
+        enemiesDB.Load();
+        spawnersDB.Load(); 
     }
 }
 
@@ -210,33 +212,44 @@ public class LevelsDatabase : LocalDatabase
     public LevelsData Levels { get; } = new LevelsData();
 }
 
-//public class EnemiesDatabase : LocalDatabase
-//{
-//    public EnemiesDatabase() : base("enemiesDB") { }
+public class EnemiesDatabase : LocalDatabase
+{
+    public EnemiesDatabase() : base("enemiesDB") { }
 
-//    public EnemiesData Enemies { get; set; } = new EnemiesData();
+    public EnemiesData Enemies { get; set; } = new EnemiesData();
 
-//    public override void Load()
-//    {
-//        if (!File.Exists(FilePath))
-//            return;
+    public override void Load()
+    {
+        if (!File.Exists(FilePath))
+            return;
 
-//        string json = File.ReadAllText(FilePath);
-//        JObject root = JObject.Parse(json);
-//        string enemiesJson = root["Enemies"].ToString();
-//        EnemiesData deserialized = JsonConvert.DeserializeObject<EnemiesData>(enemiesJson);
-//        Debug.Log("Deserialized count: " + deserialized.enemies.Count);
-//        Enemies = deserialized;
-//        Debug.Log("Enemies assigned, count: " + Enemies.enemies.Count);
-//    }
-//}
+        string json = File.ReadAllText(FilePath);
+        JObject root = JObject.Parse(json);
+        string enemiesJson = root["Enemies"].ToString();
+        EnemiesData deserialized = JsonConvert.DeserializeObject<EnemiesData>(enemiesJson);
+        Enemies = deserialized;
+    }
+}
 
-//public class SpawnersDatabase : LocalDatabase
-//{
-//    public SpawnersDatabase() : base("spawnersDB") { }
+public class SpawnersDatabase : LocalDatabase
+{
+    public SpawnersDatabase() : base("spawnersDB") { }
 
-//    public SpawnersData Spawners { get; set; } = new SpawnersData();
-//}
+    public SpawnersData Spawners { get; set; } = new SpawnersData();
+
+
+    public override void Load()
+    {
+        if (!File.Exists(FilePath))
+            return;
+
+        string json = File.ReadAllText(FilePath);
+        JObject root = JObject.Parse(json);
+        string spawnersJson = root["Spawners"].ToString();
+        SpawnersData deserialized = JsonConvert.DeserializeObject<SpawnersData>(spawnersJson);
+        Spawners = deserialized;
+    }
+}
 
 //public class ExampleLocalDataBase : LocalDatabase
 //{
