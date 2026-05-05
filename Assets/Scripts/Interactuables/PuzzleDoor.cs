@@ -27,6 +27,10 @@ class PuzzleDoor : Component
     public float easeIntensity = 1.5f;
     public float cameraZoom = 20;
 
+    public float cameraShakeDuration = 0.5f;
+    public float cameraShakeAmount = 0.3f;
+    public float cameraShakeRotation = 0.3f;
+
     private bool isOpening = false;
     private bool hasOpened = false;
 

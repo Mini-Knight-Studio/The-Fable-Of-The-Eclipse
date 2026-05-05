@@ -1,225 +1,188 @@
-//using System;
-//using System.Collections;
-//using Loopie;
+using System;
+using System.Collections;
+using Loopie;
 
-//class PuzzleDoorTablet : Component
-//{
-//    [Header("Identity")]
-//    public string puzzleDoorID = "UNASSIGNED_PUZZLEDOOR";
-//    public string requiredKeyID = "UNASSIGNED_KEY";
+class PuzzleDoorTablet : Component
+{
+    [Header("Identity")]
+    public string puzzleDoorID = "UNASSIGNED_PUZZLEDOOR";
+    public string requiredKeyID = "UNASSIGNED_KEY";
 
-//    [Header("References")]
-//    public Entity raisingTemple;
-//    public Entity tablet;
-//    public Entity staticKey;
-//    public Entity animatedKey;
-//    public Entity focusPointOnInsert;
-//    public Entity interactPrompt;
+    [Header("References")]
+    public Entity raisingTemple;
+    public Entity staticKey;
+    public Entity animatedKey;
+    public Entity focusPointOnInsert;
+    public Entity interactPrompt;
 
-//    [Header("Settings")]
-//    public float finalTempleHeight;
-//    public float camFocusDuration = 1.0f;
-//    public float keyTravelDuration = 1.0f;
-//    public float raiseDuration = 2.0f;
-//    public float pauseBeforeRaising = 0.5f;
-//    public float easeIntensity = 1.5f;
-//    public float cameraZoom = 20;
+    [Header("Settings")]
+    public float finalTempleHeight;
+    public float camFocusDuration = 1.0f;
+    public float keyTravelDuration = 1.0f;
+    public float raiseDuration = 2.0f;
+    public float pauseBeforeRaising = 0.5f;
+    public float easeIntensity = 1.5f;
+    public float cameraZoom = 20;
 
-//    private bool isRisen = false;
-//    private bool hasRisen = false;
+    public float cameraShakeDuration = 0.5f;
+    public float cameraShakeAmount = 0.3f;
+    public float cameraShakeRotation = 0.3f;
 
-//    private float initialTempleHeight;
-//    private Vector3 finalKeyScale;
+    private bool isRisen = false;
+    private bool hasRisen = false;
 
-//    [Header("Feedback")]
-//    public Entity keyParticles;
+    private float initialTempleHeight;
+    private Vector3 finalKeyScale;
 
-//    public Entity insertKeySFX;
+    [Header("Feedback")]
+    public Entity keyParticles;
+    public Entity risingParticles;
 
-//    void OnCreate()
-//    {
-//        finalKeyScale = animatedKey.transform.scale;
+    public Entity insertKeySFX;
 
-//        staticKey.SetActive(false);
-//        animatedKey.SetActive(false);
+    void OnCreate()
+    {
+        finalKeyScale = animatedKey.transform.scale;
 
-//        initialRightDoorRot = rightDoor.transform.local_rotation;
-//        initialLeftDoorRot = leftDoor.transform.local_rotation;
+        staticKey.SetActive(false);
+        animatedKey.SetActive(false);
 
-//        rightParticle1.GetComponent<ParticleComponent>().Stop();
-//        rightParticle2.GetComponent<ParticleComponent>().Stop();
-//        rightParticle3.GetComponent<ParticleComponent>().Stop();
-//        leftParticle1.GetComponent<ParticleComponent>().Stop();
-//        leftParticle2.GetComponent<ParticleComponent>().Stop();
-//        leftParticle3.GetComponent<ParticleComponent>().Stop();
+        initialTempleHeight = raisingTemple.transform.position.y;
 
-//        keyParticles.GetComponent<ParticleComponent>().Stop();
+        if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Stop();
+        if (keyParticles != null) keyParticles.GetComponent<ParticleComponent>().Stop();
 
-//        door1SFX.GetComponent<AudioSource>().Stop();
-//        door2SFX.GetComponent<AudioSource>().Stop();
-//        door3SFX.GetComponent<AudioSource>().Stop();
+        if (insertKeySFX != null) insertKeySFX.GetComponent<AudioSource>().Stop();
 
-//        impactSFX.GetComponent<AudioSource>().Stop();
+        if (DatabaseRegistry.levelsDB.Levels.IsPuzzleDoorOpened(puzzleDoorID))
+        {
+            hasRisen = true;
+            TempleRisen();
+        }
+    }
 
-//        if (DatabaseRegistry.levelsDB.Levels.IsPuzzleDoorOpened(puzzleDoorID))
-//        {
-//            hasOpened = true;
-//            DoorOpened();
-//        }
-//    }
+    void OnUpdate()
+    {
+        if (Pause.isPaused) { return; }
 
-//    void OnUpdate()
-//    {
-//        if (Pause.isPaused) { return; }
+        if (hasRisen || isRisen) return;
 
-//        if (hasOpened || isOpening) return;
+        if (entity.GetComponent<BoxCollider>().IsColliding && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyID))
+        {
+            if (!interactPrompt.Active)
+            {
+                interactPrompt.SetActive(true);
+            }
 
-//        if (entity.GetComponent<BoxCollider>().IsColliding && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyID))
-//        {
-//            if (!interactPrompt.Active)
-//            {
-//                interactPrompt.SetActive(true);
-//            }
+            if (Player.Instance.Input.interactKeyPressed)
+            {
+                isRisen = true;
+                StartCoroutine(RaiseTemple());
+                interactPrompt.SetActive(false);
+            }
+        }
+        else
+        {
+            if (interactPrompt.Active)
+            {
+                interactPrompt.SetActive(false);
+            }
+        }
+    }
 
-//            if (Player.Instance.Input.interactKeyPressed)
-//            {
-//                isOpening = true;
-//                StartCoroutine(OpenDoors());
-//                interactPrompt.SetActive(false);
-//            }
-//        }
-//        else
-//        {
-//            if (interactPrompt.Active)
-//            {
-//                interactPrompt.SetActive(false);
-//            }
-//        }
+    IEnumerator RaiseTemple()
+    {
+        animatedKey.SetActive(true);
+        animatedKey.transform.position = Player.Instance.transform.position + new Vector3(0, 2, 0);
+        animatedKey.transform.scale = Vector3.Zero;
 
-//    }
+        Vector3 startKeyPos = animatedKey.transform.position;
+        Vector3 targetKeyPos = staticKey.transform.position;
 
-//    IEnumerator OpenDoors()
-//    {
-//        animatedKey.SetActive(true);
-//        animatedKey.transform.position = Player.Instance.transform.position + new Vector3(0, 2, 0);
-//        animatedKey.transform.scale = Vector3.Zero;
+        Vector3 startKeyScale = Vector3.Zero;
+        Vector3 targetKeyScale = finalKeyScale;
 
-//        Vector3 startKeyPos = animatedKey.transform.position;
-//        Vector3 targetKeyPos = staticKey.transform.position;
+        float elapsedTime = 0f;
 
-//        Vector3 startKeyScale = Vector3.Zero;
-//        Vector3 targetKeyScale = finalKeyScale;
+        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom, 4);
 
-//        float elapsedTime = 0f;
+        yield return new WaitForSeconds(camFocusDuration);
 
-//        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom, 4);
+        while (true)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / keyTravelDuration;
+            float curvedT = Mathf.Pow(t, easeIntensity);
 
-//        yield return new WaitForSeconds(camFocusDuration);
+            animatedKey.transform.position = Vector3.Lerp(startKeyPos, targetKeyPos, curvedT);
+            animatedKey.transform.scale = Vector3.Lerp(startKeyScale, targetKeyScale, curvedT);
 
-//        while (true)
-//        {
-//            elapsedTime += Time.deltaTime;
-//            float t = elapsedTime / keyTravelDuration;
+            if (t >= 0.85f && !keyParticles.GetComponent<ParticleComponent>().IsPlaying)
+            {
+                keyParticles.GetComponent<ParticleComponent>().Play();
+                if (insertKeySFX != null) insertKeySFX.GetComponent<AudioSource>().Play();
+            }
+            if (t >= 1f)
+            {
+                animatedKey.transform.position = targetKeyPos;
+                animatedKey.transform.scale = targetKeyScale;
+                break;
+            }
+            yield return null;
+        }
 
-//            float curvedT = Mathf.Pow(t, easeIntensity);
+        animatedKey.SetActive(false);
+        staticKey.SetActive(true);
 
-//            animatedKey.transform.position = Vector3.Lerp(startKeyPos, targetKeyPos, curvedT);
-//            animatedKey.transform.scale = Vector3.Lerp(startKeyScale, targetKeyScale, curvedT);
+        yield return new WaitForSeconds(pauseBeforeRaising * 0.05f);
+        keyParticles.GetComponent<ParticleComponent>().Stop();
+        yield return new WaitForSeconds(pauseBeforeRaising * 0.95f);
 
-//            if(t >= 0.85f && !keyParticles.GetComponent<ParticleComponent>().IsPlaying)
-//            {
-//                keyParticles.GetComponent<ParticleComponent>().Play();
-//                insertKeySFX.GetComponent<AudioSource>().Play();
-//            }
-//            if (t >= 1f)
-//            {
-//                animatedKey.transform.position = targetKeyPos;
-//                animatedKey.transform.scale = targetKeyScale;
-//                break;
-//            }
-//            yield return null;
-//        }
+        elapsedTime = 0f;
 
-//        animatedKey.SetActive(false);
-//        staticKey.SetActive(true);
+        while (true)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / raiseDuration;
+            float curvedT = Mathf.Pow(t, easeIntensity);
 
-//        yield return new WaitForSeconds(pauseBeforeOpening * 0.05f);
+            float currentHeight = Mathf.Lerp(initialTempleHeight, finalTempleHeight, curvedT);
+            raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, currentHeight, raisingTemple.transform.position.z);
 
-//        keyParticles.GetComponent<ParticleComponent>().Stop();
+            if (t >= 0.1f && !risingParticles.GetComponent<ParticleComponent>().IsPlaying)
+            {
+                risingParticles.GetComponent<ParticleComponent>().Play();
+            }
 
-//        yield return new WaitForSeconds(pauseBeforeOpening * 0.95f);
+            if (t >= 1f)
+            {
+                raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, finalTempleHeight, raisingTemple.transform.position.z);
+                break;
+            }
+            yield return null;
+        }
 
-//        door1SFX.GetComponent<AudioSource>().Play();
-//        door2SFX.GetComponent<AudioSource>().Play();
-//        door3SFX.GetComponent<AudioSource>().Play();
+        Player.Instance.Camera.StopFocus();
+        risingParticles.GetComponent<ParticleComponent>().Stop();
 
-//        elapsedTime = 0f;
+        hasRisen = true;
+        DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);
 
-//        while (true)
-//        {
-//            elapsedTime += Time.deltaTime;
-//            float t = elapsedTime / doorOpenDuration;
+        yield return null;
+    }
 
-//            float curvedT = Mathf.Pow(t, easeIntensity);
+    void TempleRisen()
+    {
+        staticKey.SetActive(true);
+        animatedKey.SetActive(false);
 
-//            rightDoor.transform.local_rotation = Vector3.Lerp(initialRightDoorRot, finalRightDoorRot, curvedT);
+        raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, finalTempleHeight, raisingTemple.transform.position.z);
 
-//            leftDoor.transform.local_rotation = Vector3.Lerp(initialLeftDoorRot, finalLefttDoorRot, curvedT);
+        interactPrompt.SetActive(false);
+    }
 
-//            if(t >= 0.1f && !rightParticle1.GetComponent<ParticleComponent>().IsPlaying)
-//            {
-//                rightParticle1.GetComponent<ParticleComponent>().Play();
-//                rightParticle2.GetComponent<ParticleComponent>().Play();
-//                rightParticle3.GetComponent<ParticleComponent>().Play();
-//                leftParticle1.GetComponent<ParticleComponent>().Play();
-//                leftParticle2.GetComponent<ParticleComponent>().Play();
-//                leftParticle3.GetComponent<ParticleComponent>().Play();
-//            }
-
-//            if (t >= 1f)
-//            {
-//                rightDoor.transform.local_rotation = finalRightDoorRot;
-//                leftDoor.transform.local_rotation = finalLefttDoorRot;
-//                door1SFX.GetComponent<AudioSource>().Stop();
-//                door2SFX.GetComponent<AudioSource>().Stop();
-//                door3SFX.GetComponent<AudioSource>().Stop();
-//                impactSFX.GetComponent<AudioSource>().Play();
-//                break;
-//            }
-//            yield return null;
-//        }
-
-//        Player.Instance.Camera.StopFocus();
-
-//        rightParticle1.GetComponent<ParticleComponent>().Stop();
-//        rightParticle2.GetComponent<ParticleComponent>().Stop();
-//        rightParticle3.GetComponent<ParticleComponent>().Stop();
-//        leftParticle1.GetComponent<ParticleComponent>().Stop();
-//        leftParticle2.GetComponent<ParticleComponent>().Stop();
-//        leftParticle3.GetComponent<ParticleComponent>().Stop();
-
-//        blockingCollider.SetActive(false);
-
-//        hasOpened = true;
-//        DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);
-
-//        yield return null;
-//    }
-
-//    void DoorOpened()
-//    {
-//        staticKey.SetActive(true);
-//        animatedKey.SetActive(false);
-
-//        rightDoor.transform.local_rotation = finalRightDoorRot;
-//        leftDoor.transform.local_rotation = finalLefttDoorRot;
-
-//        blockingCollider.SetActive(false);
-//        interactPrompt.SetActive(false);
-//    }
-
-//    void OnDestroy()
-//    {
-//        StopAllOwnedCoroutines();
-//    }
-//}
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
+}
