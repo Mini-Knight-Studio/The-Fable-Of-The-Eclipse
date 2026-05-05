@@ -18,8 +18,7 @@ public class UIPopupManager : Component
     {
         if (isWaitingForInput && currentActivePanel != null)
         {
-            if (Input.IsKeyPressed(KeyCode.E) ||
-                Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_A))
+            if (Player.Instance.Input.interactKeyPressed)
             {
                 ClosePopup();
             }

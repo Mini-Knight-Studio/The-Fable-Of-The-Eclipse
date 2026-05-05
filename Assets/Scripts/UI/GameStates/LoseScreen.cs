@@ -48,7 +48,7 @@ public class LoseScreen : Component
         if (!canRecieveInput)
             return;
 
-        if (Input.IsKeyDown(KeyCode.A))
+        if (Player.Instance.Input.interactKeyPressed)
         {
             Player.Instance.GoToLastCheckpoint();
             Player.Instance.PlayerHealth.Reset();
