@@ -194,7 +194,7 @@ public class Boss : Component
     public IEnumerator ExposeCore()
     {
         headTemporalFeedback.active = false;
-        headTemporalFeedback.head.transform.rotation = Vector3.Zero;
+        headTemporalFeedback.head.transform.local_rotation = Vector3.Zero;
         while (!HeadMoveY(0))
         {
             yield return null;

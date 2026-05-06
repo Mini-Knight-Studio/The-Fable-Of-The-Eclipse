@@ -53,7 +53,7 @@ public class Hand : Component
         doing_sequence = false;
         already_attacked = false;
         HandShadow.SetActive(false);
-        transform.rotation = Vector3.Zero;
+        transform.local_rotation = Vector3.Zero;
         hand_punch_trigger.SetActive(false);
     }
 
@@ -144,7 +144,7 @@ public class Hand : Component
             while (timer > 0.0f)
             {
                 if (!boss.NeedsToCancel())
-                    RotatePalm(180, time, false);
+                    RotatePalm(-180, time, false);
                 else
                 {
                     Cancel();
@@ -152,7 +152,7 @@ public class Hand : Component
                 }
                 yield return null;
             }
-            transform.rotation = Vector3.Right * 180;
+            transform.local_rotation = Vector3.Zero;
             timer = boss.Value(boss.spikeWarn);
             while (timer > 0.0f)
             {
@@ -175,11 +175,11 @@ public class Hand : Component
             time = timer;
             while (timer > 0.0f)
             {
-                RotatePalm(180, time, true);
+                RotatePalm(-180, time, true);
                 PushSpikes(Vector3.Up * -1, time);
                 yield return null;
             }
-            transform.rotation = Vector3.Zero;
+            transform.local_rotation = Vector3.Zero;
             ended_attack_sequence = true;
             
             Cancel();
@@ -198,13 +198,13 @@ public class Hand : Component
                 yield return null;
             }
 
-            while (transform.rotation.x - base_hand_rotation.x > boss.Value(boss.handVelocity) * Time.deltaTime)
+            while (transform.local_rotation.x - base_hand_rotation.x > boss.Value(boss.handVelocity) * Time.deltaTime)
             {
                 transform.Rotate(new Vector3(boss.Value(boss.handVelocity) * Time.deltaTime, 0, 0),Transform.Space.LocalSpace);
                 yield return null;
             }
             transform.position = base_hand_position;
-            transform.rotation = base_hand_rotation;
+            transform.local_rotation = base_hand_rotation;
             if(ended_attack_sequence) sequence = sequence == 1 ? 2 : 1;
             boss.CompleteAttackCycle();
             doing_sequence = false;
@@ -217,6 +217,7 @@ public class Hand : Component
     private void Chase()
     {
         transform.position = Mantain(boss.target.entity.transform.position,transform.position, new Vector3(1,0,1));
+        Debug.Log("Hola");
     }
 
     private void Shake(Vector3 base_position)
@@ -228,7 +229,7 @@ public class Hand : Component
     {
         if(rightHand) angles = -angles;
         if(other_sense) angles = -angles;
-        transform.rotation += new Vector3(angles / duration, 0, 0)*Time.deltaTime;
+        transform.local_rotation += new Vector3(0, 0, angles / duration) *Time.deltaTime;
     }
 
     private void PushSpikes(Vector3 direction, float duration)
@@ -273,7 +274,7 @@ public class Hand : Component
     public void ResetTransform()
     {
         transform.position = base_hand_position;
-        transform.rotation = base_hand_rotation;
+        transform.local_rotation = base_hand_rotation;
     }
     #endregion
 };
