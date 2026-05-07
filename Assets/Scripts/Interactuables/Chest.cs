@@ -171,6 +171,7 @@ class Chest : Component
                     rewardItem.transform.scale = targetRewardScale;
 
                     rewardItem.GetComponent<Key_Idle>().StartMoving();
+
                 }
                 break;
             }

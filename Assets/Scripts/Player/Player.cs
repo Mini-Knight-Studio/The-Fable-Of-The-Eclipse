@@ -17,7 +17,6 @@ public class Player : Component
     public PlayerCombat Combat;
     public PlayerGrapple Grapple;
     public PlayerFeedback Feedback;
-
     public PlayerTorch Torch;
 
     [Header("Others")]
