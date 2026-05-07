@@ -61,9 +61,18 @@ public class PlayerAnimation : PlayerComponent
 
             if (state == AnimationState.HIT)
             {
-                if (hitTimer > 0.1f) return;
+                // Si el timer baja de 0.1s, permitimos que el resto del código 
+                // tome el control para mezclar hacia Idle/Move sin saltos.
+                if (hitTimer <= 0.1f)
+                {
+                    // No hacemos return, dejamos que pase a las siguientes validaciones
+                }
+                else
+                {
+                    return;
+                }
             }
-            else 
+            else
             {
                 return;
             }
@@ -123,12 +132,17 @@ public class PlayerAnimation : PlayerComponent
 
     public void PlayHit()
     {
+        // Forzamos el estado a NULL un instante si ya estábamos en HIT
+        // para que el Animator reinicie el clip correctamente.
+        if (state == AnimationState.HIT) state = AnimationState.NULL;
+
         state = AnimationState.HIT;
         lastPlayedComboIndex = 0;
         isWaitingForLoop = false;
 
         modelAnimator.Looping = false;
-        modelAnimator.Play(onHitClip, 0.05f);
+        // 0.02f es casi instantáneo para evitar el efecto de "rebobinado"
+        modelAnimator.Play(onHitClip, 0.02f);
         hitTimer = 0.5f;
     }
 
@@ -155,23 +169,29 @@ public class PlayerAnimation : PlayerComponent
     private void Idle()
     {
         if (state == AnimationState.IDLE) return;
+
+        // Si venimos de un HIT, usamos un blend un poco más largo para suavizar la salida
+        float blend = (state == AnimationState.HIT) ? 0.3f : 0.4f;
+
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
-
         modelAnimator.Looping = false;
-        modelAnimator.Play(idleClipName, 0.4f);
+        modelAnimator.Play(idleClipName, blend);
 
         isWaitingForLoop = true;
-        loopDelayTimer = 0.4f;
+        loopDelayTimer = blend;
     }
 
     private void Move()
     {
         if (state == AnimationState.WALK) return;
+
+        float blend = (state == AnimationState.HIT) ? 0.2f : 0.4f;
+
         state = AnimationState.WALK;
         lastPlayedComboIndex = 0;
         modelAnimator.Looping = true;
-        modelAnimator.Play(walkClipName, 0.4f);
+        modelAnimator.Play(walkClipName, blend);
     }
 
     private void Dash()
