@@ -104,7 +104,7 @@ class PuzzleDoorTablet : Component
         Vector3 startKeyScale = Vector3.Zero;
         Vector3 targetKeyScale = finalKeyScale;
 
-        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom / 2f, 4);
+        Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom / 2f, 6);
 
         yield return new WaitForSeconds(0.25f);
 
@@ -135,6 +135,8 @@ class PuzzleDoorTablet : Component
         animatedKey.SetActive(false);
         staticKey.SetActive(true);
 
+        Player.Instance.Camera.SetIsShaking(true, raiseDuration + pauseBeforeRaising + 1, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+
         yield return new WaitForSeconds(0.5f);
         if (keyParticles != null) keyParticles.GetComponent<ParticleComponent>().Stop();
 
@@ -143,7 +145,6 @@ class PuzzleDoorTablet : Component
         yield return new WaitForSeconds(0.5f);
 
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Play();
-        Player.Instance.Camera.SetIsShaking(true, raiseDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
 
         yield return new WaitForSeconds(pauseBeforeRaising);
 
@@ -168,7 +169,7 @@ class PuzzleDoorTablet : Component
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Stop();
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount*2, cameraShakeRotation*2, cameraShakeAmountVel, cameraShakeRotationVel);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
 
         Player.Instance.Camera.StopFocus();
 
