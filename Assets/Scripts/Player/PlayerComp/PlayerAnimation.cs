@@ -57,7 +57,16 @@ public class PlayerAnimation : PlayerComponent
         if (hitTimer > 0)
         {
             hitTimer -= Time.deltaTime;
-            return;
+            modelAnimator.Looping = false;
+
+            if (state == AnimationState.HIT)
+            {
+                if (hitTimer > 0.1f) return;
+            }
+            else 
+            {
+                return;
+            }
         }
 
         if (state != AnimationState.IDLE)
@@ -77,17 +86,14 @@ public class PlayerAnimation : PlayerComponent
 
         if (player.Grapple.IsLaunching)
         {
-            if (state != AnimationState.GRAPPLE_SHOOT) Debug.Log("ANIM: Trying to play SHOOT: " + grappleShootClip);
             PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
         }
         else if (player.Grapple.IsGrappling)
         {
-            if (state != AnimationState.GRAPPLE_FLIGHT) Debug.Log("ANIM: Trying to play POSE: " + grapplePoseClip);
             PlayGrappleAnim(grapplePoseClip, AnimationState.GRAPPLE_FLIGHT, true);
         }
         else if (player.Grapple.IsLanding)
         {
-            if (state != AnimationState.GRAPPLE_LAND) Debug.Log("ANIM: Trying to play LANDING: " + grappleLandingClip);
             PlayGrappleAnim(grappleLandingClip, AnimationState.GRAPPLE_LAND, false);
         }
         else if (player.Torch.IsTorching)
@@ -115,31 +121,32 @@ public class PlayerAnimation : PlayerComponent
             swordEntity.SetActive(false);
     }
 
-    public void PlayHit(float duration = 0.4f)
+    public void PlayHit()
     {
         state = AnimationState.HIT;
-        hitTimer = duration;
         lastPlayedComboIndex = 0;
+        isWaitingForLoop = false;
+
         modelAnimator.Looping = false;
         modelAnimator.Play(onHitClip, 0.05f);
-        Debug.Log("ANIM: Playing Hit Animation: " + onHitClip);
+        hitTimer = 0.5f;
     }
 
-    public void PlayPickUp(float duration = 1.5f)
+    public void PlayPickUp()
     {
         state = AnimationState.PICKUP;
-        hitTimer = duration;
         lastPlayedComboIndex = 0;
+        isWaitingForLoop = false;
+
         modelAnimator.Looping = false;
         modelAnimator.Play(pickUpClip, 0.1f);
-        Debug.Log("ANIM: Playing PickUp Animation: " + pickUpClip);
+        hitTimer = 1.0f;
     }
 
     private void PlayGrappleAnim(string clip, AnimationState newState, bool loop)
     {
         if (state == newState) return;
         state = newState;
-        Debug.Log("ANIM FIRE: " + clip);
         lastPlayedComboIndex = 0;
         modelAnimator.Play(clip, 0.1f);
         modelAnimator.Looping = loop;
@@ -150,8 +157,10 @@ public class PlayerAnimation : PlayerComponent
         if (state == AnimationState.IDLE) return;
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
+
         modelAnimator.Looping = false;
         modelAnimator.Play(idleClipName, 0.4f);
+
         isWaitingForLoop = true;
         loopDelayTimer = 0.4f;
     }
@@ -162,7 +171,7 @@ public class PlayerAnimation : PlayerComponent
         state = AnimationState.WALK;
         lastPlayedComboIndex = 0;
         modelAnimator.Looping = true;
-        modelAnimator.Play(walkClipName, .4f);
+        modelAnimator.Play(walkClipName, 0.4f);
     }
 
     private void Dash()
@@ -181,7 +190,7 @@ public class PlayerAnimation : PlayerComponent
         state = AnimationState.TORCH_BURN;
         lastPlayedComboIndex = 0;
         modelAnimator.Looping = false;
-        modelAnimator.Play(torchClip, .0f);
+        modelAnimator.Play(torchClip, 0.0f);
     }
 
     private void Attack()

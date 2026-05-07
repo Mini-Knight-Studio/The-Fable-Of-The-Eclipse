@@ -153,7 +153,6 @@ public class Enemy : Component
             feedback.PlaySound("Attack");
             feedback.ShakeCamera(damage / 20.0f, knockback_time / 2);
 
-            Player.Instance.Animation.PlayHit();
 
             Player.Instance.PlayerHealth.Damage(Player.Instance.Effects.GetEffectValueInt(damage, "ModifyDamage"));
             Player.Instance.Movement.ApplyKnockback((float)damage * 10.0f, 0.3f, GetDirectionToTarget());

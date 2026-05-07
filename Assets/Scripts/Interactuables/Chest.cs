@@ -205,6 +205,7 @@ class Chest : Component
     {
         rewardCollected = true;
         DatabaseRegistry.levelsDB.Levels.SetRewardCollected(chestID);
+        Player.Instance.Animation.PlayPickUp();
     }
 
     void OnDestroy()
