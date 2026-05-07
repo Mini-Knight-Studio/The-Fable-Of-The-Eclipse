@@ -331,7 +331,7 @@ public class PlayerGrapple : PlayerComponent
             seg.transform.LookAt(segFakeTarget, direction);
 
             float dist = (float)Vector3.Distance(posA, posB);
-            seg.transform.scale = new Vector3(2, dist * 1.5f, 2);
+            seg.transform.scale = new Vector3(1.5f, dist * 1.5f, 1.5f);
         }
     }
 
