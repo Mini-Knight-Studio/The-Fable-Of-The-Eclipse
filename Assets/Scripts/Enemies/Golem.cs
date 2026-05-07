@@ -13,6 +13,7 @@ class Golem : Enemy
     public float ReachDistance;
     public float AttackDistance;
     public float PushForceScale;
+    public Vector2 HitOffset;
     [Space(5)]
     public float PreparationTime;
     public float AttackCooldown;
@@ -46,6 +47,9 @@ class Golem : Enemy
             movement.CanMove = false;
             entity.Destroy();
         }
+        if (!isAttacking)
+            attack_cooldown -= Time.deltaTime;
+
         #endregion
         Hit(1, PushForceScale, "G_Scale_CTRL|Walk");
         if (!isAttacking && !health.IsDead())
@@ -59,8 +63,15 @@ class Golem : Enemy
                 movement.Move(2.0f, transform.Forward);
                 ResetWander();
                 #region Attack
-                if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
-                    attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|AttackRecovery_ArmOut"), Damage, "G_Scale_CTRL|ChargeAttack", "G_Scale_CTRL|Attack", "G_Scale_CTRL|AttackRecovery_ArmStuck", "G_Scale_CTRL|AttackRecovery_ArmOut", false));
+                if (CanDoAttack())
+                {
+                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
+                    {
+                        ReceivedHits = 0;
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|AttackRecovery_ArmOut"), HitOffset, Damage, "G_Scale_CTRL|ChargeAttack", "G_Scale_CTRL|Attack", "G_Scale_CTRL|AttackRecovery_ArmStuck", "G_Scale_CTRL|AttackRecovery_ArmOut", false));
+                    }
+                }
+          
                 #endregion
             }
             else if (!health.IsDead())
@@ -91,7 +102,6 @@ class Golem : Enemy
                 feedback.PlaySound("Hit");
             }
         }
-
         if (isAttacking && ReceivedHits >= HitsForRecovery)
         {
             StopCoroutine(attackCoroutine);

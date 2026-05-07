@@ -28,6 +28,7 @@ public class Enemy : Component
     protected bool isAttacking;
     private Vector2 attack_stages; //x: ended preparing attack | y: ended attacking
     private float knockback_time;
+    protected float attack_cooldown = 0.5f;
 
     public string type = "Enemy";
     #region Set Up
@@ -106,8 +107,9 @@ public class Enemy : Component
     #endregion
 
     #region Attack
-    protected IEnumerator Attack(float attack_distance, float preparation_time, float attack_cooldown, float end_attack_duration, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string end_attack_clip, bool applyFeedbackOnlyOnhit = true)
+    protected IEnumerator Attack(float attack_distance, float preparation_time, float attack_cooldown, float end_attack_duration, Vector2 hitOffset, int damage, string charge_attack_clip, string attack_clip, string cooldown_clip, string end_attack_clip, bool applyFeedbackOnlyOnhit = true)
     {
+        if (isAttacking) yield break;
         isAttacking = true;
         float timer = 0.0f;
         DoChargeAttack(charge_attack_clip);
@@ -117,14 +119,18 @@ public class Enemy : Component
             transform.LookAt(Player.Instance.transform.position, Vector3.Up);
             yield return null;
         }
-        DoAttack(attack_distance, damage, attack_clip, applyFeedbackOnlyOnhit);
-        yield return new WaitForSeconds(animator.ClipDuration());
+        animator.PlayClip(attack_clip, false, 0.0f);
+        float clipDuration = animator.ClipDuration();
+        yield return new WaitForSeconds(clipDuration*hitOffset.x);
+        DoAttack(attack_distance, damage, applyFeedbackOnlyOnhit);
+        yield return new WaitForSeconds(clipDuration*hitOffset.y);
         DoAttackCooldown(cooldown_clip);
         yield return new WaitForSeconds(attack_cooldown);
         EndAttack(end_attack_clip);
         yield return new WaitForSeconds(end_attack_duration);
         movement.CanMove = true;
         isAttacking = false;
+        this.attack_cooldown = 0.5f;
     }
 
     protected IEnumerator CancelAttack(string end_attack_clip, float end_attack_duration)
@@ -142,16 +148,16 @@ public class Enemy : Component
         animator.PlayClip(charge_attack_clip, false, 0.0f);
     }
 
-    public virtual void DoAttack(float attack_distance, int damage, string attack_clip, bool feedback_only_on_hit)
+    public virtual void DoAttack(float attack_distance, int damage, bool feedback_only_on_hit)
     {
         attack_stages.x = 1.0f;
-        animator.PlayClip(attack_clip, false, 0.0f);
+        
         if (Mathf.Abs((float)Vector3.Distance(transform.position, Player.Instance.transform.position)) <= GetEntityForwardBase() + attack_distance)
         {
             if (Player.Instance.Effects.AddEffect(effect)) feedback.TickParticles("Effect", Time.deltaTime);
             else feedback.TickParticles("Attack", Time.deltaTime);
             feedback.PlaySound("Attack");
-            feedback.ShakeCamera(damage / 20.0f, knockback_time / 2);
+            feedback.ShakeCamera(damage / 25.0f, knockback_time / 2);
 
             Player.Instance.PlayerHealth.Damage(Player.Instance.Effects.GetEffectValueInt(damage, "ModifyDamage"));
             Player.Instance.Movement.ApplyKnockback((float)damage * 10.0f, 0.3f, GetDirectionToTarget());
@@ -174,6 +180,11 @@ public class Enemy : Component
     {
         animator.PlayClip(idle_clip, false, 0.0f);
         attack_stages = Vector2.Zero;
+    }
+
+    public bool CanDoAttack()
+    {
+        return !isAttacking && attack_cooldown <= 0;
     }
 
     public virtual void Hit(int points, float force_scale, string hit_clip)

@@ -13,6 +13,7 @@ class Blob : Enemy
     public float ReachDistance;
     public float AttackDistance;
     public float PushForceScale;
+    public Vector2 HitOffset;
     [Space(5)]
     public float PreparationTime;
     public float AttackCooldown;
@@ -89,7 +90,7 @@ class Blob : Enemy
                     #region Attack
                     if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
                     {
-                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, Damage*Stage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, HitOffset, Damage*Stage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
                     }
                     #endregion
                 }
