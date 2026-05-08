@@ -9,7 +9,7 @@ class Blob : Enemy
     public Vector2 ViewField;
     public float ForcedDetectionDistance;
     [Space(5)]
-    public int Damage;
+    public Vector2 BaseDamageandStageMultiplier;
     public float ReachDistance;
     public float AttackDistance;
     public float PushForceScale;
@@ -90,7 +90,7 @@ class Blob : Enemy
                     #region Attack
                     if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
                     {
-                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, HitOffset, Damage*Stage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, HitOffset, (int)(BaseDamageandStageMultiplier.x + BaseDamageandStageMultiplier.y*Stage), "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
                     }
                     #endregion
                 }
@@ -108,6 +108,14 @@ class Blob : Enemy
     {
         Stage = newStage;
         transform.scale = Vector3.One * StageScale * Stage;
+    }
+
+    public float StageMultiplier(float Multiplier)
+    {
+        if (Multiplier == 0) return 0;
+        if (Multiplier < 1)
+            return 1 / Multiplier * (4 - Stage);
+        return Multiplier * Stage;
     }
 
     public override void Hit(int points, float force_scale, string hit_clip)
