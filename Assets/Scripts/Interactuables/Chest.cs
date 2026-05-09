@@ -221,11 +221,11 @@ class Chest : Component
 
             float pulseSpeed = 1f;
 
-            float minIntensity = 0f;
-            float maxIntensity = 1f;
+            float minIntensity = 0.3f;
+            float maxIntensity = 0.9f;
 
             float minRoughness = 0.1f;
-            float maxRoughness = 50f;
+            float maxRoughness = 40f;
 
             float elapsedTime = 0f;
 
@@ -234,14 +234,14 @@ class Chest : Component
                 elapsedTime += Time.deltaTime;
 
                 float intensity = Mathf.Lerp(minIntensity, maxIntensity, (Mathf.Sin(elapsedTime * pulseSpeed) + 1f) / 2f);
-                moonstoneMat.SetFloat("u_EmisiveIntenisty", intensity);
+                moonstoneMat.SetFloat("u_EmissiveIntensity", intensity);
 
                 float roughness = Mathf.Lerp(minRoughness, maxRoughness, (Mathf.Sin(elapsedTime * pulseSpeed * 2f) + 1f) / 2f);
                 moonstoneMat.SetFloat("u_Roughness", roughness);
 
                 yield return null;
             }
-            moonstoneMat.SetFloat("u_EmisiveIntenisty", moonstone.GetComponent<MeshRenderer>().GetFloat("u_EmisiveIntenisty"));
+            moonstoneMat.SetFloat("u_EmissiveIntensity", moonstone.GetComponent<MeshRenderer>().GetFloat("u_EmissiveIntensity"));
             moonstoneMat.SetFloat("u_Roughness", moonstone.GetComponent<MeshRenderer>().GetFloat("u_Roughness"));
         }
     }
