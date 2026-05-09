@@ -42,6 +42,10 @@ class PuzzleDoorTablet : Component
     public Entity risingParticles;
 
     public Entity insertKeySFX;
+    public Entity doorStartSFX;
+    public Entity doorRiseSFX;
+    public Entity doorEndSFX;
+    public Entity drippingSFX;
 
     void OnCreate()
     {
@@ -122,6 +126,7 @@ class PuzzleDoorTablet : Component
             {
                 keyParticles.GetComponent<ParticleComponent>().Play();
                 if (insertKeySFX != null) insertKeySFX.GetComponent<AudioSource>().Play();
+                if (doorStartSFX != null) doorStartSFX.GetComponent<AudioSource>().Play();
             }
             if (t >= 1f)
             {
@@ -131,6 +136,8 @@ class PuzzleDoorTablet : Component
             }
             yield return null;
         }
+
+        if (drippingSFX != null) drippingSFX.GetComponent<AudioSource>().Play();
 
         animatedKey.SetActive(false);
         staticKey.SetActive(true);
@@ -145,6 +152,8 @@ class PuzzleDoorTablet : Component
         yield return new WaitForSeconds(0.5f);
 
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Play();
+
+        if (doorRiseSFX != null) doorRiseSFX.GetComponent<AudioSource>().Play();
 
         yield return new WaitForSeconds(pauseBeforeRaising);
 
@@ -161,6 +170,7 @@ class PuzzleDoorTablet : Component
             if (t >= 1f)
             {
                 raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, finalTempleHeight, raisingTemple.transform.position.z);
+                if (doorEndSFX != null) doorEndSFX.GetComponent<AudioSource>().Play();
                 break;
             }
             yield return null;
@@ -185,6 +195,8 @@ class PuzzleDoorTablet : Component
         animatedKey.SetActive(false);
 
         raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, finalTempleHeight, raisingTemple.transform.position.z);
+
+        if (drippingSFX != null) drippingSFX.GetComponent<AudioSource>().Play();
 
         interactPrompt.SetActive(false);
     }
