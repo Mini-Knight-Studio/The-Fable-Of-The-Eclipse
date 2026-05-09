@@ -35,7 +35,6 @@ public class EnemyAnimation : Component
         if (animator.GetClipIndex(clip_name) == -1) return;
         animation_timer = 0;
         stay_until_finish = stay_until_end;
-        Debug.Log(clip_name);
         animator.Play(clip_name, transition);
     }
 
