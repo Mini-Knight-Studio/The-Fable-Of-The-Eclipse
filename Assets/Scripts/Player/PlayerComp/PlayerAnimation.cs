@@ -33,6 +33,7 @@ public class PlayerAnimation : PlayerComponent
         PICKUP,
         NULL
     };
+
     private AnimationState state;
     private int lastPlayedComboIndex = 0;
 
@@ -54,30 +55,25 @@ public class PlayerAnimation : PlayerComponent
     {
         if (player.Movement == null || player.Combat == null || player.Grapple == null || player.Torch == null) return;
 
+        // --- HIT & PICKUP LOCK ---
         if (hitTimer > 0)
         {
             hitTimer -= Time.deltaTime;
-            modelAnimator.Looping = false;
 
-            if (state == AnimationState.HIT)
-            {
-                // Si el timer baja de 0.1s, permitimos que el resto del código 
-                // tome el control para mezclar hacia Idle/Move sin saltos.
-                if (hitTimer <= 0.1f)
-                {
-                    // No hacemos return, dejamos que pase a las siguientes validaciones
-                }
-                else
-                {
-                    return;
-                }
-            }
-            else
+            // While the timer is active, we block all other animation logic
+            if (hitTimer > 0)
             {
                 return;
             }
+            else
+            {
+                // Once timer expires, reset state to NULL so the code below 
+                // is forced to pick a new animation (Idle/Move) immediately.
+                state = AnimationState.NULL;
+            }
         }
 
+        // --- LOOP MANAGEMENT ---
         if (state != AnimationState.IDLE)
         {
             isWaitingForLoop = false;
@@ -93,6 +89,7 @@ public class PlayerAnimation : PlayerComponent
             }
         }
 
+        // --- STATE PRIORITIES ---
         if (player.Grapple.IsLaunching)
         {
             PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
@@ -126,24 +123,26 @@ public class PlayerAnimation : PlayerComponent
             Idle();
         }
 
+        // --- CLEANUP ---
         if (state != AnimationState.ATTACK)
             swordEntity.SetActive(false);
     }
 
     public void PlayHit()
     {
-        // Forzamos el estado a NULL un instante si ya estábamos en HIT
-        // para que el Animator reinicie el clip correctamente.
-        if (state == AnimationState.HIT) state = AnimationState.NULL;
+        // If already in hit, we use a tiny blend to "restart" the motion
+        float blend = (state == AnimationState.HIT) ? 0.05f : 0.02f;
 
         state = AnimationState.HIT;
         lastPlayedComboIndex = 0;
         isWaitingForLoop = false;
+        swordEntity.SetActive(false); // Disable sword if hit during attack
 
         modelAnimator.Looping = false;
-        // 0.02f es casi instantáneo para evitar el efecto de "rebobinado"
-        modelAnimator.Play(onHitClip, 0.02f);
-        hitTimer = 0.5f;
+        modelAnimator.Play(onHitClip, blend);
+
+        // Adjust this value to match your actual clip duration
+        hitTimer = 0.45f;
     }
 
     public void PlayPickUp()
@@ -170,8 +169,8 @@ public class PlayerAnimation : PlayerComponent
     {
         if (state == AnimationState.IDLE) return;
 
-        // Si venimos de un HIT, usamos un blend un poco más largo para suavizar la salida
-        float blend = (state == AnimationState.HIT) ? 0.3f : 0.4f;
+        // Smoother transition if coming out of a Hit reaction
+        float blend = (state == AnimationState.NULL) ? 0.25f : 0.4f;
 
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
@@ -186,7 +185,7 @@ public class PlayerAnimation : PlayerComponent
     {
         if (state == AnimationState.WALK) return;
 
-        float blend = (state == AnimationState.HIT) ? 0.2f : 0.4f;
+        float blend = (state == AnimationState.NULL) ? 0.15f : 0.4f;
 
         state = AnimationState.WALK;
         lastPlayedComboIndex = 0;
