@@ -5,6 +5,7 @@ using System.Collections;
 
 class PuzzleGoalSimonSays : Component
 {
+    [Header("References")]
     public Entity Pillar1;
     public Entity Pillar2;
     public Entity Pillar3;
@@ -13,12 +14,12 @@ class PuzzleGoalSimonSays : Component
     private MovingPillar[] basePillars;
     private MovingPillarSimonSays[] simonPillars;
     private bool[] pillarTriggered;
-    private bool[] pillarPressedThisRound;
 
     private bool puzzle2Completed = false;
 
     private BoxCollider goalCollider;
 
+    [Header("Settings")]
     public float movementSpeed = 2.0f;
     public float movementDistance = 1.0f;
 
@@ -29,11 +30,16 @@ class PuzzleGoalSimonSays : Component
     public int maxRounds = 4;
     private int successfulRounds = 0;
 
-    public float showDelay = 1.0f;
+    [Header("Timing Settings")]
+    public float playbackActiveTime = 0.8f;
+    public float playbackInactiveTime = 0.2f;
+    public float roundStartDelay = 1.0f;
+
     private bool simonStarted = false;
 
     public Entity Gem;
 
+    [Header("Feedback")]
     // Particles
     private ParticleComponent goalParticles;
 
@@ -58,7 +64,6 @@ class PuzzleGoalSimonSays : Component
         basePillars = new MovingPillar[4];
         simonPillars = new MovingPillarSimonSays[4];
         pillarTriggered = new bool[4];
-        pillarPressedThisRound = new bool[4];
 
         goalCollider = entity.GetComponent<BoxCollider>();
 
@@ -177,14 +182,11 @@ class PuzzleGoalSimonSays : Component
         currentState = State.PlayingSimon;
         ResetAllPillars();
         sequence.Clear();
-        fullSequence = new List<int> { 0, 1, 2, 3 };
+        fullSequence.Clear();
 
-        for (int i = 0; i < fullSequence.Count; i++)
+        for (int i = 0; i < maxRounds; i++)
         {
-            int temp = fullSequence[i];
-            int r = Loopie.Random.Range(i, fullSequence.Count);
-            fullSequence[i] = fullSequence[r];
-            fullSequence[r] = temp;
+            fullSequence.Add(Loopie.Random.Range(0, 4));
         }
 
         round = 0;
@@ -197,18 +199,19 @@ class PuzzleGoalSimonSays : Component
 
             LockAllPillars();
             ResetAllPillars();
-            yield return new WaitForSeconds(showDelay);
+
+            yield return new WaitForSeconds(roundStartDelay);
 
             foreach (int index in sequence)
             {
                 if (simonPillars[index] != null) simonPillars[index].ForceActive();
-                yield return new WaitForSeconds(showDelay);
+                yield return new WaitForSeconds(playbackActiveTime);
+
                 ResetAllPillars();
-                yield return new WaitForSeconds(showDelay * 0.5f);
+                yield return new WaitForSeconds(playbackInactiveTime);
             }
 
             playerIndex = 0;
-            for (int i = 0; i < pillarPressedThisRound.Length; i++) pillarPressedThisRound[i] = false;
             UnlockAllPillars();
 
             bool roundFailed = false;
@@ -217,7 +220,7 @@ class PuzzleGoalSimonSays : Component
                 int pressedIndex = -1;
                 for (int i = 0; i < simonPillars.Length; i++)
                 {
-                    if (simonPillars[i] != null && simonPillars[i].wasPressed && !pillarPressedThisRound[i])
+                    if (simonPillars[i] != null && simonPillars[i].wasPressed)
                     {
                         pressedIndex = i;
                         break;
@@ -226,13 +229,18 @@ class PuzzleGoalSimonSays : Component
 
                 if (pressedIndex != -1)
                 {
-                    pillarPressedThisRound[pressedIndex] = true;
                     if (sequence[playerIndex] == pressedIndex)
                     {
                         playerIndex++;
+                        simonPillars[pressedIndex].ResetState();
+
+                        yield return new WaitForSeconds(1f);
+
+                        simonPillars[pressedIndex].ResetState();
                     }
                     else
                     {
+                        simonPillars[pressedIndex].ResetState();
                         roundFailed = true;
                         break;
                     }
@@ -253,7 +261,7 @@ class PuzzleGoalSimonSays : Component
             {
                 successfulRounds++;
                 yield return StartCoroutine(MoveRoutine(new Vector3(0, -movementDistance, 0)));
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(roundStartDelay);
             }
         }
 

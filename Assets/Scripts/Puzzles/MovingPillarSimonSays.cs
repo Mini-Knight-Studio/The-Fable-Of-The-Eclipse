@@ -1,8 +1,17 @@
 using System;
+using System.Collections;
 using Loopie;
 
 class MovingPillarSimonSays : Component
 {
+    [Header("References")]
+    public Entity torch;
+
+    private ParticleComponent torchParticles;
+    private BoxCollider torchCollider;
+    private MovingPillar movingPillar;
+
+    [Header("Settings")]
     private bool enabled = false;
 
     public bool active = false;
@@ -11,15 +20,13 @@ class MovingPillarSimonSays : Component
     private bool activated = false;
     private bool locked = true;
 
-    public Entity torch;
-    private ParticleComponent torchParticles;
-    private BoxCollider torchCollider;
-
-    private MovingPillar movingPillar;
-
+    [Header("Feedback")]
     public Entity igniteSFXEntity;
-
     public Entity fireSFXEntity;
+    public Entity pillarModel;
+
+    private Material pillarMaterial;
+    private float defaultIntensity = 0.5f;
 
     void OnCreate()
     {
@@ -30,6 +37,12 @@ class MovingPillarSimonSays : Component
             torchParticles = torch.GetComponent<ParticleComponent>();
             torchParticles.Stop();
             torchCollider = torch.GetComponent<BoxCollider>();
+        }
+
+        if (pillarModel != null)
+        {
+            pillarMaterial = pillarModel.GetComponent<MeshRenderer>().GetInstancedMaterial();
+            defaultIntensity = pillarMaterial.GetFloat("u_EmissiveIntensity");
         }
     }
 
@@ -52,6 +65,7 @@ class MovingPillarSimonSays : Component
             }
 
             enabled = true;
+            StartCoroutine(EmissiveShine());
         }
 
         HandleActivation();
@@ -126,5 +140,43 @@ class MovingPillarSimonSays : Component
     public void Lock()
     {
         locked = true;
+    }
+
+    IEnumerator EmissiveShine()
+    {
+        if (pillarMaterial == null) yield break;
+
+        float currentIntensity = defaultIntensity;
+        float transitionSpeed = 2f;
+        float pulseSpeed = 2f;
+        float minPulse = 0.8f;
+        float maxPulse = 1.2f;
+        float pulseTimer = 0f;
+
+        while (true)
+        {
+            float targetIntensity = activated ? maxPulse : defaultIntensity;
+
+            if (activated)
+            {
+                pulseTimer += Time.deltaTime;
+                float pulseFactor = (Mathf.Sin(pulseTimer * pulseSpeed) + 1f) / 2f;
+                targetIntensity = Mathf.Lerp(minPulse, maxPulse, pulseFactor);
+            }
+            else
+            {
+                pulseTimer = 0f;
+            }
+
+            currentIntensity = Mathf.MoveTowards(currentIntensity, targetIntensity, transitionSpeed * Time.deltaTime);
+            pillarMaterial.SetFloat("u_EmissiveIntensity", currentIntensity);
+
+            yield return null;
+        }
+    }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
     }
 }
