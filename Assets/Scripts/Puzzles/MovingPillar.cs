@@ -9,7 +9,7 @@ class MovingPillar : Component
     public float onGoalMovementDistance = 1.0f;
     public bool onGoalPosition = false;
     public bool onGoalCalled = false;
-    private bool stopedOnGoal = false;
+    public bool stopedOnGoal = false;
 
     [Header("Settings")]
     public float movementSpeed = 2.0f;
@@ -61,6 +61,8 @@ class MovingPillar : Component
     private ParticleComponent goalParticles;
     public Entity movingParticlesEntity;
     private ParticleComponent movingParticles;
+    public Entity onGoalSFX;
+    public Entity impactSFX;
 
     public Entity pillarModel;
 
@@ -107,6 +109,8 @@ class MovingPillar : Component
             if (onGoalCalled && !stopedOnGoal)
             {
                 stopedOnGoal = true;
+                onGoalSFX.GetComponent<AudioSource>().Play();
+                impactSFX.GetComponent<AudioSource>().Play();
                 goalParticles.Stop();
             }
         }

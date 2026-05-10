@@ -160,7 +160,7 @@ class PuzzleGoalSimonSays : Component
         {
             if (basePillars[i] == null) continue;
 
-            if (!basePillars[i].onGoalPosition)
+            if (!basePillars[i].stopedOnGoal)
             {
                 allOnGoal = false;
                 pillarTriggered[i] = false;
@@ -257,10 +257,12 @@ class PuzzleGoalSimonSays : Component
                         playerIndex++;
                         simonPillars[pressedIndex].ResetState();
                         simonPillars[pressedIndex].interactPrompt.SetActive(false);
+                        
+                        if (playerIndex >= sequence.Count) HidePromptAllPillars();
 
                         yield return new WaitForSeconds(1f);
 
-                        simonPillars[pressedIndex].interactPrompt.SetActive(true);
+                        if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
                         simonPillars[pressedIndex].ResetState();
                     }
                     else

@@ -603,6 +603,64 @@
                             "z": 0.0
                         },
                         "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "d9fb8949-0ffc-240d-0619-417fc66c5dce"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "24d488c7-1056-5056-c156-462568700b8f"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.2120000123977661,
+                        "playOnAwake": false,
+                        "volume": 0.5389999747276306
+                    },
+                    "is_active": true,
+                    "uuid": "5f2bae54-d2e2-10eb-345a-71fcb77b83c5"
+                }
+            ],
+            "name": "ImpactSFX",
+            "order": 1,
+            "parent_uuid": "f7b24d6f-e50d-d551-a832-328711157347",
+            "static": true,
+            "uuid": "1f56f372-4872-b236-cf1a-c3a9ea28c8a0"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
                             "x": -0.0527496337890625,
                             "y": 11.061722755432129,
                             "z": -0.0476531982421875
@@ -649,6 +707,7 @@
                         "class_id": "Gem_Idle",
                         "fields": {
                             "amplitude": 0.30000001192092896,
+                            "gemModel": "3583a2fd-471c-2fea-0aa9-7e6dc34d7e77",
                             "interactionPrompt": "64affa56-ce6c-ae7e-afa9-dc7250d30440",
                             "speed": 1.0
                         }
@@ -1063,17 +1122,20 @@
                         "class_id": "MovingPillar",
                         "fields": {
                             "goalEntity": "84b5b998-d514-87ed-c859-4a2dbc923019",
+                            "impactSFX": "1f56f372-4872-b236-cf1a-c3a9ea28c8a0",
                             "movementSpeed": 4.0,
                             "movingParticlesEntity": "a4d003e2-e966-0feb-8c55-c6ab16d15a3c",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
+                            "onGoalSFX": "f7ef5769-a083-c86e-4f0e-219db12a2246",
                             "pillarModel": "ff273c6f-8277-7dea-f963-f0bdbc23b3bd",
                             "pushBackEntity": "d36bbc19-1512-cbea-3b89-97195b7ca95e",
                             "pushForwardEntity": "53b57763-be04-9db0-7cf7-7af0f740daf1",
                             "pushLeftEntity": "7063484f-cf61-8d63-a2cf-88ae20021d56",
                             "pushRightEntity": "453fa0ba-fa09-33c1-ddf2-602145e14f39",
                             "pushTimeRequired": 0.3499999940395355,
+                            "stopedOnGoal": false,
                             "tileSize": 4.0
                         }
                     },
@@ -1084,7 +1146,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -1275,7 +1337,7 @@
             ],
             "name": "Environment",
             "order": 0,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "7764c9e6-7b50-f087-0ea9-70e69b813c6a"
         },
@@ -1938,17 +2000,20 @@
                         "class_id": "MovingPillar",
                         "fields": {
                             "goalEntity": "43f32ffc-ad0e-0e3f-a7ca-41fd32d44176",
+                            "impactSFX": "c97fa1f3-6b34-1516-1573-14aee566bcad",
                             "movementSpeed": 4.0,
                             "movingParticlesEntity": "658acea4-87ed-3450-c1da-969420da5a89",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
+                            "onGoalSFX": "621bd585-b829-ce78-1eaa-9a1dca92b24c",
                             "pillarModel": "df2c6022-5dae-be6f-d992-817a7226227b",
                             "pushBackEntity": "b5dce982-3ece-b082-e8e4-ad109902681e",
                             "pushForwardEntity": "f399d9d9-001a-60b2-d708-95ccc774bd82",
                             "pushLeftEntity": "eb5b2c94-1dd5-e1c0-3ecf-4fd819aca2bb",
                             "pushRightEntity": "6c1cda81-b840-a934-f3e0-6e5a85abdb7b",
                             "pushTimeRequired": 0.3499999940395355,
+                            "stopedOnGoal": false,
                             "tileSize": 4.0
                         }
                     },
@@ -1959,7 +2024,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -2037,7 +2102,7 @@
             ],
             "name": "Puzzle_Borders",
             "order": 2,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "666815e3-731b-f199-1238-ff869804f25c"
         },
@@ -2909,7 +2974,7 @@
             ],
             "name": "PuzzleBoard",
             "order": 3,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
@@ -3559,6 +3624,64 @@
             "parent_uuid": "354de116-b1a1-78fd-a839-949da8e33a56",
             "static": true,
             "uuid": "83690ad0-31bd-a5f5-2d49-bf0c0a65dfb9"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "cd4e7abc-7c1a-318d-e078-6baf97cc5905"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "bb5babc9-3cce-f2b2-ce1a-6f19e68631bd"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.8600000143051147,
+                        "playOnAwake": false,
+                        "volume": 0.8730000257492065
+                    },
+                    "is_active": true,
+                    "uuid": "098f58d6-5934-009e-5b03-9be4e26aa0b4"
+                }
+            ],
+            "name": "OnGoalSFX",
+            "order": 0,
+            "parent_uuid": "2fd491ac-0772-55d7-cc76-75611a1fd47c",
+            "static": true,
+            "uuid": "4fc8ca72-be33-d4c1-26a6-228284b7ff8d"
         },
         {
             "active": true,
@@ -4996,7 +5119,7 @@
             ],
             "name": "LevelFadeIn",
             "order": 11,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "1c906acc-0a55-dbbe-1d2c-1565746af07c"
         },
@@ -5449,7 +5572,7 @@
             ],
             "name": "Puzzle_Goal",
             "order": 4,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": false,
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
@@ -6330,7 +6453,7 @@
             ],
             "name": "Lighting",
             "order": 5,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "07a093b1-5552-f8af-16ed-156f6110db5a"
         },
@@ -6429,7 +6552,7 @@
             ],
             "name": "LunariTemple",
             "order": 6,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "bb75dc15-dbda-6e5a-6783-0651da2657c9"
         },
@@ -6572,7 +6695,7 @@
             ],
             "name": "Colliders",
             "order": 7,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "faf92da4-4a35-01cc-cd90-7d5d06e5f4be"
         },
@@ -7605,7 +7728,7 @@
             ],
             "name": "Pillars",
             "order": 8,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": false,
             "uuid": "fb076017-00ea-c384-dd59-90aafe82e22d"
         },
@@ -7773,17 +7896,20 @@
                         "class_id": "MovingPillar",
                         "fields": {
                             "goalEntity": "ca324d90-f87d-cdc5-983a-a55e1c9f8818",
+                            "impactSFX": "0156f443-ff6f-5e33-7c77-c0cf822f4171",
                             "movementSpeed": 4.0,
                             "movingParticlesEntity": "d214c3c0-f5b4-b2c0-57ec-2d98a0c64fa4",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
+                            "onGoalSFX": "4fc8ca72-be33-d4c1-26a6-228284b7ff8d",
                             "pillarModel": "2c9198e5-7d4e-f6a3-7a92-6373fbd75511",
                             "pushBackEntity": "affea250-c1a7-9f50-d6b3-c7c4f9613608",
                             "pushForwardEntity": "7061f17e-a69d-255a-7661-98173aa21f0f",
                             "pushLeftEntity": "b4a98a1c-e163-ab67-866b-c991b579a9a4",
                             "pushRightEntity": "c38b1926-b9e5-cb83-016e-499d6effa485",
                             "pushTimeRequired": 0.3499999940395355,
+                            "stopedOnGoal": false,
                             "tileSize": 4.0
                         }
                     },
@@ -7794,7 +7920,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -8103,17 +8229,20 @@
                         "class_id": "MovingPillar",
                         "fields": {
                             "goalEntity": "b1c84545-7c17-34f7-501a-8197e0b474c2",
+                            "impactSFX": "86a4114c-698d-823e-4d06-10614d76cff0",
                             "movementSpeed": 4.0,
                             "movingParticlesEntity": "91842952-60dd-3d87-982a-db6ab7fd0b5f",
                             "onGoalCalled": false,
                             "onGoalMovementDistance": 2.0,
                             "onGoalPosition": false,
+                            "onGoalSFX": "fa7cb963-aec4-2c81-870e-c7636105bc2e",
                             "pillarModel": "be366f8b-b76f-7f5f-5816-7effc729aacc",
                             "pushBackEntity": "80cf3233-9c08-195b-23e3-39fb7c730a20",
                             "pushForwardEntity": "8e0224c2-7d2c-3a9d-415e-08ba92b821db",
                             "pushLeftEntity": "50ff8a0d-2538-b9d8-2dab-73e1b1d843f1",
                             "pushRightEntity": "0f366b9e-3f8a-4963-1c79-6d68fd9b3169",
                             "pushTimeRequired": 0.3499999940395355,
+                            "stopedOnGoal": false,
                             "tileSize": 4.0
                         }
                     },
@@ -8124,7 +8253,7 @@
                         "audioClips": {
                             "0": "151b2cbc-d620-54bb-723d-58720a3c9b5a"
                         },
-                        "channelBus": "",
+                        "channelBus": "Sfx",
                         "currentClipIndex": 0,
                         "isSpatial": false,
                         "loop": false,
@@ -8635,111 +8764,6 @@
             "parent_uuid": "07a093b1-5552-f8af-16ed-156f6110db5a",
             "static": true,
             "uuid": "5df8999c-f1d4-901a-aeae-081d1d3a03d9"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 165.7777862548828,
-                            "y": 43.158451080322266,
-                            "z": 159.66868591308594
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 1.8767461776733398,
-                            "z": 0.0
-                        },
-                        "rotation": {
-                            "w": 0.3795466125011444,
-                            "x": 0.11804670095443726,
-                            "y": 0.9163069128990173,
-                            "z": 0.04889670014381409
-                        },
-                        "scale": {
-                            "x": 0.7499998807907104,
-                            "y": 0.75,
-                            "z": 0.7499998807907104
-                        }
-                    },
-                    "uuid": "60a17376-aa55-4776-f50a-fac9b88f21d5"
-                }
-            ],
-            "name": "Air_Gem",
-            "order": 0,
-            "parent_uuid": "b8f86ec8-a32b-6010-e0ec-c3025e1a34fa",
-            "static": true,
-            "uuid": "5f6dc03c-70ae-d0fc-7004-1ee1687570d9"
-        },
-        {
-            "active": true,
-            "components": [
-                {
-                    "is_active": true,
-                    "transform": {
-                        "euler_angles": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -90.0
-                        },
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.015378216281533241
-                        },
-                        "rotation": {
-                            "w": 0.7071067690849304,
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": -0.7071067690849304
-                        },
-                        "scale": {
-                            "x": 4.356971740722656,
-                            "y": 1.0,
-                            "z": 4.356971740722656
-                        }
-                    },
-                    "uuid": "9fb53783-0c7d-4340-83f0-77bc180e5570"
-                },
-                {
-                    "is_active": true,
-                    "meshrenderer": {
-                        "casts_shadows": true,
-                        "material_uuid": "7fc4dcbc-9890-e6f2-80e6-9db772266474",
-                        "mesh_index": 0,
-                        "mesh_uuid": "81e2933a-8b94-dadc-3efc-8a0c5c86418f"
-                    },
-                    "uuid": "da46c94b-84df-2681-032f-610312c2a311"
-                },
-                {
-                    "audiosource": {
-                        "audioClips": {
-                            "0": "d05f60d9-0b46-e054-ea43-a12045081528"
-                        },
-                        "channelBus": "",
-                        "currentClipIndex": 0,
-                        "isSpatial": true,
-                        "loop": true,
-                        "loopStrategy": 0,
-                        "maxDistance": 20.0,
-                        "minDistance": 5.0,
-                        "noLoopStrategy": 0,
-                        "pan": 0.0,
-                        "pitch": 1.0,
-                        "playOnAwake": true,
-                        "volume": 0.19599999487400055
-                    },
-                    "is_active": true,
-                    "uuid": "cb2171c5-243f-a149-84ed-bcf725538f93"
-                }
-            ],
-            "name": "pPlane1",
-            "order": 0,
-            "parent_uuid": "5f6dc03c-70ae-d0fc-7004-1ee1687570d9",
-            "static": true,
-            "uuid": "1be93133-31a2-2ffa-b912-07d6452f3769"
         },
         {
             "active": true,
@@ -9337,7 +9361,7 @@
                             "r": 0.13638366758823395
                         },
                         "inner_cone_angle": 14.0,
-                        "intensity": 200.0,
+                        "intensity": 32.0,
                         "outer_cone_angle": 29.5,
                         "reach_distance": 10.0,
                         "shadow_color": {
@@ -9542,7 +9566,7 @@
             ],
             "name": "EntranceSFX",
             "order": 9,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "70442e90-92f2-75b4-af1f-512ad0f1fd98"
         },
@@ -9754,7 +9778,7 @@
             ],
             "name": "PREFAB_BLOCK",
             "order": 1,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "214a877e-b110-5f9f-4d00-a888bf417561"
         },
@@ -23304,7 +23328,7 @@
             ],
             "name": "Music",
             "order": 10,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "e2bde98c-df70-8af1-6539-ab61511e723e"
         },
@@ -23389,7 +23413,7 @@
             "uuid": "13847baf-13e3-9eed-16e5-43fa9168773b"
         },
         {
-            "active": false,
+            "active": true,
             "components": [
                 {
                     "is_active": true,
@@ -23413,8 +23437,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 1440.0,
-                                "y": 829.0
+                                "x": 186.73023986816406,
+                                "y": 111.04790496826172
                             }
                         },
                         "position": {
@@ -23484,7 +23508,7 @@
             ],
             "name": "LevelFadeOut",
             "order": 12,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "d2843566-e904-fe7d-5dac-e6ef561c5d43"
         },
@@ -26213,7 +26237,7 @@
             ],
             "name": "Puzzle_Board_1",
             "order": 13,
-            "parent_uuid": "0ecc2458-2ca1-a052-f95a-4963e934b5b3",
+            "parent_uuid": "b7d0b7a1-c8cc-ded3-dbb4-916c7d57c5fb",
             "static": true,
             "uuid": "9d91803b-63fa-72d6-d74a-30708db18b6e"
         },
@@ -28237,6 +28261,607 @@
             "parent_uuid": "9d91803b-63fa-72d6-d74a-30708db18b6e",
             "static": true,
             "uuid": "3550d746-1ed6-2025-835b-5c4dcbc710fb"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ff00d184-e0cc-a4fc-b8fc-0f84adf85894"
+                }
+            ],
+            "name": "Feedback",
+            "order": 6,
+            "parent_uuid": "fa42c6c1-143e-57e9-0f14-4bf405d438a9",
+            "static": true,
+            "uuid": "f7b24d6f-e50d-d551-a832-328711157347"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "59d59c53-40f6-ef5f-3d41-adbd5979c5c7"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "bb5babc9-3cce-f2b2-ce1a-6f19e68631bd"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.2120000123977661,
+                        "playOnAwake": false,
+                        "volume": 0.8730000257492065
+                    },
+                    "is_active": true,
+                    "uuid": "7dfeecac-6e40-86c8-392f-9bcd4896395c"
+                }
+            ],
+            "name": "OnGoalSFX",
+            "order": 0,
+            "parent_uuid": "f7b24d6f-e50d-d551-a832-328711157347",
+            "static": true,
+            "uuid": "f7ef5769-a083-c86e-4f0e-219db12a2246"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "ff2b4197-3f9f-be69-afab-884fdcc82f3f"
+                }
+            ],
+            "name": "Feedback",
+            "order": 6,
+            "parent_uuid": "0dd35820-8247-5742-a616-9ea8abb14a25",
+            "static": true,
+            "uuid": "bbac008b-1852-9dff-fd3d-0a7845024e9a"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "82f07fcb-618b-6534-be74-1a4c690ff999"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "bb5babc9-3cce-f2b2-ce1a-6f19e68631bd"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0010000467300415,
+                        "playOnAwake": false,
+                        "volume": 0.8730000257492065
+                    },
+                    "is_active": true,
+                    "uuid": "c82b29ff-11bb-58df-237f-f2f6b12288ad"
+                }
+            ],
+            "name": "OnGoalSFX",
+            "order": 0,
+            "parent_uuid": "bbac008b-1852-9dff-fd3d-0a7845024e9a",
+            "static": true,
+            "uuid": "621bd585-b829-ce78-1eaa-9a1dca92b24c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "91d0fc69-7448-7fb6-f9ab-c893987c5f23"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "24d488c7-1056-5056-c156-462568700b8f"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.2120000123977661,
+                        "playOnAwake": false,
+                        "volume": 0.5389999747276306
+                    },
+                    "is_active": true,
+                    "uuid": "8358614b-6506-1195-c9e1-a64e92f15f10"
+                }
+            ],
+            "name": "ImpactSFX",
+            "order": 1,
+            "parent_uuid": "bbac008b-1852-9dff-fd3d-0a7845024e9a",
+            "static": true,
+            "uuid": "c97fa1f3-6b34-1516-1573-14aee566bcad"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "bc04290c-84eb-1fab-7538-b815c90a6d13"
+                }
+            ],
+            "name": "Feedback_1",
+            "order": 6,
+            "parent_uuid": "e3359c6e-12c0-1236-fb10-bfb1f229f158",
+            "static": true,
+            "uuid": "2fd491ac-0772-55d7-cc76-75611a1fd47c"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "bb3accd1-dfbd-62f6-2005-154e5324bb1f"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "24d488c7-1056-5056-c156-462568700b8f"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.2120000123977661,
+                        "playOnAwake": false,
+                        "volume": 0.5389999747276306
+                    },
+                    "is_active": true,
+                    "uuid": "1de53e68-4ff5-9f92-099c-e1e971e5e74d"
+                }
+            ],
+            "name": "ImpactSFX",
+            "order": 1,
+            "parent_uuid": "2fd491ac-0772-55d7-cc76-75611a1fd47c",
+            "static": true,
+            "uuid": "0156f443-ff6f-5e33-7c77-c0cf822f4171"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "34b68f9a-910c-442c-97a8-5f9ebfe99634"
+                }
+            ],
+            "name": "Feedback_1",
+            "order": 6,
+            "parent_uuid": "05d85a34-a7b4-0513-ccd1-1c6a7d577f6e",
+            "static": true,
+            "uuid": "b963e158-d7d3-2f19-937c-b3abe38a4dbd"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f6cde03b-0e92-d429-59f9-24d923358e98"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "bb5babc9-3cce-f2b2-ce1a-6f19e68631bd"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.409000039100647,
+                        "playOnAwake": false,
+                        "volume": 0.8730000257492065
+                    },
+                    "is_active": true,
+                    "uuid": "95af46dc-8378-e20d-d2db-253eaf601b35"
+                }
+            ],
+            "name": "OnGoalSFX",
+            "order": 0,
+            "parent_uuid": "b963e158-d7d3-2f19-937c-b3abe38a4dbd",
+            "static": true,
+            "uuid": "fa7cb963-aec4-2c81-870e-c7636105bc2e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "3c82ab65-e278-87b1-043e-f2fd2de9b46e"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "24d488c7-1056-5056-c156-462568700b8f"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.2120000123977661,
+                        "playOnAwake": false,
+                        "volume": 0.5389999747276306
+                    },
+                    "is_active": true,
+                    "uuid": "49253e9b-59ec-294d-6032-1b9b033c260d"
+                }
+            ],
+            "name": "ImpactSFX",
+            "order": 1,
+            "parent_uuid": "b963e158-d7d3-2f19-937c-b3abe38a4dbd",
+            "static": true,
+            "uuid": "86a4114c-698d-823e-4d06-10614d76cff0"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 165.7779998779297,
+                            "y": 43.158016204833984,
+                            "z": 159.66900634765625
+                        },
+                        "position": {
+                            "x": -0.27587890625,
+                            "y": 0.3004779815673828,
+                            "z": -0.27586841583251953
+                        },
+                        "rotation": {
+                            "w": 0.37954288721084595,
+                            "x": 0.11804555356502533,
+                            "y": 0.9163087010383606,
+                            "z": 0.04889689385890961
+                        },
+                        "scale": {
+                            "x": 0.7500033974647522,
+                            "y": 0.7500000596046448,
+                            "z": 0.7500006556510925
+                        }
+                    },
+                    "uuid": "189e37c6-bda6-04a6-650f-8bd799ccf365"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "d05f60d9-0b46-e054-ea43-a12045081528"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": true,
+                        "loop": true,
+                        "loopStrategy": 0,
+                        "maxDistance": 20.0,
+                        "minDistance": 5.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": true,
+                        "volume": 0.20399999618530273
+                    },
+                    "is_active": true,
+                    "uuid": "4fca9178-e726-034e-c2e4-b587c81b077e"
+                }
+            ],
+            "name": "Air_Gem",
+            "order": 0,
+            "parent_uuid": "b8f86ec8-a32b-6010-e0ec-c3025e1a34fa",
+            "static": true,
+            "uuid": "c8616753-8ac7-df08-c4af-1f99b256d6cb"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -90.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 2.185091972351074,
+                            "z": -0.015378216281533241
+                        },
+                        "rotation": {
+                            "w": 0.7071067690849304,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -0.7071067690849304
+                        },
+                        "scale": {
+                            "x": 4.356971740722656,
+                            "y": 0.9089123010635376,
+                            "z": 4.356971740722656
+                        }
+                    },
+                    "uuid": "5733f787-e89b-c7db-67c7-9a8ee88ff022"
+                },
+                {
+                    "is_active": true,
+                    "meshrenderer": {
+                        "casts_shadows": true,
+                        "material_uuid": "7fc4dcbc-9890-e6f2-80e6-9db772266474",
+                        "mesh_index": 0,
+                        "mesh_uuid": "0396176a-e59f-e030-46b2-5ef763455d59"
+                    },
+                    "uuid": "d0aeec14-05ec-1097-4761-bc7af900091b"
+                }
+            ],
+            "name": "pPlane1",
+            "order": 0,
+            "parent_uuid": "c8616753-8ac7-df08-c4af-1f99b256d6cb",
+            "static": true,
+            "uuid": "3583a2fd-471c-2fea-0aa9-7e6dc34d7e77"
         }
     ]
 }

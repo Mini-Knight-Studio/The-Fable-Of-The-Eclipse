@@ -78,13 +78,13 @@ class PuzzleGoal : Component
         {
             if (pillars[i] == null) continue;
 
-            if (pillars[i].onGoalPosition && !pillarTriggered[i])
+            if (pillars[i].stopedOnGoal && !pillarTriggered[i])
             {
                 pillarTriggered[i] = true;
                 pendingMoves++;
             }
 
-            if (!pillars[i].onGoalPosition)
+            if (!pillars[i].stopedOnGoal)
             {
                 allOnGoal = false;
             }
