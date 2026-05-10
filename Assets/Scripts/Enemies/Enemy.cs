@@ -14,7 +14,7 @@ public class Enemy : Component
     protected BoxCollider collision;
     protected BoxCollider enemyAvoid;
     protected BoxCollider hitbox;
-
+    protected BlinkEffect blink;
     protected TemporalEffect effect;
 
     //-- Wander --//
@@ -44,9 +44,9 @@ public class Enemy : Component
         animator = entity.GetComponent<EnemyAnimation>();
         feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
+        blink = entity.GetComponent<BlinkEffect>();
 
-
-        foreach(Entity child in entity.GetChildren())
+        foreach (Entity child in entity.GetChildren())
         {
             if (child.Name == "Hitbox")
             {
@@ -185,6 +185,12 @@ public class Enemy : Component
             if (hitbox.HasCollided)
             {
                 health.Damage(points);
+                
+                if (blink != null)
+                {
+                    blink.TriggerBlink();
+                }
+
                 transform.LookAt(Player.Instance.transform.position, Vector3.Up);
                 feedback.TickParticles("Hurt", Time.deltaTime);
                 feedback.PlaySound("Hit");
