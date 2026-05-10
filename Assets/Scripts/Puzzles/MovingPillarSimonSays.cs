@@ -87,6 +87,7 @@ class MovingPillarSimonSays : Component
                 torchParticles.Play();
                 fireSFXEntity.GetComponent<AudioSource>().Play();
                 igniteSFXEntity.GetComponent<AudioSource>().Play();
+                movingPillar.onGoalSFX.GetComponent<AudioSource>().Play();
             }
             activated = true;
         }
@@ -110,6 +111,7 @@ class MovingPillarSimonSays : Component
             if (torchParticles != null)
             {
                 torchParticles.Play();
+                movingPillar.onGoalSFX.GetComponent<AudioSource>().Play();
                 fireSFXEntity.GetComponent<AudioSource>().Play();
                 igniteSFXEntity.GetComponent<AudioSource>().Play();
             }
