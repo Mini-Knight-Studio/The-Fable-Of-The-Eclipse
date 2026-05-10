@@ -26,9 +26,11 @@ class MovingPillar : Component
     [HideInInspector]
     public AudioSource slideSFX;
 
-    public float cameraShakeDuration = 0.5f;
-    public float cameraShakeAmount = 0.3f;
-    public float cameraShakeRotation = 0.3f;
+    private float cameraShakeDuration = 0.5f;
+    private float cameraShakeAmount = 0.1f;
+    private float cameraShakeRotation = 0.1f;
+    private float cameraShakeAmountVel = 20f;
+    private float cameraShakeRotationVel = 20f;
 
     // Side colliders
     public Entity pushForwardEntity;
@@ -195,7 +197,7 @@ class MovingPillar : Component
 
         slideSFX.Play();
         movingParticles.Play();
-        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation);
+        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeRotationVel, cameraShakeAmountVel);
     }
 
     void MoveTowardsTarget()

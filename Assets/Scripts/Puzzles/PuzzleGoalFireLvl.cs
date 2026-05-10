@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Loopie;
 
 class PuzzleGoalFireLvl : Component
@@ -15,16 +16,19 @@ class PuzzleGoalFireLvl : Component
     public float movementSpeed = 2.0f;
     public float movementDistance = 1.0f;
 
-    private Vector3 startPosition;
-    private Vector3 targetPosition;
-
-    private float moveTimer = 0.0f;
-    private float moveDuration = 0.0f;
-
     private bool isMoving = false;
     private int pendingMoves = 0;
 
     private bool puzzle3Completed;
+    private bool isCollecting = false;
+
+    private float cameraShakeDuration = 1f;
+    private float cameraShakeAmount = 0.5f;
+    private float cameraShakeRotation = 0.5f;
+    private float cameraShakeAmountVel = 10f;
+    private float cameraShakeRotationVel = 10f;
+
+    public float collectTime = 1f;
 
     // Particles
     private ParticleComponent goalParticles;
@@ -58,20 +62,9 @@ class PuzzleGoalFireLvl : Component
 
         CheckPillars();
 
-        if (isMoving)
+        if (pendingMoves > 0 && !isMoving)
         {
-            MoveTowardsTarget();
-        }
-        else if (pendingMoves > 0)
-        {
-            pendingMoves--;
-            StartMovement(entity.transform.position + new Vector3(0, -movementDistance, 0));
-        }
-
-        if (!isMoving && !particlesSwitched)
-        {
-            goalParticles.Stop();
-            particlesSwitched = true;
+            StartCoroutine(ProcessMovementQueue());
         }
     }
 
@@ -101,9 +94,12 @@ class PuzzleGoalFireLvl : Component
             
             CompletePuzzleAuto();
 
-            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
-            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
-            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
+            if (!isCollecting)
+            {
+                Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
+                Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
+                Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemFireCollected);
+            }
         }
 
         if (allOnGoal && !puzzle3Completed)
@@ -118,48 +114,47 @@ class PuzzleGoalFireLvl : Component
             Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         }
 
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
+        if (!isCollecting && Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
-            Gem.SetActive(false);
-
-            collectGemSFX.GetComponent<AudioSource>().Play();
-
-            DatabaseRegistry.playerDB.Player.gemFireCollected = true;
+            StartCoroutine(Collect());
         }
     }
 
-    void StartMovement(Vector3 newTarget)
+    IEnumerator ProcessMovementQueue()
     {
-        startPosition = entity.transform.position;
-        targetPosition = newTarget;
-
-        Vector3 difference = targetPosition - startPosition;
-        float distance = (float)difference.magnitude;
-
-        moveDuration = distance / movementSpeed;
-        moveTimer = 0.0f;
-
         isMoving = true;
-
+        
         goalParticles.Play();
         moveSFX.Play();
         particlesSwitched = false;
-    }
 
-    void MoveTowardsTarget()
-    {
-        moveTimer += Time.deltaTime;
-
-        float t = moveTimer / moveDuration;
-
-        if (t >= 1.0f)
+        while (pendingMoves > 0)
         {
-            entity.transform.position = targetPosition;
-            isMoving = false;
-            return;
+            pendingMoves--;
+
+            Vector3 startPos = entity.transform.position;
+            Vector3 targetPos = startPos + new Vector3(0, -movementDistance, 0);
+
+            float distance = (float)(targetPos - startPos).magnitude;
+            float moveDuration = distance / movementSpeed;
+            float timer = 0.0f;
+
+            Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+
+            while (timer < moveDuration)
+            {
+                timer += Time.deltaTime;
+                float t = timer / moveDuration;
+                entity.transform.position = Vector3.Lerp(startPos, targetPos, t);
+                yield return null;
+            }
+
+            entity.transform.position = targetPos;
         }
 
-        entity.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+        goalParticles.Stop();
+        particlesSwitched = true;
+        isMoving = false;
     }
 
     void CompletePuzzleAuto()
@@ -170,4 +165,42 @@ class PuzzleGoalFireLvl : Component
 
         completeSFX.GetComponent<AudioSource>().Play();
     }
-};
+
+    IEnumerator Collect()
+    {
+        isCollecting = true;
+
+        Gem.GetComponent<BoxCollider>().SetActive(false);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(false);
+        Gem.GetComponent<Gem_Idle>().SetActive(false);
+
+        Entity player = Player.Instance.entity;
+        Vector3 initialPosition = Gem.transform.position;
+        Vector3 initialScale = Gem.transform.scale;
+        float timer = 0;
+
+        while (timer < collectTime)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / collectTime);
+
+            Gem.transform.position = Vector3.Lerp(initialPosition, player.transform.position + new Vector3(0, 2, 0), t);
+            Gem.transform.scale = Vector3.Lerp(initialScale, Vector3.Zero, t);
+
+            yield return null;
+        }
+
+        Gem.SetActive(false);
+
+        collectGemSFX.GetComponent<AudioSource>().Play();
+
+        DatabaseRegistry.playerDB.Player.gemFireCollected = true;
+
+        isCollecting = false;
+    }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
+}

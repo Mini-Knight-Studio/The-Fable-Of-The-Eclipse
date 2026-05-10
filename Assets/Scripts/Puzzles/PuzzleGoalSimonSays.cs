@@ -16,6 +16,7 @@ class PuzzleGoalSimonSays : Component
     private bool[] pillarTriggered;
 
     private bool puzzle2Completed = false;
+    private bool isCollecting = false;
 
     private BoxCollider goalCollider;
 
@@ -29,6 +30,14 @@ class PuzzleGoalSimonSays : Component
     private int round = 0;
     public int maxRounds = 4;
     private int successfulRounds = 0;
+
+    private float cameraShakeDuration = 1f;
+    private float cameraShakeAmount = 0.5f;
+    private float cameraShakeRotation = 0.5f;
+    private float cameraShakeAmountVel = 10f;
+    private float cameraShakeRotationVel = 10f;
+
+    public float collectTime = 1f;
 
     [Header("Timing Settings")]
     public float playbackActiveTime = 0.8f;
@@ -125,6 +134,7 @@ class PuzzleGoalSimonSays : Component
 
             goalParticles.Play();
             moveSFX.Play();
+            Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
 
             while (moveTimer < moveDuration)
             {
@@ -275,13 +285,44 @@ class PuzzleGoalSimonSays : Component
             if (pillar != null) pillar.ForceActive();
         }
 
-        if (Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
+        if (!isCollecting && Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
-            Gem.SetActive(false);
-            DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
-            DatabaseRegistry.playerDB.Player.hasGrappling = true;
-            collectGemSFX.GetComponent<AudioSource>().Play();
+            StartCoroutine(Collect());
         }
+    }
+
+    IEnumerator Collect()
+    {
+        isCollecting = true;
+
+        Gem.GetComponent<BoxCollider>().SetActive(false);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(false);
+        Gem.GetComponent<Gem_Idle>().SetActive(false);
+
+        Entity player = Player.Instance.entity;
+        Vector3 initialPosition = Gem.transform.position;
+        Vector3 initialScale = Gem.transform.scale;
+        float timer = 0;
+
+        while (timer < collectTime)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / collectTime);
+
+            Gem.transform.position = Vector3.Lerp(initialPosition, player.transform.position + new Vector3(0, 2, 0), t);
+            Gem.transform.scale = Vector3.Lerp(initialScale, Vector3.Zero, t);
+
+            yield return null;
+        }
+
+        Gem.SetActive(false);
+
+        DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
+        DatabaseRegistry.playerDB.Player.hasGrappling = true;
+
+        collectGemSFX.GetComponent<AudioSource>().Play();
+
+        isCollecting = false;
     }
 
     void CompletePuzzle()
@@ -300,9 +341,12 @@ class PuzzleGoalSimonSays : Component
         puzzle2Completed = true;
         DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = true;
 
-        Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
-        Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
-        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+        if (!isCollecting)
+        {
+            Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+            Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+        }
 
         ResetAllPillars();
         foreach (var pillar in basePillars) if (pillar != null) pillar.CompletePillarAuto();
