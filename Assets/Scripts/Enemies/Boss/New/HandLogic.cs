@@ -42,9 +42,16 @@ public class HandLogic : Component
 
     [Space(10)]
     [Header("Hand Settings")]
-
     [ShowInInspector] BossSide side;
 
+    [Space(10)]
+    [Header("Feedback")]
+    public Entity hitFeedbackEntity;
+    public float hitFeedbackDuration;
+    ParticleComponent hitFeedbackParticles;
+    public Entity spikeFeedbackEntity;
+    public float spikeFeedbackDuration;
+    ParticleComponent spikeFeedbackParticles;
 
     [ReadOnly][ShowInInspector] bool isDefeated;
     [ReadOnly][ShowInInspector] bool isInCooldown;
@@ -83,6 +90,9 @@ public class HandLogic : Component
         attackCollider = attackColliderEntity.GetComponent<BoxCollider>();
         burnCollider = burnColliderEntity.GetComponent<BoxCollider>();
         spikesAttackCollider = spikesAttackColliderEntity.GetComponent<BoxCollider>();
+
+        hitFeedbackParticles = hitFeedbackEntity.GetComponent<ParticleComponent>();
+        spikeFeedbackParticles = spikeFeedbackEntity.GetComponent<ParticleComponent>();
 
         transform.position = startPointEntity.transform.position;
         isBusy = false;
@@ -188,12 +198,16 @@ public class HandLogic : Component
 
         StartCoroutine(owner.MoveVertically(transform, owner.handsFollowAltitude + 2, owner.handsHitAltitude, 0.4f, Mathf.LerpCurve.ExponentialInOut));
         yield return new WaitForSeconds(0.3f);
-        
-        if(HasHitTarget())
+
+        hitFeedbackParticles.transform.position = new Vector3(transform.position.x, hitFeedbackParticles.transform.position.y, transform.position.z);
+        PlayFeedback(hitFeedbackParticles, hitFeedbackDuration);
+
+        if (HasHitTarget())
         {
              owner.GetTarget().PlayerHealth.Damage(1);
         }
          yield return new WaitForSeconds(0.1f);
+
         ///CheckDamagePlayer
 
 
@@ -231,9 +245,10 @@ public class HandLogic : Component
         yield return new WaitForSeconds(owner.handTimeToReturnToStartPoint);
 
         ///Trigger Animations?? Shake???
-
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.75f);
         canBeStopped = false;
+        PlayFeedback(spikeFeedbackParticles, spikeFeedbackDuration);
+        yield return new WaitForSeconds(0.75f);
 
         ///Start PArticles Emerge??
 
@@ -241,6 +256,7 @@ public class HandLogic : Component
         yield return new WaitForSeconds(0.3f);
         if (HasSpikeHitTarget())
             owner.GetTarget().PlayerHealth.Damage(1);
+        
         yield return new WaitForSeconds(0.2f);
 
 
@@ -319,6 +335,37 @@ public class HandLogic : Component
             state = false;
             timer = 0;
         }
+    }
+
+
+    void PlayFeedback(AudioSource audio)
+    {
+        if (audio != null)
+            audio.Play();
+    }
+
+    void PlayFeedback(ParticleComponent particle, float duration = 1f)
+    {
+        if (particle != null)
+            StartCoroutine(PlayParticles(particle, duration));
+    }
+
+    void PlayFeedback(AudioSource audio, ParticleComponent particle, float duration = 1f)
+    {
+        if (audio != null)
+            PlayFeedback(audio);
+
+        if (particle != null)
+        {
+            PlayFeedback(particle, duration);
+        }
+    }
+
+    IEnumerator PlayParticles(ParticleComponent component, float duration)
+    {
+        component.Play();
+        yield return new WaitForSeconds(duration);
+        component.Stop();
     }
 
 }
