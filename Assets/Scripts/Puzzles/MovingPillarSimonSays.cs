@@ -6,6 +6,7 @@ class MovingPillarSimonSays : Component
 {
     [Header("References")]
     public Entity torch;
+    public Entity interactPrompt;
 
     private ParticleComponent torchParticles;
     private BoxCollider torchCollider;

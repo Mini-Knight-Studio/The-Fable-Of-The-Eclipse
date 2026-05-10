@@ -1,8 +1,17 @@
 using System;
+using System.Collections;
 using Loopie;
 
 class MovingPillar : Component
 {
+    [Header("References")]
+    public Entity goalEntity;
+    public float onGoalMovementDistance = 1.0f;
+    public bool onGoalPosition = false;
+    public bool onGoalCalled = false;
+    private bool stopedOnGoal = false;
+
+    [Header("Settings")]
     public float movementSpeed = 2.0f;
     public float tileSize = 1.0f;
 
@@ -13,12 +22,6 @@ class MovingPillar : Component
     private float moveDuration = 0.0f;
 
     private bool isMoving = false;
-
-    public Entity goalEntity;
-    public float onGoalMovementDistance = 1.0f;
-    public bool onGoalPosition = false;
-    public bool onGoalCalled = false;
-    private bool stopedOnGoal = false;
 
     private BoxCollider myCollider;
     private BoxCollider goalCollider;
@@ -32,7 +35,10 @@ class MovingPillar : Component
     private float cameraShakeAmountVel = 20f;
     private float cameraShakeRotationVel = 20f;
 
-    // Side colliders
+    // For reseting
+    private Vector3 initialPosition;
+
+    [Header("Collider References and Settings")]
     public Entity pushForwardEntity;
     public Entity pushBackEntity;
     public Entity pushLeftEntity;
@@ -50,14 +56,16 @@ class MovingPillar : Component
 
     public float pushTimeRequired = 1.25f;
 
+    [Header("Feedback")]
     // Particles
     private ParticleComponent goalParticles;
     public Entity movingParticlesEntity;
     private ParticleComponent movingParticles;
 
-    // For reseting
-    private Vector3 initialPosition;
+    public Entity pillarModel;
 
+    private Material pillarMaterial;
+    private float defaultIntensity = 0.5f;
 
     void OnCreate()
     {
@@ -73,6 +81,12 @@ class MovingPillar : Component
         pushBack = pushBackEntity.GetComponent<BoxCollider>();
         pushLeft = pushLeftEntity.GetComponent<BoxCollider>();
         pushRight = pushRightEntity.GetComponent<BoxCollider>();
+
+        if (pillarModel != null)
+        {
+            pillarMaterial = pillarModel.GetComponent<MeshRenderer>().GetInstancedMaterial();
+            defaultIntensity = pillarMaterial.GetFloat("u_EmissiveIntensity");
+        }
 
         initialPosition = entity.transform.position;
     }
@@ -250,6 +264,8 @@ class MovingPillar : Component
         Debug.LogWarning("The pillar has reached its goal");
 
         goalParticles.Play();
+
+        StartCoroutine(EmissiveShine());
     }
 
     public void CompletePillarAuto()
@@ -275,5 +291,36 @@ class MovingPillar : Component
         onGoalPosition = false;
         onGoalCalled = false;
         stopedOnGoal = false;
-}
+    }
+    IEnumerator EmissiveShine()
+    {
+        if (pillarMaterial == null) yield break;
+        if (entity.HasComponent<MovingPillarSimonSays>()) yield break;
+
+        float currentIntensity = defaultIntensity;
+        float transitionSpeed = 2f;
+        float pulseSpeed = 2f;
+        float minPulse = 0.8f;
+        float maxPulse = 1.2f;
+        float pulseTimer = 0f;
+
+        while (true)
+        {
+            float targetIntensity = onGoalPosition ? maxPulse : defaultIntensity;
+
+            pulseTimer += Time.deltaTime;
+            float pulseFactor = (Mathf.Sin(pulseTimer * pulseSpeed) + 1f) / 2f;
+            targetIntensity = Mathf.Lerp(minPulse, maxPulse, pulseFactor);
+
+            currentIntensity = Mathf.MoveTowards(currentIntensity, targetIntensity, transitionSpeed * Time.deltaTime);
+            pillarMaterial.SetFloat("u_EmissiveIntensity", currentIntensity);
+
+            yield return null;
+        }
+    }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
 }

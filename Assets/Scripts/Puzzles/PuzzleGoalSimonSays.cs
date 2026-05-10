@@ -2,6 +2,7 @@ using System;
 using Loopie;
 using System.Collections.Generic;
 using System.Collections;
+using System.Media;
 
 class PuzzleGoalSimonSays : Component
 {
@@ -58,6 +59,7 @@ class PuzzleGoalSimonSays : Component
     public Entity completeSFX;
     public Entity collectGemSFX;
     public Entity failSFX;
+    public Entity roundSuccessSFX;
 
     private enum State
     {
@@ -93,6 +95,7 @@ class PuzzleGoalSimonSays : Component
         goalParticles.Stop();
 
         LockAllPillars();
+        HidePromptAllPillars();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
     }
@@ -194,9 +197,17 @@ class PuzzleGoalSimonSays : Component
         sequence.Clear();
         fullSequence.Clear();
 
+        int lastIndex = -1;
         for (int i = 0; i < maxRounds; i++)
         {
-            fullSequence.Add(Loopie.Random.Range(0, 4));
+            int nextIndex;
+            do
+            {
+                nextIndex = Loopie.Random.Range(0, 4);
+            } while (nextIndex == lastIndex);
+
+            fullSequence.Add(nextIndex);
+            lastIndex = nextIndex;
         }
 
         round = 0;
@@ -215,6 +226,7 @@ class PuzzleGoalSimonSays : Component
             foreach (int index in sequence)
             {
                 if (simonPillars[index] != null) simonPillars[index].ForceActive();
+                HidePromptAllPillars();
                 yield return new WaitForSeconds(playbackActiveTime);
 
                 ResetAllPillars();
@@ -223,6 +235,7 @@ class PuzzleGoalSimonSays : Component
 
             playerIndex = 0;
             UnlockAllPillars();
+            ShowPromptAllPillars();
 
             bool roundFailed = false;
             while (playerIndex < sequence.Count)
@@ -243,9 +256,11 @@ class PuzzleGoalSimonSays : Component
                     {
                         playerIndex++;
                         simonPillars[pressedIndex].ResetState();
+                        simonPillars[pressedIndex].interactPrompt.SetActive(false);
 
                         yield return new WaitForSeconds(1f);
 
+                        simonPillars[pressedIndex].interactPrompt.SetActive(true);
                         simonPillars[pressedIndex].ResetState();
                     }
                     else
@@ -261,6 +276,7 @@ class PuzzleGoalSimonSays : Component
             if (roundFailed)
             {
                 failSFX.GetComponent<AudioSource>().Play();
+                HidePromptAllPillars();
                 yield return StartCoroutine(MoveRoutine(new Vector3(0, movementDistance * successfulRounds, 0)));
 
                 simonStarted = false;
@@ -271,6 +287,8 @@ class PuzzleGoalSimonSays : Component
             {
                 successfulRounds++;
                 yield return StartCoroutine(MoveRoutine(new Vector3(0, -movementDistance, 0)));
+                roundSuccessSFX.GetComponent<AudioSource>().Play();
+                HidePromptAllPillars();
                 yield return new WaitForSeconds(roundStartDelay);
             }
         }
@@ -369,6 +387,16 @@ class PuzzleGoalSimonSays : Component
     void ResetAllPillars()
     {
         foreach (var pillar in simonPillars) if (pillar != null) pillar.ResetState();
+    }
+
+    void ShowPromptAllPillars()
+    {
+        foreach (var pillar in simonPillars) if (pillar != null) pillar.interactPrompt.SetActive(true);
+    }
+
+    void HidePromptAllPillars()
+    {
+        foreach (var pillar in simonPillars) if (pillar != null) pillar.interactPrompt.SetActive(false);
     }
 
     void OnDestroy()
