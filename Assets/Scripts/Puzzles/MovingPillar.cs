@@ -30,10 +30,10 @@ class MovingPillar : Component
     public AudioSource slideSFX;
 
     private float cameraShakeDuration = 0.5f;
-    private float cameraShakeAmount = 0.1f;
-    private float cameraShakeRotation = 0.1f;
-    private float cameraShakeAmountVel = 20f;
-    private float cameraShakeRotationVel = 20f;
+    private float cameraShakeAmount = 0.05f;
+    private float cameraShakeRotation = 0.05f;
+    private float cameraShakeAmountVel = 10f;
+    private float cameraShakeRotationVel = 10f;
 
     // For reseting
     private Vector3 initialPosition;

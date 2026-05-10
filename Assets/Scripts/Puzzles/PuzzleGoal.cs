@@ -24,8 +24,8 @@ class PuzzleGoal : Component
     private bool isCollecting = false;
 
     private float cameraShakeDuration = 1f;
-    private float cameraShakeAmount = 0.5f;
-    private float cameraShakeRotation = 0.5f;
+    private float cameraShakeAmount = 0.1f;
+    private float cameraShakeRotation = 0.1f;
     private float cameraShakeAmountVel = 10f;
     private float cameraShakeRotationVel = 10f;
 

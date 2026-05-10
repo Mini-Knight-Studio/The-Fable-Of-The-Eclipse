@@ -3,14 +3,17 @@ using Loopie;
 
 class Geyser : Component
 {
-    public int damage = 1;
-    public float damageCD = 2.0f;
-    private float damageTimer = 0.0f;
+    [Header("References")]
+    public AudioSource riseSFX;
 
     private BoxCollider collider;
     private ParticleComponent particles;
-    public AudioSource riseSFX;
 
+    [Header("Settings")]
+    public int damage = 1;
+    public float damageCD = 2.0f;
+    private float damageTimer = 0.0f;
+    
     public float frequency = 3.0f;
     public float delay = 0.0f;
     private float frequencyTimer = 0.0f;
@@ -19,6 +22,15 @@ class Geyser : Component
 
     public float knockbackForce = 0.0f;
     public float knockbackDuration = 0.0f;
+
+    [Header("Orientation")]
+    public bool horizontal = false;
+
+    [Header("Feedback")]
+    public Entity unactiveParticles;
+    public Entity topParticles;
+    public Entity dispersionParticles;
+
 
     void OnCreate()
     {
