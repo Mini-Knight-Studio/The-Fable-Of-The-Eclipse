@@ -38,18 +38,13 @@ public class HandLogic : Component
     public Entity spikesAttackColliderEntity;
     public BoxCollider spikesAttackCollider;
     public Entity startPointEntity;
+    public Entity shadowEntity;
 
     [Space(10)]
     [Header("Hand Settings")]
-    [ShowInInspector] float followSpeed;
-    [ShowInInspector] float timeToReturnToStartPoint;
-    [ShowInInspector] float timeToTriggerPunch;
+
     [ShowInInspector] BossSide side;
 
-    [Space(10)]
-    [Header("Spike Settings")]
-    public float spikeHideAttitude;
-    public float spikeShowAttitude;
 
     [ReadOnly][ShowInInspector] bool isDefeated;
     [ReadOnly][ShowInInspector] bool isInCooldown;
@@ -100,6 +95,9 @@ public class HandLogic : Component
 
     void OnUpdate()
     {
+
+        shadowEntity.transform.position = new Vector3(transform.position.x, shadowEntity.transform.position.y, transform.position.z);
+
         ProcessStateTimer(ref cooldownTimer, ref isInCooldown);
         ProcessStateTimer(ref vulnerableTimer, ref isVulnerable);
 
@@ -121,7 +119,7 @@ public class HandLogic : Component
             if (canBeStopped && side != owner.GetCurrentSide())
             {
                 StopAllOwnedCoroutines();
-                StartCoroutine(ReturnToStartPoint());
+                StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.handTimeToReturnToStartPoint));
                 isBusy = false;
             }
 
@@ -162,18 +160,18 @@ public class HandLogic : Component
         while (!hitPlayer)
         {
             Vector3 targetPosition = owner.GetTarget().transform.position;
-            targetPosition.y = owner.handsFollowAttitude;
+            targetPosition.y = owner.handsFollowAltitude;
 
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 targetPosition,
-                followSpeed * Time.deltaTime
+                owner.handFollowSpeed * Time.deltaTime
             );
 
             if(Vector3.Distance(transform.position, targetPosition) < 2f)
             {
                 timer+= Time.deltaTime;
-                if(timer> timeToTriggerPunch)
+                if(timer> owner.handTimeToTriggerPunch)
                     hitPlayer = true;
             }else
             {
@@ -185,10 +183,10 @@ public class HandLogic : Component
         canBeStopped = false;
         Debug.Log($"Hit player with {entity.Name}");
 
-        StartCoroutine(MoveVertically(transform, owner.handsFollowAttitude, owner.handsFollowAttitude + 2, 0.1f, Mathf.LerpCurve.EaseOut));
+        StartCoroutine(owner.MoveVertically(transform, owner.handsFollowAltitude, owner.handsFollowAltitude + 2, 0.1f, Mathf.LerpCurve.EaseOut));
         yield return new WaitForSeconds(0.1f);
 
-        StartCoroutine(MoveVertically(transform, owner.handsFollowAttitude + 2, owner.handsHitAttitude, 0.4f, Mathf.LerpCurve.ExponentialInOut));
+        StartCoroutine(owner.MoveVertically(transform, owner.handsFollowAltitude + 2, owner.handsHitAltitude, 0.4f, Mathf.LerpCurve.ExponentialInOut));
         yield return new WaitForSeconds(0.3f);
         
         if(HasHitTarget())
@@ -209,14 +207,14 @@ public class HandLogic : Component
             }
             else
             {
-                StartCoroutine(MoveVertically(transform, owner.handsHitAttitude, owner.handsFollowAttitude, 1, Mathf.LerpCurve.EaseOut));
+                StartCoroutine(owner.MoveVertically(transform, owner.handsHitAltitude, owner.handsFollowAltitude, 1, Mathf.LerpCurve.EaseOut));
                 yield return new WaitForSeconds(1);
             }
         }
         else
         {
             IncreaseSequenceCounter();
-            StartCoroutine(MoveVertically(transform, owner.handsHitAttitude, owner.handsFollowAttitude, 1, Mathf.LerpCurve.EaseOut));
+            StartCoroutine(owner.MoveVertically(transform, owner.handsHitAltitude, owner.handsFollowAltitude, 1, Mathf.LerpCurve.EaseOut));
             yield return new WaitForSeconds(1);
         }
 
@@ -229,8 +227,8 @@ public class HandLogic : Component
         Debug.Log($"Starting spike with {entity.Name}");
 
         isBusy = true;
-        StartCoroutine(ReturnToStartPoint());
-        yield return new WaitForSeconds(timeToReturnToStartPoint);
+        StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.handTimeToReturnToStartPoint));
+        yield return new WaitForSeconds(owner.handTimeToReturnToStartPoint);
 
         ///Trigger Animations?? Shake???
 
@@ -239,7 +237,7 @@ public class HandLogic : Component
 
         ///Start PArticles Emerge??
 
-        StartCoroutine(MoveVertically(spikesEntity.transform, spikeHideAttitude, spikeShowAttitude, 0.5f, Mathf.LerpCurve.ExponentialOut));
+        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.spikeHideAltitude, owner.spikeShowAltitude, 0.5f, Mathf.LerpCurve.ExponentialOut));
         yield return new WaitForSeconds(0.3f);
         if (HasSpikeHitTarget())
             owner.GetTarget().PlayerHealth.Damage(1);
@@ -249,7 +247,7 @@ public class HandLogic : Component
         yield return new WaitForSeconds(1.5f);
 
         ///Start Particles Hide??
-        StartCoroutine(MoveVertically(spikesEntity.transform, spikeShowAttitude, spikeHideAttitude, 1.5f, Mathf.LerpCurve.EaseOut));
+        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.spikeShowAltitude, owner.spikeHideAltitude, 1.5f, Mathf.LerpCurve.EaseOut));
         yield return new WaitForSeconds(1.5f);
         ///Stop Particles Hide??
 
@@ -262,29 +260,14 @@ public class HandLogic : Component
         canBeStopped = true;
     }
 
-    IEnumerator ReturnToStartPoint()
-    {
-        Debug.Log($"Returning {entity.Name} to start point");
-
-        Vector3 init = transform.position;
-        Vector3 target = startPointEntity.transform.position;
-
-        float timer = 0.0f;
-        while (timer<timeToReturnToStartPoint)
-        {
-
-            timer += Time.deltaTime;
-            transform.position = Vector3.Lerp(init, target, timer / timeToReturnToStartPoint);
-            yield return null;
-        }
-        transform.position = target;
-        transform.position = startPointEntity.transform.position;
-    }
+    
 
     public void Regenerate()
     {
         isDefeated = false;
         isVulnerable = false;
+        SetCooldown(2);
+         Debug.Log($"Hand {entity.Name} has regenerated");
     }
 
     void OnDestroy()
@@ -336,19 +319,6 @@ public class HandLogic : Component
             state = false;
             timer = 0;
         }
-    }
-
-    IEnumerator MoveVertically(Transform target, float start, float end, float duration, Mathf.LerpCurve mode)
-    {
-        float timer = 0.0f;
-        while (timer < duration)
-        {
-            timer += Time.deltaTime;
-            float yPos = Mathf.Lerp(start, end, timer / duration, mode);
-            target.position = new Vector3(target.position.x, yPos, target.position.z);
-            yield return null;
-        }
-        target.position = new Vector3(target.position.x, end, target.position.z);
     }
 
 }
