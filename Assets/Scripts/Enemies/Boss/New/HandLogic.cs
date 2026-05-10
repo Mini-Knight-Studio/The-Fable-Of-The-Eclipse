@@ -49,9 +49,11 @@ public class HandLogic : Component
     public Entity hitFeedbackEntity;
     public float hitFeedbackDuration;
     ParticleComponent hitFeedbackParticles;
+    AudioSource hitFeedbackAudio;
     public Entity spikeFeedbackEntity;
     public float spikeFeedbackDuration;
     ParticleComponent spikeFeedbackParticles;
+    AudioSource spikeFeedbackAudio;
 
     [ReadOnly][ShowInInspector] bool isDefeated;
     [ReadOnly][ShowInInspector] bool isInCooldown;
@@ -93,6 +95,8 @@ public class HandLogic : Component
 
         hitFeedbackParticles = hitFeedbackEntity.GetComponent<ParticleComponent>();
         spikeFeedbackParticles = spikeFeedbackEntity.GetComponent<ParticleComponent>();
+        hitFeedbackAudio = hitFeedbackEntity.GetComponent<AudioSource>();
+        spikeFeedbackAudio = spikeFeedbackEntity.GetComponent<AudioSource>();
 
         transform.position = startPointEntity.transform.position;
         isBusy = false;
@@ -199,8 +203,8 @@ public class HandLogic : Component
         StartCoroutine(owner.MoveVertically(transform, owner.handsFollowAltitude + 2, owner.handsHitAltitude, 0.4f, Mathf.LerpCurve.ExponentialInOut));
         yield return new WaitForSeconds(0.3f);
 
-        hitFeedbackParticles.transform.position = new Vector3(transform.position.x, hitFeedbackParticles.transform.position.y, transform.position.z);
-        PlayFeedback(hitFeedbackParticles, hitFeedbackDuration);
+        hitFeedbackEntity.transform.position = new Vector3(transform.position.x, hitFeedbackParticles.transform.position.y, transform.position.z);
+        PlayFeedback(hitFeedbackAudio, hitFeedbackParticles, hitFeedbackDuration);
 
         if (HasHitTarget())
         {
@@ -247,7 +251,7 @@ public class HandLogic : Component
         ///Trigger Animations?? Shake???
         yield return new WaitForSeconds(0.75f);
         canBeStopped = false;
-        PlayFeedback(spikeFeedbackParticles, spikeFeedbackDuration);
+        PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, spikeFeedbackDuration);
         yield return new WaitForSeconds(0.75f);
 
         ///Start PArticles Emerge??
