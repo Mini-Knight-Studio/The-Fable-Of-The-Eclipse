@@ -120,7 +120,12 @@ public class HandLogic : Component
         shadowEntity.transform.position = new Vector3(transform.position.x, shadowEntity.transform.position.y, transform.position.z);
 
         ProcessStateTimer(ref cooldownTimer, ref isInCooldown);
-        ProcessStateTimer(ref vulnerableTimer, ref isVulnerable);
+        if(ProcessStateTimer(ref vulnerableTimer, ref isVulnerable))
+        {
+            StopAllOwnedCoroutines();
+            StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.handTimeToReturnToStartPoint));
+            isBusy = false;
+        }
 
         if(!isDefeated && isVulnerable && HasBeenHit())
         {
@@ -248,7 +253,9 @@ public class HandLogic : Component
             yield return new WaitForSeconds(1);
         }
 
-        isBusy = false;
+        if (side == owner.GetCurrentSide())
+            isBusy = false;
+
         canBeStopped = true;
     }
 
@@ -307,6 +314,11 @@ public class HandLogic : Component
         Debug.Log($"Hand {entity.Name} has regenerated");
 
         FakeRegenerate();
+
+        if (side == owner.GetCurrentSide())
+            isBusy = false;
+        else
+            isBusy = true;
     }
 
     void OnDestroy()
@@ -348,16 +360,18 @@ public class HandLogic : Component
         vulnerableTimer = time;
     }
 
-    void ProcessStateTimer(ref float timer, ref bool state)
+    bool ProcessStateTimer(ref float timer, ref bool state)
     {
         if (!state) 
-            return;
+            return false;
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
             state = false;
             timer = 0;
+            return true;
         }
+        return false;
     }
 
 
