@@ -6,9 +6,17 @@ class MovingPlatform : Component
 {
     [Header("Model")]
     public Entity platformModel;
-    private BoxCollider collider;
+
+    public Entity doublePlatformGroup;
+    public Entity doublePlatformModel1;
+    public Entity doublePlatformModel2;
+
+    private Entity activeMovingEntity;
+    private BoxCollider collider1;
+    private BoxCollider collider2;
 
     [Header("Path Points")]
+    public bool followPathRotations = false;
     public int numOfPathPoints = 5;
     public Entity pathPointEntity0;
     public Entity pathPointEntity1;
@@ -40,6 +48,8 @@ class MovingPlatform : Component
     [Header("Feedback")]
     public Entity movingParticlesEntity;
     private ParticleComponent movingParticles;
+    public Entity movingParticlesEntity2;
+    private ParticleComponent movingParticles2;
 
     [Header("Settings")]
     public float movementSpeed = 2.0f;
@@ -58,6 +68,10 @@ class MovingPlatform : Component
     public bool activateOnCollision = false;
     private bool isWaitingForPlayer = false;
 
+    [Header("Start moving after Burned")]
+    public bool activateAfterBurn = false;
+    public string burnableID = "UNASSIGNED_BURNABLE";
+
     [Header("Sinking Platforms")]
     public bool canSink = false;
     public float timeBeforeSink = 2.0f;
@@ -71,9 +85,26 @@ class MovingPlatform : Component
 
     void OnCreate()
     {
-        collider = platformModel.GetComponent<BoxCollider>();
+        if (doublePlatformGroup != null)
+        {
+            activeMovingEntity = doublePlatformGroup;
+            if (doublePlatformModel1 != null) collider1 = doublePlatformModel1.GetComponent<BoxCollider>();
+            if (doublePlatformModel2 != null) collider2 = doublePlatformModel2.GetComponent<BoxCollider>();
+        }
+        else
+        {
+            activeMovingEntity = platformModel;
+            if (platformModel != null) collider1 = platformModel.GetComponent<BoxCollider>();
+        }
+
         movingParticles = movingParticlesEntity.GetComponent<ParticleComponent>();
         movingParticles.Stop();
+
+        if (movingParticlesEntity2 != null)
+        {
+            movingParticles2 = movingParticlesEntity2.GetComponent<ParticleComponent>();
+            movingParticles2.Stop();
+        }
 
         pathPoints = new Entity[10];
 
@@ -106,7 +137,7 @@ class MovingPlatform : Component
             isWaitingForPlayer = true;
             goingToPoint = false;
         }
-        else if (moveOnStart)
+        else if (moveOnStart || (activateAfterBurn && DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID)))
         {
             GoToPoint(targetPoint);
         }
@@ -118,7 +149,7 @@ class MovingPlatform : Component
 
         if (canSink && !sinkRoutineRunning)
         {
-            if (collider.IsColliding)
+            if (CheckCollision())
             {
                 StartCoroutine(SinkRoutine());
             }
@@ -128,13 +159,25 @@ class MovingPlatform : Component
         {
             if (activateOnCollision && isWaitingForPlayer)
             {
-                if (collider.IsColliding)
+                if (CheckCollision())
                 {
                     isWaitingForPlayer = false;
-                    GoToPoint((currentPoint + 1) % numOfPathPoints);
+                    GoToPoint(targetPoint);
                 }
             }
+            else if (activateAfterBurn && DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID))
+            {
+                GoToPoint(targetPoint);
+            }
         }
+    }
+
+    private bool CheckCollision()
+    {
+        bool hit = false;
+        if (collider1 != null && collider1.IsColliding) hit = true;
+        if (collider2 != null && collider2.IsColliding) hit = true;
+        return hit;
     }
 
     public void GoToPoint(int pointNum)
@@ -154,6 +197,7 @@ class MovingPlatform : Component
         goingToPoint = true;
 
         movingParticles.Play();
+        if (movingParticlesEntity2 != null) movingParticles2.Play();
 
         while (true)
         {
@@ -174,59 +218,82 @@ class MovingPlatform : Component
                 break;
             }
 
-            Vector3 currentPos = platformModel.transform.position;
+            Vector3 startPos = activeMovingEntity.transform.position;
+            Vector3 startRot = activeMovingEntity.transform.rotation;
             Vector3 targetPos = pathPoints[targetPoint].transform.position;
+            Vector3 targetRot = pathPoints[targetPoint].transform.rotation;
 
-            Vector3 directionVec = targetPos - currentPos;
-            float distance = (float)directionVec.magnitude;
+            float totalDistance = (float)(targetPos - startPos).magnitude;
 
-            if (distance < 0.1f)
+            while (true)
             {
-                currentPoint = targetPoint;
-
-                platformModel.transform.position = targetPos;
-
-                goingToPoint = false;
-
-                movingParticles.Stop();
-
-                if (pointPauseTimes[currentPoint] > 0.0f)
+                if (Pause.isPaused || isSinking)
                 {
-                    yield return new WaitForSeconds(pointPauseTimes[currentPoint]);
-                }
-
-                if (activateOnCollision && currentPoint == 0)
-                {
-                    isWaitingForPlayer = true;
-                    break;
-                }
-
-                if (looping || activateOnCollision)
-                {
-                    targetPoint = (currentPoint + 1) % numOfPathPoints;
-
-                    goingToPoint = true;
-
-                    movingParticles.Play();
-
                     yield return null;
                     continue;
                 }
 
+                Vector3 currentPos = activeMovingEntity.transform.position;
+                Vector3 directionVec = targetPos - currentPos;
+                float remainingDistance = (float)directionVec.magnitude;
+
+                if (remainingDistance < 0.1f)
+                {
+                    break;
+                }
+
+                float distanceCovered = totalDistance - remainingDistance;
+                float interpolationFactor = distanceCovered / totalDistance;
+
+                Vector3 moveDir = directionVec.normalized;
+                Vector3 velocity = moveDir * movementSpeed * Time.deltaTime;
+
+                activeMovingEntity.transform.position += velocity;
+
+                activeMovingEntity.transform.rotation = Vector3.Lerp(
+                    startRot,
+                    targetRot,
+                    interpolationFactor
+                );
+
+                if (CheckCollision())
+                {
+                    Player.Instance.transform.position += velocity;
+                }
+
+                yield return null;
+            }
+
+            currentPoint = targetPoint;
+            activeMovingEntity.transform.position = targetPos;
+            activeMovingEntity.transform.rotation = targetRot;
+
+            goingToPoint = false;
+            movingParticles.Stop();
+            if (movingParticlesEntity2 != null) movingParticles2.Stop();
+
+            if (pointPauseTimes[currentPoint] > 0.0f)
+            {
+                yield return new WaitForSeconds(pointPauseTimes[currentPoint]);
+            }
+
+            if (activateOnCollision && currentPoint == 0)
+            {
+                isWaitingForPlayer = true;
                 break;
             }
 
-            Vector3 moveDir = directionVec.normalized;
-            Vector3 velocity = moveDir * movementSpeed * Time.deltaTime;
-
-            platformModel.transform.position += velocity;
-
-            if (collider.IsColliding)
+            if (looping || activateOnCollision)
             {
-                Player.Instance.transform.position += velocity;
+                targetPoint = (currentPoint + 1) % numOfPathPoints;
+                goingToPoint = true;
+                movingParticles.Play();
+                if (movingParticlesEntity2 != null) movingParticles2.Play();
+                yield return null;
+                continue;
             }
 
-            yield return null;
+            break;
         }
 
         movementRoutineRunning = false;
@@ -236,11 +303,11 @@ class MovingPlatform : Component
     {
         sinkRoutineRunning = true;
 
-        Player.Instance.Camera.SetIsShaking(true, timeBeforeSink*1.5f, 0.05f, 0.05f, 50f, 50f);
+        Player.Instance.Camera.SetIsShaking(true, timeBeforeSink * 1.5f, 0.05f, 0.05f, 50f, 50f);
 
         yield return new WaitForSeconds(timeBeforeSink);
 
-        if (!collider.IsColliding)
+        if (!CheckCollision())
         {
             Player.Instance.Camera.SetIsShaking(false);
             sinkRoutineRunning = false;
@@ -249,7 +316,7 @@ class MovingPlatform : Component
 
         isSinking = true;
 
-        positionBeforeSink = platformModel.transform.position;
+        positionBeforeSink = activeMovingEntity.transform.position;
 
         Vector3 sinkTarget = positionBeforeSink - new Vector3(0, sinkDistance, 0);
 
@@ -261,24 +328,19 @@ class MovingPlatform : Component
                 continue;
             }
 
-            Vector3 directionVec = sinkTarget - platformModel.transform.position;
+            Vector3 directionVec = sinkTarget - activeMovingEntity.transform.position;
             float distance = (float)directionVec.magnitude;
 
             if (distance < 0.1f)
             {
-                platformModel.transform.position = sinkTarget;
+                activeMovingEntity.transform.position = sinkTarget;
                 break;
             }
 
             Vector3 moveDir = directionVec.normalized;
             Vector3 velocity = moveDir * sinkSpeed * Time.deltaTime;
 
-            platformModel.transform.position += velocity;
-
-            //if (collider.IsColliding)
-            //{
-            //    Player.Instance.Movement.gravityActive = false;
-            //}
+            activeMovingEntity.transform.position += velocity;
 
             yield return null;
         }
@@ -293,19 +355,19 @@ class MovingPlatform : Component
                 continue;
             }
 
-            Vector3 directionVec = positionBeforeSink - platformModel.transform.position;
+            Vector3 directionVec = positionBeforeSink - activeMovingEntity.transform.position;
             float distance = (float)directionVec.magnitude;
 
             if (distance < 0.1f)
             {
-                platformModel.transform.position = positionBeforeSink;
+                activeMovingEntity.transform.position = positionBeforeSink;
                 break;
             }
 
             Vector3 moveDir = directionVec.normalized;
             Vector3 velocity = moveDir * sinkSpeed * Time.deltaTime;
 
-            platformModel.transform.position += velocity;
+            activeMovingEntity.transform.position += velocity;
 
             yield return null;
         }
@@ -316,6 +378,7 @@ class MovingPlatform : Component
         if (goingToPoint)
         {
             movingParticles.Play();
+            if (movingParticlesEntity2 != null) movingParticles2.Play();
         }
     }
 
