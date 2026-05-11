@@ -345,7 +345,7 @@
             ],
             "name": "Lighting",
             "order": 1,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -441,7 +441,7 @@
             ],
             "name": "Boss_Level",
             "order": 6,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "64e4d03c-790a-69f6-4a2b-3dec68acaf68"
         },
@@ -2095,7 +2095,7 @@
             ],
             "name": "PREFAB_BLOCK",
             "order": 0,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "214a877e-b110-5f9f-4d00-a888bf417561"
         },
@@ -9537,7 +9537,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 171.24514770507813,
+                                "x": 199.19068908691406,
                                 "y": 108.00001525878906
                             }
                         },
@@ -16490,8 +16490,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 181.32586669921875,
-                                "y": 114.357666015625
+                                "x": 195.56228637695313,
+                                "y": 106.03271484375
                             }
                         },
                         "position": {
@@ -18361,8 +18361,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 181.32586669921875,
-                                "y": 114.357666015625
+                                "x": 195.56228637695313,
+                                "y": 106.03271484375
                             }
                         },
                         "position": {
@@ -19308,7 +19308,7 @@
             ],
             "name": "Pilars",
             "order": 2,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "01d75178-5ee1-efb9-b73c-ae552387c23e"
         },
@@ -20354,7 +20354,7 @@
             ],
             "name": "Enemies",
             "order": 3,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -29299,7 +29299,7 @@
             ],
             "name": "VistaPoint",
             "order": 7,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "78bd64dc-3954-4772-e03c-a13820cd2d66"
         },
@@ -33350,7 +33350,7 @@
             ],
             "name": "Music",
             "order": 4,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "ad3e1ec2-cb2a-ba02-df0f-70e44e38380d"
         },
@@ -34298,27 +34298,41 @@
                     "script": {
                         "class_id": "BossLogic",
                         "fields": {
-                            "coreRegenerationDuration": 3.0,
-                            "coreVulnerabilityDuration": 10.0,
-                            "handFollowSpeed": 15.0,
-                            "handTimeToReturnToStartPoint": 2.0,
-                            "handTimeToTriggerPunch": 1.5,
-                            "handsFollowAltitude": 9.0,
-                            "handsHitAltitude": 0.0,
-                            "headEntity": "57b98a48-35d3-de7f-1491-59a721b9af19",
-                            "headLookAtSpeed": 10.0,
-                            "headTimeToReturnToStartPoint": 2.0,
-                            "headVulnerableAttitude": 10.0,
-                            "headVulnerableRotation": {
+                            "Core_RegenerationDuration": 3.0,
+                            "Core_VulnerabilityDuration": 10.0,
+                            "HPunch_Damage": 2,
+                            "HPunch_DelayTimeAfterPunch": 1.0,
+                            "HPunch_FollowSpeed": 15.0,
+                            "HPunch_FollowTime": 1.5,
+                            "HPunch_FollowTimeReduction": 0.5,
+                            "HPunch_HitAltitude": 0.0,
+                            "HPunch_HitTimePercentage": 70.0,
+                            "HPunch_MoveAltitude": 9.0,
+                            "HPunch_TimeGoingDown": 0.4000000059604645,
+                            "HPunch_TimeGoingUp": 0.10000000149011612,
+                            "HPunch_VulnerableTime": 7.0,
+                            "HSpike_AlertTime": 3.0,
+                            "HSpike_Damage": 1,
+                            "HSpike_DelayTimeAfterSpike": 2.0,
+                            "HSpike_HideAltitude": -5.0,
+                            "HSpike_InitialDelay": 2.0,
+                            "HSpike_ShowAltitude": 0.0,
+                            "HSpike_SpikeHideTime": 1.0,
+                            "HSpike_SpikeShowTime": 0.5,
+                            "HSpike_SpikeStayTime": 0.4000000059604645,
+                            "H_TimeToReturnToStartPoint": 2.0,
+                            "Head_TimeToReturnToStartPoint": 2.0,
+                            "Head_TimeToVulnerablePosition": 1.5,
+                            "Head_VulnerableAltitude": 10.0,
+                            "Head_VulnerableRotation": {
                                 "x": 0.0,
                                 "y": 0.0,
                                 "z": 40.0
                             },
+                            "headEntity": "57b98a48-35d3-de7f-1491-59a721b9af19",
                             "leftHandEntity": "294e629a-9ece-480f-fa1b-903af55f345f",
                             "rightHandEntity": "be1bdecd-c5b8-2ece-b137-7f4156c41cd1",
                             "sidePivotEntity": "dc5f8144-0abf-f32c-645b-d7bd612f7ea0",
-                            "spikeHideAltitude": -5.0,
-                            "spikeShowAltitude": 0.0,
                             "totalPhases": 2
                         }
                     },
@@ -34327,7 +34341,7 @@
             ],
             "name": "Boss",
             "order": 5,
-            "parent_uuid": "ebaf61c0-c9dd-3c39-4d73-488486290fe9",
+            "parent_uuid": "c33c45c9-2802-2d46-a940-2ab03395594a",
             "static": true,
             "uuid": "9b7934df-abcb-9750-e4bb-706de6bb9801"
         },
@@ -34339,7 +34353,7 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
-                            "y": -0.0,
+                            "y": 0.0,
                             "z": 0.0
                         },
                         "position": {
@@ -34424,7 +34438,6 @@
                             "hitFeedbackEntity": "80b4cce2-12b8-095d-82b1-89cb716db03c",
                             "shadowEntity": "bd8ccd04-0482-51ad-7f03-28db7d1eef5f",
                             "side": 0,
-                            "spikeFeedbackDuration": 0.699999988079071,
                             "spikeFeedbackEntity": "d7343172-d6ee-131a-3d4a-4ae356dac9c9",
                             "spikesAttackColliderEntity": "92554d2a-9f58-1ebf-f749-267eb3270bbe",
                             "spikesEntity": "82f3f9f9-cd1c-6c2d-6421-e755e7d6fa73",
@@ -34482,7 +34495,6 @@
                             "hitFeedbackEntity": "4c1ab61d-4ac2-efea-b7a6-c3855c267782",
                             "shadowEntity": "193ba96f-8833-b78d-74bd-f389b2f29fe0",
                             "side": 1,
-                            "spikeFeedbackDuration": 0.699999988079071,
                             "spikeFeedbackEntity": "d7d6ab17-8ff0-4b9c-9cb8-ede27e2ef58a",
                             "spikesAttackColliderEntity": "6208d6fe-0621-bf7c-415e-2451e8151a98",
                             "spikesEntity": "006b8d12-8cc4-2c8a-386a-263fb8074794",

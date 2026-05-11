@@ -32,17 +32,18 @@ public class HandLogic : Component
     [Header("References")]
     public Entity attackColliderEntity;
     public Entity burnColliderEntity;
-    BoxCollider attackCollider;
-    BoxCollider burnCollider;
     public Entity spikesEntity;
     public Entity spikesAttackColliderEntity;
-    public BoxCollider spikesAttackCollider;
     public Entity startPointEntity;
     public Entity shadowEntity;
+    BoxCollider attackCollider;
+    BoxCollider burnCollider;
+    BoxCollider spikesAttackCollider;
 
     [Space(10)]
-    [Header("Hand Settings")]
+    [Header("Settings")]
     [ShowInInspector] BossSide side;
+
 
     [Space(10)]
     [Header("Feedback")]
@@ -51,14 +52,13 @@ public class HandLogic : Component
     ParticleComponent hitFeedbackParticles;
     AudioSource hitFeedbackAudio;
 
+    public Entity spikeFeedbackEntity;
+    ParticleComponent spikeFeedbackParticles;
+    AudioSource spikeFeedbackAudio;
+
     public Entity defeatFeedbackEntity;
     ParticleComponent defeatFeedbackParticles;
     AudioSource defeatFeedbackAudio;
-
-    public Entity spikeFeedbackEntity;
-    public float spikeFeedbackDuration;
-    ParticleComponent spikeFeedbackParticles;
-    AudioSource spikeFeedbackAudio;
 
     [ReadOnly][ShowInInspector] bool isDefeated;
     [ReadOnly][ShowInInspector] bool isInCooldown;
@@ -123,7 +123,7 @@ public class HandLogic : Component
         if(ProcessStateTimer(ref vulnerableTimer, ref isVulnerable))
         {
             StopAllOwnedCoroutines();
-            StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.handTimeToReturnToStartPoint));
+            StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
             isBusy = false;
         }
 
@@ -150,7 +150,7 @@ public class HandLogic : Component
             if (canBeStopped && side != owner.GetCurrentSide())
             {
                 StopAllOwnedCoroutines();
-                StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.handTimeToReturnToStartPoint));
+                StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
                 isBusy = false;
             }
 
@@ -191,22 +191,22 @@ public class HandLogic : Component
         while (!hitPlayer)
         {
             Vector3 targetPosition = owner.GetTarget().transform.position;
-            targetPosition.y = owner.handsFollowAltitude;
+            targetPosition.y = owner.HPunch_MoveAltitude;
 
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 targetPosition,
-                owner.handFollowSpeed * Time.deltaTime
+                owner.HPunch_FollowSpeed * Time.deltaTime
             );
 
             if(Vector3.Distance(transform.position, targetPosition) < 2f)
             {
                 timer+= Time.deltaTime;
-                if(timer> owner.handTimeToTriggerPunch)
+                if(timer> owner.HPunch_FollowTime)
                     hitPlayer = true;
             }else
             {
-                timer -= Time.deltaTime / 2;
+                timer -= Time.deltaTime * owner.HPunch_FollowTimeReduction;
             }
 
             yield return null;
@@ -214,43 +214,58 @@ public class HandLogic : Component
         canBeStopped = false;
         Debug.Log($"Hit player with {entity.Name}");
 
-        StartCoroutine(owner.MoveVertically(transform, owner.handsFollowAltitude, owner.handsFollowAltitude + 2, 0.1f, Mathf.LerpCurve.EaseOut));
-        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(owner.MoveVertically(transform, owner.HPunch_MoveAltitude, owner.HPunch_MoveAltitude + 2, owner.HPunch_TimeGoingUp, Mathf.LerpCurve.EaseOut));
+        yield return new WaitForSeconds(owner.HPunch_TimeGoingUp);
 
-        StartCoroutine(owner.MoveVertically(transform, owner.handsFollowAltitude + 2, owner.handsHitAltitude, 0.4f, Mathf.LerpCurve.ExponentialInOut));
-        yield return new WaitForSeconds(0.3f);
+        StartCoroutine(owner.MoveVertically(transform, owner.HPunch_MoveAltitude + 2, owner.HPunch_HitAltitude, owner.HPunch_TimeGoingDown, Mathf.LerpCurve.ExponentialInOut));
 
-        hitFeedbackEntity.transform.position = new Vector3(transform.position.x, hitFeedbackParticles.transform.position.y, transform.position.z);
-        PlayFeedback(hitFeedbackAudio, hitFeedbackParticles, hitFeedbackDuration);
-
-        if (HasHitTarget())
+        timer = 0;
+        bool hasDoneFeedback = false;
+        bool hasHitTarget = false;
+        while (timer < owner.HPunch_TimeGoingDown)
         {
-             owner.GetTarget().PlayerHealth.Damage(1);
+            timer += Time.deltaTime;
+            if (!hasHitTarget)
+            {
+                float percentage = (timer / owner.HPunch_TimeGoingDown) * 100;
+
+                if(percentage > owner.HPunch_HitTimePercentage)
+                {
+                    if(!hasHitTarget && HasHitTarget())
+                    {
+                        hasHitTarget = true;
+                        owner.GetTarget().PlayerHealth.Damage(owner.HPunch_Damage);
+                    }
+                    if (!hasDoneFeedback)
+                    {
+                        hasDoneFeedback = true;
+                        hitFeedbackEntity.transform.position = new Vector3(transform.position.x, hitFeedbackParticles.transform.position.y, transform.position.z);
+                        PlayFeedback(hitFeedbackAudio, hitFeedbackParticles, hitFeedbackDuration);
+                    }
+                }
+            }
+            
+            yield return null;
         }
-         yield return new WaitForSeconds(0.1f);
 
-        ///CheckDamagePlayer
-
-
-        //// Trigger Particles
         if (sequenceIndex == sequence.Count-1)
         {
             if (IncreaseSequenceCounter())
             {
                 Debug.Log($"Set Vulnerable {entity.Name}");
-                SetVulnerable(5.0f);
+                SetVulnerable(owner.HPunch_VulnerableTime);
             }
             else
             {
-                StartCoroutine(owner.MoveVertically(transform, owner.handsHitAltitude, owner.handsFollowAltitude, 1, Mathf.LerpCurve.EaseOut));
-                yield return new WaitForSeconds(1);
+                StartCoroutine(owner.MoveVertically(transform, owner.HPunch_HitAltitude, owner.HPunch_MoveAltitude, 1, Mathf.LerpCurve.EaseOut));
+                yield return new WaitForSeconds(owner.HPunch_DelayTimeAfterPunch);
             }
         }
         else
         {
             IncreaseSequenceCounter();
-            StartCoroutine(owner.MoveVertically(transform, owner.handsHitAltitude, owner.handsFollowAltitude, 1, Mathf.LerpCurve.EaseOut));
-            yield return new WaitForSeconds(1);
+            StartCoroutine(owner.MoveVertically(transform, owner.HPunch_HitAltitude, owner.HPunch_MoveAltitude, 1, Mathf.LerpCurve.EaseOut));
+            yield return new WaitForSeconds(owner.HPunch_DelayTimeAfterPunch);
         }
 
         if (side == owner.GetCurrentSide())
@@ -264,36 +279,44 @@ public class HandLogic : Component
         Debug.Log($"Starting spike with {entity.Name}");
 
         isBusy = true;
-        StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.handTimeToReturnToStartPoint));
-        yield return new WaitForSeconds(owner.handTimeToReturnToStartPoint);
+        StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
+        yield return new WaitForSeconds(owner.H_TimeToReturnToStartPoint);
 
         ///Trigger Animations?? Shake???
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(owner.HSpike_InitialDelay);
         canBeStopped = false;
-        PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, spikeFeedbackDuration);
-        yield return new WaitForSeconds(0.75f);
+        PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, owner.HSpike_AlertTime);
+        yield return new WaitForSeconds(owner.HSpike_AlertTime);
 
         ///Start PArticles Emerge??
 
-        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.spikeHideAltitude, owner.spikeShowAltitude, 0.5f, Mathf.LerpCurve.ExponentialOut));
-        yield return new WaitForSeconds(0.3f);
-        if (HasSpikeHitTarget())
-            owner.GetTarget().PlayerHealth.Damage(1);
-        
-        yield return new WaitForSeconds(0.2f);
+        bool hasHitTarget = false;
 
+        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.HSpike_HideAltitude, owner.HSpike_ShowAltitude, owner.HSpike_SpikeShowTime, Mathf.LerpCurve.ExponentialOut));
+        yield return new WaitForSeconds(owner.HSpike_SpikeShowTime);
 
-        yield return new WaitForSeconds(1.5f);
+        if (!hasHitTarget && HasSpikeHitTarget())
+        {
+            hasHitTarget = true;
+            owner.GetTarget().PlayerHealth.Damage(owner.HSpike_Damage);
+        }
 
-        ///Start Particles Hide??
-        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.spikeShowAltitude, owner.spikeHideAltitude, 1.5f, Mathf.LerpCurve.EaseOut));
-        yield return new WaitForSeconds(1.5f);
-        ///Stop Particles Hide??
+        float timer = 0;
+        while (timer < owner.HSpike_SpikeStayTime)
+        {
+            timer+= Time.deltaTime;
+            if (!hasHitTarget && HasSpikeHitTarget())
+            {
+                hasHitTarget = true;
+                owner.GetTarget().PlayerHealth.Damage(owner.HSpike_Damage);
+            }
+        }
 
-        yield return new WaitForSeconds(2);
+        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.HSpike_ShowAltitude, owner.HSpike_HideAltitude,owner.HSpike_SpikeHideTime, Mathf.LerpCurve.EaseOut));
+        yield return new WaitForSeconds(owner.HSpike_SpikeHideTime);
 
         IncreaseSequenceCounter();
-        SetCooldown(1);
+        SetCooldown(owner.HSpike_DelayTimeAfterSpike);
 
         isBusy = false;
         canBeStopped = true;
@@ -308,17 +331,15 @@ public class HandLogic : Component
 
     public void Regenerate()
     {
+        FakeRegenerate();
         isDefeated = false;
         isVulnerable = false;
+        canBeStopped = true;
+        isBusy = false;
+        StopAllOwnedCoroutines();
         SetCooldown(2);
         Debug.Log($"Hand {entity.Name} has regenerated");
 
-        FakeRegenerate();
-
-        if (side == owner.GetCurrentSide())
-            isBusy = false;
-        else
-            isBusy = true;
     }
 
     void OnDestroy()

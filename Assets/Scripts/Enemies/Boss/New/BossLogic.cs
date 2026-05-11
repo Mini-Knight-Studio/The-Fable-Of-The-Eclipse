@@ -23,30 +23,50 @@ public class BossLogic : Component
     [Header("Boss Settings")]
     public int totalPhases = 3;
 
-    [Space(10)]
-    [Header("Hand Settings")]
-    public float handFollowSpeed;
-    public float handTimeToReturnToStartPoint;
-    public float handTimeToTriggerPunch;
-    public float handsFollowAltitude = 9.0f;
-    public float handsHitAltitude = 0.0f;
 
     [Space(10)]
-    [Header("Spikes Settings")]
-    public float spikeHideAltitude;
-    public float spikeShowAltitude;
+    [Header("Hand Settings")]
+    [Tooltip("Time it takes for the hand to return to its start point")]public float H_TimeToReturnToStartPoint;
+
+    [Space(10)]
+    [Header("Hand Settings (PUNCH)")]
+    [Tooltip("Damage that the hand will deal")]public int HPunch_Damage;
+    [Tooltip("Speed that the hand will have following the target")]public float HPunch_FollowSpeed;
+    [Tooltip("Altitude that the hand will move at")] public float HPunch_MoveAltitude;
+    [Tooltip("Altitude that the hand will move to when hitting the target")]public float HPunch_HitAltitude;
+    [Tooltip("How much time must the hand be at the top of the target")]public float HPunch_FollowTime;
+    [Tooltip("Time reduction multiplier when hand is not at the top")]public float HPunch_FollowTimeReduction;
+    [Tooltip("The time in which the hand will go up charging")]public float HPunch_TimeGoingUp;
+    [Tooltip("The time the hand will take until hitting the ground")]public float HPunch_TimeGoingDown;
+    [Tooltip("The % of the hitting motion completed before the hand registers hit (0-100)")] public float HPunch_HitTimePercentage;
+    [Tooltip("The time that the hand is resting after a punch")] public float HPunch_DelayTimeAfterPunch;
+    [Tooltip("The time that the hand is vulnerable after last punch attack")] public float HPunch_VulnerableTime;
+
+    [Space(10)]
+    [Header("Hand Settings (SPIKES)")]
+    [Tooltip("Damage that the hand will deal")] public int HSpike_Damage;
+    [Tooltip("Altitude that the spikes will hide at")]public float HSpike_HideAltitude;
+    [Tooltip("Altitude that the spikes will show at")]public float HSpike_ShowAltitude;
+    [Tooltip("The delay time after starting the attack")] public float HSpike_InitialDelay;
+    [Tooltip("The alert time before the spikes attack")] public float HSpike_AlertTime;
+    [Tooltip("The time that the spikes takes to emerge")] public float HSpike_SpikeShowTime;
+    [Tooltip("The time that the spikes stay up")] public float HSpike_SpikeStayTime;
+    [Tooltip("The time that the spikes takes to hide")] public float HSpike_SpikeHideTime;
+    [Tooltip("The time that the hand is resting after a spike attack")] public float HSpike_DelayTimeAfterSpike;
+
+
 
     [Space(10)]
     [Header("Head Settings")]
-    public float headTimeToReturnToStartPoint;
-    public float headLookAtSpeed;
-    public float headVulnerableAttitude;
-    public Vector3 headVulnerableRotation;
+    [Tooltip("Time it takes for the head to return to its start point")]public float Head_TimeToReturnToStartPoint;
+    [Tooltip("Time it takes for the head to move to vulnerable position")]public float Head_TimeToVulnerablePosition;
+    [Tooltip("Altitude that the head will move to when vulnerable")]public float Head_VulnerableAltitude;
+    [Tooltip("Rotation that the head will have when vulnerable")]public Vector3 Head_VulnerableRotation;
 
     [Space(10)]
     [Header("Phase Transition")]
-    public float coreVulnerabilityDuration = 5.0f;
-    public float coreRegenerationDuration = 5.0f;
+    [Tooltip("Time it takes to recover from vulnerability")]public float Core_VulnerabilityDuration = 5.0f;
+    [Tooltip("Time it takes to change phase when recovered")]public float Core_RegenerationDuration = 5.0f;
 
     [ReadOnly][ShowInInspector] BossSide currentSide;
     [ReadOnly][ShowInInspector] int currentPhase;
@@ -102,7 +122,6 @@ public class BossLogic : Component
             {
                 /// Core Exposed
 
-                Debug.Log("test");
                 StartCoroutine(ExposeCore());
             }                
         }
@@ -115,13 +134,13 @@ public class BossLogic : Component
         isVulnerable = true;
         isBusy = true;
 
-        StartCoroutine(MoveVertically(head.transform, head.startPointEntity.transform.position.y, headVulnerableAttitude, 1.5f, Mathf.LerpCurve.ExponentialOut));
-        StartCoroutine(RotateInAxis(head.transform, new Vector3(0,0,0), headVulnerableRotation, 1.5f, new Vector3(0,0,1)));
-        yield return new WaitForSeconds(2);
+        StartCoroutine(MoveVertically(head.transform, head.startPointEntity.transform.position.y, Head_VulnerableAltitude, Head_TimeToVulnerablePosition, Mathf.LerpCurve.ExponentialOut));
+        StartCoroutine(RotateInAxis(head.transform, new Vector3(0,0,0), Head_VulnerableRotation, Head_TimeToVulnerablePosition, new Vector3(0,0,1)));
+        yield return new WaitForSeconds(Head_TimeToVulnerablePosition+0.5f);
 
         head.headColliderEntity.SetActive(true);
         float timer = 0;
-        while (timer <= coreVulnerabilityDuration)
+        while (timer <= Core_VulnerabilityDuration)
         {
             timer+=Time.deltaTime;
             if(head.HasBeenHit())
@@ -141,15 +160,15 @@ public class BossLogic : Component
                     /// REGENERATE CORE
                     
                     head.headColliderEntity.SetActive(false);
-                    StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+                    StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
                     leftHand.FakeRegenerate();
-                    StartCoroutine(GoToPoint(rightHand.transform, rightHand.transform.position, rightHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+                    StartCoroutine(GoToPoint(rightHand.transform, rightHand.transform.position, rightHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
                     rightHand.FakeRegenerate();
 
-                    StartCoroutine(RotateInAxis(head.transform, headVulnerableRotation, new Vector3(0, 0, 0), 1.5f, new Vector3(0, 0, 1)));
-                    StartCoroutine(GoToPoint(head.transform, head.transform.position, head.startPointEntity.transform.position, headTimeToReturnToStartPoint));
+                    StartCoroutine(RotateInAxis(head.transform, Head_VulnerableRotation, new Vector3(0, 0, 0), Head_TimeToReturnToStartPoint, new Vector3(0, 0, 1)));
+                    StartCoroutine(GoToPoint(head.transform, head.transform.position, head.startPointEntity.transform.position, Head_TimeToReturnToStartPoint));
 
-                    yield return new WaitForSeconds(coreRegenerationDuration);
+                    yield return new WaitForSeconds(Core_RegenerationDuration);
 
                     head.Regenerate();
                     leftHand.Regenerate();
@@ -162,15 +181,15 @@ public class BossLogic : Component
         }
 
         head.headColliderEntity.SetActive(false);
-        StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+        StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
         leftHand.FakeRegenerate();
-        StartCoroutine(GoToPoint(rightHand.transform, rightHand.transform.position, rightHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+        StartCoroutine(GoToPoint(rightHand.transform, rightHand.transform.position, rightHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
         rightHand.FakeRegenerate();
 
-        StartCoroutine(RotateInAxis(head.transform, headVulnerableRotation, new Vector3(0, 0, 0), 1.5f, new Vector3(0, 0, 1)));
-        StartCoroutine(GoToPoint(head.transform, head.transform.position, head.startPointEntity.transform.position, headTimeToReturnToStartPoint));
+        StartCoroutine(RotateInAxis(head.transform, Head_VulnerableRotation, new Vector3(0, 0, 0), Head_TimeToReturnToStartPoint, new Vector3(0, 0, 1)));
+        StartCoroutine(GoToPoint(head.transform, head.transform.position, head.startPointEntity.transform.position, Head_TimeToReturnToStartPoint));
 
-        yield return new WaitForSeconds(coreRegenerationDuration);
+        yield return new WaitForSeconds(Core_RegenerationDuration);
 
         head.Regenerate();
         leftHand.Regenerate();
