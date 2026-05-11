@@ -19,6 +19,12 @@ public class Movement : Component
             transform.position += direction * Time.deltaTime * Speed * multiplier;
     }
 
+    public void MoveVelocity(float velocity, Vector3 direction)
+    {
+        if(CanMove)
+            transform.position += direction * Time.deltaTime * velocity;
+    }
+
     public IEnumerator Push(float force, float duration, Vector3 direction)
     {
         float timer = 0;
