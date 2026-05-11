@@ -43,6 +43,9 @@ class PuzzleDoorTablet : Component
     [Header("Feedback")]
     public Entity keyParticles;
     public Entity risingParticles;
+    public Entity risingParticles2;
+    public Entity risingParticles3;
+    public Entity risingParticles4;
 
     public Entity insertKeySFX;
     public Entity doorStartSFX;
@@ -60,6 +63,9 @@ class PuzzleDoorTablet : Component
         initialTempleHeight = raisingTemple.transform.position.y;
 
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Stop();
+        if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().Stop();
+        if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().Stop();
+        if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().Stop();
         if (keyParticles != null) keyParticles.GetComponent<ParticleComponent>().Stop();
 
         if (insertKeySFX != null) insertKeySFX.GetComponent<AudioSource>().Stop();
@@ -155,6 +161,9 @@ class PuzzleDoorTablet : Component
         yield return new WaitForSeconds(0.5f);
 
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Play();
+        if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().Play();
+        if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().Play();
+        if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().Play();
 
         if (doorRiseSFX != null) doorRiseSFX.GetComponent<AudioSource>().Play();
 
@@ -170,6 +179,18 @@ class PuzzleDoorTablet : Component
             float currentHeight = Mathf.Lerp(initialTempleHeight, finalTempleHeight, curvedT);
             raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, currentHeight, raisingTemple.transform.position.z);
 
+            float particleT = Mathf.Min(1.0f, t * 2f);
+            float particleCurvedT = Mathf.Pow(particleT, easeIntensity);
+
+            float currentSpreadX = Mathf.Lerp(1.5f, 5.5f, particleCurvedT);
+            float currentSpreadZ = Mathf.Lerp(1.5f, 5.5f, particleCurvedT);
+            Vector3 variation = new Vector3(currentSpreadX, 0, currentSpreadZ);
+
+            if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+            if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+            if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+            if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+
             if (t >= 1f)
             {
                 raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, finalTempleHeight, raisingTemple.transform.position.z);
@@ -180,7 +201,11 @@ class PuzzleDoorTablet : Component
         }
 
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Stop();
-        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount*2, cameraShakeRotation*2, cameraShakeAmountVel, cameraShakeRotationVel);
+        if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().Stop();
+        if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().Stop();
+        if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().Stop();
+
+        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount * 2, cameraShakeRotation * 2, cameraShakeAmountVel, cameraShakeRotationVel);
 
         yield return new WaitForSeconds(1.0f);
 
