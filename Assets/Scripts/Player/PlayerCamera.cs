@@ -78,8 +78,6 @@ public class PlayerCamera : Component
 
     public void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (cameraUser == null) return;
 
         hasInput = CheckInput();

@@ -98,8 +98,6 @@ class PuzzleGoalSimonSays : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (isMoving)
         {
             MoveTowardsTarget();

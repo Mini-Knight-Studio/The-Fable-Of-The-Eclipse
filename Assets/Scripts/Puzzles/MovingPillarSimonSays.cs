@@ -35,8 +35,6 @@ class MovingPillarSimonSays : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         wasPressed = false;
 
         if (movingPillar == null) return;

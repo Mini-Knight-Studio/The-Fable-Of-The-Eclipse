@@ -19,8 +19,6 @@ class NarrativeTrigger : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (boxCollider.HasCollided)
         {
             text.Value = textValue;

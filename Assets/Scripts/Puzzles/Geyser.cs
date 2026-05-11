@@ -33,8 +33,6 @@ class Geyser : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         frequencyTimer += Time.deltaTime;
         damageTimer += Time.deltaTime;
 

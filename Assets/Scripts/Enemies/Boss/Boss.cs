@@ -65,7 +65,6 @@ public class Boss : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
 
         if (vulnerable) return;
         if (leftHand.defeated && rightHand.defeated)

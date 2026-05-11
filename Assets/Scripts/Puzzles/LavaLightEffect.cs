@@ -25,8 +25,6 @@ class LavaLightEffect : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (isMoving)
         {
             MoveRotation();

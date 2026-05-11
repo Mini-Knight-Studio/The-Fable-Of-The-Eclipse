@@ -38,10 +38,6 @@ class Golem : Enemy
 
     void OnUpdate()
     {
-        if (Pause.isPaused)
-        {
-            return;
-        }
         #region Health
         if (health.IsDead())
         {

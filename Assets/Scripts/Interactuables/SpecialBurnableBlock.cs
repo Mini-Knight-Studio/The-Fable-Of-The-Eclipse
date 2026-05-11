@@ -18,8 +18,6 @@ public class SpecialBurnableBlock : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (myCollider == null || isBurning) return;
 
         if (myCollider.HasCollided)

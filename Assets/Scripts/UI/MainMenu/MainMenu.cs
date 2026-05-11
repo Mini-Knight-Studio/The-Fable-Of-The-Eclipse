@@ -264,7 +264,7 @@ class MainMenu : Component
             canCallScripts = false;
             Settings.quickStartAnimations = true;
             Settings.invertedPassPagePlayed = false;
-            Pause.isPaused = false;
+            //Pause.isPaused = false;
 
             if (newGameButton.Hovered)
             {

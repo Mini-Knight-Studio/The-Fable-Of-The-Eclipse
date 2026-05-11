@@ -19,8 +19,6 @@ class InteractHover : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (!started) return;
 
         time += Time.deltaTime * speed;

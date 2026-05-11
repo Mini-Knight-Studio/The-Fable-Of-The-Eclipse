@@ -21,8 +21,6 @@ class Gem_Idle : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         time += Time.deltaTime * speed;
 
         float offsetY = (float)Math.Sin(time) * amplitude;
