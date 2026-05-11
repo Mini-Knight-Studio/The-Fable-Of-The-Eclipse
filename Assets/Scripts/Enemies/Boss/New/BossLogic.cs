@@ -101,6 +101,8 @@ public class BossLogic : Component
             if(leftHand.IsDefeated() && rightHand.IsDefeated())
             {
                 /// Core Exposed
+
+                Debug.Log("test");
                 StartCoroutine(ExposeCore());
             }                
         }
@@ -109,7 +111,9 @@ public class BossLogic : Component
     IEnumerator ExposeCore()
     {
         //// ZOOM TO HEAD
+        Debug.Log("Core Exposed");
         isVulnerable = true;
+        isBusy = true;
 
         StartCoroutine(MoveVertically(head.transform, head.startPointEntity.transform.position.y, headVulnerableAttitude, 1.5f, Mathf.LerpCurve.ExponentialOut));
         StartCoroutine(RotateInAxis(head.transform, new Vector3(0,0,0), headVulnerableRotation, 1.5f, new Vector3(0,0,1)));
@@ -135,8 +139,12 @@ public class BossLogic : Component
                 else
                 {
                     /// REGENERATE CORE
+                    
+                    head.headColliderEntity.SetActive(false);
                     StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+                    leftHand.FakeRegenerate();
                     StartCoroutine(GoToPoint(rightHand.transform, rightHand.transform.position, rightHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+                    rightHand.FakeRegenerate();
 
                     StartCoroutine(RotateInAxis(head.transform, headVulnerableRotation, new Vector3(0, 0, 0), 1.5f, new Vector3(0, 0, 1)));
                     StartCoroutine(GoToPoint(head.transform, head.transform.position, head.startPointEntity.transform.position, headTimeToReturnToStartPoint));
@@ -155,7 +163,9 @@ public class BossLogic : Component
 
         head.headColliderEntity.SetActive(false);
         StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+        leftHand.FakeRegenerate();
         StartCoroutine(GoToPoint(rightHand.transform, rightHand.transform.position, rightHand.startPointEntity.transform.position, handTimeToReturnToStartPoint));
+        rightHand.FakeRegenerate();
 
         StartCoroutine(RotateInAxis(head.transform, headVulnerableRotation, new Vector3(0, 0, 0), 1.5f, new Vector3(0, 0, 1)));
         StartCoroutine(GoToPoint(head.transform, head.transform.position, head.startPointEntity.transform.position, headTimeToReturnToStartPoint));
@@ -166,6 +176,7 @@ public class BossLogic : Component
         leftHand.Regenerate();
         rightHand.Regenerate();
         isDefeated = false;
+        isBusy = false;
 
         /// RESET OR DIE && REMOVE ZOOM
     }

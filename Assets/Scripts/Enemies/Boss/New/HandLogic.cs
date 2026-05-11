@@ -50,6 +50,11 @@ public class HandLogic : Component
     public float hitFeedbackDuration;
     ParticleComponent hitFeedbackParticles;
     AudioSource hitFeedbackAudio;
+
+    public Entity defeatFeedbackEntity;
+    ParticleComponent defeatFeedbackParticles;
+    AudioSource defeatFeedbackAudio;
+
     public Entity spikeFeedbackEntity;
     public float spikeFeedbackDuration;
     ParticleComponent spikeFeedbackParticles;
@@ -95,8 +100,10 @@ public class HandLogic : Component
 
         hitFeedbackParticles = hitFeedbackEntity.GetComponent<ParticleComponent>();
         spikeFeedbackParticles = spikeFeedbackEntity.GetComponent<ParticleComponent>();
+        defeatFeedbackParticles = defeatFeedbackEntity.GetComponent<ParticleComponent>();
         hitFeedbackAudio = hitFeedbackEntity.GetComponent<AudioSource>();
         spikeFeedbackAudio = spikeFeedbackEntity.GetComponent<AudioSource>();
+        defeatFeedbackAudio = defeatFeedbackEntity.GetComponent<AudioSource>();
 
         transform.position = startPointEntity.transform.position;
         isBusy = false;
@@ -121,6 +128,11 @@ public class HandLogic : Component
             isDefeated = true;
             isVulnerable = false;
             canBeStopped = false;
+
+            defeatFeedbackEntity.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            defeatFeedbackAudio.Play();
+            defeatFeedbackParticles.Play();
+
             StopAllOwnedCoroutines();
             return;
         }
@@ -281,13 +293,20 @@ public class HandLogic : Component
     }
 
     
+    public void FakeRegenerate()
+    {
+        defeatFeedbackAudio.Stop();
+        defeatFeedbackParticles.Stop();
+    }
 
     public void Regenerate()
     {
         isDefeated = false;
         isVulnerable = false;
         SetCooldown(2);
-         Debug.Log($"Hand {entity.Name} has regenerated");
+        Debug.Log($"Hand {entity.Name} has regenerated");
+
+        FakeRegenerate();
     }
 
     void OnDestroy()
