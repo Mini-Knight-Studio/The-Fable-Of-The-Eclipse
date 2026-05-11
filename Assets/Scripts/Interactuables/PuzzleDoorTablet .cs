@@ -15,6 +15,7 @@ class PuzzleDoorTablet : Component
     public Entity focusPointOnInsert;
     public Entity focusPointOnRaise;
     public Entity interactPrompt;
+    public Entity movingPlatform;
 
     [Header("Settings")]
     public float finalTempleHeight;
@@ -36,6 +37,8 @@ class PuzzleDoorTablet : Component
 
     private float initialTempleHeight;
     private Vector3 finalKeyScale;
+
+    public float movingPlatformFinalHeight;
 
     [Header("Feedback")]
     public Entity keyParticles;
@@ -179,7 +182,27 @@ class PuzzleDoorTablet : Component
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Stop();
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount*2, cameraShakeRotation*2, cameraShakeAmountVel, cameraShakeRotationVel);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
+
+        elapsedTime = 0f;
+        while (true)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / 3.0f;
+            float curvedT = Mathf.Pow(t, easeIntensity);
+
+            float currentHeight = Mathf.Lerp(movingPlatform.transform.position.y, movingPlatformFinalHeight, curvedT);
+            movingPlatform.transform.position = new Vector3(movingPlatform.transform.position.x, currentHeight, movingPlatform.transform.position.z);
+
+            if (t >= 1f)
+            {
+                movingPlatform.transform.position = new Vector3(movingPlatform.transform.position.x, movingPlatformFinalHeight, movingPlatform.transform.position.z);
+                break;
+            }
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.0f);
 
         Player.Instance.Camera.StopFocus();
 
@@ -195,6 +218,7 @@ class PuzzleDoorTablet : Component
         animatedKey.SetActive(false);
 
         raisingTemple.transform.position = new Vector3(raisingTemple.transform.position.x, finalTempleHeight, raisingTemple.transform.position.z);
+        movingPlatform.transform.position = new Vector3(movingPlatform.transform.position.x, movingPlatformFinalHeight, movingPlatform.transform.position.z);
 
         if (drippingSFX != null) drippingSFX.GetComponent<AudioSource>().Play();
 
