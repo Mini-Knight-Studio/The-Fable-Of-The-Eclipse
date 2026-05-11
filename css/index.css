@@ -1,20 +1,24 @@
-html {
+html
+{
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-.row {
+.row
+{
     display: flex;
     flex-direction: row;
 }
 
-.column {
+.column
+{
     display: flex;
     flex-direction: column;
 }
 
-body {
+body
+{
     margin: 0;
     min-height: 100vh;
 
@@ -22,12 +26,14 @@ body {
     flex-direction: column;
 }
 
-header {
+header
+{
     background: blue;
     align-items: center;
 }
 
-main {
+main
+{
     background: rgb(46, 46, 46);
     flex: 1; 
     position: relative; 
@@ -37,7 +43,8 @@ main {
     padding: 0;
 }
 
-.page-container {
+.page-container
+{
     position: absolute;
     top: 0;
     left: 0;
@@ -50,8 +57,12 @@ main {
     display: block;
 }
 
-footer {
+footer
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
     background: cornflowerblue;
+    display: grid;
     align-items: center;
 }
 
@@ -59,9 +70,12 @@ footer div
 {
     padding-left: 25px;
     padding-right: 25px;
+    display: grid;
+    align-items: center;
 }
 
-.menu-list {
+.menu-list
+{
     position: absolute;
     top: 0;
     right: 0;
@@ -79,7 +93,8 @@ footer div
     pointer-events: none;
 }
 
-.menu-div {
+.menu-div
+{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -89,7 +104,8 @@ footer div
     pointer-events: auto;
 }
 
-.menu-div p {
+.menu-div p
+{
     margin: 0;
     padding: 0;
     white-space: nowrap;
@@ -100,7 +116,8 @@ footer div
     transition: all 0.1s ease-in-out;
 }
 
-.menu-button {
+.menu-button
+{
     flex-shrink: 0;
     border-radius: 50%;
     display: grid;
@@ -114,22 +131,47 @@ footer div
     transition: all 0.1s ease-in-out;
 }
 
-.menu-button:hover {
+.menu-button:hover
+{
     font-size: 25px;
     width: 50px;
     height: 50px;
 }
 
-.menu-div:has(.menu-button:hover) p {
+.menu-div:has(.menu-button:hover) p
+{
     opacity: 100;
 }
 
-h1, p{
+h1, p
+{
     margin: 0;
     padding: 0;
+}
+
+h1
+{
+    padding-top: 15px;
+    padding-bottom: 5px;
 }
 
 .space
 {
     flex: 1;
 }
+
+.copyright
+{
+    font-size: 14px;
+}
+
+.social-media-access
+{
+    background: none;
+    border: none;
+    display: grid;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+
