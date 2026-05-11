@@ -17,6 +17,7 @@ public class Player : Component
     public PlayerCombat Combat;
     public PlayerGrapple Grapple;
     public PlayerFeedback Feedback;
+
     public PlayerTorch Torch;
 
     [Header("Others")]
@@ -34,7 +35,7 @@ public class Player : Component
     private LoseScreen LoseScreen;
     private CreditsScreen CreditsScreen;
 
-
+    public bool IsInCutscene = false;
 
     public static Player Instance { get; private set; }
 
@@ -96,12 +97,10 @@ public class Player : Component
         LoseScreen = LoseScreenEntity.GetComponent<LoseScreen>();
         CreditsScreen = CreditsScreenEntity.GetComponent<CreditsScreen>();
 
-        if(RespawnTransition!=null)
+        if (RespawnTransition != null)
             RespawnTransition.OnFadeInComplete += EndRespawn;
         if (LoseScreen != null)
             PlayerHealth.OnDeath += LoseScreen.OpenLoseScreen;
-        if (PlayerHealth != null)
-            PlayerHealth.OnHit += Animation.PlayHit;
     }
 
     public void GoToLastCheckpoint()
@@ -131,7 +130,11 @@ public class Player : Component
     {
         if (Pause.isPaused) { return; }
 
-        Input.ProcessInputs();
+        if (!IsInCutscene)
+        {
+            Input.ProcessInputs();
+        }
+
         Movement.ProcessMovement();
         Combat.ProcessCombat();
         Torch.ProcessTorch();
@@ -146,9 +149,5 @@ public class Player : Component
         if (RespawnTransition == null)
             return;
         RespawnTransition.OnFadeInComplete -= EndRespawn;
-        if (PlayerHealth != null)
-        {
-            PlayerHealth.OnHit -= Animation.PlayHit;
-        }
     }
 }
