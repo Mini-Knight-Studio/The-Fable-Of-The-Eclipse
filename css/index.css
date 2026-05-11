@@ -69,15 +69,39 @@ footer div
     
     margin: 0;
     padding: 0;
+    padding-right: 10px;
     list-style-type: none;
 
     width: 50px;
+    
+    align-items: center; 
 }
 
-.menu-div
+.menu-div {
+    width: 50px;
+    height: 50px;
+    
+    display: grid; 
+    place-items: center;
+}
+
+.menu-button{
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    
+    display: grid; 
+    place-items: center;
+    font-size: 15px;
+    padding: 0; 
+}
+
+.menu-button:hover
 {
     width: 50px;
     height: 50px;
+    font-size: 25px;
+    transition: all ease-in-out 0.1s;
 }
 
 h1, p{
