@@ -61,6 +61,8 @@ class PuzzleGoalSimonSays : Component
     public Entity failSFX;
     public Entity roundSuccessSFX;
 
+    public string popupName = "Popup_GemWater";
+
     private enum State
     {
         WaitingForPillars,
@@ -341,6 +343,11 @@ class PuzzleGoalSimonSays : Component
         DatabaseRegistry.playerDB.Player.hasGrappling = true;
 
         collectGemSFX.GetComponent<AudioSource>().Play();
+
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupName);
+        }
 
         isCollecting = false;
     }
