@@ -53,7 +53,8 @@ public class PlayerGrapple : PlayerComponent
 
     public void OnCreate()
     {
-        ropeSegments.Clear(); 
+        ropeSegments.Clear();
+        grappleCooldownTimer = 0;
     }
 
     void OnDestroy()
