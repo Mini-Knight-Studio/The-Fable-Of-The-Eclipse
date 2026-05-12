@@ -145,7 +145,7 @@ class MovingPlatform : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+       if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
         if (canSink && !sinkRoutineRunning)
         {

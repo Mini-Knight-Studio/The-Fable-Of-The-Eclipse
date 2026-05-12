@@ -57,10 +57,6 @@ class Blob : Enemy
 
     void OnUpdate()
     {
-        if (Pause.isPaused)
-        {
-            return;
-        }
         if (spawn)
         {
             StartCoroutine(SplitLerp());

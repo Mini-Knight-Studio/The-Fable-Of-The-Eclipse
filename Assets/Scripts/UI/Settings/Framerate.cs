@@ -19,7 +19,7 @@ class Framerate : Component
 
     public void IncreaseFramerate()
     {
-        if (framerate < 995)
+        if (framerate < 240)
         {
             framerate += 5;
         }

@@ -1,17 +1,16 @@
 using System;
 using Loopie;
 
-class MusicVolume : Component
+public class MusicVolume : Component
 {
-    private float volume = 1.0f;
-
+    public static float volume = 1.0f;
     void OnCreate()
     {
         volume = ClampAndRound(GlobalDatabase.GlobalData.settingsDB.Settings.MusicVolume);
         ApplyToMixer();
     }
 
-    public void ApplyMusicVolume()
+    public static void ApplyMusicVolume()
     {
         volume = ClampAndRound(volume);
         GlobalDatabase.GlobalData.settingsDB.Settings.MusicVolume = volume;
@@ -33,12 +32,12 @@ class MusicVolume : Component
         return volume;
     }
 
-    private void ApplyToMixer()
+    public static void ApplyToMixer()
     {
         AudioMixer.SetVolume("Master/Music", AudioMixer.LinearToEngineVolume(volume));
     }
 
-    private float ClampAndRound(float value)
+    private static float ClampAndRound(float value)
     {
         value = Mathf.Clamp(value, 0f, 1f);
         return Mathf.Round(value * 10f) / 10f;

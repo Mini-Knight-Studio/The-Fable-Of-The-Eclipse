@@ -68,8 +68,6 @@ class Chest : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (rewardCollected && !particlesStopped)
         {
             openParticlesEntity.GetComponent<ParticleComponent>().Stop();

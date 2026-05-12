@@ -90,8 +90,6 @@ class PuzzleDoor : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (hasOpened || isOpening) return;
 
         if (entity.GetComponent<BoxCollider>().IsColliding && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyID))

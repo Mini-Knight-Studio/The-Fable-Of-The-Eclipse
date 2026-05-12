@@ -45,8 +45,6 @@ class VistaPoint : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (camera == null) return;
         if (collider == null) return;
 

@@ -33,7 +33,7 @@ class InteractHover : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
         if (interactGamepad != null && interactKeyboard != null)
         {

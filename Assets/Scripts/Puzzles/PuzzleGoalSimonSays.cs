@@ -102,7 +102,7 @@ class PuzzleGoalSimonSays : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
         if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed && !puzzle2Completed)
         {
