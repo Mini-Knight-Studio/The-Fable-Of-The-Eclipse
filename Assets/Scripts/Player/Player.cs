@@ -128,8 +128,7 @@ public class Player : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         Input.ProcessInputs();
         Movement.ProcessMovement();
         Combat.ProcessCombat();

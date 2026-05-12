@@ -736,21 +736,21 @@ class Settings : Component
             masterVolumeScript.IncreaseVolume();
             float masterVolume = Mathf.Abs(masterVolumeScript.GetVolume() * 100);
             masterVolumeDisplayText.SetText(Mathf.Round(masterVolume).ToString());
-            masterVolumeScript.ApplyMasterVolume();
+            MasterVolume.ApplyMasterVolume();
         }
         else if (musicVolumeButton.Hovered)
         {
             musicVolumeScript.IncreaseVolume();
             float musicVolume = Mathf.Abs(musicVolumeScript.GetVolume() * 100);
             musicVolumeDisplayText.SetText(Mathf.Round(musicVolume).ToString());
-            musicVolumeScript.ApplyMusicVolume();
+            MusicVolume.ApplyMusicVolume();
         }
         else if (sfxVolumeButton.Hovered)
         {
             sfxVolumeScript.IncreaseVolume();
             float sfxVolume = Mathf.Abs(sfxVolumeScript.GetVolume() * 100);
             sfxVolumeDisplayText.SetText(Mathf.Round(sfxVolume).ToString());
-            sfxVolumeScript.ApplySfxVolume();
+            SfxVolume.ApplySfxVolume();
         }
     }
 
@@ -778,21 +778,21 @@ class Settings : Component
             masterVolumeScript.DecreaseVolume();
             float masterVolume = masterVolumeScript.GetVolume() * 100;
             masterVolumeDisplayText.SetText(Mathf.Round(masterVolume).ToString());
-            masterVolumeScript.ApplyMasterVolume();
+            MasterVolume.ApplyMasterVolume();
         }
         else if (musicVolumeButton.Hovered)
         {
             musicVolumeScript.DecreaseVolume();
             float musicVolume = Mathf.Abs(musicVolumeScript.GetVolume() * 100);
             musicVolumeDisplayText.SetText(Mathf.Round(musicVolume).ToString());
-            musicVolumeScript.ApplyMusicVolume();
+            MusicVolume.ApplyMusicVolume();
         }
         else if (sfxVolumeButton.Hovered)
         {
             sfxVolumeScript.DecreaseVolume();
             float sfxVolume = Mathf.Abs(sfxVolumeScript.GetVolume() * 100);
             sfxVolumeDisplayText.SetText(Mathf.Round(sfxVolume).ToString());
-            sfxVolumeScript.ApplySfxVolume();
+            SfxVolume.ApplySfxVolume();
         }
     }
 
@@ -818,9 +818,9 @@ class Settings : Component
             displayModeScript.ApplyFullscreen();
             framerateScript.ApplyFramerate();
             vSyncScript.ApplyVSync();
-            masterVolumeScript.ApplyMasterVolume();
-            musicVolumeScript.ApplyMusicVolume();
-            sfxVolumeScript.ApplySfxVolume();
+            MasterVolume.ApplyMasterVolume();
+            MusicVolume.ApplyMusicVolume();
+            SfxVolume.ApplySfxVolume();
 
             GlobalDatabase.GlobalData.settingsDB.Settings.AreSettingsDefault = false;
             GlobalDatabase.GlobalData.SaveGlobalDatabase();

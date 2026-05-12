@@ -9,10 +9,10 @@ class Blob : Enemy
     public Vector2 ViewField;
     public float ForcedDetectionDistance;
     [Space(5)]
-    public int Damage;
     public float ReachDistance;
     public float AttackDistance;
     public float PushForceScale;
+    public Vector2 HitOffset;
     [Space(5)]
     public float PreparationTime;
     public float AttackCooldown;
@@ -20,6 +20,9 @@ class Blob : Enemy
     [Header("Blob")]
     public int Stage;
     public float StageScale;
+    public Vector2 BaseDamageandStageMultiplier;
+    public Vector2 BaseVelocityandStageMultiplier;
+    public Vector2 BaseHealthandStageMultiplier;
     [Space(5)]
     public int SplitAmmount;
     public float SplitDistance;
@@ -45,14 +48,16 @@ class Blob : Enemy
         spawn = false;
         isSpawning = false;
         splitting = false;
+
+        movement.Speed = StageMultiplier(BaseVelocityandStageMultiplier);
+        health.ModifyMaxHealth((int)StageMultiplier(BaseHealthandStageMultiplier));
+        health.Reset();
+        Debug.Log(health.GetActualHealth());
     }
 
     void OnUpdate()
     {
-        if (Pause.isPaused)
-        {
-            return;
-        }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (spawn)
         {
             StartCoroutine(SplitLerp());
@@ -82,20 +87,20 @@ class Blob : Enemy
                 #region Movement
                 if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
                 {
-                    animator.PlayClip("Armature|Chase", true, 0.25f);
+                    animator.PlayClip("Armature|Chase", true, 0.5f);
                     transform.LookAt(Player.Instance.transform.position, transform.Up);
                     movement.Move(4-Stage, transform.Forward);
                     ResetWander();
                     #region Attack
                     if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
                     {
-                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, Damage*Stage, "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, HitOffset, (int)StageMultiplier(BaseDamageandStageMultiplier), "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
                     }
                     #endregion
                 }
                 else if (!health.IsDead())
                 {
-                    animator.PlayClip("Armature|Walk", true, 0.25f);
+                    animator.PlayClip("Armature|Walk", true, 0.5f);
                     Wander(ViewField, 4-Stage);
                 }
                 #endregion
@@ -107,6 +112,15 @@ class Blob : Enemy
     {
         Stage = newStage;
         transform.scale = Vector3.One * StageScale * Stage;
+    }
+
+    public float StageMultiplier(Vector2 Characteristic)
+    {
+        int multiplierStage = Stage - 1;
+        if(Characteristic.y < 0)
+            return Characteristic.x + (2 - multiplierStage) * -Characteristic.y;
+        else
+            return Characteristic.x + multiplierStage * Characteristic.y;
     }
 
     public override void Hit(int points, float force_scale, string hit_clip)
@@ -126,6 +140,10 @@ class Blob : Enemy
 
     private IEnumerator SplitLerp()
     {
+        movement.Speed = StageMultiplier(BaseVelocityandStageMultiplier);
+        health.ModifyMaxHealth((int)StageMultiplier(BaseHealthandStageMultiplier));
+        health.Reset();
+
         animator.PlayClip("Armature|Spawn", false, 0.0f, false, true);
         float timer = 0.0f;
         spawn = false;
@@ -171,6 +189,10 @@ class Blob : Enemy
             Blob_component.animator.model.transform.rotation = Vector3.Zero;
             Blob_component.feedback.FeedbackEntity.transform.rotation = Vector3.Right * 90;
             new_Blob.SetActive(true);
+
+            Blob_component.movement.Speed = StageMultiplier(BaseVelocityandStageMultiplier);
+            Blob_component.health.ModifyMaxHealth((int)StageMultiplier(BaseHealthandStageMultiplier));
+            Blob_component.health.Reset();
         }
     }
 

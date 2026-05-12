@@ -1,19 +1,22 @@
 using System;
+using System.Collections;
 using Loopie;
 
 class MovingPlatform : Component
 {
-    public enum SinkState
-    {
-        Normal,
-        Sinking,
-        Sunken,
-        Rising
-    }
-
+    [Header("Model")]
     public Entity platformModel;
-    private BoxCollider collider;
 
+    public Entity doublePlatformGroup;
+    public Entity doublePlatformModel1;
+    public Entity doublePlatformModel2;
+
+    private Entity activeMovingEntity;
+    private BoxCollider collider1;
+    private BoxCollider collider2;
+
+    [Header("Path Points")]
+    public bool followPathRotations = false;
     public int numOfPathPoints = 5;
     public Entity pathPointEntity0;
     public Entity pathPointEntity1;
@@ -28,9 +31,27 @@ class MovingPlatform : Component
 
     private Entity[] pathPoints;
 
+    [Header("Point Pause Times")]
+    public float pauseInPoint0 = 0.0f;
+    public float pauseInPoint1 = 0.0f;
+    public float pauseInPoint2 = 0.0f;
+    public float pauseInPoint3 = 0.0f;
+    public float pauseInPoint4 = 0.0f;
+    public float pauseInPoint5 = 0.0f;
+    public float pauseInPoint6 = 0.0f;
+    public float pauseInPoint7 = 0.0f;
+    public float pauseInPoint8 = 0.0f;
+    public float pauseInPoint9 = 0.0f;
+
+    private float[] pointPauseTimes;
+
+    [Header("Feedback")]
     public Entity movingParticlesEntity;
     private ParticleComponent movingParticles;
+    public Entity movingParticlesEntity2;
+    private ParticleComponent movingParticles2;
 
+    [Header("Settings")]
     public float movementSpeed = 2.0f;
 
     public bool moveOnStart = false;
@@ -41,27 +62,49 @@ class MovingPlatform : Component
 
     private int currentPoint = 0;
 
-    // Activate with player col
+    private bool movementRoutineRunning = false;
+
+    [Header("Start moving on Collision")]
     public bool activateOnCollision = false;
     private bool isWaitingForPlayer = false;
 
-    // Sinking platforms
+    [Header("Start moving after Burned")]
+    public bool activateAfterBurn = false;
+    public string burnableID = "UNASSIGNED_BURNABLE";
+
+    [Header("Sinking Platforms")]
     public bool canSink = false;
     public float timeBeforeSink = 2.0f;
     public float timeSunken = 3.0f;
     public float sinkDistance = 5.0f;
     public float sinkSpeed = 2.0f;
 
-    private SinkState sinkState = SinkState.Normal;
-    private float stepTimer = 0.0f;
-    private float sunkenTimer = 0.0f;
+    private bool isSinking = false;
+    private bool sinkRoutineRunning = false;
     private Vector3 positionBeforeSink;
 
     void OnCreate()
     {
-        collider = platformModel.GetComponent<BoxCollider>();
+        if (doublePlatformGroup != null)
+        {
+            activeMovingEntity = doublePlatformGroup;
+            if (doublePlatformModel1 != null) collider1 = doublePlatformModel1.GetComponent<BoxCollider>();
+            if (doublePlatformModel2 != null) collider2 = doublePlatformModel2.GetComponent<BoxCollider>();
+        }
+        else
+        {
+            activeMovingEntity = platformModel;
+            if (platformModel != null) collider1 = platformModel.GetComponent<BoxCollider>();
+        }
+
         movingParticles = movingParticlesEntity.GetComponent<ParticleComponent>();
         movingParticles.Stop();
+
+        if (movingParticlesEntity2 != null)
+        {
+            movingParticles2 = movingParticlesEntity2.GetComponent<ParticleComponent>();
+            movingParticles2.Stop();
+        }
 
         pathPoints = new Entity[10];
 
@@ -76,164 +119,271 @@ class MovingPlatform : Component
         pathPoints[8] = pathPointEntity8;
         pathPoints[9] = pathPointEntity9;
 
+        pointPauseTimes = new float[10];
+
+        pointPauseTimes[0] = pauseInPoint0;
+        pointPauseTimes[1] = pauseInPoint1;
+        pointPauseTimes[2] = pauseInPoint2;
+        pointPauseTimes[3] = pauseInPoint3;
+        pointPauseTimes[4] = pauseInPoint4;
+        pointPauseTimes[5] = pauseInPoint5;
+        pointPauseTimes[6] = pauseInPoint6;
+        pointPauseTimes[7] = pauseInPoint7;
+        pointPauseTimes[8] = pauseInPoint8;
+        pointPauseTimes[9] = pauseInPoint9;
+
         if (activateOnCollision)
         {
             isWaitingForPlayer = true;
             goingToPoint = false;
         }
-        else if (moveOnStart)
+        else if (moveOnStart || (activateAfterBurn && DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID)))
         {
-            GoToPoint(0);
+            GoToPoint(targetPoint);
         }
     }
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+       if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
-        if (canSink)
+        if (canSink && !sinkRoutineRunning)
         {
-            ManageSinking();
+            if (CheckCollision())
+            {
+                StartCoroutine(SinkRoutine());
+            }
         }
 
-        if (sinkState == SinkState.Normal)
+        if (!isSinking)
         {
             if (activateOnCollision && isWaitingForPlayer)
             {
-                if (collider.IsColliding)
+                if (CheckCollision())
                 {
                     isWaitingForPlayer = false;
-                    GoToPoint((currentPoint + 1) % numOfPathPoints);
+                    GoToPoint(targetPoint);
                 }
             }
-            else if (goingToPoint)
+            else if (activateAfterBurn && DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID))
             {
-                ManageMovement();
+                GoToPoint(targetPoint);
             }
         }
+    }
+
+    private bool CheckCollision()
+    {
+        bool hit = false;
+        if (collider1 != null && collider1.IsColliding) hit = true;
+        if (collider2 != null && collider2.IsColliding) hit = true;
+        return hit;
     }
 
     public void GoToPoint(int pointNum)
     {
         if (pointNum < 0 || pointNum >= numOfPathPoints) return;
 
-        goingToPoint = true;
+        if (movementRoutineRunning) return;
+
         targetPoint = pointNum;
-        movingParticles.Play();
+
+        StartCoroutine(MoveToPointRoutine());
     }
 
-    void ManageMovement()
+    IEnumerator MoveToPointRoutine()
     {
-        if (pathPoints[targetPoint] == null) return;
+        movementRoutineRunning = true;
+        goingToPoint = true;
 
-        Vector3 currentPos = platformModel.transform.position;
-        Vector3 targetPos = pathPoints[targetPoint].transform.position;
+        movingParticles.Play();
+        if (movingParticlesEntity2 != null) movingParticles2.Play();
 
-        Vector3 directionVec = targetPos - currentPos;
-        float distance = (float)directionVec.magnitude;
-
-        if (distance < 0.1f)
+        while (true)
         {
+            if (Pause.isPaused)
+            {
+                yield return null;
+                continue;
+            }
+
+            if (isSinking)
+            {
+                yield return null;
+                continue;
+            }
+
+            if (pathPoints[targetPoint] == null)
+            {
+                break;
+            }
+
+            Vector3 startPos = activeMovingEntity.transform.position;
+            Vector3 startRot = activeMovingEntity.transform.rotation;
+            Vector3 targetPos = pathPoints[targetPoint].transform.position;
+            Vector3 targetRot = pathPoints[targetPoint].transform.rotation;
+
+            float totalDistance = (float)(targetPos - startPos).magnitude;
+
+            while (true)
+            {
+                if (Pause.isPaused || isSinking)
+                {
+                    yield return null;
+                    continue;
+                }
+
+                Vector3 currentPos = activeMovingEntity.transform.position;
+                Vector3 directionVec = targetPos - currentPos;
+                float remainingDistance = (float)directionVec.magnitude;
+
+                if (remainingDistance < 0.1f)
+                {
+                    break;
+                }
+
+                float distanceCovered = totalDistance - remainingDistance;
+                float interpolationFactor = distanceCovered / totalDistance;
+
+                Vector3 moveDir = directionVec.normalized;
+                Vector3 velocity = moveDir * movementSpeed * Time.deltaTime;
+
+                activeMovingEntity.transform.position += velocity;
+
+                activeMovingEntity.transform.rotation = Vector3.Lerp(
+                    startRot,
+                    targetRot,
+                    interpolationFactor
+                );
+
+                if (CheckCollision())
+                {
+                    Player.Instance.transform.position += velocity;
+                }
+
+                yield return null;
+            }
+
             currentPoint = targetPoint;
+            activeMovingEntity.transform.position = targetPos;
+            activeMovingEntity.transform.rotation = targetRot;
+
+            goingToPoint = false;
+            movingParticles.Stop();
+            if (movingParticlesEntity2 != null) movingParticles2.Stop();
+
+            if (pointPauseTimes[currentPoint] > 0.0f)
+            {
+                yield return new WaitForSeconds(pointPauseTimes[currentPoint]);
+            }
 
             if (activateOnCollision && currentPoint == 0)
             {
-                goingToPoint = false;
                 isWaitingForPlayer = true;
-                movingParticles.Stop();
-                return;
+                break;
             }
 
             if (looping || activateOnCollision)
             {
-                GoToPoint((currentPoint + 1) % numOfPathPoints);
-            }
-            else
-            {
-                goingToPoint = false;
-                movingParticles.Stop();
+                targetPoint = (currentPoint + 1) % numOfPathPoints;
+                goingToPoint = true;
+                movingParticles.Play();
+                if (movingParticlesEntity2 != null) movingParticles2.Play();
+                yield return null;
+                continue;
             }
 
-            return;
+            break;
         }
 
-        Vector3 moveDir = directionVec.normalized;
-        platformModel.transform.position += moveDir * movementSpeed * Time.deltaTime;
-
-        if (collider.IsColliding)
-        {
-            Player.Instance.transform.position += moveDir * movementSpeed * Time.deltaTime;
-        }
+        movementRoutineRunning = false;
     }
 
-    void ManageSinking()
+    IEnumerator SinkRoutine()
     {
-        switch (sinkState)
+        sinkRoutineRunning = true;
+
+        Player.Instance.Camera.SetIsShaking(true, timeBeforeSink * 1.5f, 0.05f, 0.05f, 50f, 50f);
+
+        yield return new WaitForSeconds(timeBeforeSink);
+
+        if (!CheckCollision())
         {
-            case SinkState.Normal:
-                if (collider.IsColliding)
-                {
-                    Player.Instance.Camera.SetIsShaking(true, 0.1f, 0.05f, 0.05f);
-                    stepTimer += Time.deltaTime;
-                    if (stepTimer >= timeBeforeSink)
-                    {
-                        sinkState = SinkState.Sinking;
-                        positionBeforeSink = platformModel.transform.position;
-                        //if (goingToPoint) movingParticles.Stop();
-                    }
-                }
-                else
-                {
-                    stepTimer = 0.0f;
-                }
-                break;
-
-            case SinkState.Sinking:
-                Vector3 sinkTarget = positionBeforeSink - new Vector3(0, sinkDistance, 0);
-                HandleVerticalMovement(sinkTarget, sinkSpeed, SinkState.Sunken);
-                break;
-
-            case SinkState.Sunken:
-                sunkenTimer += Time.deltaTime;
-                if (sunkenTimer >= timeSunken)
-                {
-                    sinkState = SinkState.Rising;
-                    sunkenTimer = 0.0f;
-                }
-                break;
-
-            case SinkState.Rising:
-                HandleVerticalMovement(positionBeforeSink, sinkSpeed, SinkState.Normal);
-                break;
+            Player.Instance.Camera.SetIsShaking(false);
+            sinkRoutineRunning = false;
+            yield break;
         }
-    }
 
-    void HandleVerticalMovement(Vector3 targetPos, float speed, SinkState nextState)
-    {
-        Vector3 directionVec = targetPos - platformModel.transform.position;
-        float distance = (float)directionVec.magnitude;
+        isSinking = true;
 
-        if (distance < 0.1f)
+        positionBeforeSink = activeMovingEntity.transform.position;
+
+        Vector3 sinkTarget = positionBeforeSink - new Vector3(0, sinkDistance, 0);
+
+        while (true)
         {
-            platformModel.transform.position = targetPos;
-            sinkState = nextState;
-
-            if (nextState == SinkState.Normal)
+            if (Pause.isPaused)
             {
-                stepTimer = 0.0f;
-                if (goingToPoint) movingParticles.Play();
+                yield return null;
+                continue;
             }
-        }
-        else
-        {
+
+            Vector3 directionVec = sinkTarget - activeMovingEntity.transform.position;
+            float distance = (float)directionVec.magnitude;
+
+            if (distance < 0.1f)
+            {
+                activeMovingEntity.transform.position = sinkTarget;
+                break;
+            }
+
             Vector3 moveDir = directionVec.normalized;
-            Vector3 velocity = moveDir * speed * Time.deltaTime;
-            platformModel.transform.position += velocity;
+            Vector3 velocity = moveDir * sinkSpeed * Time.deltaTime;
 
-            //if (collider.IsColliding)
-            //{
-            //    Player.Instance.Movement.gravityActive = false;
-            //}
+            activeMovingEntity.transform.position += velocity;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(timeSunken);
+
+        while (true)
+        {
+            if (Pause.isPaused)
+            {
+                yield return null;
+                continue;
+            }
+
+            Vector3 directionVec = positionBeforeSink - activeMovingEntity.transform.position;
+            float distance = (float)directionVec.magnitude;
+
+            if (distance < 0.1f)
+            {
+                activeMovingEntity.transform.position = positionBeforeSink;
+                break;
+            }
+
+            Vector3 moveDir = directionVec.normalized;
+            Vector3 velocity = moveDir * sinkSpeed * Time.deltaTime;
+
+            activeMovingEntity.transform.position += velocity;
+
+            yield return null;
+        }
+
+        isSinking = false;
+        sinkRoutineRunning = false;
+
+        if (goingToPoint)
+        {
+            movingParticles.Play();
+            if (movingParticlesEntity2 != null) movingParticles2.Play();
         }
     }
-};
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
+}

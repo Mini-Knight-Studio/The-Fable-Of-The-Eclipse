@@ -18,6 +18,7 @@ class Key_Idle : Component
     public bool started = false;
     public float collectTime = 1;
     public float cameraZoom = 20;
+    public float cameraFocusTravelTime = 6f;
 
     private Vector3 startLocalPos;
     private float time;
@@ -42,8 +43,7 @@ class Key_Idle : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (collected)
             return;
 
@@ -90,6 +90,7 @@ class Key_Idle : Component
 
     IEnumerator Collect()
     {
+        GameManager.SetState(GameManager.GameState.PAUSE);
         collected = true;
         Entity player = Player.Instance.entity;
         Vector3 initialPosition = transform.position;
@@ -122,14 +123,14 @@ class Key_Idle : Component
 
         if(focusPointOnCollect != null)
         {
-            Player.Instance.Camera.FocusOnPoint(focusPointOnCollect.transform.position, cameraZoom, 6);
+            Player.Instance.Camera.FocusOnPoint(focusPointOnCollect.transform.position, cameraZoom, cameraFocusTravelTime);
 
             yield return new WaitForSeconds(2.5f);
 
             Player.Instance.Camera.StopFocus();
         }
 
-
+        GameManager.SetState(GameManager.GameState.DEFAULT);
         yield return null;
     }
 

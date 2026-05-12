@@ -13,6 +13,7 @@ class Golem : Enemy
     public float ReachDistance;
     public float AttackDistance;
     public float PushForceScale;
+    public Vector2 HitOffset;
     [Space(5)]
     public float PreparationTime;
     public float AttackCooldown;
@@ -23,6 +24,7 @@ class Golem : Enemy
     private int LayerOverride;
     private bool isShielding;
     private int ReceivedHits;
+    private bool dead;
 
     void OnCreate()
     {
@@ -31,23 +33,31 @@ class Golem : Enemy
         int PlayerHitLayer = Collisions.GetLayerBit("WorldLimits");
         LayerOverride = EnemyLayer | PlayerHitLayer;
         ReceivedHits = 0;
+        dead = false;
     }
 
     void OnUpdate()
     {
-        if (Pause.isPaused)
-        {
-            return;
-        }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         #region Health
         if (health.IsDead())
         {
-            StopAllCoroutines();
-            movement.CanMove = false;
-            entity.Destroy();
+            if (!dead)
+            {
+                dead = true;
+                movement.CanMove = false;
+                animator.PlayClip("G_Scale_CTRL|Death", false, 0.0f, false, true);
+                feedback.PlaySound("Death");
+            }
+            if (animator.AnimationEnded())
+                entity.Destroy();
         }
         #endregion
+        if (!isAttacking)
+            attack_cooldown -= Time.deltaTime;
+
         Hit(1, PushForceScale, "G_Scale_CTRL|Walk");
+        movement.CanMove = (animator.CurrentClip() == "G_Scale_CTRL|GetHitShieldOn" || isAttacking || ReceivedHits > 0) ? false : true;
         if (!isAttacking && !health.IsDead())
         {
             ReceivedHits = 0;
@@ -59,8 +69,15 @@ class Golem : Enemy
                 movement.Move(2.0f, transform.Forward);
                 ResetWander();
                 #region Attack
-                if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
-                    attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|AttackRecovery_ArmOut"), Damage, "G_Scale_CTRL|ChargeAttack", "G_Scale_CTRL|Attack", "G_Scale_CTRL|AttackRecovery_ArmStuck", "G_Scale_CTRL|AttackRecovery_ArmOut", false));
+                if (CanDoAttack() && !IsBeingHitted())
+                {
+                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
+                    {
+                        ReceivedHits = 0;
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|RecoveryArmOut"), HitOffset, Damage, "G_Scale_CTRL|AttackCharge", "G_Scale_CTRL|AttackSwing", "G_Scale_CTRL|RecoveryStuck", "G_Scale_CTRL|RecoveryArmOut", false));
+                    }
+                }
+          
                 #endregion
             }
             else if (!health.IsDead())
@@ -79,23 +96,31 @@ class Golem : Enemy
 
     public override void Hit(int points, float force_scale, string hit_clip)
     {
-        if (!health.canBeDamaged || isShielding) return;
+        if (isAttacking)
+        {
+            if (ReceivedHits >= HitsForRecovery)
+            {
+                ReceivedHits = 0;
+                StopCoroutine(attackCoroutine);
+                StartCoroutine(CancelAttack("G_Scale_CTRL|GetHitShieldOff", animator.ClipDuration("G_Scale_CTRL|GetHitShieldOff")));
+            }
+            else if (isShielding) return;
+        }
         if (Player.Instance.Combat.TemporalFunctionIsAttacking())
         {
             if (hitbox.HasCollided)
             {
-                ReceivedHits++;
-                health.Damage(points);
-                transform.LookAt(Player.Instance.transform.position, Vector3.Up);
-                feedback.TickParticles("Hurt", Time.deltaTime);
-                feedback.PlaySound("Hit");
+                if (!health.canBeDamaged || isShielding)
+                    animator.PlayClip("G_Scale_CTRL|GetHitShieldOn", false, 0.0f, true, true);
+                else
+                {
+                    ReceivedHits++;
+                    health.Damage(points);
+                    transform.LookAt(Player.Instance.transform.position, Vector3.Up);
+                    feedback.TickParticles("Hurt", Time.deltaTime);
+                    feedback.PlaySound("Hit");
+                }
             }
-        }
-
-        if (isAttacking && ReceivedHits >= HitsForRecovery)
-        {
-            StopCoroutine(attackCoroutine);
-            StartCoroutine(CancelAttack("G_Scale_CTRL|AttackRecovery_ArmOut", animator.ClipDuration("G_Scale_CTRL|AttackRecovery_ArmOut")));
         }
     }
 
@@ -125,6 +150,10 @@ class Golem : Enemy
         }
     }
 
+    private bool IsBeingHitted()
+    {
+        return animator.CurrentClip() == "G_Scale_CTRL|GetHitShieldOn" || ReceivedHits > 0;
+    }
     void OnDestroy()
     {
         StopAllOwnedCoroutines();

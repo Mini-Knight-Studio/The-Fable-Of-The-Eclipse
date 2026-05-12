@@ -49,8 +49,7 @@ class RollingBridge : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (animationFinished) return;
 
         if (DatabaseRegistry.levelsDB.Levels.IsBridgePushed(bridgeID))

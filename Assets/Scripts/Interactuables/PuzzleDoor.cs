@@ -27,6 +27,12 @@ class PuzzleDoor : Component
     public float easeIntensity = 1.5f;
     public float cameraZoom = 20;
 
+    public float cameraShakeDuration = 0.5f;
+    public float cameraShakeAmount = 0.3f;
+    public float cameraShakeRotation = 0.3f;
+    public float cameraShakeAmountVel = 0.3f;
+    public float cameraShakeRotationVel = 0.3f;
+
     private bool isOpening = false;
     private bool hasOpened = false;
 
@@ -84,8 +90,7 @@ class PuzzleDoor : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (hasOpened || isOpening) return;
 
         if (entity.GetComponent<BoxCollider>().IsColliding && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyID))
@@ -114,6 +119,7 @@ class PuzzleDoor : Component
 
     IEnumerator OpenDoors()
     {
+        GameManager.SetState(GameManager.GameState.PAUSE);
         animatedKey.SetActive(true);
         animatedKey.transform.position = Player.Instance.transform.position + new Vector3(0, 2, 0);
         animatedKey.transform.scale = Vector3.Zero;
@@ -169,6 +175,8 @@ class PuzzleDoor : Component
 
         elapsedTime = 0f;
 
+        Player.Instance.Camera.SetIsShaking(true, doorOpenDuration*2f, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+
         while (true)
         {
             elapsedTime += Time.deltaTime;
@@ -198,10 +206,15 @@ class PuzzleDoor : Component
                 door2SFX.GetComponent<AudioSource>().Stop();
                 door3SFX.GetComponent<AudioSource>().Stop();
                 impactSFX.GetComponent<AudioSource>().Play();
+                
+                Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount * 2, cameraShakeRotation * 2, cameraShakeAmountVel, cameraShakeRotationVel);
+                
                 break;
             }
             yield return null;
         }
+
+        yield return new WaitForSeconds(pauseBeforeOpening);
 
         Player.Instance.Camera.StopFocus();
 
@@ -218,6 +231,7 @@ class PuzzleDoor : Component
         DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);
 
         yield return null;
+        GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 
     void DoorOpened()

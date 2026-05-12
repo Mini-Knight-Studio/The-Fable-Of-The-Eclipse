@@ -1,9 +1,9 @@
 using System;
 using Loopie;
 
-class MasterVolume : Component
+public class MasterVolume : Component
 {
-    private float volume = 1.0f;
+    public static float volume = 1.0f;
 
     void OnCreate()
     {
@@ -11,7 +11,7 @@ class MasterVolume : Component
         ApplyToMixer();
     }
 
-    public void ApplyMasterVolume()
+    public static void ApplyMasterVolume()
     {
         volume = ClampAndRound(volume);
         GlobalDatabase.GlobalData.settingsDB.Settings.MasterVolume = volume;
@@ -33,12 +33,12 @@ class MasterVolume : Component
         return volume;
     }
 
-    private void ApplyToMixer()
+    public static void ApplyToMixer()
     {
         AudioMixer.SetVolume("Master", AudioMixer.LinearToEngineVolume(volume));
     }
 
-    private float ClampAndRound(float value)
+    private static float ClampAndRound(float value)
     {
         value = Mathf.Clamp(value, 0f, 1f);
         return Mathf.Round(value * 10f) / 10f;

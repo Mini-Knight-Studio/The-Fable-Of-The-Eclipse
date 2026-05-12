@@ -8,8 +8,11 @@ class IntroMiniKnightStudio : Component
     public Entity backgroundEntity;
     private Image background;
 
-    public Entity textEntity;
-    private Text text;
+    public Entity titleEntity;
+    private Image titleImage;
+
+    public Entity julianEntity;
+    private Image julianImage;
 
     public float preTextDelay = 2f;
     public float textFadeInDelay = 2f;
@@ -36,13 +39,22 @@ class IntroMiniKnightStudio : Component
 
     void OnCreate()
     {
-        if (textEntity != null)
+        if (titleEntity != null)
         {
-            text = textEntity.GetComponent<Text>();
+            titleImage = titleEntity.GetComponent<Image>();
         }
         else
         {
-            Debug.Log("Error: There is no Text Entity assigned.");
+            Debug.Log("Error: There is no Title Entity assigned.");
+        }
+
+        if (julianEntity != null)
+        {
+            julianImage = julianEntity.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no Title Entity assigned.");
         }
 
         if (backgroundEntity != null)
@@ -76,7 +88,8 @@ class IntroMiniKnightStudio : Component
     {
         if (timer >= preTextDelay)
         {
-            textEntity.SetActive(true);
+            titleEntity.SetActive(true);
+            julianEntity.SetActive(true);
             currentState = introState.FADE_IN_TEXT;
             timer = 0f;
         }
@@ -93,7 +106,8 @@ class IntroMiniKnightStudio : Component
         {
             currentTextOpacity = Mathf.Lerp(0, 1, timer / textFadeInDelay);
             Vector4 color = new Vector4(1, 1, 1, currentTextOpacity);
-            text.SetColor(color);
+            titleImage.SetTint(color);
+            julianImage.SetTint(color);
         }
     }
 
@@ -110,7 +124,8 @@ class IntroMiniKnightStudio : Component
     {
         if (timer >= textFadeOutDelay)
         {
-            textEntity.SetActive(false);
+            titleEntity.SetActive(false);
+            julianEntity.SetActive(false);
             currentState = introState.DELAY_AFTER_TEXT;
             timer = 0f;
         }
@@ -118,7 +133,8 @@ class IntroMiniKnightStudio : Component
         {
             currentTextOpacity = Mathf.Lerp(1, 0, timer / textFadeOutDelay);
             Vector4 color = new Vector4(1, 1, 1, currentTextOpacity);
-            text.SetColor(color);
+            titleImage.SetTint(color);
+            julianImage.SetTint(color);
         }
     }
 
