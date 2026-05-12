@@ -90,8 +90,7 @@ class PuzzleDoor : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (hasOpened || isOpening) return;
 
         if (entity.GetComponent<BoxCollider>().IsColliding && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyID))
@@ -120,6 +119,7 @@ class PuzzleDoor : Component
 
     IEnumerator OpenDoors()
     {
+        GameManager.SetState(GameManager.GameState.PAUSE);
         animatedKey.SetActive(true);
         animatedKey.transform.position = Player.Instance.transform.position + new Vector3(0, 2, 0);
         animatedKey.transform.scale = Vector3.Zero;
@@ -231,6 +231,7 @@ class PuzzleDoor : Component
         DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);
 
         yield return null;
+        GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 
     void DoorOpened()

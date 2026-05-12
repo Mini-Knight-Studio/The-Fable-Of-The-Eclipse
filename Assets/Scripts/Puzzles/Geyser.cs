@@ -45,7 +45,7 @@ class Geyser : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
         damageTimer += Time.deltaTime;
 

@@ -32,10 +32,20 @@ class VistaPoint : Component
         }
     }
 
+    void OnPostCreate()
+    {
+        if (camera == null) return;
+        if (collider == null) return;
+
+        if (collider.IsColliding)
+        {
+            camera.FocusOnPoint(entity.transform.position + offset, zoom, time);
+        }
+    }
+
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (camera == null) return;
         if (collider == null) return;
 

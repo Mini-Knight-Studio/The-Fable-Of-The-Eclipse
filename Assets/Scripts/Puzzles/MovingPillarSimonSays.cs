@@ -49,8 +49,7 @@ class MovingPillarSimonSays : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         wasPressed = false;
 
         if (movingPillar == null) return;

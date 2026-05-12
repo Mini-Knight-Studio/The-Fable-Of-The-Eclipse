@@ -10,6 +10,8 @@ public class Pause : Component
 
     private float inputCooldown = 0.2f;
     private float inputTimer = 0f;
+
+    GameManager.GameState previousState;
     void OnCreate()
     {
 
@@ -31,6 +33,8 @@ public class Pause : Component
             {
                 pauseMenuEntity.SetActive(false);
                 infoDebugEntity.SetActive(false);
+
+                GameManager.SetState(previousState);
             }
             else
             {
@@ -41,6 +45,10 @@ public class Pause : Component
                 {
                     pauseMenuEntity.GetComponent<PauseMenu>().Open();
                 }
+
+
+                previousState = GameManager.state;
+                GameManager.SetState(GameManager.GameState.FREEZE);
             }
         }
     }

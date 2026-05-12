@@ -1,9 +1,9 @@
 using System;
 using Loopie;
 
-class SfxVolume : Component
+public class SfxVolume : Component
 {
-    private float volume = 1.0f;
+    public static float volume = 1.0f;
 
     void OnCreate()
     {
@@ -11,7 +11,7 @@ class SfxVolume : Component
         ApplyToMixer();
     }
 
-    public void ApplySfxVolume()
+    public static void ApplySfxVolume()
     {
         volume = ClampAndRound(volume);
         GlobalDatabase.GlobalData.settingsDB.Settings.SfxVolume = volume;
@@ -33,12 +33,12 @@ class SfxVolume : Component
         return volume;
     }
 
-    private void ApplyToMixer()
+    public static void ApplyToMixer()
     {
         AudioMixer.SetVolume("Master/Sfx", AudioMixer.LinearToEngineVolume(volume));
     }
 
-    private float ClampAndRound(float value)
+    private static float ClampAndRound(float value)
     {
         value = Mathf.Clamp(value, 0f, 1f);
         return Mathf.Round(value * 10f) / 10f;

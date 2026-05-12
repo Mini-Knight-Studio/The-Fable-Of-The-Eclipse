@@ -38,10 +38,7 @@ class Golem : Enemy
 
     void OnUpdate()
     {
-        if (Pause.isPaused)
-        {
-            return;
-        }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         #region Health
         if (health.IsDead())
         {

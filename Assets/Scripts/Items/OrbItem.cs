@@ -29,8 +29,6 @@ public class OrbItem : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (alreadyCollected) return;
 
         BoxCollider col = entity.GetComponent<BoxCollider>();

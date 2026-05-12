@@ -25,8 +25,7 @@ class LavaLightEffect : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (isMoving)
         {
             MoveRotation();

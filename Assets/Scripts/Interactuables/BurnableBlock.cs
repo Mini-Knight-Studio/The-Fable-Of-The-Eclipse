@@ -35,8 +35,6 @@ public class BurnableBlock : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
-
         if (collider == null || isBurning) return;
 
         if (collider.IsColliding)

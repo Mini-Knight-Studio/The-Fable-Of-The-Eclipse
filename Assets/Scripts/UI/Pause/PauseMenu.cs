@@ -202,7 +202,7 @@ public class PauseMenu : Component
 
         if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
         {
-            //oopMusicAudioSource.Stop();
+            //loopMusicAudioSource.Stop();
             quickStartAnimations = false;
             invertedPassPagePlayed = false;
             canCallScripts = false;
@@ -210,11 +210,11 @@ public class PauseMenu : Component
             MainMenu.invertedPassPagePlayed = false;
             Settings.quickStartAnimations = true;
             Settings.invertedPassPagePlayed = false;
-            Pause.isPaused = false;
+            //Pause.isPaused = false;
 
             if (continueButton.Hovered)
             {
-                Pause.isPaused = false;
+                //Pause.isPaused = false;
             }
             else if (mainMenuButton.Hovered)
             {

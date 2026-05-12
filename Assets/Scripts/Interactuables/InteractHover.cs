@@ -33,7 +33,21 @@ class InteractHover : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
+
+        if (interactGamepad != null && interactKeyboard != null)
+        {
+            if (Input.CurrentInputDevice == Input.InputDevice.Gamepad && !interactGamepad.GetComponent<MeshRenderer>().IsActive())
+            {
+                interactGamepad.GetComponent<MeshRenderer>().SetActive(true);
+                interactKeyboard.GetComponent<MeshRenderer>().SetActive(false);
+            }
+            else if (Input.CurrentInputDevice == Input.InputDevice.MouseKeyboard && !interactKeyboard.GetComponent<MeshRenderer>().IsActive())
+            {
+                interactKeyboard.GetComponent<MeshRenderer>().SetActive(true);
+                interactGamepad.GetComponent<MeshRenderer>().SetActive(false);
+            }
+        }
 
         if (interactGamepad != null && interactKeyboard != null)
         {
