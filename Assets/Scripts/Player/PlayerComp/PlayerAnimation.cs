@@ -18,6 +18,7 @@ public class PlayerAnimation : PlayerComponent
     public string torchClip = "";
     public string onHitClip = "";
     public string pickUpClip = "";
+    public string pushClipName = "";
 
     private enum AnimationState
     {
@@ -31,6 +32,7 @@ public class PlayerAnimation : PlayerComponent
         TORCH_BURN,
         HIT,
         PICKUP,
+        PUSH,
         NULL
     };
 
@@ -43,6 +45,7 @@ public class PlayerAnimation : PlayerComponent
     private float loopDelayTimer = 0f;
     private bool isWaitingForLoop = false;
     private float hitTimer = 0f;
+    private float pushTimer = 0f;
 
     public void OnCreate()
     {
@@ -55,25 +58,27 @@ public class PlayerAnimation : PlayerComponent
     {
         if (player.Movement == null || player.Combat == null || player.Grapple == null || player.Torch == null) return;
 
-        // --- HIT & PICKUP LOCK ---
+        if (pushTimer > 0)
+        {
+            pushTimer -= Time.deltaTime;
+            if (pushTimer > 0) return;
+            else state = AnimationState.NULL;
+        }
+
         if (hitTimer > 0)
         {
             hitTimer -= Time.deltaTime;
 
-            // While the timer is active, we block all other animation logic
             if (hitTimer > 0)
             {
                 return;
             }
             else
             {
-                // Once timer expires, reset state to NULL so the code below 
-                // is forced to pick a new animation (Idle/Move) immediately.
                 state = AnimationState.NULL;
             }
         }
 
-        // --- LOOP MANAGEMENT ---
         if (state != AnimationState.IDLE)
         {
             isWaitingForLoop = false;
@@ -89,7 +94,6 @@ public class PlayerAnimation : PlayerComponent
             }
         }
 
-        // --- STATE PRIORITIES ---
         if (player.Grapple.IsLaunching)
         {
             PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
@@ -123,25 +127,29 @@ public class PlayerAnimation : PlayerComponent
             Idle();
         }
 
-        // --- CLEANUP ---
         if (state != AnimationState.ATTACK)
             swordEntity.SetActive(false);
     }
+    public void PlayPush()
+    {
+        pushTimer = 0.2f;
+        if (state == AnimationState.PUSH) return;
 
+        state = AnimationState.PUSH;
+        modelAnimator.Play(pushClipName, 0.2f);
+    }
     public void PlayHit()
     {
-        // If already in hit, we use a tiny blend to "restart" the motion
         float blend = (state == AnimationState.HIT) ? 0.05f : 0.02f;
 
         state = AnimationState.HIT;
         lastPlayedComboIndex = 0;
         isWaitingForLoop = false;
-        swordEntity.SetActive(false); // Disable sword if hit during attack
+        swordEntity.SetActive(false);
 
         modelAnimator.Looping = false;
         modelAnimator.Play(onHitClip, blend);
 
-        // Adjust this value to match your actual clip duration
         hitTimer = 0.45f;
     }
 
@@ -169,7 +177,6 @@ public class PlayerAnimation : PlayerComponent
     {
         if (state == AnimationState.IDLE) return;
 
-        // Smoother transition if coming out of a Hit reaction
         float blend = (state == AnimationState.NULL) ? 0.25f : 0.4f;
 
         state = AnimationState.IDLE;

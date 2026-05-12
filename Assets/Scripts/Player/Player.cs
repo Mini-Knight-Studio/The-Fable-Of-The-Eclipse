@@ -101,6 +101,11 @@ public class Player : Component
             RespawnTransition.OnFadeInComplete += EndRespawn;
         if (LoseScreen != null)
             PlayerHealth.OnDeath += LoseScreen.OpenLoseScreen;
+
+        if (PlayerHealth != null)
+        {
+            PlayerHealth.OnHit += Animation.PlayHit;
+        }
     }
 
     public void GoToLastCheckpoint()
