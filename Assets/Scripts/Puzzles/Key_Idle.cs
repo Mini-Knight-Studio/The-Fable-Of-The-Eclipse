@@ -18,6 +18,7 @@ class Key_Idle : Component
     public bool started = false;
     public float collectTime = 1;
     public float cameraZoom = 20;
+    public float cameraFocusTravelTime = 6f;
 
     private Vector3 startLocalPos;
     private float time;
@@ -122,7 +123,7 @@ class Key_Idle : Component
 
         if(focusPointOnCollect != null)
         {
-            Player.Instance.Camera.FocusOnPoint(focusPointOnCollect.transform.position, cameraZoom, 6);
+            Player.Instance.Camera.FocusOnPoint(focusPointOnCollect.transform.position, cameraZoom, cameraFocusTravelTime);
 
             yield return new WaitForSeconds(2.5f);
 

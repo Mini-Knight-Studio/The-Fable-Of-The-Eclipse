@@ -13,6 +13,9 @@ class Chest : Component
     public Entity upperPart;
     public Entity rewardItem;
     public Entity interactPrompt;
+    public Entity moonstone;
+
+    private Material moonstoneMat;
 
     [Header("Feedback")]
     public Entity openSFXEntity;
@@ -56,6 +59,10 @@ class Chest : Component
         {
             isOpen = true;
             ChestOpened();
+        }
+        else
+        {
+            StartCoroutine(GemShineCoroutine());
         }
     }
 
@@ -204,6 +211,39 @@ class Chest : Component
     {
         rewardCollected = true;
         DatabaseRegistry.levelsDB.Levels.SetRewardCollected(chestID);
+    }
+
+    IEnumerator GemShineCoroutine()
+    {
+        if (moonstone != null)
+        {
+            moonstoneMat = moonstone.GetComponent<MeshRenderer>().GetInstancedMaterial();
+
+            float pulseSpeed = 1f;
+
+            float minIntensity = 0.3f;
+            float maxIntensity = 0.9f;
+
+            float minRoughness = 0.1f;
+            float maxRoughness = 40f;
+
+            float elapsedTime = 0f;
+
+            while (!isOpen)
+            {
+                elapsedTime += Time.deltaTime;
+
+                float intensity = Mathf.Lerp(minIntensity, maxIntensity, (Mathf.Sin(elapsedTime * pulseSpeed) + 1f) / 2f);
+                moonstoneMat.SetFloat("u_EmissiveIntensity", intensity);
+
+                float roughness = Mathf.Lerp(minRoughness, maxRoughness, (Mathf.Sin(elapsedTime * pulseSpeed * 2f) + 1f) / 2f);
+                moonstoneMat.SetFloat("u_Roughness", roughness);
+
+                yield return null;
+            }
+            moonstoneMat.SetFloat("u_EmissiveIntensity", moonstone.GetComponent<MeshRenderer>().GetFloat("u_EmissiveIntensity"));
+            moonstoneMat.SetFloat("u_Roughness", moonstone.GetComponent<MeshRenderer>().GetFloat("u_Roughness"));
+        }
     }
 
     void OnDestroy()
