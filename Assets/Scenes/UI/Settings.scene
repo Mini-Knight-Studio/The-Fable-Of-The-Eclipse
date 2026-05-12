@@ -50,7 +50,7 @@
             ],
             "name": "MainCamera",
             "order": 0,
-            "parent_uuid": "eeecd36f-19f1-89d5-9e16-26735c47c8bc",
+            "parent_uuid": "6cadf26b-4822-2a0f-2bc9-fb62b7ca0d65",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -79,8 +79,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 188.72857666015625,
-                                "y": 109.87206268310547
+                                "x": 192.44229125976563,
+                                "y": 107.75177764892578
                             }
                         },
                         "position": {
@@ -135,7 +135,7 @@
             ],
             "name": "Canvas",
             "order": 3,
-            "parent_uuid": "eeecd36f-19f1-89d5-9e16-26735c47c8bc",
+            "parent_uuid": "6cadf26b-4822-2a0f-2bc9-fb62b7ca0d65",
             "static": true,
             "uuid": "e2025a4c-65b8-322f-f468-b75576038e00"
         },
@@ -152,20 +152,20 @@
                         },
                         "layout": {
                             "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 1.0,
+                                "y": 1.0
                             },
                             "anchor_min": {
                                 "x": 0.0,
                                 "y": 0.0
                             },
                             "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 0.5,
+                                "y": 0.5
                             },
                             "size_delta": {
-                                "x": 192.0,
-                                "y": 108.0
+                                "x": 1.0,
+                                "y": 1.0
                             }
                         },
                         "position": {
@@ -597,7 +597,9 @@
                     "is_active": true,
                     "script": {
                         "class_id": "SfxVolume",
-                        "fields": {}
+                        "fields": {
+                            "volume": 0.0
+                        }
                     },
                     "uuid": "57d477f8-92d0-ba82-6f15-4d76052da499"
                 }
@@ -721,7 +723,7 @@
             ],
             "name": "Audio",
             "order": 5,
-            "parent_uuid": "eeecd36f-19f1-89d5-9e16-26735c47c8bc",
+            "parent_uuid": "6cadf26b-4822-2a0f-2bc9-fb62b7ca0d65",
             "static": true,
             "uuid": "8b51f683-b3f8-33a1-905f-f8affff1de1e"
         },
@@ -1809,7 +1811,9 @@
                     "is_active": true,
                     "script": {
                         "class_id": "MusicVolume",
-                        "fields": {}
+                        "fields": {
+                            "volume": 0.0
+                        }
                     },
                     "uuid": "ba72c53a-a35f-50e7-ae3c-9624b8b4c2bc"
                 }
@@ -3825,7 +3829,9 @@
                     "is_active": true,
                     "script": {
                         "class_id": "MasterVolume",
-                        "fields": {}
+                        "fields": {
+                            "volume": 0.0
+                        }
                     },
                     "uuid": "1f90ba92-c0a2-bae7-3745-58a3e08c1d7e"
                 }
@@ -13597,20 +13603,20 @@
                         },
                         "layout": {
                             "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 1.0,
+                                "y": 1.0
                             },
                             "anchor_min": {
                                 "x": 0.0,
                                 "y": 0.0
                             },
                             "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 0.5,
+                                "y": 0.5
                             },
                             "size_delta": {
-                                "x": 192.0,
-                                "y": 108.0
+                                "x": 1.0,
+                                "y": 1.0
                             }
                         },
                         "position": {
@@ -13640,7 +13646,7 @@
                         "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 11,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4",
+                        "texture_uuid": "b8d44169-b648-2519-ccf7-7a9b39b2f449",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -13660,17 +13666,17 @@
                 {
                     "is_active": true,
                     "sprite_animator": {
-                        "fps": 12.0,
-                        "frame_count": 12,
+                        "fps": 6.0,
+                        "frame_count": 6,
                         "grid": {
-                            "columns": 12,
+                            "columns": 6,
                             "rows": 1
                         },
                         "loop": false,
-                        "play_on_start": true,
+                        "play_on_start": false,
                         "playing": false,
                         "start_frame": 0,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4"
+                        "texture_uuid": "b8d44169-b648-2519-ccf7-7a9b39b2f449"
                     },
                     "uuid": "a86163cc-8079-4956-67f7-691fdf9628d4"
                 }
@@ -13971,20 +13977,20 @@
                         },
                         "layout": {
                             "anchor_max": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 1.0,
+                                "y": 1.0
                             },
                             "anchor_min": {
                                 "x": 0.0,
                                 "y": 0.0
                             },
                             "pivot": {
-                                "x": 0.0,
-                                "y": 0.0
+                                "x": 0.5,
+                                "y": 0.5
                             },
                             "size_delta": {
-                                "x": 192.0,
-                                "y": 108.0
+                                "x": 1.0,
+                                "y": 1.0
                             }
                         },
                         "position": {
@@ -14014,7 +14020,7 @@
                         "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 0,
                         "sorting_layer": 11,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4",
+                        "texture_uuid": "6c4d405c-072a-d8ff-3216-c3d25d9abc99",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -14034,17 +14040,17 @@
                 {
                     "is_active": true,
                     "sprite_animator": {
-                        "fps": 12.0,
-                        "frame_count": 12,
+                        "fps": 6.0,
+                        "frame_count": 4,
                         "grid": {
-                            "columns": 12,
+                            "columns": 4,
                             "rows": 1
                         },
                         "loop": false,
-                        "play_on_start": true,
+                        "play_on_start": false,
                         "playing": false,
                         "start_frame": 0,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4"
+                        "texture_uuid": "6c4d405c-072a-d8ff-3216-c3d25d9abc99"
                     },
                     "uuid": "1298db13-4090-d7b0-7da4-f0ca810533e3"
                 }
@@ -14248,7 +14254,7 @@
             ],
             "name": "///////// Audio",
             "order": 4,
-            "parent_uuid": "eeecd36f-19f1-89d5-9e16-26735c47c8bc",
+            "parent_uuid": "6cadf26b-4822-2a0f-2bc9-fb62b7ca0d65",
             "static": true,
             "uuid": "cf289042-8e24-6731-016d-dfb711c42934"
         },
@@ -14285,7 +14291,7 @@
             ],
             "name": "///////// UI",
             "order": 1,
-            "parent_uuid": "eeecd36f-19f1-89d5-9e16-26735c47c8bc",
+            "parent_uuid": "6cadf26b-4822-2a0f-2bc9-fb62b7ca0d65",
             "static": true,
             "uuid": "32eb2ee9-94ad-169b-2559-e07a9c7db321"
         },
@@ -14435,7 +14441,7 @@
             ],
             "name": "UIManager",
             "order": 2,
-            "parent_uuid": "eeecd36f-19f1-89d5-9e16-26735c47c8bc",
+            "parent_uuid": "6cadf26b-4822-2a0f-2bc9-fb62b7ca0d65",
             "static": true,
             "uuid": "0c2f11f5-1ac0-a910-a2d8-7e8896d62ef3"
         }

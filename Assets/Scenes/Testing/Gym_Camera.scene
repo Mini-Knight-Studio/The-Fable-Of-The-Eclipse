@@ -502,7 +502,7 @@
             ],
             "name": "Interactables",
             "order": 6,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "283d40fe-d5ca-71b1-2681-2af8d5b63816"
         },
@@ -2964,7 +2964,7 @@
                             "sprite_uuid": "e459930c-1aa7-d4bf-a175-87687265bb07"
                         },
                         "emitterscount": 1,
-                        "playing": true
+                        "playing": false
                     },
                     "uuid": "10fd00f0-4b26-5237-5bf8-9a63db6c15f0"
                 }
@@ -6989,7 +6989,7 @@
                             "r": 1.0
                         },
                         "uv_rect": {
-                            "max_u": 1.0,
+                            "max_u": 0.0833333358168602,
                             "max_v": 1.0,
                             "min_u": 0.0,
                             "min_v": 0.0
@@ -7017,7 +7017,7 @@
                 }
             ],
             "name": "CloseBookCover",
-            "order": 7,
+            "order": 8,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "fe246ab7-1b45-8d7e-1acc-2d8f979b5a1e"
@@ -8221,7 +8221,7 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 179.73434448242188,
+                                "x": 182.7232666015625,
                                 "y": 108.00001525878906
                             }
                         },
@@ -11335,8 +11335,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 185.76597595214844,
-                                "y": 111.62434387207031
+                                "x": 187.3042449951172,
+                                "y": 110.70763397216797
                             }
                         },
                         "position": {
@@ -12608,7 +12608,7 @@
                 }
             ],
             "name": "MainMenu",
-            "order": 4,
+            "order": 5,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "6ef401e6-8efb-369f-27d9-51ace9d2d81f"
@@ -12763,7 +12763,7 @@
             ],
             "name": "Lighting",
             "order": 3,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "1e89116b-071b-5735-6bf4-a2258b8b58bd"
         },
@@ -12969,7 +12969,7 @@
             ],
             "name": "Level_Container",
             "order": 5,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "2fe4f35d-68d0-0ee8-356e-96bd16b54747"
         },
@@ -13139,7 +13139,7 @@
             ],
             "name": "Enemies",
             "order": 14,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "81ee81cc-1f2b-045b-e6bd-fb546466ae8f"
         },
@@ -13177,9 +13177,7 @@
                     "is_active": true,
                     "meshrenderer": {
                         "casts_shadows": true,
-                        "material_uuid": "bb2d4aed-ce17-bb16-fa17-80de29e9668b",
-                        "mesh_index": 0,
-                        "mesh_uuid": "6f84e03a-9492-b9b1-c84c-fd3d36aa5be9"
+                        "material_uuid": "bb2d4aed-ce17-bb16-fa17-80de29e9668b"
                     },
                     "uuid": "0548b688-963d-f8c2-0139-5f2fc4e1643a"
                 }
@@ -13260,7 +13258,7 @@
             ],
             "name": "//////////////// WORLD",
             "order": 4,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "1a511023-f8de-375a-8197-ca8e36bf62f1"
         },
@@ -13475,12 +13473,18 @@
                     "script": {
                         "class_id": "Geyser",
                         "fields": {
+                            "alwaysActive": false,
                             "damage": 1,
                             "damageCD": 2.0,
                             "delay": 2.5,
+                            "dispersionParticles": "",
                             "frequency": 2.5,
+                            "horizontal": false,
                             "knockbackDuration": 0.20000000298023224,
-                            "knockbackForce": 4.0
+                            "knockbackForce": 4.0,
+                            "topParticles": "",
+                            "topParticlesTiming": 0.0,
+                            "unactiveParticles": ""
                         }
                     },
                     "uuid": "09fb3248-4ca2-0b62-7cfa-46648533ec6b"
@@ -13584,7 +13588,7 @@
             ],
             "name": "WoodenBridge",
             "order": 7,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "734cd308-22e2-c91e-390e-7a45d9dabad6"
         },
@@ -13827,7 +13831,7 @@
             ],
             "name": "//////////////// LIGHTS",
             "order": 2,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "038bed1e-61d2-b9b1-df40-ee2bf7d50fc9"
         },
@@ -13864,7 +13868,7 @@
             ],
             "name": "//////////////// OTHERS",
             "order": 12,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "eb583655-1b63-12dd-8ccc-c1ca88b7cd4c"
         },
@@ -13901,7 +13905,7 @@
             ],
             "name": "//////////////// PLAYER",
             "order": 0,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "7e248101-17e2-52c9-4275-8d812874cdc7"
         },
@@ -14449,9 +14453,7 @@
                     "is_active": true,
                     "meshrenderer": {
                         "casts_shadows": true,
-                        "material_uuid": "7fc4dcbc-9890-e6f2-80e6-9db772266474",
-                        "mesh_index": 0,
-                        "mesh_uuid": "81e2933a-8b94-dadc-3efc-8a0c5c86418f"
+                        "material_uuid": "7fc4dcbc-9890-e6f2-80e6-9db772266474"
                     },
                     "uuid": "2f7065f7-1fc9-09bf-0e4c-adc2130691f6"
                 }
@@ -14607,9 +14609,7 @@
                     "is_active": true,
                     "meshrenderer": {
                         "casts_shadows": true,
-                        "material_uuid": "22fe5255-d3db-6af0-097c-eee6741a4ef0",
-                        "mesh_index": 0,
-                        "mesh_uuid": "736e22e9-a782-419a-b8ce-12af62ed7b33"
+                        "material_uuid": "22fe5255-d3db-6af0-097c-eee6741a4ef0"
                     },
                     "uuid": "d56abaf9-cf2e-1200-0a61-db5d64fc5457"
                 }
@@ -15159,8 +15159,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 185.76597595214844,
-                                "y": 111.62434387207031
+                                "x": 187.3042449951172,
+                                "y": 110.70763397216797
                             }
                         },
                         "position": {
@@ -15427,7 +15427,7 @@
             ],
             "name": "WaterLevel",
             "order": 13,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "c9248883-d09c-a8d5-c4d8-4487a286a37f"
         },
@@ -15679,12 +15679,18 @@
                     "script": {
                         "class_id": "Geyser",
                         "fields": {
+                            "alwaysActive": false,
                             "damage": 1,
                             "damageCD": 2.0,
                             "delay": 0.0,
+                            "dispersionParticles": "",
                             "frequency": 2.5,
+                            "horizontal": false,
                             "knockbackDuration": 0.20000000298023224,
-                            "knockbackForce": 4.0
+                            "knockbackForce": 4.0,
+                            "topParticles": "",
+                            "topParticlesTiming": 0.0,
+                            "unactiveParticles": ""
                         }
                     },
                     "uuid": "d926e62b-4b15-0ee8-4b19-36a03d2fff8c"
@@ -15870,12 +15876,18 @@
                     "script": {
                         "class_id": "Geyser",
                         "fields": {
+                            "alwaysActive": false,
                             "damage": 1,
                             "damageCD": 2.0,
                             "delay": 2.5,
+                            "dispersionParticles": "",
                             "frequency": 2.5,
+                            "horizontal": false,
                             "knockbackDuration": 0.20000000298023224,
-                            "knockbackForce": 4.0
+                            "knockbackForce": 4.0,
+                            "topParticles": "",
+                            "topParticlesTiming": 0.0,
+                            "unactiveParticles": ""
                         }
                     },
                     "uuid": "4b3b69e8-91bd-a8a1-fbc1-8655edb0de08"
@@ -16061,12 +16073,18 @@
                     "script": {
                         "class_id": "Geyser",
                         "fields": {
+                            "alwaysActive": false,
                             "damage": 1,
                             "damageCD": 2.0,
                             "delay": 0.0,
+                            "dispersionParticles": "",
                             "frequency": 2.5,
+                            "horizontal": false,
                             "knockbackDuration": 0.20000000298023224,
-                            "knockbackForce": 4.0
+                            "knockbackForce": 4.0,
+                            "topParticles": "",
+                            "topParticlesTiming": 0.0,
+                            "unactiveParticles": ""
                         }
                     },
                     "uuid": "b63d2802-a7cc-6dfd-5e88-c5f45f2c7039"
@@ -16720,7 +16738,7 @@
             ],
             "name": "Music",
             "order": 16,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "e2bde98c-df70-8af1-6539-ab61511e723e"
         },
@@ -17957,12 +17975,19 @@
                     "script": {
                         "class_id": "MovingPlatform",
                         "fields": {
+                            "activateAfterBurn": false,
                             "activateOnCollision": false,
+                            "burnableID": "",
                             "canSink": false,
+                            "doublePlatformGroup": "",
+                            "doublePlatformModel1": "",
+                            "doublePlatformModel2": "",
+                            "followPathRotations": false,
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
                             "movingParticlesEntity": "12dd50c0-b597-842e-160b-dc5eac6525f8",
+                            "movingParticlesEntity2": "",
                             "numOfPathPoints": 5,
                             "pathPointEntity0": "59fac29f-c11e-0e5c-b716-974fa283826a",
                             "pathPointEntity1": "d74cc18c-725d-a802-0551-277667b40fe6",
@@ -17974,6 +17999,16 @@
                             "pathPointEntity7": "29862fcc-ad46-8f80-78c8-3eee2c2f6e44",
                             "pathPointEntity8": "f7a64ef4-50d7-da84-935b-2659cc535c5e",
                             "pathPointEntity9": "",
+                            "pauseInPoint0": 0.0,
+                            "pauseInPoint1": 0.0,
+                            "pauseInPoint2": 0.0,
+                            "pauseInPoint3": 0.0,
+                            "pauseInPoint4": 0.0,
+                            "pauseInPoint5": 0.0,
+                            "pauseInPoint6": 0.0,
+                            "pauseInPoint7": 0.0,
+                            "pauseInPoint8": 0.0,
+                            "pauseInPoint9": 0.0,
                             "platformModel": "a71119dd-d768-a26a-d3e5-e115aa8ead90",
                             "sinkDistance": 0.0,
                             "sinkSpeed": 0.0,
@@ -18470,12 +18505,19 @@
                     "script": {
                         "class_id": "MovingPlatform",
                         "fields": {
+                            "activateAfterBurn": false,
                             "activateOnCollision": true,
+                            "burnableID": "",
                             "canSink": false,
+                            "doublePlatformGroup": "",
+                            "doublePlatformModel1": "",
+                            "doublePlatformModel2": "",
+                            "followPathRotations": false,
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
                             "movingParticlesEntity": "8689c06f-b8f5-b44d-b024-bceb49eee097",
+                            "movingParticlesEntity2": "",
                             "numOfPathPoints": 5,
                             "pathPointEntity0": "6819438a-b762-31f5-9f9e-e44c2454b2fa",
                             "pathPointEntity1": "d3bd2f02-4644-8227-b8f4-eae5803c02f3",
@@ -18487,6 +18529,16 @@
                             "pathPointEntity7": "29862fcc-ad46-8f80-78c8-3eee2c2f6e44",
                             "pathPointEntity8": "f7a64ef4-50d7-da84-935b-2659cc535c5e",
                             "pathPointEntity9": "",
+                            "pauseInPoint0": 0.0,
+                            "pauseInPoint1": 0.0,
+                            "pauseInPoint2": 0.0,
+                            "pauseInPoint3": 0.0,
+                            "pauseInPoint4": 0.0,
+                            "pauseInPoint5": 0.0,
+                            "pauseInPoint6": 0.0,
+                            "pauseInPoint7": 0.0,
+                            "pauseInPoint8": 0.0,
+                            "pauseInPoint9": 0.0,
                             "platformModel": "c7ec49fb-69a6-d489-217a-cfc5636c2d62",
                             "sinkDistance": 0.0,
                             "sinkSpeed": 0.0,
@@ -19082,12 +19134,19 @@
                     "script": {
                         "class_id": "MovingPlatform",
                         "fields": {
+                            "activateAfterBurn": false,
                             "activateOnCollision": false,
+                            "burnableID": "",
                             "canSink": true,
+                            "doublePlatformGroup": "",
+                            "doublePlatformModel1": "",
+                            "doublePlatformModel2": "",
+                            "followPathRotations": false,
                             "looping": true,
                             "moveOnStart": true,
                             "movementSpeed": 10.0,
                             "movingParticlesEntity": "51129580-21b4-4fca-ff29-2824d748db67",
+                            "movingParticlesEntity2": "",
                             "numOfPathPoints": 5,
                             "pathPointEntity0": "318319bb-39ea-4b90-721b-9d1b3f4b03cb",
                             "pathPointEntity1": "7db6208b-995e-6197-18fd-fd71b4b62d11",
@@ -19099,6 +19158,16 @@
                             "pathPointEntity7": "29862fcc-ad46-8f80-78c8-3eee2c2f6e44",
                             "pathPointEntity8": "f7a64ef4-50d7-da84-935b-2659cc535c5e",
                             "pathPointEntity9": "",
+                            "pauseInPoint0": 0.0,
+                            "pauseInPoint1": 0.0,
+                            "pauseInPoint2": 0.0,
+                            "pauseInPoint3": 0.0,
+                            "pauseInPoint4": 0.0,
+                            "pauseInPoint5": 0.0,
+                            "pauseInPoint6": 0.0,
+                            "pauseInPoint7": 0.0,
+                            "pauseInPoint8": 0.0,
+                            "pauseInPoint9": 0.0,
                             "platformModel": "dfe2c66f-896a-df88-2df5-2a93acf62c73",
                             "sinkDistance": 3.0,
                             "sinkSpeed": 2.0,
@@ -19367,7 +19436,7 @@
                             "sprite_uuid": "e459930c-1aa7-d4bf-a175-87687265bb07"
                         },
                         "emitterscount": 1,
-                        "playing": true
+                        "playing": false
                     },
                     "uuid": "7736e43d-d38b-b09f-d0f8-dfba553beaa2"
                 }
@@ -20301,6 +20370,11 @@
                             "animatedKey": "144bec94-2fd6-a07e-a130-72494ce1b3c5",
                             "blockingCollider": "545388b3-d95a-093e-7382-a4b3a532bc93",
                             "camFocusDuration": 0.15000000596046448,
+                            "cameraShakeAmount": 0.0,
+                            "cameraShakeAmountVel": 0.0,
+                            "cameraShakeDuration": 0.0,
+                            "cameraShakeRotation": 0.0,
+                            "cameraShakeRotationVel": 0.0,
                             "cameraZoom": 0.0,
                             "door1SFX": "eaca7a51-1b7b-3a75-4603-a14a16b96c58",
                             "door2SFX": "6100924e-19c2-1d50-34bc-8da7350d3adc",
@@ -20342,7 +20416,7 @@
             ],
             "name": "TempleDoorWind",
             "order": 11,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "ae046e1e-da0a-471e-ef9c-4de2ef865b26"
         },
@@ -21705,7 +21779,7 @@
                 }
             ],
             "name": "Settings",
-            "order": 5,
+            "order": 6,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "7ac7d2f6-61ad-02b9-b73e-8a5cf3565e3a"
@@ -22532,7 +22606,7 @@
             ],
             "name": "ChestGroup",
             "order": 8,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "ddb1b4f0-deaf-6f6e-d85c-0831b7a46876"
         },
@@ -22583,7 +22657,7 @@
             ],
             "name": "BurneableVines",
             "order": 10,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "204e4921-a92e-2512-31f2-0abce2d8bafa"
         },
@@ -22811,7 +22885,7 @@
             ],
             "name": "Pilars",
             "order": 9,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "01d75178-5ee1-efb9-b73c-ae552387c23e"
         },
@@ -22893,7 +22967,7 @@
             ],
             "name": "PREFAB_BLOCK",
             "order": 1,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "214a877e-b110-5f9f-4d00-a888bf417561"
         },
@@ -23046,6 +23120,7 @@
                                 "y": 0.0,
                                 "z": 0.0
                             },
+                            "moonstone": "",
                             "openParticlesEntity": "31025068-e529-763d-19f7-d7ee6d03fdd6",
                             "openSFXEntity": "1438ed41-1746-f49d-79cb-11c8f71f6864",
                             "rewardItem": "e75397d9-6d2a-20ac-498b-00e86c7fcf4b",
@@ -23877,6 +23952,7 @@
                         "class_id": "Key_Idle",
                         "fields": {
                             "amplitude": 0.5,
+                            "cameraFocusTravelTime": 0.0,
                             "cameraZoom": 0.0,
                             "collectTime": 0.5,
                             "focusPointOnCollect": "580d2d62-f2fc-5ba3-9437-59bd5ad5065a",
@@ -24142,6 +24218,9 @@
                         "class_id": "InteractHover",
                         "fields": {
                             "amplitude": 0.20000000298023224,
+                            "hovers": false,
+                            "interactGamepad": "",
+                            "interactKeyboard": "",
                             "speed": 2.5,
                             "started": false
                         }
@@ -25406,6 +25485,9 @@
                         "class_id": "InteractHover",
                         "fields": {
                             "amplitude": 0.019999999552965164,
+                            "hovers": false,
+                            "interactGamepad": "",
+                            "interactKeyboard": "",
                             "speed": 2.5,
                             "started": false
                         }
@@ -27503,7 +27585,7 @@
             ],
             "name": "EnemyBarriers",
             "order": 15,
-            "parent_uuid": "25097af2-9cfc-56c1-bdc6-699af3d53118",
+            "parent_uuid": "7a37b419-4bdc-6a2d-5b39-2630e6052ffb",
             "static": true,
             "uuid": "9229debb-fcb7-2923-7a81-deec9265373d"
         },
@@ -27733,7 +27815,7 @@
             "uuid": "06967563-59c0-e196-a4ab-39cf70e41a09"
         },
         {
-            "active": false,
+            "active": true,
             "components": [
                 {
                     "is_active": true,
@@ -27757,8 +27839,8 @@
                                 "y": 0.0
                             },
                             "size_delta": {
-                                "x": 1600.0,
-                                "y": 900.0
+                                "x": 187.3042449951172,
+                                "y": 110.70763397216797
                             }
                         },
                         "position": {
@@ -27951,7 +28033,7 @@
                 }
             ],
             "name": "Exit",
-            "order": 6,
+            "order": 7,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "4765b331-c2d2-1734-58f1-27d7172168e1"
@@ -28088,7 +28170,7 @@
                 }
             ],
             "name": "Continue",
-            "order": 3,
+            "order": 4,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "e294d23b-a1f7-7479-63c7-9e3974c51d0a"
@@ -28389,7 +28471,7 @@
                         "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 3,
                         "sorting_layer": 5,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4",
+                        "texture_uuid": "6c4d405c-072a-d8ff-3216-c3d25d9abc99",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -28397,7 +28479,7 @@
                             "r": 1.0
                         },
                         "uv_rect": {
-                            "max_u": 1.0,
+                            "max_u": 0.1666666716337204,
                             "max_v": 1.0,
                             "min_u": 0.0,
                             "min_v": 0.0
@@ -28410,22 +28492,22 @@
                     "is_active": true,
                     "sprite_animator": {
                         "fps": 12.0,
-                        "frame_count": 12,
+                        "frame_count": 6,
                         "grid": {
-                            "columns": 12,
+                            "columns": 6,
                             "rows": 1
                         },
                         "loop": false,
                         "play_on_start": false,
                         "playing": false,
                         "start_frame": 0,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4"
+                        "texture_uuid": "6c4d405c-072a-d8ff-3216-c3d25d9abc99"
                     },
                     "uuid": "7a5092f5-0f67-98f4-1d0f-b2f3bb8dab5a"
                 }
             ],
             "name": "PassPage",
-            "order": 8,
+            "order": 9,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "87520640-668d-b217-9d25-4c9f28d44c59"
@@ -28486,7 +28568,7 @@
                         "nav_up": "00000000-0000-0000-0000-000000000000",
                         "order_in_layer": 3,
                         "sorting_layer": 5,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4",
+                        "texture_uuid": "b8d44169-b648-2519-ccf7-7a9b39b2f449",
                         "tint": {
                             "a": 1.0,
                             "b": 1.0,
@@ -28494,7 +28576,7 @@
                             "r": 1.0
                         },
                         "uv_rect": {
-                            "max_u": 1.0,
+                            "max_u": 0.1666666716337204,
                             "max_v": 1.0,
                             "min_u": 0.0,
                             "min_v": 0.0
@@ -28507,22 +28589,22 @@
                     "is_active": true,
                     "sprite_animator": {
                         "fps": 12.0,
-                        "frame_count": 12,
+                        "frame_count": 6,
                         "grid": {
-                            "columns": 12,
+                            "columns": 6,
                             "rows": 1
                         },
                         "loop": false,
                         "play_on_start": false,
                         "playing": false,
                         "start_frame": 0,
-                        "texture_uuid": "c58c9aff-12b5-6a95-224f-0edc9e2af4c4"
+                        "texture_uuid": "b8d44169-b648-2519-ccf7-7a9b39b2f449"
                     },
                     "uuid": "299e1c7b-4101-f889-d276-5c73042a2bd7"
                 }
             ],
             "name": "InvertedPassPage",
-            "order": 9,
+            "order": 10,
             "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
             "static": true,
             "uuid": "8f07135b-74d6-a539-1387-1851a5cfc0d5"
@@ -44096,6 +44178,86 @@
             "parent_uuid": "2c629393-d69d-62a9-e89c-fbdff47114ac",
             "static": true,
             "uuid": "798a92da-6472-bdd2-acb8-ebe4ce312058"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "recttransform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "layout": {
+                            "anchor_max": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "anchor_min": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "pivot": {
+                                "x": 1.0,
+                                "y": 0.5
+                            },
+                            "size_delta": {
+                                "x": 2000.0,
+                                "y": 2000.0
+                            }
+                        },
+                        "position": {
+                            "x": -15.906999588012695,
+                            "y": -3.0369999408721924,
+                            "z": -2.650217056274414
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.04612528905272484,
+                            "y": 0.04612528905272484,
+                            "z": 0.04612528905272484
+                        }
+                    },
+                    "uuid": "ea4343b2-1ae5-03c2-dcb4-c40ef32681fb"
+                },
+                {
+                    "image": {
+                        "nav_down": "00000000-0000-0000-0000-000000000000",
+                        "nav_left": "00000000-0000-0000-0000-000000000000",
+                        "nav_right": "00000000-0000-0000-0000-000000000000",
+                        "nav_up": "00000000-0000-0000-0000-000000000000",
+                        "order_in_layer": 1,
+                        "sorting_layer": 5,
+                        "texture_uuid": "c5068f14-e3e3-248a-2763-5dcd56694966",
+                        "tint": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "uv_rect": {
+                            "max_u": 1.0,
+                            "max_v": 1.0,
+                            "min_u": 0.0,
+                            "min_v": 0.0
+                        }
+                    },
+                    "is_active": true,
+                    "uuid": "e8609b1a-de57-59c9-9d49-8e59343a328a"
+                }
+            ],
+            "name": "IlustrationWater",
+            "order": 3,
+            "parent_uuid": "8a69222f-640f-90dc-dae6-c043822435b4",
+            "static": true,
+            "uuid": "1053e2d1-69aa-3474-2990-282e06c85094"
         }
     ]
 }
