@@ -111,6 +111,7 @@ public class BossLogic : Component
 
     void OnUpdate()
     {
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         UpdateCurrentSide();
         if (isDefeated || isVulnerable)
             return;

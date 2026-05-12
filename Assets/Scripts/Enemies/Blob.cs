@@ -57,6 +57,7 @@ class Blob : Enemy
 
     void OnUpdate()
     {
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (spawn)
         {
             StartCoroutine(SplitLerp());

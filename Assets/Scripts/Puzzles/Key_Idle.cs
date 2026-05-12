@@ -43,6 +43,7 @@ class Key_Idle : Component
 
     void OnUpdate()
     {
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (collected)
             return;
 
@@ -89,6 +90,7 @@ class Key_Idle : Component
 
     IEnumerator Collect()
     {
+        GameManager.SetState(GameManager.GameState.PAUSE);
         collected = true;
         Entity player = Player.Instance.entity;
         Vector3 initialPosition = transform.position;
@@ -128,7 +130,7 @@ class Key_Idle : Component
             Player.Instance.Camera.StopFocus();
         }
 
-
+        GameManager.SetState(GameManager.GameState.DEFAULT);
         yield return null;
     }
 

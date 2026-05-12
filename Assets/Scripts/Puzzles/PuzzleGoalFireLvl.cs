@@ -58,6 +58,7 @@ class PuzzleGoalFireLvl : Component
 
     void OnUpdate()
     {
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         CheckPillars();
 
         if (pendingMoves > 0 && !isMoving)

@@ -26,6 +26,7 @@ class Gem_Idle : Component
 
     void OnUpdate()
     {
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         time += Time.deltaTime * speed;
 
         float offsetY = (float)Math.Sin(time) * amplitude;

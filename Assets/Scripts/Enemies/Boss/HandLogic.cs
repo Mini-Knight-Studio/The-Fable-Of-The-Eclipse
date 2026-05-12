@@ -116,7 +116,7 @@ public class HandLogic : Component
 
     void OnUpdate()
     {
-
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         shadowEntity.transform.position = new Vector3(transform.position.x, shadowEntity.transform.position.y, transform.position.z);
 
         ProcessStateTimer(ref cooldownTimer, ref isInCooldown);

@@ -45,6 +45,7 @@ class VistaPoint : Component
 
     void OnUpdate()
     {
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (camera == null) return;
         if (collider == null) return;
 

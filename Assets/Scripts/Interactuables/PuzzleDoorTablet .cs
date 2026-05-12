@@ -108,6 +108,7 @@ class PuzzleDoorTablet : Component
 
     IEnumerator RaiseTemple()
     {
+        GameManager.SetState(GameManager.GameState.PAUSE);
         animatedKey.SetActive(true);
         animatedKey.transform.position = Player.Instance.transform.position + new Vector3(0, 2, 0);
         animatedKey.transform.scale = Vector3.Zero;
@@ -235,6 +236,7 @@ class PuzzleDoorTablet : Component
         DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);
 
         yield return null;
+        GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 
     void TempleRisen()

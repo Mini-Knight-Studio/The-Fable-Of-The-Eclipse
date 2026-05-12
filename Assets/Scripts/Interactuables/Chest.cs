@@ -68,6 +68,7 @@ class Chest : Component
 
     void OnUpdate()
     {
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (rewardCollected && !particlesStopped)
         {
             openParticlesEntity.GetComponent<ParticleComponent>().Stop();

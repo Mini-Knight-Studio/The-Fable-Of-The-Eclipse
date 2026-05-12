@@ -36,7 +36,8 @@ public class HeadLogic : Component
 
     void OnUpdate()
     {
-        if(owner.IsDefeated() || owner.IsVulnerable())
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
+        if (owner.IsDefeated() || owner.IsVulnerable())
             return;
 
         LookAtTarget();

@@ -78,6 +78,7 @@ public class PlayerCamera : Component
 
     public void OnUpdate()
     {
+        if (GameManager.state == GameManager.GameState.FREEZE) { return; }
         if (cameraUser == null) return;
 
         hasInput = CheckInput();
