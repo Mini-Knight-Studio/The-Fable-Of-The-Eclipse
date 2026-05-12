@@ -334,8 +334,9 @@ public class HandLogic : Component
         FakeRegenerate();
         isDefeated = false;
         isVulnerable = false;
-        canBeStopped = true;
         isBusy = false;
+        canBeStopped = true;
+        isInCooldown = false;
         StopAllOwnedCoroutines();
         SetCooldown(2);
         Debug.Log($"Hand {entity.Name} has regenerated");

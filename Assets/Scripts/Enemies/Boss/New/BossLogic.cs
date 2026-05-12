@@ -111,10 +111,9 @@ public class BossLogic : Component
 
     void OnUpdate()
     {
+        UpdateCurrentSide();
         if (isDefeated || isVulnerable)
             return;
-
-        UpdateCurrentSide();
 
         if (!isBusy)
         {
