@@ -29,12 +29,6 @@ public class PlayerCombat : PlayerComponent
     BoxCollider attack3Collider;
     public float attack3Damage;
 
-
-    [Header("References")]
-
-    public Entity swordTriggerEntity;
-    private BoxCollider swordTriggerCollider;
-
     [ShowInInspector]private int comboIndex = 0;
     private bool wantsToCombo = false;
 
@@ -45,10 +39,6 @@ public class PlayerCombat : PlayerComponent
 
     void OnCreate()
     {
-        swordTriggerCollider = swordTriggerEntity.GetComponent<BoxCollider>();
-        if (swordTriggerCollider != null) swordTriggerCollider.entity.SetActive(false);
-        swordTriggerCollider.Trigger = true;
-
         attack1Collider = attack1ColliderEntity.GetComponent<BoxCollider>();
         if(attack1Collider != null) attack1Collider.entity.SetActive(false);
         attack1Collider.Trigger = true;
@@ -67,7 +57,7 @@ public class PlayerCombat : PlayerComponent
 
     public void ProcessCombat()
     {
-        if (swordTriggerCollider == null || player.Grapple.IsGrappling || player.Torch.IsTorching || player.Movement.IsDashing())
+        if (player.Grapple.IsGrappling || player.Torch.IsTorching || player.Movement.IsDashing())
             return;
 
         if (isAttacking && player.Input.attackKeyPressed)
@@ -82,7 +72,6 @@ public class PlayerCombat : PlayerComponent
         {
             if (attackTimer <= GetAttackCooldownTime())
             {
-                swordTriggerCollider.entity.SetActive(false);
                 attack1Collider.entity.SetActive(false);
                 attack2Collider.entity.SetActive(false);
                 attack3Collider.entity.SetActive(false);
@@ -127,7 +116,6 @@ public class PlayerCombat : PlayerComponent
 
         attackTimer = GetAttackDuration();
         player.Feedback.PlayAttack();
-        //swordTriggerCollider.entity.SetActive(true);
 
         if (comboIndex == 1) attack1Collider.entity.SetActive(true);
         else if (comboIndex == 2) attack2Collider.entity.SetActive(true);
