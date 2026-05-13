@@ -51,7 +51,7 @@ public class PillarTrigger : Component
 
         int layer = Collisions.GetLayerBit("WorldLimits") | Collisions.GetLayerBit("Enemy");
 
-        Collisions.Raycast(pillarPos, dirToPlayer, distance, out RaycastHit hit, layer);
+        Collisions.Raycast(pillarPos, dirToPlayer, distance, out RaycastHit hit, entity, layer);
         return hit.entity == null;
     }
 
