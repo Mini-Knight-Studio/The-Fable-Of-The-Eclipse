@@ -80,7 +80,7 @@ class Blob : Enemy
         #endregion
         if (!isSpawning && !splitting && !health.IsDead())
         {
-            Hit(1, PushForceScale, "Armature|GetHit");
+            Hit(Player.Instance.Combat.GetCurrentComboDamage(), PushForceScale, "Armature|GetHit");
             movement.CanMove = (animator.CurrentClip() == "Armature|GetHit" || isAttacking)? false : true;
             if(!isAttacking)
             {
