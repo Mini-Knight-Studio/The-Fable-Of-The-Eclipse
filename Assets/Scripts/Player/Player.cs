@@ -35,7 +35,7 @@ public class Player : Component
     private LoseScreen LoseScreen;
     private CreditsScreen CreditsScreen;
 
-
+    public bool IsInCutscene = false;
 
     public static Player Instance { get; private set; }
 
@@ -97,10 +97,15 @@ public class Player : Component
         LoseScreen = LoseScreenEntity.GetComponent<LoseScreen>();
         CreditsScreen = CreditsScreenEntity.GetComponent<CreditsScreen>();
 
-        if(RespawnTransition!=null)
+        if (RespawnTransition != null)
             RespawnTransition.OnFadeInComplete += EndRespawn;
         if (LoseScreen != null)
             PlayerHealth.OnDeath += LoseScreen.OpenLoseScreen;
+
+        if (PlayerHealth != null)
+        {
+            PlayerHealth.OnHit += Animation.PlayHit;
+        }
     }
 
     public void GoToLastCheckpoint()

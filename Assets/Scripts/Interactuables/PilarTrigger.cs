@@ -5,7 +5,6 @@ public class PillarTrigger : Component
 {
     public Entity interactionPrompt;
     public Entity hookParticlesEntity;
-    public Entity colliderEntity;
 
     private ParticleComponent hookParticles;
 
@@ -17,7 +16,6 @@ public class PillarTrigger : Component
     {
         if (interactionPrompt != null) interactionPrompt.SetActive(false);
         if (hookParticlesEntity != null) hookParticles = hookParticlesEntity.GetComponent<ParticleComponent>();
-        if (colliderEntity != null) colliderEntity.GetComponent<BoxCollider>();
 
         PlayerGrapple.RegisterPillar(this);
     }
@@ -53,7 +51,7 @@ public class PillarTrigger : Component
 
         int layer = Collisions.GetLayerBit("WorldLimits") | Collisions.GetLayerBit("Enemy");
 
-        Collisions.Raycast(pillarPos, dirToPlayer, distance, out RaycastHit hit, colliderEntity, layer);
+        Collisions.Raycast(pillarPos, dirToPlayer, distance, out RaycastHit hit, layer);
         return hit.entity == null;
     }
 
