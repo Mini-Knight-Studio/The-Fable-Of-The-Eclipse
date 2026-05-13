@@ -43,4 +43,9 @@ public class BlinkEffect : Component
 
         instancedMaterial.SetFloat("u_EmissiveIntensity", defaultIntensity);
     }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
 }

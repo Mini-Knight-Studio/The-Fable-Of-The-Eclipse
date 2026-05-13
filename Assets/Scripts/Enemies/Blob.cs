@@ -52,7 +52,6 @@ class Blob : Enemy
         movement.Speed = StageMultiplier(BaseVelocityandStageMultiplier);
         health.ModifyMaxHealth((int)StageMultiplier(BaseHealthandStageMultiplier));
         health.Reset();
-        Debug.Log(health.GetActualHealth());
     }
 
     void OnUpdate()
