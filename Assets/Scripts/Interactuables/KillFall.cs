@@ -70,8 +70,6 @@ class KillFall : Component
             }
         }
 
-        Debug.Log(isCurrentlyTouching ? 1:0);
-
         // 3. Death Logic
         if (isCurrentlyTouching)
         {
