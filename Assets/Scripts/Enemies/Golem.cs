@@ -56,7 +56,7 @@ class Golem : Enemy
         if (!isAttacking)
             attack_cooldown -= Time.deltaTime;
 
-        Hit(1, PushForceScale, "G_Scale_CTRL|Walk");
+        Hit(Player.Instance.Combat.GetCurrentComboDamage(), PushForceScale, "G_Scale_CTRL|Walk");
         movement.CanMove = (animator.CurrentClip() == "G_Scale_CTRL|GetHitShieldOn" || isAttacking || ReceivedHits > 0) ? false : true;
         if (!isAttacking && !health.IsDead())
         {

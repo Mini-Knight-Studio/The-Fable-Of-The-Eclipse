@@ -16,10 +16,18 @@ public class PlayerCombat : PlayerComponent
     public float attack3_Cooldown;
     public float hitbox3_Duration;
 
-    [Header("References")]
+    [Header("Attacks Colliders")]
+    public Entity attack1ColliderEntity;
+    BoxCollider attack1Collider;
+    public float attack1Damage;
 
-    public Entity swordTriggerEntity;
-    private BoxCollider swordTriggerCollider;
+    public Entity attack2ColliderEntity;
+    BoxCollider attack2Collider;
+    public float attack2Damage;
+
+    public Entity attack3ColliderEntity;
+    BoxCollider attack3Collider;
+    public float attack3Damage;
 
     [ShowInInspector]private int comboIndex = 0;
     private bool wantsToCombo = false;
@@ -31,9 +39,17 @@ public class PlayerCombat : PlayerComponent
 
     void OnCreate()
     {
-        swordTriggerCollider = swordTriggerEntity.GetComponent<BoxCollider>();
-        if (swordTriggerCollider != null) swordTriggerCollider.entity.SetActive(false);
-        swordTriggerCollider.Trigger = true;
+        attack1Collider = attack1ColliderEntity.GetComponent<BoxCollider>();
+        if(attack1Collider != null) attack1Collider.entity.SetActive(false);
+        attack1Collider.Trigger = true;
+
+        attack2Collider = attack2ColliderEntity.GetComponent<BoxCollider>();
+        if (attack2Collider != null) attack2Collider.entity.SetActive(false);
+        attack2Collider.Trigger = true;
+
+        attack3Collider = attack3ColliderEntity.GetComponent<BoxCollider>();
+        if (attack3Collider != null) attack3Collider.entity.SetActive(false);
+        attack3Collider.Trigger = true;
 
         attackTimer = 0.0f;
         isAttacking = false;
@@ -41,7 +57,7 @@ public class PlayerCombat : PlayerComponent
 
     public void ProcessCombat()
     {
-        if (swordTriggerCollider == null || player.Grapple.IsGrappling || player.Torch.IsTorching || player.Movement.IsDashing())
+        if (player.Grapple.IsGrappling || player.Torch.IsTorching || player.Movement.IsDashing())
             return;
 
         if (isAttacking && player.Input.attackKeyPressed)
@@ -54,9 +70,11 @@ public class PlayerCombat : PlayerComponent
 
         if (isAttacking)
         {
-            if (attackTimer <= GetAttackCooldownTime() && swordTriggerCollider.entity.Active)
+            if (attackTimer <= GetAttackCooldownTime())
             {
-                swordTriggerCollider.entity.SetActive(false);
+                attack1Collider.entity.SetActive(false);
+                attack2Collider.entity.SetActive(false);
+                attack3Collider.entity.SetActive(false);
             }
 
             if (attackTimer > 0.0f)
@@ -98,7 +116,10 @@ public class PlayerCombat : PlayerComponent
 
         attackTimer = GetAttackDuration();
         player.Feedback.PlayAttack();
-        swordTriggerCollider.entity.SetActive(true);
+
+        if (comboIndex == 1) attack1Collider.entity.SetActive(true);
+        else if (comboIndex == 2) attack2Collider.entity.SetActive(true);
+        else if (comboIndex == 3) attack3Collider.entity.SetActive(true);
     }
 
     public int GetCurrentComboIndex()
@@ -145,6 +166,21 @@ public class PlayerCombat : PlayerComponent
                 return hitbox3_Duration;
             default:
                 return 0;
+        }
+    }
+
+    public int GetCurrentComboDamage() //For some reason, casting here seems to be the only way it works, casting on Hit() doesn't
+    {
+        switch (comboIndex)
+        {
+            case (1):
+                return (int)attack1Damage;
+            case (2):
+                return (int)attack2Damage;
+            case (3):
+                return (int)attack3Damage;
+            default: 
+                return 1;
         }
     }
 };

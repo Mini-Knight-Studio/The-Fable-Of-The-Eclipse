@@ -15,19 +15,27 @@ public class PlayerAnimation : PlayerComponent
     public string grappleShootClip = "";
     public string grapplePoseClip = "";
     public string grappleLandingClip = "";
-    public string torchClip= "";
+    public string torchClip = "";
+    public string onHitClip = "";
+    public string pickUpClip = "";
+    public string pushClipName = "";
 
-    private enum AnimationState { 
+    private enum AnimationState
+    {
         IDLE,
-        WALK, 
-        DASH, 
-        ATTACK, 
-        GRAPPLE_SHOOT, 
-        GRAPPLE_FLIGHT, 
-        GRAPPLE_LAND, 
+        WALK,
+        DASH,
+        ATTACK,
+        GRAPPLE_SHOOT,
+        GRAPPLE_FLIGHT,
+        GRAPPLE_LAND,
         TORCH_BURN,
+        HIT,
+        PICKUP,
+        PUSH,
         NULL
     };
+
     private AnimationState state;
     private int lastPlayedComboIndex = 0;
 
@@ -36,6 +44,8 @@ public class PlayerAnimation : PlayerComponent
 
     private float loopDelayTimer = 0f;
     private bool isWaitingForLoop = false;
+    private float hitTimer = 0f;
+    private float pushTimer = 0f;
 
     public void OnCreate()
     {
@@ -47,6 +57,27 @@ public class PlayerAnimation : PlayerComponent
     public void ProcessAnimations()
     {
         if (player.Movement == null || player.Combat == null || player.Grapple == null || player.Torch == null) return;
+
+        if (pushTimer > 0)
+        {
+            pushTimer -= Time.deltaTime;
+            if (pushTimer > 0) return;
+            else state = AnimationState.NULL;
+        }
+
+        if (hitTimer > 0)
+        {
+            hitTimer -= Time.deltaTime;
+
+            if (hitTimer > 0)
+            {
+                return;
+            }
+            else
+            {
+                state = AnimationState.NULL;
+            }
+        }
 
         if (state != AnimationState.IDLE)
         {
@@ -65,17 +96,14 @@ public class PlayerAnimation : PlayerComponent
 
         if (player.Grapple.IsLaunching)
         {
-            if (state != AnimationState.GRAPPLE_SHOOT) Debug.Log("ANIM: Trying to play SHOOT: " + grappleShootClip);
             PlayGrappleAnim(grappleShootClip, AnimationState.GRAPPLE_SHOOT, false);
         }
         else if (player.Grapple.IsGrappling)
         {
-            if (state != AnimationState.GRAPPLE_FLIGHT) Debug.Log("ANIM: Trying to play POSE: " + grapplePoseClip);
             PlayGrappleAnim(grapplePoseClip, AnimationState.GRAPPLE_FLIGHT, true);
         }
         else if (player.Grapple.IsLanding)
         {
-            if (state != AnimationState.GRAPPLE_LAND) Debug.Log("ANIM: Trying to play LANDING: " + grappleLandingClip);
             PlayGrappleAnim(grappleLandingClip, AnimationState.GRAPPLE_LAND, false);
         }
         else if (player.Torch.IsTorching)
@@ -99,42 +127,77 @@ public class PlayerAnimation : PlayerComponent
             Idle();
         }
 
-        if(state!=AnimationState.ATTACK)
+        if (state != AnimationState.ATTACK)
             swordEntity.SetActive(false);
+    }
+    public void PlayPush()
+    {
+        pushTimer = 0.2f;
+        if (state == AnimationState.PUSH) return;
+
+        state = AnimationState.PUSH;
+        modelAnimator.Play(pushClipName, 0.2f);
+    }
+    public void PlayHit()
+    {
+        float blend = (state == AnimationState.HIT) ? 0.05f : 0.02f;
+
+        state = AnimationState.HIT;
+        lastPlayedComboIndex = 0;
+        isWaitingForLoop = false;
+        swordEntity.SetActive(false);
+
+        modelAnimator.Looping = false;
+        modelAnimator.Play(onHitClip, blend);
+
+        hitTimer = 0.45f;
+    }
+
+    public void PlayPickUp()
+    {
+        state = AnimationState.PICKUP;
+        lastPlayedComboIndex = 0;
+        isWaitingForLoop = false;
+
+        modelAnimator.Looping = false;
+        modelAnimator.Play(pickUpClip, 0.1f);
+        hitTimer = 1.0f;
     }
 
     private void PlayGrappleAnim(string clip, AnimationState newState, bool loop)
     {
         if (state == newState) return;
         state = newState;
-
-        Debug.Log("ANIM FIRE: " + clip);
         lastPlayedComboIndex = 0;
         modelAnimator.Play(clip, 0.1f);
         modelAnimator.Looping = loop;
     }
+
     private void Idle()
     {
-
         if (state == AnimationState.IDLE) return;
+
+        float blend = (state == AnimationState.NULL) ? 0.25f : 0.4f;
+
         state = AnimationState.IDLE;
         lastPlayedComboIndex = 0;
-
         modelAnimator.Looping = false;
-        modelAnimator.Play(idleClipName, 0.4f);
+        modelAnimator.Play(idleClipName, blend);
 
         isWaitingForLoop = true;
-        loopDelayTimer = 0.4f;
+        loopDelayTimer = blend;
     }
 
     private void Move()
     {
         if (state == AnimationState.WALK) return;
 
+        float blend = (state == AnimationState.NULL) ? 0.15f : 0.4f;
+
         state = AnimationState.WALK;
         lastPlayedComboIndex = 0;
         modelAnimator.Looping = true;
-        modelAnimator.Play(walkClipName, .4f);
+        modelAnimator.Play(walkClipName, blend);
     }
 
     private void Dash()
@@ -143,38 +206,32 @@ public class PlayerAnimation : PlayerComponent
         string clip = (state == AnimationState.WALK) ? dashWalkClipName : dashIdleClipName;
         state = AnimationState.DASH;
         lastPlayedComboIndex = 0;
-
         modelAnimator.Looping = false;
         modelAnimator.Play(clip, 0.0f);
     }
 
     private void Torch()
-    { 
+    {
         if (state == AnimationState.TORCH_BURN) return;
-
         state = AnimationState.TORCH_BURN;
         lastPlayedComboIndex = 0;
         modelAnimator.Looping = false;
-        modelAnimator.Play(torchClip, .0f);
+        modelAnimator.Play(torchClip, 0.0f);
     }
 
     private void Attack()
     {
         swordEntity.SetActive(true);
         int currentCombo = player.Combat.GetCurrentComboIndex();
-
         if (state != AnimationState.ATTACK || lastPlayedComboIndex != currentCombo)
         {
             state = AnimationState.ATTACK;
             lastPlayedComboIndex = currentCombo;
-
             string clipToPlay = attack1Clip;
             if (currentCombo == 2) clipToPlay = attack2Clip;
             else if (currentCombo == 3) clipToPlay = attack3Clip;
-
             modelAnimator.Looping = false;
             modelAnimator.Play(clipToPlay, 0.0f);
         }
     }
- 
 }
