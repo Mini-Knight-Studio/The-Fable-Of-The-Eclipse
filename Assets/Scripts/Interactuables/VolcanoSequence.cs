@@ -7,19 +7,24 @@ class VolcanoSequence : Component
     [Header("Flow Control")]
     public bool playOnlyOnce = true;
 
-    [Header("Camera Settings")]
-    public float cameraZoom = 111f;
-    public float cameraSpeed = 4f;
+    [Header("Preparation")]
+    public Entity prepFocusTarget;
+    public float prepZoom = 111f;
+    public float prepCameraSpeed = 4f;
+    public float prepDuration = 2.5f;
 
-    public float sequenceDistance = 0f;
+    [Header("Explosion")]
+    public Entity craterFocusTarget;
+    public float craterZoom = 70f;
+    public float craterCameraSpeed = 6f;
+    public float craterFocusDuration = 1.0f;
 
     [Header("Timings")]
-    public float camFocusDuration = 2.0f;
     public float eruptionDuration = 4.0f;
     public float delayBetweenMeteorites = 0.1f;
+    public float sequenceDistance = 0f;
 
     [Header("References")]
-    public Entity focusTarget;
     public Entity prepParticles;
     public Entity explosionParticles;
 
@@ -56,21 +61,30 @@ class VolcanoSequence : Component
     {
         GameManager.SetState(GameManager.GameState.PAUSE);
 
+        float originalDistance = Player.Instance.Camera.distance;
+        Player.Instance.Camera.distance = sequenceDistance;
+
         if (prepParticles != null)
         {
             prepParticles.SetActive(true);
             prepParticles.GetComponent<ParticleComponent>().Play();
         }
 
-        float originalDistance = Player.Instance.Camera.distance;
-        Player.Instance.Camera.distance = sequenceDistance;
-
-        if (focusTarget != null)
+        if (prepFocusTarget != null)
         {
-            Player.Instance.Camera.FocusOnHeightPoint(focusTarget.transform.position, cameraZoom, cameraSpeed);
+            Player.Instance.Camera.FocusOnHeightPoint(prepFocusTarget.transform.position, prepZoom, prepCameraSpeed);
         }
 
-        yield return new WaitForSeconds(camFocusDuration);
+        yield return new WaitForSeconds(prepDuration);
+
+
+        if (craterFocusTarget != null)
+        {
+            Player.Instance.Camera.FocusOnHeightPoint(craterFocusTarget.transform.position, craterZoom, craterCameraSpeed);
+        }
+
+        yield return new WaitForSeconds(craterFocusDuration);
+
 
         if (prepParticles != null) prepParticles.SetActive(false);
 
@@ -91,7 +105,6 @@ class VolcanoSequence : Component
         if (explosionParticles != null) explosionParticles.GetComponent<ParticleComponent>().Stop();
 
         Player.Instance.Camera.StopFocus();
-
         Player.Instance.Camera.distance = originalDistance;
 
         yield return null;

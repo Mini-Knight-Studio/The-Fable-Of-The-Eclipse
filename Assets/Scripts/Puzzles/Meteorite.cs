@@ -7,6 +7,12 @@ class Meteorite : Component
     public float meteoriteTime = 2.0f;
     public float fallDistance = 25.0f;
     public int damage = 20;
+    public bool goingUp = false;
+    public bool useCurve = false;
+
+    [Header("Curve Tweaks")]
+    public float curveArcHeight = 15f;
+    public float curveHorizontalOffset = 10f;
 
     [Header("Collision & Radius")]
     public BoxCollider MeteoriteTrigger;
@@ -23,6 +29,7 @@ class Meteorite : Component
 
     private Vector3 startPos;
     private Vector3 targetPos;
+    private Vector3 controlPos;
     private float timer = 0.0f;
     private float totalElapsed = 0.0f;
     private bool isFalling = false;
@@ -31,7 +38,18 @@ class Meteorite : Component
     void OnCreate()
     {
         startPos = transform.position;
-        targetPos = new Vector3(startPos.x, startPos.y - fallDistance, startPos.z);
+
+        float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
+
+        if (goingUp && useCurve)
+        {
+            targetPos = new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z);
+            controlPos = new Vector3(startPos.x, startPos.y + fallDistance + curveArcHeight, startPos.z);
+        }
+        else
+        {
+            targetPos = new Vector3(startPos.x, finalY, startPos.z);
+        }
 
         if (MeteoriteTrigger == null)
             MeteoriteTrigger = entity.GetComponent<BoxCollider>();
@@ -58,7 +76,16 @@ class Meteorite : Component
         {
             timer += Time.deltaTime;
             float t = timer / meteoriteTime;
-            transform.position = Vector3.Lerp(startPos, targetPos, t);
+
+            if (goingUp && useCurve)
+            {
+                float u = 1f - t;
+                transform.position = (startPos * (u * u)) + (controlPos * (2f * u * t)) + (targetPos * (t * t));
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(startPos, targetPos, t);
+            }
 
             if (!hasDealtDamage && MeteoriteTrigger != null && MeteoriteTrigger.HasCollided)
             {
@@ -102,7 +129,15 @@ class Meteorite : Component
 
     void OnDrawGizmo()
     {
-        Vector3 groundPos = new Vector3(startPos.x, startPos.y - fallDistance, startPos.z);
+        float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
+        Vector3 groundPos = (goingUp && useCurve) ? new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z) : new Vector3(startPos.x, finalY, startPos.z);
         Gizmo.DrawCircle(groundPos, shakeRadius, Vector3.Up, 32, Color.Green);
+
+        if (goingUp && useCurve)
+        {
+            Vector3 peakPos = new Vector3(startPos.x, startPos.y + fallDistance + curveArcHeight, startPos.z);
+            Gizmo.DrawLine(startPos, peakPos, Color.Orange);
+            Gizmo.DrawLine(peakPos, groundPos, Color.Orange);
+        }
     }
 }
