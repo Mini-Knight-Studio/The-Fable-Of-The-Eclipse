@@ -4,46 +4,48 @@ using Loopie;
 
 class VolcanoSequence : Component
 {
-    [Header("Debugsito")]
+    [Header("Flow Control")]
     public bool playOnlyOnce = true;
 
     [Header("Camera Settings")]
-    public float zoom = 80f;
-    public float cameraSmoothness = 2.5f;
-    public Vector3 focusOffset = new Vector3(0, 15, 0);
-    public float cameraFocusTime = 4.0f;
+    public float cameraZoom = 111f;
+    public float cameraSpeed = 4f;
 
-    [Header("Entity References")]
+    public float sequenceDistance = 0f;
+
+    [Header("Timings")]
+    public float camFocusDuration = 2.0f;
+    public float eruptionDuration = 4.0f;
+    public float delayBetweenMeteorites = 0.1f;
+
+    [Header("References")]
     public Entity focusTarget;
-    public Entity eruptionParticles;
-    public Entity[] meteorites;
+    public Entity prepParticles;
+    public Entity explosionParticles;
 
-    public float delayBetweenMeteorites = 0.5f;
+    [Header("Meteorites")]
+    public Entity meteorite1;
+    public Entity meteorite2;
+    public Entity meteorite3;
 
     private bool hasTriggered = false;
-    private BoxCollider trigger;
 
     void OnCreate()
     {
-        trigger = entity.GetComponent<BoxCollider>();
+        if (prepParticles != null) prepParticles.GetComponent<ParticleComponent>().Stop();
+        if (explosionParticles != null) explosionParticles.GetComponent<ParticleComponent>().Stop();
 
-        if (eruptionParticles != null)
-            eruptionParticles.GetComponent<ParticleComponent>().Stop();
-
-        if (meteorites != null)
-        {
-            foreach (var meteorite in meteorites)
-            {
-                if (meteorite != null) meteorite.SetActive(false);
-            }
-        }
+        if (meteorite1 != null) meteorite1.SetActive(false);
+        if (meteorite2 != null) meteorite2.SetActive(false);
+        if (meteorite3 != null) meteorite3.SetActive(false);
     }
 
     void OnUpdate()
     {
-        if ((playOnlyOnce && hasTriggered) || hasTriggered) return;
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
+        if (hasTriggered) return;
 
-        if (trigger != null && trigger.HasCollided)
+        if (entity.GetComponent<BoxCollider>().IsColliding)
         {
             hasTriggered = true;
             StartCoroutine(PlayVolcanoSequence());
@@ -52,51 +54,63 @@ class VolcanoSequence : Component
 
     IEnumerator PlayVolcanoSequence()
     {
-        Vector3 targetPos = focusTarget != null ? focusTarget.transform.position + focusOffset : transform.position + focusOffset;
-        Player.Instance.Camera.FocusOnPoint(targetPos, zoom, cameraSmoothness);
+        GameManager.SetState(GameManager.GameState.PAUSE);
 
-        if (eruptionParticles != null)
-            eruptionParticles.GetComponent<ParticleComponent>().Play();
-
-        if (meteorites != null)
+        if (prepParticles != null)
         {
-            foreach (var meteorite in meteorites)
-            {
-                if (meteorite != null)
-                {
-                    meteorite.SetActive(true);
-                    yield return new WaitForSeconds(delayBetweenMeteorites);
-                }
-            }
+            prepParticles.SetActive(true);
+            prepParticles.GetComponent<ParticleComponent>().Play();
         }
 
-        Player.Instance.Camera.SetIsShaking(true, cameraFocusTime, 0.5f, 0.4f);
+        float originalDistance = Player.Instance.Camera.distance;
+        Player.Instance.Camera.distance = sequenceDistance;
 
-        yield return new WaitForSeconds(cameraFocusTime);
+        if (focusTarget != null)
+        {
+            Player.Instance.Camera.FocusOnPoint(focusTarget.transform.position, cameraZoom, cameraSpeed);
+        }
+
+        yield return new WaitForSeconds(camFocusDuration);
+
+        if (prepParticles != null) prepParticles.SetActive(false);
+
+        if (explosionParticles != null)
+        {
+            explosionParticles.SetActive(true);
+            explosionParticles.GetComponent<ParticleComponent>().Play();
+        }
+
+        Player.Instance.Camera.SetIsShaking(true, eruptionDuration, 0.5f, 0.4f);
+
+        if (meteorite1 != null) { meteorite1.SetActive(true); yield return new WaitForSeconds(delayBetweenMeteorites); }
+        if (meteorite2 != null) { meteorite2.SetActive(true); yield return new WaitForSeconds(delayBetweenMeteorites); }
+        if (meteorite3 != null) { meteorite3.SetActive(true); yield return new WaitForSeconds(delayBetweenMeteorites); }
+
+        yield return new WaitForSeconds(eruptionDuration);
+
+        if (explosionParticles != null) explosionParticles.GetComponent<ParticleComponent>().Stop();
 
         Player.Instance.Camera.StopFocus();
 
-        if (eruptionParticles != null)
-            eruptionParticles.GetComponent<ParticleComponent>().Stop();
+        Player.Instance.Camera.distance = originalDistance;
+
+        yield return null;
+
+        GameManager.SetState(GameManager.GameState.DEFAULT);
 
         if (!playOnlyOnce)
         {
             yield return new WaitForSeconds(2.0f);
             hasTriggered = false;
+
+            if (meteorite1 != null) meteorite1.SetActive(false);
+            if (meteorite2 != null) meteorite2.SetActive(false);
+            if (meteorite3 != null) meteorite3.SetActive(false);
         }
     }
 
     void OnDestroy()
     {
         StopAllOwnedCoroutines();
-    }
-
-    void OnDrawGizmo()
-    {
-        if (focusTarget != null)
-        {
-            Gizmo.DrawLine(transform.position, focusTarget.transform.position, Color.Orange);
-            Gizmo.DrawSphere(focusTarget.transform.position, 1f, 1.0f, Color.Red);
-        }
     }
 }

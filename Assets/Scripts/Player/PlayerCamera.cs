@@ -187,6 +187,17 @@ public class PlayerCamera : Component
         lerpTimer = 0;
     }
 
+    public void FocusOnHeightPoint(Vector3 destination, float zoomSize, float time)
+    {
+        currentState = cameraState.FOCUSING;
+        previousState = cameraState.FOLLOWING_PLAYER;
+        focusTarget = destination;
+        focusZoom = zoomSize;
+        timeToFocus = time;
+
+        lerpTimer = 0;
+    }
+
     private void UpdateStopFocus()
     {
         Vector3 cameraOriginalPosition = cameraUser.transform.position + new Vector3(-distance, distance * verticalScale, -distance);
