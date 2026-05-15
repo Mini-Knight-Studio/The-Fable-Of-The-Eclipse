@@ -1,17 +1,15 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using Loopie;
 
 public class PlayerGrapple : PlayerComponent
 {
-    // --- Global Pillar Management ---
     private static List<PillarTrigger> availablePillars = new List<PillarTrigger>();
     public static void RegisterPillar(PillarTrigger p) { if (!availablePillars.Contains(p)) availablePillars.Add(p); }
     public static void UnregisterPillar(PillarTrigger p) { availablePillars.Remove(p); }
 
     [Header("Settings")]
-    //public float maxGrappleDistance = 25.0f;
     public float maxGrappleAngle = 60.0f;
     public float grappleCooldownTimer = 0.0f;
 
@@ -35,6 +33,12 @@ public class PlayerGrapple : PlayerComponent
     private bool isTraveling = false;
     private bool isLanding = false;
 
+    [Header("Effects")]
+    public Entity comicEffectEntity;
+    private Image comicImage;
+    public float maxComicAlpha = 1.0f;
+    public float grappleShakeAmount = 0.15f;
+    public float grappleShakeRotation = 0.1f;
 
     private float stateTimer = 0.0f;
     private float landingTimer = 0f;
@@ -48,13 +52,17 @@ public class PlayerGrapple : PlayerComponent
     public bool IsLaunching => isLaunching;
     public bool IsTraveling => isTraveling;
     public bool IsLanding => isLanding;
-
     public bool IsGrappling => isLaunching || isTraveling || isLanding;
 
     public void OnCreate()
     {
         ropeSegments.Clear();
         grappleCooldownTimer = 0;
+        if (comicEffectEntity != null)
+        {
+            comicImage = comicEffectEntity.GetComponent<Image>();
+            SetComicAlpha(0.0f);
+        }
     }
 
     void OnDestroy()
@@ -75,13 +83,19 @@ public class PlayerGrapple : PlayerComponent
         if (isLanding)
         {
             landingTimer -= Time.deltaTime;
-            if (landingTimer <= 0) isLanding = false;
+            float fadeOut = landingTimer / landingDuration;
+            SetComicAlpha(fadeOut * maxComicAlpha);
+
+            if (landingTimer <= 0)
+            {
+                isLanding = false;
+                SetComicAlpha(0.0f);
+            }
         }
 
         if (!isLaunching && !isTraveling)
         {
             UpdateTargetPrompt();
-
             if (Player.Instance.Input.grappleKeyPressed && grappleCooldownTimer <= 0)
             {
                 TryExecuteGrapple();
@@ -113,14 +127,34 @@ public class PlayerGrapple : PlayerComponent
             UpdateRopeVisuals(1.0f, false);
             transform.position = Vector3.Lerp(startPos, targetPos, t);
 
+            SetComicAlpha(t * maxComicAlpha);
+
+            if (Player.Instance != null && Player.Instance.Camera != null)
+            {
+                Player.Instance.Camera.SetIsShaking(true, Time.deltaTime * 2.0f, grappleShakeAmount, grappleShakeRotation);
+            }
+
             if (stateTimer >= grappleDuration)
             {
+                if (Player.Instance != null && Player.Instance.Camera != null)
+                {
+                    Player.Instance.Camera.SetIsShaking(true, 0.2f, grappleShakeAmount * 2f, grappleShakeRotation * 2f);
+                }
+
                 DestroyGrappleObjects();
                 FinalizeGrapple();
                 isLanding = true;
                 landingTimer = landingDuration;
             }
         }
+    }
+
+    private void SetComicAlpha(float alpha)
+    {
+        if (comicImage == null) return;
+        Vector4 currentTint = comicImage.Tint;
+        currentTint.w = Math.Max(0.0f, Math.Min(1.0f, alpha));
+        comicImage.Tint = currentTint;
     }
 
     private void TryExecuteGrapple()
@@ -130,7 +164,6 @@ public class PlayerGrapple : PlayerComponent
 
         PillarTrigger bestPillar = null;
         float bestScore = float.MaxValue;
-
         Vector3 playerPos = transform.position;
         Vector3 playerForward = transform.Forward;
 
@@ -157,7 +190,6 @@ public class PlayerGrapple : PlayerComponent
     {
         PillarTrigger bestLookedAt = null;
         float bestScore = float.MaxValue;
-
         Vector3 playerPos = transform.position;
         Vector3 playerForward = transform.Forward;
 
@@ -173,8 +205,7 @@ public class PlayerGrapple : PlayerComponent
             }
         }
 
-        if (bestLookedAt != null &&
-            !bestLookedAt.CheckLineOfSight(playerPos))
+        if (bestLookedAt != null && !bestLookedAt.CheckLineOfSight(playerPos))
         {
             bestLookedAt = null;
         }
@@ -194,41 +225,29 @@ public class PlayerGrapple : PlayerComponent
     private bool IsValidGrappleTarget(PillarTrigger pillar, Vector3 playerPos, Vector3 playerForward, bool requireLineOfSight, out float score)
     {
         score = float.MaxValue;
+        if (pillar == null || pillar.entity == null) return false;
+        Vector3 pPos = pillar.entity.transform.position;
+        float distance = (float)Vector3.Distance(playerPos, pPos);
+        if (distance > pillar.reachDistance || distance < pillar.minReachDistance) return false;
 
-        if (pillar == null || pillar.entity == null)
-            return false;
-
-        Vector3 pillarPos = pillar.entity.transform.position;
-
-        float distance = (float)Vector3.Distance(playerPos, pillarPos);
-        if (distance > pillar.reachDistance || distance < pillar.minReachDistance)
-            return false;
-
-        Vector3 toPillar = pillarPos - playerPos;
+        Vector3 toPillar = pPos - playerPos;
         toPillar.y = 0f;
-
         Vector3 forwardFlat = playerForward;
         forwardFlat.y = 0f;
 
-        if (toPillar.magnitude < 0.0001f || forwardFlat.magnitude < 0.0001f)
-            return false;
+        if (toPillar.magnitude < 0.0001f || forwardFlat.magnitude < 0.0001f) return false;
 
         toPillar.Normalize();
         forwardFlat.Normalize();
 
         float dot = Vector3.Dot(forwardFlat, toPillar);
         dot = Math.Max(-1.0f, Math.Min(1.0f, dot));
-
         float angle = (float)(Math.Acos(dot) * (180.0 / Math.PI));
 
-        if (angle > maxGrappleAngle)
-            return false;
-
-        if (requireLineOfSight && !pillar.CheckLineOfSight(playerPos))
-            return false;
+        if (angle > maxGrappleAngle) return false;
+        if (requireLineOfSight && !pillar.CheckLineOfSight(playerPos)) return false;
 
         score = (angle * 2.0f) + distance;
-
         return true;
     }
 
@@ -236,9 +255,7 @@ public class PlayerGrapple : PlayerComponent
     {
         DestroyGrappleObjects();
         CreateGrappleObjects();
-
         player.Feedback.PlayGrapple();
-
         currentWaitTime = waitTime > 0.01f ? waitTime : 0.5f;
         isLanding = false;
         isLaunching = true;
@@ -255,12 +272,9 @@ public class PlayerGrapple : PlayerComponent
 
     private void CreateGrappleObjects()
     {
-        if (segmentPrefab == null || hookPrefab == null) 
-            return;
-
+        if (segmentPrefab == null || hookPrefab == null) return;
         hookInstance = hookPrefab.Clone(true);
         hookInstance.SetActive(true);
-
         for (int i = 0; i < segmentCount; i++)
         {
             Entity seg = segmentPrefab.Clone(true);
@@ -275,34 +289,23 @@ public class PlayerGrapple : PlayerComponent
         isLaunching = false;
         stateTimer = 0.0f;
         grappleCooldownTimer = grappleCooldown;
-
         if (activePillar != null) activePillar.ResetParticles();
         activePillar = null;
     }
 
     private void DestroyGrappleObjects()
     {
-        if (hookInstance != null)
-        {
-            hookInstance.Destroy();
-            hookInstance = null;
-        }
-
+        if (hookInstance != null) { hookInstance.Destroy(); hookInstance = null; }
         for (int i = 0; i < ropeSegments.Count; i++)
         {
-            if (ropeSegments[i] != null)
-            {
-                ropeSegments[i].Destroy();
-            }
+            if (ropeSegments[i] != null) ropeSegments[i].Destroy();
         }
         ropeSegments.Clear();
     }
 
     private void UpdateRopeVisuals(float progress, bool isLaunchingPhase)
     {
-        if (player.HookAnchor == null || hookInstance == null) 
-            return;
-
+        if (player.HookAnchor == null || hookInstance == null) return;
         Vector3 start = player.HookAnchor.transform.position;
         Vector3 end = isLaunchingPhase ? Vector3.Lerp(start, pillarPos, progress) : pillarPos;
 
@@ -311,7 +314,6 @@ public class PlayerGrapple : PlayerComponent
         Vector3 controlPoint = midPoint + (manualDown * (ropeSagAmount * (1.0f - progress)));
 
         hookInstance.transform.position = end;
-
         Vector3 tipDirection = (end - GetBezierPoint(start, controlPoint, end, 0.95f)).normalized;
         Vector3 hookFakeTarget = end + new Vector3(0, 1, 0);
         hookInstance.transform.LookAt(hookFakeTarget, tipDirection);
@@ -320,19 +322,15 @@ public class PlayerGrapple : PlayerComponent
         {
             float t1 = (float)i / (float)ropeSegments.Count;
             float t2 = (float)(i + 1) / (float)ropeSegments.Count;
-
             Vector3 posA = GetBezierPoint(start, controlPoint, end, t1);
             Vector3 posB = GetBezierPoint(start, controlPoint, end, t2);
-
             Entity seg = ropeSegments[i];
             seg.transform.position = posA;
-
             Vector3 direction = (posB - posA).normalized;
             Vector3 segFakeTarget = posA + new Vector3(0, 1, 0);
             seg.transform.LookAt(segFakeTarget, direction);
-
             float dist = (float)Vector3.Distance(posA, posB);
-            seg.transform.scale = new Vector3(2, dist * 1.5f, 2);
+            seg.transform.scale = new Vector3(1.5f, dist * 1.5f, 1.5f);
         }
     }
 

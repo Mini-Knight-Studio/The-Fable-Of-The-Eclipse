@@ -5,8 +5,7 @@ using Loopie;
 class CheckpointCollider : Component
 {
     private BoxCollider collider;
-
-    private static CheckpointCollider lastSaved = null;
+    private bool hasSaved = false;
     public Player player;
 
     void OnPostCreate()
@@ -17,9 +16,9 @@ class CheckpointCollider : Component
 
     void OnUpdate()
     {
-        if (collider.HasCollided && lastSaved!=this)
+        if (!hasSaved && collider.IsColliding)
         {
-            lastSaved = this;
+            hasSaved = true;
             if (DatabaseRegistry.playerDB != null)
             {
                 DatabaseRegistry.playerDB.Player.playerPositionX = player.transform.position.x;
