@@ -67,7 +67,7 @@ class VolcanoSequence : Component
 
         if (focusTarget != null)
         {
-            Player.Instance.Camera.FocusOnPoint(focusTarget.transform.position, cameraZoom, cameraSpeed);
+            Player.Instance.Camera.FocusOnHeightPoint(focusTarget.transform.position, cameraZoom, cameraSpeed);
         }
 
         yield return new WaitForSeconds(camFocusDuration);
