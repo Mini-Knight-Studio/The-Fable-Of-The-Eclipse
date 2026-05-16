@@ -3,7 +3,6 @@ using Loopie;
 
 class MeteoriteSpawner : Component
 {
-    [Header("Spawning Settings")]
     public float spawnCooldown = 5.0f;
 
     [Header("References")]
@@ -20,6 +19,9 @@ class MeteoriteSpawner : Component
     public Entity spawnPointEntity7;
     public Entity spawnPointEntity8;
     public Entity spawnPointEntity9;
+
+    [Header("Audio Feedback")]
+    public Entity spawnWaveSFX;
 
     private Entity[] validSpawnPoints;
     private int realSpawnCount = 0;
@@ -76,6 +78,11 @@ class MeteoriteSpawner : Component
 
     private void SpawnMeteoriteWave()
     {
+        if (spawnWaveSFX != null)
+        {
+            spawnWaveSFX.GetComponent<AudioSource>().Play();
+        }
+
         for (int i = 0; i < realSpawnCount; i++)
         {
             Entity currentPoint = validSpawnPoints[i];
@@ -86,7 +93,6 @@ class MeteoriteSpawner : Component
 
                 if (newClone != null)
                 {
-                    //copiada historica del spawn de Ana
                     newClone.Name = newClone.Name.Replace("_Reference_", "").Replace("_Reference", "");
 
                     newClone.transform.position = currentPoint.transform.position;
