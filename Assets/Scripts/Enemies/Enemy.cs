@@ -15,6 +15,7 @@ public class Enemy : Component
     protected BoxCollider enemyAvoid;
     protected BoxCollider hitbox;
 
+    protected BlinkEffect blink;
     protected TemporalEffect effect;
 
     //-- Wander --//
@@ -45,9 +46,9 @@ public class Enemy : Component
         animator = entity.GetComponent<EnemyAnimation>();
         feedback = entity.GetComponent<EnemyFeedback>();
         effect = entity.GetComponent<TemporalEffect>();
+        blink = entity.GetComponent<BlinkEffect>();
 
-
-        foreach(Entity child in entity.GetChildren())
+        foreach (Entity child in entity.GetChildren())
         {
             if (child.Name == "Hitbox")
             {
@@ -55,7 +56,7 @@ public class Enemy : Component
             }
         }
 
- 
+
         health.Init();
         wanderRange = false;
         ResetWander();
@@ -121,9 +122,9 @@ public class Enemy : Component
         }
         animator.PlayClip(attack_clip, false, 0.0f);
         float clipDuration = animator.ClipDuration();
-        yield return new WaitForSeconds(clipDuration*hitOffset.x);
+        yield return new WaitForSeconds(clipDuration * hitOffset.x);
         DoAttack(attack_distance, damage, applyFeedbackOnlyOnhit);
-        yield return new WaitForSeconds(clipDuration*hitOffset.y);
+        yield return new WaitForSeconds(clipDuration * hitOffset.y);
         DoAttackCooldown(cooldown_clip);
         yield return new WaitForSeconds(attack_cooldown);
         EndAttack(end_attack_clip);
@@ -151,7 +152,7 @@ public class Enemy : Component
     public virtual void DoAttack(float attack_distance, int damage, bool feedback_only_on_hit)
     {
         attack_stages.x = 1.0f;
-        
+
         if (Mathf.Abs((float)Vector3.Distance(transform.position, Player.Instance.transform.position)) <= GetEntityForwardBase() + attack_distance)
         {
             if (Player.Instance.Effects.AddEffect(effect)) feedback.TickParticles("Effect", Time.deltaTime);
@@ -195,10 +196,16 @@ public class Enemy : Component
             if (hitbox.HasCollided)
             {
                 health.Damage(points);
+
+                if (blink != null)
+                {
+                    blink.TriggerBlink();
+                }
+
                 transform.LookAt(Player.Instance.transform.position, Vector3.Up);
                 feedback.TickParticles("Hurt", Time.deltaTime);
                 feedback.PlaySound("Hit");
-                if(!health.IsDead())
+                if (!health.IsDead())
                     animator.PlayClip(hit_clip, false, 0.0f, true, true);
                 StartCoroutine(movement.Push(points * force_scale, knockback_time, GetDirectionToTarget() * -1));
             }

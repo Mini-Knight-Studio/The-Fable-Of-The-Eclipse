@@ -210,6 +210,10 @@ class PuzzleDoorTablet : Component
 
         yield return new WaitForSeconds(1.0f);
 
+        Player.Instance.Camera.StopFocus();
+
+        yield return new WaitForSeconds(1.0f);
+
         elapsedTime = 0f;
         while (true)
         {
@@ -228,9 +232,6 @@ class PuzzleDoorTablet : Component
             yield return null;
         }
 
-        yield return new WaitForSeconds(1.0f);
-
-        Player.Instance.Camera.StopFocus();
 
         hasRisen = true;
         DatabaseRegistry.levelsDB.Levels.SetPuzzleDoorOpened(puzzleDoorID);

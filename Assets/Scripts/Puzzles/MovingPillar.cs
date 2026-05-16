@@ -141,10 +141,14 @@ class MovingPillar : Component
             pushTimerRight = 0.0f;
         }
     }
-
     void HandlePush(BoxCollider col, Vector3 direction, ref float timer)
     {
         timer += Time.deltaTime;
+
+        if (timer > 0.1f)
+        {
+            Player.Instance.Animation.PlayPush();
+        }
 
         if (timer >= pushTimeRequired)
         {
@@ -152,7 +156,6 @@ class MovingPillar : Component
             {
                 TryMove(direction);
             }
-
             timer = 0.0f;
         }
     }

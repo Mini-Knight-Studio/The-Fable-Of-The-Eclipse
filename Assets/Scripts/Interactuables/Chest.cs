@@ -177,6 +177,7 @@ class Chest : Component
                     rewardItem.transform.scale = targetRewardScale;
 
                     rewardItem.GetComponent<Key_Idle>().StartMoving();
+
                 }
                 break;
             }
@@ -210,6 +211,7 @@ class Chest : Component
     {
         rewardCollected = true;
         DatabaseRegistry.levelsDB.Levels.SetRewardCollected(chestID);
+        Player.Instance.Animation.PlayPickUp();
     }
 
     IEnumerator GemShineCoroutine()
