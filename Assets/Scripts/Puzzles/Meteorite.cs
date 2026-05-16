@@ -132,12 +132,5 @@ class Meteorite : Component
         float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
         Vector3 groundPos = (goingUp && useCurve) ? new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z) : new Vector3(startPos.x, finalY, startPos.z);
         Gizmo.DrawCircle(groundPos, shakeRadius, Vector3.Up, 32, Color.Green);
-
-        if (goingUp && useCurve)
-        {
-            Vector3 peakPos = new Vector3(startPos.x, startPos.y + fallDistance + curveArcHeight, startPos.z);
-            Gizmo.DrawLine(startPos, peakPos, Color.Orange);
-            Gizmo.DrawLine(peakPos, groundPos, Color.Orange);
-        }
     }
 }

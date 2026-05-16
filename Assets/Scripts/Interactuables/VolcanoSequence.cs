@@ -4,7 +4,6 @@ using Loopie;
 
 class VolcanoSequence : Component
 {
-    [Header("Flow Control")]
     public bool playOnlyOnce = true;
 
     [Header("Preparation")]
@@ -12,15 +11,21 @@ class VolcanoSequence : Component
     public float prepZoom = 111f;
     public float prepCameraSpeed = 4f;
     public float prepDuration = 2.5f;
+    public float prepShakeAmount = 0.1f;
+    public float prepShakeRotation = 0.05f;
 
-    [Header("Explosion")]
+    [Header("Pre")]
     public Entity craterFocusTarget;
     public float craterZoom = 70f;
     public float craterCameraSpeed = 6f;
     public float craterFocusDuration = 1.0f;
+    public float craterShakeAmount = 0.3f;
+    public float craterShakeRotation = 0.2f;
 
-    [Header("Timings")]
+    [Header("Explosion")]
     public float eruptionDuration = 4.0f;
+    public float eruptionShakeAmount = 0.6f;
+    public float eruptionShakeRotation = 0.4f;
     public float delayBetweenMeteorites = 0.1f;
     public float sequenceDistance = 0f;
 
@@ -32,6 +37,11 @@ class VolcanoSequence : Component
     public Entity meteorite1;
     public Entity meteorite2;
     public Entity meteorite3;
+
+    [Header("Audio Feedback")]
+    public Entity prepRumbleSFX;
+    public Entity explosionBoomSFX;
+    public Entity meteoriteLaunchSFX;
 
     private bool hasTriggered = false;
 
@@ -64,6 +74,8 @@ class VolcanoSequence : Component
         float originalDistance = Player.Instance.Camera.distance;
         Player.Instance.Camera.distance = sequenceDistance;
 
+        if (prepRumbleSFX != null) prepRumbleSFX.GetComponent<AudioSource>().Play();
+
         if (prepParticles != null)
         {
             prepParticles.SetActive(true);
@@ -75,6 +87,8 @@ class VolcanoSequence : Component
             Player.Instance.Camera.FocusOnHeightPoint(prepFocusTarget.transform.position, prepZoom, prepCameraSpeed);
         }
 
+        Player.Instance.Camera.SetIsShaking(true, prepDuration, prepShakeAmount, prepShakeRotation);
+
         yield return new WaitForSeconds(prepDuration);
 
 
@@ -83,8 +97,14 @@ class VolcanoSequence : Component
             Player.Instance.Camera.FocusOnHeightPoint(craterFocusTarget.transform.position, craterZoom, craterCameraSpeed);
         }
 
+        Player.Instance.Camera.SetIsShaking(true, craterFocusDuration, craterShakeAmount, craterShakeRotation);
+
         yield return new WaitForSeconds(craterFocusDuration);
 
+
+        if (prepRumbleSFX != null) prepRumbleSFX.GetComponent<AudioSource>().Stop();
+
+        if (explosionBoomSFX != null) explosionBoomSFX.GetComponent<AudioSource>().Play();
 
         if (prepParticles != null) prepParticles.SetActive(false);
 
@@ -94,13 +114,29 @@ class VolcanoSequence : Component
             explosionParticles.GetComponent<ParticleComponent>().Play();
         }
 
-        Player.Instance.Camera.SetIsShaking(true, eruptionDuration, 0.5f, 0.4f);
+        Player.Instance.Camera.SetIsShaking(true, eruptionDuration, eruptionShakeAmount, eruptionShakeRotation);
 
-        if (meteorite1 != null) { meteorite1.SetActive(true); yield return new WaitForSeconds(delayBetweenMeteorites); }
-        if (meteorite2 != null) { meteorite2.SetActive(true); yield return new WaitForSeconds(delayBetweenMeteorites); }
-        if (meteorite3 != null) { meteorite3.SetActive(true); yield return new WaitForSeconds(delayBetweenMeteorites); }
+        if (meteorite1 != null)
+        {
+            meteorite1.SetActive(true);
+            PlayMeteoriteLaunchSound();
+            yield return new WaitForSeconds(delayBetweenMeteorites);
+        }
+        if (meteorite2 != null)
+        {
+            meteorite2.SetActive(true);
+            PlayMeteoriteLaunchSound();
+            yield return new WaitForSeconds(delayBetweenMeteorites);
+        }
+        if (meteorite3 != null)
+        {
+            meteorite3.SetActive(true);
+            PlayMeteoriteLaunchSound();
+            yield return new WaitForSeconds(delayBetweenMeteorites);
+        }
 
         yield return new WaitForSeconds(eruptionDuration);
+
 
         if (explosionParticles != null) explosionParticles.GetComponent<ParticleComponent>().Stop();
 
@@ -119,6 +155,13 @@ class VolcanoSequence : Component
             if (meteorite1 != null) meteorite1.SetActive(false);
             if (meteorite2 != null) meteorite2.SetActive(false);
             if (meteorite3 != null) meteorite3.SetActive(false);
+        }
+    }
+    private void PlayMeteoriteLaunchSound()
+    {
+        if (meteoriteLaunchSFX != null)
+        {
+            meteoriteLaunchSFX.GetComponent<AudioSource>().Play();
         }
     }
 
