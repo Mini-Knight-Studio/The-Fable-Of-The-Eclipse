@@ -133,14 +133,18 @@ public class Player : Component
 
     void OnUpdate()
     {
-        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
-        Input.ProcessInputs();
-        Movement.ProcessMovement();
-        Combat.ProcessCombat();
-        Torch.ProcessTorch();
-        Grapple.ProcessGrappel();
-        Animation.ProcessAnimations();
-        Feedback.ProcessFeedback();
+        Input.ProcessInputs(GameManager.state);
+
+        if (GameManager.state == GameManager.GameState.DEFAULT)
+        {
+            Movement.ProcessMovement();
+            Combat.ProcessCombat();
+            Torch.ProcessTorch();
+            Grapple.ProcessGrappel();
+            Animation.ProcessAnimations();
+            Feedback.ProcessFeedback();
+        }
+
 
     }
 

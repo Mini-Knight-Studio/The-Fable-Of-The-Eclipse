@@ -16,35 +16,49 @@ public class PlayerInput : PlayerComponent
     /// </summary>
     public bool godModeKeyPressed = false;
 
-    public void ProcessInputs()
+    public void ProcessInputs(GameManager.GameState state)
     {
-        CollectMovementInput();
+        ResetInputs();
+        switch (state)
+        {
+            case GameManager.GameState.DEFAULT:
+                CollectMovementInput();
+                CollectDashInput();
+                CollectAttackInput();
+                CollectGrappleInput();
+                CollectTorchInput();
+                CollectOptionsInput();
+                CollectInteractInput();
+                break;
 
-        CollectDashInput();
+            case GameManager.GameState.PAUSE:
+                CollectInteractInput();
+                break;
 
-        CollectAttackInput();
+            case GameManager.GameState.FREEZE:
+                break;
+        }
 
-        CollectGrappleInput();
+        if (state == GameManager.GameState.DEFAULT) { 
+            
+        }
 
-        CollectTorchInput();
-
-        CollectInteractInput();
-
-        CollectOptionsInput();
-        //// MORE IF NEED IT
-        /// ...
-
-
-
-
-
-
-
-
-        ///// DEBUG INPUTS
         CollectDebugInputs();
-        ////
+    }
 
+    private void ResetInputs()
+    {
+        moveDirection = Vector3.Zero;
+        dashKeyPressed = false;
+        attackKeyPressed = false;
+        grappleKeyPressed = false;
+        torchKeyPressed = false;
+        interactKeyPressed = false;
+        optionsKeyPressed = false;
+        godModeKeyPressed = false;
+        torchKeyPressed = false;
+        interactKeyPressed = false;
+        optionsKeyPressed = false;
     }
 
     private void CollectMovementInput()
