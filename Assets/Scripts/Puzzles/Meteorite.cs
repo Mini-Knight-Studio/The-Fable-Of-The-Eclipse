@@ -14,7 +14,6 @@ class Meteorite : Component
     public float curveArcHeight = 15f;
     public float curveHorizontalOffset = 10f;
 
-    [Header("Collision & Radius")]
     public BoxCollider MeteoriteTrigger;
     public float shakeRadius = 12.0f;
 
@@ -35,22 +34,10 @@ class Meteorite : Component
     private bool isFalling = false;
     private bool hasDealtDamage = false;
 
+    private bool isInitialized = false;
+
     void OnCreate()
     {
-        startPos = transform.position;
-
-        float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
-
-        if (goingUp && useCurve)
-        {
-            targetPos = new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z);
-            controlPos = new Vector3(startPos.x, startPos.y + fallDistance + curveArcHeight, startPos.z);
-        }
-        else
-        {
-            targetPos = new Vector3(startPos.x, finalY, startPos.z);
-        }
-
         if (MeteoriteTrigger == null)
             MeteoriteTrigger = entity.GetComponent<BoxCollider>();
 
@@ -64,11 +51,31 @@ class Meteorite : Component
         timer = 0.0f;
         totalElapsed = 0.0f;
         hasDealtDamage = false;
+        isInitialized = false;
     }
 
     void OnUpdate()
     {
         if (!isFalling) return;
+
+        if (!isInitialized)
+        {
+            startPos = transform.position;
+
+            float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
+
+            if (goingUp && useCurve)
+            {
+                targetPos = new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z);
+                controlPos = new Vector3(startPos.x, startPos.y + fallDistance + curveArcHeight, startPos.z);
+            }
+            else
+            {
+                targetPos = new Vector3(startPos.x, finalY, startPos.z);
+            }
+
+            isInitialized = true;
+        }
 
         totalElapsed += Time.deltaTime;
 
