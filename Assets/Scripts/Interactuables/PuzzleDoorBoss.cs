@@ -64,6 +64,8 @@ class PuzzleDoorBoss : Component
 
     private Entity[] keyParticles;
 
+    public Entity bossEyesParticles;
+
     public Entity door1SFX;
     public Entity door2SFX;
     public Entity door3SFX;
@@ -202,6 +204,62 @@ class PuzzleDoorBoss : Component
                 {
                     currentAnimKey.transform.position = targetKeyPos;
                     currentAnimKey.transform.scale = targetKeyScale;
+
+                    switch (keyIndex)
+                    {
+                        case 0:
+                            {
+                                bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 5);
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 5);
+
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
+                                break;
+                            }
+
+                        case 1:
+                            {
+                                bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 10);
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 10);
+
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
+                                break;
+                            }
+
+                        case 2:
+                            {
+                                bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 30);
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 30);
+
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.361f, 0.105f, 0.105f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.361f, 0.105f, 0.105f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.976f, 0.384f, 0.384f, 1.0f));
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.976f, 0.384f, 0.384f, 1.0f));
+                                break;
+                            }
+
+                        default:
+                            {
+                                bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 10);
+                                bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 10);
+                                break;
+                            }
+                    }
+                    bossEyesParticles.GetComponent<ParticleComponent>().Play();
+
                     break;
                 }
                 yield return null;
