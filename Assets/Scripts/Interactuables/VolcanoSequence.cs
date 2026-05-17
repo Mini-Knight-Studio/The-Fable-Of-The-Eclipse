@@ -44,6 +44,7 @@ class VolcanoSequence : Component
     public Entity meteoriteLaunchSFX;
 
     private bool hasTriggered = false;
+    public static bool SequenceFinished = false;
 
     void OnCreate()
     {
@@ -144,7 +145,7 @@ class VolcanoSequence : Component
         Player.Instance.Camera.distance = originalDistance;
 
         yield return null;
-
+        VolcanoSequence.SequenceFinished = true;
         GameManager.SetState(GameManager.GameState.DEFAULT);
 
         if (!playOnlyOnce)

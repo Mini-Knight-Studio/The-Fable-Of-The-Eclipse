@@ -64,6 +64,7 @@ class MeteoriteSpawner : Component
 
     void OnUpdate()
     {
+        if (!VolcanoSequence.SequenceFinished) return;
         if (GameManager.state != GameManager.GameState.DEFAULT) return;
         if (meteoritePrefab == null || realSpawnCount == 0) return;
 
