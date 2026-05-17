@@ -35,8 +35,9 @@ public class LevelsData
         collectedRewards[chestID] = true;
     }
 
-    // -------------------------------- Puzzle Doors --------------------------------
+    // -------------------------------- Puzzle Doors / Boss Door --------------------------------
     public Dictionary<string, bool> openedPuzzleDoors = new Dictionary<string, bool>();
+    public Dictionary<int, bool> insertedBossDoorKeys = new Dictionary<int, bool>();
 
     public bool IsPuzzleDoorOpened(string puzzledoorID)
     {
@@ -47,6 +48,17 @@ public class LevelsData
     public void SetPuzzleDoorOpened(string puzzledoorID)
     {
         openedPuzzleDoors[puzzledoorID] = true;
+    }
+
+    public bool IsBossDoorKeyInserted(int keyNumber)
+    {
+        if (insertedBossDoorKeys.TryGetValue(keyNumber, out bool isOpen)) return isOpen;
+        return false;
+    }
+
+    public void SetBossDoorKeyInserted(int keyNumber)
+    {
+        insertedBossDoorKeys[keyNumber] = true;
     }
 
     // -------------------------------- Bridges --------------------------------
