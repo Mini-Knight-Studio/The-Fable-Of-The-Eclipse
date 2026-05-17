@@ -24,6 +24,7 @@ class PuzzleDoorTablet : Component
     public float raiseDuration = 2.0f;
     public float pauseBeforeRaising = 0.5f;
     public float easeIntensity = 1.5f;
+    public bool modifyParticles = true;
     public float cameraZoom = 20;
 
     public float cameraShakeDuration = 0.5f;
@@ -187,10 +188,13 @@ class PuzzleDoorTablet : Component
             float currentSpreadZ = Mathf.Lerp(1.5f, 5.5f, particleCurvedT);
             Vector3 variation = new Vector3(currentSpreadX, 0, currentSpreadZ);
 
-            if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
-            if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
-            if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
-            if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+            if(modifyParticles)
+            {
+                if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+                if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+                if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+                if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+            }
 
             if (t >= 1f)
             {
