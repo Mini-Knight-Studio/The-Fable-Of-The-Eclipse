@@ -69,10 +69,13 @@ class PuzzleDoorBoss : Component
     public Entity door1SFX;
     public Entity door2SFX;
     public Entity door3SFX;
+    public Entity doorSongSFX;
     public Entity impactSFX;
+    public Entity bellSFX;
     public Entity insertKey1SFX;
     public Entity insertKey2SFX;
     public Entity insertKey3SFX;
+    public Entity eyesIgniteSFX;
 
     private Entity[] insertKeySFXs;
 
@@ -100,6 +103,60 @@ class PuzzleDoorBoss : Component
             {
                 staticKeys[i].SetActive(true);
                 keyInserted[i] = true;
+                switch (i)
+                {
+                    case 0:
+                        {
+                            bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 5);
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 5);
+
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
+                            break;
+                        }
+
+                    case 1:
+                        {
+                            bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 10);
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 10);
+
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 30);
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 30);
+
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.361f, 0.105f, 0.105f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.361f, 0.105f, 0.105f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.976f, 0.384f, 0.384f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.976f, 0.384f, 0.384f, 1.0f));
+                            break;
+                        }
+
+                    default:
+                        {
+                            bossEyesParticles.GetComponent<ParticleComponent>().Stop();
+
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 10);
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 10);
+                            break;
+                        }
+                }
+                bossEyesParticles.GetComponent<ParticleComponent>().Play();
             }
         }
 
@@ -259,6 +316,7 @@ class PuzzleDoorBoss : Component
                             }
                     }
                     bossEyesParticles.GetComponent<ParticleComponent>().Play();
+                    if (eyesIgniteSFX != null) eyesIgniteSFX.GetComponent<AudioSource>().Play();
 
                     break;
                 }
@@ -284,6 +342,7 @@ class PuzzleDoorBoss : Component
             if (door1SFX != null) door1SFX.GetComponent<AudioSource>().Play();
             if (door2SFX != null) door2SFX.GetComponent<AudioSource>().Play();
             if (door3SFX != null) door3SFX.GetComponent<AudioSource>().Play();
+            if (doorSongSFX != null) doorSongSFX.GetComponent<AudioSource>().Play();
 
             float elapsedTime = 0f;
 
@@ -313,6 +372,7 @@ class PuzzleDoorBoss : Component
                     if (door2SFX != null) door2SFX.GetComponent<AudioSource>().Stop();
                     if (door3SFX != null) door3SFX.GetComponent<AudioSource>().Stop();
                     if (impactSFX != null) impactSFX.GetComponent<AudioSource>().Play();
+                    if (bellSFX != null) bellSFX.GetComponent<AudioSource>().Play();
 
                     Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount * 2, cameraShakeRotation * 2, cameraShakeAmountVel, cameraShakeRotationVel);
 
