@@ -34,6 +34,9 @@ public class Pause : Component
                 pauseMenuEntity.SetActive(false);
                 infoDebugEntity.SetActive(false);
 
+                PauseMenu.quickStartAnimations = true;
+                PauseMenu.invertedPassPagePlayed = false;
+
                 GameManager.SetState(previousState);
             }
             else
@@ -46,6 +49,7 @@ public class Pause : Component
                     pauseMenuEntity.GetComponent<PauseMenu>().Open();
                 }
 
+                
 
                 previousState = GameManager.state;
                 GameManager.SetState(GameManager.GameState.FREEZE);
