@@ -41,7 +41,7 @@ class Puzzle1Blocker : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
         if (isBurnt) return;
         

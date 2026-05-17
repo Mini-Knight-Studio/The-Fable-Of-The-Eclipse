@@ -211,7 +211,7 @@ class MovingPlatform : Component
 
         while (true)
         {
-            if (Pause.isPaused || isSinking)
+            if (GameManager.state != GameManager.GameState.DEFAULT || isSinking)
             {
                 yield return null;
                 continue;
@@ -237,7 +237,7 @@ class MovingPlatform : Component
             {
                 while (elapsedTravelTime < totalTravelTime)
                 {
-                    if (Pause.isPaused || isSinking)
+                    if (GameManager.state != GameManager.GameState.DEFAULT || isSinking)
                     {
                         yield return null;
                         continue;
@@ -328,7 +328,7 @@ class MovingPlatform : Component
 
                 while (elapsedPauseTime < pauseTime)
                 {
-                    if (Pause.isPaused || isSinking)
+                    if (GameManager.state != GameManager.GameState.DEFAULT || isSinking)
                     {
                         yield return null;
                         continue;
@@ -397,7 +397,7 @@ class MovingPlatform : Component
 
         while (true)
         {
-            if (Pause.isPaused)
+            if (GameManager.state != GameManager.GameState.DEFAULT)
             {
                 yield return null;
                 continue;
@@ -429,7 +429,7 @@ class MovingPlatform : Component
 
         while (true)
         {
-            if (Pause.isPaused)
+            if (GameManager.state != GameManager.GameState.DEFAULT)
             {
                 yield return null;
                 continue;
