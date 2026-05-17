@@ -80,19 +80,22 @@ html, body
     height: 100%;
 }
 
-.member-card
-{
-    background-color: red;
-    border-radius: 15px;
-    padding: 10px;
-    width: 400px;
-}
-
-@media screen and(max-width: 768px)
+@media (pointer: coarse)
 {
     .member-card
     {
-        background-color: blueviolet;
+        background-color: blue;
+        border-radius: 15px;
+        padding: 10px;
+        width: 400px;
+    }
+}
+
+@media (pointer: fine)
+{
+    .member-card
+    {
+        background-color: green;
         border-radius: 15px;
         padding: 10px;
         width: 400px;
