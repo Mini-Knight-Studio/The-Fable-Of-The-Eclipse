@@ -26,7 +26,7 @@ public class GameDebug : Component
     {
         if (debugMenuEntity.Active)
         {
-            Pause.isPaused = false;
+            GameManager.SetState(GameManager.GameState.DEFAULT);
             Time.timeScale = 1;
         }
     }
