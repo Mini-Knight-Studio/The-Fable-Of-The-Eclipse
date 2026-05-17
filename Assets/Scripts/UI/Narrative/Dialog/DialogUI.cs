@@ -74,20 +74,21 @@ class DialogUI : Component
 
         foreach (string line in lines)
         {
-            text.SetText("");
+            text.SetText(line);
+            text.VisibleCharacters = 0;
 
             for (int i = 0; i < line.Length; i++)
             {
-                text.SetText(line.Substring(0, i + 1));
+                text.VisibleCharacters = i + 1;
 
                 float timer = 0f;
                 bool skipRequested = false;
 
                 while (timer < readSpeed)
                 {
-                    if (Player.Instance.Input.interactKeyPressed)
+                    if (Input.Any)
                     {
-                        text.SetText(line);
+                        text.VisibleCharacters = line.Length;
                         skipRequested = true;
                         break;
                     }
@@ -101,7 +102,7 @@ class DialogUI : Component
                 }
             }
 
-            while (Player.Instance.Input.interactKeyPressed)
+            while (Input.Any)
             {
                 yield return null;
             }
@@ -111,19 +112,23 @@ class DialogUI : Component
             isWaitingForNextLine = true;
             while (isWaitingForNextLine)
             {
-                if (Player.Instance.Input.interactKeyPressed)
+                if (Input.Any)
                 {
                     isWaitingForNextLine = false;
                 }
                 yield return null;
             }
-            while (Player.Instance.Input.interactKeyPressed)
+            while (Input.Any)
             {
                 yield return null;
             }
         }
 
+
         Close();
+        IsDialogOpen = true;
+        yield return new WaitForSeconds(0.5f);
+        IsDialogOpen = false;
     }
 
     IEnumerator NextLineIconBlink(float blinkSpeed)
