@@ -31,7 +31,7 @@ public class BlinkEffect : Component
     {
         if (instancedMaterial == null) return;
 
-        StopAllCoroutines();
+        StopAllOwnedCoroutines();
         StartCoroutine(FlashSequence());
     }
 

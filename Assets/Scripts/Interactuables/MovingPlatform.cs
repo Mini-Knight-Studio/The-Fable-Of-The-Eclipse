@@ -56,6 +56,7 @@ class MovingPlatform : Component
 
     public bool moveOnStart = false;
     public bool looping = false;
+    public bool counterClockwise = false;
 
     private bool goingToPoint = false;
     public int targetPoint = 0;
@@ -351,7 +352,15 @@ class MovingPlatform : Component
 
             if (looping || activateOnCollision)
             {
-                targetPoint = (currentPoint + 1) % numOfPathPoints;
+                if (counterClockwise)
+                {
+                    targetPoint = (currentPoint - 1 + numOfPathPoints) % numOfPathPoints;
+                }
+                else
+                {
+                    targetPoint = (currentPoint + 1) % numOfPathPoints;
+                }
+
                 goingToPoint = true;
                 movingParticles.Play();
                 if (movingParticlesEntity2 != null) movingParticles2.Play();
