@@ -121,6 +121,7 @@ class PuzzleDoorTablet : Component
 
         Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom / 2f, 6);
 
+
         yield return new WaitForSeconds(0.25f);
 
         float elapsedTime = 0f;
@@ -152,6 +153,8 @@ class PuzzleDoorTablet : Component
 
         animatedKey.SetActive(false);
         staticKey.SetActive(true);
+
+        Input.StartShake(.7f, raiseDuration);
 
         Player.Instance.Camera.SetIsShaking(true, raiseDuration + pauseBeforeRaising + 1, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
 
@@ -209,9 +212,9 @@ class PuzzleDoorTablet : Component
         if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().Stop();
         if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().Stop();
         if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().Stop();
+        Input.StartShake(1, .1f);
 
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount * 2, cameraShakeRotation * 2, cameraShakeAmountVel, cameraShakeRotationVel);
-
         yield return new WaitForSeconds(1.0f);
 
         Player.Instance.Camera.StopFocus();
