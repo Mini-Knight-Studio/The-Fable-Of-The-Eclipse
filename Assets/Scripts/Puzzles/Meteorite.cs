@@ -26,6 +26,10 @@ class Meteorite : Component
     public float shakeAmount = 0.3f;
     public float shakeRotation = 0.2f;
 
+    // Esta variable la llena automáticamente el Spawner al nacer
+    [HideInInspector]
+    public Entity originSpawnPoint;
+
     private Vector3 startPos;
     private Vector3 targetPos;
     private Vector3 controlPos;
@@ -121,6 +125,7 @@ class Meteorite : Component
 
     void Impact()
     {
+        // 1. Efecto de la cámara
         if (Player.Instance != null)
         {
             float distanceToPlayer = (float)Vector3.Distance(transform.position, Player.Instance.transform.position);
@@ -131,6 +136,32 @@ class Meteorite : Component
             }
         }
 
+        // REPRODUCIR EFECTOS DIRECTAMENTE EN EL SPAWNPOINT DE ORIGEN
+        if (originSpawnPoint != null)
+        {
+            // Movemos el spawnpoint visualmente a la posición exacta del suelo/impacto si es necesario, 
+            // o dejamos que actúe desde donde está configurado.
+
+            // 2. Activar partículas estáticas del SpawnPoint
+            ParticleComponent pComp = originSpawnPoint.GetComponent<ParticleComponent>();
+            if (pComp != null)
+            {
+                pComp.Play();
+            }
+
+            // 3. Activar sonido estático del SpawnPoint
+            AudioSource audio = originSpawnPoint.GetComponent<AudioSource>();
+            if (audio != null)
+            {
+                audio.Play();
+            }
+        }
+        else
+        {
+            Console.WriteLine("[Meteorite] Alerta: No se encontró la referencia del originSpawnPoint.");
+        }
+
+        // 4. Morir instantáneamente (Los efectos sobreviven porque están en el SpawnPoint)
         entity.Destroy();
     }
 

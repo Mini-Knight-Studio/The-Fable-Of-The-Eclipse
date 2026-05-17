@@ -27,9 +27,13 @@ class MeteoriteSpawner : Component
     private int realSpawnCount = 0;
     private float timer;
 
+    // Tracks the previous frame's state to catch the exact moment the sequence ends
+    private GameManager.GameState lastState;
+
     void OnCreate()
     {
         timer = spawnCooldown;
+        lastState = GameManager.state;
 
         if (meteoritePrefab != null)
         {
@@ -64,7 +68,17 @@ class MeteoriteSpawner : Component
 
     void OnUpdate()
     {
-        if (!VolcanoSequence.SequenceFinished) return;
+        // If the game just transitioned out of PAUSE and back into DEFAULT, 
+        // it means the volcano sequence just finished up.
+        if (lastState == GameManager.GameState.PAUSE && GameManager.state == GameManager.GameState.DEFAULT)
+        {
+            timer = spawnCooldown; // Reset timer to give the player a fair head start
+            Console.WriteLine("[MeteoriteSpawner] Cutscene finished. Resetting spawn timer.");
+        }
+
+        // Always record the current state for the next frame's comparison
+        lastState = GameManager.state;
+
         if (GameManager.state != GameManager.GameState.DEFAULT) return;
         if (meteoritePrefab == null || realSpawnCount == 0) return;
 
