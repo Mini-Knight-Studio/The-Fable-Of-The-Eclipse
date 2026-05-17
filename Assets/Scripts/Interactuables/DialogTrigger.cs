@@ -14,6 +14,9 @@ class DialogTrigger : Component
     [Header("Typing")]
     public float characterDelay = 0.03f;
 
+    [Header("References")]
+    public Entity interactPrompt;
+
     BoxCollider boxCollider;
 
     void OnCreate()
@@ -23,10 +26,32 @@ class DialogTrigger : Component
 
     void OnUpdate()
     {
-        if (Input.IsKeyPressed(KeyCode.U) && !DialogUI.Instance.IsDialogOpen)
+        if (DialogUI.Instance.IsDialogOpen)
         {
-            Open();
+            interactPrompt.SetActive(false);
+            return;
         }
+
+        if (boxCollider.IsColliding)
+        {
+            if (!interactPrompt.Active)
+            {
+                interactPrompt.SetActive(true);
+            }
+
+            if (Player.Instance.Input.interactKeyPressed)
+            {
+                Open();
+            }
+        }
+        else
+        {
+            if (interactPrompt.Active)
+            {
+                interactPrompt.SetActive(false);
+            }
+        }
+
     }
 
     private void Open()

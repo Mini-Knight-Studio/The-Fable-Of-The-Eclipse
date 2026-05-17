@@ -8,6 +8,7 @@ public class PillarTrigger : Component
 
     private ParticleComponent hookParticles;
 
+    public float yOffset = 1;
     public float reachDistance = 10.0f;
     public float minReachDistance = 1.0f;
     public float hookTravelTime = 0.5f;
@@ -43,9 +44,13 @@ public class PillarTrigger : Component
             hookParticles.Stop();
     }
 
+    public Vector3 GetGrapplePoint()
+    {
+        return entity.transform.position + Vector3.Up * yOffset;
+    }
     public bool CheckLineOfSight(Vector3 playerPos)
     {
-        Vector3 pillarPos = entity.transform.position;
+        Vector3 pillarPos = GetGrapplePoint();
         Vector3 dirToPlayer = (playerPos - pillarPos).normalized;
         float distance = (float)Vector3.Distance(pillarPos, playerPos);
 
