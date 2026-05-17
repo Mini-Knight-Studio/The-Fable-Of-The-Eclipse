@@ -262,7 +262,7 @@ public class PlayerGrapple : PlayerComponent
         isTraveling = false;
         stateTimer = 0.0f;
         activePillar = pillarScript;
-        pillarPos = activePillar.entity.transform.position;
+        pillarPos = activePillar.GetGrapplePoint();
         startPos = transform.position;
 
         Vector3 dir = (pillarPos - startPos).normalized;

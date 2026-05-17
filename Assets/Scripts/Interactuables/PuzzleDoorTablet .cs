@@ -80,7 +80,7 @@ class PuzzleDoorTablet : Component
 
     void OnUpdate()
     {
-        if (Pause.isPaused) { return; }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
         if (hasRisen || isRisen) return;
 

@@ -63,6 +63,20 @@ public class HeadLogic : Component
         isVulnerable = false;
     }
 
+    public void Restart()
+    {
+        StopAllOwnedCoroutines();
+
+        isDefeated = false;
+        isVulnerable = false;
+
+        // Reset position and rotation
+        transform.position = startPointEntity.transform.position;
+        transform.rotation = Vector3.Zero;
+
+        headColliderEntity.SetActive(false);
+    }
+
     void OnDestroy()
     {
         StopAllOwnedCoroutines();
