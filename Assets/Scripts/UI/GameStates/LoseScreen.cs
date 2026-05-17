@@ -28,7 +28,7 @@ public class LoseScreen : Component
     [ShowInInspector] Color colorLoseText;
     [ShowInInspector] Color colorRespawnText;
 
-
+    public event Action OnClosing;
 
     bool canRecieveInput = false;
 
@@ -167,6 +167,7 @@ public class LoseScreen : Component
 
     IEnumerator Hide()
     {
+        OnClosing?.Invoke();
         canRecieveInput = false;
 
         float timer = 0;

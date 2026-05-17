@@ -31,9 +31,9 @@ public class Player : Component
     public Entity RespawnTransitionEntity;
     public Entity LoseScreenEntity;
     public Entity CreditsScreenEntity;
-    private FadeInOutEvent RespawnTransition;
-    private LoseScreen LoseScreen;
-    private CreditsScreen CreditsScreen;
+    public FadeInOutEvent RespawnTransition;
+    public LoseScreen LoseScreen;
+    public CreditsScreen CreditsScreen;
 
     public bool IsInCutscene = false;
 
@@ -133,14 +133,18 @@ public class Player : Component
 
     void OnUpdate()
     {
-        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
-        Input.ProcessInputs();
-        Movement.ProcessMovement();
-        Combat.ProcessCombat();
-        Torch.ProcessTorch();
-        Grapple.ProcessGrappel();
-        Animation.ProcessAnimations();
-        Feedback.ProcessFeedback();
+        Input.ProcessInputs(GameManager.state);
+
+        if (GameManager.state == GameManager.GameState.DEFAULT)
+        {
+            Movement.ProcessMovement();
+            Combat.ProcessCombat();
+            Torch.ProcessTorch();
+            Grapple.ProcessGrappel();
+            Animation.ProcessAnimations();
+            Feedback.ProcessFeedback();
+        }
+
 
     }
 

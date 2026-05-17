@@ -56,6 +56,7 @@ class MovingPlatform : Component
 
     public bool moveOnStart = false;
     public bool looping = false;
+    public bool counterClockwise = false;
 
     private bool goingToPoint = false;
     public int targetPoint = 0;
@@ -145,7 +146,7 @@ class MovingPlatform : Component
 
     void OnUpdate()
     {
-       if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
+        if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
         if (canSink && !sinkRoutineRunning)
         {
@@ -180,6 +181,13 @@ class MovingPlatform : Component
         return hit;
     }
 
+    private Entity GetCollidedModel()
+    {
+        if (collider1 != null && collider1.IsColliding) return doublePlatformModel1 != null ? doublePlatformModel1 : platformModel;
+        if (collider2 != null && collider2.IsColliding) return doublePlatformModel2;
+        return null;
+    }
+
     public void GoToPoint(int pointNum)
     {
         if (pointNum < 0 || pointNum >= numOfPathPoints) return;
@@ -199,15 +207,11 @@ class MovingPlatform : Component
         movingParticles.Play();
         if (movingParticlesEntity2 != null) movingParticles2.Play();
 
+        float overflowTime = 0f;
+
         while (true)
         {
-            if (Pause.isPaused)
-            {
-                yield return null;
-                continue;
-            }
-
-            if (isSinking)
+            if (Pause.isPaused || isSinking)
             {
                 yield return null;
                 continue;
@@ -221,47 +225,92 @@ class MovingPlatform : Component
             Vector3 startPos = activeMovingEntity.transform.position;
             Vector3 startRot = activeMovingEntity.transform.rotation;
             Vector3 targetPos = pathPoints[targetPoint].transform.position;
-            Vector3 targetRot = pathPoints[targetPoint].transform.rotation;
+            Vector3 targetRot = followPathRotations ? pathPoints[targetPoint].transform.rotation : startRot;
 
             float totalDistance = (float)(targetPos - startPos).magnitude;
 
-            while (true)
+            float totalTravelTime = movementSpeed > 0f ? totalDistance / movementSpeed : 0f;
+
+            float elapsedTravelTime = overflowTime;
+
+            if (totalTravelTime > 0f)
             {
-                if (Pause.isPaused || isSinking)
+                while (elapsedTravelTime < totalTravelTime)
                 {
+                    if (Pause.isPaused || isSinking)
+                    {
+                        yield return null;
+                        continue;
+                    }
+
+                    elapsedTravelTime += Time.deltaTime;
+
+                    float t = elapsedTravelTime / totalTravelTime;
+                    if (t > 1f) t = 1f;
+
+                    Vector3 previousGroupPos = activeMovingEntity.transform.position;
+                    Vector3 previousGroupRot = activeMovingEntity.transform.rotation;
+
+                    Vector3 newGroupPos = Vector3.Lerp(startPos, targetPos, t);
+                    Vector3 newGroupRot = followPathRotations ? Vector3.Lerp(startRot, targetRot, t) : startRot;
+
+                    Entity collidedModel = GetCollidedModel();
+                    Vector3 playerLocalPos = Vector3.Zero;
+
+                    if (collidedModel != null)
+                    {
+                        Vector3 worldPivot = collidedModel.transform.position;
+                        Vector3 toPlayer = Player.Instance.transform.position - worldPivot;
+
+                        Vector3 groupForward = activeMovingEntity.transform.Forward;
+                        Vector3 groupRight = activeMovingEntity.transform.Left;
+                        Vector3 groupUp = activeMovingEntity.transform.Up;
+
+                        playerLocalPos = new Vector3(
+                            Vector3.Dot(toPlayer, groupRight),
+                            Vector3.Dot(toPlayer, groupUp),
+                            Vector3.Dot(toPlayer, groupForward)
+                        );
+                    }
+
+                    activeMovingEntity.transform.position = newGroupPos;
+                    activeMovingEntity.transform.rotation = newGroupRot;
+
+                    if (collidedModel != null)
+                    {
+                        Vector3 newWorldPivot = collidedModel.transform.position;
+
+                        Vector3 newGroupForward = activeMovingEntity.transform.Forward;
+                        Vector3 newGroupRight = activeMovingEntity.transform.Left;
+                        Vector3 newGroupUp = activeMovingEntity.transform.Up;
+
+                        Vector3 newPlayerWorldPos = newWorldPivot +
+                            (newGroupRight * playerLocalPos.x) +
+                            (newGroupUp * playerLocalPos.y) +
+                            (newGroupForward * playerLocalPos.z);
+
+                        Player.Instance.transform.position = newPlayerWorldPos;
+
+                        if (followPathRotations)
+                        {
+                            Vector3 deltaRot = newGroupRot - previousGroupRot;
+                            Player.Instance.transform.rotation -= deltaRot;
+                        }
+                    }
+
+                    if (elapsedTravelTime >= totalTravelTime)
+                    {
+                        break;
+                    }
+
                     yield return null;
-                    continue;
                 }
 
-                Vector3 currentPos = activeMovingEntity.transform.position;
-                Vector3 directionVec = targetPos - currentPos;
-                float remainingDistance = (float)directionVec.magnitude;
-
-                if (remainingDistance < 0.1f)
-                {
-                    break;
-                }
-
-                float distanceCovered = totalDistance - remainingDistance;
-                float interpolationFactor = distanceCovered / totalDistance;
-
-                Vector3 moveDir = directionVec.normalized;
-                Vector3 velocity = moveDir * movementSpeed * Time.deltaTime;
-
-                activeMovingEntity.transform.position += velocity;
-
-                activeMovingEntity.transform.rotation = Vector3.Lerp(
-                    startRot,
-                    targetRot,
-                    interpolationFactor
-                );
-
-                if (CheckCollision())
-                {
-                    Player.Instance.transform.position += velocity;
-                }
-
-                yield return null;
+                overflowTime = elapsedTravelTime - totalTravelTime;
+            }
+            else
+            {
+                overflowTime = 0f;
             }
 
             currentPoint = targetPoint;
@@ -272,9 +321,27 @@ class MovingPlatform : Component
             movingParticles.Stop();
             if (movingParticlesEntity2 != null) movingParticles2.Stop();
 
-            if (pointPauseTimes[currentPoint] > 0.0f)
+            float pauseTime = pointPauseTimes[currentPoint];
+            if (pauseTime > 0.0f)
             {
-                yield return new WaitForSeconds(pointPauseTimes[currentPoint]);
+                float elapsedPauseTime = overflowTime;
+
+                while (elapsedPauseTime < pauseTime)
+                {
+                    if (Pause.isPaused || isSinking)
+                    {
+                        yield return null;
+                        continue;
+                    }
+
+                    elapsedPauseTime += Time.deltaTime;
+                    if (elapsedPauseTime >= pauseTime) break;
+
+                    yield return null;
+                }
+
+                overflowTime = elapsedPauseTime - pauseTime;
+                if (overflowTime < 0f) overflowTime = 0f;
             }
 
             if (activateOnCollision && currentPoint == 0)
@@ -285,7 +352,15 @@ class MovingPlatform : Component
 
             if (looping || activateOnCollision)
             {
-                targetPoint = (currentPoint + 1) % numOfPathPoints;
+                if (counterClockwise)
+                {
+                    targetPoint = (currentPoint - 1 + numOfPathPoints) % numOfPathPoints;
+                }
+                else
+                {
+                    targetPoint = (currentPoint + 1) % numOfPathPoints;
+                }
+
                 goingToPoint = true;
                 movingParticles.Play();
                 if (movingParticlesEntity2 != null) movingParticles2.Play();
@@ -342,6 +417,11 @@ class MovingPlatform : Component
 
             activeMovingEntity.transform.position += velocity;
 
+            if (CheckCollision())
+            {
+                Player.Instance.transform.position += velocity;
+            }
+
             yield return null;
         }
 
@@ -368,6 +448,11 @@ class MovingPlatform : Component
             Vector3 velocity = moveDir * sinkSpeed * Time.deltaTime;
 
             activeMovingEntity.transform.position += velocity;
+
+            if (CheckCollision())
+            {
+                Player.Instance.transform.position += velocity;
+            }
 
             yield return null;
         }

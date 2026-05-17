@@ -36,16 +36,22 @@ public class GameDebug : Component
         {
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = !DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed;
             Debug.LogWarning("Completed Puzzle 1 = " + DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed);
+
+            DatabaseRegistry.levelsDB.Levels.SetRewardCollected("Lvl1_KeyWind");
         }
         if (Input.IsKeyDown(KeyCode.NUM_2))
         {
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = !DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed;
             Debug.LogWarning("Completed Puzzle 2 = " + DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed);
+
+            DatabaseRegistry.levelsDB.Levels.SetRewardCollected("Lvl2Waterpath_KeyWater");
         }
         if (Input.IsKeyDown(KeyCode.NUM_3))
         {
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed = !DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed;
             Debug.LogWarning("Completed Puzzle 3 = " + DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed);
+
+            DatabaseRegistry.levelsDB.Levels.SetRewardCollected("Lvl2Firepath_KeyFire");
         }
         if (Input.IsKeyDown(KeyCode.NUM_4))
         {
