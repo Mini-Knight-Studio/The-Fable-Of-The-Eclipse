@@ -1,19 +1,13 @@
-using System;
 using Loopie;
+using System;
 
 class NarrativeTrigger : Component
 {
-    public string entityName = "TextNarrative";
-    public Text text;
-    public Entity textEntity;
-
     public string textValue = "";
     private BoxCollider boxCollider;
 
     void OnCreate()
     {
-        textEntity = Entity.FindEntityByName(entityName);
-        text = textEntity.GetComponent<Text>();
         boxCollider = entity.GetComponent<BoxCollider>();
     }
 
@@ -21,11 +15,12 @@ class NarrativeTrigger : Component
     {
         if (boxCollider.HasCollided)
         {
-            text.Value = textValue;
+            SimpleTextUI.Instance.Open();
+            SimpleTextUI.Instance.SetText(textValue);
         }
         if (boxCollider.HasEndedCollision)
         {
-            text.Value = "";
+            SimpleTextUI.Instance.Close();
         }
     }
 };

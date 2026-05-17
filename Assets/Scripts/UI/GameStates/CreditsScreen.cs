@@ -59,7 +59,7 @@ public class CreditsScreen : Component
 
     IEnumerator Show()
     {
-
+        GameManager.SetState(GameManager.GameState.FREEZE);
         float timer = 0;
 
         while (true)
@@ -121,6 +121,7 @@ public class CreditsScreen : Component
         yield return new WaitForUnscaledSeconds(2);
 
         Time.timeScale = 1;
+        GameManager.SetState(GameManager.GameState.DEFAULT);
         SceneManager.LoadSceneByID(targetSceneUUID);
     }
 
