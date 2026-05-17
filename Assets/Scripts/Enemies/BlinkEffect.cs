@@ -23,6 +23,7 @@ public class BlinkEffect : Component
             if (targetRenderer != null)
             {
                 instancedMaterial = targetRenderer.GetInstancedMaterial();
+                instancedMaterial.SetFloat("u_EmissiveIntensity", defaultIntensity);
             }
         }
     }
@@ -31,7 +32,7 @@ public class BlinkEffect : Component
     {
         if (instancedMaterial == null) return;
 
-        StopAllCoroutines();
+        StopAllOwnedCoroutines();
         StartCoroutine(FlashSequence());
     }
 

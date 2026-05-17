@@ -31,9 +31,9 @@ public class Player : Component
     public Entity RespawnTransitionEntity;
     public Entity LoseScreenEntity;
     public Entity CreditsScreenEntity;
-    private FadeInOutEvent RespawnTransition;
-    private LoseScreen LoseScreen;
-    private CreditsScreen CreditsScreen;
+    public FadeInOutEvent RespawnTransition;
+    public LoseScreen LoseScreen;
+    public CreditsScreen CreditsScreen;
 
     public bool IsInCutscene = false;
 

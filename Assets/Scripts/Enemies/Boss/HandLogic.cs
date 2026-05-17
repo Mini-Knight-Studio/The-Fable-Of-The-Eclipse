@@ -427,4 +427,36 @@ public class HandLogic : Component
         component.Stop();
     }
 
+    public void Restart()
+    {
+        StopAllOwnedCoroutines();
+
+        isDefeated = false;
+        isInCooldown = false;
+        isVulnerable = false;
+        isBusy = false;
+        canBeStopped = true;
+        cooldownTimer = 0f;
+        vulnerableTimer = 0f;
+
+        sequenceIndex = 0;
+        foreach (SequenceAction action in sequence)
+        {
+            action.Reset();
+        }
+
+        transform.position = startPointEntity.transform.position;
+        shadowEntity.transform.position = new Vector3(transform.position.x, shadowEntity.transform.position.y, transform.position.z);
+
+        if (owner != null)
+        {
+            spikesEntity.transform.position = new Vector3(spikesEntity.transform.position.x, owner.HSpike_HideAltitude, spikesEntity.transform.position.z);
+        }
+
+        FakeRegenerate();
+        if (hitFeedbackParticles != null) hitFeedbackParticles.Stop();
+        if (hitFeedbackAudio != null) hitFeedbackAudio.Stop();
+        if (spikeFeedbackParticles != null) spikeFeedbackParticles.Stop();
+        if (spikeFeedbackAudio != null) spikeFeedbackAudio.Stop();
+    }
 }

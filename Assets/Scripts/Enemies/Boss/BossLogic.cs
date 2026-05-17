@@ -107,6 +107,8 @@ public class BossLogic : Component
         head.SetOwner(this);
 
         head.headColliderEntity.SetActive(false);
+
+        Player.Instance.LoseScreen.OnClosing += RestartBoss;
     }
 
     void OnUpdate()
@@ -153,6 +155,8 @@ public class BossLogic : Component
                 if (IsFinalPhase())
                 {
                     /// DIE
+                    yield return new WaitForSeconds(2);
+                    Player.Instance.CreditsScreen.OpenCreditsScreen();
                     yield break;
                 }
                 else
@@ -174,6 +178,7 @@ public class BossLogic : Component
                     leftHand.Regenerate();
                     rightHand.Regenerate();
                     isDefeated = false;
+                    isBusy = false;
                     yield break;
                 }
             }
@@ -254,8 +259,32 @@ public class BossLogic : Component
         target.position = targetPosition;
     }
 
+    public void RestartBoss()
+    {
+        StopAllOwnedCoroutines();
+
+        currentPhase = 0;
+        isDefeated = false;
+        isVulnerable = false;
+        isBusy = false;
+
+        if (head != null) head.Restart();
+        if (leftHand != null) leftHand.Restart();
+        if (rightHand != null) rightHand.Restart();
+
+        if (leftHand != null) leftHand.SetCooldown(2f);
+        if (rightHand != null) rightHand.SetCooldown(2f);
+
+        if (head != null && head.headColliderEntity != null)
+        {
+            head.headColliderEntity.SetActive(false);
+        }
+    }
+
+
     void OnDestroy()
     {
+        Player.Instance.LoseScreen.OnClosing -= RestartBoss;
         StopAllOwnedCoroutines();
     }
 }
