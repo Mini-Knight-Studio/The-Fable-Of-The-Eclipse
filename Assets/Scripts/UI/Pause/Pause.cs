@@ -1,92 +1,91 @@
-using System;
-using Loopie;
+//using System;
+//using Loopie;
 
-public class Pause : Component
-{
-    public static Pause Instance { get; private set; }
+//public class Pause : Component
+//{
+//    public Entity pauseMenuEntity;
+//    public Entity infoDebugEntity;
 
-    public Entity pauseMenuEntity;
-    public Entity infoDebugEntity;
+//    public bool isPaused = false;
 
-    public bool isPaused = false;
+//    private float inputCooldown = 0.2f;
+//    private float inputTimer = 0f;
 
-    private float inputCooldown = 0.2f;
-    private float inputTimer = 0f;
+//    public static GameManager.GameState previousState;
+//    void OnCreate()
+//    {
 
-    public static GameManager.GameState previousState;
-    void OnCreate()
-    {
+//    }
 
-    }
+//    void OnUpdate()
+//    {
+//        inputTimer += Time.deltaTime;
 
-    void OnUpdate()
-    {
-        inputTimer += Time.deltaTime;
+//        if (inputTimer < inputCooldown)
+//            return;
 
-        if (inputTimer < inputCooldown)
-            return;
+//        if (Input.IsKeyPressed(KeyCode.ESCAPE) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_START))
+//        {
+//            isPaused = !isPaused;
+//            inputTimer = 0f;
 
-        if (Input.IsKeyPressed(KeyCode.ESCAPE) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_START))
-        {
-            isPaused = !isPaused;
-            inputTimer = 0f;
+//            if (!isPaused)
+//            {
+//                pauseMenuEntity.SetActive(false);
+//                infoDebugEntity.SetActive(false);
 
-            if (!isPaused)
-            {
-                pauseMenuEntity.SetActive(false);
-                infoDebugEntity.SetActive(false);
+//                PauseMenu.quickStartAnimations = true;
+//                PauseMenu.invertedPassPagePlayed = false;
 
-                PauseMenu.quickStartAnimations = true;
-                PauseMenu.invertedPassPagePlayed = false;
+//                GameManager.SetState(previousState);
+//            }
+//            else
+//            {
+//                pauseMenuEntity.SetActive(true);
+//                infoDebugEntity.SetActive(true);
 
-                GameManager.SetState(previousState);
-            }
-            else
-            {
-                pauseMenuEntity.SetActive(true);
-                infoDebugEntity.SetActive(true);
+//                if (!pauseMenuEntity.Active)
+//                {
+//                    pauseMenuEntity.GetComponent<PauseMenu>().Open();
+//                }
 
-                if (!pauseMenuEntity.Active)
-                {
-                    pauseMenuEntity.GetComponent<PauseMenu>().Open();
-                }
+//                previousState = GameManager.state;
+//                GameManager.SetState(GameManager.GameState.FREEZE);
+//            }
+//        }
+//    }
 
-                previousState = GameManager.state;
-                GameManager.SetState(GameManager.GameState.FREEZE);
-            }
-        }
-    }
+//    public void TogglePauseMenu()
+//    {
+//        isPaused = !isPaused;
+//        if (!isPaused)
+//        {
+//            pauseMenuEntity.SetActive(false);
+//            infoDebugEntity.SetActive(false);
+//            Debug.Log("Before");
+//            PauseMenu.quickStartAnimations = true;
+//            PauseMenu.invertedPassPagePlayed = false;
 
-    public void TogglePauseMenu()
-    {
-        isPaused = !isPaused;
-        if (!isPaused)
-        {
-            pauseMenuEntity.SetActive(false);
-            infoDebugEntity.SetActive(false);
+//            GameManager.SetState(previousState);
+//        }
+//        else
+//        {
+//            pauseMenuEntity.SetActive(true);
+//            infoDebugEntity.SetActive(true);
 
-            PauseMenu.quickStartAnimations = true;
-            PauseMenu.invertedPassPagePlayed = false;
+//            if (!pauseMenuEntity.Active)
+//            {
+//                pauseMenuEntity.GetComponent<PauseMenu>().Open();
+//            }
 
-            GameManager.SetState(previousState);
-        }
-        else
-        {
-            pauseMenuEntity.SetActive(true);
-            infoDebugEntity.SetActive(true);
-
-            if (!pauseMenuEntity.Active)
-            {
-                pauseMenuEntity.GetComponent<PauseMenu>().Open();
-            }
-
-            previousState = GameManager.state;
-            GameManager.SetState(GameManager.GameState.FREEZE);
-        }
-    }
-    public void SetStateToPrevious()
-    {
-        isPaused = false;
-        GameManager.SetState(previousState);
-    }
-};
+//            previousState = GameManager.state;
+//            GameManager.SetState(GameManager.GameState.FREEZE);
+//        }
+//        Debug.Log("After");
+//    }
+//    public void SetStateToPrevious()
+//    {
+//        isPaused = false;
+//        GameManager.SetState(previousState);
+//    }
+//};

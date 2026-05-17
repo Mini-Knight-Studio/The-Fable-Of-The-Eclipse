@@ -69,6 +69,15 @@ public class PauseMenu : Component
     [HideInInspector]
     public static bool invertedPassPagePlayed = false;
 
+    public Entity pauseMenuEntity;
+    public Entity infoDebugEntity;
+
+    public bool isPaused = false;
+
+    private float inputCooldown = 0.2f;
+    private float inputTimer = 0f;
+
+    public static GameManager.GameState previousState;
     void OnCreate()
     {
         backgroundImage = entity.GetComponent<Image>();
@@ -206,45 +215,85 @@ public class PauseMenu : Component
     }
     void OnUpdate()
     {
-        if (quickStartAnimations)
-        {
-            PrepareAnimations();
-        }
+        inputTimer += Time.unscaledDeltaTime;
 
-        //// Audio
-        //if (!loopMusicHasPlayed)
-        //{
-        //    //loopMusicAudioSource.Play();
-        //    loopMusicHasPlayed = true;
-        //}
+        if (inputTimer < inputCooldown)
+            return;
 
-        if (!invertedPassPagePlayed)
+        if (Input.IsKeyPressed(KeyCode.ESCAPE) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_START))
         {
-            invertedPassPageEntity.SetActive(true);
-            invertedPassPageAnimator.Play();
-            invertedPassPagePlayed = true;
-        }
-        else
-        {
-            if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.StartFrame)
+            isPaused = !isPaused;
+            inputTimer = 0f;
+
+            if (!isPaused)
             {
-                uiManagerScript.BlockNavigation = false;
+                pauseMenuEntity.SetActive(false);
+                infoDebugEntity.SetActive(false);
+
+                PauseMenu.quickStartAnimations = true;
+                PauseMenu.invertedPassPagePlayed = false;
+
+                GameManager.SetState(previousState);
             }
             else
             {
-                uiManagerScript.BlockNavigation = true;
-            }
+                pauseMenuEntity.SetActive(true);
+                infoDebugEntity.SetActive(true);
 
-            if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
-            {
-                invertedPassPageEntity.SetActive(false);
-                uiManagerScript.BlockNavigation = false;
+                if (!pauseMenuEntity.Active)
+                {
+                    pauseMenuEntity.GetComponent<PauseMenu>().Open();
+                }
+
+                previousState = GameManager.state;
+                GameManager.SetState(GameManager.GameState.FREEZE);
             }
         }
-        
-        if (canCallScripts)
+
+        if (isPaused)
         {
-            HandleConfirm();
+
+
+            if (quickStartAnimations)
+            {
+                PrepareAnimations();
+            }
+
+            //// Audio
+            //if (!loopMusicHasPlayed)
+            //{
+            //    //loopMusicAudioSource.Play();
+            //    loopMusicHasPlayed = true;
+            //}
+
+            if (!invertedPassPagePlayed)
+            {
+                invertedPassPageEntity.SetActive(true);
+                invertedPassPageAnimator.Play();
+                invertedPassPagePlayed = true;
+            }
+            else
+            {
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.StartFrame)
+                {
+                    uiManagerScript.BlockNavigation = false;
+                }
+                else
+                {
+                    uiManagerScript.BlockNavigation = true;
+                }
+
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
+                {
+                    invertedPassPageEntity.SetActive(false);
+                    uiManagerScript.BlockNavigation = false;
+                }
+            }
+
+            if (canCallScripts)
+            {
+                HandleConfirm();
+            }
         }
     }
     public void Open()
@@ -270,7 +319,7 @@ public class PauseMenu : Component
             Settings.quickStartAnimations = true;
             Settings.invertedPassPagePlayed = false;
 
-            Pause.Instance.TogglePauseMenu();
+            TogglePauseMenu();
 
             if (continueButton.Hovered)
             {
@@ -316,5 +365,32 @@ public class PauseMenu : Component
         closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
         closeBookEntity.SetActive(false);
         quickStartAnimations = false;
+    }
+    public void TogglePauseMenu()
+    {
+        isPaused = !isPaused;
+        if (!isPaused)
+        {
+            pauseMenuEntity.SetActive(false);
+            infoDebugEntity.SetActive(false);
+
+            PauseMenu.quickStartAnimations = true;
+            PauseMenu.invertedPassPagePlayed = false;
+
+            GameManager.SetState(previousState);
+        }
+        else
+        {
+            pauseMenuEntity.SetActive(true);
+            infoDebugEntity.SetActive(true);
+
+            if (!pauseMenuEntity.Active)
+            {
+                pauseMenuEntity.GetComponent<PauseMenu>().Open();
+            }
+
+            previousState = GameManager.state;
+            GameManager.SetState(GameManager.GameState.FREEZE);
+        }
     }
 };
