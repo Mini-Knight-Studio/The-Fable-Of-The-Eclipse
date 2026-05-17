@@ -235,7 +235,7 @@ public class PauseMenu : Component
                 uiManagerScript.BlockNavigation = true;
             }
 
-            if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount /*- 1*/)
+            if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
             {
                 invertedPassPageEntity.SetActive(false);
                 uiManagerScript.BlockNavigation = false;
@@ -269,11 +269,12 @@ public class PauseMenu : Component
             MainMenu.invertedPassPagePlayed = false;
             Settings.quickStartAnimations = true;
             Settings.invertedPassPagePlayed = false;
-            //Pause.isPaused = false;
+
+            Pause.Instance.TogglePauseMenu();
 
             if (continueButton.Hovered)
             {
-                //Pause.isPaused = false;
+
             }
             else if (mainMenuButton.Hovered)
             {
