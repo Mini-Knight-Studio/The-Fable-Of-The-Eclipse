@@ -43,9 +43,12 @@ class Geyser : Component
         particles = entity.GetComponent<ParticleComponent>();
         riseSFX = entity.GetComponent<AudioSource>();
 
-        unactiveParticlesPriv = unactiveParticles.GetComponent<ParticleComponent>();
-        topParticlesPriv = topParticles.GetComponent<ParticleComponent>();
-        dispersionParticlesPriv = dispersionParticles.GetComponent<ParticleComponent>();
+        if(unactiveParticles!=null)
+            unactiveParticlesPriv = unactiveParticles.GetComponent<ParticleComponent>();
+        if(topParticles != null)
+            topParticlesPriv = topParticles.GetComponent<ParticleComponent>();
+        if(dispersionParticles!=null)
+            dispersionParticlesPriv = dispersionParticles.GetComponent<ParticleComponent>();
 
         SetActiveState(false);
         StartCoroutine(GeyserCycleRoutine());
