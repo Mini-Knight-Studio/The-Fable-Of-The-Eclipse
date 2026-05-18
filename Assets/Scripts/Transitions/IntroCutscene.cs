@@ -91,4 +91,9 @@ public class IntroCutscene : Component
 
         Player.Instance.IsInCutscene = false;
     }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
 }

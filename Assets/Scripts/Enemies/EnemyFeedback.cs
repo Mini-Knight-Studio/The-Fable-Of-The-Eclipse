@@ -58,4 +58,9 @@ public class EnemyFeedback : Component
         if (index != -1)
             Particles.SetEmitterState(index, state);
     }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
 };

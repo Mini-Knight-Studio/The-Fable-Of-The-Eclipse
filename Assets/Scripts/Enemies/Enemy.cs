@@ -103,7 +103,9 @@ public class Enemy : Component
     #region Target
     protected Vector3 GetDirectionToTarget()
     {
-        return (Player.Instance.transform.position - transform.position).normalized;
+        Vector3 targetPos = Player.Instance.transform.position;
+        targetPos.y = transform.position.y;
+        return (targetPos  - transform.position).normalized;
     }
     #endregion
 
@@ -314,4 +316,9 @@ public class Enemy : Component
         return (attack_stages == Vector2.One && isAttacking);
     }
     #endregion
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
 }

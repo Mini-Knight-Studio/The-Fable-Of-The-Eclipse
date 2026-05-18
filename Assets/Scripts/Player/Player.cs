@@ -110,7 +110,9 @@ public class Player : Component
 
     public void GoToLastCheckpoint()
     {
-        entity.transform.position = new Vector3(DatabaseRegistry.playerDB.Player.playerPositionX, DatabaseRegistry.playerDB.Player.playerPositionY, DatabaseRegistry.playerDB.Player.playerPositionZ);
+        Vector3 pos = entity.transform.position;
+        DatabaseRegistry.playerDB.Player.GetPosition(ref pos);
+        entity.transform.position = pos;
     }
 
     public void StartRespawn()

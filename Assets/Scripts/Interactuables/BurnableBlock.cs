@@ -70,4 +70,9 @@ public class BurnableBlock : Component
 
         DatabaseRegistry.levelsDB.Levels.SetBurnableBurned(burnableID);
     }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
+    }
 }

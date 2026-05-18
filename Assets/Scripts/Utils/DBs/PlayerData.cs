@@ -1,5 +1,6 @@
-using System;
 using Loopie;
+using System;
+using System.Collections.Generic;
 
 public class PlayerData
 {
@@ -18,6 +19,9 @@ public class PlayerData
     // Scenes and position
     public string currentSceneUUID = "";
     public string previousSceneUUID = "";
+
+    public Dictionary<string, PlayerPosition> positions = new Dictionary<string, PlayerPosition>();
+
     public void SetCurrentScene(string newSceneUUID)
     {
         if (currentSceneUUID == newSceneUUID) return;
@@ -31,7 +35,41 @@ public class PlayerData
         previousSceneUUID = "";
     }
 
-    public float playerPositionX = 0.0f;
-    public float playerPositionY = 0.0f;
-    public float playerPositionZ = 0.0f;
+    public void GetPosition(ref Vector3 pos)
+    {
+        if(positions.ContainsKey(currentSceneUUID))
+        {
+            PlayerPosition position = positions[currentSceneUUID];
+            pos.x = position.x;
+            pos.y = position.y;
+            pos.z = position.z;
+        }
+    }
+
+    public void SetPosition(Vector3 pos)
+    {
+        if (positions.ContainsKey(currentSceneUUID))
+        {
+            PlayerPosition position = new PlayerPosition();
+            position.x = pos.x;
+            position.y = pos.y;
+            position.z = pos.z;
+            positions[currentSceneUUID] = position;
+        }
+        else
+        {
+            PlayerPosition position = new PlayerPosition();
+            position.x = pos.x;
+            position.y = pos.y;
+            position.z = pos.z;
+            positions.Add(currentSceneUUID, position);
+        }
+    }
+}
+
+public class PlayerPosition
+{
+    public float x;
+    public float y;
+    public float z;
 }
