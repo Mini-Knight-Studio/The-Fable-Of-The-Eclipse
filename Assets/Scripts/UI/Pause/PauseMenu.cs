@@ -33,10 +33,18 @@ public class PauseMenu : Component
     private float openingMusicDelay = 2f;
     private float openingMusicTimer = 0f;
 
-    [Header("Debug")]
-    public Entity ilustrationEntity;
+    [Header("Ilustration")]
+    public Entity ilustrationLevel1Entity;
     [HideInInspector]
-    public Image ilustrationImage;
+    public Image ilustrationLevel1Image;
+
+    public Entity ilustrationWaterPathEntity;
+    [HideInInspector]
+    public Image ilustrationWaterPathImage;
+
+    public string UUIDLevel1 = "";
+    public string UUIDWaterPath = "";
+
     [HideInInspector]
     public Image backgroundImage;
 
@@ -59,8 +67,17 @@ public class PauseMenu : Component
     [HideInInspector]
     public static bool hasPlayedIntro = false;
     [HideInInspector]
-    public static bool invertedPassPagePlayed = true;
+    public static bool invertedPassPagePlayed = false;
 
+    public Entity pauseMenuEntity;
+    public Entity infoDebugEntity;
+
+    public bool isPaused = false;
+
+    private float inputCooldown = 0.2f;
+    private float inputTimer = 0f;
+
+    public static GameManager.GameState previousState;
     void OnCreate()
     {
         backgroundImage = entity.GetComponent<Image>();
@@ -152,15 +169,6 @@ public class PauseMenu : Component
             Debug.Log("Error: There is no passPageEntity Entity assigned.");
         }
 
-        if (ilustrationEntity != null)
-        {
-            ilustrationImage = ilustrationEntity.GetComponent<Image>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no Ilustration Entity assigned.");
-        }
-
         if (uiManagerEntity != null)
         {
             uiManagerScript = uiManagerEntity.GetComponent<UIManager>();
@@ -169,23 +177,123 @@ public class PauseMenu : Component
         {
             Debug.Log("Error: There is no UIManager Entity assigned.");
         }
+
+        if (ilustrationLevel1Entity != null)
+        {
+            ilustrationLevel1Image = ilustrationLevel1Entity.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no ilustrationLevel1 Entity assigned.");
+        }
+        if (ilustrationWaterPathEntity != null)
+        {
+            ilustrationWaterPathImage = ilustrationWaterPathEntity.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no ilustrationWaterPath Entity assigned.");
+        }
+    }
+    void OnPostCreate()
+    {
+        if (DatabaseRegistry.playerDB.Player.currentSceneUUID == UUIDLevel1)
+        {
+            ilustrationLevel1Entity.SetActive(true);
+            ilustrationWaterPathEntity.SetActive(false);
+        }
+        else if (DatabaseRegistry.playerDB.Player.currentSceneUUID == UUIDWaterPath)
+        {
+            ilustrationLevel1Entity.SetActive(false);
+            ilustrationWaterPathEntity.SetActive(true);
+        }
+        else
+        {
+            ilustrationLevel1Entity.SetActive(true);
+            ilustrationWaterPathEntity.SetActive(false);
+        }
     }
     void OnUpdate()
     {
-        if (quickStartAnimations)
+        inputTimer += Time.unscaledDeltaTime;
+
+        if (inputTimer < inputCooldown)
+            return;
+
+        if (Input.IsKeyPressed(KeyCode.ESCAPE) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_START))
         {
-            PrepareAnimations();
+            isPaused = !isPaused;
+            inputTimer = 0f;
+
+            if (!isPaused)
+            {
+                pauseMenuEntity.SetActive(false);
+                infoDebugEntity.SetActive(false);
+
+                PauseMenu.quickStartAnimations = true;
+                PauseMenu.invertedPassPagePlayed = false;
+
+                GameManager.SetState(previousState);
+            }
+            else
+            {
+                pauseMenuEntity.SetActive(true);
+                infoDebugEntity.SetActive(true);
+
+                if (!pauseMenuEntity.Active)
+                {
+                    pauseMenuEntity.GetComponent<PauseMenu>().Open();
+                }
+
+                previousState = GameManager.state;
+                GameManager.SetState(GameManager.GameState.FREEZE);
+            }
         }
 
-        //if (!loopMusicHasPlayed)
-        //{
-        //    //loopMusicAudioSource.Play();
-        //    loopMusicHasPlayed = true;
-        //}
-            
-        if (canCallScripts)
+        if (isPaused)
         {
-            HandleConfirm();
+
+
+            if (quickStartAnimations)
+            {
+                PrepareAnimations();
+            }
+
+            //// Audio
+            //if (!loopMusicHasPlayed)
+            //{
+            //    //loopMusicAudioSource.Play();
+            //    loopMusicHasPlayed = true;
+            //}
+
+            if (!invertedPassPagePlayed)
+            {
+                invertedPassPageEntity.SetActive(true);
+                invertedPassPageAnimator.Play();
+                invertedPassPagePlayed = true;
+            }
+            else
+            {
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.StartFrame)
+                {
+                    uiManagerScript.BlockNavigation = false;
+                }
+                else
+                {
+                    uiManagerScript.BlockNavigation = true;
+                }
+
+                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
+                {
+                    invertedPassPageEntity.SetActive(false);
+                    uiManagerScript.BlockNavigation = false;
+                }
+            }
+
+            if (canCallScripts)
+            {
+                HandleConfirm();
+            }
         }
     }
     public void Open()
@@ -210,11 +318,12 @@ public class PauseMenu : Component
             MainMenu.invertedPassPagePlayed = false;
             Settings.quickStartAnimations = true;
             Settings.invertedPassPagePlayed = false;
-            //Pause.isPaused = false;
+
+            TogglePauseMenu();
 
             if (continueButton.Hovered)
             {
-                //Pause.isPaused = false;
+
             }
             else if (mainMenuButton.Hovered)
             {
@@ -256,5 +365,32 @@ public class PauseMenu : Component
         closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
         closeBookEntity.SetActive(false);
         quickStartAnimations = false;
+    }
+    public void TogglePauseMenu()
+    {
+        isPaused = !isPaused;
+        if (!isPaused)
+        {
+            pauseMenuEntity.SetActive(false);
+            infoDebugEntity.SetActive(false);
+
+            PauseMenu.quickStartAnimations = true;
+            PauseMenu.invertedPassPagePlayed = false;
+
+            GameManager.SetState(previousState);
+        }
+        else
+        {
+            pauseMenuEntity.SetActive(true);
+            infoDebugEntity.SetActive(true);
+
+            if (!pauseMenuEntity.Active)
+            {
+                pauseMenuEntity.GetComponent<PauseMenu>().Open();
+            }
+
+            previousState = GameManager.state;
+            GameManager.SetState(GameManager.GameState.FREEZE);
+        }
     }
 };

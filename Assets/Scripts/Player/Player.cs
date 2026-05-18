@@ -144,8 +144,6 @@ public class Player : Component
             Animation.ProcessAnimations();
             Feedback.ProcessFeedback();
         }
-
-
     }
 
     void OnDestroy()

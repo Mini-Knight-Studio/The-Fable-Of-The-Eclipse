@@ -105,13 +105,27 @@ public class GameDebug : Component
         {
             Vector4 lowOpacityColor = new Vector4(1, 1, 1, 0.25f);
             pauseMenuScript.backgroundImage.SetTint(lowOpacityColor);
-            pauseMenuScript.ilustrationImage.SetTint(lowOpacityColor);
+            if (pauseMenuScript.ilustrationLevel1Image.IsActive())
+            {
+                pauseMenuScript.ilustrationLevel1Image.SetTint(lowOpacityColor);
+            }
+            if (pauseMenuScript.ilustrationLevel1Image.IsActive())
+            {
+                pauseMenuScript.ilustrationLevel1Image.SetTint(lowOpacityColor);
+            }
         }
         else
         {
             Vector4 fullOpacityColor = new Vector4(1, 1, 1, 1);
             pauseMenuScript.backgroundImage.SetTint(fullOpacityColor);
-            pauseMenuScript.ilustrationImage.SetTint(fullOpacityColor);
+            if (pauseMenuScript.ilustrationLevel1Image.IsActive())
+            {
+                pauseMenuScript.ilustrationLevel1Image.SetTint(fullOpacityColor);
+            }
+            if (pauseMenuScript.ilustrationWaterPathImage.IsActive())
+            {
+                pauseMenuScript.ilustrationWaterPathImage.SetTint(fullOpacityColor);
+            }
         }
     }
     public void CompletePuzzle1()
