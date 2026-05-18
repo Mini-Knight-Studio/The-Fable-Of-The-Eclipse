@@ -8,6 +8,7 @@ class VolcanoSequence : Component
 
     [Header("Preparation")]
     public Entity prepFocusTarget;
+    public int cameraStartingFarPlane = 1000;
     public float prepZoom = 111f;
     public float prepCameraSpeed = 4f;
     public float prepDuration = 2.5f;
@@ -16,6 +17,7 @@ class VolcanoSequence : Component
 
     [Header("Pre")]
     public Entity craterFocusTarget;
+    public int cameraEndingFarPlane = 300;
     public float craterZoom = 70f;
     public float craterCameraSpeed = 6f;
     public float craterFocusDuration = 1.0f;
@@ -74,6 +76,8 @@ class VolcanoSequence : Component
 
         float originalDistance = Player.Instance.Camera.distance;
         Player.Instance.Camera.distance = sequenceDistance;
+
+        Player.Instance.Camera.SetFarPlane(cameraStartingFarPlane);
 
         if (prepRumbleSFX != null) prepRumbleSFX.GetComponent<AudioSource>().Play();
 
@@ -147,6 +151,7 @@ class VolcanoSequence : Component
         yield return null;
         VolcanoSequence.SequenceFinished = true;
         GameManager.SetState(GameManager.GameState.DEFAULT);
+        Player.Instance.Camera.SetFarPlane(cameraEndingFarPlane);
 
         if (!playOnlyOnce)
         {

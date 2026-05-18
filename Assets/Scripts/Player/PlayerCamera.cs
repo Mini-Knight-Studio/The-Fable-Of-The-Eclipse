@@ -168,6 +168,11 @@ public class PlayerCamera : Component
         return direction;
     }
 
+    public void SetFarPlane(int farPlane)
+    {
+        camera.SetFarPlane(farPlane);
+    }
+
     private void UpdateFocus()
     {
         Vector3 targetPosition = new Vector3(focusTarget.x - distance, cameraEntity.transform.position.y, focusTarget.z - distance);
