@@ -33,11 +33,19 @@ class Geyser : Component
     public Entity topParticles;
     public Entity dispersionParticles;
 
+    private ParticleComponent unactiveParticlesPriv;
+    private ParticleComponent topParticlesPriv;
+    private ParticleComponent dispersionParticlesPriv;
+
     void OnCreate()
     {
         collider = entity.GetComponent<BoxCollider>();
         particles = entity.GetComponent<ParticleComponent>();
         riseSFX = entity.GetComponent<AudioSource>();
+
+        unactiveParticlesPriv = unactiveParticles.GetComponent<ParticleComponent>();
+        topParticlesPriv = topParticles.GetComponent<ParticleComponent>();
+        dispersionParticlesPriv = dispersionParticles.GetComponent<ParticleComponent>();
 
         SetActiveState(false);
         StartCoroutine(GeyserCycleRoutine());
@@ -96,8 +104,8 @@ class Geyser : Component
             particles.Play();
             if (riseSFX != null) riseSFX.Play();
 
-            if (unactiveParticles != null) unactiveParticles.GetComponent<ParticleComponent>().Stop();
-            if (dispersionParticles != null) dispersionParticles.GetComponent<ParticleComponent>().Play();
+            if (unactiveParticlesPriv != null) unactiveParticlesPriv.Stop();
+            if (dispersionParticlesPriv != null) dispersionParticlesPriv.Play();
 
             StartCoroutine(TopParticlesRoutine());
         }
@@ -105,9 +113,9 @@ class Geyser : Component
         {
             particles.Stop();
 
-            if (unactiveParticles != null) unactiveParticles.GetComponent<ParticleComponent>().Play();
-            if (dispersionParticles != null) dispersionParticles.GetComponent<ParticleComponent>().Stop();
-            if (topParticles != null) topParticles.GetComponent<ParticleComponent>().Stop();
+            if (unactiveParticlesPriv != null) unactiveParticlesPriv.Play();
+            if (dispersionParticlesPriv != null) dispersionParticlesPriv.Stop();
+            if (topParticlesPriv != null) topParticlesPriv.Stop();
         }
     }
 
@@ -117,7 +125,7 @@ class Geyser : Component
 
         if (isActive && topParticles != null)
         {
-            topParticles.GetComponent<ParticleComponent>().Play();
+            topParticlesPriv.Play();
         }
     }
 
