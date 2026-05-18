@@ -149,7 +149,7 @@ class IntroMiniKnightStudio : Component
         else
         {
             currentBackgroundOpacity = Mathf.Lerp(1, 0, timer / afterTextDelay);
-            Vector4 color = new Vector4(0, 0, 0, currentBackgroundOpacity);
+            Vector4 color = new Vector4(0.9961f, 0.9961f, 0.9529f, currentBackgroundOpacity);
             background.SetTint(color);
         }
     }
