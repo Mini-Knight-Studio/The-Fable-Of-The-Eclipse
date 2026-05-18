@@ -17,6 +17,7 @@ public class PlayerCamera : Component
     {
         FOLLOWING_PLAYER,
         FOCUSING,
+        FOCUSING_HEIGHT,
         STOP_FOCUSING
     }
 
@@ -86,6 +87,7 @@ public class PlayerCamera : Component
         switch (currentState)
         {
             case cameraState.FOCUSING: UpdateFocus(); break;
+            case cameraState.FOCUSING_HEIGHT: UpdateFocusHeight(); break;
             case cameraState.STOP_FOCUSING: UpdateStopFocus(); break;
             case cameraState.FOLLOWING_PLAYER: UpdateFollowPlayer(); break;
         }
@@ -185,6 +187,31 @@ public class PlayerCamera : Component
         timeToFocus = time;
 
         lerpTimer = 0;
+    }
+
+    public void FocusOnHeightPoint(Vector3 destination, float zoomSize, float time)
+    {
+        currentState = cameraState.FOCUSING_HEIGHT;
+        previousState = cameraState.FOLLOWING_PLAYER;
+        focusTarget = destination;
+        focusZoom = zoomSize;
+        timeToFocus = time;
+
+        lerpTimer = 0;
+    }
+
+    private void UpdateFocusHeight()
+    {
+        Vector3 targetPosition = new Vector3(
+            focusTarget.x - distance,
+            focusTarget.y + (distance * verticalScale),
+            focusTarget.z - distance
+        );
+
+        cameraEntity.transform.position = Vector3.Lerp(cameraEntity.transform.position, targetPosition, lerpTimer / timeToFocus);
+
+        currentZoom = Mathf.Lerp(currentZoom, focusZoom, lerpTimer / timeToFocus);
+        camera.SetOrthoSize(currentZoom);
     }
 
     private void UpdateStopFocus()

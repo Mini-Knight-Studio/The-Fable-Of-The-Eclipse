@@ -24,6 +24,7 @@ class PuzzleDoorTablet : Component
     public float raiseDuration = 2.0f;
     public float pauseBeforeRaising = 0.5f;
     public float easeIntensity = 1.5f;
+    public bool modifyParticles = true;
     public float cameraZoom = 20;
 
     public float cameraShakeDuration = 0.5f;
@@ -120,6 +121,7 @@ class PuzzleDoorTablet : Component
 
         Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom / 2f, 6);
 
+
         yield return new WaitForSeconds(0.25f);
 
         float elapsedTime = 0f;
@@ -151,6 +153,8 @@ class PuzzleDoorTablet : Component
 
         animatedKey.SetActive(false);
         staticKey.SetActive(true);
+
+        Input.StartShake(.7f, raiseDuration);
 
         Player.Instance.Camera.SetIsShaking(true, raiseDuration + pauseBeforeRaising + 1, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
 
@@ -187,10 +191,13 @@ class PuzzleDoorTablet : Component
             float currentSpreadZ = Mathf.Lerp(1.5f, 5.5f, particleCurvedT);
             Vector3 variation = new Vector3(currentSpreadX, 0, currentSpreadZ);
 
-            if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
-            if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
-            if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
-            if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+            if(modifyParticles)
+            {
+                if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+                if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+                if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+                if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().SetPositionVariation(0, variation);
+            }
 
             if (t >= 1f)
             {
@@ -205,9 +212,9 @@ class PuzzleDoorTablet : Component
         if (risingParticles2 != null) risingParticles2.GetComponent<ParticleComponent>().Stop();
         if (risingParticles3 != null) risingParticles3.GetComponent<ParticleComponent>().Stop();
         if (risingParticles4 != null) risingParticles4.GetComponent<ParticleComponent>().Stop();
+        Input.StartShake(1, .1f);
 
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount * 2, cameraShakeRotation * 2, cameraShakeAmountVel, cameraShakeRotationVel);
-
         yield return new WaitForSeconds(1.0f);
 
         Player.Instance.Camera.StopFocus();

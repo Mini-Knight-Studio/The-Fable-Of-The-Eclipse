@@ -6,6 +6,16 @@ class Meteorite : Component
     [Header("Settings")]
     public float meteoriteTime = 2.0f;
     public float fallDistance = 25.0f;
+    public int damage = 20;
+    public bool goingUp = false;
+    public bool useCurve = false;
+
+    [Header("Curve Tweaks")]
+    public float curveArcHeight = 15f;
+    public float curveHorizontalOffset = 10f;
+
+    public BoxCollider MeteoriteTrigger;
+    public float shakeRadius = 12.0f;
 
     [Header("Wiggle Effect")]
     public float wiggleSpeed = 10.0f;
@@ -16,25 +26,60 @@ class Meteorite : Component
     public float shakeAmount = 0.3f;
     public float shakeRotation = 0.2f;
 
+    // Esta variable la llena automáticamente el Spawner al nacer
+    [HideInInspector]
+    public Entity originSpawnPoint;
+
     private Vector3 startPos;
     private Vector3 targetPos;
+    private Vector3 controlPos;
     private float timer = 0.0f;
     private float totalElapsed = 0.0f;
     private bool isFalling = false;
+    private bool hasDealtDamage = false;
+
+    private bool isInitialized = false;
 
     void OnCreate()
     {
-        startPos = transform.position;
-        targetPos = new Vector3(startPos.x, startPos.y - fallDistance, startPos.z);
+        if (MeteoriteTrigger == null)
+            MeteoriteTrigger = entity.GetComponent<BoxCollider>();
+
+        if (MeteoriteTrigger != null)
+        {
+            MeteoriteTrigger.Trigger = true;
+            MeteoriteTrigger.entity.SetActive(true);
+        }
 
         isFalling = true;
         timer = 0.0f;
         totalElapsed = 0.0f;
+        hasDealtDamage = false;
+        isInitialized = false;
     }
 
     void OnUpdate()
     {
         if (!isFalling) return;
+
+        if (!isInitialized)
+        {
+            startPos = transform.position;
+
+            float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
+
+            if (goingUp && useCurve)
+            {
+                targetPos = new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z);
+                controlPos = new Vector3(startPos.x, startPos.y + fallDistance + curveArcHeight, startPos.z);
+            }
+            else
+            {
+                targetPos = new Vector3(startPos.x, finalY, startPos.z);
+            }
+
+            isInitialized = true;
+        }
 
         totalElapsed += Time.deltaTime;
 
@@ -43,10 +88,22 @@ class Meteorite : Component
             timer += Time.deltaTime;
             float t = timer / meteoriteTime;
 
-            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            if (goingUp && useCurve)
+            {
+                float u = 1f - t;
+                transform.position = (startPos * (u * u)) + (controlPos * (2f * u * t)) + (targetPos * (t * t));
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(startPos, targetPos, t);
+            }
+
+            if (!hasDealtDamage && MeteoriteTrigger != null && MeteoriteTrigger.HasCollided)
+            {
+                ApplyDamageOnce();
+            }
 
             float angle = Mathf.Sin(totalElapsed * wiggleSpeed) * wiggleIntensity;
-
             transform.rotation = new Vector3(0, 0, angle);
         }
         else
@@ -56,13 +113,62 @@ class Meteorite : Component
         }
     }
 
-    void Impact()
+    private void ApplyDamageOnce()
     {
-        if (Player.Instance != null && Player.Instance.Camera != null)
+        if (Player.Instance != null && Player.Instance.PlayerHealth != null)
         {
-            Player.Instance.Camera.SetIsShaking(true, shakeDuration, shakeAmount, shakeRotation);
+            Player.Instance.PlayerHealth.Damage(damage);
         }
 
+        hasDealtDamage = true;
+    }
+
+    void Impact()
+    {
+        // 1. Efecto de la cámara
+        if (Player.Instance != null)
+        {
+            float distanceToPlayer = (float)Vector3.Distance(transform.position, Player.Instance.transform.position);
+
+            if (Player.Instance.Camera != null && distanceToPlayer <= shakeRadius)
+            {
+                Player.Instance.Camera.SetIsShaking(true, shakeDuration, shakeAmount, shakeRotation);
+            }
+        }
+
+        // REPRODUCIR EFECTOS DIRECTAMENTE EN EL SPAWNPOINT DE ORIGEN
+        if (originSpawnPoint != null)
+        {
+            // Movemos el spawnpoint visualmente a la posición exacta del suelo/impacto si es necesario, 
+            // o dejamos que actúe desde donde está configurado.
+
+            // 2. Activar partículas estáticas del SpawnPoint
+            ParticleComponent pComp = originSpawnPoint.GetComponent<ParticleComponent>();
+            if (pComp != null)
+            {
+                pComp.Play();
+            }
+
+            // 3. Activar sonido estático del SpawnPoint
+            AudioSource audio = originSpawnPoint.GetComponent<AudioSource>();
+            if (audio != null)
+            {
+                audio.Play();
+            }
+        }
+        else
+        {
+            Console.WriteLine("[Meteorite] Alerta: No se encontró la referencia del originSpawnPoint.");
+        }
+
+        // 4. Morir instantáneamente (Los efectos sobreviven porque están en el SpawnPoint)
         entity.Destroy();
     }
-};
+
+    void OnDrawGizmo()
+    {
+        float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
+        Vector3 groundPos = (goingUp && useCurve) ? new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z) : new Vector3(startPos.x, finalY, startPos.z);
+        Gizmo.DrawCircle(groundPos, shakeRadius, Vector3.Up, 32, Color.Green);
+    }
+}
