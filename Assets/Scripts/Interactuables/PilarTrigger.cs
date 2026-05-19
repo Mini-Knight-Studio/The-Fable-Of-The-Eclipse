@@ -7,7 +7,6 @@ public class PillarTrigger : Component
     public Entity hookParticlesEntity;
 
     private ParticleComponent hookParticles;
-    private InteractHover interactPromptComponent;
 
     public float yOffset = 1;
     public float reachDistance = 10.0f;

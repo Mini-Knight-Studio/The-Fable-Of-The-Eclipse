@@ -16,7 +16,6 @@ class Chest : Component
     public Entity moonstone;
 
     private Material moonstoneMat;
-    private InteractHover interactPromptComponent;
 
     [Header("Feedback")]
     public Entity openSFXEntity;
@@ -50,8 +49,6 @@ class Chest : Component
         staticMoon.SetActive(false);
         animatedMoon.SetActive(true);
 
-        interactPromptComponent = interactPrompt.GetComponent<InteractHover>();
-
         if (rewardItem != null)
         {
             rewardItem.transform.scale = Loopie.Vector3.Zero;
@@ -84,21 +81,21 @@ class Chest : Component
         {
             if (!interactPrompt.Active)
             {
-                interactPromptComponent.ActivatePromt();
+                interactPrompt.SetActive(true);
             }
 
             if (Player.Instance.Input.interactKeyPressed)
             {
                 animationStarted = true;
                 StartCoroutine(HandleChestAnimation());
-                interactPromptComponent.DeactivatePromt();
+                interactPrompt.SetActive(false);
             }
         }
         else
         {
             if (interactPrompt.Active)
             {
-                interactPromptComponent.DeactivatePromt();
+                interactPrompt.SetActive(false);
             }
         }
     }
@@ -195,7 +192,7 @@ class Chest : Component
     {
         staticMoon.SetActive(true);
         animatedMoon.SetActive(false);
-        interactPromptComponent.DeactivatePromt();
+        interactPrompt.SetActive(false);
 
         Loopie.Vector3 targetLidRot = new Loopie.Vector3(lidStartRot.x, lidStartRot.y, lidStartRot.z + 108.0f);
         upperPart.transform.local_rotation = targetLidRot;

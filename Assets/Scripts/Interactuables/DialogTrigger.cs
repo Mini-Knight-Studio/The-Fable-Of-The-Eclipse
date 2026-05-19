@@ -17,22 +17,18 @@ class DialogTrigger : Component
     [Header("References")]
     public Entity interactPrompt;
 
-    private InteractHover interactPromptComponent;
-
     BoxCollider boxCollider;
 
     void OnCreate()
     {
         boxCollider = entity.GetComponent<BoxCollider>();
-
-        interactPromptComponent = interactPrompt.GetComponent<InteractHover>();
     }
 
     void OnUpdate()
     {
         if (DialogUI.Instance.IsDialogOpen)
         {
-            interactPromptComponent.DeactivatePromt();
+            interactPrompt.SetActive(false);
             return;
         }
 
@@ -40,7 +36,7 @@ class DialogTrigger : Component
         {
             if (!interactPrompt.Active)
             {
-                interactPromptComponent.ActivatePromt();
+                interactPrompt.SetActive(true);
             }
 
             if (Player.Instance.Input.interactKeyPressed)
@@ -52,7 +48,7 @@ class DialogTrigger : Component
         {
             if (interactPrompt.Active)
             {
-                interactPromptComponent.DeactivatePromt();
+                interactPrompt.SetActive(false);
             }
         }
 

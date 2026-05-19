@@ -8,8 +8,6 @@ class Gem_Idle : Component
     public Entity gemModel;
     public Entity interactionPrompt;
 
-    private InteractHover interactPromptComponent;
-
     [Header("Settings")]
     public float amplitude = 0.5f;
     public float speed = 2.0f;

@@ -17,8 +17,6 @@ class PuzzleDoor : Component
     public Entity blockingCollider;
     public Entity interactPrompt;
 
-    private InteractHover interactPromptComponent;
-
     [Header("Settings")]
     public Vector3 finalRightDoorRot = Vector3.Zero;
     public Vector3 finalLefttDoorRot = Vector3.Zero;
