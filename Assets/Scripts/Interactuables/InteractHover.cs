@@ -120,4 +120,16 @@ class InteractHover : Component
             user.LookAt(finalLookTarget, finalUpVector);
         }
     }
+
+    public void DeactivatePromt()
+    {
+        interactKeyboard.SetActive(false);
+        interactGamepad.SetActive(false);
+    }
+
+    public void ActivatePromt()
+    {
+        interactKeyboard.SetActive(true);
+        interactGamepad.SetActive(true);
+    }
 }

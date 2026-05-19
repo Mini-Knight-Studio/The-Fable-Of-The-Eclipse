@@ -12,6 +12,8 @@ class Key_Idle : Component
     public Entity ownerChest;
     public Entity focusPointOnCollect;
 
+    private InteractHover interactPromptComponent;
+
     [Header("Settings")]
     public float amplitude = 0.5f;
     public float speed = 2.0f;

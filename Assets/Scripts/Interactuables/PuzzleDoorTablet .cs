@@ -17,6 +17,8 @@ class PuzzleDoorTablet : Component
     public Entity interactPrompt;
     public Entity movingPlatform;
 
+    private InteractHover interactPromptComponent;
+
     [Header("Settings")]
     public float finalTempleHeight;
     public float camFocusDuration = 1.0f;

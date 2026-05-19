@@ -11,6 +11,7 @@ class MovingPillarSimonSays : Component
     private ParticleComponent torchParticles;
     private BoxCollider torchCollider;
     private MovingPillar movingPillar;
+    private InteractHover interactPromptComponent;
 
     [Header("Settings")]
     private bool enabled = false;

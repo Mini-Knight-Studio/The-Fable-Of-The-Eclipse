@@ -98,7 +98,15 @@ class PuzzleGoal : Component
             if (!isCollecting)
             {
                 Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
-                Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
+
+                if (DatabaseRegistry.playerDB.Player.gemAirCollected)
+                {
+                    Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().DeactivatePromt();
+                }
+                else
+                {
+                    Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().ActivatePromt();
+                }
                 Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
             }
         }
@@ -112,7 +120,7 @@ class PuzzleGoal : Component
             completeSFX.GetComponent<AudioSource>().Play();
 
             Gem.GetComponent<BoxCollider>().SetActive(true);
-            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().ActivatePromt();
         }
 
         if (!isCollecting && Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
@@ -173,7 +181,7 @@ class PuzzleGoal : Component
         isCollecting = true;
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
-        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(false);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().DeactivatePromt();
         Gem.GetComponent<Gem_Idle>().SetActive(false);
 
         Entity player = Player.Instance.entity;

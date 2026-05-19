@@ -179,12 +179,12 @@ class PuzzleGoalSimonSays : Component
 
         if (allOnGoal && !simonStarted)
         {
-            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().ActivatePromt();
             if (goalCollider != null && goalCollider.IsColliding && Player.Instance.Input.interactKeyPressed)
             {
                 simonStarted = true;
                 activateSFX.GetComponent<AudioSource>().Play();
-                Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(false);
+                Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().DeactivatePromt();
                 StartCoroutine(SimonSaysRoutine());
             }
         }
@@ -256,13 +256,13 @@ class PuzzleGoalSimonSays : Component
                     {
                         playerIndex++;
                         simonPillars[pressedIndex].ResetState();
-                        simonPillars[pressedIndex].interactPrompt.SetActive(false);
+                        simonPillars[pressedIndex].interactPrompt.GetComponent<InteractHover>().DeactivatePromt();
                         
                         if (playerIndex >= sequence.Count) HidePromptAllPillars();
 
                         yield return new WaitForSeconds(1f);
 
-                        if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
+                        if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.GetComponent<InteractHover>().ActivatePromt();
                         simonPillars[pressedIndex].ResetState();
                     }
                     else
@@ -316,7 +316,7 @@ class PuzzleGoalSimonSays : Component
         isCollecting = true;
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
-        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(false);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().DeactivatePromt();
         Gem.GetComponent<Gem_Idle>().SetActive(false);
 
         Entity player = Player.Instance.entity;
@@ -351,7 +351,7 @@ class PuzzleGoalSimonSays : Component
         puzzle2Completed = true;
         currentState = State.Completed;
         Gem.GetComponent<BoxCollider>().SetActive(true);
-        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().ActivatePromt();
         completeSFX.GetComponent<AudioSource>().Play();
     }
 
@@ -365,7 +365,14 @@ class PuzzleGoalSimonSays : Component
         {
             Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
             Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
-            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
+            if (DatabaseRegistry.playerDB.Player.gemWaterCollected)
+            {
+                Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().DeactivatePromt();
+            }
+            else
+            {
+                Gem.GetComponent<Gem_Idle>().interactionPrompt.GetComponent<InteractHover>().ActivatePromt();
+            }
         }
 
         ResetAllPillars();
@@ -393,12 +400,12 @@ class PuzzleGoalSimonSays : Component
 
     void ShowPromptAllPillars()
     {
-        foreach (var pillar in simonPillars) if (pillar != null) pillar.interactPrompt.SetActive(true);
+        foreach (var pillar in simonPillars) if (pillar != null) pillar.interactPrompt.GetComponent<InteractHover>().ActivatePromt();
     }
 
     void HidePromptAllPillars()
     {
-        foreach (var pillar in simonPillars) if (pillar != null) pillar.interactPrompt.SetActive(false);
+        foreach (var pillar in simonPillars) if (pillar != null) pillar.interactPrompt.GetComponent<InteractHover>().DeactivatePromt();
     }
 
     void OnDestroy()
