@@ -28,11 +28,7 @@ html, body
     align-items: center;
 }
 
-.team-member-list
-{
-    width: fit-content;
-    height: 100%;
-}
+
 
 .member-card
 {
@@ -43,6 +39,19 @@ html, body
 
 @media (pointer: coarse)
 {
+    .team-member-list
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 5px;
+        column-gap: 15px;
+    }
+
     .member-photo
     {
         width: 50px;
@@ -69,6 +78,7 @@ html, body
         margin: 0;
         margin-left: 5px;
         margin-right: 5px;
+        transform: translate(0, -5%);
     }
 
     .member-button
@@ -92,6 +102,18 @@ html, body
 
 @media (pointer: fine)
 {
+    .team-member-list
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
     .member-photo
     {
         width: 100px;
@@ -118,6 +140,7 @@ html, body
         margin: 0;
         margin-left: 5px;
         margin-right: 5px;
+        transform: translate(0, -5%);
     }
 
     .member-button

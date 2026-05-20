@@ -11,19 +11,23 @@
 </head>
 <body>
     <header>
-        <h1>The Fable of the Eclipse</h1>
+        <div class="row">
+            <h1>The Fable of the Eclipse</h1>
+            <div class="space"></div>
+            <button class="menu-hider"></button>
+        </div>
     </header>
     <main>
         <iframe id="frame" class="page-container" src="html/game.html" frameborder="0"></iframe>
         <ul class="menu-list column">
             <li class="space"></div>
             <li class="menu-div"><p>Game</p><button class="menu-button" onclick="SetSource('game')"><iconify-icon icon="material-symbols:stadia-controller"></iconify-icon></button></div>
-            <li class="menu-div"><p>History</p><button class="menu-button"><iconify-icon icon="material-symbols:history-edu"></iconify-icon></button></div>
+            <li class="menu-div"><p>History</p><button class="menu-button" onclick="SetSource('history')"><iconify-icon icon="material-symbols:history-edu"></iconify-icon></button></div>
             <li class="menu-div"><p>Team</p><button class="menu-button" onclick="SetSource('team')"><iconify-icon icon="ic:baseline-groups"></iconify-icon></button></div>
-            <li class="menu-div"><p>Tools</p><button class="menu-button"><iconify-icon icon="octicon:gear"></iconify-icon></button></div>
-            <li class="menu-div"><p>Process</p><button class="menu-button"><iconify-icon icon="mdi:progress-clock"></iconify-icon></button></div>
-            <li class="menu-div"><p>Post-mortem</p><button class="menu-button"><iconify-icon icon="lsicon:work-order-filled"></iconify-icon></button></div>
-            <li class="menu-div"><p>Source Code</p><button class="menu-button"><iconify-icon icon="gridicons:code"></iconify-icon></button></div>
+            <li class="menu-div"><p>Tools</p><button class="menu-button" onclick="SetSource('tools')"><iconify-icon icon="octicon:gear"></iconify-icon></button></div>
+            <li class="menu-div"><p>Process</p><button class="menu-button" onclick="SetSource('process')"><iconify-icon icon="mdi:progress-clock"></iconify-icon></button></div>
+            <li class="menu-div"><p>Post-mortem</p><button class="menu-button" onclick="SetSource('post-mortem')"><iconify-icon icon="lsicon:work-order-filled"></iconify-icon></button></div>
+            <li class="menu-div"><p>Source Code</p><button class="menu-button" onclick="SetSource('code')"><iconify-icon icon="gridicons:code"></iconify-icon></button></div>
             <li class="space"></div>
         </ul>
     </main>
