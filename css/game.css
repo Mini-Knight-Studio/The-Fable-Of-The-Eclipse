@@ -28,65 +28,139 @@ html, body
     flex: 1;
 }
 
-.video-container
-{
+.video-container {
     position: relative;
-    left: 0;
-    top: 0;
     width: 100%;
-    height: 300px;
+    height: auto;
     border: 0;
 }
 
-.gameplay-snippet
-{
-    position: absolute;
-    left: 0;
-    top: 0;
+.gameplay-snippet-container {
+    position: relative; 
     width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.gameplay-snippet-container
-{
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
     border: 0;
     pointer-events: none;
 }
 
-.gameplay-snippet-container::after
-{
+.gameplay-snippet {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0;
+}
+
+.gameplay-snippet-container::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    border: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    border: 0;
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 .game-title
 {
+    color:#E2B25B;
     position: absolute;
     top: 25%;
     left: 50%;
+    width: 100%;
+    text-align: center;
     transform: translate(-50%, -50%);
     font-size: 40px;
 }
 
 .game-download
 {
+    display: grid;
+    place-items: center;
     position: absolute;
-    top: 60%;
+    top: 70%;
     left: 50%;
     width: 100px;
     height: 50px;
     font-size: 25px;
     transform: translate(-50%, -50%);
+    background-color: #3C2621;
+    color: #E2B25B;
+    border: 3px inset #E2B25B;
+}
+
+.main-features
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.main-feature
+{
+    width: 100%;
+    aspect-ratio: 1/1;
+    margin: 5px;
+    border: 5px solid #3C2621;
+    border-radius: 25%;
+}
+
+@media (pointer: fine)
+{
+    .game-title
+    {
+        color:#E2B25B;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        width: 100%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        font-size: 100px;
+    }
+
+    .game-download
+    {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        transform: translate(-50%, -50%);
+        background-color: #3C2621;
+        color: #E2B25B;
+        border: 10px inset #E2B25B;
+    }
+}
+
+@media (pointer: coarse)
+{
+    .game-title
+    {
+        color:#E2B25B;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        width: 100%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+    }
+
+    .game-download
+    {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        width: 100px;
+        height: 50px;
+        font-size: 25px;
+        transform: translate(-50%, -50%);
+        background-color: #3C2621;
+        color: #E2B25B;
+        border: 3px inset #E2B25B;
+    }
 }
