@@ -46,7 +46,7 @@ public class PillarTrigger : Component
 
     public Vector3 GetGrapplePoint()
     {
-        return entity.transform.position + Vector3.Up * yOffset;
+        return entity.transform.position + entity.transform.Up * yOffset;
     }
     public bool CheckLineOfSight(Vector3 playerPos)
     {
