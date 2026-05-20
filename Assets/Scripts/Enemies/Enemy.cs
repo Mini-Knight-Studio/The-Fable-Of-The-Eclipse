@@ -103,9 +103,17 @@ public class Enemy : Component
     #region Target
     protected Vector3 GetDirectionToTarget()
     {
+        return (GetTargetPosition() - transform.position).normalized;
+    }
+    protected Vector3 GetTargetPosition()
+    {
         Vector3 targetPos = Player.Instance.transform.position;
         targetPos.y = transform.position.y;
-        return (targetPos  - transform.position).normalized;
+        return targetPos;
+    }
+    protected double GetDistanceToTarget()
+    {
+        return Vector3.Distance(GetTargetPosition(), transform.position);
     }
     #endregion
 
@@ -119,7 +127,7 @@ public class Enemy : Component
         while (timer < preparation_time)
         {
             timer += Time.deltaTime;
-            transform.LookAt(Player.Instance.transform.position, Vector3.Up);
+            transform.LookAt(GetTargetPosition(), Vector3.Up);
             yield return null;
         }
         animator.PlayClip(attack_clip, false, 0.0f);
@@ -155,7 +163,7 @@ public class Enemy : Component
     {
         attack_stages.x = 1.0f;
 
-        if (Mathf.Abs((float)Vector3.Distance(transform.position, Player.Instance.transform.position)) <= GetEntityForwardBase() + attack_distance)
+        if (Mathf.Abs((float)GetDistanceToTarget()) <= GetEntityForwardBase() + attack_distance)
         {
             if (Player.Instance.Effects.AddEffect(effect)) feedback.TickParticles("Effect", Time.deltaTime);
             else feedback.TickParticles("Attack", Time.deltaTime);
@@ -204,7 +212,7 @@ public class Enemy : Component
                     blink.TriggerBlink();
                 }
 
-                transform.LookAt(Player.Instance.transform.position, Vector3.Up);
+                transform.LookAt(GetTargetPosition(), Vector3.Up);
                 feedback.TickParticles("Hurt", Time.deltaTime);
                 feedback.PlaySound("Hit");
                 if (!health.IsDead())

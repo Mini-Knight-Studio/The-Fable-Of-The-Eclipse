@@ -70,6 +70,7 @@ class Blob : Enemy
                 splitting = true;
                 if (Stage > 1)
                     Split();
+                StopAllOwnedCoroutines();
                 animator.PlayClip("Armature|Split", false, 0.0f, false, true);
                 feedback.PlaySound("Death");
             }
@@ -87,11 +88,11 @@ class Blob : Enemy
                 if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
                 {
                     animator.PlayClip("Armature|Chase", true, 0.5f);
-                    transform.LookAt(Player.Instance.transform.position, transform.Up);
+                    transform.LookAt(GetTargetPosition(), transform.Up);
                     movement.Move(4-Stage, transform.Forward);
                     ResetWander();
                     #region Attack
-                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
+                    if (GetDistanceToTarget() < GetEntityForwardBase() + ReachDistance)
                     {
                         attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, HitOffset, (int)StageMultiplier(BaseDamageandStageMultiplier), "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
                     }
@@ -158,7 +159,7 @@ class Blob : Enemy
             yield return null;
         }
 
-        transform.LookAt(Player.Instance.transform.position, Vector3.Up);
+        transform.LookAt(GetTargetPosition(), Vector3.Up);
         collision.RemoveExcludeMask(LayerOverride);
         isSpawning = false;
     }

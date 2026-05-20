@@ -46,6 +46,7 @@ class Golem : Enemy
             {
                 dead = true;
                 movement.CanMove = false;
+                StopAllOwnedCoroutines();
                 animator.PlayClip("G_Scale_CTRL|Death", false, 0.0f, false, true);
                 feedback.PlaySound("Death");
             }
@@ -65,13 +66,13 @@ class Golem : Enemy
             if (DetectedTargetInViewField(ViewField.x, ViewField.y) || DetectedTargetInDistance(GetEntityForwardBase() + ForcedDetectionDistance))
             {
                 animator.PlayClip("G_Scale_CTRL|Chase", true, 0.25f);
-                transform.LookAt(Player.Instance.transform.position, transform.Up);
+                transform.LookAt(GetTargetPosition(), transform.Up);
                 movement.Move(2.0f, transform.Forward);
                 ResetWander();
                 #region Attack
                 if (CanDoAttack() && !IsBeingHitted())
                 {
-                    if (Vector3.Distance(Player.Instance.transform.position, transform.position) < GetEntityForwardBase() + ReachDistance)
+                    if (GetDistanceToTarget() < GetEntityForwardBase() + ReachDistance)
                     {
                         ReceivedHits = 0;
                         attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|RecoveryArmOut"), HitOffset, Damage, "G_Scale_CTRL|AttackCharge", "G_Scale_CTRL|AttackSwing", "G_Scale_CTRL|RecoveryStuck", "G_Scale_CTRL|RecoveryArmOut", false));
@@ -116,7 +117,7 @@ class Golem : Enemy
                 {
                     ReceivedHits++;
                     health.Damage(points);
-                    transform.LookAt(Player.Instance.transform.position, Vector3.Up);
+                    transform.LookAt(GetTargetPosition(), Vector3.Up);
                     feedback.TickParticles("Hurt", Time.deltaTime);
                     feedback.PlaySound("Hit");
                 }
