@@ -39,6 +39,8 @@ class PuzzleGoalFireLvl : Component
     public Entity completeSFX;
     public Entity collectGemSFX;
 
+    public string popupName = "Popup_GemFire";
+
     void OnCreate()
     {
         pillars = new MovingPillar[3];
@@ -194,6 +196,11 @@ class PuzzleGoalFireLvl : Component
         collectGemSFX.GetComponent<AudioSource>().Play();
 
         DatabaseRegistry.playerDB.Player.gemFireCollected = true;
+
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupName);
+        }
 
         isCollecting = false;
     }

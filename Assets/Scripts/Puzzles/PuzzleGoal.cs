@@ -40,6 +40,8 @@ class PuzzleGoal : Component
     public Entity completeSFX;
     public Entity collectGemSFX;
 
+    public string popupName = "Popup_GemAir";
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -198,6 +200,11 @@ class PuzzleGoal : Component
 
         DatabaseRegistry.playerDB.Player.gemAirCollected = true;
         DatabaseRegistry.playerDB.Player.hasBurner = true;
+
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupName);
+        }
 
         isCollecting = false;
     }
