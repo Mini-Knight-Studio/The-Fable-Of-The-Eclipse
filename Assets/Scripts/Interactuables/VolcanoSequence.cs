@@ -12,22 +12,37 @@ class VolcanoSequence : Component
     public float prepZoom = 111f;
     public float prepCameraSpeed = 4f;
     public float prepDuration = 2.5f;
+
+    [Header("Preparation Shake (Subtle Rumble)")]
     public float prepShakeAmount = 0.1f;
     public float prepShakeRotation = 0.05f;
+    public float prepShakeAmountVel = 0.1f;
+    public float prepShakeRotationVel = 0.1f;
 
-    [Header("Pre")]
+    [Header("Pre (Crater Zoom)")]
     public Entity craterFocusTarget;
     public int cameraEndingFarPlane = 300;
     public float craterZoom = 70f;
     public float craterCameraSpeed = 6f;
     public float craterFocusDuration = 1.0f;
+
+    [Header("Crater Zoom Shake (Building Up)")]
     public float craterShakeAmount = 0.3f;
     public float craterShakeRotation = 0.2f;
+    public float craterShakeAmountVel = 0.4f;
+    public float craterShakeRotationVel = 0.4f;
 
-    [Header("Explosion")]
+    [Header("Camera Curve Settings")]
+    public bool useCameraCurve = true;
+    public float camCurveOutwardOffset = 15f;
+    public float camCurveHeightOffset = 10f;
+
+    [Header("Explosion (Massive Earthquake)")]
     public float eruptionDuration = 4.0f;
     public float eruptionShakeAmount = 0.6f;
     public float eruptionShakeRotation = 0.4f;
+    public float eruptionShakeAmountVel = 0.8f;
+    public float eruptionShakeRotationVel = 0.8f;
     public float delayBetweenMeteorites = 0.1f;
     public float sequenceDistance = 0f;
 
@@ -92,23 +107,52 @@ class VolcanoSequence : Component
             Player.Instance.Camera.FocusOnHeightPoint(prepFocusTarget.transform.position, prepZoom, prepCameraSpeed);
         }
 
-        Player.Instance.Camera.SetIsShaking(true, prepDuration, prepShakeAmount, prepShakeRotation);
+        Input.StartShake(0.2f, prepDuration);
+        Player.Instance.Camera.SetIsShaking(true, prepDuration, prepShakeAmount, prepShakeRotation, prepShakeAmountVel, prepShakeRotationVel);
 
         yield return new WaitForSeconds(prepDuration);
 
 
-        if (craterFocusTarget != null)
+        Input.StartShake(0.5f, craterFocusDuration);
+        Player.Instance.Camera.SetIsShaking(true, craterFocusDuration, craterShakeAmount, craterShakeRotation, craterShakeAmountVel, craterShakeRotationVel);
+
+        if (craterFocusTarget != null && prepFocusTarget != null)
+        {
+            if (useCameraCurve)
+            {
+                Vector3 p0 = prepFocusTarget.transform.position;
+                Vector3 p2 = craterFocusTarget.transform.position;
+                Vector3 centerPoint = Vector3.Lerp(p0, p2, 0.5f);
+                Vector3 p1 = centerPoint + new Vector3(camCurveOutwardOffset, camCurveHeightOffset, 0f);
+
+                float elapsed = 0f;
+                while (elapsed < craterFocusDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / craterFocusDuration);
+                    float u = 1f - t;
+
+                    Vector3 currentFocusPos = (p0 * (u * u)) + (p1 * (2f * u * t)) + (p2 * (t * t));
+                    float currentZoom = Mathf.Lerp(prepZoom, craterZoom, t);
+
+                    Player.Instance.Camera.FocusOnHeightPoint(currentFocusPos, currentZoom, craterCameraSpeed);
+                    yield return null;
+                }
+            }
+            else
+            {
+                Player.Instance.Camera.FocusOnHeightPoint(craterFocusTarget.transform.position, craterZoom, craterCameraSpeed);
+                yield return new WaitForSeconds(craterFocusDuration);
+            }
+        }
+        else if (craterFocusTarget != null)
         {
             Player.Instance.Camera.FocusOnHeightPoint(craterFocusTarget.transform.position, craterZoom, craterCameraSpeed);
+            yield return new WaitForSeconds(craterFocusDuration);
         }
-
-        Player.Instance.Camera.SetIsShaking(true, craterFocusDuration, craterShakeAmount, craterShakeRotation);
-
-        yield return new WaitForSeconds(craterFocusDuration);
 
 
         if (prepRumbleSFX != null) prepRumbleSFX.GetComponent<AudioSource>().Stop();
-
         if (explosionBoomSFX != null) explosionBoomSFX.GetComponent<AudioSource>().Play();
 
         if (prepParticles != null) prepParticles.SetActive(false);
@@ -119,7 +163,8 @@ class VolcanoSequence : Component
             explosionParticles.GetComponent<ParticleComponent>().Play();
         }
 
-        Player.Instance.Camera.SetIsShaking(true, eruptionDuration, eruptionShakeAmount, eruptionShakeRotation);
+        Input.StartShake(1.0f, eruptionDuration);
+        Player.Instance.Camera.SetIsShaking(true, eruptionDuration, eruptionShakeAmount, eruptionShakeRotation, eruptionShakeAmountVel, eruptionShakeRotationVel);
 
         if (meteorite1 != null)
         {
@@ -163,6 +208,7 @@ class VolcanoSequence : Component
             if (meteorite3 != null) meteorite3.SetActive(false);
         }
     }
+
     private void PlayMeteoriteLaunchSound()
     {
         if (meteoriteLaunchSFX != null)
