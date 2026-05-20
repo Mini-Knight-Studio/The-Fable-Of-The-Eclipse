@@ -8,38 +8,57 @@ public class GrassReaction : Component
     public float recoverySpeed = 5.0f;
     public float detectionRadius = 2.0f;
 
+    [Header("Juice")]
+    private float grassVibrationIntensity = 0.02f;
+    private float grassVibrationDuration = 0.02f;
+
     private Vector3 originalRotation;
-    private Vector3 pushDirection = Vector3.Zero;
+    private Vector3 currentBendOffset = Vector3.Zero;
     private bool isPlayerInside = false;
 
     void OnCreate()
     {
         originalRotation = transform.rotation;
-
     }
 
     void OnUpdate()
     {
-        float dist = (float)Vector3.Distance(transform.position, Player.Instance.transform.position);
+        Vector3 targetPush = Vector3.Zero;
 
-        if (dist < detectionRadius)
+        if (Player.Instance != null)
         {
-            isPlayerInside = true;
-            pushDirection = (transform.position - Player.Instance.transform.position).normalized;
-        }
-        else
-        {
-            isPlayerInside = false;
+            float dist = (float)Vector3.Distance(transform.position, Player.Instance.transform.position);
+
+            if (dist < detectionRadius && dist > 0.01f)
+            {
+                Vector3 pushDirection = (transform.position - Player.Instance.transform.position).normalized;
+                float distanceFactor = 1.0f - (dist / detectionRadius);
+                targetPush = pushDirection * distanceFactor;
+
+                if (!isPlayerInside)
+                {
+                    isPlayerInside = true;
+                    Input.StartShake(grassVibrationIntensity, grassVibrationDuration);
+                }
+            }
+            else
+            {
+                isPlayerInside = false;
+            }
         }
 
-        Vector3 targetPush = isPlayerInside ? pushDirection : Vector3.Zero;
-
-        Vector3 targetRot = new Vector3(
-            originalRotation.x + (targetPush.z * bendIntensity),
-            originalRotation.y,
-            originalRotation.z + (-targetPush.x * bendIntensity)
+        Vector3 targetBendOffset = new Vector3(
+            targetPush.z * bendIntensity,
+            0,
+            -targetPush.x * bendIntensity
         );
 
-        transform.rotation = Vector3.Lerp(transform.rotation, targetRot, Time.deltaTime * recoverySpeed);
+        currentBendOffset = Vector3.Lerp(currentBendOffset, targetBendOffset, Time.deltaTime * recoverySpeed);
+
+        transform.rotation = new Vector3(
+            originalRotation.x + currentBendOffset.x,
+            originalRotation.y,
+            originalRotation.z + currentBendOffset.z
+        );
     }
 }

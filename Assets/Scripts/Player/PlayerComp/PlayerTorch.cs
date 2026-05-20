@@ -51,6 +51,7 @@ public class PlayerTorch : PlayerComponent
 
         if (torchEntity != null) torchEntity.SetActive(true);
         if (fireParticle != null) fireParticle.Play();
+        Input.StartShake(.3f, .5f);
 
         float timer = 0.0f;
         while (timer < sequenceDuration)
