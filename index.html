@@ -14,12 +14,12 @@
         <div class="row">
             <h1>The Fable of the Eclipse</h1>
             <div class="space"></div>
-            <button class="menu-hider"></button>
+            <button class="menu-hider" status="hiden" id="menu-hider" onclick="ChangeMenuVisibility()"><iconify-icon icon="material-symbols:menu"></iconify-icon></button>
         </div>
     </header>
     <main>
         <iframe id="frame" class="page-container" src="html/game.html" frameborder="0"></iframe>
-        <ul class="menu-list column">
+        <ul class="menu-list column" id="menu">
             <li class="space"></div>
             <li class="menu-div"><p>Game</p><button class="menu-button" onclick="SetSource('game')"><iconify-icon icon="material-symbols:stadia-controller"></iconify-icon></button></div>
             <li class="menu-div"><p>History</p><button class="menu-button" onclick="SetSource('history')"><iconify-icon icon="material-symbols:history-edu"></iconify-icon></button></div>
