@@ -34,7 +34,7 @@ public class UIPopupManager : Component
             currentActivePanel = panel;
             isWaitingForInput = true;
 
-            Time.timeScale = 0.0f;
+            GameManager.SetState(GameManager.GameState.PAUSE);
         }
         else
         {
@@ -52,6 +52,6 @@ public class UIPopupManager : Component
 
         isWaitingForInput = false;
 
-        Time.timeScale = 1.0f;
+        GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 };
