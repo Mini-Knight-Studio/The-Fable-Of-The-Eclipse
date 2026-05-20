@@ -8,8 +8,13 @@ public class GrassReaction : Component
     public float recoverySpeed = 5.0f;
     public float detectionRadius = 2.0f;
 
+    [Header("Juice")]
+    private float grassVibrationIntensity = 0.02f;
+    private float grassVibrationDuration = 0.02f;
+
     private Vector3 originalRotation;
     private Vector3 currentBendOffset = Vector3.Zero;
+    private bool isPlayerInside = false;
 
     void OnCreate()
     {
@@ -27,10 +32,18 @@ public class GrassReaction : Component
             if (dist < detectionRadius && dist > 0.01f)
             {
                 Vector3 pushDirection = (transform.position - Player.Instance.transform.position).normalized;
-
                 float distanceFactor = 1.0f - (dist / detectionRadius);
-
                 targetPush = pushDirection * distanceFactor;
+
+                if (!isPlayerInside)
+                {
+                    isPlayerInside = true;
+                    Input.StartShake(grassVibrationIntensity, grassVibrationDuration);
+                }
+            }
+            else
+            {
+                isPlayerInside = false;
             }
         }
 

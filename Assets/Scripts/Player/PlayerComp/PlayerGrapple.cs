@@ -113,6 +113,8 @@ public class PlayerGrapple : PlayerComponent
 
             if (stateTimer >= currentWaitTime)
             {
+                Input.StartShake(.4f, landingDuration);
+
                 isLaunching = false;
                 isTraveling = true;
                 stateTimer = 0.0f;
@@ -143,6 +145,7 @@ public class PlayerGrapple : PlayerComponent
 
                 DestroyGrappleObjects();
                 FinalizeGrapple();
+                Input.StartShake(1f, .1f);
                 isLanding = true;
                 landingTimer = landingDuration;
             }
@@ -264,7 +267,6 @@ public class PlayerGrapple : PlayerComponent
         activePillar = pillarScript;
         pillarPos = activePillar.GetGrapplePoint();
         startPos = transform.position;
-
         Vector3 dir = (pillarPos - startPos).normalized;
         targetPos = pillarPos - (dir * stoppingDistance);
         targetPos.y = transform.position.y;
