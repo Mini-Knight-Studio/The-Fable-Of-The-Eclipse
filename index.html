@@ -14,13 +14,13 @@
         <h1>The Fable of the Eclipse</h1>
     </header>
     <main>
-        <iframe class="page-container" src="html/teams.html" frameborder="0"></iframe>
+        <iframe id="frame" class="page-container" src="html/game.html" frameborder="0"></iframe>
         <ul class="menu-list column">
             <li class="space"></div>
-            <li class="menu-div"><p>Game</p><button class="menu-button"><iconify-icon icon="material-symbols:stadia-controller"></iconify-icon></button></div>
+            <li class="menu-div"><p>Game</p><button class="menu-button" onclick="SetSource('game')"><iconify-icon icon="material-symbols:stadia-controller"></iconify-icon></button></div>
             <li class="menu-div"><p>History</p><button class="menu-button"><iconify-icon icon="material-symbols:history-edu"></iconify-icon></button></div>
-            <li class="menu-div"><p>Team</p><button class="menu-button"><iconify-icon icon="ic:baseline-groups"></iconify-icon></button></div>
-            <li class="menu-div"><p>Engine</p><button class="menu-button"><iconify-icon icon="octicon:gear"></iconify-icon></button></div>
+            <li class="menu-div"><p>Team</p><button class="menu-button" onclick="SetSource('team')"><iconify-icon icon="ic:baseline-groups"></iconify-icon></button></div>
+            <li class="menu-div"><p>Tools</p><button class="menu-button"><iconify-icon icon="octicon:gear"></iconify-icon></button></div>
             <li class="menu-div"><p>Process</p><button class="menu-button"><iconify-icon icon="mdi:progress-clock"></iconify-icon></button></div>
             <li class="menu-div"><p>Post-mortem</p><button class="menu-button"><iconify-icon icon="lsicon:work-order-filled"></iconify-icon></button></div>
             <li class="menu-div"><p>Source Code</p><button class="menu-button"><iconify-icon icon="gridicons:code"></iconify-icon></button></div>
