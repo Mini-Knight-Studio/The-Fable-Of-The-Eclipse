@@ -35,17 +35,67 @@ html, body
 
 .member-card
 {
-    border-radius: 15px;
     width: 100%;
     background-color: burlywood;
+    margin-bottom: 5px;
 }
+
+.member-display
+{
+    display: none;
+}
+
+.member-display-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5%;
+    padding: 1%;
+    align-items: top;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.member-display-section:last-of-type
+{
+    border-bottom: 0;
+}
+
+/* Add .video-container to your existing selector group */
+.member-display-section img,
+.member-display-section video,
+.member-display-section canvas,
+.member-display-section .video-container {
+    width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Works beautifully on img, video, canvas */
+    margin: 5px;
+    border-radius: 15px;
+    align-self: center;
+    
+    overflow: hidden;
+}
+
+.member-display-section .video-container
+{
+    aspect-ratio: 16/9;
+}
+
+.member-display-section .video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
 
 @media (pointer: coarse)
 {
     .team-member-list
     {
         width: 100%;
-        height: 100%;
+        height: fit-content;
         margin: 0;
         padding: 0;
 
@@ -53,6 +103,17 @@ html, body
         grid-template-columns: repeat(1, 1fr);
         row-gap: 5px;
         column-gap: 15px;
+    }
+
+    .member-list-title
+    {
+        font-family: "Merriweather";
+        font-weight: 900;
+        font-size: 20px;
+        margin: 0;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        margin-left: 10px;
     }
 
     .member-photo
@@ -89,26 +150,64 @@ html, body
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        margin-right: 10px;
+        margin-right: 15px;
         cursor: pointer;
         border: none;
         display: grid;
-        align-items:center;
+        justify-items: center;
         background-color: transparent;
     }
 
     .member-button-text
     {
-        font-size: 15px;
+        font-size: 20px;
+    }
+
+    .section-title
+    {
+        font-family: "Merriweather";
+        font-weight: 900;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        margin-top: 5%;
+    }
+
+    .member-display-section p
+    {
+        font-family: "Lora";
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    .social-media-button
+    {
+        font-size: 16px;
+        margin: 0;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        color: black;
     }
 }
 
 @media (pointer: fine)
 {
+    .member-list-title
+    {
+        font-family: "Merriweather";
+        font-weight: 900;
+        font-size: 28px;
+        margin: 0;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+
     .team-member-list
     {
         width: 100%;
-        height: 100%;
+        height: fit-content;
         margin: 0;
         padding: 0;
 
@@ -151,17 +250,44 @@ html, body
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        margin-right: 10px;
+        margin-right: 15px;
         cursor: pointer;
         border: none;
         display: grid;
-        align-items:center;
+        place-items: center center;
         background-color: transparent;
     }
 
     .member-button-text
     {
         font-size: 25px;
+    }
+
+    .section-title
+    {
+        font-family: "Merriweather";
+        font-weight: 900;
+        font-size: 21px;
+        margin: 0;
+        padding: 0;
+        margin-top: 5%;
+    }
+
+    .member-display-section p
+    {
+        font-family: "Lora";
+        font-weight: 400;
+        font-size: 18px;
+    }
+
+    .social-media-button
+    {
+        font-size: 24px;
+        margin: 0;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        color: black;
     }
 }
     
