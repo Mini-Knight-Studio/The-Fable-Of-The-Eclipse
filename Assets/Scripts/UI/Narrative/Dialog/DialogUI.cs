@@ -10,6 +10,7 @@ class DialogUI : Component
     public Entity textEntity;
     public Entity nextLineEntity;
     [HideInInspector]public Text text;
+    [HideInInspector] public DialogTrigger current;
 
     List<string> lines;
     public bool IsDialogOpen { get; private set; } = false;
@@ -41,8 +42,12 @@ class DialogUI : Component
         }
     }
 
-    public void StartReading(float readSpeed)
+    public bool StartReading(float readSpeed, DialogTrigger caller)
     {
+
+        if (current != null)
+            return false;
+        current = caller;
         GameManager.SetState(GameManager.GameState.PAUSE);
 
         IsDialogOpen = true;
@@ -54,6 +59,7 @@ class DialogUI : Component
 
         StopAllOwnedCoroutines();
         StartCoroutine(Read());
+        return true;
     }
 
     public void Close()
@@ -126,6 +132,11 @@ class DialogUI : Component
 
 
         Close();
+
+        if (current != null)
+            current.NotifyEnd();
+        current = null;
+
         IsDialogOpen = true;
         yield return new WaitForSeconds(0.5f);
         IsDialogOpen = false;
