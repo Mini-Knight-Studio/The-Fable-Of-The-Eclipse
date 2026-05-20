@@ -71,6 +71,11 @@ class RollingBridge : Component
         }
     }
 
+    public bool IsDown()
+    {
+        return DatabaseRegistry.levelsDB.Levels.IsBridgePushed(bridgeID);
+    }
+
     IEnumerator HandleMovement()
     {
         elapsedTime = 0;

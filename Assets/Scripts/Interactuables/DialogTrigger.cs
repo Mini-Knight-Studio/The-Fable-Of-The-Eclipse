@@ -19,6 +19,9 @@ class DialogTrigger : Component
 
     BoxCollider boxCollider;
 
+    public event Action OnDialogStart;
+    public event Action OnDialogEnd;
+
     void OnCreate()
     {
         boxCollider = entity.GetComponent<BoxCollider>();
@@ -57,6 +60,12 @@ class DialogTrigger : Component
     private void Open()
     {
         DialogUI.Instance.SetText(textValue, nextCharSeparator);
-        DialogUI.Instance.StartReading(characterDelay);
+        if(DialogUI.Instance.StartReading(characterDelay, this)) 
+            OnDialogStart?.Invoke();
+    }
+
+    public void NotifyEnd()
+    {
+        OnDialogEnd?.Invoke();
     }
 };
