@@ -21,3 +21,7 @@ function ChangeMenuVisibility()
         menu.style.display = 'none';
     }
 }
+
+function GoToPage(page) {
+    window.location.href = page;
+}
