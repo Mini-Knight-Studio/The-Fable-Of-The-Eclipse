@@ -220,7 +220,7 @@ public class PauseMenu : Component
         if (inputTimer < inputCooldown)
             return;
 
-        if (Input.IsKeyPressed(KeyCode.ESCAPE) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_START))
+        if (Input.IsKeyDown(KeyCode.ESCAPE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_START))
         {
             isPaused = !isPaused;
             inputTimer = 0f;
