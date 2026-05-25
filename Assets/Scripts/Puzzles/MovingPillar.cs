@@ -298,6 +298,14 @@ class MovingPillar : Component
         onGoalCalled = false;
         stopedOnGoal = false;
     }
+
+    public void ResetPillarInstant()
+    {
+        entity.transform.position = initialPosition;
+        onGoalPosition = false;
+        onGoalCalled = false;
+        stopedOnGoal = false;
+    }
     IEnumerator EmissiveShine()
     {
         if (pillarMaterial == null) yield break;
