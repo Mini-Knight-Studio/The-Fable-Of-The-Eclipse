@@ -185,20 +185,20 @@ public class PlayerCombat : PlayerComponent
         switch (comboIndex)
         {
             case 1:
-                Time.timeScale = .6f;
+                Time.timeScale = .8f;
                 yield return new WaitForUnscaledSeconds(.1f);
                 Time.timeScale = 1;
                 yield return null;
                 break;
             case 2:
-                Time.timeScale = .5f;
+                Time.timeScale = .7f;
                 yield return new WaitForUnscaledSeconds(.1f);
                 Time.timeScale = 1;
                 yield return null;
                 break;
             case 3:
                 Time.timeScale = .3f;
-                yield return new WaitForUnscaledSeconds(.1f);
+                yield return new WaitForUnscaledSeconds(.15f);
                 Time.timeScale = 1;
                 yield return null;
                 break;
