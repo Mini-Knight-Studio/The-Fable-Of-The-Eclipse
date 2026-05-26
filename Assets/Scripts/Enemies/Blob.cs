@@ -145,7 +145,6 @@ class Blob : Enemy
         health.Reset();
 
         animator.PlayClip("Armature|Spawn", false, 0.0f, false, true);
-        Time.timeScale = .5f;
         float timer = 0.0f;
         spawn = false;
         isSpawning = true;
@@ -160,7 +159,6 @@ class Blob : Enemy
             yield return null;
         }
 
-        Time.timeScale = 1f;
         transform.LookAt(GetTargetPosition(), Vector3.Up);
         collision.RemoveExcludeMask(LayerOverride);
         isSpawning = false;
