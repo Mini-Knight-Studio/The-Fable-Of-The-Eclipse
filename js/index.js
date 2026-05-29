@@ -22,6 +22,7 @@ function ChangeMenuVisibility()
     }
 }
 
-function GoToPage(page) {
+function GoToPage(page)
+{
     window.location.href = page;
 }
