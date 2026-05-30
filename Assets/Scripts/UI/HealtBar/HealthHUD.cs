@@ -47,30 +47,42 @@ public class HealthHUD : Component
 
     private void UpdateIcons(int currentHealth, int maxHealth)
     {
-        int healthCount = 0;
-        foreach (var icon in healthIcons)
+        int numActiveSlots = (maxHealth + 3) / 4;
+
+        if (numActiveSlots > maxHealthIcons)
+            numActiveSlots = maxHealthIcons;
+
+        for (int i = 0; i < maxHealthIcons; i++)
         {
-            if (currentHealth >= 2)
+            var icon = healthIcons[i];
+            if (icon == null) continue;
+
+            if (i < numActiveSlots)
             {
-                icon.UpdateVisuals(2);
-            }
-            else if (currentHealth == 1)
-            {
-                icon.UpdateVisuals(1);
+                icon.entity.SetActive(true);
+
+                if (currentHealth >= 3)
+                {
+                    icon.UpdateVisuals(2); 
+                }
+                else if (currentHealth >= 1)
+                {
+                    icon.UpdateVisuals(1); 
+                }
+                else
+                {
+                    icon.UpdateVisuals(0);
+                }
+
+                icon.Unlock();
+
+                currentHealth -= 4;
             }
             else
             {
-                icon.UpdateVisuals(0);
-            }
-
-            if(maxHealth<= healthCount)
-            {
+                icon.entity.SetActive(true);
                 icon.Lock();
-            }else
-                icon.Unlock();
-
-                currentHealth -= 2;
-            healthCount += 2;
+            }
         }
     }
 };
