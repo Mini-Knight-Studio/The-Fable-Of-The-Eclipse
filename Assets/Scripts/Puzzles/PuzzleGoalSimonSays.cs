@@ -2,7 +2,6 @@ using System;
 using Loopie;
 using System.Collections.Generic;
 using System.Collections;
-using System.Media;
 
 class PuzzleGoalSimonSays : Component
 {
@@ -63,6 +62,23 @@ class PuzzleGoalSimonSays : Component
 
     public string popupName = "Popup_GemWater";
 
+    [Header("Mechanic Door")]
+    public Entity MechanicDoor;
+    public Entity MechanicDoorVistaPoint;
+
+    public float mechanichDoorInitialHeight = 0f;
+    public float mechanichDoorFinalHeight = 0f;
+
+    public float fallDuration = 2.0f;
+    public float pauseBeforeFalling = 0.5f;
+    public float easeIntensity = 1.5f;
+
+    public Entity mechanichDoorParticlesEntity;
+    private ParticleComponent mechanichDoorParticles;
+
+    public Entity mechanichDoorPlatformSFXEntity;
+    private AudioSource mechanichDoorPlatformSFX;
+
     private enum State
     {
         WaitingForPillars,
@@ -95,6 +111,12 @@ class PuzzleGoalSimonSays : Component
 
         goalParticles = entity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
+
+        if (mechanichDoorParticlesEntity != null)
+            mechanichDoorParticles = mechanichDoorParticlesEntity.GetComponent<ParticleComponent>();
+
+        if (mechanichDoorPlatformSFXEntity != null)
+            mechanichDoorPlatformSFX = mechanichDoorPlatformSFXEntity.GetComponent<AudioSource>();
 
         LockAllPillars();
         HidePromptAllPillars();
@@ -259,7 +281,7 @@ class PuzzleGoalSimonSays : Component
                         playerIndex++;
                         simonPillars[pressedIndex].ResetState();
                         simonPillars[pressedIndex].interactPrompt.SetActive(false);
-                        
+
                         if (playerIndex >= sequence.Count) HidePromptAllPillars();
 
                         yield return new WaitForSeconds(1f);
@@ -356,10 +378,56 @@ class PuzzleGoalSimonSays : Component
     {
         if (puzzle2Completed) return;
         puzzle2Completed = true;
+
+        StartCoroutine(PuzzleCompleteCinematic());
+    }
+
+    IEnumerator PuzzleCompleteCinematic()
+    {
+        GameManager.SetState(GameManager.GameState.PAUSE);
+
+        Player.Instance.Camera.FocusOnPoint(Gem.transform.position, 10, 4);
+        yield return new WaitForSeconds(1.5f);
+
+        Player.Instance.Camera.FocusOnPoint(MechanicDoorVistaPoint.transform.position, 20, 4);
+        yield return new WaitForSeconds(0.5f);
+
+        Player.Instance.Camera.SetIsShaking(true, fallDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+
+        if (mechanichDoorParticles != null) mechanichDoorParticles.Play();
+        if (mechanichDoorPlatformSFX != null) mechanichDoorPlatformSFX.Play();
+
+        yield return new WaitForSeconds(pauseBeforeFalling);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fallDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / fallDuration;
+            float curvedT = Mathf.Pow(t, easeIntensity);
+
+            float currentHeight = Mathf.Lerp(mechanichDoorInitialHeight, mechanichDoorFinalHeight, curvedT);
+            MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, currentHeight, MechanicDoor.transform.position.z);
+
+            yield return null;
+        }
+
+        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+        MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
+
+        if (mechanichDoorParticles != null) mechanichDoorParticles.Stop();
+
+        yield return new WaitForSeconds(1.0f);
+
+        Player.Instance.Camera.StopFocus();
+        yield return new WaitForSeconds(0.5f);
+
         currentState = State.Completed;
         Gem.GetComponent<BoxCollider>().SetActive(true);
         Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
         completeSFX.GetComponent<AudioSource>().Play();
+
+        GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 
     void CompletePuzzleAuto()
@@ -380,6 +448,9 @@ class PuzzleGoalSimonSays : Component
         foreach (var pillar in simonPillars) if (pillar != null) { pillar.Lock(); pillar.ForceActive(); }
 
         entity.transform.position += new Vector3(0, -movementDistance * maxRounds, 0);
+
+        MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
+
         currentState = State.Completed;
     }
 
