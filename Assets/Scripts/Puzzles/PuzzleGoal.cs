@@ -199,7 +199,6 @@ class PuzzleGoal : Component
         collectGemSFX.GetComponent<AudioSource>().Play();
 
         DatabaseRegistry.playerDB.Player.gemAirCollected = true;
-        DatabaseRegistry.playerDB.Player.hasBurner = true;
 
         if (UIPopupManager.Instance != null)
         {

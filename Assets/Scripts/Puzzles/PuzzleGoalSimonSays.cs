@@ -362,7 +362,6 @@ class PuzzleGoalSimonSays : Component
         Gem.SetActive(false);
 
         DatabaseRegistry.playerDB.Player.gemWaterCollected = true;
-        DatabaseRegistry.playerDB.Player.hasGrappling = true;
 
         collectGemSFX.GetComponent<AudioSource>().Play();
 

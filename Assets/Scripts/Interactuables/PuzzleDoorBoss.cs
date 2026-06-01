@@ -7,25 +7,20 @@ class PuzzleDoorBoss : Component
 {
     [Header("Identity")]
     public string puzzleDoorID = "UNASSIGNED_PUZZLEDOOR";
-    public string requiredKeyID1 = "UNASSIGNED_KEY_1";
-    public string requiredKeyID2 = "UNASSIGNED_KEY_2";
-    public string requiredKeyID3 = "UNASSIGNED_KEY_3";
-
-    private string[] requiredKeyIDs;
 
     [Header("References")]
     public Entity rightDoor;
     public Entity leftDoor;
-    public Entity staticKey1;
-    public Entity staticKey2;
-    public Entity staticKey3;
-    public Entity animatedKey1;
-    public Entity animatedKey2;
-    public Entity animatedKey3;
+    public Entity staticGem1;
+    public Entity staticGem2;
+    public Entity staticGem3;
+    public Entity animatedGem1;
+    public Entity animatedGem2;
+    public Entity animatedGem3;
 
-    private Entity[] staticKeys;
-    private Entity[] animatedKeys;
-    private bool[] keyInserted;
+    private Entity[] staticGems;
+    private Entity[] animatedGems;
+    private bool[] gemInserted;
 
     public Entity focusPointOnInsert;
     public Entity blockingCollider;
@@ -35,7 +30,7 @@ class PuzzleDoorBoss : Component
     public Vector3 finalRightDoorRot = Vector3.Zero;
     public Vector3 finalLefttDoorRot = Vector3.Zero;
     public float camFocusDuration = 1.0f;
-    public float keyTravelDuration = 1.0f;
+    public float gemTravelDuration = 1.0f;
     public float doorOpenDuration = 2.0f;
     public float pauseBeforeOpening = 0.5f;
     public float easeIntensity = 1.5f;
@@ -52,17 +47,17 @@ class PuzzleDoorBoss : Component
 
     private Vector3 initialRightDoorRot;
     private Vector3 initialLeftDoorRot;
-    private Vector3 finalKeyScale;
+    private Vector3 finalGemScale;
 
     [Header("Feedback")]
     public Entity rightParticle;
     public Entity leftParticle;
 
-    public Entity keyParticles1;
-    public Entity keyParticles2;
-    public Entity keyParticles3;
+    public Entity gemParticles1;
+    public Entity gemParticles2;
+    public Entity gemParticles3;
 
-    private Entity[] keyParticles;
+    private Entity[] gemParticles;
 
     public Entity bossEyesParticles;
 
@@ -72,37 +67,36 @@ class PuzzleDoorBoss : Component
     public Entity doorSongSFX;
     public Entity impactSFX;
     public Entity bellSFX;
-    public Entity insertKey1SFX;
-    public Entity insertKey2SFX;
-    public Entity insertKey3SFX;
+    public Entity insertGem1SFX;
+    public Entity insertGem2SFX;
+    public Entity insertGem3SFX;
     public Entity eyesIgniteSFX;
 
-    private Entity[] insertKeySFXs;
+    private Entity[] insertGemSFXs;
 
     void OnCreate()
     {
-        requiredKeyIDs = new string[] { requiredKeyID1, requiredKeyID2, requiredKeyID3 };
-        staticKeys = new Entity[] { staticKey1, staticKey2, staticKey3 };
-        animatedKeys = new Entity[] { animatedKey1, animatedKey2, animatedKey3 };
-        keyParticles = new Entity[] { keyParticles1, keyParticles2, keyParticles3 };
-        insertKeySFXs = new Entity[] { insertKey1SFX, insertKey2SFX, insertKey3SFX };
-        keyInserted = new bool[3];
+        staticGems = new Entity[] { staticGem1, staticGem2, staticGem3 };
+        animatedGems = new Entity[] { animatedGem1, animatedGem2, animatedGem3 };
+        gemParticles = new Entity[] { gemParticles1, gemParticles2, gemParticles3 };
+        insertGemSFXs = new Entity[] { insertGem1SFX, insertGem2SFX, insertGem3SFX };
+        gemInserted = new bool[3];
 
-        if (animatedKeys[0] != null)
+        if (animatedGems[0] != null)
         {
-            finalKeyScale = animatedKeys[0].transform.scale;
+            finalGemScale = animatedGems[0].transform.scale;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            if (staticKeys[i] != null) staticKeys[i].SetActive(false);
-            if (animatedKeys[i] != null) animatedKeys[i].SetActive(false);
-            if (keyParticles[i] != null) keyParticles[i].GetComponent<ParticleComponent>().Stop();
+            if (staticGems[i] != null) staticGems[i].SetActive(false);
+            if (animatedGems[i] != null) animatedGems[i].SetActive(false);
+            if (gemParticles[i] != null) gemParticles[i].GetComponent<ParticleComponent>().Stop();
 
-            if (DatabaseRegistry.levelsDB.Levels.IsBossDoorKeyInserted(i))
+            if (DatabaseRegistry.levelsDB.Levels.IsBossDoorGemInserted(i))
             {
-                staticKeys[i].SetActive(true);
-                keyInserted[i] = true;
+                staticGems[i].SetActive(true);
+                gemInserted[i] = true;
                 switch (i)
                 {
                     case 0:
@@ -184,17 +178,22 @@ class PuzzleDoorBoss : Component
         if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         if (hasOpened || isOpening) return;
 
-        List<int> keysReadyToInsert = new List<int>();
+        List<int> gemsReadyToInsert = new List<int>();
 
         for (int i = 0; i < 3; i++)
         {
-            if (!keyInserted[i] && DatabaseRegistry.levelsDB.Levels.IsRewardCollected(requiredKeyIDs[i]))
+            bool isCollected = false;
+            if (i == 0) isCollected = DatabaseRegistry.playerDB.Player.gemAirCollected;
+            else if (i == 1) isCollected = DatabaseRegistry.playerDB.Player.gemWaterCollected;
+            else if (i == 2) isCollected = DatabaseRegistry.playerDB.Player.gemFireCollected;
+
+            if (!gemInserted[i] && isCollected)
             {
-                keysReadyToInsert.Add(i);
+                gemsReadyToInsert.Add(i);
             }
         }
 
-        if (entity.GetComponent<BoxCollider>().IsColliding && keysReadyToInsert.Count > 0)
+        if (entity.GetComponent<BoxCollider>().IsColliding && gemsReadyToInsert.Count > 0)
         {
             if (!interactPrompt.Active)
             {
@@ -204,7 +203,7 @@ class PuzzleDoorBoss : Component
             if (Player.Instance.Input.interactKeyPressed)
             {
                 isOpening = true;
-                StartCoroutine(InsertKeysAndOpen(keysReadyToInsert));
+                StartCoroutine(InsertGemsAndOpen(gemsReadyToInsert));
                 interactPrompt.SetActive(false);
             }
         }
@@ -217,40 +216,40 @@ class PuzzleDoorBoss : Component
         }
     }
 
-    IEnumerator InsertKeysAndOpen(List<int> keysToInsert)
+    IEnumerator InsertGemsAndOpen(List<int> gemsToInsert)
     {
         GameManager.SetState(GameManager.GameState.PAUSE);
 
         Player.Instance.Camera.FocusOnPoint(focusPointOnInsert.transform.position, cameraZoom, 4);
         yield return new WaitForSeconds(camFocusDuration);
 
-        foreach (int keyIndex in keysToInsert)
+        foreach (int gemIndex in gemsToInsert)
         {
-            Entity currentAnimKey = animatedKeys[keyIndex];
-            Entity currentStaticKey = staticKeys[keyIndex];
-            Entity currentParticle = keyParticles[keyIndex];
-            Entity currentInsertSFX = insertKeySFXs[keyIndex];
+            Entity currentAnimGem = animatedGems[gemIndex];
+            Entity currentStaticGem = staticGems[gemIndex];
+            Entity currentParticle = gemParticles[gemIndex];
+            Entity currentInsertSFX = insertGemSFXs[gemIndex];
 
-            currentAnimKey.SetActive(true);
-            currentAnimKey.transform.position = Player.Instance.transform.position + new Vector3(0, 2, 0);
-            currentAnimKey.transform.scale = Vector3.Zero;
+            currentAnimGem.SetActive(true);
+            currentAnimGem.transform.position = Player.Instance.transform.position + new Vector3(0, 2, 0);
+            currentAnimGem.transform.scale = Vector3.Zero;
 
-            Vector3 startKeyPos = currentAnimKey.transform.position;
-            Vector3 targetKeyPos = currentStaticKey.transform.position;
+            Vector3 startGemPos = currentAnimGem.transform.position;
+            Vector3 targetGemPos = currentStaticGem.transform.position;
 
-            Vector3 startKeyScale = Vector3.Zero;
-            Vector3 targetKeyScale = finalKeyScale;
+            Vector3 startGemScale = Vector3.Zero;
+            Vector3 targetGemScale = finalGemScale;
 
             float elapsedTime = 0f;
 
             while (true)
             {
                 elapsedTime += Time.deltaTime;
-                float t = elapsedTime / keyTravelDuration;
+                float t = elapsedTime / gemTravelDuration;
                 float curvedT = Mathf.Pow(t, easeIntensity);
 
-                currentAnimKey.transform.position = Vector3.Lerp(startKeyPos, targetKeyPos, curvedT);
-                currentAnimKey.transform.scale = Vector3.Lerp(startKeyScale, targetKeyScale, curvedT);
+                currentAnimGem.transform.position = Vector3.Lerp(startGemPos, targetGemPos, curvedT);
+                currentAnimGem.transform.scale = Vector3.Lerp(startGemScale, targetGemScale, curvedT);
 
                 if (t >= 0.85f && currentParticle != null && !currentParticle.GetComponent<ParticleComponent>().IsPlaying)
                 {
@@ -259,10 +258,10 @@ class PuzzleDoorBoss : Component
                 }
                 if (t >= 1f)
                 {
-                    currentAnimKey.transform.position = targetKeyPos;
-                    currentAnimKey.transform.scale = targetKeyScale;
+                    currentAnimGem.transform.position = targetGemPos;
+                    currentAnimGem.transform.scale = targetGemScale;
 
-                    switch (keyIndex)
+                    switch (gemIndex)
                     {
                         case 0:
                             {
@@ -323,10 +322,10 @@ class PuzzleDoorBoss : Component
                 yield return null;
             }
 
-            currentAnimKey.SetActive(false);
-            currentStaticKey.SetActive(true);
-            keyInserted[keyIndex] = true;
-            DatabaseRegistry.levelsDB.Levels.SetBossDoorKeyInserted(keyIndex);
+            currentAnimGem.SetActive(false);
+            currentStaticGem.SetActive(true);
+            gemInserted[gemIndex] = true;
+            DatabaseRegistry.levelsDB.Levels.SetBossDoorGemInserted(gemIndex);
 
             yield return new WaitForSeconds(pauseBeforeOpening * 0.5f);
 
@@ -335,9 +334,9 @@ class PuzzleDoorBoss : Component
             yield return new WaitForSeconds(pauseBeforeOpening * 0.5f);
         }
 
-        bool allKeysInserted = keyInserted[0] && keyInserted[1] && keyInserted[2];
+        bool allGemsInserted = gemInserted[0] && gemInserted[1] && gemInserted[2];
 
-        if (allKeysInserted)
+        if (allGemsInserted)
         {
             if (door1SFX != null) door1SFX.GetComponent<AudioSource>().Play();
             if (door2SFX != null) door2SFX.GetComponent<AudioSource>().Play();
@@ -406,9 +405,9 @@ class PuzzleDoorBoss : Component
     {
         for (int i = 0; i < 3; i++)
         {
-            if (staticKeys[i] != null) staticKeys[i].SetActive(true);
-            if (animatedKeys[i] != null) animatedKeys[i].SetActive(false);
-            keyInserted[i] = true;
+            if (staticGems[i] != null) staticGems[i].SetActive(true);
+            if (animatedGems[i] != null) animatedGems[i].SetActive(false);
+            gemInserted[i] = true;
         }
 
         rightDoor.transform.local_rotation = finalRightDoorRot;

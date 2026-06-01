@@ -7,6 +7,9 @@ class Chest : Component
     [Header("Identity")]
     public string chestID = "UNASSIGNED_CHEST";
 
+    [Header("Mechanic Chests")]
+    public bool isMechanicUnlocker = false;
+
     [Header("References")]
     public Entity animatedMoon;
     public Entity staticMoon;
@@ -176,7 +179,14 @@ class Chest : Component
                     rewardItem.transform.local_position = targetRewardPos;
                     rewardItem.transform.scale = targetRewardScale;
 
-                    rewardItem.GetComponent<Key_Idle>().StartMoving();
+                    if (!isMechanicUnlocker)
+                    {
+                        rewardItem.GetComponent<Key_Idle>().StartMoving();
+                    }
+                    else
+                    {
+                        rewardItem.GetComponent<Mechanic_Idle>().StartMoving();
+                    }
 
                 }
                 break;

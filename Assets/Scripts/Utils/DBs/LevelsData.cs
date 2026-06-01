@@ -37,7 +37,7 @@ public class LevelsData
 
     // -------------------------------- Puzzle Doors / Boss Door --------------------------------
     public Dictionary<string, bool> openedPuzzleDoors = new Dictionary<string, bool>();
-    public Dictionary<int, bool> insertedBossDoorKeys = new Dictionary<int, bool>();
+    public Dictionary<int, bool> insertedBossDoorGems = new Dictionary<int, bool>();
 
     public bool IsPuzzleDoorOpened(string puzzledoorID)
     {
@@ -50,15 +50,15 @@ public class LevelsData
         openedPuzzleDoors[puzzledoorID] = true;
     }
 
-    public bool IsBossDoorKeyInserted(int keyNumber)
+    public bool IsBossDoorGemInserted(int gemNumber)
     {
-        if (insertedBossDoorKeys.TryGetValue(keyNumber, out bool isOpen)) return isOpen;
+        if (insertedBossDoorGems.TryGetValue(gemNumber, out bool isOpen)) return isOpen;
         return false;
     }
 
-    public void SetBossDoorKeyInserted(int keyNumber)
+    public void SetBossDoorGemInserted(int gemNumber)
     {
-        insertedBossDoorKeys[keyNumber] = true;
+        insertedBossDoorGems[gemNumber] = true;
     }
 
     // -------------------------------- Bridges --------------------------------
