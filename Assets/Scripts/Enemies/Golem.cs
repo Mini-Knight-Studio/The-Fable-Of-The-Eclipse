@@ -1,5 +1,6 @@
 using Loopie;
 using System;
+using System.Collections;
 using static Loopie.Transform;
 
 class Golem : Enemy
@@ -94,6 +95,8 @@ class Golem : Enemy
         else
             isShielding = true;
     }
+
+   
 
     public override void Hit(int points, float force_scale, string hit_clip)
     {

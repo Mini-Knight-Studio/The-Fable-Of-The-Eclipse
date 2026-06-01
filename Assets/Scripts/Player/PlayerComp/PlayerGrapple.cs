@@ -270,6 +270,8 @@ public class PlayerGrapple : PlayerComponent
         Vector3 dir = (pillarPos - startPos).normalized;
         targetPos = pillarPos - (dir * stoppingDistance);
         targetPos.y = transform.position.y;
+
+
     }
 
     private void CreateGrappleObjects()
