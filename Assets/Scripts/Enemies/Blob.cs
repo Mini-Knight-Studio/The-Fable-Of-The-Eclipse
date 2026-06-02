@@ -125,9 +125,9 @@ class Blob : Enemy
 
     public override void Hit(int points, float force_scale, string hit_clip)
     {
-        if (OnHitCooldown() || !health.canBeDamaged) return;
-        if (Player.Instance.Combat.TemporalFunctionIsAttacking())
-        {
+        //if (OnHitCooldown() || !health.canBeDamaged) return;
+        //if (Player.Instance.Combat.TemporalFunctionIsAttacking())
+        //{
             if (hitbox.HasCollided)
             {
                 StopCoroutine(attackCoroutine);
@@ -135,7 +135,7 @@ class Blob : Enemy
                 movement.CanMove = true;
                 base.Hit(points, force_scale, hit_clip);
             }
-        }
+        //}
     }
 
     private IEnumerator SplitLerp()
@@ -151,7 +151,7 @@ class Blob : Enemy
         transform.position = new Vector3(transform.position.x, parentY, transform.position.z);
         collision.AddExcludeMask(LayerOverride);
         Vector3 startPosition = transform.position;
-        float animationTime = animator.ClipDuration();
+        float animationTime = animator.ClipDuration() / 2;
         while (timer < animationTime)
         {
             timer += Time.deltaTime;
