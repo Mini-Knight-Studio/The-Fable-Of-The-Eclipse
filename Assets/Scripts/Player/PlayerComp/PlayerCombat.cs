@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Loopie;
 
 public class PlayerCombat : PlayerComponent
@@ -42,6 +43,7 @@ public class PlayerCombat : PlayerComponent
     [ShowInInspector] private int comboIndex = 0;
     private bool wantsToCombo = false;
     private bool hasTriggeredVibrationThisAttack = false;
+    private bool hasHitstoppedThisAttack = false;
 
     [Header("Settings")]
     public float comboWindow = 0.8f;
@@ -86,6 +88,7 @@ public class PlayerCombat : PlayerComponent
                 if (CheckCurrentAttackCollision())
                 {
                     TriggerHitVibration();
+                    StartCoroutine(TriggerHitstop());
                 }
             }
 
@@ -129,6 +132,7 @@ public class PlayerCombat : PlayerComponent
         isAttacking = true;
         wantsToCombo = false;
         hasTriggeredVibrationThisAttack = false;
+        hasHitstoppedThisAttack = false;
         comboResetTimer = 0f;
 
         comboIndex++;
@@ -174,7 +178,33 @@ public class PlayerCombat : PlayerComponent
                 break;
         }
     }
+    IEnumerator TriggerHitstop()
+    {
+        hasHitstoppedThisAttack = true;
 
+        switch (comboIndex)
+        {
+            case 1:
+                Time.timeScale = .8f;
+                yield return new WaitForUnscaledSeconds(.1f);
+                Time.timeScale = 1;
+                yield return null;
+                break;
+            case 2:
+                Time.timeScale = .7f;
+                yield return new WaitForUnscaledSeconds(.1f);
+                Time.timeScale = 1;
+                yield return null;
+                break;
+            case 3:
+                Time.timeScale = .3f;
+                yield return new WaitForUnscaledSeconds(.15f);
+                Time.timeScale = 1;
+                yield return null;
+                break;
+        }
+    }
+ 
     public int GetCurrentComboIndex()
     {
         return comboIndex;

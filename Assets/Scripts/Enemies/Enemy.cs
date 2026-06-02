@@ -200,7 +200,7 @@ public class Enemy : Component
 
     public virtual void Hit(int points, float force_scale, string hit_clip)
     {
-        if (!health.canBeDamaged) return;
+        //if (!health.canBeDamaged) return;
         if (Player.Instance.Combat.TemporalFunctionIsAttacking())
         {
             if (hitbox.HasCollided)
