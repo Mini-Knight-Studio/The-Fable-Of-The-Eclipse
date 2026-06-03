@@ -11,63 +11,148 @@
     </head>
     <body>
         <div class="studio">
-
+            <div class="row">
+                <div class="space"></div>
+                <img src="" alt="" class="logo">
+                <div class="space"></div>
+            </div>
+            <h1 class="studio-name">Mini Knight Studio</h1>
+            <p class="studio-description">We are a collaborative studio of 19 game development students, united by our passion for the medium and dedicated to creating unforgettable interactive projects.</p>
         </div>
 
         <div class="team">
             <h1 class="team-title">Meet Our Team</h1>
             <p class="team-text">The ones behind the Eclipse</p>
-            <div class="section-list">
-                <h2 class="section-title">Organization</h2>
-                <div class="row">
-                    <div class="space"></div>
-                    <div class="member-card" id="tm1">
-                        <div class="row">
-                            <div class="show-profile">
-                                <button class="member-preview" onclick="DisplayCard('tm1')">
-                                    <img src="../assets/team/member.png" alt="">
-                                    <p class="preview-name">Member</p>
-                                </button>
-                            </div>
-                            <div class="display column">
-                                <div class="row">
-                                    <div class="member-image">
+            <div class="team-sections">
+                <div class="section-list">
+                    <h2 class="section-title">Organization</h2>
+                    <div class="wrap row">
+                        <div class="member-card" id="gma">                                      <!--Member ID--><!--Guillem Martínez Aparicio-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('gma')">
                                         <img src="../assets/team/member.png" alt="">
-                                    </div>
-                                    <div class="member-info">
-                                        <div class="column">
-                                            <h1 class="display-name">Member</h1>
-                                            <h2 class="display-role">Role</h2>
-                                        </div>
-                                    </div>
+                                        <p class="preview-name">Member</p>
+                                    </button>
                                 </div>
-                                <div class="member-task-carousel row" slide="1">
-                                    <button class="carousel-button previous" onclick="SetPreviousTask('tm1')">
-                                        <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
-                                    </button>
-                                    
-                                    <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
-                                        <p>hola (Slide 1)</p>
-                                    </div>
-                                    <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
-                                        <div class="text-container column">
-                                            <h1 class="task-title">Title</h1>
-                                            <p class="task-text">This is an example of a task text a member has done</p>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/member.png" alt="">
                                         </div>
-                                        <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Member</h1>
+                                                <h2 class="display-role">Role</h2>
+                                                <div class="row">
+                                                    <div class="space"></div>
+                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:gmail"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
-                                        <p>hola (Slide 3)</p>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('gma')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task</h1>
+                                                <p class="task-text">This is an example of a task text a member has done</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Video</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a video</p>
+                                            </div>
+                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Photo</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a photo</p>
+                                            </div>
+                                            <img src="../assets/team/member.png" alt="">
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('gma')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
                                     </div>
-                                    
-                                    <button class="carousel-button next" onclick="SetNextTask('tm1')">
-                                        <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
-                                    </button>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="member-card" id="tcg">                                      <!--Member ID--><!--Guillem Martínez Aparicio-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('tcg')">
+                                        <img src="../assets/team/member.png" alt="">
+                                        <p class="preview-name">Member</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/member.png" alt="">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Member</h1>
+                                                <h2 class="display-role">Role</h2>
+                                                <div class="row">
+                                                    <div class="space"></div>
+                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:gmail"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            This is a text container for personal conclusions. In this text you need to explain how you feel during the project.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('tcg')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task</h1>
+                                                <p class="task-text">This is an example of a task text a member has done</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Video</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a video</p>
+                                            </div>
+                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Photo</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a photo</p>
+                                            </div>
+                                            <img src="../assets/team/member.png" alt="">
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('tcg')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space"></div>
                     </div>
-                    <div class="space"></div>
                 </div>
             </div>
         </div>

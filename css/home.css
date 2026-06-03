@@ -1,0 +1,85 @@
+html
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.row
+{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1%;
+}
+
+.column
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.space
+{
+    flex: 1;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo
+{
+    width: 100%;
+}
+
+.text
+{
+    text-align: justify;
+    padding: 2%;
+}
+
+.location-button
+{
+    background-color: #3C2621;
+    border: 1px solid #E2B25B;
+    padding: 2%;
+    color: #E2B25B;
+}
+
+@media (pointer: fine)
+{
+    .container
+    {
+        width: 75%;
+    }
+
+    .text
+    {
+        font-size: 24px;
+    }
+    
+    .location-button
+    {
+        font-size: 24px;
+    }
+}
+
+@media (pointer: coarse)
+{
+    .container
+    {
+        width: 100%;
+    }
+
+    .location-button
+    {
+        font-size: 16px;
+    }
+}

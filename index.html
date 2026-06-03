@@ -7,35 +7,35 @@
     <link rel="stylesheet" href="css/index.css">
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
     <script src="js/index.js"></script>
-    <title>The Fable of the Eclipse</title>
+    <title>Fable of the Eclipse</title>
 </head>
 <body>
     <header>
-        <div class="row">
-            <h1>The Fable of the Eclipse</h1>
+        <div class="menu row">
             <div class="space"></div>
-            <button class="menu-hider" status="hiden" id="menu-hider" onclick="ChangeMenuVisibility()"><iconify-icon icon="material-symbols:menu"></iconify-icon></button>
+            <button class="menu-button active" id="home-button" onclick="SetSource('home-button', 'home')">HOME</button>
+            <div class="space"></div>
+            <button class="menu-button" id="game-button" onclick="SetSource('game-button', 'game')">GAME</button>
+            <div class="space"></div>
+            <button class="menu-button" id="team-button" onclick="SetSource('team-button', 'team')">TEAM</button>
+            <div class="space"></div>
+            <button class="menu-button" id="tools-button" onclick="SetSource('tools-button', 'tools')">TOOLS</button>
+            <div class="space"></div>
+            <button class="menu-button" id="process-button" onclick="SetSource('process-button', 'process')">PROCESS</button>
+            <div class="space"></div>
+            <button class="menu-button" id="post-mortem-button" onclick="SetSource('post-mortem-button', 'post-mortem')">POST-MORTEM</button>
+            <div class="space"></div>
         </div>
     </header>
     <main>
-        <iframe id="frame" class="page-container" src="html/game.html" frameborder="0"></iframe>
-        <ul class="menu-list column" id="menu">
-            <li class="menu-div"><p>Game</p><button class="menu-button" onclick="SetSource('game')"><iconify-icon icon="material-symbols:stadia-controller"></iconify-icon></button></div>
-            <li class="menu-div"><p>History</p><button class="menu-button" onclick="SetSource('history')"><iconify-icon icon="material-symbols:history-edu"></iconify-icon></button></div>
-            <li class="menu-div"><p>Team</p><button class="menu-button" onclick="SetSource('team')"><iconify-icon icon="ic:baseline-groups"></iconify-icon></button></div>
-            <li class="menu-div"><p>Tools</p><button class="menu-button" onclick="SetSource('tools')"><iconify-icon icon="octicon:gear"></iconify-icon></button></div>
-            <li class="menu-div"><p>Process</p><button class="menu-button" onclick="SetSource('process')"><iconify-icon icon="mdi:progress-clock"></iconify-icon></button></div>
-            <li class="menu-div"><p>Post-mortem</p><button class="menu-button" onclick="SetSource('post-mortem')"><iconify-icon icon="lsicon:work-order-filled"></iconify-icon></button></div>
-            <li class="menu-div"><p>Source Code</p><button class="menu-button" onclick="GoToPage('https://github.com/Mini-Knight-Studio/The-Fable-Of-The-Eclipse')"><iconify-icon icon="gridicons:code"></iconify-icon></button></div>
-            <li class="space"></div>
-        </ul>
+        <iframe id="frame" class="page-container" src="html/home.html" frameborder="0"></iframe>
     </main>
     <footer>
         <div class="row">
             <p class="copyright">Copyright © 2026 Mini Knight Studio. All rights reserved.</p>
             <div class="space"></div>
-            <button class="social-media-access"><iconify-icon icon="ic:baseline-email"></iconify-icon></button>
-            <button class="social-media-access"><iconify-icon icon="mdi:github"></iconify-icon></buttonclass></button>
+            <a class="social-media-access"><iconify-icon icon="ic:baseline-email"></iconify-icon></a>
+            <a class="social-media-access"><iconify-icon icon="mdi:github"></iconify-icon></buttonclass></a>
         </div>
     </footer>
 </body>

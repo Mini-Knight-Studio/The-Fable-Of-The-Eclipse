@@ -1,65 +1,34 @@
 var prevIndex = '';
 
-function ChangeDisplay(memberId)
-{
-    var member_card = document.getElementById(memberId);
-    
-    var member_card_display_button = member_card.querySelector('.member-button');
-    var member_card_display_button_icon = member_card.querySelector('.icon');
-    var member_card_display = member_card.querySelector('.member-display');
-    
-    var status = member_card_display_button.getAttribute('status');
-
-    if (status === 'off')
-    {
-        member_card_display_button.setAttribute('status', 'on');
-        member_card_display.style.display = 'flex';
-        member_card_display_button_icon.setAttribute('icon', 'material-symbols:arrow-drop-up-rounded');
-    }
-    else if (status === 'on')
-    {
-        member_card_display_button.setAttribute('status', 'off');
-        member_card_display.style.display = 'none';
-        member_card_display_button_icon.setAttribute('icon', 'material-symbols:arrow-drop-down-rounded');
-    }
-}
-
 function HideCard(memberID)
 {
     var card = document.getElementById(memberID);
-    var profile = card.querySelector('.show-profile');
-    var display = card.querySelector('.display');
+    if (!card) return;
 
-    display.style.width = 0;
-    display.style.height = 0;
-    display.style.opacity = 0;
-    display.style.visibility = 'hidden';
+    // Remove the open state class
+    card.classList.remove('open');
 
-    profile.style.width = 'fit-content';
-    profile.style.height = 'fit-content';
-    profile.style.visibility = 'visible';
-    profile.style.opacity = 1;
-
-    stopCarouselAutoScroll()
+    stopCarouselAutoScroll();
 }
 
 function ShowCard(memberID)
 {    
     var card = document.getElementById(memberID);
-    var profile = card.querySelector('.show-profile');
-    var display = card.querySelector('.display');
+    if (!card) return;
 
-    profile.style.width = 0;
-    profile.style.height = 0;
-    profile.style.opacity = 0;
-    profile.style.visibility = 'hidden';
+    // Add the open state class
+    card.classList.add('open');
 
-    display.style.width = 'fit-content';
-    display.style.height = 'fit-content';
-    display.style.visibility = 'visible';
-    display.style.opacity = 1;
-
-    startCarouselAutoScroll(memberID);
+    // Fix: Locate the carousel container correctly inside the card
+    const carousel = card.querySelector('.member-task-carousel');
+    if (carousel) {
+        // Initialize the carousel to its current slide smoothly
+        const currentSlide = parseInt(carousel.getAttribute('slide')) || 1;
+        
+        // Pass the actual card container ID down to your functions safely
+        updateCarousel(memberID, currentSlide);
+        startCarouselAutoScroll(memberID);
+    }
 }
 
 function DisplayCard(memberID)

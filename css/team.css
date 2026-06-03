@@ -28,6 +28,12 @@ html, body
     flex: 1;
 }
 
+.wrap
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 /*Member General*/
 
 .member-card
@@ -38,22 +44,27 @@ html, body
     height: fit-content;
 }
 
-.show-profile
-{
-    width: fit-content;
-    height: fit-content;
+/* --- Base Rules --- */
+.show-profile {
+    display: block;
     opacity: 1;
-    visibility: visible;
-    transition: all 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
-.display
-{
-    width: 0;
-    height: 0;
+.display {
+    display: none;
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease;
+    transition: opacity 0.3s ease;
+}
+
+.member-card.open .show-profile {
+    display: none;
+    opacity: 0;
+}
+
+.member-card.open .display {
+    display: flex;
+    opacity: 1;
 }
 
 /*Preview*/
@@ -135,7 +146,7 @@ html, body
 
 .member-info
 {
-    background: #cccccc url('path-to-your-image.jpg') no-repeat center / cover;
+    background: #cccccc url(background.png) no-repeat center / cover;
 }
 
 .display-name
@@ -150,11 +161,33 @@ html, body
     margin-left: 2%;
 }
 
+.social-media-link
+{
+    color: black;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+/*Description*/
+.member-description
+{
+    background: #cccccc url(path-to-image.png) no-repeat center / cover;
+
+}
+
+.member-text
+{
+    width: auto;
+    margin: 2%;
+    text-wrap: auto;
+}
+
 /*Carousel*/
 
 .member-task-carousel
 {
     display: flex;
+    background: #cccccc url(path-to-image.png) no-repeat center / cover;
 }
 
 .carousel-track
@@ -186,6 +219,17 @@ html, body
     flex-shrink: 1;        /* Permits the element to scale down if the box is tight */
 }
 
+.carousel-track img
+{
+    margin: 0;
+    padding: 0;
+    width: 50%;            /* Keeps it to exactly half the track width */
+    max-width: 50%;
+    height: auto;
+    align-self: center; 
+    flex-shrink: 1;        /* Permits the element to scale down if the box is tight */
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -198,7 +242,7 @@ html, body
     border: 0;
     align-self: center;
     padding: 5px;
-    border-radius: 50%;
+    height: 100%;
 }
 
 .task-title
@@ -219,7 +263,7 @@ html, body
 {
     box-sizing: border-box;
     padding: 2%;
-    width: 50%;            /* Use 50% instead of min-width: 40% to fill the remaining half perfectly */
+    min-width: 50%;            /* Use 50% instead of min-width: 40% to fill the remaining half perfectly */
     height: 100%;
     overflow-y: auto;      /* If text is too long for the 200px height, let it scroll internally */
 }
@@ -249,7 +293,7 @@ html, body
     .member-description
     {
         width: 400px;
-        height: 100px;
+        height: fit-content;
     }
 
     .member-task-carousel
@@ -282,7 +326,7 @@ html, body
     .member-description
     {
         width: 400px;
-        height: 100px;
+        height: fit-content;
     }
 
     .member-task-carousel
