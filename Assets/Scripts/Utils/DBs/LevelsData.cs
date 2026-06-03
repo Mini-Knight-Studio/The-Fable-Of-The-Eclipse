@@ -102,4 +102,18 @@ public class LevelsData
     {
         collectedAcorns[acornID] = true;
     }
+
+    // -------------------------------- Cinematics --------------------------------
+    public Dictionary<string, bool> cinematicsDone = new Dictionary<string, bool>();
+
+    public bool IsCinematicDone(string cinematicID)
+    {
+        if (cinematicsDone.TryGetValue(cinematicID, out bool isDone)) return isDone;
+        return false;
+    }
+
+    public void SetCinematicDone(string cinematicID)
+    {
+        cinematicsDone[cinematicID] = true;
+    }
 }

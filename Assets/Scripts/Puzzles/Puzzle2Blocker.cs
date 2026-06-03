@@ -28,8 +28,12 @@ class Puzzle2Blocker : Component
 
     private bool hasFallen = false;
     private bool hasDoneCinematic = false;
+    private bool hasDoneBlocker = false;
 
     private float initialPlatformHeight;
+
+    private string cinematicIntroID = "puzzle2Intro";
+    private string cinematicBlockerID = "puzzle2Blocker";
 
     [Header("Camera Settings")]
     public float puzzleCamFocusDuration = 1.0f;
@@ -66,6 +70,15 @@ class Puzzle2Blocker : Component
         collider = colliderEnitity.GetComponent<BoxCollider>();
 
         vistaPointAfterFall.SetActive(false);
+        
+        if(DatabaseRegistry.levelsDB.Levels.IsCinematicDone(cinematicIntroID))
+        {
+            hasDoneCinematic = true;
+        }
+        if (DatabaseRegistry.levelsDB.Levels.IsCinematicDone(cinematicBlockerID))
+        {
+            BridgeFinalPos();
+        }
     }
 
     void OnUpdate()
@@ -110,6 +123,8 @@ class Puzzle2Blocker : Component
         Player.Instance.Camera.StopFocus();
         yield return new WaitForSeconds(0.5f);
 
+        DatabaseRegistry.levelsDB.Levels.SetCinematicDone(cinematicIntroID);
+
         GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 
@@ -151,7 +166,15 @@ class Puzzle2Blocker : Component
         yield return null;
         vistaPointAfterFall.SetActive(true);
 
+        DatabaseRegistry.levelsDB.Levels.SetCinematicDone(cinematicBlockerID);
+
         GameManager.SetState(GameManager.GameState.DEFAULT);
+    }
+
+    public void BridgeFinalPos()
+    {
+        fallingBridge.transform.position = new Vector3(fallingBridge.transform.position.x, finalPlatformHeight, fallingBridge.transform.position.z);
+        hasFallen = true;
     }
 
     void OnDestroy()
