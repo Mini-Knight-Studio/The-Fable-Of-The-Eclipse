@@ -19,39 +19,108 @@
             <h1 class="studio-name">Mini Knight Studio</h1>
             <p class="studio-description">We are a collaborative studio of 19 game development students, united by our passion for the medium and dedicated to creating unforgettable interactive projects.</p>
         </div>
-
+        
         <div class="team">
+            <div class="member-card" id="empty">                                      <!--Member ID--><!--Empty-->
+                <div class="row">
+                    <div class="show-profile">                                      <!--Member Preview-->
+                        <button class="member-preview" onclick="DisplayCard('empty')">
+                            <img src="../assets/team/member.png" alt="">
+                            <p class="preview-name">Member</p>
+                        </button>
+                    </div>
+                    <div class="display column">
+                        <div class="row">
+                            <div class="member-image">                              <!--Member Image-->
+                                <img src="../assets/team/member.png" alt="">
+                            </div>
+                            <div class="member-info">                               <!--Member Info-->
+                                <div class="column">
+                                    <h1 class="display-name">Member</h1>
+                                    <h2 class="display-role">Role</h2>
+                                    <div class="row">
+                                        <a href="https://github.com/GuillemDev" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=guillem.ma.dev@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                        <a href="https://www.linkedin.com/in/guillem-martinez-aparicio" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                        <div class="space"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-description">
+                            <p class="member-text">
+                                This is a text container for personal conclusions. In this text you need to explain how you feel during the project.
+                            </p>
+                        </div>
+                        <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                            <button class="carousel-button previous" onclick="SetPreviousTask('empty')">
+                                <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                            </button>
+                            
+                            <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                <div class="text-container column">
+                                    <h1 class="task-title">Task</h1>
+                                    <p class="task-text">This is an example of a task text a member has done</p>
+                                </div>
+                            </div>
+                            <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                <div class="text-container column">
+                                    <h1 class="task-title">Task with Video</h1>
+                                    <p class="task-text">This is an example of a task text a member has done with a video</p>
+                                </div>
+                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </div>
+                            <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                <div class="text-container column">
+                                    <h1 class="task-title">Task with Photo</h1>
+                                    <p class="task-text">This is an example of a task text a member has done with a photo</p>
+                                </div>
+                                <img src="../assets/team/member.png" alt="">
+                            </div>
+                            
+                            <button class="carousel-button next" onclick="SetNextTask('empty')">
+                                <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <h1 class="team-title">Meet Our Team</h1>
             <p class="team-text">The ones behind the Eclipse</p>
             <div class="team-sections">
                 <div class="section-list">
-                    <h2 class="section-title">Organization</h2>
+                    <h2 class="section-title">Organization</h2> <!-- Guillem | Ton | Laura | Adrià -->
                     <div class="wrap row">
                         <div class="member-card" id="gma">                                      <!--Member ID--><!--Guillem Martínez Aparicio-->
                             <div class="row">
                                 <div class="show-profile">                                      <!--Member Preview-->
                                     <button class="member-preview" onclick="DisplayCard('gma')">
-                                        <img src="../assets/team/member.png" alt="">
-                                        <p class="preview-name">Member</p>
+                                        <img src="../assets/team/gma.webp" alt="">
+                                        <p class="preview-name">Guillem</p>
                                     </button>
                                 </div>
                                 <div class="display column">
                                     <div class="row">
                                         <div class="member-image">                              <!--Member Image-->
-                                            <img src="../assets/team/member.png" alt="">
+                                            <img src="../assets/team/gma.webp" alt="">
                                         </div>
                                         <div class="member-info">                               <!--Member Info-->
                                             <div class="column">
-                                                <h1 class="display-name">Member</h1>
-                                                <h2 class="display-role">Role</h2>
+                                                <h1 class="display-name">Guillem Martínez Aparicio</h1>
+                                                <h2 class="display-role">Producer</h2>
                                                 <div class="row">
-                                                    <div class="space"></div>
-                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:github"></iconify-icon></a>
-                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:gmail"></iconify-icon></a>
+                                                    <a href="https://github.com/GuillemDev" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=guillem.ma.dev@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="https://www.linkedin.com/in/guillem-martinez-aparicio" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
                                                     <div class="space"></div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            What started with my volition to take on the role of director for this project, ended up with me doing a wide range of roles(Producer, Director and Programmer) due to the needs of the project, our small team, and the inexperience from being a student. Even though it has led to a huge improvement in all my skills in those wide-ranging of areas, I ended up realizing the value and comfort of having a defined role to work on. Still, I would repeat my efforts, since nothing beats the fact of working on what I love.
+                                        </p>
                                     </div>
                                     <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
                                         <button class="carousel-button previous" onclick="SetPreviousTask('gma')">
@@ -60,25 +129,12 @@
                                         
                                         <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
                                             <div class="text-container column">
-                                                <h1 class="task-title">Task</h1>
-                                                <p class="task-text">This is an example of a task text a member has done</p>
+                                                <h1 class="task-title">Production</h1>
+                                                <p class="task-text">In this area, I was in charge of the entire project management, including the maintenance of the organizational tools we used, such as Hack&Plan, Google Drive , Discord, and a bit of the merges and branch assignment in our GitHub repository. Also, I tried to implement many organizational methodologies, such as Scrum teams, evaluation of the team on each milestone , milestone preparation, personal performance reports , group retrospectives , weekly meetings , daily standups , priority task lists , roles and responsibilities documentation , feedback boards , feedback surveys, and so on.</p>
+                                                <p class="task-text">Even trying all those in small doses and showing them in ways easy to access, truth be told, only half of them actually worked in our academic and small team environment.</p>
+                                                <p class="task-text">Realizing this made me approach everything with a different perspective , focusing on the essentials of the role that worked in our environment to keep everything in motion . Instead of trying any complex structures , I adopted a role in which I was the core point of connection inside the project, someone to reach out to easily in case of any arising doubt regarding organization, information about the state of development, or who to communicate with for specific topics or problems.</p>
                                             </div>
-                                        </div>
-                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
-                                            <div class="text-container column">
-                                                <h1 class="task-title">Task with Video</h1>
-                                                <p class="task-text">This is an example of a task text a member has done with a video</p>
-                                            </div>
-                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                        </div>
-                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
-                                            <div class="text-container column">
-                                                <h1 class="task-title">Task with Photo</h1>
-                                                <p class="task-text">This is an example of a task text a member has done with a photo</p>
-                                            </div>
-                                            <img src="../assets/team/member.png" alt="">
-                                        </div>
-                                        
+                                        </div>                                      
                                         <button class="carousel-button next" onclick="SetNextTask('gma')">
                                             <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
                                         </button>
@@ -87,27 +143,26 @@
                             </div>
                         </div>
 
-                        <div class="member-card" id="tcg">                                      <!--Member ID--><!--Guillem Martínez Aparicio-->
+                        <div class="member-card" id="lpc">                                      <!--Member ID--><!--Laura Parras Cruz-->
                             <div class="row">
                                 <div class="show-profile">                                      <!--Member Preview-->
-                                    <button class="member-preview" onclick="DisplayCard('tcg')">
-                                        <img src="../assets/team/member.png" alt="">
-                                        <p class="preview-name">Member</p>
+                                    <button class="member-preview" onclick="DisplayCard('lpc')">
+                                        <img src="../assets/team/lpc.webp" alt="Laura Parras Cruz">
+                                        <p class="preview-name">Laura</p>
                                     </button>
                                 </div>
                                 <div class="display column">
                                     <div class="row">
                                         <div class="member-image">                              <!--Member Image-->
-                                            <img src="../assets/team/member.png" alt="">
+                                            <img src="../assets/team/lpc.webp" alt="Laura Parras Cruz">
                                         </div>
                                         <div class="member-info">                               <!--Member Info-->
                                             <div class="column">
-                                                <h1 class="display-name">Member</h1>
-                                                <h2 class="display-role">Role</h2>
+                                                <h1 class="display-name">Laura Parras Cruz</h1>
+                                                <h2 class="display-role">Lead Artist</h2>
                                                 <div class="row">
-                                                    <div class="space"></div>
-                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:github"></iconify-icon></a>
-                                                    <a href="" class="social-media-link"><iconify-icon icon="mdi:gmail"></iconify-icon></a>
+                                                    <a href="https://github.com/AuriChan" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=aurichan22@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
                                                     <div class="space"></div>
                                                 </div>
                                             </div>
@@ -119,7 +174,7 @@
                                         </p>
                                     </div>
                                     <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
-                                        <button class="carousel-button previous" onclick="SetPreviousTask('tcg')">
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('lpc')">
                                             <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
                                         </button>
                                         
@@ -144,7 +199,7 @@
                                             <img src="../assets/team/member.png" alt="">
                                         </div>
                                         
-                                        <button class="carousel-button next" onclick="SetNextTask('tcg')">
+                                        <button class="carousel-button next" onclick="SetNextTask('lpc')">
                                             <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
                                         </button>
                                     </div>
@@ -152,6 +207,270 @@
                             </div>
                         </div>
                         <div class="space"></div>
+                    </div>
+                </div>
+                <div class="section-list">
+                    <h2 class="section-title">Design</h2> <!-- Marc | Li | Noa | Kaede -->
+                    <div class="wrap row">
+                        <div class="member-card" id="zl">                                      <!--Member ID--><!--Zhehao Li-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('zl')">
+                                        <img src="../assets/team/member.png" alt="Zhehao Li">
+                                        <p class="preview-name">Zhehao Li</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/member.png" alt="Zhehao Li">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Zhehao Li</h1>
+                                                <h2 class="display-role">Designer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/jeremy-zhehaoli" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jeremy.zhehaoli@msn.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="https://www.linkedin.com/in/zhehao-li-b4951a29b" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            I really like this experience as this is my first big game, learnt a lot from my teammates.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('zl')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">UI Design</h1>
+                                                <p class="task-text">I was in charge of designing all the UIs and HUD to guide the player and highly enhance players' experience in the game.</p>
+                                            </div>
+                                            <img src="../assets/tasks/zl-task01.webp" alt="UI Design">
+                                        </div>
+
+                                        <div class="carousel-track active" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">QA Test</h1>
+                                                <p class="task-text">I was in charge of QA testing, make sure players could enjoy the game without bugs.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('zl')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-list">
+                    <h2 class="section-title">Art</h2> <!-- Alba | Paula | Mario | Judit -->
+                    <div class="wrap row">
+                        <div class="member-card" id="jpc">                                      <!--Member ID--><!--Judit Parras Cruz-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('jpc')">
+                                        <img src="../assets/team/jpc.webp" alt="">
+                                        <p class="preview-name">Judit</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/jpc.webp" alt="">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Judit Parras Cruz</h1>
+                                                <h2 class="display-role">Artist</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/JulaChan" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jparras2212@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            This is a text container for personal conclusions. In this text you need to explain how you feel during the project.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('jpc')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task</h1>
+                                                <p class="task-text">This is an example of a task text a member has done</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Video</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a video</p>
+                                            </div>
+                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Photo</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a photo</p>
+                                            </div>
+                                            <img src="../assets/team/member.png" alt="">
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('jpc')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-list">
+                    <h2 class="section-title">Programming</h2> <!-- Ana | Víctor | Pau | Max | Javi | Pol | Dídac -->
+                    <div class="wrap row">
+                        <div class="member-card" id="vch">                                      <!--Member ID--><!--Víctor-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('vch')">
+                                        <img src="../assets/team/vch.webp" alt="Víctor Cárdenas Hormigo">
+                                        <p class="preview-name">Víctor</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/vch.webp" alt="Víctor Cárdenas Hormigo">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Víctor Cárdenas Hormigo</h1>
+                                                <h2 class="display-role">Programmer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/Vixtorbir" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=victorcarhor@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            It has been a great way to get a foot in the door in this sector, showing us how to work as a team using professional tools. It has given me a clear idea of what the future might hold for me.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('vch')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Audio System</h1>
+                                                <p class="task-text">Implemented the game's audio system in the engine using FMOD, creating the necessary components to control sound effects and music.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Items</h1>
+                                                <p class="task-text">Implemented healing items and elemental gems (Air, Water, Fire) that upgrade player attributes and unlock skills.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">HUD</h1>
+                                                <p class="task-text">Developed the game's HUD to display player health, collected gems, and active skill cooldowns.</p>
+                                            </div>
+                                        </div>
+                                        <button class="carousel-button next" onclick="SetNextTask('vch')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card" id="pss">                                      <!--Member ID--><!--Pol Sierra Sabadell-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('pss')">
+                                        <img src="../assets/team/pss.webp" alt="">
+                                        <p class="preview-name">Pol</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/pss.webp" alt="">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Pol Sierra Sabadell</h1>
+                                                <h2 class="display-role">Programmer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/AbyssWatcher64" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=polsierrasabadell@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href=" https://www.linkedin.com/in/pol-sierra-sabadell-980777174" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            This project has reinforced a belief I already had: passion moves people, and it is beautiful. Thank you to all who made out of this experience, an unforgettable one. I appreciate you for that, and you earned my respect.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('pss')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Shader & Pender Programming</h1>
+                                                <p class="task-text">Programmed the shaders and part of the renderer for the game - light, shadows, water, lava, post-processing (like bloom), etc.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Worldbuilding & Character Design</h1>
+                                                <p class="task-text"> Participated as the lead narrative (in pre-production) to create the world, context for it, and characters which would later be produced.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Map & Layout Design</h1>
+                                                <p class="task-text">Helped with the layout and brainstorming of the iteration of the map layouts.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="4" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Environmental 3D Artist</h1>
+                                                <p class="task-text">Created 3D environmental assets and did the terrain for some of the maps.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('pss')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
