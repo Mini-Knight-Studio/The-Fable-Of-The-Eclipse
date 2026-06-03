@@ -83,6 +83,7 @@ layout (std140, binding = 1) uniform Lighting
 uniform sampler2D u_LavaMapA; // The two scrolling normal maps that drive the molten surface ripple and specular
 uniform sampler2D u_LavaMapB;
 uniform sampler2D u_Emissive; // The glow texture (the bright cracks)
+uniform float u_BaseEmissive = 1.0; // Adds a general emissive to the lava
 
 // Foam
 uniform sampler2D lp_SceneDepth; 
@@ -254,8 +255,11 @@ void main()
 
     float pulse = 1.0 + 0.15 * sin(lp_Time * 1.5); // 0.15 = amplitude, 1.5 = time. Touch as needed.
     vec3 result = totalDiffuse * u_Color.xyz + totalSpecular;
+    result += u_BaseEmissive * texEmissive.rgb;   
     float emissiveMask = clamp(length(texEmissive.rgb), 0.0, 1.0);
-    result = mix(result, texEmissive.rgb * u_EmissiveIntensity * pulse, emissiveMask);
+    //result = mix(result, texEmissive.rgb * u_EmissiveIntensity * pulse, emissiveMask);
     result = mix(result, u_FoamColor.rgb, foamAmount);
+    result += u_BaseEmissive * texEmissive.rgb;
+    result += texEmissive.rgb * u_EmissiveIntensity * pulse * emissiveMask;  
     FragColor = vec4(result, 1.0);
 }
