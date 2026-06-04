@@ -19,54 +19,48 @@ public class BossLogic : Component
     HeadLogic head;
     public Entity sidePivotEntity;
 
+    [Header("Environment")]
+    public Entity vinesObstructionEntity; // For Phase 3 map blocking
+
     [Space(10)]
     [Header("Boss Settings")]
     public int totalPhases = 3;
+    [Tooltip("Time before a defeated hand regenerates if the other is ignored")]
+    public float antiCampRegenTime = 20.0f;
 
-
+    // (Keep all your existing Hand/Head settings parameters here...)
     [Space(10)]
     [Header("Hand Settings")]
-    [Tooltip("Time it takes for the hand to return to its start point")]public float H_TimeToReturnToStartPoint;
+    public float H_TimeToReturnToStartPoint;
+    public int HPunch_Damage;
+    public float HPunch_FollowSpeed;
+    public float HPunch_MoveAltitude;
+    public float HPunch_HitAltitude;
+    public float HPunch_FollowTime;
+    public float HPunch_FollowTimeReduction;
+    public float HPunch_TimeGoingUp;
+    public float HPunch_TimeGoingDown;
+    public float HPunch_HitTimePercentage;
+    public float HPunch_DelayTimeAfterPunch;
+    public float HPunch_VulnerableTime;
 
-    [Space(10)]
-    [Header("Hand Settings (PUNCH)")]
-    [Tooltip("Damage that the hand will deal")]public int HPunch_Damage;
-    [Tooltip("Speed that the hand will have following the target")]public float HPunch_FollowSpeed;
-    [Tooltip("Altitude that the hand will move at")] public float HPunch_MoveAltitude;
-    [Tooltip("Altitude that the hand will move to when hitting the target")]public float HPunch_HitAltitude;
-    [Tooltip("How much time must the hand be at the top of the target")]public float HPunch_FollowTime;
-    [Tooltip("Time reduction multiplier when hand is not at the top")]public float HPunch_FollowTimeReduction;
-    [Tooltip("The time in which the hand will go up charging")]public float HPunch_TimeGoingUp;
-    [Tooltip("The time the hand will take until hitting the ground")]public float HPunch_TimeGoingDown;
-    [Tooltip("The % of the hitting motion completed before the hand registers hit (0-100)")] public float HPunch_HitTimePercentage;
-    [Tooltip("The time that the hand is resting after a punch")] public float HPunch_DelayTimeAfterPunch;
-    [Tooltip("The time that the hand is vulnerable after last punch attack")] public float HPunch_VulnerableTime;
+    public int HSpike_Damage;
+    public float HSpike_HideAltitude;
+    public float HSpike_ShowAltitude;
+    public float HSpike_InitialDelay;
+    public float HSpike_AlertTime;
+    public float HSpike_SpikeShowTime;
+    public float HSpike_SpikeStayTime;
+    public float HSpike_SpikeHideTime;
+    public float HSpike_DelayTimeAfterSpike;
 
-    [Space(10)]
-    [Header("Hand Settings (SPIKES)")]
-    [Tooltip("Damage that the hand will deal")] public int HSpike_Damage;
-    [Tooltip("Altitude that the spikes will hide at")]public float HSpike_HideAltitude;
-    [Tooltip("Altitude that the spikes will show at")]public float HSpike_ShowAltitude;
-    [Tooltip("The delay time after starting the attack")] public float HSpike_InitialDelay;
-    [Tooltip("The alert time before the spikes attack")] public float HSpike_AlertTime;
-    [Tooltip("The time that the spikes takes to emerge")] public float HSpike_SpikeShowTime;
-    [Tooltip("The time that the spikes stay up")] public float HSpike_SpikeStayTime;
-    [Tooltip("The time that the spikes takes to hide")] public float HSpike_SpikeHideTime;
-    [Tooltip("The time that the hand is resting after a spike attack")] public float HSpike_DelayTimeAfterSpike;
+    public float Head_TimeToReturnToStartPoint;
+    public float Head_TimeToVulnerablePosition;
+    public float Head_VulnerableAltitude;
+    public Vector3 Head_VulnerableRotation;
 
-
-
-    [Space(10)]
-    [Header("Head Settings")]
-    [Tooltip("Time it takes for the head to return to its start point")]public float Head_TimeToReturnToStartPoint;
-    [Tooltip("Time it takes for the head to move to vulnerable position")]public float Head_TimeToVulnerablePosition;
-    [Tooltip("Altitude that the head will move to when vulnerable")]public float Head_VulnerableAltitude;
-    [Tooltip("Rotation that the head will have when vulnerable")]public Vector3 Head_VulnerableRotation;
-
-    [Space(10)]
-    [Header("Phase Transition")]
-    [Tooltip("Time it takes to recover from vulnerability")]public float Core_VulnerabilityDuration = 5.0f;
-    [Tooltip("Time it takes to change phase when recovered")]public float Core_RegenerationDuration = 5.0f;
+    public float Core_VulnerabilityDuration = 5.0f;
+    public float Core_RegenerationDuration = 5.0f;
 
     [ReadOnly][ShowInInspector] BossSide currentSide;
     [ReadOnly][ShowInInspector] int currentPhase;
@@ -75,13 +69,18 @@ public class BossLogic : Component
     [ReadOnly][ShowInInspector] bool isVulnerable;
     [ReadOnly][ShowInInspector] bool isBusy;
 
+    // Track anti-camp timers
+    float leftHandDefeatTimer = 0f;
+    float rightHandDefeatTimer = 0f;
+
     Player target;
 
     public bool IsDefeated() => isDefeated;
     public bool IsVulnerable() => isVulnerable;
     public BossSide GetCurrentSide() => currentSide;
     public Player GetTarget() => target;
-    bool IsFinalPhase() => currentPhase >= totalPhases;
+    public int GetCurrentPhase() => currentPhase;
+    bool IsFinalPhase() => currentPhase >= totalPhases - 1;
 
     void OnCreate()
     {
@@ -107,51 +106,119 @@ public class BossLogic : Component
         head.SetOwner(this);
 
         head.headColliderEntity.SetActive(false);
+        if (vinesObstructionEntity != null) vinesObstructionEntity.SetActive(false);
 
         Player.Instance.LoseScreen.OnClosing += RestartBoss;
+
+        UpdatePhaseSequences();
+    }
+
+    // Assigns sequences per the GDD based on Phase
+    void UpdatePhaseSequences()
+    {
+        List<SequenceAction> phaseSequence = new List<SequenceAction>();
+
+        if (currentPhase == 0)
+        {
+            // Phase 1: 1 Punch -> 1 Palm (Stuck)
+            phaseSequence.Add(new SequenceAction(AttackType.Punch, 1));
+            phaseSequence.Add(new SequenceAction(AttackType.Palm, 1));
+        }
+        else if (currentPhase == 1)
+        {
+            // Phase 2: 2 Punches -> Spike -> Palm (Stuck)
+            phaseSequence.Add(new SequenceAction(AttackType.Punch, 2));
+            phaseSequence.Add(new SequenceAction(AttackType.Spike, 1));
+            phaseSequence.Add(new SequenceAction(AttackType.Palm, 1));
+        }
+        else
+        {
+            // Phase 3: 3 Punches -> Spike -> Palm (Stuck) + Arena Obstruction
+            phaseSequence.Add(new SequenceAction(AttackType.Punch, 3));
+            phaseSequence.Add(new SequenceAction(AttackType.Spike, 1));
+            phaseSequence.Add(new SequenceAction(AttackType.Palm, 1));
+
+            if (vinesObstructionEntity != null) vinesObstructionEntity.SetActive(true);
+        }
+
+        leftHand.SetSequence(new List<SequenceAction>(phaseSequence));
+        rightHand.SetSequence(new List<SequenceAction>(phaseSequence));
     }
 
     void OnUpdate()
     {
         if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         UpdateCurrentSide();
-        if (isDefeated || isVulnerable)
-            return;
+
+        if (isDefeated || isVulnerable) return;
+
+        // Anti-camp Mechanic tracking
+        HandleRegenerationTimers();
 
         if (!isBusy)
         {
-            if(leftHand.IsDefeated() && rightHand.IsDefeated())
+            if (leftHand.IsDefeated() && rightHand.IsDefeated())
             {
                 /// Core Exposed
-
                 StartCoroutine(ExposeCore());
-            }                
+            }
+        }
+    }
+
+    void HandleRegenerationTimers()
+    {
+        if (leftHand.IsDefeated() && !rightHand.IsDefeated() && GetCurrentSide() == BossSide.Left)
+        {
+            leftHandDefeatTimer += Time.deltaTime;
+            if (leftHandDefeatTimer >= antiCampRegenTime)
+            {
+                Debug.Log("Anti-camp triggered: Left hand regenerating.");
+                leftHand.Regenerate();
+                leftHandDefeatTimer = 0f;
+            }
+        }
+        else
+        {
+            leftHandDefeatTimer = 0f;
+        }
+
+        if (rightHand.IsDefeated() && !leftHand.IsDefeated() && GetCurrentSide() == BossSide.Right)
+        {
+            rightHandDefeatTimer += Time.deltaTime;
+            if (rightHandDefeatTimer >= antiCampRegenTime)
+            {
+                Debug.Log("Anti-camp triggered: Right hand regenerating.");
+                rightHand.Regenerate();
+                rightHandDefeatTimer = 0f;
+            }
+        }
+        else
+        {
+            rightHandDefeatTimer = 0f;
         }
     }
 
     IEnumerator ExposeCore()
     {
-        //// ZOOM TO HEAD
         Debug.Log("Core Exposed");
         isVulnerable = true;
         isBusy = true;
 
         StartCoroutine(MoveVertically(head.transform, head.startPointEntity.transform.position.y, Head_VulnerableAltitude, Head_TimeToVulnerablePosition, Mathf.LerpCurve.ExponentialOut));
-        StartCoroutine(RotateInAxis(head.transform, new Vector3(0,0,0), Head_VulnerableRotation, Head_TimeToVulnerablePosition, new Vector3(0,0,1)));
-        yield return new WaitForSeconds(Head_TimeToVulnerablePosition+0.5f);
+        StartCoroutine(RotateInAxis(head.transform, new Vector3(0, 0, 0), Head_VulnerableRotation, Head_TimeToVulnerablePosition, new Vector3(0, 0, 1)));
+        yield return new WaitForSeconds(Head_TimeToVulnerablePosition + 0.5f);
 
         head.headColliderEntity.SetActive(true);
         float timer = 0;
         while (timer <= Core_VulnerabilityDuration)
         {
-            timer+=Time.deltaTime;
-            if(head.HasBeenHit())
+            timer += Time.deltaTime;
+            if (head.HasBeenHit())
             {
                 head.headColliderEntity.SetActive(false);
                 isDefeated = true;
                 isVulnerable = false;
 
-                currentPhase++;
                 if (IsFinalPhase())
                 {
                     /// DIE
@@ -161,8 +228,10 @@ public class BossLogic : Component
                 }
                 else
                 {
-                    /// REGENERATE CORE
-                    
+                    /// REGENERATE CORE & NEXT PHASE
+                    currentPhase++;
+                    UpdatePhaseSequences(); // Update attacks for next phase
+
                     head.headColliderEntity.SetActive(false);
                     StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
                     leftHand.FakeRegenerate();
@@ -185,6 +254,7 @@ public class BossLogic : Component
             yield return null;
         }
 
+        // FAILED TO HIT CORE IN TIME
         head.headColliderEntity.SetActive(false);
         StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
         leftHand.FakeRegenerate();
@@ -201,8 +271,6 @@ public class BossLogic : Component
         rightHand.Regenerate();
         isDefeated = false;
         isBusy = false;
-
-        /// RESET OR DIE && REMOVE ZOOM
     }
 
     void UpdateCurrentSide()
@@ -213,6 +281,7 @@ public class BossLogic : Component
             currentSide = BossSide.Left;
     }
 
+    // Keep all your public IEnumerator Movement functions (MoveVertically, RotateInAxis, GoToPoint) exactly the same...
     public IEnumerator MoveVertically(Transform target, float start, float end, float duration, Mathf.LerpCurve mode)
     {
         float timer = 0.0f;
@@ -225,17 +294,16 @@ public class BossLogic : Component
         }
         target.position = new Vector3(target.position.x, end, target.position.z);
     }
+
     public IEnumerator RotateInAxis(Transform target, Vector3 start, Vector3 end, float duration, Vector3 axis)
     {
         float timer = 0.0f;
-        
-        Vector3 targetRotation =  new Vector3(axis.x == 0 ? start.x : end.x*axis.x, axis.y == 0 ? start.y : end.y*axis.y, axis.z == 0 ? start.z : end.z*axis.z);
+        Vector3 targetRotation = new Vector3(axis.x == 0 ? start.x : end.x * axis.x, axis.y == 0 ? start.y : end.y * axis.y, axis.z == 0 ? start.z : end.z * axis.z);
 
         while (timer < duration)
         {
             timer += Time.deltaTime;
             target.rotation = Vector3.Lerp(start, targetRotation, timer / duration);
-
             yield return null;
         }
         target.rotation = targetRotation;
@@ -243,15 +311,12 @@ public class BossLogic : Component
 
     public IEnumerator GoToPoint(Transform target, Vector3 start, Vector3 end, float duration)
     {
-        Debug.Log($"Returning {target.entity.Name} to start point");
-
         Vector3 init = start;
         Vector3 targetPosition = end;
-
         float timer = 0.0f;
+
         while (timer < duration)
         {
-
             timer += Time.deltaTime;
             target.position = Vector3.Lerp(init, targetPosition, timer / duration);
             yield return null;
@@ -267,6 +332,10 @@ public class BossLogic : Component
         isDefeated = false;
         isVulnerable = false;
         isBusy = false;
+        leftHandDefeatTimer = 0f;
+        rightHandDefeatTimer = 0f;
+
+        UpdatePhaseSequences();
 
         if (head != null) head.Restart();
         if (leftHand != null) leftHand.Restart();
@@ -275,12 +344,9 @@ public class BossLogic : Component
         if (leftHand != null) leftHand.SetCooldown(2f);
         if (rightHand != null) rightHand.SetCooldown(2f);
 
-        if (head != null && head.headColliderEntity != null)
-        {
-            head.headColliderEntity.SetActive(false);
-        }
+        if (head != null && head.headColliderEntity != null) head.headColliderEntity.SetActive(false);
+        if (vinesObstructionEntity != null) vinesObstructionEntity.SetActive(false);
     }
-
 
     void OnDestroy()
     {
