@@ -42,6 +42,24 @@ class PuzzleGoal : Component
 
     public string popupName = "Popup_GemAir";
 
+    [Header("Mechanic door")]
+    public Entity doorEntity;
+    public Entity doorFocusPoint;
+    public float finalDoorHeight;
+    public float lowerDuration = 2.0f;
+    public float pauseBeforeLowering = 0.5f;
+    public float easeIntensity = 1.5f;
+    public float doorCameraZoom = 20f;
+    public float doorFocusDuration = 1.5f;
+
+    private float initialDoorHeight;
+
+    public float doorShakeDuration = 2.0f;
+    public float doorShakeAmount = 0.4f;
+    public float doorShakeRotation = 0.4f;
+    public float doorShakeAmountVel = 10f;
+    public float doorShakeRotationVel = 10f;
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -51,6 +69,11 @@ class PuzzleGoal : Component
         pillars[1] = Pillar2.GetComponent<MovingPillar>();
         pillars[2] = Pillar3.GetComponent<MovingPillar>();
         pillars[3] = Pillar4.GetComponent<MovingPillar>();
+
+        if (doorEntity != null)
+        {
+            initialDoorHeight = doorEntity.transform.position.y;
+        }
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
 
@@ -108,19 +131,56 @@ class PuzzleGoal : Component
         if (allOnGoal && !puzzle1Completed)
         {
             puzzle1Completed = true;
-
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
 
             completeSFX.GetComponent<AudioSource>().Play();
 
-            Gem.GetComponent<BoxCollider>().SetActive(true);
-            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+            StartCoroutine(PuzzleCompleteCinematic());
         }
 
         if (!isCollecting && Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             StartCoroutine(Collect());
         }
+    }
+
+    IEnumerator PuzzleCompleteCinematic()
+    {
+        GameManager.SetState(GameManager.GameState.PAUSE);
+
+        if (doorEntity != null)
+        {
+            Player.Instance.Camera.FocusOnPoint(doorFocusPoint.transform.position, doorCameraZoom, 4);
+            yield return new WaitForSeconds(doorFocusDuration);
+
+            yield return new WaitForSeconds(pauseBeforeLowering);
+
+            Player.Instance.Camera.SetIsShaking(true, doorShakeDuration, doorShakeAmount, doorShakeRotation, doorShakeAmountVel, doorShakeRotationVel);
+
+            float elapsedTime = 0f;
+            while (elapsedTime < lowerDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / lowerDuration;
+                float curvedT = Mathf.Pow(t, easeIntensity);
+
+                float currentHeight = Mathf.Lerp(initialDoorHeight, finalDoorHeight, curvedT);
+                doorEntity.transform.position = new Vector3(doorEntity.transform.position.x, currentHeight, doorEntity.transform.position.z);
+
+                yield return null;
+            }
+
+            doorEntity.transform.position = new Vector3(doorEntity.transform.position.x, finalDoorHeight, doorEntity.transform.position.z);
+        }
+
+        yield return new WaitForSeconds(1.0f);
+        Player.Instance.Camera.StopFocus();
+        yield return new WaitForSeconds(0.5f);
+
+        Gem.GetComponent<BoxCollider>().SetActive(true);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+
+        GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 
     IEnumerator ProcessMovementQueue()
@@ -167,7 +227,19 @@ class PuzzleGoal : Component
         Pillar3.GetComponent<MovingPillar>().CompletePillarAuto();
         Pillar4.GetComponent<MovingPillar>().CompletePillarAuto();
 
-        completeSFX.GetComponent<AudioSource>().Play();
+        float totalDropDistance = 4f * movementDistance;
+        entity.transform.position = new Vector3(entity.transform.position.x, entity.transform.position.y - totalDropDistance, entity.transform.position.z);
+
+        for (int i = 0; i < pillarTriggered.Length; i++)
+        {
+            pillarTriggered[i] = true;
+        }
+        pendingMoves = 0;
+
+        if (doorEntity != null)
+        {
+            doorEntity.transform.position = new Vector3(doorEntity.transform.position.x, finalDoorHeight, doorEntity.transform.position.z);
+        }
     }
 
     IEnumerator Collect()

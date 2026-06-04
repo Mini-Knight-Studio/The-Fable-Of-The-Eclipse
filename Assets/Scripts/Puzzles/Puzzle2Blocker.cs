@@ -28,7 +28,6 @@ class Puzzle2Blocker : Component
 
     private bool hasFallen = false;
     private bool hasDoneCinematic = false;
-    private bool hasDoneBlocker = false;
 
     private float initialPlatformHeight;
 
@@ -62,9 +61,11 @@ class Puzzle2Blocker : Component
     {
         initialPlatformHeight = entity.transform.position.y;
 
-        if (fallingParticlesEntity != null) fallingParticles = fallingPlatformSFXEntity.GetComponent<ParticleComponent>();
-
-        if (fallingParticlesEntity != null) fallingParticles.Stop();
+        if (fallingParticlesEntity != null)
+        {
+            fallingParticles = fallingParticlesEntity.GetComponent<ParticleComponent>();
+            fallingParticles.Stop();
+        }
 
         levelFadeOutEvent = levelFadeOut.GetComponent<FadeInOutEvent>();
         collider = colliderEnitity.GetComponent<BoxCollider>();
@@ -78,6 +79,7 @@ class Puzzle2Blocker : Component
         if (DatabaseRegistry.levelsDB.Levels.IsCinematicDone(cinematicBlockerID))
         {
             BridgeFinalPos();
+            vistaPointAfterFall.SetActive(true);
         }
     }
 

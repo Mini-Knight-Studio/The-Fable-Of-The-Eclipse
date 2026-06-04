@@ -79,6 +79,8 @@ class PuzzleGoalSimonSays : Component
     public Entity mechanichDoorPlatformSFXEntity;
     private AudioSource mechanichDoorPlatformSFX;
 
+    private float initialGoalY;
+
     private enum State
     {
         WaitingForPillars,
@@ -122,6 +124,8 @@ class PuzzleGoalSimonSays : Component
         HidePromptAllPillars();
 
         Gem.GetComponent<BoxCollider>().SetActive(false);
+
+        initialGoalY = entity.transform.position.y;
     }
 
     void OnUpdate()
@@ -264,36 +268,49 @@ class PuzzleGoalSimonSays : Component
             bool roundFailed = false;
             while (playerIndex < sequence.Count)
             {
-                int pressedIndex = -1;
+                bool aPillarIsActivating = false;
                 for (int i = 0; i < simonPillars.Length; i++)
                 {
-                    if (simonPillars[i] != null && simonPillars[i].wasPressed)
+                    if (simonPillars[i] != null && simonPillars[i].active && !simonPillars[i].interactPrompt.Active)
                     {
-                        pressedIndex = i;
+                        aPillarIsActivating = true;
                         break;
                     }
                 }
 
-                if (pressedIndex != -1)
+                if (!aPillarIsActivating)
                 {
-                    if (sequence[playerIndex] == pressedIndex)
+                    int pressedIndex = -1;
+                    for (int i = 0; i < simonPillars.Length; i++)
                     {
-                        playerIndex++;
-                        simonPillars[pressedIndex].ResetState();
-                        simonPillars[pressedIndex].interactPrompt.SetActive(false);
-
-                        if (playerIndex >= sequence.Count) HidePromptAllPillars();
-
-                        yield return new WaitForSeconds(1f);
-
-                        if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
-                        simonPillars[pressedIndex].ResetState();
+                        if (simonPillars[i] != null && simonPillars[i].wasPressed)
+                        {
+                            pressedIndex = i;
+                            break;
+                        }
                     }
-                    else
+
+                    if (pressedIndex != -1)
                     {
-                        simonPillars[pressedIndex].ResetState();
-                        roundFailed = true;
-                        break;
+                        if (sequence[playerIndex] == pressedIndex)
+                        {
+                            playerIndex++;
+                            simonPillars[pressedIndex].ResetState();
+                            simonPillars[pressedIndex].interactPrompt.SetActive(false);
+
+                            if (playerIndex >= sequence.Count) HidePromptAllPillars();
+
+                            yield return new WaitForSeconds(1f);
+
+                            if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
+                            simonPillars[pressedIndex].ResetState();
+                        }
+                        else
+                        {
+                            simonPillars[pressedIndex].ResetState();
+                            roundFailed = true;
+                            break;
+                        }
                     }
                 }
                 yield return null;
@@ -378,6 +395,8 @@ class PuzzleGoalSimonSays : Component
         if (puzzle2Completed) return;
         puzzle2Completed = true;
 
+        DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = true;
+
         StartCoroutine(PuzzleCompleteCinematic());
     }
 
@@ -442,13 +461,23 @@ class PuzzleGoalSimonSays : Component
             Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemWaterCollected);
         }
 
-        ResetAllPillars();
-        foreach (var pillar in basePillars) if (pillar != null) pillar.CompletePillarAuto();
-        foreach (var pillar in simonPillars) if (pillar != null) { pillar.Lock(); pillar.ForceActive(); }
+        foreach (var pillar in basePillars)
+        {
+            if (pillar != null) pillar.CompletePillarAuto();
+        }
 
-        entity.transform.position += new Vector3(0, -movementDistance * maxRounds, 0);
+        foreach (var pillar in simonPillars)
+        {
+            if (pillar != null) pillar.CompletePillarSimonSaysAuto();
+        }
 
-        MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
+        float totalDropDistance = movementDistance * maxRounds;
+        entity.transform.position = new Vector3(entity.transform.position.x, initialGoalY - totalDropDistance, entity.transform.position.z);
+
+        if (MechanicDoor != null)
+        {
+            MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
+        }
 
         currentState = State.Completed;
     }

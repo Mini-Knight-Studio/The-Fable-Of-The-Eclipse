@@ -35,7 +35,7 @@ class MovingPillar : Component
     private float cameraShakeAmountVel = 10f;
     private float cameraShakeRotationVel = 10f;
 
-    // For reseting
+    // For resetting
     private Vector3 initialPosition;
 
     [Header("Collider References and Settings")]
@@ -141,6 +141,7 @@ class MovingPillar : Component
             pushTimerRight = 0.0f;
         }
     }
+
     void HandlePush(BoxCollider col, Vector3 direction, ref float timer)
     {
         timer += Time.deltaTime;
@@ -193,7 +194,7 @@ class MovingPillar : Component
         origin += direction * 0.05f;
 
         RaycastHit hit;
-        bool blocked = Collisions.Raycast(origin, direction, tileSize, out hit, Collisions.GetLayerBit("PillarLimits")| Collisions.GetLayerBit("WorldLimits") | Collisions.GetLayerBit("Pillars"));
+        bool blocked = Collisions.Raycast(origin, direction, tileSize, out hit, Collisions.GetLayerBit("PillarLimits") | Collisions.GetLayerBit("WorldLimits") | Collisions.GetLayerBit("Pillars"));
 
         pushForward.SetActive(true);
         pushBack.SetActive(true);
@@ -276,10 +277,23 @@ class MovingPillar : Component
 
     public void CompletePillarAuto()
     {
-        Vector3 finalPos = goalCollider.transform.position;
-        finalPos.y = entity.transform.position.y;
+        onGoalPosition = true;
+        onGoalCalled = true;
+        stopedOnGoal = true;
 
+        if (myCollider != null)
+        {
+            myCollider.Static = true;
+        }
+
+        Vector3 finalPos = goalCollider.transform.position;
+        finalPos.y = initialPosition.y - onGoalMovementDistance;
         entity.transform.position = finalPos;
+
+        if (movingParticles != null) movingParticles.Stop();
+        if (goalParticles != null) goalParticles.Stop();
+
+        StartCoroutine(EmissiveShine());
     }
 
     Vector3 SnapToGrid(Vector3 pos)
@@ -306,6 +320,7 @@ class MovingPillar : Component
         onGoalCalled = false;
         stopedOnGoal = false;
     }
+
     IEnumerator EmissiveShine()
     {
         if (pillarMaterial == null) yield break;
