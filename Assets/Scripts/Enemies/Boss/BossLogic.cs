@@ -18,9 +18,10 @@ public class BossLogic : Component
     public Entity headEntity;
     HeadLogic head;
     public Entity sidePivotEntity;
+    public Entity middleColliderEntity;
 
     [Header("Environment")]
-    public Entity vinesObstructionEntity; // For Phase 3 map blocking
+    public Entity vinesObstructionEntity; 
 
     [Space(10)]
     [Header("Boss Settings")]
@@ -28,7 +29,7 @@ public class BossLogic : Component
     [Tooltip("Time before a defeated hand regenerates if the other is ignored")]
     public float antiCampRegenTime = 20.0f;
 
-    // (Keep all your existing Hand/Head settings parameters here...)
+
     [Space(10)]
     [Header("Hand Settings")]
     public float H_TimeToReturnToStartPoint;
@@ -69,7 +70,7 @@ public class BossLogic : Component
     [ReadOnly][ShowInInspector] bool isVulnerable;
     [ReadOnly][ShowInInspector] bool isBusy;
 
-    // Track anti-camp timers
+
     float leftHandDefeatTimer = 0f;
     float rightHandDefeatTimer = 0f;
 
@@ -113,7 +114,6 @@ public class BossLogic : Component
         UpdatePhaseSequences();
     }
 
-    // Assigns sequences per the GDD based on Phase
     void UpdatePhaseSequences()
     {
         List<SequenceAction> phaseSequence = new List<SequenceAction>();
@@ -149,19 +149,29 @@ public class BossLogic : Component
     {
         if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         UpdateCurrentSide();
-
+        ManageMiddleCollider();
         if (isDefeated || isVulnerable) return;
 
-        // Anti-camp Mechanic tracking
         HandleRegenerationTimers();
 
         if (!isBusy)
         {
             if (leftHand.IsDefeated() && rightHand.IsDefeated())
             {
-                /// Core Exposed
                 StartCoroutine(ExposeCore());
             }
+        }
+    }
+
+    void ManageMiddleCollider()
+    {
+        if (!Player.Instance.Grapple.IsGrappling)
+        {
+            middleColliderEntity.SetActive(true);
+        }
+        else
+        {
+            middleColliderEntity.SetActive(false);
         }
     }
 
@@ -221,16 +231,14 @@ public class BossLogic : Component
 
                 if (IsFinalPhase())
                 {
-                    /// DIE
                     yield return new WaitForSeconds(2);
                     Player.Instance.CreditsScreen.OpenCreditsScreen();
                     yield break;
                 }
                 else
                 {
-                    /// REGENERATE CORE & NEXT PHASE
                     currentPhase++;
-                    UpdatePhaseSequences(); // Update attacks for next phase
+                    UpdatePhaseSequences();
 
                     head.headColliderEntity.SetActive(false);
                     StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
@@ -254,7 +262,6 @@ public class BossLogic : Component
             yield return null;
         }
 
-        // FAILED TO HIT CORE IN TIME
         head.headColliderEntity.SetActive(false);
         StartCoroutine(GoToPoint(leftHand.transform, leftHand.transform.position, leftHand.startPointEntity.transform.position, H_TimeToReturnToStartPoint));
         leftHand.FakeRegenerate();
@@ -281,7 +288,6 @@ public class BossLogic : Component
             currentSide = BossSide.Left;
     }
 
-    // Keep all your public IEnumerator Movement functions (MoveVertically, RotateInAxis, GoToPoint) exactly the same...
     public IEnumerator MoveVertically(Transform target, float start, float end, float duration, Mathf.LerpCurve mode)
     {
         float timer = 0.0f;

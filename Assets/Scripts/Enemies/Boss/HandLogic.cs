@@ -234,7 +234,6 @@ public class HandLogic : Component
             if (Vector3.Distance(transform.position, targetPosition) < 2f)
             {
                 timer += Time.deltaTime;
-                // Rely strictly on Inspector variable
                 if (timer > owner.HPunch_FollowTime)
                     hitPlayer = true;
             }
@@ -283,7 +282,6 @@ public class HandLogic : Component
 
         if (isPalm)
         {
-            // Fixed vulnerable time from Inspector
             SetVulnerable(owner.HPunch_VulnerableTime);
             IncreaseSequenceCounter();
 
@@ -316,7 +314,6 @@ public class HandLogic : Component
         yield return new WaitForSeconds(owner.HSpike_InitialDelay);
         canBeStopped = false;
 
-        // Use fixed variables from Inspector
         PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, owner.HSpike_AlertTime);
         yield return new WaitForSeconds(owner.HSpike_AlertTime);
 
@@ -332,7 +329,6 @@ public class HandLogic : Component
         }
 
         float timer = 0;
-        // Uses fixed stay time from Inspector
         while (timer < owner.HSpike_SpikeStayTime)
         {
             timer += Time.deltaTime;
