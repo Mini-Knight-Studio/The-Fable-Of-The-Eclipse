@@ -351,7 +351,20 @@ public class BossLogic : Component
         if (rightHand != null) rightHand.SetCooldown(2f);
 
         if (head != null && head.headColliderEntity != null) head.headColliderEntity.SetActive(false);
-        if (vinesObstructionEntity != null) vinesObstructionEntity.SetActive(false);
+        if (vinesObstructionEntity != null)
+        {
+            vinesObstructionEntity.SetActive(false);
+            foreach (Entity vine in vinesObstructionEntity.Children)
+            {
+                vine.SetActive(true);
+                if(vine.HasComponent<BurnableBlock>())
+                {
+                    vine.GetComponent<BurnableBlock>().Regenerate();
+                }
+            }
+        }
+
+
     }
 
     void OnDestroy()
