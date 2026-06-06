@@ -255,10 +255,10 @@ class PuzzleGoalFireLvl : Component
 
         DatabaseRegistry.playerDB.Player.gemFireCollected = true;
 
-        if (UIPopupManager.Instance != null)
-        {
-            UIPopupManager.Instance.ShowPopup(popupName);
-        }
+        //if (UIPopupManager.Instance != null)
+        //{
+        //    UIPopupManager.Instance.ShowPopup(popupName);
+        //}
 
         isCollecting = false;
     }

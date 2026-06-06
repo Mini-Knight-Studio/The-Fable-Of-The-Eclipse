@@ -15,6 +15,7 @@ class Mechanic_Idle : Component
     [Header("References")]
     public Entity interactPrompt;
     public Entity ownerChest;
+    public Entity popupTutorial;
 
     [Header("Settings")]
     public float amplitude = 0.5f;
@@ -141,6 +142,12 @@ class Mechanic_Idle : Component
         }
 
         GameManager.SetState(GameManager.GameState.DEFAULT);
+
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupTutorial.Name);
+        }
+
         yield return null;
     }
 

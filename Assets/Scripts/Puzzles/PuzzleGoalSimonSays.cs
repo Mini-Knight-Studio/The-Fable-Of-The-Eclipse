@@ -382,10 +382,10 @@ class PuzzleGoalSimonSays : Component
 
         collectGemSFX.GetComponent<AudioSource>().Play();
 
-        if (UIPopupManager.Instance != null)
-        {
-            UIPopupManager.Instance.ShowPopup(popupName);
-        }
+        //if (UIPopupManager.Instance != null)
+        //{
+        //    UIPopupManager.Instance.ShowPopup(popupName);
+        //}
 
         isCollecting = false;
     }
