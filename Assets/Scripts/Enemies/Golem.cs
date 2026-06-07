@@ -76,7 +76,7 @@ class Golem : Enemy
                     if (GetDistanceToTarget() < GetEntityForwardBase() + ReachDistance)
                     {
                         ReceivedHits = 0;
-                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|RecoveryArmOut"), HitOffset, Damage, "G_Scale_CTRL|AttackCharge", "G_Scale_CTRL|AttackSwing", "G_Scale_CTRL|RecoveryStuck", "G_Scale_CTRL|RecoveryArmOut", false));
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown, animator.ClipDuration("G_Scale_CTRL|AttackRecovery_GetArmOut"), HitOffset, Damage, "G_Scale_CTRL|ChargeAttack", "G_Scale_CTRL|Attack", "G_Scale_CTRL|AttackRecovery", "G_Scale_CTRL|AttackRecovery_GetArmOut", false));
                     }
                 }
           
