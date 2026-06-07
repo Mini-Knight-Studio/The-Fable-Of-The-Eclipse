@@ -106,10 +106,11 @@ class PuzzleDoorBoss : Component
                             bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 5);
                             bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 5);
 
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
+
                             break;
                         }
 
@@ -120,10 +121,11 @@ class PuzzleDoorBoss : Component
                             bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(0, 10);
                             bossEyesParticles.GetComponent<ParticleComponent>().SetSpawnRate(1, 10);
 
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.176f, 0.361f, 1.0f));
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
-                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.627f, 0.976f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(0, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorBegin(1, new Vector4(0.105f, 0.361f, 0.322f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(0, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
+                            bossEyesParticles.GetComponent<ParticleComponent>().SetColorEnd(1, new Vector4(0.384f, 0.976f, 0.875f, 1.0f));
+
                             break;
                         }
 
