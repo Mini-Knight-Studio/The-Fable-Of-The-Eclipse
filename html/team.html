@@ -21,70 +21,74 @@
         </div>
         
         <div class="team">
-            <div class="member-card" id="empty">                                      <!--Member ID--><!--Empty-->
-                <div class="row">
-                    <div class="show-profile">                                      <!--Member Preview-->
-                        <button class="member-preview" onclick="DisplayCard('empty')">
-                            <img src="../assets/team/member.png" alt="">
-                            <p class="preview-name">Member</p>
-                        </button>
-                    </div>
-                    <div class="display column">
-                        <div class="row">
-                            <div class="member-image">                              <!--Member Image-->
-                                <img src="../assets/team/member.png" alt="">
-                            </div>
-                            <div class="member-info">                               <!--Member Info-->
-                                <div class="column">
-                                    <h1 class="display-name">Member</h1>
-                                    <h2 class="display-role">Role</h2>
+                        <div class="member-card" id="empty">                                      <!--Member ID--><!--Empty-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('empty')">
+                                        <img src="../assets/team/member.png" alt="">
+                                        <p class="preview-name">Member</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
                                     <div class="row">
-                                        <a href="" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
-                                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
-                                        <a href="" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
-                                        <div class="space"></div>
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/member.png" alt="">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Member</h1>
+                                                <h2 class="display-role">Role</h2>
+                                                <div class="row">
+                                                    <a href="" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            This is a text container for personal conclusions. In this text you need to explain how you feel during the project.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('empty')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task</h1>
+                                                <p class="task-text">This is an example of a task text a member has done</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Video</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a video</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Task with Photo</h1>
+                                                <p class="task-text">This is an example of a task text a member has done with a photo</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/team/member.png" alt="">
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('empty')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="member-description">
-                            <p class="member-text">
-                                This is a text container for personal conclusions. In this text you need to explain how you feel during the project.
-                            </p>
-                        </div>
-                        <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
-                            <button class="carousel-button previous" onclick="SetPreviousTask('empty')">
-                                <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
-                            </button>
-                            
-                            <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
-                                <div class="text-container column">
-                                    <h1 class="task-title">Task</h1>
-                                    <p class="task-text">This is an example of a task text a member has done</p>
-                                </div>
-                            </div>
-                            <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
-                                <div class="text-container column">
-                                    <h1 class="task-title">Task with Video</h1>
-                                    <p class="task-text">This is an example of a task text a member has done with a video</p>
-                                </div>
-                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                            <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
-                                <div class="text-container column">
-                                    <h1 class="task-title">Task with Photo</h1>
-                                    <p class="task-text">This is an example of a task text a member has done with a photo</p>
-                                </div>
-                                <img src="../assets/team/member.png" alt="">
-                            </div>
-                            
-                            <button class="carousel-button next" onclick="SetNextTask('empty')">
-                                <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <h1 class="team-title">Meet Our Team</h1>
             <p class="team-text">The ones behind the Eclipse</p>
             <div class="team-sections">
@@ -129,13 +133,104 @@
                                         
                                         <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
                                             <div class="text-container column">
-                                                <h1 class="task-title">Production</h1>
-                                                <p class="task-text">In this area, I was in charge of the entire project management, including the maintenance of the organizational tools we used, such as Hack&Plan, Google Drive , Discord, and a bit of the merges and branch assignment in our GitHub repository. Also, I tried to implement many organizational methodologies, such as Scrum teams, evaluation of the team on each milestone , milestone preparation, personal performance reports , group retrospectives , weekly meetings , daily standups , priority task lists , roles and responsibilities documentation , feedback boards , feedback surveys, and so on.</p>
-                                                <p class="task-text">Even trying all those in small doses and showing them in ways easy to access, truth be told, only half of them actually worked in our academic and small team environment.</p>
-                                                <p class="task-text">Realizing this made me approach everything with a different perspective , focusing on the essentials of the role that worked in our environment to keep everything in motion . Instead of trying any complex structures , I adopted a role in which I was the core point of connection inside the project, someone to reach out to easily in case of any arising doubt regarding organization, information about the state of development, or who to communicate with for specific topics or problems.</p>
+                                                <h1 class="task-title">Producer</h1>
+                                                <p class="task-text">Managed the team and organizational tools along with the methodologies used during the development of the project.</p>
                                             </div>
-                                        </div>                                      
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/gma-task01.webp" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track active" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Director</h1>
+                                                <p class="task-text">I was responsible for collecting the suggestions put forth by our team members to ensure that the project could progress along a unified direction shaped by the small contributions we all made.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/gma-task02.webp" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track active" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Camera</h1>
+                                                <p class="task-text">Programmed the player camera, along with the extra functionalities that enabled other members to create cinematics.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track active" slide="4" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Menus</h1>
+                                                <p class="task-text">Programmed the menu flow in the game and its several functionalities such as the settings.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>                                    
                                         <button class="carousel-button next" onclick="SetNextTask('gma')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card" id="tcg">                                      <!--Member ID--><!--Ton Casals Gil-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('tcg')">
+                                        <img src="../assets/team/member.png" alt="Ton Casals Gil">
+                                        <p class="preview-name">Ton</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/member.png" alt="Ton Casals Gil">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Ton Casals Gil</h1>
+                                                <h2 class="display-role">Lead Designer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/Tontito05" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Ton.casals05@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="https://toncasals05.wixsite.com/ton-casals" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:internet"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            In this project I have learned that having healthy communication methods and trust in your companions, combined with a good organization method and clear goals, is the key to managing a team of designers.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('tcg')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Leading the Design team</h1>
+                                                <p class="task-text">To do so, I gave every member of the team clear tasks for each week, centered on their strengths, with additional information like the programming and art members, which they would need to communicate with for that week.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Developing documentation</h1>
+                                                <p class="task-text">We created a Game Design Document that joined all the design documentation from all the members of the team so that programmers and artists alike could check the documentation for extra information about different abilities, characters, levels…</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/team/member.png" alt="">
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('tcg')">
                                             <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
                                         </button>
                                     </div>
@@ -190,17 +285,96 @@
                                                 <h1 class="task-title">Task with Video</h1>
                                                 <p class="task-text">This is an example of a task text a member has done with a video</p>
                                             </div>
-                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                         <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
                                             <div class="text-container column">
                                                 <h1 class="task-title">Task with Photo</h1>
                                                 <p class="task-text">This is an example of a task text a member has done with a photo</p>
                                             </div>
-                                            <img src="../assets/team/member.png" alt="">
+                                            <div class="media-container">
+                                                <img src="../assets/team/member.png" alt="">
+                                            </div>
                                         </div>
                                         
                                         <button class="carousel-button next" onclick="SetNextTask('lpc')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card" id="aga">                                      <!--Member ID--><!--Adrià García Almadén-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('aga')">
+                                        <img src="../assets/team/aga.webp" alt="Adrià García Almadén">
+                                        <p class="preview-name">Adrià</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/aga.webp" alt="Adrià García Almadén">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Adrià García Almadén</h1>
+                                                <h2 class="display-role">Lead Programmer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/XeivUPC" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=adriagarciaa@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="https://www.linkedin.com/in/adria-garcía-8a362723b" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            Although I only joined the gameplay part for the final two months, due to focusing heavily on the engine, it was incredibly rewarding to watch the teams momentum shift. Those last two months were exactly when everyone started seeing the vision work, and the hype really built up. It feels great to have stepped in and helped those who where enthusiastic turn their ideas into a reality.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('aga')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Core Game Engine</h1>
+                                                <p class="task-text">Acted as the lead engine developer, working across all core subsystems, except UI and Lighting, where I only acted as a supportive developer.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Player & World Feedback</h1>
+                                                <p class="task-text">Implemented systems for feedback, including audio and particle effects, to make the world feel alive.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Cinematics</h1>
+                                                <p class="task-text">Developed a lightweight UI cinematic system to allow the team to quickly create in-game cutscenes.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="4" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Team Support & Generalist Development</h1>
+                                                <p class="task-text">Spent a significant amount of time covering skill gaps on the team, removing blockers, and taking care of the less exciting gameplay tasks that were essential to moving the project forward.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="5" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Team Support & Generalist Development</h1>
+                                                <p class="task-text">Addressed critical, last minute gameplay bugs under time pressure and took full responsibility for identifying and fixing almost all core engine issues in order to ensure a smooth, optimized experience.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('aga')">
                                             <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
                                         </button>
                                     </div>
@@ -217,14 +391,14 @@
                             <div class="row">
                                 <div class="show-profile">                                      <!--Member Preview-->
                                     <button class="member-preview" onclick="DisplayCard('zl')">
-                                        <img src="../assets/team/member.png" alt="Zhehao Li">
-                                        <p class="preview-name">Zhehao Li</p>
+                                        <img src="../assets/team/zl.webp" alt="Zhehao Li">
+                                        <p class="preview-name">Zhehao</p>
                                     </button>
                                 </div>
                                 <div class="display column">
                                     <div class="row">
                                         <div class="member-image">                              <!--Member Image-->
-                                            <img src="../assets/team/member.png" alt="Zhehao Li">
+                                            <img src="../assets/team/zl.webp" alt="Zhehao Li">
                                         </div>
                                         <div class="member-info">                               <!--Member Info-->
                                             <div class="column">
@@ -254,7 +428,9 @@
                                                 <h1 class="task-title">UI Design</h1>
                                                 <p class="task-text">I was in charge of designing all the UIs and HUD to guide the player and highly enhance players' experience in the game.</p>
                                             </div>
-                                            <img src="../assets/tasks/zl-task01.webp" alt="UI Design">
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/zl-task01.webp" alt="UI Design">
+                                            </div>
                                         </div>
 
                                         <div class="carousel-track active" slide="2" onclick="stopCarouselAutoScroll()">
@@ -271,11 +447,217 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="member-card" id="ksm">                                      <!--Member ID--><!--Kaede Sato Morales-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('ksm')">
+                                        <img src="../assets/team/ksm.webp" alt="">
+                                        <p class="preview-name">Kaede</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/ksm.webp" alt="">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Kaede Sato Morales</h1>
+                                                <h2 class="display-role">Designer</h2>
+                                                <div class="row">
+                                                    <a href="" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            It was great to see how the game progressed in development.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('ksm')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Early item concepts</h1>
+                                                <p class="task-text">Sketching out and conceptualizing items and abilities used in the game early in development.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/ksm-task01-01.webp" alt="">
+                                                <img src="../assets/tasks/ksm-task01-02.webp" alt="">
+                                                <img src="../assets/tasks/ksm-task01-03.webp" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Puzzle mechanic use concepts</h1>
+                                                <p class="task-text">Coming up with ways to make the game mechanics usable in puzzles. I.e.: lighting the pillars on fire in puzzle 2.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/ksm-task02-01.webp" alt="">
+                                                <img src="../assets/tasks/ksm-task02-02.webp" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Puzzle layout concepts</h1>
+                                                <p class="task-text">Designing the layout for the puzzles early in development, including the murals for solving them.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/ksm-task03.webp" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="4" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Enemy placement balancing</h1>
+                                                <p class="task-text">Reviewing level layouts and adjusting enemy encounters for better player experience.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('ksm')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="section-list">
                     <h2 class="section-title">Art</h2> <!-- Alba | Paula | Mario | Judit -->
                     <div class="wrap row">
+                        <div class="member-card" id="pll">                                      <!--Member ID--><!--Paula Laguna López-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('pll')">
+                                        <img src="../assets/team/pll.webp" alt="Paula Laguna López">
+                                        <p class="preview-name">Paula</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/pll.webp" alt="Paula Laguna López">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Paula Laguna López</h1>
+                                                <h2 class="display-role">Role</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/kiwiipow" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kiwiipaw@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="https://www.linkedin.com/in/paula-laguna-lopez-89868831a" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <a href="https://www.artstation.com/kiwiipaw" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:artstation"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            Rigging the player is one of the most excruciatingly painful things I have done up to date, which has forced me to learn about Maya much more than I wanted for this project.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('pll')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Player Animation</h1>
+                                                <p class="task-text">I was in charge of doing animations for the player.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/cFRjR6M9r88?autoplay=1&mute=1&loop=1&playlist=cFRjR6M9r88" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Player Rig</h1>
+                                                <p class="task-text">I was in charge of rigging the player model. Features FK spine, spring IK legs, IK/FK arms, IK/FK tail, minimal facial rig, prop handles for tail and hand, spine twist control, 2D VFX handles.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/EXkD5VJhAFM?autoplay=1&mute=1&loop=1&playlist=EXkD5VJhAFM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Blob Animation</h1>
+                                                <p class="task-text">I was in charge of doing animations for the blob enemy.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/0VInWT__Slc?autoplay=1&mute=1&loop=1&playlist=0VInWT__Slc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-track" slide="4" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Blob Rig</h1>
+                                                <p class="task-text">I was in charge of rigging the blob model. Features squash and stretch and squash spine, surface constraints for cartoonish eyes and teeth, FK limbs and spine controls and 2D VFX handles and mesh.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/w3OVR144gfQ?autoplay=1&mute=1&loop=1&playlist=w3OVR144gfQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-track" slide="5" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Golem Animation</h1>
+                                                <p class="task-text">I was in charge of doing animations for the golem enemy.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/Xy1UfdE9b_s?autoplay=1&mute=1&loop=1&playlist=Xy1UfdE9b_s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-track" slide="6" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Golem Rig</h1>
+                                                <p class="task-text">I was in charge of rigging the Golem model. Features IK/FK arms, on/off and attached/detached shield toggles, FK legs and 2D VFX handles.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/z0o3W_DUK6g?autoplay=1&mute=1&loop=1&playlist=z0o3W_DUK6g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-track" slide="7" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Boss Rig</h1>
+                                                <p class="task-text">I was in charge of doing the rig for the boss. Features FK spine, free FK hand rig, IK stretch and squash splines for branches grow motion and simple head control.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/SCBA-myGJp4?autoplay=1&mute=1&loop=1&playlist=SCBA-myGJp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-track" slide="8" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Game music</h1>
+                                                <p class="task-text">I was in charge of scoring and producing all the game music tracks and tunes.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/pll-task08.webp" alt="Game Music Interface Layout">
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('pll')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="member-card" id="jpc">                                      <!--Member ID--><!--Judit Parras Cruz-->
                             <div class="row">
                                 <div class="show-profile">                                      <!--Member Preview-->
@@ -323,14 +705,18 @@
                                                 <h1 class="task-title">Task with Video</h1>
                                                 <p class="task-text">This is an example of a task text a member has done with a video</p>
                                             </div>
-                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                         <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
                                             <div class="text-container column">
                                                 <h1 class="task-title">Task with Photo</h1>
                                                 <p class="task-text">This is an example of a task text a member has done with a photo</p>
                                             </div>
-                                            <img src="../assets/team/member.png" alt="">
+                                            <div class="media-container">
+                                                <img src="../assets/team/member.png" alt="">
+                                            </div>
                                         </div>
                                         
                                         <button class="carousel-button next" onclick="SetNextTask('jpc')">
@@ -392,28 +778,36 @@
                                                 <h1 class="task-title">Blobs</h1>
                                                 <p class="task-text">I was in charge of the elemental blobs, these blobs bites the player, splits into smaller ones when defeated and elemental blobs have effects. Fire blob has a chance of double damage. Water blob has a chance of apply slowness to player.</p>
                                             </div>
-                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                         <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
                                             <div class="text-container column">
                                                 <h1 class="task-title">Golem</h1>
                                                 <p class="task-text">I was in charge of the golem, this golem is protecting with its shield until attacking that will be vulnerable and player can attack in order to defeat him.</p>
                                             </div>
-                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                         <div class="carousel-track" slide="4" onclick="stopCarouselAutoScroll()">
                                             <div class="text-container column">
                                                 <h1 class="task-title">Boss</h1>
                                                 <p class="task-text">I was in charge of the boss called God of Nature, this boss consist in 2 hands throwing patterns of attacks the player needs to evade, burn both hands and head, repeat the pattern and finally burn it to defeat it.</p>
                                             </div>
-                                            <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                         <div class="carousel-track" slide="5" onclick="stopCarouselAutoScroll()">
                                             <div class="text-container column">
                                                 <h1 class="task-title">Web</h1>
                                                 <p class="task-text">I was in charge of doing this website of the game, with pages showing the project, its process, the studio and team performance, and tools used meanwhile.</p>
                                             </div>
-                                            <img src="../assets/tasks/aac-task05.webp" alt="Web Development">
+                                            <div class="media-container">
+                                                <img src="../assets/tasks/aac-task05.webp" alt="Web Development">
+                                            </div>
                                         </div>
                                         
                                         <button class="carousel-button next" onclick="SetNextTask('aac')">
@@ -484,6 +878,198 @@
                             </div>
                         </div>
 
+                        <div class="member-card" id="pgc">                                      <!--Member ID--><!--Pau González Cayuela-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('pgc')">
+                                        <img src="../assets/team/member.png" alt="Pau González Cayuela">
+                                        <p class="preview-name">Pau</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/member.png" alt="Pau González Cayuela">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Pau González Cayuela</h1>
+                                                <h2 class="display-role">Programmer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/PauGon75" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=gpaucayuela@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="https://www.linkedin.com/in/paugonzalezcayuela" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            This is a text container for personal conclusions. In this text you need to explain how you feel during the project.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('pgc')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Player Movement</h1>
+                                                <p class="task-text">I was in charge of making the character able to move in an isometric view, also implementing the Dash ability. And as a cherry on top, I improved the feeling via haptic design and buffers.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Combat design and implementation</h1>
+                                                <p class="task-text">I designed and implemented a combat framework in the game. Also, making the player have reactions like knockback, making the enemys shine when hit, slowdown the combo, and so much more polishments!</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Map implementation</h1>
+                                                <p class="task-text">I implemented the lava map inside the engine, and creating things such as cutscenes, particles... To improve the overall experience.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="4" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Perks creation</h1>
+                                                <p class="task-text">I was in charge of designing, iterating and creating both Grapple and Torch perks. The grapple has a complex rope system that works with a sinusoidal wave of meshes that stretch themselves based on the distance that the player is from a pillar.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="5" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Polish</h1>
+                                                <p class="task-text">I did different kind of polishes in the overall game. That include: haptic polishes, time slows, some cutscene, lively grass...</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('pgc')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card" id="mmf">                                      <!--Member ID--><!--Max Mateo Ferret-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('mmf')">
+                                        <img src="../assets/team/mmf.webp" alt="Max Mateo Ferret">
+                                        <p class="preview-name">Max</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/mmf.webp" alt="Max Mateo Ferret">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Max Mateo Ferret</h1>
+                                                <h2 class="display-role">Programmer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/M4xp0w3rg4m3s" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=m4xp0w3r.dev@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <a href="https://www.linkedin.com/in/max-mateo-ferret-16b0a52a2" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            Being involved in a project I was passionate about (born from the arduous collaboration of those genuinely devoted to it) reinforced my belief that teamwork brings the best and most unexpected experiences. It proved that I truly enjoy working toward a common goal and that, even with limited resources, a group can exceed initial expectations while revealing the true character of everyone involved.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('mmf')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Level Implementation</h1>
+                                                <p class="task-text">Implemented some of the environments, materials, lightning and programmed / placed environmental mechanics.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="2" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Puzzle Logic and Design</h1>
+                                                <p class="task-text">Originally being from the design team, I designed the main mechanic of the puzzles and then programmed all of the subsequent mechanics and behaviours that surround them.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <img src="../assets/team/member.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="3" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Moving Platforms, Geysers and Bridges</h1>
+                                                <p class="task-text">After conversations with designers I programmed the moving platforms and geysers, all of which allow different behaviours explored in the water and lava level. Also the bridges.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="4" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Progression and Databases</h1>
+                                                <p class="task-text">After Adrià made the logic for accessing databases, I implemented their functionalities inside the game to allow smooth level progression and saving systems.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="5" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Chest and Rewards</h1>
+                                                <p class="task-text">Programmed and animated an adaptable chest system that can hold different rewards and how those rewards work.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="6" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Doors and Temples</h1>
+                                                <p class="task-text">Made different animations and cinematics for each of the temples and their respective doors / passages.</p>
+                                            </div>
+                                            <div class="media-container">
+                                                <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="7" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Feedback</h1>
+                                                <p class="task-text">Designed the behaviour, animations and sound design of previously mentioned mechanics and environments.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-track" slide="8" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">Narrative Design</h1>
+                                                <p class="task-text">During the summer pre-production I created ideas and adapted the ones created by teammates to develop our narrative IP.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('mmf')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="member-card" id="pss">                                      <!--Member ID--><!--Pol Sierra Sabadell-->
                             <div class="row">
                                 <div class="show-profile">                                      <!--Member Preview-->
@@ -546,6 +1132,56 @@
                                         </div>
                                         
                                         <button class="carousel-button next" onclick="SetNextTask('pss')">
+                                            <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card" id="dsc">                                      <!--Member ID--><!--Dídac Sillué Cecilia-->
+                            <div class="row">
+                                <div class="show-profile">                                      <!--Member Preview-->
+                                    <button class="member-preview" onclick="DisplayCard('dsc')">
+                                        <img src="../assets/team/dsc.webp" alt="Dídac Sillué Cecilia">
+                                        <p class="preview-name">Dídac</p>
+                                    </button>
+                                </div>
+                                <div class="display column">
+                                    <div class="row">
+                                        <div class="member-image">                              <!--Member Image-->
+                                            <img src="../assets/team/dsc.webp" alt="Dídac Sillué Cecilia">
+                                        </div>
+                                        <div class="member-info">                               <!--Member Info-->
+                                            <div class="column">
+                                                <h1 class="display-name">Dídac Sillué Cecilia</h1>
+                                                <h2 class="display-role">Programmer</h2>
+                                                <div class="row">
+                                                    <a href="https://github.com/digui048" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=digui048@gmail.com" class="social-media-link" target="_blank" rel="noopener noreferrer"><iconify-icon icon="mdi:gmail"></iconify-icon></a>                                                    
+                                                    <div class="space"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="member-description">
+                                        <p class="member-text">
+                                            It has been a fantastic opportunity to gain practical experience in this field, teaching us how to collaborate effectively in a professional environment. It has also helped me better understand the career path I would like to pursue.
+                                        </p>
+                                    </div>
+                                    <div class="member-task-carousel row" slide="1">            <!--Member Carousel-->   
+                                        <button class="carousel-button previous" onclick="SetPreviousTask('dsc')">
+                                            <iconify-icon icon="ooui:previous-ltr"></iconify-icon>
+                                        </button>
+                                        
+                                        <div class="carousel-track active" slide="1" onclick="stopCarouselAutoScroll()">
+                                            <div class="text-container column">
+                                                <h1 class="task-title">UI Engine Tools Programmer</h1>
+                                                <p class="task-text">Responsible for the development and maintenance of UI engine tools. Improved workflows and implemented features to support designers and developers.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="carousel-button next" onclick="SetNextTask('dsc')">
                                             <iconify-icon icon="ooui:previous-rtl"></iconify-icon>
                                         </button>
                                     </div>

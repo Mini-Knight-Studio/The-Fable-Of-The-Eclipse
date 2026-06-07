@@ -1,9 +1,16 @@
-&::-webkit-scrollbar
-{
-    display: none;
+/* --- Global Reset & Shared Base Styling --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html, body
+body
+{
+  padding: 50px 20px;
+}
+
+html
 {
     height: 100%;
     width: 100%;
@@ -28,109 +35,212 @@ html, body
     flex: 1;
 }
 
-.list-member
+.timeline
 {
-    position: absolute;
-    top: 0;
-
-    display: grid;
-    gap: 2%;
+  display: flex;
+  gap: 30px;
+  width: 100%; 
+  margin: 0 auto;
 }
 
-.list-member-card
+.timeline-item
 {
-    display:inline-ruby;
-    place-content: center;
-    padding: 1%;
-    border: 0;
+  position: relative;
 }
 
-.list-member-photo
+.timeline-item::after                               /*Timeline lines*/
 {
-    border-radius: 50%;
-    pointer-events: none;
-    aspect-ratio: 1/1;
-    flex-shrink: 0;
-    object-fit: cover;
+  content: '';
+  position: absolute;
+  z-index: 0;
+
+  background-color: #007bff;
 }
 
-.list-header
+.timeline-item:last-child::after
 {
-    display: grid;
+  display: none;
+}
+
+.timeline-item::before                             /*Timeline Dots*/
+{
+  content: '';
+  position: absolute;
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%;
+  z-index: 1;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 3px solid #007bff;
+}
+                                                    /*Timeline Dot Images*/
+
+.timeline-item:nth-child(1)::before { background-image: url('https://placehold.co/40x40/png?text=1'); }
+.timeline-item:nth-child(2)::before { background-image: url('https://placehold.co/40x40/png?text=2'); }
+.timeline-item:nth-child(3)::before { background-image: url('https://placehold.co/40x40/png?text=3'); }
+.timeline-item:nth-child(4)::before { background-image: url('https://placehold.co/40x40/png?text=4'); }
+.timeline-item:nth-child(5)::before { background-image: url('https://placehold.co/40x40/png?text=5'); }
+
+                                                    /*Timeline text box*/
+.timeline-content
+{
+    padding: 20px;
+    border-radius: 8px;
+
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.timeline-date
+{
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.timeline-content h3
+{
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.timeline-content p
+{
+    line-height: 1.5;
+}
+
+.performances
+{
+    display: flex;
+    gap: 5%;
+    width: 100%;
+}
+
+.performance
+{
+    flex: 1;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.performance-title
+{
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.performance-text
+{
     text-align: justify;
-    align-items: center;
+    width: 100%;
+    padding-top: 5%;
 }
 
-.list-member-card:hover > .list-member-name, .list-member-card:hover > .list-member-role
-{
-    max-width: fit-content;
-    margin: 0 10px 0 10px;
-    white-space: nowrap;
-    pointer-events: none;
-    transition: all 0.1s ease-in;
-}
-
-.list-member-card:not(:hover) > .list-member-name, .list-member-card:not(:hover) > .list-member-role
-{
-    max-width: 0;
-    opacity: 0;
-    margin: 0;
-
-    white-space: nowrap;
-    pointer-events: none;
-    transition: all 0.1s ease-out;
-}
-
-@media (pointer: fine)
-{
-    .content
-    {
-        grid-template-columns: 3fr 7fr;
-        gap: 2%;
-    }
-
-    .list-member-photo
-    {
-        width: 50px;
-        height: 50px;
-    }
-
-    .list-member-card:hover .list-member-name
-    {
-        font-size: 18px;
-        margin-right: 5px;
-    }
-
-    .list-member-card:hover .list-member-role
-    {
-        font-size: 14px;
-        margin-right: 5px;
-    }
-}
-
+/* --- TOUCH DEVICES: Vertical Timeline --- */
 @media (pointer: coarse)
 {
-    .content
+    .timeline, .performances
     {
-        grid-template-columns: 2fr 8fr;
-        gap: 1%;
+        flex-direction: column;
     }
 
-    .list-member-photo
+    .timeline-date
     {
-        width: 25px;
-        height: 25px;
-    }
-
-    .list-member-card:hover .list-member-name
-    {
+        font-family: 'Times New Roman', Times, serif;
         font-size: 14px;
-        margin-right: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        color: red;
     }
 
-    .list-member-card:hover .list-member-role
+    .timeline-item
     {
-        font-size: 10px;
-        margin-right: 5px;
+        padding-left: 70px; 
+    }
+
+    /* Dot centered at 30px */
+    .timeline-item::before
+    {
+        top: 50%; 
+        left: 30px; 
+        transform: translate(-50%, -50%);
+    }
+
+    /* Vertical Line Segments */
+    .timeline-item::after
+    {
+        top: 50%; /* Starts at the exact center of the current dot (10px top + 20px radius) */
+        left: 30px; 
+        width: 4px;
+        height: calc(100% + 30px); /* Reaches exactly to the center of the next dot by adding the flex gap */
+        transform: translateX(-50%);
+    }
+
+    .timeline-content p
+    {
+        font-size:  12px;
+    }
+}
+
+
+/* --- MOUSE/STYLUS DEVICES: Horizontal Timeline --- */
+@media (pointer: fine)
+{
+    .timeline, .performances
+    {
+        flex-direction: row;
+    }
+
+    .timeline-date
+    {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        color: red;
+    }
+
+    .timeline-item
+    {
+        flex: 1; 
+        padding: 70px 15px 0 15px; 
+    }
+
+    /* Dot centered at 30px from the top */
+    .timeline-item::before
+    {
+        top: 30px; 
+        left: 50%;
+        transform: translate(-50%, -50%); 
+    }
+
+    /* Horizontal Line Segments */
+    .timeline-item::after
+    {
+        top: 30px; 
+        left: 50%;
+        width: calc(100% + 30px);
+        height: 4px;
+        transform: translateY(-50%);
+    }
+
+    .timeline-content
+    {
+        text-align: center;
+        height: 100%; 
+    }
+
+    .timeline-content p
+    {
+        line-height: 1.5;
+        font-size: 0.95rem;
     }
 }
