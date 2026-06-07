@@ -65,6 +65,20 @@ class MovingPlatform : Component
 
     private bool movementRoutineRunning = false;
 
+    [Header("Orbital Movement")]
+    public bool isOrbital = false;
+    public Entity orbitCenter;     
+    public float orbitSpeed = 1.0f; 
+
+    private float orbitRadius = 0f;
+    private float currentOrbitAngle = 0f;
+
+    public bool selfRotate = false;         
+    public float selfRotationSpeed = 45f;
+
+    private Vector3 initialRotation;
+    private float currentSelfRotationY;
+
     [Header("Start moving on Collision")]
     public bool activateOnCollision = false;
     private bool isWaitingForPlayer = false;
@@ -142,11 +156,68 @@ class MovingPlatform : Component
         {
             GoToPoint(targetPoint);
         }
-    }
 
+        if (isOrbital && orbitCenter != null)
+        {
+            Vector3 centerPos = orbitCenter.transform.position;
+            Vector3 Pos = activeMovingEntity.transform.position;
+
+            float distanceX = Pos.x - centerPos.x;
+            float distanceZ = Pos.z - centerPos.z;
+
+            orbitRadius = (float)Math.Sqrt(distanceX * distanceX + distanceZ * distanceZ);
+
+            currentOrbitAngle = (float)Math.Atan2(distanceZ, distanceX);
+
+        }
+    }
+    
     void OnUpdate()
     {
         if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
+
+        if (isOrbital && orbitCenter != null)
+        {
+
+            currentOrbitAngle += orbitSpeed * Time.deltaTime;
+
+            Vector3 centerPos = orbitCenter.transform.position;
+
+            Vector3 newPos = activeMovingEntity.transform.position;
+            newPos.x = centerPos.x + orbitRadius * (float)Math.Cos(currentOrbitAngle);
+            newPos.z = centerPos.z + orbitRadius * (float)Math.Sin(currentOrbitAngle);
+
+            Vector3 velocity = newPos - activeMovingEntity.transform.position;
+            activeMovingEntity.transform.position = newPos;
+
+            if (selfRotate)
+            {
+                currentSelfRotationY += selfRotationSpeed * Time.deltaTime;
+
+                activeMovingEntity.transform.rotation = new Vector3(
+                    initialRotation.x,
+                    currentSelfRotationY,
+                    initialRotation.z
+                );
+            }
+            Debug.Log(Time.deltaTime);
+
+            if (CheckCollision())
+            {
+                Player.Instance.transform.position += velocity;
+
+                if (selfRotate)
+                {
+                    Vector3 playerRot = Player.Instance.transform.rotation;
+
+                    playerRot.y -= selfRotationSpeed * Time.deltaTime;
+
+                    Player.Instance.transform.rotation = playerRot;
+                }
+            }
+
+            return; 
+        }
 
         if (canSink && !sinkRoutineRunning)
         {
