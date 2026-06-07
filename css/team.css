@@ -34,6 +34,36 @@ html, body
     flex-wrap: wrap;
 }
 
+.studio-name
+{
+    color: #3f6cbf;
+    font-family: "Tagesschrift", system-ui;
+}
+
+.studio-description
+{
+    color: #201e6a;
+    font-family: "IM Fell DW Pica", serif;
+}
+
+.team-title
+{
+    color: #3f6cbf;
+    font-family: "Tagesschrift", system-ui;
+}
+
+.team-text
+{
+    color: #201e6a;
+    font-family: "IM Fell DW Pica", serif;
+}
+
+.section-title
+{
+    color: #3f6cbf;
+    font-family: "Tagesschrift", system-ui;
+}
+
 /* --- Member General --- */
 
 .member-card
@@ -73,7 +103,7 @@ html, body
 {
     display: none;
     opacity: 0;
-    background: #cccccc url(background.png) no-repeat center / cover;
+    background: rgba(255, 255, 255, 0.55) url(background.png) no-repeat center / cover;
     transition: opacity 0.3s ease;
 }
 
@@ -93,6 +123,7 @@ html, body
 
 .member-preview
 {
+    font-family: "IM Fell DW Pica", serif;
     position: relative;
     top: 0;
     left: 0;
@@ -172,19 +203,24 @@ html, body
 
 .display-name
 {
+    font-family: "Tagesschrift", system-ui;
+    color: #4462bd;
     margin: 0;
     margin-left: 2%;
+    margin-top: 1%;
 }
 
 .display-role
 {
+    font-family: "Tagesschrift", system-ui;
+    color: #cf9184;
     margin: 0;
     margin-left: 2%;
 }
 
 .social-media-link
 {
-    color: black;
+    color: #201e6a;
     padding-left: 2%;
     padding-right: 2%;
 }
@@ -197,6 +233,8 @@ html, body
 
 .member-text
 {
+    font-family: "IM Fell DW Pica", serif;
+    color: #201e6a;
     width: auto;
     margin: 2%;
     text-wrap: auto;
@@ -209,7 +247,6 @@ html, body
 {
     display: flex;
     flex: 1;
-    background: #cccccc url(path-to-image.png) no-repeat center / cover;
 }
 
 .carousel-track
@@ -243,10 +280,13 @@ html, body
     align-self: center;
     padding: 5px;
     height: 100%;
+    background-color: transparent;
 }
 
 .task-title
 {
+    font-family: "Tagesschrift", system-ui;
+    color: #3f6cbf;
     width: 100%;
     margin: 0;
     text-align: center;
@@ -254,6 +294,8 @@ html, body
 
 .task-text
 {
+    font-family: "IM Fell DW Pica", serif;
+    color: #201e6a;
     margin: 0;
     width: 100%;
     text-align: center;
@@ -277,7 +319,6 @@ html, body
     justify-content: center;
     align-items: center;
 }
-
 
 /* --- Media Breakpoints --- */
 

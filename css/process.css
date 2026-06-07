@@ -7,7 +7,7 @@
 
 body
 {
-  padding: 50px 20px;
+    padding: 50px 20px;
 }
 
 html
@@ -54,7 +54,7 @@ html
   position: absolute;
   z-index: 0;
 
-  background-color: #007bff;
+  background-color: #6d92d6;
 }
 
 .timeline-item:last-child::after
@@ -64,26 +64,27 @@ html
 
 .timeline-item::before                             /*Timeline Dots*/
 {
-  content: '';
-  position: absolute;
-  width: 40px; 
-  height: 40px; 
-  border-radius: 50%;
-  z-index: 1;
+    content: '';
+    position: absolute;
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%;
+    z-index: 1;
   
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  border: 3px solid #007bff;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: white;
+    border: 3px solid #6d92d6;
 }
                                                     /*Timeline Dot Images*/
 
-.timeline-item:nth-child(1)::before { background-image: url('https://placehold.co/40x40/png?text=1'); }
-.timeline-item:nth-child(2)::before { background-image: url('https://placehold.co/40x40/png?text=2'); }
-.timeline-item:nth-child(3)::before { background-image: url('https://placehold.co/40x40/png?text=3'); }
-.timeline-item:nth-child(4)::before { background-image: url('https://placehold.co/40x40/png?text=4'); }
-.timeline-item:nth-child(5)::before { background-image: url('https://placehold.co/40x40/png?text=5'); }
+.timeline-item:nth-child(1)::before { background-image: url('../assets/earth.webp'); }
+.timeline-item:nth-child(2)::before { background-image: url('../assets/air.webp'); }
+.timeline-item:nth-child(3)::before { background-image: url('../assets/water.webp'); }
+.timeline-item:nth-child(4)::before { background-image: url('../assets/fire.webp'); }
+.timeline-item:nth-child(5)::before { background-image: url('../assets/boss.webp'); background-color: #E2B25B; width: 50px; height: 50px; border: 3px solid #201e6a; box-shadow: 0 0 15px 15px white; 
+}
 
                                                     /*Timeline text box*/
 .timeline-content
@@ -103,12 +104,14 @@ html
 
 .timeline-content h3
 {
+    color: #4462bd;
     text-transform: uppercase;
     margin-bottom: 10px;
 }
 
 .timeline-content p
 {
+    color: #201e6a;
     line-height: 1.5;
 }
 
@@ -128,13 +131,16 @@ html
 
 .performance-title
 {
+    color: #4462bd;
     text-align: center;
     width: 100%;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid color #7ca1e6;
 }
 
 .performance-text
 {
+
+    color: #201e6a;
     text-align: justify;
     width: 100%;
     padding-top: 5%;
@@ -150,13 +156,13 @@ html
 
     .timeline-date
     {
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "IM Fell DW Pica", serif;
         font-size: 14px;
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 1px;
 
-        color: red;
+        color: #cf9184;;
     }
 
     .timeline-item
@@ -199,13 +205,13 @@ html
 
     .timeline-date
     {
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "IM Fell DW Pica", serif;
         font-size: 14px;
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 1px;
 
-        color: red;
+        color: #cf9184;;
     }
 
     .timeline-item

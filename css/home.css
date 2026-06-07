@@ -1,3 +1,8 @@
+&::-webkit-scrollbar
+{
+    display: none;
+}
+
 html
 {
     height: 100%;
@@ -41,16 +46,25 @@ body
 
 .text
 {
-    text-align: justify;
+    color: #201e6a;
+    font-family: "IM Fell DW Pica", serif;
+    text-align: center;
     padding: 2%;
 }
 
 .location-button
 {
+    font-family: "Tagesschrift", system-ui;
     background-color: #201e6a;
-    border: 1px solid #E2B25B;
+    
     padding: 2%;
     color: #E2B25B;
+}
+.container
+{
+    display: grid;
+    align-items: center;
+    margin-bottom: 10%;
 }
 
 @media (pointer: fine)
@@ -68,6 +82,7 @@ body
     .location-button
     {
         font-size: 24px;
+        border: 5px solid #E2B25B;
     }
 }
 
@@ -81,5 +96,6 @@ body
     .location-button
     {
         font-size: 16px;
+        border: 2px solid #E2B25B;
     }
 }

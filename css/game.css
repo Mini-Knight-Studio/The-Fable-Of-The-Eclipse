@@ -1,171 +1,191 @@
-&::-webkit-scrollbar
-{
+/* --- Global Styles --- */
+&::-webkit-scrollbar {
     display: none;
 }
 
-html, body
-{
+html, body {
     height: 100%;
     width: 100%;
     border: 0;
     margin: 0;
 }
 
-.row
-{
+/* --- Layout Helpers --- */
+.row {
     display: flex;
     flex-direction: row;
 }
 
-.column
-{
+.column {
     display: flex;
     flex-direction: column;
 }
 
-.space
-{
+.space {
     flex: 1;
 }
 
-.game-title
-{
+/* --- Typography --- */
+.game-title {
     width: 100%;
     text-align: center;
 }
 
-.download
-{
-    width: 10%;
-    aspect-ratio: 16/9;
-}
-
-.trailer-container
-{
-    margin: 0;
+.explanation {
+    margin: 4% 0 5% 0;
     padding: 0;
     border: 0;
-
-    width: 100%;
-    height: fit-content;
-}
-
-.trailer
-{
-    margin: 0;
-    padding: 0;
-    border: 0;
-
-    width: 100%;
-    aspect-ratio: 16/9;
-}
-
-.explanation
-{
-    margin: 5% 0 5% 0;
-    padding: 0;
-    border: 0;
-
+    color: #201e6a;
+    font-family: "IM Fell DW Pica", serif;
     text-align: center;
-
     width: 100%;
     height: fit-content;
 }
 
-.features
-{
-    background-color: red;
+.feature-title {
+    font-family: "Tagesschrift", system-ui;
+    color: #3f6cbf;
+    text-align: center;
+    margin: 0;
+}
 
+.feature-text {
+    font-family: "IM Fell DW Pica", serif;
+    color: #201e6a;
+    text-align: justify;
+}
+
+/* --- Containers & Media --- */
+.banner-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+}
+
+.trailer-container {
     margin: 0;
     padding: 0;
     border: 0;
-
     width: 100%;
     height: fit-content;
 }
 
-.feature
-{
-    background-color: pink;
-
+.trailer {
     margin: 0;
     padding: 0;
     border: 0;
-
     width: 100%;
+    aspect-ratio: 16/9;
+}
 
+/* --- Features Section (Desktop Default) --- */
+.features {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
     height: fit-content;
+}
+
+.feature-row {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-
-    margin-bottom: 5%;
+    margin: 0 0 5% 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: fit-content;
 }
 
-.feature-img
-{
-    background-color: orange;
-
+.feature-img {
     margin: 0;
     padding: 0;
     border: 0;
-
+    width: 50%;
     max-width: 50%;
     min-width: 0;
     aspect-ratio: 16/9;
     height: auto;
-    
+    object-fit: cover;
 }
 
-.text-container
-{
-    background-color: yellow;
-
+.text-container {
     margin: 0;
-    padding: 0;
+    padding: 0 4%; /* Added horizontal padding so text doesn't touch the image */
     border: 0;
-
     width: 50%;
+    box-sizing: border-box; /* Ensures padding doesn't break the 50% width */
     aspect-ratio: 16/9;
     overflow-y: auto;
     min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the text vertically next to the image */
 }
 
-.banner-container
-{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-.banner
-{
-    width: 100%;
-}
-
-.feature-title
-{
-    text-align: center;
-    margin: 0;
-}
-
-@media (pointer: fine)
-{
-    .game-title
-    {
+/* --- Input Device Specifics --- */
+@media (pointer: fine) {
+    .game-title {
         font-size: 70px;
     }
 
-    .explanation
-    {
+    .explanation {
         font-size: 30px;
     }
 
-    .download iconify-icon
-    {
-        font-size: 50px;
+    .download iconify-icon {
+        font-size: 70px;
+    }
+
+    .download {
+        width: 10%;
+        aspect-ratio: 16/9;
+        font-family: "IM Fell DW Pica", serif;
+        background-color: #201e6a;
+        border: 5px solid #E2B25B;
+        color: #E2B25B;
+        cursor: pointer;
     }
 }
 
-@media (pointer: coarse)
-{
-    
+@media (pointer: coarse) {
+    .download iconify-icon {
+        font-size: 30px;
+    }
+
+    .download {
+        width: 20%;
+        aspect-ratio: 16/9;
+        font-family: "IM Fell DW Pica", serif;
+        background-color: #201e6a;
+        border: 2px solid #E2B25B;
+        color: #E2B25B;
+    }
+}
+
+/* --- Mobile Layout (Screens under 768px) --- */
+@media (max-width: 768px) {
+    .feature-row {
+        flex-direction: column;
+        margin-bottom: 10%;
+    }
+
+    .feature-img {
+        max-width: 100%;
+        width: 100%;
+        order: 1; /* Forces image to the top */
+    }
+
+    .text-container {
+        width: 100%;
+        order: 2; /* Forces text below the image */
+        aspect-ratio: auto; /* Disables 16/9 lock on mobile */
+        padding: 5%;
+        overflow-y: visible;
+    }
 }
