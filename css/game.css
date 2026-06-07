@@ -28,10 +28,20 @@ html, body
     flex: 1;
 }
 
+.game-title
+{
+    width: 100%;
+    text-align: center;
+}
+
+.download
+{
+    width: 10%;
+    aspect-ratio: 16/9;
+}
+
 .trailer-container
 {
-    background-color: aqua;
-
     margin: 0;
     padding: 0;
     border: 0;
@@ -42,8 +52,6 @@ html, body
 
 .trailer
 {
-    background-color: blue;
-
     margin: 0;
     padding: 0;
     border: 0;
@@ -54,8 +62,6 @@ html, body
 
 .explanation
 {
-    background-color: blue;
-
     margin: 5% 0 5% 0;
     padding: 0;
     border: 0;
@@ -123,9 +129,40 @@ html, body
     min-height: 0;
 }
 
+.banner-container
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.banner
+{
+    width: 100%;
+}
+
+.feature-title
+{
+    text-align: center;
+    margin: 0;
+}
+
 @media (pointer: fine)
 {
-    
+    .game-title
+    {
+        font-size: 70px;
+    }
+
+    .explanation
+    {
+        font-size: 30px;
+    }
+
+    .download iconify-icon
+    {
+        font-size: 50px;
+    }
 }
 
 @media (pointer: coarse)
