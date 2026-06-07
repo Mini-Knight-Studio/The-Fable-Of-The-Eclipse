@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Loopie;
 
 class Meteorite : Component
@@ -26,6 +27,11 @@ class Meteorite : Component
     public float shakeAmount = 0.3f;
     public float shakeRotation = 0.2f;
 
+    [Header("Explosion VFX")]
+    public Entity explosionPrefab;
+    public float explosionDuration = 1.0f; // Tiempo total de vida de la partícula
+    public float growDuration = 0.2f;     // Tiempo que tarda en expandirse
+    public float finalScale = 2.0f;       // Tamaño máximo al final
 
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -34,13 +40,22 @@ class Meteorite : Component
     private float totalElapsed = 0.0f;
     private bool isFalling = false;
     private bool hasDealtDamage = false;
-
     private bool isInitialized = false;
+
+    public bool inUse = false;
 
     void OnCreate()
     {
         if (MeteoriteTrigger == null)
             MeteoriteTrigger = entity.GetComponent<BoxCollider>();
+    }
+
+    public void Fire(Vector3 spawnPosition, Vector3 spawnRotation)
+    {
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
+        inUse = true;
+        entity.SetActive(true);
 
         if (MeteoriteTrigger != null)
         {
@@ -62,7 +77,6 @@ class Meteorite : Component
         if (!isInitialized)
         {
             startPos = transform.position;
-
             float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
 
             if (goingUp && useCurve)
@@ -74,12 +88,10 @@ class Meteorite : Component
             {
                 targetPos = new Vector3(startPos.x, finalY, startPos.z);
             }
-
             isInitialized = true;
         }
 
         totalElapsed += Time.deltaTime;
-
         if (timer < meteoriteTime)
         {
             timer += Time.deltaTime;
@@ -113,10 +125,7 @@ class Meteorite : Component
     private void ApplyDamageOnce()
     {
         if (Player.Instance != null && Player.Instance.PlayerHealth != null)
-        {
             Player.Instance.PlayerHealth.Damage(damage);
-        }
-
         hasDealtDamage = true;
     }
 
@@ -125,22 +134,53 @@ class Meteorite : Component
         if (Player.Instance != null)
         {
             float distanceToPlayer = (float)Vector3.Distance(transform.position, Player.Instance.transform.position);
-
             if (Player.Instance.Camera != null && distanceToPlayer <= shakeRadius)
-            {
                 Player.Instance.Camera.SetIsShaking(true, shakeDuration, shakeAmount, shakeRotation);
-            }
         }
 
-       
+        if (explosionPrefab != null)
+        {
+            Entity explosionInstance = explosionPrefab.Clone(true);
+            explosionInstance.transform.position = transform.position;
+            explosionInstance.transform.scale = new Vector3(0.1f, 0.1f, 0.1f);
+            explosionInstance.SetActive(true);
 
-        entity.Destroy();
+            StartCoroutine(ExplosionEffectRoutine(explosionInstance));
+        }
+
+        StartCoroutine(DeactivateRoutine());
     }
 
-    void OnDrawGizmo()
+    private IEnumerator ExplosionEffectRoutine(Entity explosionEntity)
     {
-        float finalY = goingUp ? startPos.y + fallDistance : startPos.y - fallDistance;
-        Vector3 groundPos = (goingUp && useCurve) ? new Vector3(startPos.x + curveHorizontalOffset, finalY, startPos.z) : new Vector3(startPos.x, finalY, startPos.z);
-        Gizmo.DrawCircle(groundPos, shakeRadius, Vector3.Up, 32, Color.Green);
+        float elapsed = 0f;
+        Vector3 startScale = new Vector3(0.1f, 0.1f, 0.1f);
+        Vector3 endScale = new Vector3(finalScale, finalScale, finalScale);
+
+        while (elapsed < growDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / growDuration;
+            explosionEntity.transform.scale = Vector3.Lerp(startScale, endScale, t);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(explosionDuration - growDuration);
+
+        if (explosionEntity != null)
+        {
+            explosionEntity.Destroy();
+        }
+    }
+
+    private IEnumerator DeactivateRoutine()
+    {
+        if (MeteoriteTrigger != null) MeteoriteTrigger.entity.SetActive(false);
+        transform.position = new Vector3(0, -9999f, 0);
+
+        yield return null;
+
+        inUse = false;
+        entity.SetActive(false);
     }
 }
