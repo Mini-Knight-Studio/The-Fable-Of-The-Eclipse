@@ -28,6 +28,7 @@ class KillFall : Component
     bool isCurrentlyTouching = false;
 
     bool canReset = true;
+    float saveCheckTimer = 0;
 
     List<Transform> detectors;
     void OnCreate()
@@ -52,8 +53,23 @@ class KillFall : Component
             return;
         }
 
-        // 2. Optimized Raycast (Don't raycast every single frame)
-        detectionTimer += Time.deltaTime;
+        if (Player.Instance.transform.position.y < killEntity.transform.position.y)
+        {
+            saveCheckTimer += Time.deltaTime;
+            if (saveCheckTimer >= 0.5f)
+            {
+                saveCheckTimer = 0;
+                canReset = true;
+                Player.Instance.StartRespawn();
+                ResetState();
+
+            }
+        }
+        else
+            saveCheckTimer = 0;
+
+            // 2. Optimized Raycast (Don't raycast every single frame)
+            detectionTimer += Time.deltaTime;
         if (detectionTimer >= detectionFrequency)
         {
             detectionTimer = 0;

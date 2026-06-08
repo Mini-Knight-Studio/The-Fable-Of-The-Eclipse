@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Loopie;
 
 public class Player : Component
@@ -130,6 +131,7 @@ public class Player : Component
             RespawnTransition.StartFade();
             PlayerHealth.canBeDamaged = false;
         }
+        Movement.Lock();
     }
 
     private void EndRespawn()
@@ -137,6 +139,8 @@ public class Player : Component
         GoToLastCheckpoint();
         PlayerHealth.canBeDamaged = true;
         Movement.gravityActive = false;
+
+        StartCoroutine(UnlockMovement(1f));
     }
 
     void OnUpdate()
@@ -160,5 +164,13 @@ public class Player : Component
         if (RespawnTransition == null)
             return;
         RespawnTransition.OnFadeInComplete -= EndRespawn;
+
+        StopAllOwnedCoroutines();
+    }
+
+    IEnumerator UnlockMovement(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Movement.Unlock();
     }
 }

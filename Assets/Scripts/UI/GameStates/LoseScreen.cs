@@ -231,6 +231,8 @@ public class LoseScreen : Component
 
 
         entity.SetActive(false);
+
+        Player.Instance.Movement.Unlock();
     }
 
     void OnDestroy()

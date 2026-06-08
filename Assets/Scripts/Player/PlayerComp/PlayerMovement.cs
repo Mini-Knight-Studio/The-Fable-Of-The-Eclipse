@@ -42,6 +42,8 @@ public class PlayerMovement : PlayerComponent
     public bool isGodMode = false;
     public float godModeSpeedMultiplier = 2.5f;
 
+    private bool locked = false;
+
     public void OnCreate()
     {
         movementHelper = entity.GetComponent<Movement>();
@@ -53,7 +55,10 @@ public class PlayerMovement : PlayerComponent
 
     public void ProcessMovement()
     {
-        
+        if(locked)
+        {
+            return;
+        }
         isDashing = HandleDash();
 
         if (!isDashing)
@@ -200,6 +205,16 @@ public class PlayerMovement : PlayerComponent
     public bool CanDash()
     {
         return dashCooldownTimer <= 0 && dashBufferTimer > 0;
+    }
+
+    public void Lock()
+    {
+        locked = true;
+    }
+
+    public void Unlock()
+    {
+        locked = false;
     }
 
     void OnDestroy()
