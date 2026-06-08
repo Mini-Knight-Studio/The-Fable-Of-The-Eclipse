@@ -48,19 +48,27 @@ html, body
 
 .team-title
 {
+    text-align: center;
     color: #3f6cbf;
     font-family: "Tagesschrift", system-ui;
+    margin-bottom: 0;
 }
 
 .team-text
 {
+    margin-bottom: 50px;
+    padding: 0;
+    text-align: center;
     color: #201e6a;
     font-family: "IM Fell DW Pica", serif;
 }
 
 .section-title
 {
+    margin-top: 50px;
+    text-align: center;
     color: #3f6cbf;
+    text-transform: uppercase;
     font-family: "Tagesschrift", system-ui;
 }
 
@@ -181,6 +189,7 @@ html, body
     position: relative;
     top: 0;
     left: 0;
+    margin: 10px;
 }
 
 .member-image img
@@ -190,7 +199,6 @@ html, body
     left: 0;
     width: 100%;
     height: 100%;
-
     border: 0;
 }
 
@@ -198,6 +206,7 @@ html, body
 
 .member-info
 {
+    margin-top: 5px;
     flex: 1;
 }
 
@@ -206,8 +215,6 @@ html, body
     font-family: "Tagesschrift", system-ui;
     color: #4462bd;
     margin: 0;
-    margin-left: 2%;
-    margin-top: 1%;
 }
 
 .display-role
@@ -215,14 +222,13 @@ html, body
     font-family: "Tagesschrift", system-ui;
     color: #cf9184;
     margin: 0;
-    margin-left: 2%;
 }
 
 .social-media-link
 {
     color: #201e6a;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding: 10px;
+    padding-left: 0;
 }
 
 /* --- Description --- */
@@ -237,8 +243,9 @@ html, body
     color: #201e6a;
     width: auto;
     margin: 2%;
+    margin-top: 1%;
     text-wrap: auto;
-    text-align: justify;
+    text-align: center;
 }
 
 /* --- Carousel --- */
@@ -324,6 +331,18 @@ html, body
 
 @media (pointer: fine) /* Desktop PC Layout Engines */
 {
+
+    .section-title
+    {
+        font-size: 40px;
+    }
+
+    .carousel-button iconify-icon
+    {
+        font-size: 30px;
+        color: #4462bd;
+    }
+
     .display
     {
         flex: 1;
@@ -347,6 +366,37 @@ html, body
         height: 100px;
     }
 
+    .display-name
+    {
+        padding-top: 5px;
+        font-size: 30px;
+    }
+
+    .display-role
+    {
+        font-size: 20px;
+    }
+
+    .social-media-link
+    {
+        font-size: 18px;
+    }
+
+    .member-text
+    {
+        font-size: 20px;
+    }
+
+    .task-title
+    {
+        font-size: 30px;
+    }
+
+    .task-text
+    {
+        font-size: 20px;
+    }
+
     .member-info
     {
         flex: 1;
@@ -365,7 +415,6 @@ html, body
         height: fit-content;
     }
 
-    /* Master Layout Track */
     .carousel-track.active
     {
         display: flex;
@@ -477,6 +526,17 @@ html, body
 
 @media (pointer: coarse) /* Mobile Stacked Layout Engine */
 {
+    .section-title
+    {
+        font-size: 30px;
+    }
+
+    .carousel-button iconify-icon
+    {
+        font-size: 20px;
+        color: #4462bd;
+    }
+
     .display
     {
         width: 100%;
@@ -495,8 +555,8 @@ html, body
 
     .member-image
     {
-        width: 100px;
-        height: 100px;
+        width: 75px;
+        height: 75px;
     }
 
     .member-info
@@ -509,6 +569,36 @@ html, body
     {
         width: 100%;
         height: fit-content;
+    }
+
+    .display-name
+    {
+        font-size: 22px;
+    }
+
+    .display-role
+    {
+        font-size: 18px;
+    }
+
+    .social-media-link
+    {
+        font-size: 16px;
+    }
+
+    .member-text
+    {
+        font-size: 14px;
+    }
+
+    .task-title
+    {
+        font-size: 22px;
+    }
+
+    .task-text
+    {
+        font-size: 14px;
     }
 
     .member-task-carousel
