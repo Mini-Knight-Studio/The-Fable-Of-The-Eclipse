@@ -268,10 +268,12 @@ class MainMenu : Component
 
             if (newGameButton.Hovered)
             {
+                GlobalDatabase.GlobalData.mainMenuDB.MainMenu.IsInMainMenu = false;
                 newGameScript.StartNewGame();
             }
             else if (continueButton.Hovered) 
             {
+                GlobalDatabase.GlobalData.mainMenuDB.MainMenu.IsInMainMenu = false;
                 continueScript.LoadPreviousSave();
             }
             else if (settingsButton.Hovered)
@@ -334,6 +336,7 @@ class MainMenu : Component
         }
 
         globalDatabaseLoaded = true;
+        GlobalDatabase.GlobalData.SaveAll();
     }
     public void PrepareAnimations()
     {

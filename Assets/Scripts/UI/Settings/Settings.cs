@@ -453,7 +453,7 @@ class Settings : Component
 
     void OnUpdate()
     {
-        enterTimer += Time.deltaTime;
+        enterTimer += Time.unscaledDeltaTime;
         if (quickStartAnimations)
         {
             passPageAnimator.Play();
@@ -502,12 +502,11 @@ class Settings : Component
     }
     void HandleChangeValue()
     {
-        confirmTimer += Time.deltaTime;
+        confirmTimer += Time.unscaledDeltaTime;
 
         float deadzone = 0.3f;
         float strongDeadzone = 0.7f;
 
-        // Enter editing mode only on strong push
         if (!isEditingValue)
         {
             if (Input.LeftAxis.x > strongDeadzone || Input.IsKeyPressed(KeyCode.RIGHT) || Input.IsGamepadButtonPressed(GamepadButton.GAMEPAD_DPAD_RIGHT))
@@ -531,7 +530,6 @@ class Settings : Component
         }
         else
         {
-            // Exit editing mode when stick returns to neutral
             if (Mathf.Abs(Input.LeftAxis.x) < deadzone)
             {
                 isEditingValue = false;
@@ -634,7 +632,7 @@ class Settings : Component
 
     void HandleApplyChanges()
     {
-        applyTimer += Time.deltaTime;
+        applyTimer += Time.unscaledDeltaTime;
 
         // Cooldown
         if (applyTimer < inputCooldown)
@@ -664,9 +662,17 @@ class Settings : Component
         }
         if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
         {
-            SceneManager.LoadSceneByID("db1dd4f7-fb12-b501-b8a7-ac788f03b8ae");
-            MainMenu.quickStartAnimations = true;
-            MainMenu.invertedPassPagePlayed = false;
+            if (GlobalDatabase.GlobalData.mainMenuDB.MainMenu.IsInMainMenu)
+            {
+                SceneManager.LoadSceneByID("db1dd4f7-fb12-b501-b8a7-ac788f03b8ae");
+                MainMenu.quickStartAnimations = true;
+                MainMenu.invertedPassPagePlayed = false;
+            }
+            else 
+            {
+                DatabaseRegistry.LoadAll();
+                SceneManager.LoadSceneByID(DatabaseRegistry.playerDB.Player.currentSceneUUID);
+            }
         }
     }
     void HandleVisualFeedback()
