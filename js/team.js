@@ -1,5 +1,13 @@
 var prevIndex = '';
 
+document.addEventListener('click', function(event) {
+    if (prevIndex !== '') {
+        if (!event.target.closest('.member-card')) {
+            HideActualCard();
+        }
+    }
+});
+
 function HideCard(memberID)
 {
     var card = document.getElementById(memberID);
@@ -9,6 +17,11 @@ function HideCard(memberID)
     card.classList.remove('open');
 
     stopCarouselAutoScroll();
+}
+
+function HideActualCard()
+{
+    HideCard(prevIndex);
 }
 
 function ShowCard(memberID)
