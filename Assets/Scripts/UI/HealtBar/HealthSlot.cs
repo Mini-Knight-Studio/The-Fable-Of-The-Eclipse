@@ -48,10 +48,12 @@ class HealthSlot : Component
         }
     }
 
+    // Lose animation entity (child named "Anim")
     private Entity animEntity;
     private SpriteAnimator slotAnimator;
     private bool hasAnimator = false;
 
+    // Current display value: -1=unset, 0=empty, 1=half, 2=full
     private int currentValue = -1;
     private bool isLocked = false;
     private bool isAnimating = false;
@@ -68,6 +70,7 @@ class HealthSlot : Component
         if (halfSlotEntity != null)
             halfSlotImage = halfSlotEntity.GetComponent<Image>();
 
+        // Find animation child entity (needs Image + SpriteAnimator)
         animEntity = entity.GetChildByName("Anim");
         if (animEntity != null && animEntity.HasComponent<SpriteAnimator>())
         {
@@ -82,6 +85,7 @@ class HealthSlot : Component
         int oldValue = currentValue;
         currentValue = value;
 
+        // If value decreased, play lose animation
         if (oldValue >= 0 && value < oldValue && !isAnimating)
         {
             if (hasAnimator)
@@ -93,6 +97,7 @@ class HealthSlot : Component
                 StartCoroutine(FlashLoseAnimation(oldValue, value));
             }
         }
+        // If value increased, play gain animation
         else if (oldValue >= 0 && value > oldValue && !isAnimating)
         {
             if (hasAnimator)
@@ -152,10 +157,12 @@ class HealthSlot : Component
         SetImageTint(FullSlotImage, new Vector4(1, 1, 1, 1));
     }
 
+    // --- SPRITE ANIMATION for losing life ---
     private IEnumerator PlayLoseAnimation(int amountLost)
     {
         isAnimating = true;
 
+        // Configure SpriteAnimator with correct texture
         if (amountLost >= 2)
         {
             slotAnimator.TextureUUID = LIFE_LOSE2_UUID;
@@ -174,14 +181,17 @@ class HealthSlot : Component
         slotAnimator.StartFrame = 0;
         slotAnimator.Loop = false;
 
+        // Hide the slot content, show the animation entity
         if (fullSlotEntity != null) fullSlotEntity.SetActive(false);
         if (halfSlotEntity != null) halfSlotEntity.SetActive(false);
         animEntity.SetActive(true);
         slotAnimator.Play();
 
+        // Wait for animation to finish
         float duration = (float)slotAnimator.FrameCount / slotAnimator.FPS;
         yield return new WaitForSeconds(duration + 0.05f);
 
+        // Hide anim, apply final state
         animEntity.SetActive(false);
         slotAnimator.Stop(true);
 
@@ -189,6 +199,7 @@ class HealthSlot : Component
         ApplyVisuals(currentValue);
     }
 
+    // --- TINT FALLBACK: lose animation ---
     private IEnumerator FlashLoseAnimation(int oldVal, int newVal)
     {
         isAnimating = true;
@@ -209,10 +220,12 @@ class HealthSlot : Component
         ApplyVisuals(currentValue);
     }
 
+    // --- SPRITE ANIMATION for gaining life ---
     private IEnumerator PlayGainAnimation(int newVal)
     {
         isAnimating = true;
 
+        // Configure SpriteAnimator with correct texture (13 cols, 1 row, 13 frames)
         slotAnimator.TextureUUID = LIFE_GAIN_UUID;
         slotAnimator.SetGrid(13, 1);
         slotAnimator.FrameCount = 13;
@@ -220,10 +233,12 @@ class HealthSlot : Component
         slotAnimator.StartFrame = 0;
         slotAnimator.Loop = false;
 
+        // Show the target healed state immediately, and play the animation on top
         ApplyVisuals(newVal);
         animEntity.SetActive(true);
         slotAnimator.Play();
 
+        // Wait for animation to finish
         float duration = (float)slotAnimator.FrameCount / slotAnimator.FPS;
         yield return new WaitForSeconds(duration + 0.05f);
 
@@ -234,6 +249,7 @@ class HealthSlot : Component
         ApplyVisuals(currentValue);
     }
 
+    // --- TINT FALLBACK: gain animation ---
     private IEnumerator FlashGainAnimation(int newVal)
     {
         isAnimating = true;

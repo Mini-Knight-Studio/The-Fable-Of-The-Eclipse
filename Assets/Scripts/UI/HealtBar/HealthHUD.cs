@@ -16,14 +16,16 @@ public class HealthHUD : Component
     private Entity barBG8;
     private Entity barBG10;
 
-    // Unlock animation references
-    public Entity unlockAnim1Entity;
-    public Entity unlockAnim2Entity;
-    public Entity unlockAnim3Entity;
+    // Unlock animation properties
+    private Entity unlockAnimEntity;
+    private SpriteAnimator unlockAnimator;
+    private bool hasUnlockAnimator = false;
+    private RectTransform unlockRectTransform;
+    private bool hasUnlockRect = false;
 
-    private SpriteAnimator unlockAnimator1;
-    private SpriteAnimator unlockAnimator2;
-    private SpriteAnimator unlockAnimator3;
+    private const string BAR_UNLOCK1_UUID = "d1a1af3b-4516-49ec-a27d-4a9b163fbbcc";
+    private const string BAR_UNLOCK2_UUID = "ba9b0e41-333f-46c8-9c2c-e367fa1367c2";
+    private const string BAR_UNLOCK3_UUID = "ff1ae631-6e59-44ee-95fd-fd0bf23fe4bb";
 
     void OnCreate()
     {
@@ -45,30 +47,43 @@ public class HealthHUD : Component
             }
         }
 
+        // Find background bar entities
         barBG4  = entity.GetChildByName("BarBG_4");
         barBG6  = entity.GetChildByName("BarBG_6");
         barBG8  = entity.GetChildByName("BarBG_8");
         barBG10 = entity.GetChildByName("BarBG_10");
 
-        if (unlockAnim1Entity == null) unlockAnim1Entity = entity.GetChildByName("UnlockAnim1");
-        if (unlockAnim1Entity != null && unlockAnim1Entity.HasComponent<SpriteAnimator>())
+        // Find unlock animator child
+        unlockAnimEntity = entity.GetChildByName("UnlockAnim");
+        if (unlockAnimEntity != null)
         {
-            unlockAnimator1 = unlockAnim1Entity.GetComponent<SpriteAnimator>();
-            unlockAnim1Entity.SetActive(false);
-        }
+            Debug.Log("[HealthHUD] Found UnlockAnim entity: " + unlockAnimEntity.Name + ", Parent: " + (unlockAnimEntity.Parent != null ? unlockAnimEntity.Parent.Name : "None"));
+            if (unlockAnimEntity.HasComponent<SpriteAnimator>())
+            {
+                unlockAnimator = unlockAnimEntity.GetComponent<SpriteAnimator>();
+                hasUnlockAnimator = true;
+                Debug.Log("[HealthHUD] Found SpriteAnimator component on UnlockAnim.");
+            }
+            else
+            {
+                Debug.Log("[HealthHUD] SpriteAnimator component NOT found on UnlockAnim!");
+            }
 
-        if (unlockAnim2Entity == null) unlockAnim2Entity = entity.GetChildByName("UnlockAnim2");
-        if (unlockAnim2Entity != null && unlockAnim2Entity.HasComponent<SpriteAnimator>())
-        {
-            unlockAnimator2 = unlockAnim2Entity.GetComponent<SpriteAnimator>();
-            unlockAnim2Entity.SetActive(false);
+            if (unlockAnimEntity.HasComponent<RectTransform>())
+            {
+                unlockRectTransform = unlockAnimEntity.GetComponent<RectTransform>();
+                hasUnlockRect = true;
+                Debug.Log("[HealthHUD] Found RectTransform component on UnlockAnim. Size: " + unlockRectTransform.size + ", AnchoredPos: " + unlockRectTransform.anchored_position);
+            }
+            else
+            {
+                Debug.Log("[HealthHUD] RectTransform component NOT found on UnlockAnim!");
+            }
+            unlockAnimEntity.SetActive(false);
         }
-
-        if (unlockAnim3Entity == null) unlockAnim3Entity = entity.GetChildByName("UnlockAnim3");
-        if (unlockAnim3Entity != null && unlockAnim3Entity.HasComponent<SpriteAnimator>())
+        else
         {
-            unlockAnimator3 = unlockAnim3Entity.GetComponent<SpriteAnimator>();
-            unlockAnim3Entity.SetActive(false);
+            Debug.Log("[HealthHUD] UnlockAnim entity NOT found as child of " + entity.Name + "!");
         }
     }
 
@@ -80,6 +95,7 @@ public class HealthHUD : Component
         int currentHealth = Player.Instance.PlayerHealth.GetActualHealth();
         int maxHealth = Player.Instance.PlayerHealth.GetMaxHealth();
 
+        // First frame initialization (ensure we don't trigger unlock animation on startup)
         if (lastKnownMaxHealth == -1)
         {
             lastKnownHealth = currentHealth;
@@ -93,6 +109,7 @@ public class HealthHUD : Component
         if (currentHealth != lastKnownHealth || maxHealth != lastKnownMaxHealth)
         {
             Debug.Log("[HealthHUD] Value changed! Health: " + lastKnownHealth + " -> " + currentHealth + ", MaxHealth: " + lastKnownMaxHealth + " -> " + maxHealth);
+            // Detect unlock event (maxHealth increased)
             if (maxHealth > lastKnownMaxHealth)
             {
                 int oldSlots = lastKnownMaxHealth / 2;
@@ -150,45 +167,95 @@ public class HealthHUD : Component
 
     private IEnumerator FlashUnlockAnimation(int oldSlots, int newSlots)
     {
-        Entity targetEntity = null;
-        SpriteAnimator targetAnimator = null;
+        Debug.Log("[HealthHUD] FlashUnlockAnimation started. oldSlots=" + oldSlots + ", newSlots=" + newSlots + ", hasUnlockAnimator=" + hasUnlockAnimator + ", hasUnlockRect=" + hasUnlockRect);
+        if (hasUnlockAnimator)
+        {
+            // Select correct sprite animation sheet based on the new slot count
+            // 4 to 6 slots: BarUnlock1SS
+            // 6 to 8 slots: BarUnlock2SS
+            // 8 to 10 slots: BarUnlock3SS
+            if (newSlots == 5 || newSlots == 6)
+            {
+                Debug.Log("[HealthHUD] Playing BarUnlock1SS");
+                unlockAnimator.TextureUUID = BAR_UNLOCK1_UUID;
+                unlockAnimator.SetGrid(6, 3);
+                unlockAnimator.FrameCount = 18;
+                unlockAnimator.FPS = 18;
+                if (hasUnlockRect)
+                {
+                    unlockRectTransform.size = new Vector2(80f, 54f);
+                    unlockRectTransform.anchored_position = new Vector2(0f, -20.5f);
+                }
+            }
+            else if (newSlots == 7 || newSlots == 8)
+            {
+                Debug.Log("[HealthHUD] Playing BarUnlock2SS");
+                unlockAnimator.TextureUUID = BAR_UNLOCK2_UUID;
+                unlockAnimator.SetGrid(6, 3);
+                unlockAnimator.FrameCount = 18;
+                unlockAnimator.FPS = 18;
+                if (hasUnlockRect)
+                {
+                    unlockRectTransform.size = new Vector2(80f, 54f);
+                    unlockRectTransform.anchored_position = new Vector2(0f, -20.5f);
+                }
+            }
+            else if (newSlots == 9 || newSlots == 10)
+            {
+                Debug.Log("[HealthHUD] Playing BarUnlock3SS");
+                unlockAnimator.TextureUUID = BAR_UNLOCK3_UUID;
+                unlockAnimator.SetGrid(7, 6);
+                unlockAnimator.FrameCount = 42;
+                unlockAnimator.FPS = 18;
+                if (hasUnlockRect)
+                {
+                    unlockRectTransform.size = new Vector2(80f, 31.5f);
+                    unlockRectTransform.anchored_position = new Vector2(0f, -9.25f);
+                }
+            }
+            else
+            {
+                Debug.Log("[HealthHUD] Warning: newSlots (" + newSlots + ") is not mapped. No custom grid/texture applied.");
+            }
 
-        if (newSlots == 5 || newSlots == 6)
-        {
-            targetEntity = unlockAnim1Entity;
-            targetAnimator = unlockAnimator1;
-        }
-        else if (newSlots == 7 || newSlots == 8)
-        {
-            targetEntity = unlockAnim2Entity;
-            targetAnimator = unlockAnimator2;
-        }
-        else if (newSlots == 9 || newSlots == 10)
-        {
-            targetEntity = unlockAnim3Entity;
-            targetAnimator = unlockAnimator3;
-        }
+            unlockAnimator.StartFrame = 0;
+            unlockAnimator.Loop = false;
 
-        if (targetEntity != null && targetAnimator != null)
-        {
-            Debug.Log("[HealthHUD] Playing unlock animation on: " + targetEntity.Name);
-            targetEntity.SetActive(true);
-            targetAnimator.Play();
+            unlockAnimEntity.SetActive(true);
+            unlockAnimator.Play();
 
-            // Wait for animation to finish based on editor settings
-            float duration = (float)targetAnimator.FrameCount / targetAnimator.FPS;
-            if (duration <= 0f) duration = 1.0f; // fallback
-            
+            // Wait for animation to finish
+            float duration = (float)unlockAnimator.FrameCount / unlockAnimator.FPS;
             Debug.Log("[HealthHUD] Waiting for animator duration: " + duration + "s");
-            yield return new WaitForSeconds(duration + 0.15f);
+            yield return new WaitForSeconds(duration + 0.05f);
 
-            targetEntity.SetActive(false);
-            targetAnimator.Stop(true);
+            unlockAnimEntity.SetActive(false);
+            unlockAnimator.Stop(true);
             Debug.Log("[HealthHUD] Animator finished and deactivated.");
         }
         else
         {
-            Debug.Log("[HealthHUD] Warning: No unlock animator found for slot transition " + oldSlots + " -> " + newSlots);
+            Debug.Log("[HealthHUD] Warning: hasUnlockAnimator is false, skipping SpriteAnimator.");
+        }
+
+        // Flash the newly unlocked slots with a bright effect
+        for (int flash = 0; flash < 4; flash++)
+        {
+            for (int i = oldSlots; i < newSlots && i < maxHealthIcons; i++)
+            {
+                var icon = healthIcons[i];
+                if (icon == null) continue;
+                icon.FlashTint(flash % 2 == 0);
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        // Reset tint on newly unlocked slots
+        for (int i = oldSlots; i < newSlots && i < maxHealthIcons; i++)
+        {
+            var icon = healthIcons[i];
+            if (icon == null) continue;
+            icon.ResetTint();
         }
     }
 };
