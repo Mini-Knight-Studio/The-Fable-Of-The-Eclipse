@@ -47,6 +47,14 @@ class Chest : Component
     private bool rewardCollected = false;
     private bool particlesStopped = false;
 
+    public float pulseSpeed = 1f;
+
+    public float minIntensity = 0.3f;
+    public float minIntensityThreshold = 0.4f;
+    public float maxIntensity = 0.9f;
+
+    private bool animFinished = false;
+
     void OnCreate()
     {
         staticMoon.SetActive(false);
@@ -230,15 +238,14 @@ class Chest : Component
         {
             moonstoneMat = moonstone.GetComponent<MeshRenderer>().GetInstancedMaterial();
 
-            float pulseSpeed = 1f;
-
-            float minIntensity = 0.3f;
-            float maxIntensity = 0.9f;
-
-            float minRoughness = 0.1f;
-            float maxRoughness = 40f;
-
             float elapsedTime = 0f;
+
+            if (animFinished)
+            {
+                moonstoneMat.SetFloat("u_EmissiveIntensity", minIntensity);
+
+                yield return null;
+            }
 
             while (!isOpen)
             {
@@ -247,13 +254,21 @@ class Chest : Component
                 float intensity = Mathf.Lerp(minIntensity, maxIntensity, (Mathf.Sin(elapsedTime * pulseSpeed) + 1f) / 2f);
                 moonstoneMat.SetFloat("u_EmissiveIntensity", intensity);
 
-                float roughness = Mathf.Lerp(minRoughness, maxRoughness, (Mathf.Sin(elapsedTime * pulseSpeed * 2f) + 1f) / 2f);
-                moonstoneMat.SetFloat("u_Roughness", roughness);
+                yield return null;
+            }
+            while (isOpen && !animFinished)
+            {
+                elapsedTime += Time.deltaTime;
 
+                float intensity = Mathf.Lerp(minIntensity, maxIntensity, (Mathf.Sin(elapsedTime * pulseSpeed) + 1f) / 2f);
+                if (intensity <= (minIntensityThreshold))
+                {
+                    animFinished = true;
+                }
+                moonstoneMat.SetFloat("u_EmissiveIntensity", intensity);
                 yield return null;
             }
             moonstoneMat.SetFloat("u_EmissiveIntensity", moonstone.GetComponent<MeshRenderer>().GetFloat("u_EmissiveIntensity"));
-            moonstoneMat.SetFloat("u_Roughness", moonstone.GetComponent<MeshRenderer>().GetFloat("u_Roughness"));
         }
     }
 
