@@ -4,31 +4,27 @@ using System;
 public class HealthHUD : Component
 {
     public int maxHealthIcons = 10;
+    public Entity healthIconsParent;
 
     private HealthSlot[] healthIcons;
     private int lastKnownHealth = -1;
     private int lastKnownMaxHealth = -1;
 
-    private Entity bg4;
-    private Entity bg6;
-    private Entity bg8;
-    private Entity bg10;
+    public Entity bg4;
+    public Entity bg6;
+    public Entity bg8;
+    public Entity bg10;
 
     void OnCreate()
     {
         healthIcons = new HealthSlot[maxHealthIcons];
-
-        bg4 = entity.GetChildByName("Bg_4");
-        bg6 = entity.GetChildByName("Bg_6");
-        bg8 = entity.GetChildByName("Bg_8");
-        bg10 = entity.GetChildByName("Bg_10");
 
         int childCount = entity.GetChildren().Count;
         for (int i = 0; i < childCount; i++)
         {
             if (i >= maxHealthIcons)
                 break;
-            Entity healthSlotEntity = entity.GetChildByName("Life_" + (i));
+            Entity healthSlotEntity = healthIconsParent.GetChildByName("Life_" + (i));
             if(healthSlotEntity != null)
             {
                 HealthSlot healthSlot = healthSlotEntity.GetComponent<HealthSlot>();
