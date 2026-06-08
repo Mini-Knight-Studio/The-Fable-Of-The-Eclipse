@@ -89,6 +89,8 @@ class PuzzleGoalSimonSays : Component
 
     private float initialGoalY;
 
+    private bool canStartCinematic = false;
+
     private enum State
     {
         WaitingForPillars,
@@ -164,6 +166,12 @@ class PuzzleGoalSimonSays : Component
             case State.Completed:
                 HandleCompleted();
                 break;
+        }
+
+        if (canStartCinematic)
+        {
+            StartCoroutine(PuzzleCompleteCinematic());
+            canStartCinematic = false;
         }
     }
 
@@ -388,12 +396,12 @@ class PuzzleGoalSimonSays : Component
 
         collectGemSFX.GetComponent<AudioSource>().Play();
 
-        //if (UIPopupManager.Instance != null)
-        //{
-        //    UIPopupManager.Instance.ShowPopup(popupName);
-        //}
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupName);
+        }
 
-        StartCoroutine(PuzzleCompleteCinematic());
+        canStartCinematic = true;
 
         isCollecting = false;
     }

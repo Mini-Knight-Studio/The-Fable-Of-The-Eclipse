@@ -73,6 +73,8 @@ class PuzzleGoal : Component
     public Entity mechanichDoorThumpSFXEntity;
     private AudioSource mechanichDoorThumpSFX;
 
+    private bool canStartCinematic = false;
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -117,6 +119,12 @@ class PuzzleGoal : Component
         if (pendingMoves > 0 && !isMoving)
         {
             StartCoroutine(ProcessMovementQueue());
+        }
+
+        if (canStartCinematic)
+        {
+            StartCoroutine(PuzzleCompleteCinematic());
+            canStartCinematic = false;
         }
     }
 
@@ -307,13 +315,12 @@ class PuzzleGoal : Component
 
         DatabaseRegistry.playerDB.Player.gemAirCollected = true;
 
-        //if (UIPopupManager.Instance != null)
-        //{
-        //    UIPopupManager.Instance.ShowPopup(popupName);
-        //}
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupName);
+        }
 
-        StartCoroutine(PuzzleCompleteCinematic());
-
+        canStartCinematic = true;
         isCollecting = false;
     }
 

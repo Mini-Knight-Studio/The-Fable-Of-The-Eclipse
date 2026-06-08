@@ -62,6 +62,8 @@ class PuzzleGoalFireLvl : Component
 
     private Vector3 initialGoalPosition;
 
+    private bool canStartCinematic = false;
+
     void OnCreate()
     {
         pillars = new MovingPillar[3];
@@ -129,6 +131,12 @@ class PuzzleGoalFireLvl : Component
                     puzzleReseterPrompt.SetActive(false);
                 }
             }
+        }
+
+        if (canStartCinematic)
+        {
+            puzzle3Blocker.StartCompletitionCinematic();
+            canStartCinematic = false;
         }
     }
 
@@ -260,12 +268,12 @@ class PuzzleGoalFireLvl : Component
 
         DatabaseRegistry.playerDB.Player.gemFireCollected = true;
 
-        //if (UIPopupManager.Instance != null)
-        //{
-        //    UIPopupManager.Instance.ShowPopup(popupName);
-        //}
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupName);
+        }
 
-        puzzle3Blocker.StartCompletitionCinematic();
+        canStartCinematic = true;
 
         isCollecting = false;
     }
