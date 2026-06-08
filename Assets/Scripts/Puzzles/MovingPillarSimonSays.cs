@@ -73,6 +73,8 @@ class MovingPillarSimonSays : Component
 
     void HandleActivation()
     {
+        if (active && !activated) return;
+
         if (torchCollider != null && torchCollider.IsColliding && !locked && Player.Instance.Input.interactKeyPressed)
         {
             wasPressed = true;
@@ -116,6 +118,29 @@ class MovingPillarSimonSays : Component
             }
             activated = true;
         }
+    }
+
+    public void CompletePillarSimonSaysAuto()
+    {
+        enabled = true;
+        active = true;
+        activated = true;
+        locked = false;
+
+        if (torch != null)
+        {
+            torch.SetActive(true);
+        }
+
+        if (torchParticles != null)
+        {
+            torchParticles.Play();
+        }
+
+        igniteSFXEntity.GetComponent<AudioSource>().Volume = 0.1f;
+        igniteSFXEntity.GetComponent<AudioSource>().Play();
+
+        StartCoroutine(EmissiveShine());
     }
 
     public void ResetState()

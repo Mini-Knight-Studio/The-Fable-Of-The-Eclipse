@@ -31,6 +31,8 @@ class CheckpointCollider : Component
         if (DatabaseRegistry.playerDB != null)
         {
             DatabaseRegistry.playerDB.Player.SetPosition(player.entity.transform.position);
+            DatabaseRegistry.playerDB.Player.maxHealth = Player.Instance.PlayerHealth.GetMaxHealth();
+            DatabaseRegistry.playerDB.Player.currentHealth = Player.Instance.PlayerHealth.GetActualHealth();
             DatabaseRegistry.playerDB.Save();
             Debug.Log("Player Data Saved");
         }

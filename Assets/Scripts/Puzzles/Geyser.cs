@@ -18,6 +18,7 @@ class Geyser : Component
     public bool alwaysActive = false;
     public float frequency = 3.0f;
     public float delay = 0.0f;
+    public float pauseBetweenStates = 0.0f;
 
     private bool isActive = false;
 
@@ -80,7 +81,7 @@ class Geyser : Component
     {
         if (delay > 0.0f)
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(delay + pauseBetweenStates);
         }
 
         if (alwaysActive)
@@ -94,7 +95,9 @@ class Geyser : Component
         {
             yield return new WaitForSeconds(frequency);
             isActive = !isActive;
+            if (isActive) yield return new WaitForSeconds(pauseBetweenStates);
             SetActiveState(isActive);
+            if (!isActive) yield return new WaitForSeconds(pauseBetweenStates);
         }
     }
 

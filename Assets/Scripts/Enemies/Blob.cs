@@ -94,13 +94,13 @@ class Blob : Enemy
                     #region Attack
                     if (GetDistanceToTarget() < GetEntityForwardBase() + ReachDistance)
                     {
-                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, HitOffset, (int)StageMultiplier(BaseDamageandStageMultiplier), "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|Walk"));
+                        attackCoroutine = StartCoroutine(Attack(AttackDistance, PreparationTime, AttackCooldown,0, HitOffset, (int)StageMultiplier(BaseDamageandStageMultiplier), "Armature|ChargeAttack", "Armature|Attack", "Armature|Stunt", "Armature|IdleWalk"));
                     }
                     #endregion
                 }
                 else if (!health.IsDead())
                 {
-                    animator.PlayClip("Armature|Walk", true, 0.5f);
+                    animator.PlayClip("Armature|IdleWalk", true, 0.5f);
                     Wander(ViewField, 4-Stage);
                 }
                 #endregion
