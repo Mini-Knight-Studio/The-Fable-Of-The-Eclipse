@@ -15,12 +15,12 @@ class NarrativeTrigger : Component
     {
         if (boxCollider.HasCollided)
         {
-            SimpleTextUI.Instance.Open();
+            SimpleTextUI.Instance.Open(0.5f);
             SimpleTextUI.Instance.SetText(textValue);
         }
         if (boxCollider.HasEndedCollision)
         {
-            SimpleTextUI.Instance.Close();
+            SimpleTextUI.Instance.Close(0.5f);
         }
     }
 };
