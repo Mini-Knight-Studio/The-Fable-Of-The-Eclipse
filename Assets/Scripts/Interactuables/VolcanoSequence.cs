@@ -6,6 +6,14 @@ class VolcanoSequence : Component
 {
     public bool playOnlyOnce = true;
 
+    [Header("Title Text")]
+    public string textValue = "";
+    public float textDurationPercent = 0f;
+    public float textStartingPercent = 0f;
+
+    private float textDuration = 0f;
+    private float textStarting = 0f;
+
     [Header("Preparation")]
     public Entity prepFocusTarget;
     public int cameraStartingFarPlane = 1000;
@@ -65,6 +73,8 @@ class VolcanoSequence : Component
 
     void OnCreate()
     {
+        textStarting = prepDuration * textStartingPercent;
+        textDuration = prepDuration * textDurationPercent;
         if (prepParticles != null) prepParticles.GetComponent<ParticleComponent>().Stop();
         if (explosionParticles != null) explosionParticles.GetComponent<ParticleComponent>().Stop();
 
@@ -87,6 +97,7 @@ class VolcanoSequence : Component
 
     IEnumerator PlayVolcanoSequence()
     {
+        
         GameManager.SetState(GameManager.GameState.PAUSE);
 
         float originalDistance = Player.Instance.Camera.distance;
@@ -109,9 +120,14 @@ class VolcanoSequence : Component
 
         Input.StartShake(0.2f, prepDuration);
         Player.Instance.Camera.SetIsShaking(true, prepDuration, prepShakeAmount, prepShakeRotation, prepShakeAmountVel, prepShakeRotationVel);
-
+        
         yield return new WaitForSeconds(prepDuration);
+        SimpleTextUI.Instance.Open();
+        SimpleTextUI.Instance.SetText(textValue);
 
+        yield return new WaitForSeconds(textDuration);
+
+        SimpleTextUI.Instance.Close();
 
         Input.StartShake(0.5f, craterFocusDuration);
         Player.Instance.Camera.SetIsShaking(true, craterFocusDuration, craterShakeAmount, craterShakeRotation, craterShakeAmountVel, craterShakeRotationVel);
