@@ -48,6 +48,7 @@ html, body {
     font-family: "Tagesschrift", system-ui;
     color: #3f6cbf;
     text-align: center;
+    padding-top: 10px;
     margin: 0;
 }
 
@@ -118,16 +119,19 @@ html, body {
 
 .text-container {
     margin: 0;
-    padding: 0 4%; /* Added horizontal padding so text doesn't touch the image */
+    padding: 0 4%; 
     border: 0;
     width: 50%;
-    box-sizing: border-box; /* Ensures padding doesn't break the 50% width */
     aspect-ratio: 16/9;
     overflow-y: auto;
     min-height: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers the text vertically next to the image */
+    /* justify-content: center; <-- REMOVE THIS LINE */
+}
+
+.text-wrapper {
+    margin: auto 0;
 }
 
 /* --- Input Device Specifics --- */
