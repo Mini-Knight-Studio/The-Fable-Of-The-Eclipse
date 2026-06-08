@@ -107,6 +107,9 @@ public class Player : Component
         {
             PlayerHealth.OnHit += Animation.PlayHit;
         }
+
+        Movement.Lock();
+        StartCoroutine(UnlockMovement(1f));
     }
 
     public void OnPostCreate()
