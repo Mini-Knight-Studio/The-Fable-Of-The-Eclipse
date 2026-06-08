@@ -112,6 +112,12 @@ class Puzzle1Blocker : Component
 
         yield return new WaitForSeconds(pauseBeforeRaising);
 
+        float baseX = entity.transform.position.x;
+        float baseZ = entity.transform.position.z;
+
+        float trembleMagnitude = 0.02f;
+        float trembleFrequency = 50f;
+
         float elapsedTime = 0f;
         while (true)
         {
@@ -120,11 +126,15 @@ class Puzzle1Blocker : Component
             float curvedT = Mathf.Pow(t, easeIntensity);
 
             float currentHeight = Mathf.Lerp(initialVine, finalVinesHeight, curvedT);
-            entity.transform.position = new Vector3(entity.transform.position.x, currentHeight, entity.transform.position.z);
+
+            float shakeX = Mathf.Sin(elapsedTime * trembleFrequency) * trembleMagnitude;
+            float shakeZ = Mathf.Cos(elapsedTime * trembleFrequency) * trembleMagnitude;
+
+            entity.transform.position = new Vector3(baseX + shakeX, currentHeight, baseZ + shakeZ);
 
             if (t >= 1f)
             {
-                entity.transform.position = new Vector3(entity.transform.position.x, finalVinesHeight, entity.transform.position.z);
+                entity.transform.position = new Vector3(baseX, finalVinesHeight, baseZ);
                 break;
             }
             yield return null;

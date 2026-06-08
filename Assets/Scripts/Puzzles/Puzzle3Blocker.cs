@@ -56,10 +56,13 @@ class Puzzle3Blocker : Component
 
     [Header("Feedback")]
     public Entity risingParticlesEntity;
-    private ParticleComponent risingParticles;
+    private ParticleComponent fallingParticles;
 
     public Entity risingPlatformSFXEntity;
-    private AudioSource risingPlatformSFX;
+    private AudioSource fallenRockInitSFX;
+
+    public Entity impactRockInitSFXEntity;
+    private AudioSource impactRockInitSFX;
 
     [Header("Puzzle completition")]
 
@@ -90,12 +93,16 @@ class Puzzle3Blocker : Component
 
         if (risingParticlesEntity != null)
         {
-            risingParticles = risingParticlesEntity.GetComponent<ParticleComponent>();
-            risingParticles.Stop();
+            fallingParticles = risingParticlesEntity.GetComponent<ParticleComponent>();
+            fallingParticles.Stop();
         }
         if (risingPlatformSFXEntity != null)
         {
-            risingPlatformSFX = risingPlatformSFXEntity.GetComponent<AudioSource>();
+            fallenRockInitSFX = risingPlatformSFXEntity.GetComponent<AudioSource>();
+        }
+        if (impactRockInitSFXEntity != null)
+        {
+            impactRockInitSFX = impactRockInitSFXEntity.GetComponent<AudioSource>();
         }
 
         if (loweringParticlesEntity != null)
@@ -161,13 +168,15 @@ class Puzzle3Blocker : Component
 
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeRotationVel, cameraShakeAmountVel);
 
-        if (risingParticles != null) risingParticles.Play();
-        if (risingPlatformSFX != null) risingPlatformSFX.Play();
+        if (fallenRockInitSFX != null) fallenRockInitSFX.Play();
 
         yield return new WaitForSeconds(pauseBeforeRising);
 
         hasRisen = true;
         float elapsedTime = 0f;
+
+        bool hasImpacted = false;
+
         while (elapsedTime < riseDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -177,12 +186,22 @@ class Puzzle3Blocker : Component
             float currentHeight = Mathf.Lerp(initialBlockerHeight, finalBlockerHeight, curvedT);
             fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, currentHeight, fallingRock.transform.position.z);
 
+            if(elapsedTime > (riseDuration - (riseDuration / 6)) && !hasImpacted)
+            {
+                hasImpacted = true;
+                if (impactRockInitSFX != null) impactRockInitSFX.Play();
+            }
+
             yield return null;
         }
+        if (fallingParticles != null) fallingParticles.Play();
 
         fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, finalBlockerHeight, fallingRock.transform.position.z);
+        Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeRotationVel, cameraShakeAmountVel);
 
-        if (risingParticles != null) risingParticles.Stop();
+        yield return new WaitForSeconds(0.5f);
+
+        if (fallingParticles != null) fallingParticles.Stop();
 
         yield return new WaitForSeconds(riseCamFocusDuration);
 
@@ -221,6 +240,12 @@ class Puzzle3Blocker : Component
 
             Player.Instance.Camera.SetIsShaking(true, rockShakeDuration, rockShakeAmount, rockShakeRotation, rockShakeAmountVel, rockShakeRotationVel);
 
+            float baseX = fallingRock.transform.position.x;
+            float baseZ = fallingRock.transform.position.z;
+
+            float trembleMagnitude = 0.07f;
+            float trembleFrequency = 50f;
+
             float elapsedTime = 0f;
             while (elapsedTime < lowerDuration)
             {
@@ -229,13 +254,17 @@ class Puzzle3Blocker : Component
                 float curvedT = Mathf.Pow(t, easeIntensity);
 
                 float currentHeight = Mathf.Lerp(initialRockHeight, finalRockHeight, curvedT);
-                fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, currentHeight, fallingRock.transform.position.z);
+
+                float shakeX = Mathf.Sin(elapsedTime * trembleFrequency) * trembleMagnitude;
+                float shakeZ = Mathf.Cos(elapsedTime * trembleFrequency) * trembleMagnitude;
+
+                fallingRock.transform.position = new Vector3(baseX + shakeX, currentHeight, baseZ + shakeZ);
 
                 yield return null;
             }
 
-            fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, finalRockHeight, fallingRock.transform.position.z);
-        
+            fallingRock.transform.position = new Vector3(baseX, finalRockHeight, baseZ);
+
             if (loweringParticles != null) loweringParticles.Stop();
         }
 
