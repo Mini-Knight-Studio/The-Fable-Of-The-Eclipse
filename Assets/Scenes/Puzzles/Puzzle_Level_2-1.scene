@@ -521,7 +521,7 @@
             ],
             "name": "Puzzle_Borders",
             "order": 2,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "666815e3-731b-f199-1238-ff869804f25c"
         },
@@ -1182,7 +1182,7 @@
             ],
             "name": "PuzzleBoard",
             "order": 1,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "354de116-b1a1-78fd-a839-949da8e33a56"
         },
@@ -2229,7 +2229,7 @@
             ],
             "name": "LevelFadeIn",
             "order": 9,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "1c906acc-0a55-dbbe-1d2c-1565746af07c"
         },
@@ -2487,15 +2487,18 @@
                             "collectGemSFX": "61620816-1d0c-2ceb-c8fc-305cf8869d49",
                             "collectTime": 1.0,
                             "completeSFX": "0fa1cd41-1003-75a1-f9ad-20a12aa79be0",
-                            "doorCameraZoom": 0.0,
+                            "doorCameraZoom": 10.0,
                             "easeIntensity": 1.5,
                             "failSFX": "5dc118b6-6f4d-35f2-8b7e-cbd02d5d55d3",
-                            "fallDuration": 4.0,
+                            "fallDuration": 3.5,
                             "maxRounds": 5,
-                            "mechanichDoorFinalHeight": -9.100000381469727,
+                            "mechanichDoorFinalHeight": -10.0,
                             "mechanichDoorInitialHeight": 8.25,
-                            "mechanichDoorParticlesEntity": "",
-                            "mechanichDoorSFXEntity": "",
+                            "mechanichDoorParticlesEntity": "408b1f9b-5a55-4914-8859-a5021d1877a5",
+                            "mechanichDoorSFXEntity": "e49b0372-17b5-417a-937a-a4e98cca7a78",
+                            "mechanichDoorSFXEntity2": "786110b3-5fc8-40f8-af78-7b11ea0e9814",
+                            "mechanichDoorSFXEntity3": "1b9efcf3-1d1c-45a6-a6c3-71fb1479c04b",
+                            "mechanichDoorThumpSFXEntity": "cf83dda9-b9ec-46ca-a771-cbf7cb0503db",
                             "movementDistance": 1.75,
                             "movementSpeed": 1.0,
                             "pauseBeforeFalling": 0.5,
@@ -2630,8 +2633,8 @@
                 }
             ],
             "name": "Puzzle_Goal",
-            "order": 3,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "order": 2,
+            "parent_uuid": "0d560a49-293e-4eec-9b0d-9cf92a758350",
             "static": false,
             "uuid": "b388c2d6-e4fd-bdae-46db-caa3ddffa5bd"
         },
@@ -2904,7 +2907,7 @@
             ],
             "name": "Colliders",
             "order": 4,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "4b04ae2a-bcc1-14d6-0bf2-627617b726a2"
         },
@@ -3457,7 +3460,7 @@
             ],
             "name": "Lighting",
             "order": 5,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "07a093b1-5552-f8af-16ed-156f6110db5a"
         },
@@ -3674,7 +3677,7 @@
             ],
             "name": "Pillars",
             "order": 6,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": false,
             "uuid": "fb076017-00ea-c384-dd59-90aafe82e22d"
         },
@@ -6041,6 +6044,64 @@
             "components": [
                 {
                     "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "aee96b25-ca08-04a8-e19c-f15b41fdc7d1"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "e4159e53-50d0-f9d2-c8c6-84c8b9bbcaea"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.6129999756813049,
+                        "playOnAwake": false,
+                        "volume": 1.0
+                    },
+                    "is_active": true,
+                    "uuid": "eae38454-1ebf-106c-4c5e-59b7ebaaebf1"
+                }
+            ],
+            "name": "MechanicDoorSFX",
+            "order": 1,
+            "parent_uuid": "b385799c-476c-41f9-a53f-e40b95949bee",
+            "static": true,
+            "uuid": "e49b0372-17b5-417a-937a-a4e98cca7a78"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
                     "recttransform": {
                         "euler_angles": {
                             "x": 0.0,
@@ -6553,7 +6614,7 @@
             ],
             "name": "EntranceSFX",
             "order": 8,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "70442e90-92f2-75b4-af1f-512ad0f1fd98"
         },
@@ -8474,7 +8535,7 @@
             ],
             "name": "Music",
             "order": 7,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "3a4b9f74-49a2-3616-84d0-7ababa58a8d7"
         },
@@ -9066,7 +9127,7 @@
             ],
             "name": "LevelFadeOut",
             "order": 10,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "d2843566-e904-fe7d-5dac-e6ef561c5d43"
         },
@@ -9821,7 +9882,7 @@
             ],
             "name": "PREFAB_BLOCK",
             "order": 0,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "214a877e-b110-5f9f-4d00-a888bf417561"
         },
@@ -17433,6 +17494,64 @@
             "parent_uuid": "8a259dff-0c42-1901-7ec0-70a0765364fa",
             "static": true,
             "uuid": "1c3bfc45-3f32-b46a-35b0-05bd14fbad86"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "20603772-218a-4af8-eb0e-43baef9d0cd0"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "b5b3e2b8-591b-e196-ace6-c60609be433a"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.4740000069141388,
+                        "playOnAwake": false,
+                        "volume": 0.5170000195503235
+                    },
+                    "is_active": true,
+                    "uuid": "632296ca-c53e-97df-12a7-c5dab1649c23"
+                }
+            ],
+            "name": "SinkingSFX",
+            "order": 1,
+            "parent_uuid": "f6bc9691-6cb6-cd27-b137-9ecc68322deb",
+            "static": true,
+            "uuid": "586b02ec-fa44-d40a-cd57-7a0ceb3eff2a"
         },
         {
             "active": true,
@@ -29315,7 +29434,7 @@
             ],
             "name": "Puzzle_Board_1",
             "order": 11,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "9d91803b-63fa-72d6-d74a-30708db18b6e"
         },
@@ -30549,6 +30668,142 @@
                     "transform": {
                         "euler_angles": {
                             "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 11.326491355895996,
+                            "y": -3.814697265625e-06,
+                            "z": -46.28514099121094
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f3c21b33-b8cb-ef52-1d53-e5f6b7c5d938"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "applyRotation": true,
+                            "applyScale": true,
+                            "billboard": 0,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 1000,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": true,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.9954416155815125,
+                                    "g": 1.0,
+                                    "r": 0.8465346693992615
+                                },
+                                "colorend": {
+                                    "a": 0.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "emissivebegin": 1.0,
+                                "emissiveend": 1.0,
+                                "lifetime": 2.0,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 9.5,
+                                    "y": 0.0,
+                                    "z": 11.100000381469727
+                                },
+                                "rotation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "rotationSpeed": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "rotationSpeedVariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 15.0
+                                },
+                                "rotationVariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 360.0
+                                },
+                                "sizebegin": 3.2799999713897705,
+                                "sizeend": 1.399999976158142,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 1.0,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 0.5,
+                                    "y": 0.20000000298023224,
+                                    "z": 0.5
+                                }
+                            },
+                            "poolindex": 999,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": -2.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 200,
+                            "sprite_uuid": "cf539ce5-a7ea-3cd9-35f9-07200fb08b52"
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "af36d762-727b-e14c-827a-b4d83ccdb9b7"
+                }
+            ],
+            "name": "SinkingParticles",
+            "order": 0,
+            "parent_uuid": "f6bc9691-6cb6-cd27-b137-9ecc68322deb",
+            "static": true,
+            "uuid": "762b7c95-b2e6-8d7d-521b-5ccc7665690e"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
                             "y": 90.0,
                             "z": 0.0
                         },
@@ -31430,7 +31685,7 @@
             ],
             "name": "LevelContainer",
             "order": 12,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "dc750d45-0198-6226-6b5d-44e3586c9606"
         },
@@ -31630,8 +31885,8 @@
                             "fallCameraZoom": 13.0,
                             "fallDuration": 3.0,
                             "fallingBridge": "0b992ec1-1088-600a-85d8-7bacf0e4f7e5",
-                            "fallingParticlesEntity": "",
-                            "fallingPlatformSFXEntity": "",
+                            "fallingParticlesEntity": "762b7c95-b2e6-8d7d-521b-5ccc7665690e",
+                            "fallingPlatformSFXEntity": "586b02ec-fa44-d40a-cd57-7a0ceb3eff2a",
                             "finalPlatformHeight": -10.0,
                             "focusPointOnFall": "36f2f646-4773-f1c5-4545-da4414e7d130",
                             "focusPointOnMural": "91890896-cdcf-8719-8da4-fac1daa81332",
@@ -31643,6 +31898,7 @@
                             "pauseBeforeFalling": 0.5,
                             "puzzleCamFocusDuration": 2.0,
                             "puzzleCameraZoom": 20.0,
+                            "underwaterExplosionSFXEntity": "d277cbd8-23b4-1c8c-e5a2-f1ce51e66e27",
                             "vistaPointAfterFall": "bb334777-5f60-17b8-b27e-2d1b74c75c6f"
                         }
                     },
@@ -32521,9 +32777,9 @@
                     "uuid": "78d1de0f-ff35-162b-b815-25b48cfc6adf"
                 }
             ],
-            "name": "VistaPointDoor",
-            "order": 13,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "name": "FocusPointDoor",
+            "order": 3,
+            "parent_uuid": "0d560a49-293e-4eec-9b0d-9cf92a758350",
             "static": true,
             "uuid": "816043c0-b752-f7bf-8369-83e3f774aba6"
         },
@@ -33359,8 +33615,8 @@
                 }
             ],
             "name": "Interactables",
-            "order": 14,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "order": 13,
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "74b19661-f873-14de-8ad1-2676fe4fa38f"
         },
@@ -33410,8 +33666,8 @@
                 }
             ],
             "name": "InitialPositionManager",
-            "order": 15,
-            "parent_uuid": "4b0288f1-a482-2a82-2884-cfc4bc3535a0",
+            "order": 14,
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
             "static": true,
             "uuid": "1c75ce8c-1ca0-300f-5d5e-90bcb772611c"
         },
@@ -33865,7 +34121,7 @@
                         "rotation": {
                             "w": 0.9982166886329651,
                             "x": 0.0,
-                            "y": -0.059694793075323105,
+                            "y": -0.0596948005259037,
                             "z": 0.0
                         },
                         "scale": {
@@ -33911,9 +34167,9 @@
                         },
                         "rotation": {
                             "w": 0.5668320655822754,
-                            "x": -0.1665222942829132,
-                            "y": 0.7904416918754578,
-                            "z": -0.16178281605243683
+                            "x": -0.16652227938175201,
+                            "y": 0.790441632270813,
+                            "z": -0.16178277134895325
                         },
                         "scale": {
                             "x": 4.1731858253479,
@@ -34468,9 +34724,9 @@
                         },
                         "rotation": {
                             "w": 0.9828903675079346,
-                            "x": -0.04257599636912346,
+                            "x": -0.04257600009441376,
                             "y": -0.07967805117368698,
-                            "z": -0.16051559150218964
+                            "z": -0.16051560640335083
                         },
                         "scale": {
                             "x": 4.173185348510742,
@@ -36048,6 +36304,522 @@
             "parent_uuid": "d9ed4a9e-991c-78ec-03b3-168a19f8b8dc",
             "static": true,
             "uuid": "0ef75003-8490-370f-a1fc-433728945ccc"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "93c354c1-6888-7a6a-f13c-485fb04af761"
+                }
+            ],
+            "name": "PuzzleGoalGroup",
+            "order": 3,
+            "parent_uuid": "b6f11c12-a4c8-254d-b132-c56ca37b9230",
+            "static": true,
+            "uuid": "0d560a49-293e-4eec-9b0d-9cf92a758350"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 17.294387817382813,
+                            "y": -3.8037842386984266e-06,
+                            "z": 30.895496368408203
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "a2b095fd-5e1f-18f9-c6db-21238fba8dea"
+                }
+            ],
+            "name": "MechanicDoorFocusPoint",
+            "order": 0,
+            "parent_uuid": "0d560a49-293e-4eec-9b0d-9cf92a758350",
+            "static": true,
+            "uuid": "dc57c5d2-860a-4dd5-9dee-98eda0358bf3"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "f0b77483-6a91-b95a-f7fd-439062420376"
+                }
+            ],
+            "name": "Feedback",
+            "order": 1,
+            "parent_uuid": "0d560a49-293e-4eec-9b0d-9cf92a758350",
+            "static": true,
+            "uuid": "b385799c-476c-41f9-a53f-e40b95949bee"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "82076605-e60a-a934-77fc-1939076bac9c"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "b09fd95b-4710-3c48-8923-1b2454041668"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.925000011920929,
+                        "playOnAwake": false,
+                        "volume": 0.125
+                    },
+                    "is_active": true,
+                    "uuid": "fc79430f-60ad-9142-4fea-30556ec96b9c"
+                }
+            ],
+            "name": "MechanicDoorSFX_1",
+            "order": 2,
+            "parent_uuid": "b385799c-476c-41f9-a53f-e40b95949bee",
+            "static": true,
+            "uuid": "786110b3-5fc8-40f8-af78-7b11ea0e9814"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 11.326491355895996,
+                            "y": -3.814697265625e-06,
+                            "z": 36.4058837890625
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "a3571c61-178c-52b2-a919-7bbf41c38be6"
+                },
+                {
+                    "is_active": true,
+                    "particlecomponent": {
+                        "0": {
+                            "active": true,
+                            "applyRotation": true,
+                            "applyScale": true,
+                            "billboard": 0,
+                            "emmitertimer": 0.0,
+                            "followowner": true,
+                            "localvelocity": true,
+                            "maxparticles": 1000,
+                            "name": "DefaultParticle",
+                            "particlefollowemitter": true,
+                            "particleprops": {
+                                "colorbegin": {
+                                    "a": 1.0,
+                                    "b": 0.3137255012989044,
+                                    "g": 0.3137255012989044,
+                                    "r": 0.3137255012989044
+                                },
+                                "colorend": {
+                                    "a": 0.0,
+                                    "b": 1.0,
+                                    "g": 1.0,
+                                    "r": 1.0
+                                },
+                                "emissivebegin": 1.0,
+                                "emissiveend": 1.0,
+                                "lifetime": 1.0,
+                                "position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "positionvariation": {
+                                    "x": 5.699999809265137,
+                                    "y": 0.0,
+                                    "z": 1.899999976158142
+                                },
+                                "rotation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "rotationSpeed": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "rotationSpeedVariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 15.0
+                                },
+                                "rotationVariation": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 360.0
+                                },
+                                "sizebegin": 0.8500000238418579,
+                                "sizeend": 1.399999976158142,
+                                "sizevariation": 0.5,
+                                "velocity": {
+                                    "x": 0.0,
+                                    "y": 0.6000000238418579,
+                                    "z": 0.0
+                                },
+                                "velocityvariation": {
+                                    "x": 0.5,
+                                    "y": 0.20000000298023224,
+                                    "z": 0.5
+                                }
+                            },
+                            "poolindex": 999,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "positionoffset": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "spawnrate": 200,
+                            "sprite_uuid": "ac2e0c00-7389-c84e-8054-1e7a86080086"
+                        },
+                        "emitterscount": 1,
+                        "playing": false
+                    },
+                    "uuid": "00536e04-14d3-803a-52df-9747c5c0814c"
+                }
+            ],
+            "name": "MechanicDoorParticles",
+            "order": 0,
+            "parent_uuid": "b385799c-476c-41f9-a53f-e40b95949bee",
+            "static": true,
+            "uuid": "408b1f9b-5a55-4914-8859-a5021d1877a5"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "42c77803-6e0c-15ea-1e67-d16e78b3f9a8"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "8b100ada-1f11-9956-f704-c64913692787"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.925000011920929,
+                        "playOnAwake": false,
+                        "volume": 0.052000001072883606
+                    },
+                    "is_active": true,
+                    "uuid": "bf74ab34-c48c-3a76-0753-11521a5a2e68"
+                }
+            ],
+            "name": "MechanicDoorSFX_2",
+            "order": 3,
+            "parent_uuid": "b385799c-476c-41f9-a53f-e40b95949bee",
+            "static": true,
+            "uuid": "1b9efcf3-1d1c-45a6-a6c3-71fb1479c04b"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "15fac89b-c8de-48c7-1527-33afbbf96cf2"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "2d0ce47a-df20-a0a8-9345-d7830d4e47d3"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.6499999761581421,
+                        "playOnAwake": false,
+                        "volume": 0.3880000114440918
+                    },
+                    "is_active": true,
+                    "uuid": "39f05baf-ab9e-830e-d65e-69d0677366fc"
+                }
+            ],
+            "name": "MechanicDoorThumpSFX",
+            "order": 4,
+            "parent_uuid": "b385799c-476c-41f9-a53f-e40b95949bee",
+            "static": true,
+            "uuid": "cf83dda9-b9ec-46ca-a771-cbf7cb0503db"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "1f0814c3-c913-7d9c-8212-b6cb07d92614"
+                }
+            ],
+            "name": "Feedback",
+            "order": 6,
+            "parent_uuid": "d9ed4a9e-991c-78ec-03b3-168a19f8b8dc",
+            "static": true,
+            "uuid": "f6bc9691-6cb6-cd27-b137-9ecc68322deb"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "081eaac7-261b-fdab-e304-fcbb1486c13d"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "b12a257c-0b3e-f26d-680f-204ab3e46084"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 0.6129999756813049,
+                        "playOnAwake": false,
+                        "volume": 0.4569999873638153
+                    },
+                    "is_active": true,
+                    "uuid": "2b454f6b-4c31-7525-0cd9-fe8be394fc74"
+                }
+            ],
+            "name": "UnderwaterExplosionSFX",
+            "order": 2,
+            "parent_uuid": "f6bc9691-6cb6-cd27-b137-9ecc68322deb",
+            "static": true,
+            "uuid": "d277cbd8-23b4-1c8c-e5a2-f1ce51e66e27"
         }
     ]
 }

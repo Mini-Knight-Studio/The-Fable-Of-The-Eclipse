@@ -61,6 +61,9 @@ class Puzzle2Blocker : Component
     public Entity fallingPlatformSFXEntity;
     private AudioSource fallingPlatformSFX;
 
+    public Entity underwaterExplosionSFXEntity;
+    private AudioSource underwaterExplosionSFX;
+
     void OnCreate()
     {
         initialPlatformHeight = entity.transform.position.y;
@@ -70,6 +73,11 @@ class Puzzle2Blocker : Component
             fallingParticles = fallingParticlesEntity.GetComponent<ParticleComponent>();
             fallingParticles.Stop();
         }
+
+        if (fallingPlatformSFXEntity != null)
+            fallingPlatformSFX = fallingPlatformSFXEntity.GetComponent<AudioSource>();
+        if (underwaterExplosionSFXEntity != null)
+            underwaterExplosionSFX = underwaterExplosionSFXEntity.GetComponent<AudioSource>();
 
         levelFadeOutEvent = levelFadeOut.GetComponent<FadeInOutEvent>();
         collider = colliderEnitity.GetComponent<BoxCollider>();
@@ -145,14 +153,24 @@ class Puzzle2Blocker : Component
 
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeRotationVel, cameraShakeAmountVel);
 
-        if (fallingParticlesEntity != null) fallingParticles.Play();
-        if (fallingPlatformSFXEntity != null) fallingPlatformSFX.Play();
+        if (underwaterExplosionSFXEntity != null) underwaterExplosionSFX.Play();
 
         yield return new WaitForSeconds(pauseBeforeFalling);
+        if (fallingParticlesEntity != null) fallingParticles.Play();
 
         float elapsedTime = 0f;
+
+        bool particleDurationDone = false;
+
         while (elapsedTime < fallDuration)
         {
+            if (elapsedTime > fallDuration/3.5 && !particleDurationDone)
+            {
+                particleDurationDone = true;
+                if (fallingPlatformSFXEntity != null) fallingPlatformSFX.Play();
+                if (fallingParticlesEntity != null) fallingParticles.Stop();
+            }
+
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / fallDuration;
             float curvedT = Mathf.Pow(t, easeIntensity);
@@ -164,8 +182,6 @@ class Puzzle2Blocker : Component
         }
 
         fallingBridge.transform.position = new Vector3(fallingBridge.transform.position.x, finalPlatformHeight, fallingBridge.transform.position.z);
-
-        if (fallingParticlesEntity != null) fallingParticles.Stop();
 
         yield return new WaitForSeconds(fallCamFocusDuration);
 

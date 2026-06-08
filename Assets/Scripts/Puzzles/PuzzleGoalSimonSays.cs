@@ -79,6 +79,13 @@ class PuzzleGoalSimonSays : Component
 
     public Entity mechanichDoorSFXEntity;
     private AudioSource mechanichDoorSFX;
+    public Entity mechanichDoorSFXEntity2;
+    private AudioSource mechanichDoorSFX2;
+    public Entity mechanichDoorSFXEntity3;
+    private AudioSource mechanichDoorSFX3;
+
+    public Entity mechanichDoorThumpSFXEntity;
+    private AudioSource mechanichDoorThumpSFX;
 
     private float initialGoalY;
 
@@ -120,6 +127,13 @@ class PuzzleGoalSimonSays : Component
 
         if (mechanichDoorSFXEntity != null)
             mechanichDoorSFX = mechanichDoorSFXEntity.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity2 != null)
+            mechanichDoorSFX2 = mechanichDoorSFXEntity2.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity3 != null)
+            mechanichDoorSFX3 = mechanichDoorSFXEntity3.GetComponent<AudioSource>();
+
+        if (mechanichDoorThumpSFXEntity != null)
+            mechanichDoorThumpSFX = mechanichDoorThumpSFXEntity.GetComponent<AudioSource>();
 
         LockAllPillars();
         HidePromptAllPillars();
@@ -399,12 +413,15 @@ class PuzzleGoalSimonSays : Component
         Player.Instance.Camera.FocusOnPoint(MechanicDoorVistaPoint.transform.position, doorCameraZoom, 4);
         yield return new WaitForSeconds(0.5f);
 
-        Player.Instance.Camera.SetIsShaking(true, fallDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+        if (mechanichDoorParticlesEntity != null) mechanichDoorParticles.Play();
 
-        if (mechanichDoorParticles != null) mechanichDoorParticles.Play();
-        if (mechanichDoorSFX != null) mechanichDoorSFX.Play();
+        if (mechanichDoorSFXEntity != null) mechanichDoorSFX.Play();
+        if (mechanichDoorSFXEntity2 != null) mechanichDoorSFX2.Play();
+        if (mechanichDoorSFXEntity3 != null) mechanichDoorSFX3.Play();
 
         yield return new WaitForSeconds(pauseBeforeFalling);
+
+        Player.Instance.Camera.SetIsShaking(true, fallDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
 
         float elapsedTime = 0f;
         while (elapsedTime < fallDuration)
@@ -422,7 +439,11 @@ class PuzzleGoalSimonSays : Component
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
         MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
 
-        if (mechanichDoorParticles != null) mechanichDoorParticles.Stop();
+        if (mechanichDoorThumpSFXEntity != null) mechanichDoorThumpSFX.Play();
+
+        if (mechanichDoorParticlesEntity != null) mechanichDoorParticles.Stop();
+        if (mechanichDoorSFXEntity2 != null) mechanichDoorSFX2.Stop();
+        if (mechanichDoorSFXEntity3 != null) mechanichDoorSFX3.Stop();
 
         yield return new WaitForSeconds(1.0f);
 
@@ -430,9 +451,6 @@ class PuzzleGoalSimonSays : Component
         yield return new WaitForSeconds(0.5f);
 
         currentState = State.Completed;
-        Gem.GetComponent<BoxCollider>().SetActive(true);
-        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
-        completeSFX.GetComponent<AudioSource>().Play();
 
         GameManager.SetState(GameManager.GameState.DEFAULT);
     }
