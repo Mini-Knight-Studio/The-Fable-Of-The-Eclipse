@@ -149,9 +149,10 @@ public class Player : Component
             Combat.ProcessCombat();
             Torch.ProcessTorch();
             Grapple.ProcessGrappel();
-            Animation.ProcessAnimations();
             Feedback.ProcessFeedback();
         }
+        if (GameManager.state != GameManager.GameState.FREEZE)
+            Animation.ProcessAnimations();
     }
 
     void OnDestroy()
