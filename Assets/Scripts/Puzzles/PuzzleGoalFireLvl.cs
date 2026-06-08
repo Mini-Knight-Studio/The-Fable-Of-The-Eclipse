@@ -17,6 +17,9 @@ class PuzzleGoalFireLvl : Component
 
     public Entity PlayerCollidersHolder;
 
+    public Entity puzzle3BlockerEntity;
+    public Puzzle3Blocker puzzle3Blocker;
+
     [Header("Settings")]
     public float movementSpeed = 2.0f;
     public float movementDistance = 1.0f;
@@ -71,6 +74,8 @@ class PuzzleGoalFireLvl : Component
         Gem.GetComponent<BoxCollider>().SetActive(false);
 
         moveSFX = entity.GetComponent<AudioSource>();
+
+        puzzle3Blocker = puzzle3BlockerEntity.GetComponent<Puzzle3Blocker>();
 
         goalParticles = entity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
@@ -259,6 +264,8 @@ class PuzzleGoalFireLvl : Component
         //{
         //    UIPopupManager.Instance.ShowPopup(popupName);
         //}
+
+        puzzle3Blocker.StartCompletitionCinematic();
 
         isCollecting = false;
     }

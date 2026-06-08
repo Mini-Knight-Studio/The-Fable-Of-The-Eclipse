@@ -134,8 +134,6 @@ class PuzzleGoal : Component
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
 
             completeSFX.GetComponent<AudioSource>().Play();
-
-            StartCoroutine(PuzzleCompleteCinematic());
         }
 
         if (!isCollecting && Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
@@ -276,6 +274,8 @@ class PuzzleGoal : Component
         //{
         //    UIPopupManager.Instance.ShowPopup(popupName);
         //}
+
+        StartCoroutine(PuzzleCompleteCinematic());
 
         isCollecting = false;
     }

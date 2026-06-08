@@ -69,6 +69,7 @@ class PuzzleGoalSimonSays : Component
     public float mechanichDoorInitialHeight = 0f;
     public float mechanichDoorFinalHeight = 0f;
 
+    public float doorCameraZoom = 20f;
     public float fallDuration = 2.0f;
     public float pauseBeforeFalling = 0.5f;
     public float easeIntensity = 1.5f;
@@ -268,49 +269,40 @@ class PuzzleGoalSimonSays : Component
             bool roundFailed = false;
             while (playerIndex < sequence.Count)
             {
-                bool aPillarIsActivating = false;
+                int pressedIndex = -1;
                 for (int i = 0; i < simonPillars.Length; i++)
                 {
-                    if (simonPillars[i] != null && simonPillars[i].active && !simonPillars[i].interactPrompt.Active)
+                    if (simonPillars[i] != null && simonPillars[i].wasPressed)
                     {
-                        aPillarIsActivating = true;
+                        pressedIndex = i;
                         break;
                     }
                 }
 
-                if (!aPillarIsActivating)
+                if (pressedIndex != -1)
                 {
-                    int pressedIndex = -1;
-                    for (int i = 0; i < simonPillars.Length; i++)
+                    if (sequence[playerIndex] == pressedIndex)
                     {
-                        if (simonPillars[i] != null && simonPillars[i].wasPressed)
-                        {
-                            pressedIndex = i;
-                            break;
-                        }
+                        playerIndex++;
+                        simonPillars[pressedIndex].ResetState();
+                        simonPillars[pressedIndex].interactPrompt.SetActive(false);
+
+                        LockAllPillars();
+
+                        if (playerIndex >= sequence.Count) HidePromptAllPillars();
+
+                        yield return new WaitForSeconds(1f);
+
+                        if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
+                        simonPillars[pressedIndex].ResetState();
+
+                        UnlockAllPillars();
                     }
-
-                    if (pressedIndex != -1)
+                    else
                     {
-                        if (sequence[playerIndex] == pressedIndex)
-                        {
-                            playerIndex++;
-                            simonPillars[pressedIndex].ResetState();
-                            simonPillars[pressedIndex].interactPrompt.SetActive(false);
-
-                            if (playerIndex >= sequence.Count) HidePromptAllPillars();
-
-                            yield return new WaitForSeconds(1f);
-
-                            if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
-                            simonPillars[pressedIndex].ResetState();
-                        }
-                        else
-                        {
-                            simonPillars[pressedIndex].ResetState();
-                            roundFailed = true;
-                            break;
-                        }
+                        simonPillars[pressedIndex].ResetState();
+                        roundFailed = true;
+                        break;
                     }
                 }
                 yield return null;
@@ -387,6 +379,8 @@ class PuzzleGoalSimonSays : Component
         //    UIPopupManager.Instance.ShowPopup(popupName);
         //}
 
+        StartCoroutine(PuzzleCompleteCinematic());
+
         isCollecting = false;
     }
 
@@ -396,18 +390,13 @@ class PuzzleGoalSimonSays : Component
         puzzle2Completed = true;
 
         DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = true;
-
-        StartCoroutine(PuzzleCompleteCinematic());
     }
 
     IEnumerator PuzzleCompleteCinematic()
     {
         GameManager.SetState(GameManager.GameState.PAUSE);
 
-        Player.Instance.Camera.FocusOnPoint(Gem.transform.position, 10, 4);
-        yield return new WaitForSeconds(1.5f);
-
-        Player.Instance.Camera.FocusOnPoint(MechanicDoorVistaPoint.transform.position, 20, 4);
+        Player.Instance.Camera.FocusOnPoint(MechanicDoorVistaPoint.transform.position, doorCameraZoom, 4);
         yield return new WaitForSeconds(0.5f);
 
         Player.Instance.Camera.SetIsShaking(true, fallDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
@@ -474,7 +463,7 @@ class PuzzleGoalSimonSays : Component
         float totalDropDistance = movementDistance * maxRounds;
         entity.transform.position = new Vector3(entity.transform.position.x, initialGoalY - totalDropDistance, entity.transform.position.z);
 
-        if (MechanicDoor != null)
+        if (MechanicDoor != null && DatabaseRegistry.playerDB.Player.gemWaterCollected)
         {
             MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
         }

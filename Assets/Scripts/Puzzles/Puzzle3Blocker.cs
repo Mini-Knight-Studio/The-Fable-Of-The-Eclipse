@@ -8,7 +8,7 @@ class Puzzle3Blocker : Component
     public Entity levelFadeOut;
     private FadeInOutEvent levelFadeOutEvent;
 
-    public Entity risingBlocker;
+    public Entity fallingRock;
 
     public Entity focusPointOnPuzzle;
     public Entity focusPointOnMural;
@@ -61,19 +61,51 @@ class Puzzle3Blocker : Component
     public Entity risingPlatformSFXEntity;
     private AudioSource risingPlatformSFX;
 
+    [Header("Puzzle completition")]
+
+    public Entity rockFocusPoint;
+    public float rockFocusDuration = 20f;
+    public float rockCameraZoom = 20f;
+
+    public float lowerDuration = 20f;
+    public float initialRockHeight = 20f;
+    public float finalRockHeight = 20f;
+
+    public float pauseBeforeLowering = 20f;
+    public float rockShakeDuration = 20f;
+    public float rockShakeAmount = 20f;
+    public float rockShakeRotation = 20f;
+    public float rockShakeAmountVel = 20f;
+    public float rockShakeRotationVel = 20f;
+
+    public Entity loweringParticlesEntity;
+    private ParticleComponent loweringParticles;
+
+    public Entity loweringRockSFXEntity;
+    private AudioSource loweringRockSFX;
+
     void OnCreate()
     {
-        initialBlockerHeight = risingBlocker.transform.position.y;
+        initialBlockerHeight = fallingRock.transform.position.y;
 
         if (risingParticlesEntity != null)
         {
             risingParticles = risingParticlesEntity.GetComponent<ParticleComponent>();
             risingParticles.Stop();
         }
-
         if (risingPlatformSFXEntity != null)
         {
             risingPlatformSFX = risingPlatformSFXEntity.GetComponent<AudioSource>();
+        }
+
+        if (loweringParticlesEntity != null)
+        {
+            loweringParticles = loweringParticlesEntity.GetComponent<ParticleComponent>();
+            loweringParticles.Stop();
+        }
+        if (loweringRockSFXEntity != null)
+        {
+            loweringRockSFX = loweringRockSFXEntity.GetComponent<AudioSource>();
         }
 
         levelFadeOutEvent = levelFadeOut.GetComponent<FadeInOutEvent>();
@@ -112,9 +144,6 @@ class Puzzle3Blocker : Component
     {
         GameManager.SetState(GameManager.GameState.PAUSE);
 
-        Player.Instance.Camera.FocusOnPoint(focusPointOnPuzzle.transform.position, puzzleCameraZoom, 4);
-        yield return new WaitForSeconds(puzzleCamFocusDuration);
-
         Player.Instance.Camera.FocusOnPoint(focusPointOnMural.transform.position, muralCameraZoom, 4);
         yield return new WaitForSeconds(muralCamFocusDuration);
 
@@ -127,7 +156,7 @@ class Puzzle3Blocker : Component
         Player.Instance.Camera.FocusOnPoint(focusPointOnPuzzle.transform.position, puzzleResetCameraZoom, 4);
         yield return new WaitForSeconds(puzzleResetCamFocusDuration);
 
-        Player.Instance.Camera.FocusOnPoint(risingBlocker.transform.position, riseCameraZoom, 4);
+        Player.Instance.Camera.FocusOnPoint(rockFocusPoint.transform.position, riseCameraZoom, 4);
         yield return new WaitForSeconds(0.5f);
 
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeRotationVel, cameraShakeAmountVel);
@@ -146,12 +175,12 @@ class Puzzle3Blocker : Component
             float curvedT = Mathf.Pow(t, easeIntensity);
 
             float currentHeight = Mathf.Lerp(initialBlockerHeight, finalBlockerHeight, curvedT);
-            risingBlocker.transform.position = new Vector3(risingBlocker.transform.position.x, currentHeight, risingBlocker.transform.position.z);
+            fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, currentHeight, fallingRock.transform.position.z);
 
             yield return null;
         }
 
-        risingBlocker.transform.position = new Vector3(risingBlocker.transform.position.x, finalBlockerHeight, risingBlocker.transform.position.z);
+        fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, finalBlockerHeight, fallingRock.transform.position.z);
 
         if (risingParticles != null) risingParticles.Stop();
 
@@ -166,9 +195,60 @@ class Puzzle3Blocker : Component
         GameManager.SetState(GameManager.GameState.DEFAULT);
     }
 
+    public void StartCompletitionCinematic()
+    {
+        StartCoroutine(PuzzleCompleteCinematic());
+    }
+
+    IEnumerator PuzzleCompleteCinematic()
+    {
+        GameManager.SetState(GameManager.GameState.PAUSE);
+
+        if (fallingRock != null)
+        {
+            if (fallingRock != null)
+            {
+                initialRockHeight = fallingRock.transform.position.y;
+            }
+
+            Player.Instance.Camera.FocusOnPoint(rockFocusPoint.transform.position, rockCameraZoom, 4);
+            yield return new WaitForSeconds(rockFocusDuration);
+
+            if (loweringParticles != null) loweringParticles.Play();
+            if (loweringRockSFX != null) loweringRockSFX.Play();
+
+            yield return new WaitForSeconds(pauseBeforeLowering);
+
+            Player.Instance.Camera.SetIsShaking(true, rockShakeDuration, rockShakeAmount, rockShakeRotation, rockShakeAmountVel, rockShakeRotationVel);
+
+            float elapsedTime = 0f;
+            while (elapsedTime < lowerDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / lowerDuration;
+                float curvedT = Mathf.Pow(t, easeIntensity);
+
+                float currentHeight = Mathf.Lerp(initialRockHeight, finalRockHeight, curvedT);
+                fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, currentHeight, fallingRock.transform.position.z);
+
+                yield return null;
+            }
+
+            fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, finalRockHeight, fallingRock.transform.position.z);
+        
+            if (loweringParticles != null) loweringParticles.Stop();
+        }
+
+        yield return new WaitForSeconds(1f);
+        Player.Instance.Camera.StopFocus();
+        yield return new WaitForSeconds(0.5f);
+
+        GameManager.SetState(GameManager.GameState.DEFAULT);
+    }
+
     public void BlockerFinalPos()
     {
-        risingBlocker.transform.position = new Vector3(risingBlocker.transform.position.x, finalBlockerHeight, risingBlocker.transform.position.z);
+        fallingRock.transform.position = new Vector3(fallingRock.transform.position.x, finalBlockerHeight, fallingRock.transform.position.z);
         hasRisen = true;
     }
 
