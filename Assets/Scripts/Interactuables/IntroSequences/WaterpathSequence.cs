@@ -63,8 +63,6 @@ class WaterpathSequence : Component
             Player.Instance.Camera.FocusOnHeightPoint(prepFocusTarget.transform.position, zoom, cameraSpeed);
         }
 
-        Input.StartShake(0.1f, duration);
-
         yield return new WaitForSeconds(textStarting);
 
         SimpleTextUI.Instance.Open();
