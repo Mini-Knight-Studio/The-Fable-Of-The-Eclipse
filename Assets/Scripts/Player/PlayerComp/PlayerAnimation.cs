@@ -58,6 +58,13 @@ public class PlayerAnimation : PlayerComponent
     {
         if (player.Movement == null || player.Combat == null || player.Grapple == null || player.Torch == null) return;
 
+
+        if(GameManager.state == GameManager.GameState.PAUSE)
+        {
+            Idle();
+            return;
+        }
+
         if (pushTimer > 0)
         {
             pushTimer -= Time.deltaTime;

@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Loopie;
 
 class PuzzleGoalFireLvl : Component
 {
+    [Header("References")]
     private MovingPillar[] pillars;
     private bool[] pillarTriggered;
 
@@ -13,6 +15,9 @@ class PuzzleGoalFireLvl : Component
 
     public Entity Gem;
 
+    public Entity PlayerCollidersHolder;
+
+    [Header("Settings")]
     public float movementSpeed = 2.0f;
     public float movementDistance = 1.0f;
 
@@ -30,16 +35,29 @@ class PuzzleGoalFireLvl : Component
 
     public float collectTime = 1f;
 
-    // Particles
+    [Header("Puzzle Reset")]
+    public Entity PuzzleReseter;
+    public Entity puzzleReseterPrompt;
+    public Entity focusPointOnReset;
+
+    public float resetPillarMovementDistance = 5f;
+    public float resetDuration = 3f;
+    public float easeIntensity = 1.5f;
+    public float cameraZoom = 20f;
+
+    private BoxCollider puzzleReseterCollider;
+
+    [Header("Feedback")]
     private ParticleComponent goalParticles;
     private bool particlesSwitched = true;
 
-    // Sounds
     private AudioSource moveSFX;
     public Entity completeSFX;
     public Entity collectGemSFX;
 
     public string popupName = "Popup_GemFire";
+
+    private Vector3 initialGoalPosition;
 
     void OnCreate()
     {
@@ -56,6 +74,13 @@ class PuzzleGoalFireLvl : Component
 
         goalParticles = entity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
+
+        if (PuzzleReseter != null)
+        {
+            puzzleReseterCollider = PuzzleReseter.GetComponent<BoxCollider>();
+        }
+
+        initialGoalPosition = entity.transform.position;
     }
 
     void OnUpdate()
@@ -66,6 +91,39 @@ class PuzzleGoalFireLvl : Component
         if (pendingMoves > 0 && !isMoving)
         {
             StartCoroutine(ProcessMovementQueue());
+        }
+
+        if (Player.Instance.Grapple.IsGrappling && PlayerCollidersHolder.Active)
+        {
+            PlayerCollidersHolder.SetActive(false);
+        }
+        else if (!Player.Instance.Grapple.IsGrappling && !PlayerCollidersHolder.Active)
+        {
+            PlayerCollidersHolder.SetActive(true);
+        }
+
+        if (PuzzleReseter != null)
+        {
+            if (puzzleReseterCollider.IsColliding && !puzzle3Completed)
+            {
+                if (!puzzleReseterPrompt.Active)
+                {
+                    puzzleReseterPrompt.SetActive(true);
+                }
+
+                if (Player.Instance.Input.interactKeyPressed)
+                {
+                    StartCoroutine(ResetPuzzle());
+                    puzzleReseterPrompt.SetActive(false);
+                }
+            }
+            else
+            {
+                if (puzzleReseterPrompt.Active)
+                {
+                    puzzleReseterPrompt.SetActive(false);
+                }
+            }
         }
     }
 
@@ -92,7 +150,7 @@ class PuzzleGoalFireLvl : Component
         if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle3Completed && !puzzle3Completed)
         {
             puzzle3Completed = true;
-            
+
             CompletePuzzleAuto();
 
             if (!isCollecting)
@@ -124,7 +182,7 @@ class PuzzleGoalFireLvl : Component
     IEnumerator ProcessMovementQueue()
     {
         isMoving = true;
-        
+
         goalParticles.Play();
         moveSFX.Play();
         particlesSwitched = false;
@@ -197,12 +255,133 @@ class PuzzleGoalFireLvl : Component
 
         DatabaseRegistry.playerDB.Player.gemFireCollected = true;
 
-        if (UIPopupManager.Instance != null)
-        {
-            UIPopupManager.Instance.ShowPopup(popupName);
-        }
+        //if (UIPopupManager.Instance != null)
+        //{
+        //    UIPopupManager.Instance.ShowPopup(popupName);
+        //}
 
         isCollecting = false;
+    }
+
+    IEnumerator ResetPuzzle()
+    {
+        GameManager.SetState(GameManager.GameState.PAUSE);
+
+        Player.Instance.Camera.FocusOnPoint(focusPointOnReset.transform.position, cameraZoom, 4);
+
+        Dictionary<dynamic, Vector3> lowerStartPositions = new Dictionary<dynamic, Vector3>();
+        Dictionary<dynamic, Vector3> lowerTargetPositions = new Dictionary<dynamic, Vector3>();
+
+        foreach (var pillar in pillars)
+        {
+            if (pillar != null)
+            {
+                lowerStartPositions[pillar] = pillar.transform.position;
+                lowerTargetPositions[pillar] = new Loopie.Vector3(pillar.transform.position.x, pillar.transform.position.y - resetPillarMovementDistance, pillar.transform.position.z);
+            }
+        }
+
+        float elapsedTime = 0f;
+        while (elapsedTime < resetDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Min(elapsedTime / resetDuration, 1f);
+            float curvedT = Mathf.Pow(t, easeIntensity);
+
+            foreach (var pillar in pillars)
+            {
+                if (pillar != null)
+                {
+                    pillar.transform.position = Vector3.Lerp(lowerStartPositions[pillar], lowerTargetPositions[pillar], curvedT);
+                }
+            }
+            yield return null;
+        }
+
+        foreach (var pillar in pillars)
+        {
+            if (pillar != null) pillar.transform.position = lowerTargetPositions[pillar];
+        }
+
+        Dictionary<dynamic, Vector3> riseStartPositions = new Dictionary<dynamic, Vector3>();
+        Dictionary<dynamic, Vector3> riseTargetPositions = new Dictionary<dynamic, Vector3>();
+
+        foreach (var pillar in pillars)
+        {
+            if (pillar != null)
+            {
+                pillar.ResetPillarInstant();
+
+                riseTargetPositions[pillar] = pillar.transform.position;
+
+                riseStartPositions[pillar] = new Loopie.Vector3(pillar.transform.position.x, pillar.transform.position.y - resetPillarMovementDistance, pillar.transform.position.z);
+
+                pillar.transform.position = riseStartPositions[pillar];
+            }
+        }
+
+        yield return new WaitForSeconds(2.5f);
+
+        elapsedTime = 0f;
+        while (elapsedTime < resetDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Min(elapsedTime / resetDuration, 1f);
+            float curvedT = Mathf.Pow(t, easeIntensity);
+
+            foreach (var pillar in pillars)
+            {
+                if (pillar != null)
+                {
+                    pillar.transform.position = Vector3.Lerp(riseStartPositions[pillar], riseTargetPositions[pillar], curvedT);
+                }
+            }
+            yield return null;
+        }
+
+        foreach (var pillar in pillars)
+        {
+            if (pillar != null)
+            {
+                pillar.transform.position = riseTargetPositions[pillar];
+                pillar.ResetPillarInstant();
+                yield return null;
+            }
+        }
+
+        Vector3 currentGoalPos = entity.transform.position;
+        float goalDist = (float)(initialGoalPosition - currentGoalPos).magnitude;
+
+        if (goalDist > 0.001f)
+        {
+            goalParticles.Play();
+            moveSFX.Play();
+            Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+
+            float moveDuration = goalDist / movementSpeed;
+            float moveTimer = 0f;
+
+            while (moveTimer < moveDuration)
+            {
+                moveTimer += Time.deltaTime;
+                float t = moveTimer / moveDuration;
+                entity.transform.position = Vector3.Lerp(currentGoalPos, initialGoalPosition, t);
+                yield return null;
+            }
+
+            entity.transform.position = initialGoalPosition;
+            goalParticles.Stop();
+        }
+
+        for (int i = 0; i < pillarTriggered.Length; i++)
+        {
+            pillarTriggered[i] = false;
+        }
+        pendingMoves = 0;
+
+        Player.Instance.Camera.StopFocus();
+        GameManager.SetState(GameManager.GameState.DEFAULT);
+        yield return null;
     }
 
     void OnDestroy()

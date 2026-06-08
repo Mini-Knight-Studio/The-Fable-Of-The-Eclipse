@@ -108,6 +108,12 @@ public class Player : Component
         }
     }
 
+    public void OnPostCreate()
+    {
+        PlayerHealth.ModifyMaxHealth(DatabaseRegistry.playerDB.Player.maxHealth);
+        PlayerHealth.ModifyActualHealth(DatabaseRegistry.playerDB.Player.currentHealth);
+    }
+
     public void GoToLastCheckpoint()
     {
         Vector3 pos = entity.transform.position;
@@ -143,9 +149,10 @@ public class Player : Component
             Combat.ProcessCombat();
             Torch.ProcessTorch();
             Grapple.ProcessGrappel();
-            Animation.ProcessAnimations();
             Feedback.ProcessFeedback();
         }
+        if (GameManager.state != GameManager.GameState.FREEZE)
+            Animation.ProcessAnimations();
     }
 
     void OnDestroy()
