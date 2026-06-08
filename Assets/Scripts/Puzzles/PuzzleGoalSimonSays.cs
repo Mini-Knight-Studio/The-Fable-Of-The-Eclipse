@@ -77,8 +77,8 @@ class PuzzleGoalSimonSays : Component
     public Entity mechanichDoorParticlesEntity;
     private ParticleComponent mechanichDoorParticles;
 
-    public Entity mechanichDoorPlatformSFXEntity;
-    private AudioSource mechanichDoorPlatformSFX;
+    public Entity mechanichDoorSFXEntity;
+    private AudioSource mechanichDoorSFX;
 
     private float initialGoalY;
 
@@ -118,8 +118,8 @@ class PuzzleGoalSimonSays : Component
         if (mechanichDoorParticlesEntity != null)
             mechanichDoorParticles = mechanichDoorParticlesEntity.GetComponent<ParticleComponent>();
 
-        if (mechanichDoorPlatformSFXEntity != null)
-            mechanichDoorPlatformSFX = mechanichDoorPlatformSFXEntity.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity != null)
+            mechanichDoorSFX = mechanichDoorSFXEntity.GetComponent<AudioSource>();
 
         LockAllPillars();
         HidePromptAllPillars();
@@ -402,7 +402,7 @@ class PuzzleGoalSimonSays : Component
         Player.Instance.Camera.SetIsShaking(true, fallDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
 
         if (mechanichDoorParticles != null) mechanichDoorParticles.Play();
-        if (mechanichDoorPlatformSFX != null) mechanichDoorPlatformSFX.Play();
+        if (mechanichDoorSFX != null) mechanichDoorSFX.Play();
 
         yield return new WaitForSeconds(pauseBeforeFalling);
 

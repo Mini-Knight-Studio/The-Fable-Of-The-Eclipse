@@ -60,6 +60,19 @@ class PuzzleGoal : Component
     public float doorShakeAmountVel = 10f;
     public float doorShakeRotationVel = 10f;
 
+    public Entity mechanichDoorParticlesEntity;
+    private ParticleComponent mechanichDoorParticles;
+
+    public Entity mechanichDoorSFXEntity;
+    private AudioSource mechanichDoorSFX;
+    public Entity mechanichDoorSFXEntity2;
+    private AudioSource mechanichDoorSFX2;
+    public Entity mechanichDoorSFXEntity3;
+    private AudioSource mechanichDoorSFX3;
+
+    public Entity mechanichDoorThumpSFXEntity;
+    private AudioSource mechanichDoorThumpSFX;
+
     void OnCreate()
     {
         pillars = new MovingPillar[4];
@@ -78,6 +91,19 @@ class PuzzleGoal : Component
         Gem.GetComponent<BoxCollider>().SetActive(false);
 
         moveSFX = entity.GetComponent<AudioSource>();
+
+        if (mechanichDoorParticlesEntity != null)
+            mechanichDoorParticles = mechanichDoorParticlesEntity.GetComponent<ParticleComponent>();
+
+        if (mechanichDoorSFXEntity != null)
+            mechanichDoorSFX = mechanichDoorSFXEntity.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity2 != null)
+            mechanichDoorSFX2 = mechanichDoorSFXEntity2.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity3 != null)
+            mechanichDoorSFX3 = mechanichDoorSFXEntity3.GetComponent<AudioSource>();
+
+        if (mechanichDoorThumpSFXEntity != null)
+            mechanichDoorThumpSFX = mechanichDoorThumpSFXEntity.GetComponent<AudioSource>();
 
         goalParticles = entity.GetComponent<ParticleComponent>();
         goalParticles.Stop();
@@ -125,6 +151,10 @@ class PuzzleGoal : Component
                 Gem.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
                 Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
                 Gem.GetComponent<BoxCollider>().SetActive(!DatabaseRegistry.playerDB.Player.gemAirCollected);
+                if (doorEntity != null && DatabaseRegistry.playerDB.Player.gemAirCollected)
+                {
+                    doorEntity.transform.position = new Vector3(doorEntity.transform.position.x, finalDoorHeight, doorEntity.transform.position.z);
+                }
             }
         }
 
@@ -132,6 +162,9 @@ class PuzzleGoal : Component
         {
             puzzle1Completed = true;
             DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed = true;
+
+            Gem.GetComponent<BoxCollider>().SetActive(true);
+            Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
 
             completeSFX.GetComponent<AudioSource>().Play();
         }
@@ -151,9 +184,15 @@ class PuzzleGoal : Component
             Player.Instance.Camera.FocusOnPoint(doorFocusPoint.transform.position, doorCameraZoom, 4);
             yield return new WaitForSeconds(doorFocusDuration);
 
+            if (mechanichDoorParticlesEntity != null) mechanichDoorParticles.Play();
+
+            if (mechanichDoorSFXEntity != null) mechanichDoorSFX.Play();
+            if (mechanichDoorSFXEntity2 != null) mechanichDoorSFX2.Play();
+            if (mechanichDoorSFXEntity3 != null) mechanichDoorSFX3.Play();
+
             yield return new WaitForSeconds(pauseBeforeLowering);
 
-            Player.Instance.Camera.SetIsShaking(true, doorShakeDuration, doorShakeAmount, doorShakeRotation, doorShakeAmountVel, doorShakeRotationVel);
+            Player.Instance.Camera.SetIsShaking(true, doorShakeDuration + pauseBeforeLowering, doorShakeAmount, doorShakeRotation, doorShakeAmountVel, doorShakeRotationVel);
 
             float elapsedTime = 0f;
             while (elapsedTime < lowerDuration)
@@ -169,14 +208,17 @@ class PuzzleGoal : Component
             }
 
             doorEntity.transform.position = new Vector3(doorEntity.transform.position.x, finalDoorHeight, doorEntity.transform.position.z);
+
+            if (mechanichDoorThumpSFXEntity != null) mechanichDoorThumpSFX.Play();
+
+            if (mechanichDoorParticlesEntity != null) mechanichDoorParticles.Stop();
+            if (mechanichDoorSFXEntity2 != null) mechanichDoorSFX2.Stop();
+            if (mechanichDoorSFXEntity3 != null) mechanichDoorSFX3.Stop();
         }
 
         yield return new WaitForSeconds(1.0f);
         Player.Instance.Camera.StopFocus();
         yield return new WaitForSeconds(0.5f);
-
-        Gem.GetComponent<BoxCollider>().SetActive(true);
-        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
 
         GameManager.SetState(GameManager.GameState.DEFAULT);
     }
@@ -233,11 +275,6 @@ class PuzzleGoal : Component
             pillarTriggered[i] = true;
         }
         pendingMoves = 0;
-
-        if (doorEntity != null)
-        {
-            doorEntity.transform.position = new Vector3(doorEntity.transform.position.x, finalDoorHeight, doorEntity.transform.position.z);
-        }
     }
 
     IEnumerator Collect()
