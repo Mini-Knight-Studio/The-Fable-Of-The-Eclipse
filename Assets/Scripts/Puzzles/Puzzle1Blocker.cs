@@ -8,6 +8,10 @@ class Puzzle1Blocker : Component
     public Entity levelFadeOut;
     private FadeInOutEvent levelFadeOutEvent;
 
+    [Header("References")]
+    public Entity colliderEntity;
+    private BoxCollider collider;
+
     [Header("Focus Points")]
     public Entity focusPointPuzzle;
     public float focusPuzzleZoom = 20f;
@@ -31,6 +35,7 @@ class Puzzle1Blocker : Component
 
     private float initialVine;
     private string cinematicIntroID = "puzzle1IntroDone";
+    private string cinematicBlockerID = "puzzle1BlockerDone";
 
     [Header("Feedback")]
     public Entity risingParticles;
@@ -43,24 +48,24 @@ class Puzzle1Blocker : Component
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Stop();
 
         levelFadeOutEvent = levelFadeOut.GetComponent<FadeInOutEvent>();
+        collider = colliderEntity.GetComponent<BoxCollider>();
 
         if (DatabaseRegistry.puzzlesDB.Puzzles.Puzzle1Completed)
         {
             isBurnt = true;
             hasRisen = true;
+            VinesFinalPos();
+        }
 
+        if (DatabaseRegistry.levelsDB.Levels.IsCinematicDone(cinematicBlockerID))
+        {
+            hasRisen = true;
             VinesFinalPos();
         }
 
         if (DatabaseRegistry.levelsDB.Levels.IsCinematicDone(cinematicIntroID))
         {
             hasDoneIntroCinematic = true;
-
-            if (!isBurnt)
-            {
-                hasRisen = true;
-                VinesFinalPos();
-            }
         }
     }
 
@@ -68,17 +73,24 @@ class Puzzle1Blocker : Component
     {
         if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
 
-        if (isBurnt || hasDoneIntroCinematic) return;
-
         if (!hasRisen)
         {
             levelFadeOutEvent.OnFadeOutComplete += StartRising;
         }
-    }
 
+        if (!hasDoneIntroCinematic && collider != null)
+        {
+            if (collider.HasCollided)
+            {
+                StartCoroutine(Puzzle1Cinematic());
+                collider.SetActive(false);
+            }
+        }
+    }
     private void StartRising()
     {
         if (hasRisen) return;
+        hasRisen = true;
 
         if (levelFadeOutEvent != null)
         {
@@ -91,26 +103,12 @@ class Puzzle1Blocker : Component
     IEnumerator RaiseVines()
     {
         GameManager.SetState(GameManager.GameState.PAUSE);
-        hasRisen = true;
-        hasDoneIntroCinematic = true;
-
-        if (focusPointPuzzle != null)
-        {
-            Player.Instance.Camera.FocusOnPoint(focusPointPuzzle.transform.position, focusPuzzleZoom, 4);
-            yield return new WaitForSeconds(focusPuzzleDuration);
-        }
-
-        if (focusPointMurals != null)
-        {
-            Player.Instance.Camera.FocusOnPoint(focusPointMurals.transform.position, focusMuralsZoom, 4);
-            yield return new WaitForSeconds(focusMuralsDuration);
-        }
-
-        Player.Instance.Camera.FocusOnPoint(entity.transform.position, cameraZoom, 4);
-        yield return new WaitForSeconds(camFocusDuration);
 
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Play();
         if (vinesRiseSFX != null) vinesRiseSFX.GetComponent<AudioSource>().Play();
+
+        Player.Instance.Camera.FocusOnPoint(entity.transform.position, cameraZoom, 4);
+        yield return new WaitForSeconds(camFocusDuration);
 
         yield return new WaitForSeconds(pauseBeforeRaising);
 
@@ -132,9 +130,32 @@ class Puzzle1Blocker : Component
             yield return null;
         }
 
+        Player.Instance.Camera.StopFocus();
+
         if (risingParticles != null) risingParticles.GetComponent<ParticleComponent>().Stop();
 
-        yield return new WaitForSeconds(1.0f);
+        DatabaseRegistry.levelsDB.Levels.SetCinematicDone(cinematicBlockerID);
+
+        yield return null;
+        GameManager.SetState(GameManager.GameState.DEFAULT);
+    }
+
+    IEnumerator Puzzle1Cinematic()
+    {
+        GameManager.SetState(GameManager.GameState.PAUSE);
+        hasDoneIntroCinematic = true;
+
+        if (focusPointPuzzle != null)
+        {
+            Player.Instance.Camera.FocusOnPoint(focusPointPuzzle.transform.position, focusPuzzleZoom, 4);
+            yield return new WaitForSeconds(focusPuzzleDuration);
+        }
+
+        if (focusPointMurals != null)
+        {
+            Player.Instance.Camera.FocusOnPoint(focusPointMurals.transform.position, focusMuralsZoom, 4);
+            yield return new WaitForSeconds(focusMuralsDuration);
+        }
 
         Player.Instance.Camera.StopFocus();
 

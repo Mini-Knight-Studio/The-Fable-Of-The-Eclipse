@@ -8,11 +8,15 @@ class Puzzle2Blocker : Component
     public Entity levelFadeOut;
     private FadeInOutEvent levelFadeOutEvent;
 
+    [Header("References")]
     public Entity fallingBridge;
 
     public Entity colliderEnitity;
     private BoxCollider collider;
 
+    public Entity invisibleWall;
+
+    [Header("Focus Points")]
     public Entity focusPointOnPuzzle;
     public Entity focusPointOnMural;
     public Entity focusPointOnFall;
@@ -80,6 +84,7 @@ class Puzzle2Blocker : Component
         {
             BridgeFinalPos();
             vistaPointAfterFall.SetActive(true);
+            invisibleWall.SetActive(false);
         }
     }
 
@@ -167,6 +172,7 @@ class Puzzle2Blocker : Component
         Player.Instance.Camera.StopFocus();
         yield return null;
         vistaPointAfterFall.SetActive(true);
+        invisibleWall.SetActive(false);
 
         DatabaseRegistry.levelsDB.Levels.SetCinematicDone(cinematicBlockerID);
 
