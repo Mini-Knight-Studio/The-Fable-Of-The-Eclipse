@@ -34,16 +34,27 @@ html, body
     flex-wrap: wrap;
 }
 
+.logo
+{
+    width: 60%;
+}
+
 .studio-name
 {
     color: #3f6cbf;
     font-family: "Tagesschrift", system-ui;
+    text-align: center;
 }
 
 .studio-description
 {
     color: #201e6a;
     font-family: "IM Fell DW Pica", serif;
+    text-align: center;
+    padding-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-bottom: 1px solid #201e6a;
 }
 
 .team-title
@@ -331,6 +342,13 @@ html, body
 
 @media (pointer: fine) /* Desktop PC Layout Engines */
 {
+    .studio-description, .team-text
+    {
+        font-size: 25px;
+        padding-bottom: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
     .section-title
     {
@@ -526,6 +544,12 @@ html, body
 
 @media (pointer: coarse) /* Mobile Stacked Layout Engine */
 {
+
+    .studio-description, .team-text
+    {
+        font-size: 16px;
+    }
+
     .section-title
     {
         font-size: 30px;
