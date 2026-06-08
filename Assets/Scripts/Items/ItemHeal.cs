@@ -7,9 +7,9 @@ public class HealItem : Component
     public string healItemID = "UNASSIGNED_HEALITEM";
 
     [Header("Configuration")]
-    public int healAmount = 1;
+    public int healAmount = 20;
     public bool canIncreaseMaxHealth = false;
-    public int maxHealthIncreaseAmount = 1;
+    public int maxHealthIncreaseAmount = 4;
 
     [Header("Feedback")]
     public Entity vfx;

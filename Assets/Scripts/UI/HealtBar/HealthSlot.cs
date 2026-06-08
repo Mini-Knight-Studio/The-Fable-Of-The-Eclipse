@@ -7,10 +7,24 @@ class HealthSlot : Component
     public Entity halfSlotEntity;
 
     public Image fullSlotImage;
+    public Image halfSlotImage;
+
+    private Vector4 originalFullTint = Vector4.One;
+    private Vector4 originalHalfTint = Vector4.One;
 
     void OnCreate()
     {
         fullSlotImage = fullSlotEntity.GetComponent<Image>();
+        if (fullSlotImage != null)
+        {
+            originalFullTint = fullSlotImage.GetTint();
+        }
+
+        halfSlotImage = halfSlotEntity.GetComponent<Image>();
+        if (halfSlotImage != null)
+        {
+            originalHalfTint = halfSlotImage.GetTint();
+        }
     }
 
     public void UpdateVisuals(int value)
@@ -23,11 +37,21 @@ class HealthSlot : Component
     {
         halfSlotEntity.SetActive(false);
         fullSlotEntity.SetActive(true);
-        fullSlotImage.SetTint(new Vector4(20f, 20f, 20f, 1f));
+        if (fullSlotImage != null)
+        {
+            fullSlotImage.SetTint(new Vector4(0.08f, 0.08f, 0.08f, 1f));
+        }
     }
 
     public void Unlock()
     {
-        fullSlotImage.SetTint(new Vector4(1,1,1,1));
+        if (fullSlotImage != null)
+        {
+            fullSlotImage.SetTint(originalFullTint);
+        }
+        if (halfSlotImage != null)
+        {
+            halfSlotImage.SetTint(originalHalfTint);
+        }
     }
 }

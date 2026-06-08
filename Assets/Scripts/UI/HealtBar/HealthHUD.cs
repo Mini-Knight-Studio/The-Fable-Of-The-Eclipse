@@ -3,15 +3,25 @@ using System;
 
 public class HealthHUD : Component
 {
-    public int maxHealthIcons = 5;
+    public int maxHealthIcons = 10;
 
     private HealthSlot[] healthIcons;
     private int lastKnownHealth = -1;
     private int lastKnownMaxHealth = -1;
 
+    private Entity bg4;
+    private Entity bg6;
+    private Entity bg8;
+    private Entity bg10;
+
     void OnCreate()
     {
         healthIcons = new HealthSlot[maxHealthIcons];
+
+        bg4 = entity.GetChildByName("Bg_4");
+        bg6 = entity.GetChildByName("Bg_6");
+        bg8 = entity.GetChildByName("Bg_8");
+        bg10 = entity.GetChildByName("Bg_10");
 
         int childCount = entity.GetChildren().Count;
         for (int i = 0; i < childCount; i++)
@@ -47,7 +57,13 @@ public class HealthHUD : Component
 
     private void UpdateIcons(int currentHealth, int maxHealth)
     {
-        int numActiveSlots = (maxHealth + 3) / 4;
+        // Toggle the background layouts based on maxHealth
+        if (bg4 != null) bg4.SetActive(maxHealth <= 8);
+        if (bg6 != null) bg6.SetActive(maxHealth > 8 && maxHealth <= 12);
+        if (bg8 != null) bg8.SetActive(maxHealth > 12 && maxHealth <= 16);
+        if (bg10 != null) bg10.SetActive(maxHealth > 16);
+
+        int numActiveSlots = (maxHealth + 1) / 2;
 
         if (numActiveSlots > maxHealthIcons)
             numActiveSlots = maxHealthIcons;
@@ -60,8 +76,9 @@ public class HealthHUD : Component
             if (i < numActiveSlots)
             {
                 icon.entity.SetActive(true);
+                icon.Unlock();
 
-                if (currentHealth >= 3)
+                if (currentHealth >= 2)
                 {
                     icon.UpdateVisuals(2); 
                 }
@@ -74,9 +91,7 @@ public class HealthHUD : Component
                     icon.UpdateVisuals(0);
                 }
 
-                icon.Unlock();
-
-                currentHealth -= 4;
+                currentHealth -= 2;
             }
             else
             {
