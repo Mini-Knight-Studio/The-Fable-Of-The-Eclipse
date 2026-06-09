@@ -65,12 +65,12 @@ class WaterpathSequence : Component
 
         yield return new WaitForSeconds(textStarting);
 
-        SimpleTextUI.Instance.Open();
         SimpleTextUI.Instance.SetText(textValue);
+        SimpleTextUI.Instance.Open(1);
 
-        yield return new WaitForSeconds(textDuration);
-
-        SimpleTextUI.Instance.Close();
+        yield return new WaitForUnscaledSeconds(textDuration);
+        
+        SimpleTextUI.Instance.Close(1);
 
         float remainingTime = duration - textStarting - textDuration;
         if (remainingTime > 0)

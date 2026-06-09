@@ -30,7 +30,7 @@ class SimpleTextUI : Component
 
     public void Open(float fadeInDuration = 0)
     {
-        StopAllCoroutines();
+        StopAllOwnedCoroutines();
         containerEntity.SetActive(true);
         if(canvasGroup != null && fadeInDuration > 0)
         {
@@ -41,7 +41,7 @@ class SimpleTextUI : Component
 
     public void Close(float fadeOutDuration = 0)
     {
-        StopAllCoroutines();
+        StopAllOwnedCoroutines();
         
         if (canvasGroup != null && fadeOutDuration > 0)
         {

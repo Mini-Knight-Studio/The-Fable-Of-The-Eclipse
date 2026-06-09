@@ -122,12 +122,12 @@ class VolcanoSequence : Component
         Player.Instance.Camera.SetIsShaking(true, prepDuration, prepShakeAmount, prepShakeRotation, prepShakeAmountVel, prepShakeRotationVel);
         
         yield return new WaitForSeconds(prepDuration);
-        SimpleTextUI.Instance.Open();
         SimpleTextUI.Instance.SetText(textValue);
+        SimpleTextUI.Instance.Open(1);
 
         yield return new WaitForSeconds(textDuration);
 
-        SimpleTextUI.Instance.Close();
+        SimpleTextUI.Instance.Close(1);
 
         Input.StartShake(0.5f, craterFocusDuration);
         Player.Instance.Camera.SetIsShaking(true, craterFocusDuration, craterShakeAmount, craterShakeRotation, craterShakeAmountVel, craterShakeRotationVel);
