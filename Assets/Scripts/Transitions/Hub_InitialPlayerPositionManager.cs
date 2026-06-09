@@ -14,6 +14,8 @@ class Hub_InitialPlayerPositionManager : Component
     public Entity fromWaterpathReference;
     public Entity fromFirepathReference;
 
+    private bool canSave = false;
+
     void OnPostCreate()
     {
         DatabaseRegistry.playerDB.Player.SetCurrentScene(level2SceneUUID);
@@ -44,23 +46,29 @@ class Hub_InitialPlayerPositionManager : Component
             Player.Instance.transform.local_position = pos;
             Player.Instance.transform.local_rotation = fromFirepathReference.transform.rotation;
         }
+
+        canSave = true;
     }
 
-    //void OnDrawGizmo()
-    //{
-    //    if (fromLvl1Reference != null)
-    //    {
-    //        Gizmo.DrawLine(fromLvl1Reference.transform.position, fromLvl1Reference.transform.Forward, Color.Green);
-    //    }
+    void OnUpdate()
+    {
+        if (canSave)
+        {
+            canSave = false;
+            Save();
+        }
+    }
 
-    //    if (fromWaterpathReference != null)
-    //    {
-    //        Gizmo.DrawLine(fromWaterpathReference.transform.position, fromWaterpathReference.transform.Forward, Color.Green);
-    //    }
-
-    //    if (fromFirepathReference != null)
-    //    {
-    //        Gizmo.DrawLine(fromFirepathReference.transform.position, fromFirepathReference.transform.Forward, Color.Green);
-    //    }
-    //}
+    public void Save()
+    {
+        Player player = Player.Instance;
+        if (DatabaseRegistry.playerDB != null)
+        {
+            DatabaseRegistry.playerDB.Player.SetPosition(player.entity.transform.position);
+            DatabaseRegistry.playerDB.Player.maxHealth = Player.Instance.PlayerHealth.GetMaxHealth();
+            DatabaseRegistry.playerDB.Player.currentHealth = Player.Instance.PlayerHealth.GetActualHealth();
+            DatabaseRegistry.playerDB.Save();
+            Debug.Log("Player Data Saved");
+        }
+    }
 }
