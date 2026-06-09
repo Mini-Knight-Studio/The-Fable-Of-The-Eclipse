@@ -10,6 +10,7 @@ class Meteorite : Component
     public int damage = 20;
     public bool goingUp = false;
     public bool useCurve = false;
+    public bool autoStart = false;
 
     [Header("Curve Tweaks")]
     public float curveArcHeight = 15f;
@@ -48,6 +49,11 @@ class Meteorite : Component
     {
         if (MeteoriteTrigger == null)
             MeteoriteTrigger = entity.GetComponent<BoxCollider>();
+
+        if (autoStart)
+        {
+            Fire(transform.position, transform.rotation);
+        }
     }
 
     public void Fire(Vector3 spawnPosition, Vector3 spawnRotation)
