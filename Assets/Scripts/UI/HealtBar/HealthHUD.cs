@@ -34,7 +34,7 @@ public class HealthHUD : Component
     {
         healthIcons = new HealthSlot[maxHealthIcons];
 
-        int childCount = entity.GetChildren().Count;
+        int childCount = healthIconsParent.GetChildren().Count;
         for (int i = 0; i < childCount; i++)
         {
             if (i >= maxHealthIcons)
