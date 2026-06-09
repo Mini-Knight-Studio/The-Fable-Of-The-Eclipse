@@ -5,6 +5,9 @@ using Loopie;
 class IntroMiniKnightStudio : Component
 {
     // Modyfiable values
+    public Entity julianEffectEntity;
+    private AudioSource julianEffect;
+
     public Entity backgroundEntity;
     private Image background;
 
@@ -26,6 +29,7 @@ class IntroMiniKnightStudio : Component
     private float currentBackgroundOpacity = 1f;
 
     private bool hasIntroEnded = false;
+    private bool hasPlayedEffect = false;
 
     private enum introState
     {
@@ -64,6 +68,15 @@ class IntroMiniKnightStudio : Component
         else
         {
             Debug.Log("Error: There is no background Image Entity assigned.");
+        }
+
+        if (julianEffectEntity != null)
+        {
+            julianEffect = julianEffectEntity.GetComponent<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Error: There is no julian effect Entity assigned.");
         }
     }
 
@@ -108,6 +121,12 @@ class IntroMiniKnightStudio : Component
             Vector4 color = new Vector4(1, 1, 1, currentTextOpacity);
             titleImage.SetTint(color);
             julianImage.SetTint(color);
+
+            if (currentTextOpacity >= 0.25f && !hasPlayedEffect)
+            {
+                julianEffect.Play();
+                hasPlayedEffect = true;
+            }
         }
     }
 

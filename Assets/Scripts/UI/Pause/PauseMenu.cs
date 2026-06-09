@@ -176,24 +176,15 @@ public class PauseMenu : Component
             togglePassPageDone = false;
             openedThroughToggle = false;
             canCallScripts = false;
-            quickStartAnimations = true;
+            quickStartAnimations = false;
 
-            passPageAnimator.Play();
-            passPageAnimator.Stop();
-            passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
-            passPageEntity.SetActive(false);
-            invertedPassPageAnimator.Play();
-            invertedPassPageAnimator.Stop();
-            invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
-            invertedPassPageEntity.SetActive(false);
-            closeBookAnimator.Play();
-            closeBookAnimator.Stop();
-            closeBookAnimator.CurrentFrame = closeBookAnimator.StartFrame;
-            closeBookEntity.SetActive(false);
+            if (passPageEntity != null) passPageEntity.SetActive(false);
+            if (closeBookEntity != null) closeBookEntity.SetActive(false);
 
             if (invertedPassPageEntity != null)
             {
                 invertedPassPageEntity.SetActive(true);
+                invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
                 invertedPassPageAnimator.Play();
             }
 
@@ -209,7 +200,7 @@ public class PauseMenu : Component
     void OnUpdate()
     {
         inputTimer += Time.unscaledDeltaTime;
-
+        
         if (!isTogglingPause && !canCallScripts && inputTimer >= inputCooldown && (Input.IsKeyDown(KeyCode.ESCAPE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_START)))
         {
             isTogglingPause = true;
@@ -234,7 +225,6 @@ public class PauseMenu : Component
 
                     invertedPassPageEntity.SetActive(true);
                     invertedPassPageAnimator.Play();
-
                     togglePassPageDone = true;
                     ApplyPauseToggle();
                 }
@@ -326,6 +316,11 @@ public class PauseMenu : Component
             else if (settingsButton.Hovered)
             {
                 DatabaseRegistry.SaveAll();
+
+                isTogglingPause = false;
+                togglePassPageDone = false;
+                openedThroughToggle = false;
+                canCallScripts = false;
 
                 quickStartAnimations = false;
                 invertedPassPagePlayed = false;

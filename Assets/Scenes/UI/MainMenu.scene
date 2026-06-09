@@ -50,7 +50,7 @@
             ],
             "name": "MainCamera",
             "order": 0,
-            "parent_uuid": "8d58b214-5ff5-001a-203b-a91e5549c636",
+            "parent_uuid": "c8504338-e230-e40e-9294-7d477de0cb61",
             "static": true,
             "uuid": "7be8bed2-1395-f0d2-b4ad-90234ff2a278"
         },
@@ -279,7 +279,7 @@
             ],
             "name": "Canvas",
             "order": 4,
-            "parent_uuid": "8d58b214-5ff5-001a-203b-a91e5549c636",
+            "parent_uuid": "c8504338-e230-e40e-9294-7d477de0cb61",
             "static": true,
             "uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b"
         },
@@ -515,7 +515,7 @@
                         "class_id": "NewGame",
                         "fields": {
                             "Blocked": false,
-                            "UUID": "ef3b9b12-d7c7-bf30-ace8-54e3f2b076a4"
+                            "UUID": "bc4fe80a-5ce5-0984-016c-0a2826a2378c"
                         }
                     },
                     "uuid": "9d9e3b50-0137-8410-baec-ea339b6278e9"
@@ -900,7 +900,7 @@
             ],
             "name": "MainMenu_Music",
             "order": 6,
-            "parent_uuid": "8d58b214-5ff5-001a-203b-a91e5549c636",
+            "parent_uuid": "c8504338-e230-e40e-9294-7d477de0cb61",
             "static": true,
             "uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533"
         },
@@ -1061,7 +1061,7 @@
             ],
             "name": "LoadSettings",
             "order": 1,
-            "parent_uuid": "8d58b214-5ff5-001a-203b-a91e5549c636",
+            "parent_uuid": "c8504338-e230-e40e-9294-7d477de0cb61",
             "static": true,
             "uuid": "4b4fb05c-e9aa-761a-360d-6b32271237c1"
         },
@@ -1258,6 +1258,7 @@
                         "fields": {
                             "afterTextDelay": 3.0,
                             "backgroundEntity": "a8ba690e-f5db-6347-5aec-55bffb7a30c9",
+                            "julianEffectEntity": "e43d0e07-2983-68f8-d2cc-aca015930af0",
                             "julianEntity": "b287eaef-e33f-b74a-96ee-7ca40ad962c3",
                             "onTextDelay": 2.0,
                             "preTextDelay": 2.0,
@@ -1602,7 +1603,7 @@
             ],
             "name": "//////// Audio",
             "order": 5,
-            "parent_uuid": "8d58b214-5ff5-001a-203b-a91e5549c636",
+            "parent_uuid": "c8504338-e230-e40e-9294-7d477de0cb61",
             "static": true,
             "uuid": "6bea165f-838b-eb6d-b5b7-b1343638362b"
         },
@@ -1639,7 +1640,7 @@
             ],
             "name": "//////// UI",
             "order": 2,
-            "parent_uuid": "8d58b214-5ff5-001a-203b-a91e5549c636",
+            "parent_uuid": "c8504338-e230-e40e-9294-7d477de0cb61",
             "static": true,
             "uuid": "07a6d6d4-065d-ff6b-97aa-7711da975537"
         },
@@ -1789,7 +1790,7 @@
             ],
             "name": "UIManager",
             "order": 3,
-            "parent_uuid": "8d58b214-5ff5-001a-203b-a91e5549c636",
+            "parent_uuid": "c8504338-e230-e40e-9294-7d477de0cb61",
             "static": true,
             "uuid": "a67a526b-d2f3-eeaf-734f-d87dc84e4804"
         },
@@ -1952,6 +1953,64 @@
             "parent_uuid": "cba66414-12b2-4210-cf61-8995fd53dd1b",
             "static": true,
             "uuid": "b287eaef-e33f-b74a-96ee-7ca40ad962c3"
+        },
+        {
+            "active": true,
+            "components": [
+                {
+                    "is_active": true,
+                    "transform": {
+                        "euler_angles": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "rotation": {
+                            "w": 1.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        }
+                    },
+                    "uuid": "24c208b5-d81d-759a-f75f-021869bb796f"
+                },
+                {
+                    "audiosource": {
+                        "audioClips": {
+                            "0": "2df1d14e-d166-d716-d20a-99787f8c17e1"
+                        },
+                        "channelBus": "Sfx",
+                        "currentClipIndex": 0,
+                        "isSpatial": false,
+                        "loop": false,
+                        "loopStrategy": 0,
+                        "maxDistance": 100.0,
+                        "minDistance": 2.0,
+                        "noLoopStrategy": 0,
+                        "pan": 0.0,
+                        "pitch": 1.0,
+                        "playOnAwake": false,
+                        "volume": 0.5019999742507935
+                    },
+                    "is_active": true,
+                    "uuid": "3747dbd2-ed04-6f00-a5e0-442198d2e76d"
+                }
+            ],
+            "name": "JulianEffect",
+            "order": 3,
+            "parent_uuid": "574dfa9b-bad6-3ab2-65b4-72601f886533",
+            "static": true,
+            "uuid": "e43d0e07-2983-68f8-d2cc-aca015930af0"
         }
     ]
 }
