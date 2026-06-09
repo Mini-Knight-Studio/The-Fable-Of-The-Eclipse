@@ -45,10 +45,11 @@ class CinematicUI : Component
             Debug.LogError("Cinematic container is null.");
             return;
         }
-        foreach (var imageEntity in cinematicContainer.GetChildren())
-        {
-            
-            if(imageEntity.HasComponent<CinematicFrame>())
+
+        for (int i = 0; i < cinematicContainer.ChildCount; i++) {
+            var imageEntity = cinematicContainer.GetChildByName(i.ToString());
+
+            if (imageEntity.HasComponent<CinematicFrame>())
             {
                 CinematicFrame frame = imageEntity.GetComponent<CinematicFrame>();
                 frames.Add(frame);
@@ -66,6 +67,7 @@ class CinematicUI : Component
         }
         IsCinematicOpen = true;
         GameManager.SetState(GameManager.GameState.PAUSE);
+        Debug.Log("Start");
         
         StartCoroutine(Play());
     }
@@ -91,6 +93,7 @@ class CinematicUI : Component
         float timer = 0;
         int index = 0;
         cinematicOwner.SetActive(true);
+        yield return null;
         while (index < frames.Count)
         {
             CinematicFrame frame = frames[index];
