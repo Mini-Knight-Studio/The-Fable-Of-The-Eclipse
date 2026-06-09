@@ -10,8 +10,8 @@ class MeteoriteSpawner : Component
     [Header("Spawn Points")]
     public Entity spawnPointEntity0; public Entity spawnPointEntity1; public Entity spawnPointEntity2;
     public Entity spawnPointEntity3; public Entity spawnPointEntity4; public Entity spawnPointEntity5;
-    public Entity spawnPointEntity6; public Entity spawnPointEntity7; public Entity spawnPointEntity8;
-    public Entity spawnPointEntity9;
+    public Entity spawnPointEntity6; /*public Entity spawnPointEntity7; public Entity spawnPointEntity8;
+    public Entity spawnPointEntity9;*/
 
     [Header("Audio Feedback")]
     public Entity spawnWaveSFX;
@@ -62,7 +62,7 @@ class MeteoriteSpawner : Component
         if (spawnWaveSFX != null) spawnWaveSFX.GetComponent<AudioSource>().Play();
 
         Entity[] points = { spawnPointEntity0, spawnPointEntity1, spawnPointEntity2, spawnPointEntity3, spawnPointEntity4,
-                            spawnPointEntity5, spawnPointEntity6, spawnPointEntity7, spawnPointEntity8, spawnPointEntity9 };
+                            spawnPointEntity5, spawnPointEntity6/*, spawnPointEntity7, spawnPointEntity8, spawnPointEntity9*/ };
 
         foreach (var point in points)
         {

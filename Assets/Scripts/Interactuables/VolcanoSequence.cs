@@ -186,18 +186,21 @@ class VolcanoSequence : Component
         {
             meteorite1.SetActive(true);
             PlayMeteoriteLaunchSound();
+            meteorite1.GetComponent<Meteorite>().Fire(meteorite1.transform.position, meteorite1.transform.rotation);
             yield return new WaitForSeconds(delayBetweenMeteorites);
         }
         if (meteorite2 != null)
         {
             meteorite2.SetActive(true);
             PlayMeteoriteLaunchSound();
+            meteorite2.GetComponent<Meteorite>().Fire(meteorite2.transform.position, meteorite2.transform.rotation);
             yield return new WaitForSeconds(delayBetweenMeteorites);
         }
         if (meteorite3 != null)
         {
             meteorite3.SetActive(true);
             PlayMeteoriteLaunchSound();
+            meteorite3.GetComponent<Meteorite>().Fire(meteorite3.transform.position, meteorite3.transform.rotation);
             yield return new WaitForSeconds(delayBetweenMeteorites);
         }
 
@@ -212,7 +215,7 @@ class VolcanoSequence : Component
         yield return null;
         VolcanoSequence.SequenceFinished = true;
         GameManager.SetState(GameManager.GameState.DEFAULT);
-        Player.Instance.Camera.SetFarPlane(cameraEndingFarPlane);
+        
 
         if (!playOnlyOnce)
         {
@@ -223,6 +226,9 @@ class VolcanoSequence : Component
             if (meteorite2 != null) meteorite2.SetActive(false);
             if (meteorite3 != null) meteorite3.SetActive(false);
         }
+
+        yield return new WaitForSeconds(1);
+        Player.Instance.Camera.SetFarPlane(cameraEndingFarPlane);
     }
 
     private void PlayMeteoriteLaunchSound()
