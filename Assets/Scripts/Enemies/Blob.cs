@@ -125,7 +125,7 @@ class Blob : Enemy
 
     public override void Hit(int points, float force_scale, string hit_clip)
     {
-        if (OnHitCooldown() || !health.canBeDamaged) return;
+        if ((isAttacking && !OnHitCooldown()) || !health.canBeDamaged) return;
         if (Player.Instance.Combat.TemporalFunctionIsAttacking())
         {
             if (hitbox.HasCollided)

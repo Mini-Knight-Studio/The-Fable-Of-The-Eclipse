@@ -8,8 +8,10 @@ public class HeadLogic : Component
     BoxCollider headCollider;
     public Entity startPointEntity;
     public Entity headAniamtorEntity;
+    public Entity pulseEntity;
 
     Animator headAniamtor;
+    EmissivePulse emmisivePusle;
 
     [Space(10)]
     [Header("Settings")]
@@ -23,7 +25,13 @@ public class HeadLogic : Component
 
     BossLogic owner;
 
-    public bool HasBeenHit() => headCollider.HasCollided;
+    public bool HasBeenHit()
+    {
+        if (Player.Instance.Combat.TemporalFunctionIsAttacking())
+            if (headCollider.HasCollided)
+                return true;
+        return false;
+    }
     public bool IsDefeated() => isDefeated;
     public bool IsVulnerable() => isVulnerable;
 
@@ -31,6 +39,9 @@ public class HeadLogic : Component
     {
         headCollider = headColliderEntity.GetComponent<BoxCollider>();
         headAniamtor = headAniamtorEntity.GetComponent<Animator>();
+        emmisivePusle = pulseEntity.GetComponent<EmissivePulse>();
+
+        //SetVulnerable(false);
         headAniamtor.Play("Armature|Idle");
     }
 
@@ -62,10 +73,18 @@ public class HeadLogic : Component
         //transform.LookAt(targetPos, Vector3.Up);
     }
 
+    public void SetVulnerable(bool state)
+    {
+        emmisivePusle.Enabled = state;
+        if(!state)
+            emmisivePusle.Reset();
+    }
+
     public void Regenerate()
     {
         isDefeated = false;
         isVulnerable = false;
+        SetVulnerable(false);
     }
 
     public void Restart()
@@ -80,6 +99,8 @@ public class HeadLogic : Component
         transform.rotation = Vector3.Zero;
 
         headColliderEntity.SetActive(false);
+
+        SetVulnerable(false);
     }
 
     void OnDestroy()

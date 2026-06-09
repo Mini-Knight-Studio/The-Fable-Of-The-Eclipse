@@ -182,7 +182,7 @@ public class HandLogic : Component
             if (canBeStopped && side != owner.GetCurrentSide())
             {
                 StopAllOwnedCoroutines();
-                owner.PlayAnimation(handAnimator, "Idle", true, 0.2f);
+                owner.PlayAnimation(handAnimator, "Idle", true, 0.4f);
                 StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
                 isBusy = false;
             }
@@ -236,27 +236,28 @@ public class HandLogic : Component
 
         float timer = 0.0f;
         bool hitPlayer = false;
+        float altitude = isPalm ? owner.Palm_MoveAltitude : owner.Punch_MoveAltitude;
 
         while (!hitPlayer)
         {
             Vector3 targetPosition = owner.GetTarget().transform.position;
-            targetPosition.y = owner.HPunch_MoveAltitude;
+            targetPosition.y = altitude;
 
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 targetPosition,
-                owner.HPunch_FollowSpeed * Time.deltaTime
+                owner.Hand_FollowSpeed * Time.deltaTime
             );
 
             if (Vector3.Distance(transform.position, targetPosition) < 2f)
             {
                 timer += Time.deltaTime;
-                if (timer > owner.HPunch_FollowTime)
+                if (timer > owner.Hand_FollowTime)
                     hitPlayer = true;
             }
             else
             {
-                timer -= Time.deltaTime * owner.HPunch_FollowTimeReduction;
+                timer -= Time.deltaTime * owner.Hand_FollowTimeReduction;
             }
 
             yield return null;
@@ -264,27 +265,30 @@ public class HandLogic : Component
 
         canBeStopped = false;
 
-        StartCoroutine(owner.MoveVertically(transform, owner.HPunch_MoveAltitude, owner.HPunch_MoveAltitude + 2, owner.HPunch_TimeGoingUp, Mathf.LerpCurve.EaseOut));
-        yield return new WaitForSeconds(owner.HPunch_TimeGoingUp);
+        float timeUp = isPalm ? owner.Palm_TimeGoingUp : owner.Punch_TimeGoingUp;
+        float timeDown = isPalm ? owner.Palm_TimeGoingDown : owner.Punch_TimeGoingDown;
 
-        StartCoroutine(owner.MoveVertically(transform, owner.HPunch_MoveAltitude + 2, owner.HPunch_HitAltitude, owner.HPunch_TimeGoingDown, Mathf.LerpCurve.ExponentialInOut));
+        StartCoroutine(owner.MoveVertically(transform, altitude, altitude + 2, timeUp, Mathf.LerpCurve.EaseOut));
+        yield return new WaitForSeconds(timeUp);
+
+        StartCoroutine(owner.MoveVertically(transform, altitude + 2, owner.Hand_HitAltitude, timeDown, Mathf.LerpCurve.ExponentialInOut));
 
         timer = 0;
         bool hasDoneFeedback = false;
         bool hasHitTarget = false;
-        while (timer < owner.HPunch_TimeGoingDown)
+        while (timer < timeDown)
         {
             timer += Time.deltaTime;
             if (!hasHitTarget)
             {
-                float percentage = (timer / owner.HPunch_TimeGoingDown) * 100;
+                float percentage = (timer / timeDown) * 100;
 
-                if (percentage > owner.HPunch_HitTimePercentage)
+                if (percentage > owner.Hand_HitTimePercentage)
                 {
                     if (!hasHitTarget && HasHitTarget())
                     {
                         hasHitTarget = true;
-                        owner.GetTarget().PlayerHealth.Damage(owner.HPunch_Damage);
+                        owner.GetTarget().PlayerHealth.Damage(owner.Hand_Damage);
                     }
                     if (!hasDoneFeedback)
                     {
@@ -300,15 +304,19 @@ public class HandLogic : Component
         if (isPalm)
         {
             owner.PlayAnimation(handAnimator, "Palm Stuck", false, 0.2f);
-            SetVulnerable(owner.HPunch_VulnerableTime);
+            SetVulnerable(owner.Palm_VulnerableTime);
             IncreaseSequenceCounter();
+
+            yield return new WaitForSeconds(owner.Palm_VulnerableTime * 0.8f);
+            owner.PlayAnimation(handAnimator, "Palm End", false, 0.2f);
+            yield return new WaitForSeconds(owner.Palm_VulnerableTime * 0.2f);
         }
         else
         {
-            owner.PlayAnimation(handAnimator, "PunchRelease", true, 0.2f);
+            owner.PlayAnimation(handAnimator, "Punch Release", true, 0.2f);
             IncreaseSequenceCounter();
-            StartCoroutine(owner.MoveVertically(transform, owner.HPunch_HitAltitude, owner.HPunch_MoveAltitude, 1, Mathf.LerpCurve.EaseOut));
-            yield return new WaitForSeconds(owner.HPunch_DelayTimeAfterPunch);
+            StartCoroutine(owner.MoveVertically(transform, owner.Hand_HitAltitude, altitude, 1, Mathf.LerpCurve.EaseOut));
+            yield return new WaitForSeconds(owner.Punch_DelayTimeAfterPunch);
         }
 
         if (side == owner.GetCurrentSide() && !isVulnerable && !isDefeated)
@@ -325,41 +333,41 @@ public class HandLogic : Component
         StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
         yield return new WaitForSeconds(owner.H_TimeToReturnToStartPoint);
 
-        yield return new WaitForSeconds(owner.HSpike_InitialDelay);
+        yield return new WaitForSeconds(owner.Spike_InitialDelay);
         canBeStopped = false;
 
 
-        PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, owner.HSpike_AlertTime);
-        yield return new WaitForSeconds(owner.HSpike_AlertTime);
+        PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, owner.Spike_AlertTime);
+        yield return new WaitForSeconds(owner.Spike_AlertTime);
 
         bool hasHitTarget = false;
 
-        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.HSpike_HideAltitude, owner.HSpike_ShowAltitude, owner.HSpike_SpikeShowTime, Mathf.LerpCurve.ExponentialOut));
-        yield return new WaitForSeconds(owner.HSpike_SpikeShowTime);
+        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.Spike_HideAltitude, owner.Spike_ShowAltitude, owner.Spike_SpikeShowTime, Mathf.LerpCurve.ExponentialOut));
+        yield return new WaitForSeconds(owner.Spike_SpikeShowTime);
 
         if (!hasHitTarget && HasSpikeHitTarget())
         {
             hasHitTarget = true;
-            owner.GetTarget().PlayerHealth.Damage(owner.HSpike_Damage);
+            owner.GetTarget().PlayerHealth.Damage(owner.Spike_Damage);
         }
 
         float timer = 0;
-        while (timer < owner.HSpike_SpikeStayTime)
+        while (timer < owner.Spike_SpikeStayTime)
         {
             timer += Time.deltaTime;
             if (!hasHitTarget && HasSpikeHitTarget())
             {
                 hasHitTarget = true;
-                owner.GetTarget().PlayerHealth.Damage(owner.HSpike_Damage);
+                owner.GetTarget().PlayerHealth.Damage(owner.Spike_Damage);
             }
             yield return null;
         }
 
-        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.HSpike_ShowAltitude, owner.HSpike_HideAltitude, owner.HSpike_SpikeHideTime, Mathf.LerpCurve.EaseOut));
-        yield return new WaitForSeconds(owner.HSpike_SpikeHideTime);
+        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.Spike_ShowAltitude, owner.Spike_HideAltitude, owner.Spike_SpikeHideTime, Mathf.LerpCurve.EaseOut));
+        yield return new WaitForSeconds(owner.Spike_SpikeHideTime);
 
         IncreaseSequenceCounter();
-        SetCooldown(owner.HSpike_DelayTimeAfterSpike);
+        SetCooldown(owner.Spike_DelayTimeAfterSpike);
 
         isBusy = false;
         canBeStopped = true;
@@ -371,6 +379,8 @@ public class HandLogic : Component
         hitFeedbackAudio.Stop();
         defeatFeedbackAudio.Stop();
         defeatFeedbackParticles.Stop();
+
+        owner.PlayAnimation(handAnimator, "Idle", true, 0.4f);
     }
 
     public void Regenerate()
@@ -477,7 +487,7 @@ public class HandLogic : Component
         transform.position = startPointEntity.transform.position;
         shadowEntity.transform.position = new Vector3(transform.position.x, shadowEntity.transform.position.y, transform.position.z);
 
-        if (owner != null) spikesEntity.transform.position = new Vector3(spikesEntity.transform.position.x, owner.HSpike_HideAltitude, spikesEntity.transform.position.z);
+        if (owner != null) spikesEntity.transform.position = new Vector3(spikesEntity.transform.position.x, owner.Spike_HideAltitude, spikesEntity.transform.position.z);
         if (vineShieldEntity != null) vineShieldEntity.SetActive(false);
 
         FakeRegenerate();
