@@ -287,6 +287,8 @@ public class BossLogic : Component
         head.Regenerate();
         leftHand.Regenerate();
         rightHand.Regenerate();
+
+        isVulnerable = false;
         isDefeated = false;
         isBusy = false;
     }
