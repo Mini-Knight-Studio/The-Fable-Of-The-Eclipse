@@ -47,7 +47,7 @@ class CinematicUI : Component
         }
 
         for (int i = 0; i < cinematicContainer.ChildCount; i++) {
-            var imageEntity = cinematicContainer.GetChildByName(i.ToString());
+            var imageEntity = cinematicContainer.GetChildByName((i+1).ToString());
 
             if (imageEntity.HasComponent<CinematicFrame>())
             {
@@ -94,6 +94,10 @@ class CinematicUI : Component
         int index = 0;
         cinematicOwner.SetActive(true);
         yield return null;
+
+        if (MusicStopper.Instance != null)
+            MusicStopper.Instance.PauseMusic();
+
         while (index < frames.Count)
         {
             CinematicFrame frame = frames[index];
@@ -228,6 +232,9 @@ class CinematicUI : Component
         }
 
         Close();
+
+        if (MusicStopper.Instance != null)
+            MusicStopper.Instance.ResumeMusic();
     }
 
     void OnDestroy()

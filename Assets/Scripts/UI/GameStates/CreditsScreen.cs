@@ -8,11 +8,13 @@ public class CreditsScreen : Component
     public Entity backgroundEntity;
     public Entity decorationEntity;
     public Entity creditsTextEntity;
+    public Entity musicEntity;
     public string targetSceneUUID;
 
     Image backgroundImage;
     Image decorationImage;
     Text creditsText;
+    AudioSource musicSource;
 
     [Header("Settings")]
     [ShowInInspector]
@@ -35,7 +37,7 @@ public class CreditsScreen : Component
         backgroundImage = backgroundEntity.GetComponent<Image>();
         decorationImage = decorationEntity.GetComponent<Image>();
         creditsText = creditsTextEntity.GetComponent<Text>();
-
+        musicSource = musicEntity.GetComponent<AudioSource>();
         Initialize();
     }
 
@@ -54,11 +56,23 @@ public class CreditsScreen : Component
     {
         entity.SetActive(true);
         StartCoroutine(Show());
+
+        if (MusicStopper.Instance != null)
+        {    
+            MusicStopper.Instance.DestroyMusic();
+        }
+
+        musicSource.Play();
     }
 
 
     IEnumerator Show()
     {
+
+        
+
+        
+
         GameManager.SetState(GameManager.GameState.FREEZE);
         float timer = 0;
 
@@ -123,6 +137,7 @@ public class CreditsScreen : Component
         Time.timeScale = 1;
         GameManager.SetState(GameManager.GameState.DEFAULT);
         SceneManager.LoadSceneByID(targetSceneUUID);
+
     }
 
 
