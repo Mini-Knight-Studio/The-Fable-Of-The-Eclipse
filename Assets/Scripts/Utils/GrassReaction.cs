@@ -3,7 +3,7 @@ using Loopie;
 
 public class GrassReaction : Component
 {
-    private float bendIntensity = 26;
+    private float bendIntensity = 45;
     private float recoverySpeed = 5.0f;
     private float detectionRadius = 2.0f;
 
