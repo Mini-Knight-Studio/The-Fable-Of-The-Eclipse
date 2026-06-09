@@ -106,6 +106,11 @@ class IntroMiniKnightStudio : Component
             currentState = introState.FADE_IN_TEXT;
             timer = 0f;
         }
+        if (!hasPlayedEffect && timer >= (preTextDelay/4) * 3)
+        {
+            julianEffect.Play();
+            hasPlayedEffect = true;
+        }
     }
 
     void UpdateFadeInText()
@@ -121,12 +126,6 @@ class IntroMiniKnightStudio : Component
             Vector4 color = new Vector4(1, 1, 1, currentTextOpacity);
             titleImage.SetTint(color);
             julianImage.SetTint(color);
-
-            if (currentTextOpacity >= 0.25f && !hasPlayedEffect)
-            {
-                julianEffect.Play();
-                hasPlayedEffect = true;
-            }
         }
     }
 
