@@ -148,7 +148,6 @@ public class Enemy : Component
     {
         EndAttack(end_attack_clip);
         yield return new WaitForSeconds(end_attack_duration);
-        movement.CanMove = true;
         isAttacking = false;
     }
 
