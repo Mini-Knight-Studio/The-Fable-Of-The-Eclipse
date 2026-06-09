@@ -31,6 +31,10 @@ class ColliderSceneTransition : SceneTransition
 
     private void GoToScene()
     {
+
+        DatabaseRegistry.playerDB.Player.maxHealth = Player.Instance.PlayerHealth.maxHealth;
+        DatabaseRegistry.playerDB.Player.currentHealth = Player.Instance.PlayerHealth.GetActualHealth();
+
         DatabaseRegistry.playerDB.Player.SetCurrentScene(UUID);
         StartTransition();
     }

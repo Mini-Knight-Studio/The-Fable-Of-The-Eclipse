@@ -30,6 +30,9 @@ public class HealthHUD : Component
     SpriteAnimator unlock10Anim;
     public float timeUntilUnlock10 = 0.5f;
 
+    bool init = false;
+
+
     void OnCreate()
     {
         healthIcons = new HealthSlot[maxHealthIcons];
@@ -53,15 +56,19 @@ public class HealthHUD : Component
         unlock6Anim = unlock6.GetComponent<SpriteAnimator>();
         unlock8Anim = unlock8.GetComponent<SpriteAnimator>();
         unlock10Anim = unlock10.GetComponent<SpriteAnimator>();
-
     }
 
     void OnUpdate()
     {
         if (Player.Instance.PlayerHealth == null) return;
 
+        
+
         int currentHealth = Player.Instance.PlayerHealth.GetActualHealth();
         int maxHealth = Player.Instance.PlayerHealth.GetMaxHealth();
+
+        if (!init)
+            UpdateHUDEarly(maxHealth);
 
         if (currentHealth != lastKnownHealth || maxHealth != lastKnownMaxHealth)
         {
@@ -118,10 +125,6 @@ public class HealthHUD : Component
 
     public void UpdateHUD(int maxHealth)
     {
-        bg4.SetActive(false);
-
-
-
         if (maxHealth == 8)
         {
             bg4.SetActive(true);
@@ -155,6 +158,41 @@ public class HealthHUD : Component
             bg8.SetActive(true);
             bg10.SetActive(false);
         }
+    }
+
+    private void UpdateHUDEarly(int maxHealth)
+    {
+        init = true;   
+        if (maxHealth == 8)
+        {
+            bg4.SetActive(true);
+            bg6.SetActive(false);
+            bg8.SetActive(false);
+            bg10.SetActive(false);
+        }
+        else if (maxHealth == 12)
+        {
+            bg4.SetActive(false);
+            bg6.SetActive(true);
+            bg8.SetActive(false);
+            bg10.SetActive(false);
+        }
+        else if (maxHealth == 16)
+        {
+            bg4.SetActive(false);
+            bg6.SetActive(false);
+            bg8.SetActive(true);
+            bg10.SetActive(false);
+        }
+        else if (maxHealth == 20)
+        {
+            bg4.SetActive(false);
+            bg6.SetActive(false);
+            bg8.SetActive(false);
+            bg10.SetActive(true);
+        }
+
+        lastKnownMaxHealth = maxHealth;
     }
 
 
