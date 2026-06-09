@@ -19,6 +19,9 @@ public class BossLogic : Component
     HeadLogic head;
     public Entity sidePivotEntity;
     public Entity middleColliderEntity;
+    public Entity hitSoundEntity;
+
+    AudioSource hitSound;
 
     [Header("Environment")]
     public Entity vinesObstructionEntity; 
@@ -91,6 +94,7 @@ public class BossLogic : Component
         leftHand = leftHandEntity.GetComponent<HandLogic>();
         rightHand = rightHandEntity.GetComponent<HandLogic>();
         head = headEntity.GetComponent<HeadLogic>();
+        hitSound = hitSoundEntity.GetComponent<AudioSource>();
 
         currentSide = BossSide.Left;
         currentPhase = 0;
@@ -235,12 +239,15 @@ public class BossLogic : Component
 
                 if (IsFinalPhase())
                 {
-                    yield return new WaitForSeconds(2);
+                    hitSound.Play();
+                    yield return new WaitForSeconds(1);
                     Player.Instance.CreditsScreen.OpenCreditsScreen();
                     yield break;
                 }
                 else
                 {
+
+                    hitSound.Play();
                     currentPhase++;
                     UpdatePhaseSequences();
 
