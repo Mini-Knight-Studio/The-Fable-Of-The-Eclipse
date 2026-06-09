@@ -411,6 +411,12 @@ class PuzzleGoalSimonSays : Component
         if (puzzle2Completed) return;
         puzzle2Completed = true;
 
+        Gem.GetComponent<BoxCollider>().SetActive(true);
+        Gem.GetComponent<Gem_Idle>().SetActive(true);
+        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
+
+        currentState = State.Completed;
+
         DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = true;
     }
 
@@ -457,8 +463,6 @@ class PuzzleGoalSimonSays : Component
 
         Player.Instance.Camera.StopFocus();
         yield return new WaitForSeconds(0.5f);
-
-        currentState = State.Completed;
 
         GameManager.SetState(GameManager.GameState.DEFAULT);
     }
