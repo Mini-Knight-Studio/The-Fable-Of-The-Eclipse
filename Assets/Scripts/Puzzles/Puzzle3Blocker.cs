@@ -10,9 +10,13 @@ class Puzzle3Blocker : Component
 
     public Entity fallingRock;
 
+    public Entity puzzleGoalEntity;
+
     public Entity focusPointOnPuzzle;
     public Entity focusPointOnMural;
     public Entity focusPointOnResetButton;
+
+    private PuzzleGoalFireLvl puzzleGoal;
 
     [Header("Settings")]
     public float finalBlockerHeight;
@@ -115,6 +119,11 @@ class Puzzle3Blocker : Component
             loweringRockSFX = loweringRockSFXEntity.GetComponent<AudioSource>();
         }
 
+        if (puzzleGoalEntity != null)
+        {
+            puzzleGoal = puzzleGoalEntity.GetComponent<PuzzleGoalFireLvl>();
+        }
+
         levelFadeOutEvent = levelFadeOut.GetComponent<FadeInOutEvent>();
 
         if (DatabaseRegistry.levelsDB.Levels.IsCinematicDone(cinematicIntroID))
@@ -158,6 +167,10 @@ class Puzzle3Blocker : Component
         yield return new WaitForSeconds(puzzleBackCamFocusDuration);
 
         Player.Instance.Camera.FocusOnPoint(focusPointOnResetButton.transform.position, resetButtonCameraZoom, 4);
+        yield return new WaitForSeconds(0.5f);
+
+        puzzleGoal.CallResetPuzzle();
+
         yield return new WaitForSeconds(resetButtonCamFocusDuration);
 
         Player.Instance.Camera.FocusOnPoint(focusPointOnPuzzle.transform.position, puzzleResetCameraZoom, 4);

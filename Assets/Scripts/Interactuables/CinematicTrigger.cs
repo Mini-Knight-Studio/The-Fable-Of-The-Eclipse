@@ -13,6 +13,9 @@ class CinematicTrigger : Component
     public float fadeInTime = 0.5f;
     public float fadeOutTime = 0.5f;
 
+    [Header("Cinematics")]
+    public string cinematicID;
+
     [Header("Typing")]
     public Entity cinematicEntity;
 
@@ -29,6 +32,14 @@ class CinematicTrigger : Component
 
     void OnPostCreate()
     {
+        if (!playMoreThanOnce)
+        {
+            if (DatabaseRegistry.levelsDB.Levels.IsCinematicDone(cinematicID))
+            {
+                canBePlayed = false;
+            }
+        }
+
         if (playOnStart)
         {
             Open();
@@ -72,12 +83,17 @@ class CinematicTrigger : Component
 
     private void Open()
     {
+        if (!canBePlayed)
+            return;
+
         CinematicUI.Instance.SetUpCinematic(cinematicEntity, fadeInTime, fadeOutTime);
         CinematicUI.Instance.StartCinematic();
 
         if (!playMoreThanOnce)
         {
             canBePlayed = false;
+
+            DatabaseRegistry.levelsDB.Levels.SetCinematicDone(cinematicID);
         }
     }
 };

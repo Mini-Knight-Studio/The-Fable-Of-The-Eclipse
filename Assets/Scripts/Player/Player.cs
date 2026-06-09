@@ -116,6 +116,8 @@ public class Player : Component
     {
         PlayerHealth.ModifyMaxHealth(DatabaseRegistry.playerDB.Player.maxHealth);
         PlayerHealth.ModifyActualHealth(DatabaseRegistry.playerDB.Player.currentHealth);
+
+        Debug.Log(DatabaseRegistry.playerDB.Player.maxHealth);
     }
 
     public void GoToLastCheckpoint()

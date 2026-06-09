@@ -34,10 +34,12 @@ public class HealItem : Component
         if(triggerDetection != null && triggerDetection.HasCollided)
         {
             if (canIncreaseMaxHealth)
-            Player.Instance.PlayerHealth.IncreaseMaxHealth(MAX_HEALTH_INCREASE_AMOUNT);
+            {
+                Player.Instance.PlayerHealth.IncreaseMaxHealth(MAX_HEALTH_INCREASE_AMOUNT);
+            }
             Player.Instance.PlayerHealth.Heal(healAmount);
 
-            DatabaseRegistry.levelsDB.Levels.SetHealingItemCollected(healItemID);
+            DatabaseRegistry.levelsDB.Levels.SetHealingItemCollected(healItemID);          
 
             TriggerVFX();
 
