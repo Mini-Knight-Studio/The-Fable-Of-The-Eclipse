@@ -7,9 +7,9 @@ public class HealItem : Component
     public string healItemID = "UNASSIGNED_HEALITEM";
 
     [Header("Configuration")]
-    public int healAmount = 1;
+    public int healAmount = 20;
     public bool canIncreaseMaxHealth = false;
-    public int maxHealthIncreaseAmount = 1;
+    static int MAX_HEALTH_INCREASE_AMOUNT = 4;
 
     [Header("Feedback")]
     public Entity vfx;
@@ -34,7 +34,7 @@ public class HealItem : Component
         if(triggerDetection != null && triggerDetection.HasCollided)
         {
             if (canIncreaseMaxHealth)
-            Player.Instance.PlayerHealth.IncreaseMaxHealth(maxHealthIncreaseAmount);
+            Player.Instance.PlayerHealth.IncreaseMaxHealth(MAX_HEALTH_INCREASE_AMOUNT);
             Player.Instance.PlayerHealth.Heal(healAmount);
 
             DatabaseRegistry.levelsDB.Levels.SetHealingItemCollected(healItemID);

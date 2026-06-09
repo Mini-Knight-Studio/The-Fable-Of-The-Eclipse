@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Loopie;
 
 class HealthSlot : Component
@@ -7,10 +7,12 @@ class HealthSlot : Component
     public Entity halfSlotEntity;
 
     public Image fullSlotImage;
+    public Image halfSlotImage;
 
     void OnCreate()
     {
         fullSlotImage = fullSlotEntity.GetComponent<Image>();
+        halfSlotImage = halfSlotEntity.GetComponent<Image>();
     }
 
     public void UpdateVisuals(int value)
@@ -23,11 +25,5 @@ class HealthSlot : Component
     {
         halfSlotEntity.SetActive(false);
         fullSlotEntity.SetActive(true);
-        fullSlotImage.SetTint(new Vector4(0.45f, 0, 1, 1));
-    }
-
-    public void Unlock()
-    {
-        fullSlotImage.SetTint(new Vector4(1,1,1,1));
     }
 }

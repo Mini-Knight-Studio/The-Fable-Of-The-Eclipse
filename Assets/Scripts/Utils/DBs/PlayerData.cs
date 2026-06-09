@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class PlayerData
 {
     // Health
-    public int maxHealth = 6;
-    public int currentHealth = 6;
+    public int maxHealth = 8;
+    public int currentHealth = 8;
 
     // Items, Abilities and Gems
     public bool gemAirCollected = false;
