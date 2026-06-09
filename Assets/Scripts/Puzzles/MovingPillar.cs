@@ -329,8 +329,8 @@ class MovingPillar : Component
         float currentIntensity = defaultIntensity;
         float transitionSpeed = 2f;
         float pulseSpeed = 2f;
-        float minPulse = 0.8f;
-        float maxPulse = 1.2f;
+        float minPulse = 1f;
+        float maxPulse = 2f;
         float pulseTimer = 0f;
 
         while (true)
