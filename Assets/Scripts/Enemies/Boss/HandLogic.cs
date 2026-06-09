@@ -31,6 +31,7 @@ public class HandLogic : Component
     [Header("References")]
     public Entity attackColliderEntity;
     public Entity hitColliderEntity;
+    public Entity handAnimatorEntity;
     public Entity spikesEntity;
     public Entity spikesAttackColliderEntity;
     public Entity startPointEntity;
@@ -39,6 +40,8 @@ public class HandLogic : Component
     [Tooltip("Reference to the vine shield entity")]
     public Entity vineShieldEntity;
     BurnableBlock vineShield;
+
+    Animator handAnimator;
 
     BoxCollider attackCollider;
     BoxCollider hitCollider;
@@ -95,6 +98,8 @@ public class HandLogic : Component
         hitCollider = hitColliderEntity.GetComponent<BoxCollider>();
         spikesAttackCollider = spikesAttackColliderEntity.GetComponent<BoxCollider>();
 
+        handAnimator = handAnimatorEntity.GetComponent<Animator>();
+
         if (vineShieldEntity != null)
             vineShield = vineShieldEntity.GetComponent<BurnableBlock>();
 
@@ -106,6 +111,8 @@ public class HandLogic : Component
         defeatFeedbackAudio = defeatFeedbackEntity.GetComponent<AudioSource>();
 
         transform.position = startPointEntity.transform.position;
+
+        handAnimator.Play("Idle");
         isBusy = false;
     }
 
@@ -313,6 +320,7 @@ public class HandLogic : Component
 
         yield return new WaitForSeconds(owner.HSpike_InitialDelay);
         canBeStopped = false;
+
 
         PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, owner.HSpike_AlertTime);
         yield return new WaitForSeconds(owner.HSpike_AlertTime);

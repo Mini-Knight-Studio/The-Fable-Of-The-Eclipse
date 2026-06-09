@@ -7,6 +7,9 @@ public class HeadLogic : Component
     public Entity headColliderEntity;
     BoxCollider headCollider;
     public Entity startPointEntity;
+    public Entity headAniamtorEntity;
+
+    Animator headAniamtor;
 
     [Space(10)]
     [Header("Settings")]
@@ -27,6 +30,8 @@ public class HeadLogic : Component
     void OnCreate()
     {
         headCollider = headColliderEntity.GetComponent<BoxCollider>();
+        headAniamtor = headAniamtorEntity.GetComponent<Animator>();
+        headAniamtor.Play("Armature|Idle");
     }
 
     void OnPostCreate() 
