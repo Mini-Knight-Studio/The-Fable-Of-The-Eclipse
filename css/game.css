@@ -75,12 +75,16 @@ html, body {
     border: 0;
     width: 100%;
     height: fit-content;
+    place-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.trailer {
+.trailer
+{
     margin: 0;
     padding: 0;
-    border: 0;
+    border: 10px inset #E2B25B;
     width: 100%;
     aspect-ratio: 16/9;
 }
@@ -147,6 +151,7 @@ html, body {
 
     .download iconify-icon {
         font-size: 70px;
+        transform: translate(0, 10%);
     }
 
     .download {
@@ -157,6 +162,12 @@ html, body {
         border: 5px solid #E2B25B;
         color: #E2B25B;
         cursor: pointer;
+    }
+
+    .trailer
+    {
+        width: 75%;
+        aspect-ratio: 16/9;
     }
 
     .feature-title
@@ -173,6 +184,7 @@ html, body {
 @media (pointer: coarse) {
     .download iconify-icon {
         font-size: 30px;
+        transform: translate(0, 10%);
     }
 
     .download {
