@@ -119,12 +119,19 @@ class CinematicUI : Component
             }
             else if(frame.UsePage)
             {
+                if (frame.HasAnimation)
+                {
+                    frame.FrameAnimator.Play();
+                }
+
                 closingPageEntity.SetActive(false);
                 openingPageEntity.SetActive(true);
                 openingPageAnimator.Play();
                 yield return new WaitForUnscaledSeconds(0.5f);
                 openingPageEntity.SetActive(false);
-            }      
+            }
+
+            
 
             if (frame.FadeTextGroup && frame.TextGroupCanvasGroup != null)
             {
@@ -152,6 +159,9 @@ class CinematicUI : Component
 
             if (frame.AudioSource != null)
                 frame.AudioSource.Play();
+
+            
+
             if (!frame.WaitsForInput)
             {
                 yield return new WaitForUnscaledSeconds(frame.Duration);

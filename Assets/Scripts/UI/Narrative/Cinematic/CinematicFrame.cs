@@ -13,9 +13,11 @@ class CinematicFrame : Component
     public bool FadeOutText;
 
     public bool WaitsForInput { get { return Duration <= 0f; } }
+    public bool HasAnimation { get { return FrameAnimator != null; } }
 
     [HideInInspector] public Entity FrameEntity;
-    [HideInInspector]public CanvasGroup FrameCanvasGroup;
+    [HideInInspector] public CanvasGroup FrameCanvasGroup;
+    [HideInInspector] public SpriteAnimator FrameAnimator;
 
     public Entity FrameGroupEntity;
     [HideInInspector] public CanvasGroup TextGroupCanvasGroup;
@@ -30,6 +32,7 @@ class CinematicFrame : Component
     {
         FrameEntity = entity;
         FrameCanvasGroup = entity.GetComponent<CanvasGroup>();
+        FrameAnimator = entity.GetComponent<SpriteAnimator>();
 
         if (FrameGroupEntity != null)
             TextGroupCanvasGroup = FrameGroupEntity.GetComponent<CanvasGroup>();
