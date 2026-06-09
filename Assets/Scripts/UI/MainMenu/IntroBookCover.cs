@@ -117,7 +117,7 @@ class IntroBookCover : Component
         else if (animator.CurrentFrame == animator.FrameCount - 1)
         {
             backgroundEntity.SetActive(false);
-            openingMusicAudioSource.Stop();
+            openingMusicAudioSource.Stop(1f);
             hasIntroEnded = true;
         }
     }

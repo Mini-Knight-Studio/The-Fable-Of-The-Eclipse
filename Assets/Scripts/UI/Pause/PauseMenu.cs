@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Loopie;
 
 public class PauseMenu : Component
@@ -52,8 +52,6 @@ public class PauseMenu : Component
     public Entity uiManagerEntity;
     private UIManager uiManagerScript;
 
-    private bool canCallScripts = false;
-
     // On Start
     public Entity closeBookEntity;
     private SpriteAnimator closeBookAnimator;
@@ -69,132 +67,86 @@ public class PauseMenu : Component
     [HideInInspector]
     public static bool invertedPassPagePlayed = false;
 
+    public static bool isPaused = false;
+    public static GameManager.GameState previousState;
+
     public Entity pauseMenuEntity;
     public Entity infoDebugEntity;
-
-    public bool isPaused = false;
 
     private float inputCooldown = 0.2f;
     private float inputTimer = 0f;
 
-    public static GameManager.GameState previousState;
+    // Toggle sequence state
+    public bool isTogglingPause = false;
+    public bool togglePassPageDone = false;
+    public bool openedThroughToggle = false;
+    public bool canCallScripts = false;
+
     void OnCreate()
     {
         backgroundImage = entity.GetComponent<Image>();
 
-        // Buttons
         if (mainMenuEntity != null)
         {
             mainMenuButton = mainMenuEntity.GetComponent<Button>();
             mainMenuScript = mainMenuEntity.GetComponent<SceneTransition>();
         }
-        else
-        {
-            Debug.Log("Error: There is no NewGame Entity assigned.");
-        }
+        else Debug.Log("Error: There is no NewGame Entity assigned.");
 
         if (continueEntity != null)
         {
             continueButton = continueEntity.GetComponent<Button>();
             continueScript = continueEntity.GetComponent<Load>();
         }
-        else
-        {
-            Debug.Log("Error: There is no Continue Entity assigned.");
-        }
+        else Debug.Log("Error: There is no Continue Entity assigned.");
 
         if (settingsEntity != null)
         {
             settingsButton = settingsEntity.GetComponent<Button>();
             settingsScript = settingsEntity.GetComponent<SceneTransition>();
         }
-        else
-        {
-            Debug.Log("Error: There is no Settings Entity assigned.");
-        }
+        else Debug.Log("Error: There is no Settings Entity assigned.");
 
         if (exitEntity != null)
         {
             exitButton = exitEntity.GetComponent<Button>();
             exitScript = exitEntity.GetComponent<Exit>();
         }
-        else
-        {
-            Debug.Log("Error: There is no Exit Entity assigned.");
-        }
+        else Debug.Log("Error: There is no Exit Entity assigned.");
 
         if (loopMusicEntity != null)
-        {
             loopMusicAudioSource = loopMusicEntity.GetComponent<AudioSource>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no Loop Music Entity assigned.");
-        }
+        else Debug.Log("Error: There is no Loop Music Entity assigned.");
 
         if (selectSfxEntity != null)
-        {
             selectSfxAudioSource = selectSfxEntity.GetComponent<AudioSource>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no Loop Music Entity assigned.");
-        }
+        else Debug.Log("Error: There is no Select SFX Entity assigned.");
 
-        // On Start
         if (closeBookEntity != null)
-        {
             closeBookAnimator = closeBookEntity.GetComponent<SpriteAnimator>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no closeBookEntity Entity assigned.");
-        }
+        else Debug.Log("Error: There is no closeBookEntity Entity assigned.");
 
         if (passPageEntity != null)
-        {
             passPageAnimator = passPageEntity.GetComponent<SpriteAnimator>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no passPageEntity Entity assigned.");
-        }
+        else Debug.Log("Error: There is no passPageEntity Entity assigned.");
 
         if (invertedPassPageEntity != null)
-        {
             invertedPassPageAnimator = invertedPassPageEntity.GetComponent<SpriteAnimator>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no passPageEntity Entity assigned.");
-        }
+        else Debug.Log("Error: There is no invertedPassPageEntity Entity assigned.");
 
         if (uiManagerEntity != null)
-        {
             uiManagerScript = uiManagerEntity.GetComponent<UIManager>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no UIManager Entity assigned.");
-        }
+        else Debug.Log("Error: There is no UIManager Entity assigned.");
 
         if (ilustrationLevel1Entity != null)
-        {
             ilustrationLevel1Image = ilustrationLevel1Entity.GetComponent<Image>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no ilustrationLevel1 Entity assigned.");
-        }
+        else Debug.Log("Error: There is no ilustrationLevel1 Entity assigned.");
+
         if (ilustrationWaterPathEntity != null)
-        {
             ilustrationWaterPathImage = ilustrationWaterPathEntity.GetComponent<Image>();
-        }
-        else
-        {
-            Debug.Log("Error: There is no ilustrationWaterPath Entity assigned.");
-        }
+        else Debug.Log("Error: There is no ilustrationWaterPath Entity assigned.");
     }
+
     void OnPostCreate()
     {
         if (DatabaseRegistry.playerDB.Player.currentSceneUUID == UUIDLevel1)
@@ -212,135 +164,190 @@ public class PauseMenu : Component
             ilustrationLevel1Entity.SetActive(true);
             ilustrationWaterPathEntity.SetActive(false);
         }
-    }
-    void OnUpdate()
-    {
-        inputTimer += Time.unscaledDeltaTime;
-
-        if (inputTimer < inputCooldown)
-            return;
-
-        if (Input.IsKeyDown(KeyCode.ESCAPE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_START))
-        {
-            isPaused = !isPaused;
-            inputTimer = 0f;
-
-            if (!isPaused)
-            {
-                pauseMenuEntity.SetActive(false);
-                infoDebugEntity.SetActive(false);
-
-                PauseMenu.quickStartAnimations = true;
-                PauseMenu.invertedPassPagePlayed = false;
-
-                GameManager.SetState(previousState);
-            }
-            else
-            {
-                pauseMenuEntity.SetActive(true);
-                infoDebugEntity.SetActive(true);
-
-                if (!pauseMenuEntity.Active)
-                {
-                    pauseMenuEntity.GetComponent<PauseMenu>().Open();
-                }
-
-                previousState = GameManager.state;
-                GameManager.SetState(GameManager.GameState.FREEZE);
-            }
-        }
 
         if (isPaused)
         {
+            if (pauseMenuEntity != null) pauseMenuEntity.SetActive(true);
+            if (infoDebugEntity != null) infoDebugEntity.SetActive(true);
 
+            GameManager.SetState(GameManager.GameState.FREEZE);
 
-            if (quickStartAnimations)
-            {
-                PrepareAnimations();
-            }
+            isTogglingPause = false;
+            togglePassPageDone = false;
+            openedThroughToggle = false;
+            canCallScripts = false;
+            quickStartAnimations = false;
 
-            //// Audio
-            //if (!loopMusicHasPlayed)
-            //{
-            //    //loopMusicAudioSource.Play();
-            //    loopMusicHasPlayed = true;
-            //}
+            if (passPageEntity != null) passPageEntity.SetActive(false);
+            if (closeBookEntity != null) closeBookEntity.SetActive(false);
 
-            if (!invertedPassPagePlayed)
+            if (invertedPassPageEntity != null)
             {
                 invertedPassPageEntity.SetActive(true);
+                invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
                 invertedPassPageAnimator.Play();
-                invertedPassPagePlayed = true;
+            }
+
+            if (uiManagerScript != null)
+            {
+                uiManagerScript.SelectedElement = continueEntity;
+            }
+
+            invertedPassPagePlayed = true;
+        }
+    }
+
+    void OnUpdate()
+    {
+        inputTimer += Time.unscaledDeltaTime;
+        
+        if (!isTogglingPause && !canCallScripts && inputTimer >= inputCooldown && (Input.IsKeyDown(KeyCode.ESCAPE) || Input.IsGamepadButtonDown(GamepadButton.GAMEPAD_START)))
+        {
+            isTogglingPause = true;
+            togglePassPageDone = false;
+            openedThroughToggle = true;
+            inputTimer = 0f;
+
+            passPageEntity.SetActive(true);
+            passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
+            passPageAnimator.Play();
+        }
+
+        if (isTogglingPause)
+        {
+            if (!togglePassPageDone)
+            {
+                if (passPageAnimator.CurrentFrame >= passPageAnimator.FrameCount - 1)
+                {
+                    passPageAnimator.Stop();
+                    passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
+                    passPageEntity.SetActive(false);
+
+                    invertedPassPageEntity.SetActive(true);
+                    invertedPassPageAnimator.Play();
+                    togglePassPageDone = true;
+                    ApplyPauseToggle();
+                }
             }
             else
             {
-                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.StartFrame)
+                if (invertedPassPageAnimator.CurrentFrame >= invertedPassPageAnimator.FrameCount - 1)
                 {
-                    uiManagerScript.BlockNavigation = false;
+                    invertedPassPageAnimator.Stop();
+                    invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
+                    invertedPassPageEntity.SetActive(false);
+
+                    isTogglingPause = false;
+                }
+            }
+        }
+
+        if (isPaused && !isTogglingPause)
+        {
+            if (quickStartAnimations)
+                PrepareAnimations();
+
+            if (!openedThroughToggle)
+            {
+                if (!invertedPassPagePlayed)
+                {
+                    invertedPassPageEntity.SetActive(true);
+                    invertedPassPageAnimator.Play();
+                    invertedPassPagePlayed = true;
                 }
                 else
                 {
-                    uiManagerScript.BlockNavigation = true;
-                }
+                    uiManagerScript.BlockNavigation = (invertedPassPageAnimator.CurrentFrame != invertedPassPageAnimator.StartFrame);
 
-                if (invertedPassPageAnimator.CurrentFrame == invertedPassPageAnimator.FrameCount - 1)
-                {
-                    invertedPassPageEntity.SetActive(false);
-                    uiManagerScript.BlockNavigation = false;
+                    if (invertedPassPageAnimator.CurrentFrame >= invertedPassPageAnimator.FrameCount - 1)
+                    {
+                        invertedPassPageEntity.SetActive(false);
+                        uiManagerScript.BlockNavigation = false;
+                    }
                 }
             }
 
             if (canCallScripts)
-            {
                 HandleConfirm();
-            }
         }
     }
+
     public void Open()
     {
         uiManagerScript.SelectedElement = continueEntity;
         entity.SetActive(true);
     }
+
     void HandleConfirm()
     {
-        if (closeBookAnimator.CurrentFrame == closeBookAnimator.FrameCount - 1)
+        if (closeBookAnimator.CurrentFrame >= closeBookAnimator.FrameCount - 1)
         {
             exitScript.ExitGame();
         }
 
-        if (passPageAnimator.CurrentFrame == passPageAnimator.FrameCount - 1)
+        if (passPageAnimator.CurrentFrame >= passPageAnimator.FrameCount - 1)
         {
-            //loopMusicAudioSource.Stop();
-            quickStartAnimations = false;
-            invertedPassPagePlayed = false;
+            isTogglingPause = false;
+            togglePassPageDone = false;
+            openedThroughToggle = false;
             canCallScripts = false;
-            MainMenu.quickStartAnimations = true;
-            MainMenu.invertedPassPagePlayed = false;
-            Settings.quickStartAnimations = true;
-            Settings.invertedPassPagePlayed = false;
-
-            TogglePauseMenu();
 
             if (continueButton.Hovered)
             {
+                quickStartAnimations = true;
+                invertedPassPagePlayed = false;
 
+                if (passPageAnimator != null) passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
+                if (invertedPassPageAnimator != null) invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
+
+                TogglePauseMenu();
             }
             else if (mainMenuButton.Hovered)
             {
+                isPaused = false;
+                GlobalDatabase.GlobalData.mainMenuDB.MainMenu.IsInMainMenu = true;
+                DatabaseRegistry.SaveAll();
+                TogglePauseMenu();
+
                 mainMenuScript.StartTransition();
+                MainMenu.quickStartAnimations = true;
+                MainMenu.invertedPassPagePlayed = false;
             }
             else if (settingsButton.Hovered)
             {
+                DatabaseRegistry.SaveAll();
+
+                isTogglingPause = false;
+                togglePassPageDone = false;
+                openedThroughToggle = false;
+                canCallScripts = false;
+
+                quickStartAnimations = false;
+                invertedPassPagePlayed = false;
+
+                Settings.quickStartAnimations = false;
+                Settings.invertedPassPagePlayed = false;
+
                 settingsScript.StartTransition();
             }
         }
     }
+
     public void HandleConfirmAnimation()
     {
         if (exitButton.Hovered)
         {
             closeBookEntity.SetActive(true);
             closeBookAnimator.Play();
+        }
+        else if (continueButton.Hovered)
+        {
+            isTogglingPause = true;
+            togglePassPageDone = false;
+            openedThroughToggle = true;
+
+            passPageEntity.SetActive(true);
+            passPageAnimator.Play();
         }
         else
         {
@@ -350,6 +357,7 @@ public class PauseMenu : Component
 
         canCallScripts = true;
     }
+
     public void PrepareAnimations()
     {
         passPageAnimator.Play();
@@ -366,16 +374,28 @@ public class PauseMenu : Component
         closeBookEntity.SetActive(false);
         quickStartAnimations = false;
     }
+
     public void TogglePauseMenu()
     {
         isPaused = !isPaused;
         if (!isPaused)
         {
+            if (passPageAnimator != null) { passPageAnimator.Stop(); passPageAnimator.CurrentFrame = passPageAnimator.StartFrame; }
+            if (passPageEntity != null) passPageEntity.SetActive(false);
+
+            if (invertedPassPageAnimator != null) { invertedPassPageAnimator.Stop(); invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame; }
+            if (invertedPassPageEntity != null) invertedPassPageEntity.SetActive(false);
+
             pauseMenuEntity.SetActive(false);
             infoDebugEntity.SetActive(false);
 
             PauseMenu.quickStartAnimations = true;
             PauseMenu.invertedPassPagePlayed = false;
+
+            isTogglingPause = false;
+            togglePassPageDone = false;
+            openedThroughToggle = false;
+            canCallScripts = false;
 
             GameManager.SetState(previousState);
         }
@@ -385,12 +405,44 @@ public class PauseMenu : Component
             infoDebugEntity.SetActive(true);
 
             if (!pauseMenuEntity.Active)
-            {
                 pauseMenuEntity.GetComponent<PauseMenu>().Open();
-            }
 
             previousState = GameManager.state;
             GameManager.SetState(GameManager.GameState.FREEZE);
         }
     }
-};
+
+    public void ApplyPauseToggle()
+    {
+        isPaused = !isPaused;
+
+        if (!isPaused)
+        {
+            pauseMenuEntity.SetActive(false);
+            infoDebugEntity.SetActive(false);
+
+            PauseMenu.invertedPassPagePlayed = false;
+            PauseMenu.quickStartAnimations = true;
+
+            isTogglingPause = false;
+            togglePassPageDone = false;
+            openedThroughToggle = false;
+            canCallScripts = false;
+
+            GameManager.SetState(previousState);
+        }
+        else
+        {
+            pauseMenuEntity.SetActive(true);
+            infoDebugEntity.SetActive(true);
+
+            if (!pauseMenuEntity.Active)
+                pauseMenuEntity.GetComponent<PauseMenu>().Open();
+
+            previousState = GameManager.state;
+            GameManager.SetState(GameManager.GameState.FREEZE);
+
+            invertedPassPagePlayed = false;
+        }
+    }
+}
