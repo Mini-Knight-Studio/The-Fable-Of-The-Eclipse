@@ -29,6 +29,11 @@ class Mechanic_Idle : Component
     private ParticleComponent particles;
     private bool collected = false;
 
+    [Header("Feedback")]
+    public Entity collectSFXEntity;
+
+    private AudioSource collectSFX;
+
     void OnCreate()
     {
         interactPrompt.SetActive(false);
@@ -37,6 +42,11 @@ class Mechanic_Idle : Component
         collider.SetActive(false);
 
         particles = entity.GetComponent<ParticleComponent>();
+
+        if (collectSFXEntity != null)
+        {
+            collectSFX = collectSFXEntity.GetComponent<AudioSource>();
+        }
 
         if (unlockedMechanic == MechanicType.Torch)
         {
@@ -104,6 +114,9 @@ class Mechanic_Idle : Component
     IEnumerator Collect()
     {
         GameManager.SetState(GameManager.GameState.PAUSE);
+
+        if (collectSFXEntity != null) collectSFXEntity.GetComponent<AudioSource>().Play();
+
         collected = true;
         Entity player = Player.Instance.entity;
         Vector3 initialPosition = transform.position;
