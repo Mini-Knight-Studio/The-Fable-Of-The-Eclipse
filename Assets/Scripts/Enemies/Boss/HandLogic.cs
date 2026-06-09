@@ -5,7 +5,7 @@ using Loopie;
 
 public enum AttackType
 {
-    Punch, Spike
+    Punch, Spike, Palm
 }
 
 public class SequenceAction
@@ -26,24 +26,27 @@ public class SequenceAction
     public void Reset() => amountDone = 0;
 }
 
-
 public class HandLogic : Component
 {
     [Header("References")]
     public Entity attackColliderEntity;
-    public Entity burnColliderEntity;
+    public Entity hitColliderEntity;
     public Entity spikesEntity;
     public Entity spikesAttackColliderEntity;
     public Entity startPointEntity;
     public Entity shadowEntity;
+
+    [Tooltip("Reference to the vine shield entity")]
+    public Entity vineShieldEntity;
+    BurnableBlock vineShield;
+
     BoxCollider attackCollider;
-    BoxCollider burnCollider;
+    BoxCollider hitCollider;
     BoxCollider spikesAttackCollider;
 
     [Space(10)]
     [Header("Settings")]
     [ShowInInspector] BossSide side;
-
 
     [Space(10)]
     [Header("Feedback")]
@@ -67,36 +70,33 @@ public class HandLogic : Component
 
     BossLogic owner;
 
-    int sequenceMax = 3;
-    int currentSequence = 0;
-    int sequenceCounter = 0;
-
     float cooldownTimer = 0;
     float vulnerableTimer = 0;
-
     bool canBeStopped = true;
 
-    List<SequenceAction> sequence = new List<SequenceAction>()
-    {
-        new SequenceAction(AttackType.Punch, 3),
-        new SequenceAction(AttackType.Spike, 1),
-        new SequenceAction(AttackType.Punch, 2)
-    };
-    [ReadOnly][ShowInInspector]int sequenceIndex = 0;
+    public List<SequenceAction> sequence = new List<SequenceAction>();
+    [ReadOnly][ShowInInspector] int sequenceIndex = 0;
 
     public bool IsDefeated() => isDefeated;
     public bool IsInCooldown() => isInCooldown;
     public bool IsVulnerable() => isVulnerable;
-    bool HasBeenHit() => burnCollider.HasCollided;
+    bool HasBeenHit() {
+        if (Player.Instance.Combat.TemporalFunctionIsAttacking())
+            if (hitCollider.HasCollided)
+                return true;
+        return false;
+    }
     bool HasHitTarget() => attackCollider.IsColliding;
     bool HasSpikeHitTarget() => spikesAttackCollider.IsColliding;
-
 
     void OnCreate()
     {
         attackCollider = attackColliderEntity.GetComponent<BoxCollider>();
-        burnCollider = burnColliderEntity.GetComponent<BoxCollider>();
+        hitCollider = hitColliderEntity.GetComponent<BoxCollider>();
         spikesAttackCollider = spikesAttackColliderEntity.GetComponent<BoxCollider>();
+
+        if (vineShieldEntity != null)
+            vineShield = vineShieldEntity.GetComponent<BurnableBlock>();
 
         hitFeedbackParticles = hitFeedbackEntity.GetComponent<ParticleComponent>();
         spikeFeedbackParticles = spikeFeedbackEntity.GetComponent<ParticleComponent>();
@@ -109,37 +109,57 @@ public class HandLogic : Component
         isBusy = false;
     }
 
-    void OnPostCreate() 
-    { 
-
-    }
-
     void OnUpdate()
     {
         if (GameManager.state != GameManager.GameState.DEFAULT) { return; }
         shadowEntity.transform.position = new Vector3(transform.position.x, shadowEntity.transform.position.y, transform.position.z);
 
         ProcessStateTimer(ref cooldownTimer, ref isInCooldown);
-        if(ProcessStateTimer(ref vulnerableTimer, ref isVulnerable))
+
+        if (ProcessStateTimer(ref vulnerableTimer, ref isVulnerable))
         {
+            canBeStopped = true;
+
             StopAllOwnedCoroutines();
             StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
             isBusy = false;
         }
 
-        if(!isDefeated && isVulnerable && HasBeenHit())
+
+
+        if (!isDefeated && isVulnerable)
         {
-            Debug.Log($"Hand {entity.Name} has been hit while vulnerable");
-            isDefeated = true;
-            isVulnerable = false;
-            canBeStopped = false;
+            vineShield.Unprotect();
+            if (HasBeenHit())
+            {
+                bool shieldDestroyed = true;
+                if (owner.GetCurrentPhase() > 0 && vineShield != null)
+                {
+                    shieldDestroyed = !vineShield.entity.Active;
+                }
 
-            defeatFeedbackEntity.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            defeatFeedbackAudio.Play();
-            defeatFeedbackParticles.Play();
+                if (shieldDestroyed)
+                {
+                    Debug.Log($"Hand {entity.Name} has been hit while vulnerable");
+                    isDefeated = true;
+                    isVulnerable = false;
+                    canBeStopped = false;
 
-            StopAllOwnedCoroutines();
-            return;
+                    defeatFeedbackEntity.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    defeatFeedbackAudio.Play();
+                    defeatFeedbackParticles.Play();
+
+                    StopAllOwnedCoroutines();
+                    return;
+                }
+                else
+                {
+                    Debug.Log($"Hand {entity.Name} hit, but shield is still active!");
+                }
+            }        
+        }else
+        {
+            vineShield.Protect();
         }
 
         if (isVulnerable || isDefeated || isInCooldown)
@@ -153,14 +173,12 @@ public class HandLogic : Component
                 StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
                 isBusy = false;
             }
-
         }
         else
         {
             if (side == owner.GetCurrentSide())
                 PerformNextAction();
         }
-
     }
 
     public void SetOwner(BossLogic boss)
@@ -168,12 +186,25 @@ public class HandLogic : Component
         owner = boss;
     }
 
+    public void SetSequence(List<SequenceAction> newSequence)
+    {
+        sequence = newSequence;
+        sequenceIndex = 0;
+    }
+
     public void PerformNextAction()
     {
+        FakeRegenerate();
         StopAllOwnedCoroutines();
+        if (sequence.Count == 0) return;
+
         if (sequence[sequenceIndex].type == AttackType.Punch)
         {
-            StartCoroutine(Punch());
+            StartCoroutine(PunchOrPalm(false));
+        }
+        else if (sequence[sequenceIndex].type == AttackType.Palm)
+        {
+            StartCoroutine(PunchOrPalm(true));
         }
         else if (sequence[sequenceIndex].type == AttackType.Spike)
         {
@@ -181,13 +212,14 @@ public class HandLogic : Component
         }
     }
 
-    IEnumerator Punch()
+    IEnumerator PunchOrPalm(bool isPalm)
     {
-        Debug.Log($"Starting punch with {entity.Name}");
+        Debug.Log($"Starting {(isPalm ? "Palm" : "Punch")} with {entity.Name}");
         isBusy = true;
 
         float timer = 0.0f;
         bool hitPlayer = false;
+
         while (!hitPlayer)
         {
             Vector3 targetPosition = owner.GetTarget().transform.position;
@@ -199,20 +231,21 @@ public class HandLogic : Component
                 owner.HPunch_FollowSpeed * Time.deltaTime
             );
 
-            if(Vector3.Distance(transform.position, targetPosition) < 2f)
+            if (Vector3.Distance(transform.position, targetPosition) < 2f)
             {
-                timer+= Time.deltaTime;
-                if(timer> owner.HPunch_FollowTime)
+                timer += Time.deltaTime;
+                if (timer > owner.HPunch_FollowTime)
                     hitPlayer = true;
-            }else
+            }
+            else
             {
                 timer -= Time.deltaTime * owner.HPunch_FollowTimeReduction;
             }
 
             yield return null;
         }
+
         canBeStopped = false;
-        Debug.Log($"Hit player with {entity.Name}");
 
         StartCoroutine(owner.MoveVertically(transform, owner.HPunch_MoveAltitude, owner.HPunch_MoveAltitude + 2, owner.HPunch_TimeGoingUp, Mathf.LerpCurve.EaseOut));
         yield return new WaitForSeconds(owner.HPunch_TimeGoingUp);
@@ -229,9 +262,9 @@ public class HandLogic : Component
             {
                 float percentage = (timer / owner.HPunch_TimeGoingDown) * 100;
 
-                if(percentage > owner.HPunch_HitTimePercentage)
+                if (percentage > owner.HPunch_HitTimePercentage)
                 {
-                    if(!hasHitTarget && HasHitTarget())
+                    if (!hasHitTarget && HasHitTarget())
                     {
                         hasHitTarget = true;
                         owner.GetTarget().PlayerHealth.Damage(owner.HPunch_Damage);
@@ -244,21 +277,17 @@ public class HandLogic : Component
                     }
                 }
             }
-            
             yield return null;
         }
 
-        if (sequenceIndex == sequence.Count-1)
+        if (isPalm)
         {
-            if (IncreaseSequenceCounter())
+            SetVulnerable(owner.HPunch_VulnerableTime);
+            IncreaseSequenceCounter();
+
+            while (isVulnerable && !isDefeated)
             {
-                Debug.Log($"Set Vulnerable {entity.Name}");
-                SetVulnerable(owner.HPunch_VulnerableTime);
-            }
-            else
-            {
-                StartCoroutine(owner.MoveVertically(transform, owner.HPunch_HitAltitude, owner.HPunch_MoveAltitude, 1, Mathf.LerpCurve.EaseOut));
-                yield return new WaitForSeconds(owner.HPunch_DelayTimeAfterPunch);
+                yield return null;
             }
         }
         else
@@ -268,7 +297,7 @@ public class HandLogic : Component
             yield return new WaitForSeconds(owner.HPunch_DelayTimeAfterPunch);
         }
 
-        if (side == owner.GetCurrentSide())
+        if (side == owner.GetCurrentSide() && !isVulnerable && !isDefeated)
             isBusy = false;
 
         canBeStopped = true;
@@ -282,13 +311,11 @@ public class HandLogic : Component
         StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
         yield return new WaitForSeconds(owner.H_TimeToReturnToStartPoint);
 
-        ///Trigger Animations?? Shake???
         yield return new WaitForSeconds(owner.HSpike_InitialDelay);
         canBeStopped = false;
+
         PlayFeedback(spikeFeedbackAudio, spikeFeedbackParticles, owner.HSpike_AlertTime);
         yield return new WaitForSeconds(owner.HSpike_AlertTime);
-
-        ///Start PArticles Emerge??
 
         bool hasHitTarget = false;
 
@@ -304,15 +331,16 @@ public class HandLogic : Component
         float timer = 0;
         while (timer < owner.HSpike_SpikeStayTime)
         {
-            timer+= Time.deltaTime;
+            timer += Time.deltaTime;
             if (!hasHitTarget && HasSpikeHitTarget())
             {
                 hasHitTarget = true;
                 owner.GetTarget().PlayerHealth.Damage(owner.HSpike_Damage);
             }
+            yield return null;
         }
 
-        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.HSpike_ShowAltitude, owner.HSpike_HideAltitude,owner.HSpike_SpikeHideTime, Mathf.LerpCurve.EaseOut));
+        StartCoroutine(owner.MoveVertically(spikesEntity.transform, owner.HSpike_ShowAltitude, owner.HSpike_HideAltitude, owner.HSpike_SpikeHideTime, Mathf.LerpCurve.EaseOut));
         yield return new WaitForSeconds(owner.HSpike_SpikeHideTime);
 
         IncreaseSequenceCounter();
@@ -322,9 +350,10 @@ public class HandLogic : Component
         canBeStopped = true;
     }
 
-    
     public void FakeRegenerate()
     {
+        hitFeedbackParticles.Stop();
+        hitFeedbackAudio.Stop();
         defeatFeedbackAudio.Stop();
         defeatFeedbackParticles.Stop();
     }
@@ -332,6 +361,15 @@ public class HandLogic : Component
     public void Regenerate()
     {
         FakeRegenerate();
+
+        if (owner.GetCurrentPhase() > 0 && vineShieldEntity != null)
+        {
+            vineShieldEntity.SetActive(true);
+            vineShield.Regenerate();
+            vineShield.Protect();
+            Debug.Log("Regenerating Shield");
+        }
+
         isDefeated = false;
         isVulnerable = false;
         isBusy = false;
@@ -340,18 +378,12 @@ public class HandLogic : Component
         StopAllOwnedCoroutines();
         SetCooldown(2);
         Debug.Log($"Hand {entity.Name} has regenerated");
-
-    }
-
-    void OnDestroy()
-    {
-        StopAllOwnedCoroutines();
     }
 
     bool IncreaseSequenceCounter()
     {
         sequence[sequenceIndex].Increment();
-        if(sequence[sequenceIndex].IsCompleted())
+        if (sequence[sequenceIndex].IsCompleted())
         {
             sequence[sequenceIndex].Reset();
             IncreaseSequence();
@@ -359,6 +391,7 @@ public class HandLogic : Component
         }
         return false;
     }
+
     void IncreaseSequence()
     {
         int lastIndex = sequenceIndex;
@@ -384,7 +417,7 @@ public class HandLogic : Component
 
     bool ProcessStateTimer(ref float timer, ref bool state)
     {
-        if (!state) 
+        if (!state)
             return false;
         timer -= Time.deltaTime;
         if (timer <= 0)
@@ -396,28 +429,12 @@ public class HandLogic : Component
         return false;
     }
 
-
-    void PlayFeedback(AudioSource audio)
-    {
-        if (audio != null)
-            audio.Play();
-    }
-
-    void PlayFeedback(ParticleComponent particle, float duration = 1f)
-    {
-        if (particle != null)
-            StartCoroutine(PlayParticles(particle, duration));
-    }
-
+    void PlayFeedback(AudioSource audio) { if (audio != null) audio.Play(); }
+    void PlayFeedback(ParticleComponent particle, float duration = 1f) { if (particle != null) StartCoroutine(PlayParticles(particle, duration)); }
     void PlayFeedback(AudioSource audio, ParticleComponent particle, float duration = 1f)
     {
-        if (audio != null)
-            PlayFeedback(audio);
-
-        if (particle != null)
-        {
-            PlayFeedback(particle, duration);
-        }
+        if (audio != null) PlayFeedback(audio);
+        if (particle != null) PlayFeedback(particle, duration);
     }
 
     IEnumerator PlayParticles(ParticleComponent component, float duration)
@@ -440,23 +457,23 @@ public class HandLogic : Component
         vulnerableTimer = 0f;
 
         sequenceIndex = 0;
-        foreach (SequenceAction action in sequence)
-        {
-            action.Reset();
-        }
+        foreach (SequenceAction action in sequence) { action.Reset(); }
 
         transform.position = startPointEntity.transform.position;
         shadowEntity.transform.position = new Vector3(transform.position.x, shadowEntity.transform.position.y, transform.position.z);
 
-        if (owner != null)
-        {
-            spikesEntity.transform.position = new Vector3(spikesEntity.transform.position.x, owner.HSpike_HideAltitude, spikesEntity.transform.position.z);
-        }
+        if (owner != null) spikesEntity.transform.position = new Vector3(spikesEntity.transform.position.x, owner.HSpike_HideAltitude, spikesEntity.transform.position.z);
+        if (vineShieldEntity != null) vineShieldEntity.SetActive(false);
 
         FakeRegenerate();
         if (hitFeedbackParticles != null) hitFeedbackParticles.Stop();
         if (hitFeedbackAudio != null) hitFeedbackAudio.Stop();
         if (spikeFeedbackParticles != null) spikeFeedbackParticles.Stop();
         if (spikeFeedbackAudio != null) spikeFeedbackAudio.Stop();
+    }
+
+    void OnDestroy()
+    {
+        StopAllOwnedCoroutines();
     }
 }

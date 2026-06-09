@@ -20,6 +20,7 @@ public class BurnableBlock : Component
     private ParticleComponent particles;
 
     private bool isBurning = false;
+    private bool isProtected = false;
 
     void OnCreate()
     {
@@ -27,14 +28,24 @@ public class BurnableBlock : Component
         source = audioSourceEntity.GetComponent<AudioSource>();
         particles = particlesEntity.GetComponent<ParticleComponent>();
 
-        if (DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID))
+        if(CanBeSave())
         {
-            entity.SetActive(false);
-        }
+            if (DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID))
+            {
+                entity.SetActive(false);
+            }
+        }   
+    }
+
+    bool CanBeSave()
+    {
+        return burnableID != "UNASSIGNED_BURNABLE" && burnableID != "DO_NOT_SAVE";
     }
 
     void OnUpdate()
     {
+        if (isProtected)
+            return;
         if (collider == null || isBurning) return;
 
         if (collider.IsColliding)
@@ -68,11 +79,35 @@ public class BurnableBlock : Component
         yield return new WaitForSeconds(3);
         entity.SetActive(false);
 
-        DatabaseRegistry.levelsDB.Levels.SetBurnableBurned(burnableID);
+        if(CanBeSave())
+            DatabaseRegistry.levelsDB.Levels.SetBurnableBurned(burnableID);
+
+        isBurning = false;
     }
 
     void OnDestroy()
     {
         StopAllOwnedCoroutines();
+    }
+
+
+    public void Regenerate()
+    {
+        if (CanBeSave() && DatabaseRegistry.levelsDB.Levels.IsBurnableBurned(burnableID))
+        {
+            return;
+        }
+        collider.SetActive(true);
+        visuals.SetActive(true);
+    }
+
+    public void Protect()
+    {
+        isProtected = true;
+    }
+
+    public void Unprotect()
+    {
+        isProtected = false;
     }
 }
