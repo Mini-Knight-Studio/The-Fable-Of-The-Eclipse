@@ -69,6 +69,7 @@ class PuzzleGoalSimonSays : Component
     public float mechanichDoorInitialHeight = 0f;
     public float mechanichDoorFinalHeight = 0f;
 
+    public float doorCameraZoom = 20f;
     public float fallDuration = 2.0f;
     public float pauseBeforeFalling = 0.5f;
     public float easeIntensity = 1.5f;
@@ -76,10 +77,19 @@ class PuzzleGoalSimonSays : Component
     public Entity mechanichDoorParticlesEntity;
     private ParticleComponent mechanichDoorParticles;
 
-    public Entity mechanichDoorPlatformSFXEntity;
-    private AudioSource mechanichDoorPlatformSFX;
+    public Entity mechanichDoorSFXEntity;
+    private AudioSource mechanichDoorSFX;
+    public Entity mechanichDoorSFXEntity2;
+    private AudioSource mechanichDoorSFX2;
+    public Entity mechanichDoorSFXEntity3;
+    private AudioSource mechanichDoorSFX3;
+
+    public Entity mechanichDoorThumpSFXEntity;
+    private AudioSource mechanichDoorThumpSFX;
 
     private float initialGoalY;
+
+    private bool canStartCinematic = false;
 
     private enum State
     {
@@ -117,8 +127,15 @@ class PuzzleGoalSimonSays : Component
         if (mechanichDoorParticlesEntity != null)
             mechanichDoorParticles = mechanichDoorParticlesEntity.GetComponent<ParticleComponent>();
 
-        if (mechanichDoorPlatformSFXEntity != null)
-            mechanichDoorPlatformSFX = mechanichDoorPlatformSFXEntity.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity != null)
+            mechanichDoorSFX = mechanichDoorSFXEntity.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity2 != null)
+            mechanichDoorSFX2 = mechanichDoorSFXEntity2.GetComponent<AudioSource>();
+        if (mechanichDoorSFXEntity3 != null)
+            mechanichDoorSFX3 = mechanichDoorSFXEntity3.GetComponent<AudioSource>();
+
+        if (mechanichDoorThumpSFXEntity != null)
+            mechanichDoorThumpSFX = mechanichDoorThumpSFXEntity.GetComponent<AudioSource>();
 
         LockAllPillars();
         HidePromptAllPillars();
@@ -149,6 +166,12 @@ class PuzzleGoalSimonSays : Component
             case State.Completed:
                 HandleCompleted();
                 break;
+        }
+
+        if (canStartCinematic)
+        {
+            StartCoroutine(PuzzleCompleteCinematic());
+            canStartCinematic = false;
         }
     }
 
@@ -268,49 +291,40 @@ class PuzzleGoalSimonSays : Component
             bool roundFailed = false;
             while (playerIndex < sequence.Count)
             {
-                bool aPillarIsActivating = false;
+                int pressedIndex = -1;
                 for (int i = 0; i < simonPillars.Length; i++)
                 {
-                    if (simonPillars[i] != null && simonPillars[i].active && !simonPillars[i].interactPrompt.Active)
+                    if (simonPillars[i] != null && simonPillars[i].wasPressed)
                     {
-                        aPillarIsActivating = true;
+                        pressedIndex = i;
                         break;
                     }
                 }
 
-                if (!aPillarIsActivating)
+                if (pressedIndex != -1)
                 {
-                    int pressedIndex = -1;
-                    for (int i = 0; i < simonPillars.Length; i++)
+                    if (sequence[playerIndex] == pressedIndex)
                     {
-                        if (simonPillars[i] != null && simonPillars[i].wasPressed)
-                        {
-                            pressedIndex = i;
-                            break;
-                        }
+                        playerIndex++;
+                        simonPillars[pressedIndex].ResetState();
+                        simonPillars[pressedIndex].interactPrompt.SetActive(false);
+
+                        LockAllPillars();
+
+                        if (playerIndex >= sequence.Count) HidePromptAllPillars();
+
+                        yield return new WaitForSeconds(1f);
+
+                        if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
+                        simonPillars[pressedIndex].ResetState();
+
+                        UnlockAllPillars();
                     }
-
-                    if (pressedIndex != -1)
+                    else
                     {
-                        if (sequence[playerIndex] == pressedIndex)
-                        {
-                            playerIndex++;
-                            simonPillars[pressedIndex].ResetState();
-                            simonPillars[pressedIndex].interactPrompt.SetActive(false);
-
-                            if (playerIndex >= sequence.Count) HidePromptAllPillars();
-
-                            yield return new WaitForSeconds(1f);
-
-                            if (playerIndex < sequence.Count) simonPillars[pressedIndex].interactPrompt.SetActive(true);
-                            simonPillars[pressedIndex].ResetState();
-                        }
-                        else
-                        {
-                            simonPillars[pressedIndex].ResetState();
-                            roundFailed = true;
-                            break;
-                        }
+                        simonPillars[pressedIndex].ResetState();
+                        roundFailed = true;
+                        break;
                     }
                 }
                 yield return null;
@@ -382,10 +396,12 @@ class PuzzleGoalSimonSays : Component
 
         collectGemSFX.GetComponent<AudioSource>().Play();
 
-        //if (UIPopupManager.Instance != null)
-        //{
-        //    UIPopupManager.Instance.ShowPopup(popupName);
-        //}
+        if (UIPopupManager.Instance != null)
+        {
+            UIPopupManager.Instance.ShowPopup(popupName);
+        }
+
+        canStartCinematic = true;
 
         isCollecting = false;
     }
@@ -396,26 +412,24 @@ class PuzzleGoalSimonSays : Component
         puzzle2Completed = true;
 
         DatabaseRegistry.puzzlesDB.Puzzles.Puzzle2Completed = true;
-
-        StartCoroutine(PuzzleCompleteCinematic());
     }
 
     IEnumerator PuzzleCompleteCinematic()
     {
         GameManager.SetState(GameManager.GameState.PAUSE);
 
-        Player.Instance.Camera.FocusOnPoint(Gem.transform.position, 10, 4);
-        yield return new WaitForSeconds(1.5f);
-
-        Player.Instance.Camera.FocusOnPoint(MechanicDoorVistaPoint.transform.position, 20, 4);
+        Player.Instance.Camera.FocusOnPoint(MechanicDoorVistaPoint.transform.position, doorCameraZoom, 4);
         yield return new WaitForSeconds(0.5f);
 
-        Player.Instance.Camera.SetIsShaking(true, fallDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
+        if (mechanichDoorParticlesEntity != null) mechanichDoorParticles.Play();
 
-        if (mechanichDoorParticles != null) mechanichDoorParticles.Play();
-        if (mechanichDoorPlatformSFX != null) mechanichDoorPlatformSFX.Play();
+        if (mechanichDoorSFXEntity != null) mechanichDoorSFX.Play();
+        if (mechanichDoorSFXEntity2 != null) mechanichDoorSFX2.Play();
+        if (mechanichDoorSFXEntity3 != null) mechanichDoorSFX3.Play();
 
         yield return new WaitForSeconds(pauseBeforeFalling);
+
+        Player.Instance.Camera.SetIsShaking(true, fallDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
 
         float elapsedTime = 0f;
         while (elapsedTime < fallDuration)
@@ -433,7 +447,11 @@ class PuzzleGoalSimonSays : Component
         Player.Instance.Camera.SetIsShaking(true, cameraShakeDuration, cameraShakeAmount, cameraShakeRotation, cameraShakeAmountVel, cameraShakeRotationVel);
         MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
 
-        if (mechanichDoorParticles != null) mechanichDoorParticles.Stop();
+        if (mechanichDoorThumpSFXEntity != null) mechanichDoorThumpSFX.Play();
+
+        if (mechanichDoorParticlesEntity != null) mechanichDoorParticles.Stop();
+        if (mechanichDoorSFXEntity2 != null) mechanichDoorSFX2.Stop();
+        if (mechanichDoorSFXEntity3 != null) mechanichDoorSFX3.Stop();
 
         yield return new WaitForSeconds(1.0f);
 
@@ -441,9 +459,6 @@ class PuzzleGoalSimonSays : Component
         yield return new WaitForSeconds(0.5f);
 
         currentState = State.Completed;
-        Gem.GetComponent<BoxCollider>().SetActive(true);
-        Gem.GetComponent<Gem_Idle>().interactionPrompt.SetActive(true);
-        completeSFX.GetComponent<AudioSource>().Play();
 
         GameManager.SetState(GameManager.GameState.DEFAULT);
     }
@@ -474,7 +489,7 @@ class PuzzleGoalSimonSays : Component
         float totalDropDistance = movementDistance * maxRounds;
         entity.transform.position = new Vector3(entity.transform.position.x, initialGoalY - totalDropDistance, entity.transform.position.z);
 
-        if (MechanicDoor != null)
+        if (MechanicDoor != null && DatabaseRegistry.playerDB.Player.gemWaterCollected)
         {
             MechanicDoor.transform.position = new Vector3(MechanicDoor.transform.position.x, mechanichDoorFinalHeight, MechanicDoor.transform.position.z);
         }
