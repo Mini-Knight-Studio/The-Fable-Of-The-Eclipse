@@ -96,7 +96,7 @@ class Golem : Enemy
             isShielding = true;
     }
 
-   
+
 
     public override void Hit(int points, float force_scale, string hit_clip)
     {
@@ -107,6 +107,7 @@ class Golem : Enemy
                 ReceivedHits = 0;
                 StopCoroutine(attackCoroutine);
                 StartCoroutine(CancelAttack("G_Scale_CTRL|GetHitShieldOff", animator.ClipDuration("G_Scale_CTRL|GetHitShieldOff")));
+                return;
             }
             else if (isShielding) return;
         }
@@ -120,13 +121,13 @@ class Golem : Enemy
                 {
                     ReceivedHits++;
                     health.Damage(points);
-                    transform.LookAt(GetTargetPosition(), Vector3.Up);
                     feedback.TickParticles("Hurt", Time.deltaTime);
                     feedback.PlaySound("Hit");
                 }
             }
         }
     }
+
 
     void OnDrawGizmo()
     {
