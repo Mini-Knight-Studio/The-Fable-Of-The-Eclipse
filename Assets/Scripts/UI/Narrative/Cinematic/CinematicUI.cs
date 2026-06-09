@@ -6,21 +6,16 @@ using System.Linq;
 
 class CinematicUI : Component
 {
-    private struct CinematicFrame
-    {
-        public Image image;
-        public AudioSource audioSource;
-        public float displayDuration;
-    }
     public static CinematicUI Instance { get; private set; }
 
-    public Entity topBar;
-    RectTransform topBarRect;
-    public Entity bottomBar;
-    RectTransform bottomBarRect;
-    public float barAnimationDuration = 0.5f;
-    public float barDelay = 0.5f;
-    public float fadeInOutDuration = 0.5f;
+    public Entity closingPageEntity;
+    SpriteAnimator closingPageAnimator;
+
+    public Entity openingPageEntity;
+    SpriteAnimator openingPageAnimator;
+
+    float fadeInDuration;
+    float fadeOutDuration;
 
     public bool IsCinematicOpen { get; private set; } = false;
     private List<CinematicFrame> frames = new List<CinematicFrame>();
@@ -34,13 +29,15 @@ class CinematicUI : Component
 
         frames = new List<CinematicFrame>();
 
-        topBarRect = topBar.GetComponent<RectTransform>();
-        bottomBarRect = bottomBar.GetComponent<RectTransform>();
-
+        closingPageAnimator = closingPageEntity.GetComponent<SpriteAnimator>();
+        openingPageAnimator = openingPageEntity.GetComponent<SpriteAnimator>();
     }
 
-    public void SetUpCinematic(Entity cinematicContainer)
+    public void SetUpCinematic(Entity cinematicContainer, float fadeInTime, float fadeOutTime)
     {
+        fadeOutDuration = fadeOutTime;
+        fadeInDuration = fadeInTime;
+
         frames.Clear();
         cinematicOwner = cinematicContainer;
         if(cinematicOwner == null)
@@ -50,18 +47,11 @@ class CinematicUI : Component
         }
         foreach (var imageEntity in cinematicContainer.GetChildren())
         {
-            var image = imageEntity.GetComponent<Image>();
-            var audioSource = imageEntity.GetComponent<AudioSource>();
-            if (image != null)
+            
+            if(imageEntity.HasComponent<CinematicFrame>())
             {
-                string name = imageEntity.Name;
-                float displayDuration = -1;
-                if (float.TryParse(name, out float duration))
-                {
-                    displayDuration = duration;
-                }
-
-                frames.Add(new CinematicFrame { image = image, displayDuration = displayDuration, audioSource = audioSource });
+                CinematicFrame frame = imageEntity.GetComponent<CinematicFrame>();
+                frames.Add(frame);
             }
             imageEntity.SetActive(false);
         }
@@ -76,6 +66,7 @@ class CinematicUI : Component
         }
         IsCinematicOpen = true;
         GameManager.SetState(GameManager.GameState.PAUSE);
+        
         StartCoroutine(Play());
     }
 
@@ -84,58 +75,86 @@ class CinematicUI : Component
         cinematicOwner.SetActive(false);
         foreach (var frame in frames)
         {
-            frame.image.entity.SetActive(false);
+            frame.FrameEntity.SetActive(false);
         }
+       
         GameManager.SetState(GameManager.GameState.DEFAULT);
         IsCinematicOpen = false;
 
-        topBar.SetActive(false);
-        bottomBar.SetActive(false);
+        openingPageEntity.SetActive(false);
+        closingPageEntity.SetActive(false);
     }
 
     IEnumerator Play()
     {
         cinematicOwner.SetActive(false);
         float timer = 0;
-        float sizeBar = topBarRect.size.y;
-
-        topBar.SetActive(true);
-        bottomBar.SetActive(true);
-        while (timer < barAnimationDuration)
-        {
-            float t = timer / barAnimationDuration;
-            topBarRect.anchored_position = Vector2.Lerp(new Vector2(0, sizeBar), new Vector2(0, 0), t);
-            bottomBarRect.anchored_position = Vector2.Lerp(new Vector2(0, -sizeBar), new Vector2(0, 0), t);
-            timer += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        yield return new WaitForUnscaledSeconds(barDelay);
-
         int index = 0;
         cinematicOwner.SetActive(true);
         while (index < frames.Count)
         {
             CinematicFrame frame = frames[index];
-            frame.image.entity.SetActive(true);
+            frame.FrameEntity.SetActive(true);
+            if (frame.FadeTextGroup && frame.TextGroupCanvasGroup != null){
+                frame.TextGroupCanvasGroup.Alpha = 0;
+            }
 
-            if(index == 0)
+            if (frame.FadeInText && frame.TextCanvasGroup != null)
             {
-                Vector4 color = frame.image.Tint;
+                frame.TextCanvasGroup.Alpha = 0;
+            }
+
+            if (index == 0)
+            {
                 timer = 0;
-                while (timer < fadeInOutDuration)
+                while (timer < fadeInDuration)
                 {
-                    float t = timer / fadeInOutDuration;
-                    frame.image.Tint = new Vector4(color.x, color.y, color.z, Mathf.Lerp(0, 255, t));
+                    if(frame.FrameCanvasGroup != null)
+                    {
+                        frame.FrameCanvasGroup.Alpha = Mathf.Lerp(0, 1, timer / fadeInDuration);
+                    }
+                    timer += Time.unscaledDeltaTime;
+                    yield return null;
+                }
+            }
+            else if(frame.UsePage)
+            {
+                closingPageEntity.SetActive(false);
+                openingPageEntity.SetActive(true);
+                openingPageAnimator.Play();
+                yield return new WaitForUnscaledSeconds(0.5f);
+                openingPageEntity.SetActive(false);
+            }      
+
+            if (frame.FadeTextGroup && frame.TextGroupCanvasGroup != null)
+            {
+                frame.TextGroupCanvasGroup.Alpha = 0;
+                yield return new WaitForUnscaledSeconds(0.5f);
+                timer = 0;
+                while (timer < fadeInDuration/2)
+                {
+                    frame.TextGroupCanvasGroup.Alpha = Mathf.Lerp(0, 1, timer / (fadeInDuration/2));
                     timer += Time.unscaledDeltaTime;
                     yield return null;
                 }
             }
 
-            frame.audioSource?.Play();
-            if (frame.displayDuration != -1)
+            if (frame.FadeInText && frame.TextCanvasGroup != null)
             {
-                yield return new WaitForUnscaledSeconds(frame.displayDuration);
+                timer = 0;
+                while (timer < fadeInDuration / 2)
+                {
+                    frame.TextCanvasGroup.Alpha = Mathf.Lerp(0, 1, timer / (fadeInDuration / 2));
+                    timer += Time.unscaledDeltaTime;
+                    yield return null;
+                }
+            }
+
+            if (frame.AudioSource != null)
+                frame.AudioSource.Play();
+            if (!frame.WaitsForInput)
+            {
+                yield return new WaitForUnscaledSeconds(frame.Duration);
             }
             else
             {
@@ -150,35 +169,50 @@ class CinematicUI : Component
                 }
             }
 
-            if (index == frames.Count - 1)
+            if (frame.FadeOutText && frame.TextCanvasGroup != null)
             {
-                Vector4 color = frame.image.Tint;
                 timer = 0;
-                while (timer < fadeInOutDuration)
+                while (timer < fadeOutDuration / 2)
                 {
-                    float t = timer / fadeInOutDuration;
-                    frame.image.Tint = new Vector4(color.x, color.y, color.z, Mathf.Lerp(255, 0, t));
+                    frame.TextCanvasGroup.Alpha = Mathf.Lerp(1, 0, timer / (fadeOutDuration / 2));
                     timer += Time.unscaledDeltaTime;
                     yield return null;
                 }
             }
 
-            yield return null;
-            frame.image.entity.SetActive(false);
+            if (index == frames.Count - 1)
+            {
+                timer = 0;
+                while (timer < fadeOutDuration)
+                {
+                    if (frame.FrameCanvasGroup != null)
+                    {
+                        frame.FrameCanvasGroup.Alpha = Mathf.Lerp(1, 0, timer / fadeOutDuration);
+                    }
+                    timer += Time.unscaledDeltaTime;
+                    timer += Time.unscaledDeltaTime;
+                    yield return null;
+                }
+            }
+            else if(index + 1 < frames.Count)
+            {
+                CinematicFrame nextFrame = frames[index+1];
+                if (nextFrame.UsePage)
+                {
+                    closingPageEntity.SetActive(true);
+                    closingPageAnimator.Play();
+                    yield return new WaitForUnscaledSeconds(0.5f);
+                    
+
+                }     
+            }
+
+                yield return null;
+            frame.FrameEntity.SetActive(false);
+
+
             index++;
         }
-
-        timer = 0;
-        while (timer < barAnimationDuration)
-        {
-            float t = timer / barAnimationDuration;
-            topBarRect.anchored_position = Vector2.Lerp(new Vector2(0, 0), new Vector2(0, sizeBar), t);
-            bottomBarRect.anchored_position = Vector2.Lerp(new Vector2(0, 0), new Vector2(0, -sizeBar), t);
-            timer += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        yield return new WaitForUnscaledSeconds(barDelay);
 
         Close();
     }
