@@ -48,4 +48,9 @@ public class EmissivePulse : Component
 
         mat.SetFloat("u_EmissiveIntensity", currentIntensity);
     }
+
+    public void Reset()
+    {
+        mat.SetFloat("u_EmissiveIntensity", 0);
+    }
 }

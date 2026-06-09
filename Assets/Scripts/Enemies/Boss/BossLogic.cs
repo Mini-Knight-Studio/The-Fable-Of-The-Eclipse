@@ -19,6 +19,9 @@ public class BossLogic : Component
     HeadLogic head;
     public Entity sidePivotEntity;
     public Entity middleColliderEntity;
+    public Entity hitSoundEntity;
+
+    AudioSource hitSound;
 
     [Header("Environment")]
     public Entity vinesObstructionEntity; 
@@ -33,27 +36,30 @@ public class BossLogic : Component
     [Space(10)]
     [Header("Hand Settings")]
     public float H_TimeToReturnToStartPoint;
-    public int HPunch_Damage;
-    public float HPunch_FollowSpeed;
-    public float HPunch_MoveAltitude;
-    public float HPunch_HitAltitude;
-    public float HPunch_FollowTime;
-    public float HPunch_FollowTimeReduction;
-    public float HPunch_TimeGoingUp;
-    public float HPunch_TimeGoingDown;
-    public float HPunch_HitTimePercentage;
-    public float HPunch_DelayTimeAfterPunch;
-    public float HPunch_VulnerableTime;
+    public int Hand_Damage;
+    public float Hand_FollowSpeed;
+    public float Punch_MoveAltitude;
+    public float Palm_MoveAltitude;
+    public float Hand_HitAltitude;
+    public float Hand_FollowTime;
+    public float Hand_FollowTimeReduction;
+    public float Punch_TimeGoingUp;
+    public float Palm_TimeGoingUp;
+    public float Punch_TimeGoingDown;
+    public float Palm_TimeGoingDown;
+    public float Hand_HitTimePercentage;
+    public float Punch_DelayTimeAfterPunch;
+    public float Palm_VulnerableTime;
 
-    public int HSpike_Damage;
-    public float HSpike_HideAltitude;
-    public float HSpike_ShowAltitude;
-    public float HSpike_InitialDelay;
-    public float HSpike_AlertTime;
-    public float HSpike_SpikeShowTime;
-    public float HSpike_SpikeStayTime;
-    public float HSpike_SpikeHideTime;
-    public float HSpike_DelayTimeAfterSpike;
+    public int Spike_Damage;
+    public float Spike_HideAltitude;
+    public float Spike_ShowAltitude;
+    public float Spike_InitialDelay;
+    public float Spike_AlertTime;
+    public float Spike_SpikeShowTime;
+    public float Spike_SpikeStayTime;
+    public float Spike_SpikeHideTime;
+    public float Spike_DelayTimeAfterSpike;
 
     public float Head_TimeToReturnToStartPoint;
     public float Head_TimeToVulnerablePosition;
@@ -88,23 +94,24 @@ public class BossLogic : Component
         leftHand = leftHandEntity.GetComponent<HandLogic>();
         rightHand = rightHandEntity.GetComponent<HandLogic>();
         head = headEntity.GetComponent<HeadLogic>();
+        hitSound = hitSoundEntity.GetComponent<AudioSource>();
 
         currentSide = BossSide.Left;
         currentPhase = 0;
         isBusy = false;
         isDefeated = false;
         isVulnerable = false;
+        leftHand.SetOwner(this);
+        rightHand.SetOwner(this);
+        head.SetOwner(this);
     }
 
     void OnPostCreate()
     {
         target = Player.Instance;
 
-        leftHand.SetOwner(this);
         leftHand.SetCooldown(2);
-        rightHand.SetOwner(this);
         rightHand.SetCooldown(2);
-        head.SetOwner(this);
 
         head.headColliderEntity.SetActive(false);
         if (vinesObstructionEntity != null) vinesObstructionEntity.SetActive(false);
@@ -218,6 +225,7 @@ public class BossLogic : Component
         StartCoroutine(RotateInAxis(head.transform, new Vector3(0, 0, 0), Head_VulnerableRotation, Head_TimeToVulnerablePosition, new Vector3(0, 0, 1)));
         yield return new WaitForSeconds(Head_TimeToVulnerablePosition + 0.5f);
 
+        head.SetVulnerable(true);
         head.headColliderEntity.SetActive(true);
         float timer = 0;
         while (timer <= Core_VulnerabilityDuration)
@@ -231,12 +239,15 @@ public class BossLogic : Component
 
                 if (IsFinalPhase())
                 {
-                    yield return new WaitForSeconds(2);
+                    hitSound.Play();
+                    yield return new WaitForSeconds(1);
                     Player.Instance.CreditsScreen.OpenCreditsScreen();
                     yield break;
                 }
                 else
                 {
+
+                    hitSound.Play();
                     currentPhase++;
                     UpdatePhaseSequences();
 
@@ -371,5 +382,15 @@ public class BossLogic : Component
     {
         Player.Instance.LoseScreen.OnClosing -= RestartBoss;
         StopAllOwnedCoroutines();
+    }
+
+    public void PlayAnimation(Animator animator, string key, bool loop, float smoothTime)
+    {
+        if (animator.GetClipIndex(key) == -1) return;
+        if (animator.GetCurrentClipName() == key && !animator.InTransition) return;
+        if (animator.GetNextClipName() == key && animator.InTransition) return;
+
+        animator.Play(key, smoothTime);
+        animator.Looping = loop;
     }
 }
