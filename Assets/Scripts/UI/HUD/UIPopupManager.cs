@@ -9,6 +9,8 @@ public class UIPopupManager : Component
     private Entity currentActivePanel = null;
     private bool isWaitingForInput = false;
 
+    private float fadeDuration = 0.5f;
+
     void OnCreate()
     {
         Instance = this;
@@ -34,11 +36,13 @@ public class UIPopupManager : Component
             currentActivePanel = panel;
             isWaitingForInput = true;
 
+            StartCoroutine(FadeCanvasGroup(panel, 0.0f, 1.0f));
+
             GameManager.SetState(GameManager.GameState.PAUSE);
         }
         else
         {
-            Debug.Log("UIPopupManager: No se encontro el panel en la escena llamado " + panelName);
+            Debug.Log("UIPopupManager: No Popup was found with the name " + panelName);
         }
     }
 
@@ -46,12 +50,43 @@ public class UIPopupManager : Component
     {
         if (currentActivePanel != null)
         {
-            currentActivePanel.SetActive(false);
+            StartCoroutine(FadeAndDisable(currentActivePanel));
             currentActivePanel = null;
         }
-
-        isWaitingForInput = false;
-
-        GameManager.SetState(GameManager.GameState.DEFAULT);
     }
-};
+
+    IEnumerator FadeCanvasGroup(Entity panel, float startAlpha, float endAlpha, bool wasWaitingForInput = false)
+    {
+        if (panel != null && panel.HasComponent<CanvasGroup>())
+        {
+            CanvasGroup canvasGroup = panel.GetComponent<CanvasGroup>();
+            canvasGroup.Alpha = startAlpha;
+
+            float elapsedTime = 0f;
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / fadeDuration;
+                canvasGroup.Alpha = Mathf.Lerp(startAlpha, endAlpha, t);
+                yield return null;
+            }
+
+            canvasGroup.Alpha = endAlpha;
+
+        }
+        if (wasWaitingForInput)
+        {
+            isWaitingForInput = false;
+            GameManager.SetState(GameManager.GameState.DEFAULT);
+            if (panel != null)
+            {
+                panel.SetActive(false);
+            }
+        }
+    }
+
+    IEnumerator FadeAndDisable(Entity panel)
+    {
+        yield return StartCoroutine(FadeCanvasGroup(panel, 1.0f, 0.0f, true));
+    }
+}
