@@ -176,6 +176,7 @@ public class PauseMenu : Component
             togglePassPageDone = false;
             openedThroughToggle = false;
             canCallScripts = false;
+            quickStartAnimations = true;
 
             passPageAnimator.Play();
             passPageAnimator.Stop();
@@ -217,6 +218,7 @@ public class PauseMenu : Component
             inputTimer = 0f;
 
             passPageEntity.SetActive(true);
+            passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
             passPageAnimator.Play();
         }
 
@@ -304,6 +306,10 @@ public class PauseMenu : Component
             {
                 quickStartAnimations = true;
                 invertedPassPagePlayed = false;
+
+                if (passPageAnimator != null) passPageAnimator.CurrentFrame = passPageAnimator.StartFrame;
+                if (invertedPassPageAnimator != null) invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame;
+
                 TogglePauseMenu();
             }
             else if (mainMenuButton.Hovered)
@@ -313,10 +319,9 @@ public class PauseMenu : Component
                 DatabaseRegistry.SaveAll();
                 TogglePauseMenu();
 
-                MainMenu.quickStartAnimations = false;
-                MainMenu.invertedPassPagePlayed = false;
-
                 mainMenuScript.StartTransition();
+                MainMenu.quickStartAnimations = true;
+                MainMenu.invertedPassPagePlayed = false;
             }
             else if (settingsButton.Hovered)
             {
@@ -380,7 +385,6 @@ public class PauseMenu : Component
         isPaused = !isPaused;
         if (!isPaused)
         {
-            // FIX: Ensure all transition entities are deactivated and reset when unpausing
             if (passPageAnimator != null) { passPageAnimator.Stop(); passPageAnimator.CurrentFrame = passPageAnimator.StartFrame; }
             if (passPageEntity != null) passPageEntity.SetActive(false);
 
@@ -419,13 +423,6 @@ public class PauseMenu : Component
 
         if (!isPaused)
         {
-            // FIX: Ensure all transition entities are deactivated and reset when unpausing
-            if (passPageAnimator != null) { passPageAnimator.Stop(); passPageAnimator.CurrentFrame = passPageAnimator.StartFrame; }
-            if (passPageEntity != null) passPageEntity.SetActive(false);
-
-            if (invertedPassPageAnimator != null) { invertedPassPageAnimator.Stop(); invertedPassPageAnimator.CurrentFrame = invertedPassPageAnimator.StartFrame; }
-            if (invertedPassPageEntity != null) invertedPassPageEntity.SetActive(false);
-
             pauseMenuEntity.SetActive(false);
             infoDebugEntity.SetActive(false);
 
