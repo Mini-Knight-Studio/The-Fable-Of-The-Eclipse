@@ -363,7 +363,6 @@ class PuzzleGoalSimonSays : Component
         if (!isCollecting && Gem.GetComponent<BoxCollider>().IsColliding && Player.Instance.Input.interactKeyPressed)
         {
             StartCoroutine(Collect());
-            Debug.Log("PUZZLE COMPLETED WHATHAPPENS");
         }
     }
 
