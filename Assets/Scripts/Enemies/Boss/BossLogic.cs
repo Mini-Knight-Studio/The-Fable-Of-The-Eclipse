@@ -94,17 +94,17 @@ public class BossLogic : Component
         isBusy = false;
         isDefeated = false;
         isVulnerable = false;
+        leftHand.SetOwner(this);
+        rightHand.SetOwner(this);
+        head.SetOwner(this);
     }
 
     void OnPostCreate()
     {
         target = Player.Instance;
 
-        leftHand.SetOwner(this);
         leftHand.SetCooldown(2);
-        rightHand.SetOwner(this);
         rightHand.SetCooldown(2);
-        head.SetOwner(this);
 
         head.headColliderEntity.SetActive(false);
         if (vinesObstructionEntity != null) vinesObstructionEntity.SetActive(false);
@@ -371,5 +371,15 @@ public class BossLogic : Component
     {
         Player.Instance.LoseScreen.OnClosing -= RestartBoss;
         StopAllOwnedCoroutines();
+    }
+
+    public void PlayAnimation(Animator animator, string key, bool loop, float smoothTime)
+    {
+        if (animator.GetClipIndex(key) == -1) return;
+        if (animator.GetCurrentClipName() == key && !animator.InTransition) return;
+        if (animator.GetNextClipName() == key && animator.InTransition) return;
+
+        animator.Play(key, smoothTime);
+        animator.Looping = loop;
     }
 }

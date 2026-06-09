@@ -112,8 +112,13 @@ public class HandLogic : Component
 
         transform.position = startPointEntity.transform.position;
 
-        handAnimator.Play("Idle");
+        
         isBusy = false;
+    }
+
+    void OnPostCreate()
+    {
+        owner.PlayAnimation(handAnimator, "Idle", true, 0.2f);
     }
 
     void OnUpdate()
@@ -177,6 +182,7 @@ public class HandLogic : Component
             if (canBeStopped && side != owner.GetCurrentSide())
             {
                 StopAllOwnedCoroutines();
+                owner.PlayAnimation(handAnimator, "Idle", true, 0.2f);
                 StartCoroutine(owner.GoToPoint(transform, transform.position, startPointEntity.transform.position, owner.H_TimeToReturnToStartPoint));
                 isBusy = false;
             }
@@ -207,14 +213,18 @@ public class HandLogic : Component
 
         if (sequence[sequenceIndex].type == AttackType.Punch)
         {
+            owner.PlayAnimation(handAnimator, "Punch Close", false, 0.2f);
+            Debug.Log("Animations");
             StartCoroutine(PunchOrPalm(false));
         }
         else if (sequence[sequenceIndex].type == AttackType.Palm)
         {
+            owner.PlayAnimation(handAnimator, "Palm Begin", false, 0.2f);
             StartCoroutine(PunchOrPalm(true));
         }
         else if (sequence[sequenceIndex].type == AttackType.Spike)
         {
+            owner.PlayAnimation(handAnimator, "Spike", false, 0.2f);
             StartCoroutine(Spike());
         }
     }
@@ -289,16 +299,13 @@ public class HandLogic : Component
 
         if (isPalm)
         {
+            owner.PlayAnimation(handAnimator, "Palm Stuck", false, 0.2f);
             SetVulnerable(owner.HPunch_VulnerableTime);
             IncreaseSequenceCounter();
-
-            while (isVulnerable && !isDefeated)
-            {
-                yield return null;
-            }
         }
         else
         {
+            owner.PlayAnimation(handAnimator, "PunchRelease", true, 0.2f);
             IncreaseSequenceCounter();
             StartCoroutine(owner.MoveVertically(transform, owner.HPunch_HitAltitude, owner.HPunch_MoveAltitude, 1, Mathf.LerpCurve.EaseOut));
             yield return new WaitForSeconds(owner.HPunch_DelayTimeAfterPunch);
