@@ -20,6 +20,8 @@ class CinematicUI : Component
     public bool IsCinematicOpen { get; private set; } = false;
     private List<CinematicFrame> frames = new List<CinematicFrame>();
     private Entity cinematicOwner;
+
+    private List<AudioSource> playingAudios = new List<AudioSource>();
     void OnCreate()
     {
         if (Instance == null)
@@ -60,7 +62,8 @@ class CinematicUI : Component
 
     public void StartCinematic()
     {
-        if(frames.Count == 0)
+        playingAudios.Clear();
+        if (frames.Count == 0)
         {
             Debug.LogWarning("No frames found for cinematic.");
             return;
@@ -74,6 +77,12 @@ class CinematicUI : Component
 
     public void Close()
     {
+        foreach (var item in playingAudios)
+        {
+            item.Stop(0);
+        }
+
+
         cinematicOwner.SetActive(false);
         foreach (var frame in frames)
         {
@@ -165,7 +174,10 @@ class CinematicUI : Component
             }
 
             if (frame.AudioSource != null)
+            {
                 frame.AudioSource.Play();
+                playingAudios.Add(frame.AudioSource);
+            }
 
             
 
